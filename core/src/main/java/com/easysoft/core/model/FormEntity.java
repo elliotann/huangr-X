@@ -1,7 +1,10 @@
 package com.easysoft.core.model;
 
+import com.easysoft.framework.utils.DateUtil;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,7 +23,7 @@ public class FormEntity implements Serializable {
     private String isSynDB="0";//是否同步数据库
     private String version="1.0.0";
     private String createBy;
-    private String createTime;
+    private String createTime = DateUtil.toString(new Date(),"yyyy-MM-dd HH:mm:ss");
     private List<FormField> fields;
 
 
