@@ -56,6 +56,7 @@ public class FormDesignerController extends BaseController {
         Map<String,Class> map = new HashMap<String,Class>();
         map.put("fields", FormField.class);
         FormEntity formEntity = (FormEntity)JsonUtils.jsonToBean(data, FormEntity.class,map);
+
         formManager.addForm(formEntity);
         return result;
     }
