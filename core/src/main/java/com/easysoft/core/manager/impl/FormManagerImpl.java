@@ -1,0 +1,39 @@
+package com.easysoft.core.manager.impl;
+
+import com.easysoft.core.dao.IFormDao;
+import com.easysoft.core.dao.IFormFieldDao;
+import com.easysoft.core.manager.IFormManager;
+import com.easysoft.core.model.FormEntity;
+import com.easysoft.core.model.FormField;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+/**
+ * User: andy
+ * Date: 14-4-1
+ * Time: 上午11:05
+ *
+ * @since:
+ */
+@Service("formManager")
+public class FormManagerImpl implements IFormManager {
+    @Autowired
+    private IFormDao formDao;
+    @Autowired
+    private IFormFieldDao formFieldDao;
+    @Override
+    public List list() {
+        return formDao.queryForList("from FormEntity e",null);
+    }
+
+    @Override
+    public void addForm(FormEntity entity) {
+        formDao.save(entity);
+        for(FormField field : entity.getFields()){
+            field.setForm(entity);
+            formFieldDao.save(field);
+        }
+    }
+}
