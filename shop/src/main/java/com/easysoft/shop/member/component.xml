@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="网店会员组件"  version="1.0" esf_version="3.0.0" author="javashop">
+
+	<plugins>
+		<plugin name="会员基本信息插件" id="memberDetailBasePlugin">
+			<bundle id="memberPluginBundle"></bundle>
+		</plugin>
+
+	</plugins>
+
+
+
+	<widgets>
+
+		
+	</widgets>
+</component>
