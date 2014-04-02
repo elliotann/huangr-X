@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<product>
+	<apps>
+		<app id="base" version="1.0.0"></app>
+	</apps>
+	<!-- 在这里定义方案的作者、版权声明等 -->
+	<info>
+		<field name="id" value="simple"/>			<!-- productid -->
+		<field name="name" value="eshop"/>		<!-- productname -->
+		<field name="cat" value="1"/>				<!-- catid -->
+		<field name="color" value="1"/>				<!-- colorid -->
+		<field name="type" value="1"/>				<!-- typeid -->
+		<field name="author" value="easysoft"/>		<!-- author -->
+		<field name="version" value="1.0.0.0"/>		<!-- version -->
+		<field name="descript" value="描述"/>		<!-- descript -->
+		<field name="copyright" value="Copyright 易软工作室 保留一切权利"/>	<!-- copyright -->
+		<field name="pstate" value="1" />			<!-- pstate -->
+	</info>
+	<site>
+		<field name="sitename" value="JEDP" />
+		<field name="title" value="JEDP" />
+        <field name="copyright" value="Copyright &amp;copy; 2013-2014 本公司版权所有" />
+        
+	</site>
+	<menus>
+	
+		<menu text="日常操作" type="app" url="/shop/admin/goods!list.do" selected="1" >
+
+		</menu>
+
+
+      
+
+
+
+
+
+		<menu text="设置" type="app" url="/core/admin/setting.do?edit_input">
+			<menu text="系统设置">
+				<menu text="系统设置" url="/core/admin/setting!edit_input.do" />
+                <menu text="站点设置" url="/core/admin/user/userSite!edit.do" />
+				<menu text="smtp设置" url="/core/admin/smtp!list.do" />
+				<menu text="组件管理" url="/core/admin/component.do?list" />
+			</menu>
+            <menu text="权限管理">
+                <menu text="管理员管理" url="/core/admin/user/userAdmin.do?list" />
+                <menu text="角色管理" url="/core/admin/role.do?list" />
+            </menu>				
+		</menu>
+
+		<menu text="页面设置" type="app" url="/core/admin/user/siteTheme.do">
+			<menu text="主题管理" >
+				<menu text="站点后台主题" url="/core/admin/user/siteAdminTheme.do" />
+			</menu>		
+			<menu text="页面管理">
+				<menu text="文章管理" url="/cms/admin/cat!list.do" />
+				<menu text="友情链接" url="/core/admin/friendsLink!list.do" />
+				<menu text="网站菜单管理" url="/core/admin/siteMenu!list.do" />
+			</menu>		
+		</menu>
+
+		<menu text="统计报表" type="app" url="/shop/admin/statistics/index.jsp">
+			<menu text="销售统计">
+				<menu text="销售额总览" url="/shop/admin/statistics!monthamount.do" />
+				<menu text="销售量（额）排名" url="/shop/admin/rank.do" />
+				<menu text="用户购买量（额）排名" url="/shop/admin/rank!rankmember.do" />
+				<menu text="商品访问购买率" url="/shop/admin/rank!rankbuy.do" />
+				<menu text="销售指标分析" url="/shop/admin/rank!rankall.do" />
+			</menu>
+		</menu>
+
+
+        
+		<menu text="开发者" type="app" url="/admin/setting/setting!edit_input.do">
+			<menu text="工具">
+				<menu text="URL映射" url="/core/admin/themeUri!list.do" />
+				<menu text="菜单管理" url="/core/admin/menu.do?listframe" />
+			</menu>
+			<menu text="主题管理" >
+
+				<menu text="站点后台主题" url="/core/admin/user/siteAdminTheme.do" />
+			</menu>		
+			<menu text="页面管理">
+				<menu text="文章模型" url="/cms/admin/model!list.do" />
+				<menu text="文章管理" url="/cms/admin/cat!list.do" />					
+				<menu text="网站菜单管理" url="/core/admin/siteMenu!list.do" />
+			</menu>
+			<menu text="数据管理">
+				<menu text="导出" url="/core/admin/user/userSite!toExport.do" />
+				<menu text="导入" url="/core/admin/user/userSite!toImport.do" />
+				<menu text="数据初始化" url="/core/admin/user/userSite!toInitData.do" />
+				<menu text="部署状态" url="/core/admin/resourceState.do" />
+			</menu>	
+			<menu text="系统设置">
+				<menu text="系统设置" url="/admin/setting/setting!edit_input.do" />
+                <menu text="站点设置" url="/core/admin/user/userSite!edit.do" />
+                <menu text="域名管理" url="/core/admin/user/userSite!domain.do" />
+				<menu text="smtp设置" url="/core/admin/smtp!list.do" />
+				<menu text="组件管理" url="/core/admin/component.do?list" />
+			</menu>
+            <menu text="权限管理">
+                <menu text="管理员管理" url="/core/admin/user/userAdmin.do?list" />
+                <menu text="角色管理" url="/core/admin/role.do?list" />
+            </menu>
+            <menu text="动态表单">
+                <menu text="表单配置" url="/form/config/dFormController.do?formList" />
+            </menu>
+            
+		</menu>
+	</menus>
+
+
+	<urls>
+
+	</urls>
+
+	<components>		
+
+		
+	</components>
+
+	<themes>
+		<theme id="default" name="默认模板" default="yes"></theme>
+		<theme id="red" name="红色模板" default="no"></theme>
+	</themes>
+    <indexitems>
+    	<item>
+    		<title>站点统计信息</title>
+    		<url>/core/admin/indexItem!base.do</url>
+    	</item>     
+    	<item>
+    		<title>订单统计信息</title>
+    		<url>/shop/admin/indexItem!order.do</url>
+    	</item> 
+    	<item>
+    		<title>商品统计信息</title>
+    		<url>/shop/admin/indexItem!goods.do</url>
+    	</item><!--
+    	<item>
+    		<title>文章统计信息</title>
+    		<url>/cms/admin/indexItem!article.do</url>
+    	</item>
+    	<item>
+    		<title>流量统计信息</title>
+    		<url>/core/admin/indexItem!access.do</url>
+    	</item>  -->
+    </indexitems> 
+</product>
