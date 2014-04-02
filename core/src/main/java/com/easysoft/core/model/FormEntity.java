@@ -25,6 +25,7 @@ public class FormEntity implements Serializable {
     private String createBy;
     private String createTime = DateUtil.toString(new Date(),"yyyy-MM-dd HH:mm:ss");
     private List<FormField> fields;
+    private int formType= 1;
 
 
 
@@ -96,6 +97,12 @@ public class FormEntity implements Serializable {
     public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
+    @Column(name="form_type")
+    public int getFormType() {
+        return formType;
+    }
 
-
+    public void setFormType(int formType) {
+        this.formType = formType;
+    }
 }
