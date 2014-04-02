@@ -56,7 +56,7 @@
             {
                 $("form .l-text,.l-textarea").ligerHideTip();
                 $("#form1").ajaxSubmit({
-                    url :"menu.do?saveAdd&ajax=true",
+                    url :"code.do?generate&ajax=true",
                     type : "POST",
                     dataType:"json",
                     success : function(result) {
