@@ -30,12 +30,16 @@
             var jsonData = JSON.stringify(data);
             var tableName = parent.document.getElementById("tableName").value; //调用父页面的元素
             var tableTitle = parent.document.getElementById("tableTitle").value; //调用父页面的元素
+            var formId =0;
+            if(parent.document.getElementById("formId")!=null) {
+                formId = parent.document.getElementById("formId").value
+            }
 
             var jsonData = "{\"tableName\":\""+tableName+"\",\"tableTitle\":\""+tableTitle+"\",\"fields\":"+jsonData+"}";
             $.ajax({
                 type: "post",
                 url: "designer.do?save",
-                data:"ajax=yes&rmd="+ new Date().getTime()+"&data="+jsonData,
+                data:"ajax=yes&rmd="+ new Date().getTime()+"&data="+jsonData+"&formId="+formId,
                 dataType:"json",
                 async:false,
                 success: function(html){

@@ -236,7 +236,7 @@ function createGridToolbar(tName)
 
     function preview()
     {
-        
+
         clear();
 
         var o = bulidData();
@@ -259,7 +259,7 @@ function createGridToolbar(tName)
         var listPanle = $(out.join(''));
 
         var searchform = $("form:first", listPanle);
-        searchform.ligerForm({ fields: o.search }); 
+        searchform.ligerForm({ fields: o.search });
         var listgrid = $(".listgrid:first", listPanle).ligerGrid({
             columns: o.grid,
             toolbar: listToolbar(), data: $.extend(true, {}, AllProductData),
@@ -287,7 +287,7 @@ function createGridToolbar(tName)
             items.push({ text: '删除', click: grid_delete, img: "../icons/delete.png" });
             items.push({ text: '高级自定义查询', click: grid_search, icon: 'search2' });
             return { items: items };
-             
+
             function grid_add()
             {
                 clear();
