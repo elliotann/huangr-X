@@ -2474,6 +2474,7 @@ public class StringUtil {
      * @return
      */
     public static String formatDBName(String name){
+        if(StringUtils.isEmpty(name)) return name;
         name = name.toLowerCase();
         String[] splitName = name.split("_");
         String result = "";
