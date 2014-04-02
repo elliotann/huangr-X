@@ -19,4 +19,7 @@ public interface IFormManager {
     public List list( ) ;
 
     public void addForm(FormEntity entity);
+
+    public FormEntity getFormById(Integer id);
+
 }

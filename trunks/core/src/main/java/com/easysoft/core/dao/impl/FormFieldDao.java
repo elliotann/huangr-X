@@ -5,6 +5,8 @@ import com.easysoft.core.dao.IFormFieldDao;
 import com.easysoft.core.model.FormField;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * User: andy
  * Date: 14-4-1
@@ -18,4 +20,11 @@ public class FormFieldDao extends GenericDAO<FormField> implements IFormFieldDao
         super(FormField.class);
     }
 
+    @Override
+    public void delByFormId(Integer formId) {
+        List<FormField> formFields = this.queryForList ("from FormField f where f.form.id="+formId);
+        for(FormField field : formFields){
+            this.delete(field);
+        }
+    }
 }
