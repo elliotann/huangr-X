@@ -32,63 +32,11 @@ public class ${entityName}ServiceImpl extends CommonServiceImpl implements ${ent
  		//执行更新操作配置的sql增强
  		this.doUpdateSql((${entityName}Entity)entity);
  	}
-	<#list buttons as btn>
-	<#if btn.buttonStyle =='button' && btn.optType=='action'>
- 	/**
-	 * 自定义按钮-sql增强-${btn.buttonName}
-	 * @param id
-	 * @return
-	 */
-	 public boolean do${btn.buttonCode?cap_first}Sql(${entityName}Entity t){
-	 	<#list buttonSqlMap[btn.buttonCode] as sql>
-	 	//sql增强第${sql_index+1}条
-	 	String sqlEnhance_${sql_index+1} ="${sql}";
-	 	this.executeSql(replaceVal(sqlEnhance_${sql_index+1},t));
-	 	</#list>
-	 	return true;
-	 }
- 	</#if>
- 	</#list> 
+
  	
- 	/**
-	 * 默认按钮-sql增强-新增操作
-	 * @param id
-	 * @return
-	 */
- 	public boolean doAddSql(${entityName}Entity t){
- 		<#list buttonSqlMap['add'] as sql>
-	 	//sql增强第${sql_index+1}条
-	 	String sqlEnhance_${sql_index+1} ="${sql}";
-	 	this.executeSql(replaceVal(sqlEnhance_${sql_index+1},t));
-	 	</#list>
-	 	return true;
- 	}
- 	/**
-	 * 默认按钮-sql增强-更新操作
-	 * @param id
-	 * @return
-	 */
- 	public boolean doUpdateSql(${entityName}Entity t){
- 		<#list buttonSqlMap['update'] as sql>
-	 	//sql增强第${sql_index+1}条
-	 	String sqlEnhance_${sql_index+1} ="${sql}";
-	 	this.executeSql(replaceVal(sqlEnhance_${sql_index+1},t));
-	 	</#list>
-	 	return true;
- 	}
- 	/**
-	 * 默认按钮-sql增强-删除操作
-	 * @param id
-	 * @return
-	 */
- 	public boolean doDelSql(${entityName}Entity t){
- 		<#list buttonSqlMap['delete'] as sql>
-	 	//sql增强第${sql_index+1}条
-	 	String sqlEnhance_${sql_index+1} ="${sql}";
-	 	this.executeSql(replaceVal(sqlEnhance_${sql_index+1},t));
-	 	</#list>
-	 	return true;
- 	}
+
+
+
  	
  	/**
 	 * 替换sql中的变量
