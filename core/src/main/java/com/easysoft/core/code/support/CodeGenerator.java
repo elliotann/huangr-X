@@ -73,7 +73,7 @@ public class CodeGenerator implements ICallBack {
             }
         }
         if (createFileProperty.isServiceImplFlag()) {
-            codeFactory.invoke("cgform_serviceImplTemplate.ftl", "serviceImpl");
+            codeFactory.invoke("ServiceImplTemplate.ftl", "serviceImpl");
         }
         if (createFileProperty.isServiceIFlag()) {
             codeFactory.invoke("cgform_serviceITemplate.ftl", "service");
