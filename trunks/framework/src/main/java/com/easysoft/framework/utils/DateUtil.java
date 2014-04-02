@@ -12,8 +12,8 @@ import java.util.Date;
 
 public class DateUtil {
     public static int getDateline(String date, String pattern) {
- return (int)(toDate(date, pattern).getTime() / 1000L);
-  }
+        return (int)(toDate(date, pattern).getTime() / 1000L);
+    }
     public static String toString(Long time, String pattern) {
 /*  62 */     if (time.longValue() > 0L) {
 /*  63 */       if (time.toString().length() == 10) {
