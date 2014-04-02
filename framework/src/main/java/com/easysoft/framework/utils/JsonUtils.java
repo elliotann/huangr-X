@@ -2,11 +2,13 @@ package com.easysoft.framework.utils;
 
 import com.easysoft.framework.json.filter.InvisibleFilter;
 import net.sf.ezmorph.object.DateMorpher;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 import net.sf.json.util.JSONUtils;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -37,6 +39,13 @@ public class JsonUtils {
         return jsonObject.toString();
     }
 
+    /**
+     * json转成bean
+     * @param jsonString
+     * @param clazz
+     * @param map
+     * @return
+     */
     public static Object jsonToBean(String jsonString,Class clazz,Map<String,Class> map){
         JSONObject jsonObject = JSONObject.fromObject(jsonString);
         JsonConfig config = new JsonConfig();
@@ -45,6 +54,14 @@ public class JsonUtils {
         config.setJavaPropertyFilter(new InvisibleFilter("LIST"));
         Object bean = JSONObject.toBean(jsonObject,config);
         return bean;
+    }
+
+    public static String beanToJsonArray(List beans){
+        JsonConfig config = new JsonConfig();
+        config.setJavaPropertyFilter(new InvisibleFilter("List"));
+        config.setExcludes(new String[]{"form"});
+        JSONArray jsonArray = JSONArray.fromObject(beans,config);
+        return jsonArray.toString();
     }
 
 
