@@ -1,14 +1,19 @@
 package com.easysoft.core.controller;
 
+import com.easysoft.core.code.pojo.CreateFileProperty;
+import com.easysoft.core.code.pojo.GenerateEntity;
+import com.easysoft.core.code.support.CodeGenerator;
 import com.easysoft.core.common.controller.BaseController;
 import com.easysoft.core.manager.IFormManager;
 import com.easysoft.core.model.FormEntity;
 import com.easysoft.framework.utils.StringUtil;
+import freemarker.template.TemplateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,6 +34,27 @@ public class CodeGenController extends BaseController {
         FormEntity formEntity = null;
         if(formId!=null&&formId!=0){
             formEntity = formManager.getFormById(formId);
+        }
+        Map<String,Object> params = new HashMap<String,Object>();
+        params.put("formEntity",formEntity);
+        params.put("entityName", StringUtil.formatDBName(formEntity.getTableName()));
+        return new ModelAndView("core/admin/code/add",params);
+    }
+
+    @RequestMapping(params = {"generate"})
+    public ModelAndView generate(Integer formId,GenerateEntity generateEntity,CreateFileProperty fileProperty){
+        FormEntity formEntity = null;
+        if(formId!=null&&formId!=0){
+            formEntity = formManager.getFormById(formId);
+        }
+        generateEntity.setFormEntity(formEntity);
+        CodeGenerator generator = new CodeGenerator(fileProperty,generateEntity);
+        try {
+            generator.generateToFile();
+        } catch (TemplateException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
         Map<String,Object> params = new HashMap<String,Object>();
         params.put("formEntity",formEntity);

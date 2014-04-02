@@ -45,7 +45,7 @@ public class CodeGenerator implements ICallBack {
         this.entityName = generateEntity.getEntityName();
         this.entityPackage = generateEntity.getEntityPackage();
         this.tableName = generateEntity.getTableName();
-        this.tableTitle = generateEntity.getFtlDescription();
+        this.tableTitle = generateEntity.getTableTitle();
         FIELD_ROW_NUM = 1;
         createFileProperty = createFileProperty2;
         createFileProperty.setJspMode("01");

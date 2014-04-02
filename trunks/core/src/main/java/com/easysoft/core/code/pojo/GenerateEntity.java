@@ -9,22 +9,16 @@ import java.io.ObjectOutputStream;
 import java.util.Map;
 
 /**
- * 
- * @Title:GenerateEntity
  * @description:代码生成实体
- * @author 赵俊夫
- * @date Sep 7, 2013 1:10:18 PM
- * @version V1.0
+ * @author andy
+ * @since : 1.0.0
  */
 public class GenerateEntity implements java.io.Serializable{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 7821940124097563556L;
 	private String entityPackage;// 包名（小写）
 	private String entityName;// 实体名（首字母大写）
 	private String tableName; // 表名
-	private String ftlDescription;// 功能描述
+	private String tableTitle;// 功能描述
 	private String primaryKeyPolicy = "uuid";// 主键生成策略
 	private String[] foreignKeys;// 子表：外键(中间逗号隔开)
 	private Integer fieldRowNum;// 一行放几个字段
@@ -63,15 +57,15 @@ public class GenerateEntity implements java.io.Serializable{
 		this.tableName = tableName;
 	}
 
-	public String getFtlDescription() {
-		return ftlDescription;
-	}
+    public String getTableTitle() {
+        return tableTitle;
+    }
 
-	public void setFtlDescription(String ftlDescription) {
-		this.ftlDescription = ftlDescription;
-	}
+    public void setTableTitle(String tableTitle) {
+        this.tableTitle = tableTitle;
+    }
 
-	public String getPrimaryKeyPolicy() {
+    public String getPrimaryKeyPolicy() {
 		return primaryKeyPolicy;
 	}
 

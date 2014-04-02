@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ${bussiPackage}.service.${entityPackage}.${entityName}ServiceI;
-import org.jeecgframework.core.common.service.impl.CommonServiceImpl;
+import com.easysoft.core.common.service.impl.GenericService;
 import ${bussiPackage}.entity.${entityPackage}.${entityName}Entity;
 import java.util.UUID;
 import java.io.Serializable;
