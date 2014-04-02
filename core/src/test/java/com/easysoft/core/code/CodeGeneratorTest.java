@@ -4,10 +4,13 @@ import com.easysoft.core.code.pojo.CreateFileProperty;
 import com.easysoft.core.code.pojo.GenerateEntity;
 import com.easysoft.core.code.support.CodeGenerator;
 import com.easysoft.core.model.FormEntity;
+import com.easysoft.core.model.FormField;
 import freemarker.template.TemplateException;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * User: andy
@@ -22,8 +25,16 @@ public class CodeGeneratorTest {
 
         CreateFileProperty fileProperty = new CreateFileProperty();
         FormEntity formEntity = new FormEntity();
+        FormField field = new FormField();
+        field.setFieldName("name");
+        field.setType("String");
+        List<FormField> fields = new ArrayList<FormField>();
+        fields.add(field);
+        formEntity.setFields(fields);
         GenerateEntity generateEntity = new  GenerateEntity();
         generateEntity.setProjectPath("D:/");
+        generateEntity.setEntityPackage("test");
+        generateEntity.setEntityName("ProvideLoanInfo");
         fileProperty.setServiceImplFlag(true);
         generateEntity.setFormEntity(formEntity);
         CodeGenerator generator = new CodeGenerator(fileProperty,generateEntity);
