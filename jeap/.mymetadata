@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="jeap"
+  id="myeclipse.1394871175472"
+  context-root="/jeap"
+  j2ee-spec="5.0"
+  archive="jeap.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
