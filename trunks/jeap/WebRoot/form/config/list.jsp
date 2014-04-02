@@ -138,7 +138,9 @@
                         { line: true },
                         { text: '修改', click: modifyForm, icon: 'modify' },
                         { line: true },
-                        { text: '删除', click: delUser, img: '${context }/js/ligerui/skins/icons/delete.gif' }
+                        { text: '删除', click: delUser, img: '${context }/js/ligerui/skins/icons/delete.gif' },
+                        { line: true },
+                        { text: '生成代码', click: generatorCode, icon: 'modify' }
                     ]
                     }
                 });
@@ -152,7 +154,29 @@
         g.deleteSelectedRow();
     }
 
-
+    function generatorCode(item){
+        var row = grid1.getSelectedRow();
+        if(row==null){
+            $.ligerDialog.error('请选择数据!');
+            return;
+        }
+        $.ligerDialog.open({
+            height:600,
+            width: 900,
+            title : '代码生成',
+            url: '${ctx}//core/admin/code.do?toGenerate&formId='+row.id,
+            showMax: false,
+            showToggle: true,
+            showMin: false,
+            isResize: true,
+            slide: false,
+            data: {
+                name: $("#txtValue").val()
+            },
+            //自定义参数
+            myDataName: $("#txtValue").val()
+        });
+    }
 </script>
 
 
