@@ -139,7 +139,7 @@ function bulidMainGrid()
     {
         var row = {
             fieldName: this.fieldName,
-            display: this.text,
+            display: this.display,
             listwidth: 180,
             type: 'text',
             width: 220,
@@ -155,7 +155,7 @@ function bulidMainGrid()
             SourceTableTextField: this.sourceTableTextField
         };
         row.isNullable = this.isNullable ? true : false;
-        row.ispk = this.isPK?true:false;
+        row.ispk = this.ispk?true:false;
         row.type = this.inputType;
         if (this.isAutoKey || this.isInForeignKey)
         {
