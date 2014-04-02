@@ -30,10 +30,23 @@ public class FormManagerImpl implements IFormManager {
 
     @Override
     public void addForm(FormEntity entity) {
-        formDao.save(entity);
+        formDao.saveOrUpdate(entity);
+        if(entity.getId()!=null)
+            formFieldDao.delByFormId(entity.getId());
         for(FormField field : entity.getFields()){
             field.setForm(entity);
-            formFieldDao.save(field);
+            formFieldDao.saveOrUpdate(field);
         }
+    }
+
+    @Override
+    public FormEntity getFormById(Integer id) {
+        FormEntity result = formDao.get(id);
+        if(result==null) return null;
+        String hql = "from FormField f where f.form.id=?";
+        Object[] params = new Object[]{id};
+        List<FormField> fields = formFieldDao.queryForList(hql,params);
+        result.setFields(fields);
+        return result;
     }
 }

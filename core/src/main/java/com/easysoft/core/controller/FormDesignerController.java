@@ -50,14 +50,40 @@ public class FormDesignerController extends BaseController {
     }
     @RequestMapping(params = {"save"})
     @ResponseBody
-    public AjaxJson save(String data,String tableName){
+    public AjaxJson save(String data,String tableName,Integer formId){
         AjaxJson result = new AjaxJson();
-        System.out.println(data);
+
         Map<String,Class> map = new HashMap<String,Class>();
         map.put("fields", FormField.class);
         FormEntity formEntity = (FormEntity)JsonUtils.jsonToBean(data, FormEntity.class,map);
-
+        if(formId!=null&&formId!=0){
+            formEntity.setId(formId);
+        }
         formManager.addForm(formEntity);
         return result;
+    }
+
+    @RequestMapping(params = {"getColumns"})
+    public ModelAndView getColumns(Integer id){
+        String data = "";
+        Map<String,Object> map = new HashMap<String, Object>();
+        if(id!=null&&id!=0){
+            FormEntity form = formManager.getFormById(id);
+            data = JsonUtils.beanToJsonArray(form.getFields());
+        }else{
+            data = "[\n" +
+                    "    {\"isInForeignKey\":false, \"ispk\":true,\"isNullable\":true, \"inputType\":\"digits\", \"isAutoKey\":true, \"sourceTableName\":\"\", \"sourceTableIDField\":\"\", \"sourceTableTextField\":\"\", \"fieldName\":\"id\", \"text\":\"主键\", \"type\":\"column\", \"icon\":\"images/table_key.png\" }\n" +
+                    "]";
+        }
+        map.put("json",data);
+        return new ModelAndView("admin/json_message",map);
+    }
+
+    @RequestMapping(params = {"modify"})
+    public ModelAndView modify(Integer id){
+        Map<String,Object> map = new HashMap<String, Object>();
+        FormEntity form = formManager.getFormById(id);
+        map.put("form",form);
+        return new ModelAndView("form/config/editForm",map);
     }
 }
