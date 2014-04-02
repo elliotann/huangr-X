@@ -9,7 +9,7 @@ package com.easysoft.core.utils;
  */
 public class CodeResourceUtil {
     public static String FREEMARKER_CLASSPATH = "/jeap/template";
-    public static String SYSTEM_ENCODING;
+    public static String SYSTEM_ENCODING = "UTF-8";
     public static String JSPPATH;
     public static String CODEPATH;
     public static String bussiPackage = "sun";
