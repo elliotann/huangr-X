@@ -5,12 +5,19 @@ import com.easysoft.core.code.ICallBack;
 import com.easysoft.core.code.pojo.CreateFileProperty;
 import com.easysoft.core.code.pojo.GenerateEntity;
 import com.easysoft.core.code.support.factory.CodeFactory;
+import com.easysoft.core.model.FormField;
+import com.easysoft.core.utils.CodeResourceUtil;
+import com.easysoft.core.utils.FtlDef;
+import com.easysoft.framework.utils.DateUtil;
+import com.easysoft.framework.utils.NonceUtils;
+import com.easysoft.framework.utils.StringUtil;
 import freemarker.template.TemplateException;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import java.io.IOException;
-import java.util.Map;
+import java.util.*;
 
 /**
  * User: andy
@@ -29,6 +36,7 @@ public class CodeGenerator implements ICallBack {
     private String primaryKeyPolicy = "uuid";
     private String sequenceCode = "";
     private GenerateEntity cgformConfig;
+    private String[] foreignKeys;
     private static CreateFileProperty createFileProperty = new CreateFileProperty();
     public CodeGenerator(){
     }
@@ -89,7 +97,78 @@ public class CodeGenerator implements ICallBack {
     }
     @Override
     public Map<String, Object> execute(){
-        return null;
+        Map data = new HashMap();
+        Map fieldMeta = new HashMap();
+
+        data.put("bussiPackage", CodeResourceUtil.bussiPackage);
+
+        data.put("entityPackage", this.entityPackage);
+
+        data.put("entityName", this.entityName);
+
+        data.put("tableName", this.tableName);
+
+        data.put("ftl_description", this.tableTitle);
+
+        data.put(FtlDef.JEECG_TABLE_ID, CodeResourceUtil.JEAP_GENERATE_TABLE_ID);
+
+        data.put(FtlDef.JEECG_PRIMARY_KEY_POLICY, this.primaryKeyPolicy);
+        data.put(FtlDef.JEECG_SEQUENCE_CODE, this.sequenceCode);
+
+        data.put("ftl_create_time", DateUtil.toString(new Date(),null));
+
+        data.put("foreignKeys", this.foreignKeys);
+
+        data.put(FtlDef.FIELD_REQUIRED_NAME, Integer.valueOf(StringUtils.isNotEmpty(CodeResourceUtil.JEAP_UI_FIELD_REQUIRED_NUM) ? Integer.parseInt(CodeResourceUtil.JEAP_UI_FIELD_REQUIRED_NUM) : -1));
+
+        data.put(FtlDef.SEARCH_FIELD_NUM, Integer.valueOf(StringUtils.isNotEmpty(CodeResourceUtil.JEAP_UI_FIELD_SEARCH_NUM) ? Integer.parseInt(CodeResourceUtil.JEAP_UI_FIELD_SEARCH_NUM) : -1));
+
+        data.put(FtlDef.FIELD_ROW_NAME, Integer.valueOf(FIELD_ROW_NUM));
+        try {
+            List<FormField> columns = this.cgformConfig.deepCopy().getFormEntity().getFields();
+            String type;
+            for (FormField cf : columns) {
+                type = cf.getType();
+                if ("string".equalsIgnoreCase(type))
+                    cf.setType("java.lang.String");
+                else if ("Date".equalsIgnoreCase(type))
+                    cf.setType("java.util.Date");
+                else if ("double".equalsIgnoreCase(type))
+                    cf.setType("java.lang.Double");
+                else if ("int".equalsIgnoreCase(type))
+                    cf.setType("java.lang.Integer");
+                else if ("BigDecimal".equalsIgnoreCase(type))
+                    cf.setType("java.math.BigDecimal");
+                else if ("Text".equalsIgnoreCase(type))
+                    cf.setType("javax.xml.soap.Text");
+                else if ("Blob".equalsIgnoreCase(type)) {
+                    cf.setType("java.sql.Blob");
+                }
+                String fieldName = cf.getFieldName();
+                String fieldNameV = StringUtil.formatDBName(fieldName);
+                cf.setFieldName(fieldNameV);
+                fieldMeta.put(fieldNameV, fieldName.toUpperCase());
+            }
+            List pageColumns = new ArrayList();
+            for (FormField cf : columns) {
+                if (cf.isInform()) {
+                    pageColumns.add(cf);
+                }
+            }
+
+            data.put("cgformConfig", this.cgformConfig);
+            data.put("fieldMeta", fieldMeta);
+            data.put("columns", columns);
+            data.put("pageColumns", pageColumns);
+           // data.put("buttons", this.cgformConfig.getButtons() == null ? new ArrayList(0) : this.cgformConfig.getButtons());
+            data.put("buttonSqlMap", this.cgformConfig.getButtonSqlMap() == null ? new HashMap(0) : this.cgformConfig.getButtonSqlMap());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        long serialVersionUID = NonceUtils.randomLong() +
+                NonceUtils.currentMills();
+        data.put("serialVersionUID", String.valueOf(serialVersionUID));
+        return data;
     }
 
 }
