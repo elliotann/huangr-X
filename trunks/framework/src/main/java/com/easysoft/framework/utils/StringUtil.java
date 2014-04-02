@@ -2464,6 +2464,10 @@ public class StringUtil {
         return StringUtils.replaceChars(realName, realName.substring(0, 1),realName.substring(0, 1).toUpperCase());
     }
 
+    public static String firstLowCase(String realName) {
+        return StringUtils.replaceChars(realName, realName.substring(0, 1),realName.substring(0, 1).toLowerCase());
+    }
+
     /**
      * 把数据库中根据"_"的名称转换成java命名格式，如T_MEMBER将转换成Member
      * @param name
