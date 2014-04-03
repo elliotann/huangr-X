@@ -72,7 +72,9 @@ public class FormDesignerController extends BaseController {
             data = JsonUtils.beanToJsonArray(form.getFields());
         }else{
             data = "[\n" +
-                    "    {\"isInForeignKey\":false, \"ispk\":true,\"isNullable\":true, \"inputType\":\"digits\", \"isAutoKey\":true, \"sourceTableName\":\"\", \"sourceTableIDField\":\"\", \"sourceTableTextField\":\"\", \"fieldName\":\"id\", \"display\":\"主键\", \"type\":\"column\", \"icon\":\"images/table_key.png\" }\n" +
+                    "    {\"dataType\":\"VARCHAR\",\"isInForeignKey\":false, \"ispk\":true,\"isNullable\":true, \"inputType\":\"digits\", " +
+                    "\"isAutoKey\":true, \"sourceTableName\":\"\", \"sourceTableIDField\":\"\", \"sourceTableTextField\":\"\", " +
+                    "\"fieldName\":\"id\", \"display\":\"主键\", \"type\":\"column\", \"icon\":\"images/table_key.png\" }\n" +
                     "]";
         }
         map.put("json",data);

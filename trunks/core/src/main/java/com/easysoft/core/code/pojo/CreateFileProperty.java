@@ -9,10 +9,9 @@ package com.easysoft.core.code.pojo;
  */
 public class CreateFileProperty {
     private boolean actionFlag;
-    private boolean serviceIFlag;
+    private boolean serviceFlag;
     private boolean entityFlag;
     private boolean pageFlag;
-    private boolean serviceImplFlag;
     private boolean jspFlag;
     private String jspMode;
 
@@ -24,12 +23,12 @@ public class CreateFileProperty {
         this.actionFlag = actionFlag;
     }
 
-    public boolean isServiceIFlag() {
-        return serviceIFlag;
+    public boolean isServiceFlag() {
+        return serviceFlag;
     }
 
-    public void setServiceIFlag(boolean serviceIFlag) {
-        this.serviceIFlag = serviceIFlag;
+    public void setServiceFlag(boolean serviceFlag) {
+        this.serviceFlag = serviceFlag;
     }
 
     public boolean isEntityFlag() {
@@ -48,13 +47,7 @@ public class CreateFileProperty {
         this.pageFlag = pageFlag;
     }
 
-    public boolean isServiceImplFlag() {
-        return serviceImplFlag;
-    }
 
-    public void setServiceImplFlag(boolean serviceImplFlag) {
-        this.serviceImplFlag = serviceImplFlag;
-    }
 
     public boolean isJspFlag() {
         return jspFlag;

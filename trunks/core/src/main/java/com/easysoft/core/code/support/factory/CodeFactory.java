@@ -136,6 +136,7 @@ public class CodeFactory extends BaseCodeFactory{
                 str.append(".js");
             } else {
                 str.append(StringUtils.capitalize(entityName));
+
                 str.append(codeType);
                 str.append(".java");
             }

@@ -43,7 +43,7 @@ public class CodeGenerator implements ICallBack {
 
     public CodeGenerator(CreateFileProperty createFileProperty2, GenerateEntity generateEntity){
         this.entityName = generateEntity.getEntityName();
-        this.entityPackage = generateEntity.getEntityPackage();
+        this.entityPackage = generateEntity.getPackageName();
         this.tableName = generateEntity.getTableName();
         this.tableTitle = generateEntity.getTableTitle();
         FIELD_ROW_NUM = 1;
@@ -68,11 +68,11 @@ public class CodeGenerator implements ICallBack {
                 codeFactory.invoke("onetomany/cgform_jspSubTemplate.ftl", "jspList");
             } else {
                 if ("01".equals(createFileProperty.getJspMode())) {
-                    codeFactory.invoke("cgform_jspTableTemplate_add.ftl", "jsp_add");
+                    codeFactory.invoke("JspTableTemplate_add.ftl", "jsp_add");
                     codeFactory.invoke("cgform_jspTableTemplate_update.ftl", "jsp_update");
                 }
                 if ("02".equals(createFileProperty.getJspMode())) {
-                    codeFactory.invoke("cgform_jspDivTemplate_add.ftl", "jsp_add");
+                    codeFactory.invoke("JspTableTemplate_add.ftl", "jsp_add");
                     codeFactory.invoke("cgform_jspDivTemplate_update.ftl", "jsp_update");
                 }
                 codeFactory.invoke("cgform_jspListTemplate.ftl", "jspList");
@@ -80,18 +80,17 @@ public class CodeGenerator implements ICallBack {
                 codeFactory.invoke("cgform_jsEnhanceTemplate.ftl", "js");
             }
         }
-        if (createFileProperty.isServiceImplFlag()) {
+
+        if (createFileProperty.isServiceFlag()) {
+            codeFactory.invoke("ServiceITemplate.ftl", "service");
             codeFactory.invoke("ServiceImplTemplate.ftl", "serviceImpl");
         }
-        if (createFileProperty.isServiceIFlag()) {
-            codeFactory.invoke("cgform_serviceITemplate.ftl", "service");
-        }
         if (createFileProperty.isActionFlag()) {
-            codeFactory.invoke("cgform_controllerTemplate.ftl", "controller");
+            codeFactory.invoke("ControllerTemplate.ftl", "controller");
         }
         if (createFileProperty.isEntityFlag())
         {
-            codeFactory.invoke("cgform_entityTemplate.ftl", "entity");
+            codeFactory.invoke("EntityTemplate.ftl", "entity");
         }
         logger.info("----jeecg----Code----Generation-----[单表模型：" + this.tableName + "]------ 生成完成。。。");
     }
@@ -128,8 +127,8 @@ public class CodeGenerator implements ICallBack {
             List<FormField> columns = this.cgformConfig.deepCopy().getFormEntity().getFields();
             String type;
             for (FormField cf : columns) {
-                type = cf.getType();
-                if ("string".equalsIgnoreCase(type))
+                type = cf.getDataType();
+                if ("string".equalsIgnoreCase(type)||"VARCHAR".equalsIgnoreCase(type))
                     cf.setType("java.lang.String");
                 else if ("Date".equalsIgnoreCase(type))
                     cf.setType("java.util.Date");

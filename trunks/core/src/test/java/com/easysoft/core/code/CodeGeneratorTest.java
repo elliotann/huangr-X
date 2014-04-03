@@ -33,9 +33,9 @@ public class CodeGeneratorTest {
         formEntity.setFields(fields);
         GenerateEntity generateEntity = new  GenerateEntity();
         generateEntity.setProjectPath("D:/");
-        generateEntity.setEntityPackage("test");
+        generateEntity.setPackageName("test");
         generateEntity.setEntityName("ProvideLoanInfo");
-        fileProperty.setServiceImplFlag(true);
+        fileProperty.setServiceFlag(true);
         generateEntity.setFormEntity(formEntity);
         CodeGenerator generator = new CodeGenerator(fileProperty,generateEntity);
         try {

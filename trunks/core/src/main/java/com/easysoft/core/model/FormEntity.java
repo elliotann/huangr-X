@@ -26,6 +26,10 @@ public class FormEntity implements Serializable {
     private String createTime = DateUtil.toString(new Date(),"yyyy-MM-dd HH:mm:ss");
     private List<FormField> fields;
     private int formType= 1;
+    /**
+     * 主键生成策略
+     */
+    private String pkGeneratorPolicy;
 
 
 
@@ -104,5 +108,13 @@ public class FormEntity implements Serializable {
 
     public void setFormType(int formType) {
         this.formType = formType;
+    }
+    @Column(name="pk_generator_policy")
+    public String getPkGeneratorPolicy() {
+        return pkGeneratorPolicy;
+    }
+
+    public void setPkGeneratorPolicy(String pkGeneratorPolicy) {
+        this.pkGeneratorPolicy = pkGeneratorPolicy;
     }
 }
