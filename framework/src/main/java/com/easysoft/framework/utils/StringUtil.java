@@ -2477,6 +2477,7 @@ public class StringUtil {
         if(StringUtils.isEmpty(name)) return name;
         name = name.toLowerCase();
         String[] splitName = name.split("_");
+        if(splitName.length==1) return name;
         String result = "";
         for(int i=1;i<splitName.length;i++){
             result += firstUpperCase(splitName[i]);
