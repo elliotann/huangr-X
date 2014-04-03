@@ -75,9 +75,8 @@ public class CodeGenerator implements ICallBack {
                     codeFactory.invoke("JspTableTemplate_add.ftl", "jsp_add");
                     codeFactory.invoke("cgform_jspDivTemplate_update.ftl", "jsp_update");
                 }
-                codeFactory.invoke("cgform_jspListTemplate.ftl", "jspList");
-                codeFactory.invoke("cgform_jsListEnhanceTemplate.ftl", "jsList");
-                codeFactory.invoke("cgform_jsEnhanceTemplate.ftl", "js");
+                codeFactory.invoke("JspListTemplate.ftl", "jspList");
+
             }
         }
 
