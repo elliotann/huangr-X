@@ -63,7 +63,7 @@
 
                         if(result.success){
                             alert("增加成功!");
-                            window.parent.grid.loadData();
+
                             dialog.close();
                         }else{
                             alert(result.msg)
@@ -105,6 +105,7 @@
     .l-verify-tip{ left:230px; top:120px;}
 </style>
 <form name="form1" method="post"   id="form1">
+    <input type="hidden" name="formId" value="${formEntity.id}"/>
     <div>
     </div>
     <table cellpadding="0" cellspacing="0" class="l-table-edit" >
@@ -118,14 +119,16 @@
         <tr>
             <td align="right" class="l-table-edit-td">表名:</td>
             <td align="left" class="l-table-edit-td">
-                <input name="tableName" type="text" id="tableName" ltype="text" value="${formEntity.tableName}"  disabled="disabled" />
+                <input name="tableNameLabel" type="text" id="tableName" ltype="text" value="${formEntity.tableName}"  disabled="disabled" />
+                <input type="hidden" name="tableName" value="${formEntity.tableName}"/>
             </td>
             <td align="left"></td>
         </tr>
         <tr>
             <td align="right" class="l-table-edit-td">描述:</td>
             <td align="left" class="l-table-edit-td">
-                <input name="tableTitle" type="text" id="tableTitle" ltype="text" value="${formEntity.tableTitle}"   disabled="disabled" />
+                <input name="tableTitleLabel" type="text" id="tableTitle" ltype="text" value="${formEntity.tableTitle}"   disabled="disabled" />
+                <input type="hidden" name="tableTitle" value="${formEntity.tableTitle}"/>
             </td>
             <td align="left"></td>
         </tr>
@@ -146,10 +149,10 @@
         <tr>
             <td align="right" class="l-table-edit-td" valign="top">需要生成的代码:</td>
             <td align="left" class="l-table-edit-td" style="width:160px">
-                <input id="codeTypeAction" type="checkbox" name="codeTypeAction" checked="checked" /><label for="codeTypeAction">Action</label><br />
-                <input id="codeTypeJsp" type="checkbox" name="codeTypeJsp" /><label for="codeTypeJsp">Jsp</label> <br />
-                <input id="codeTypeService" type="checkbox" name="codeTypeService" /><label for="codeTypeService">Service</label><br/>
-                <input id="codeTypeEntity" type="checkbox" name="codeTypeEntity" /><label for="codeTypeEntity">Entity(Model)</label>
+                <input id="actionFlag" type="checkbox" name="actionFlag" checked="checked" /><label for="actionFlag">Action</label><br />
+                <input id="jspFlag" type="checkbox" name="jspFlag" /><label for="jspFlag">Jsp</label> <br />
+                <input id="serviceFlag" type="checkbox" name="serviceFlag" /><label for="serviceFlag">Service</label><br/>
+                <input id="entityFlag" type="checkbox" name="entityFlag" /><label for="entityFlag">Entity(Model)</label>
             </td><td align="left"></td>
         </tr>
 
