@@ -1,4 +1,3 @@
-
 $(init);
 
 $.extend($.ligerDefaults.Grid, {
@@ -18,7 +17,6 @@ $.ligerDefaults.Filter.operators['string'] =
 $.ligerDefaults.Grid.editors['numberbox'] = {
     create: function (container, editParm)
     {
-
         var column = editParm.column;
         var precision = column.editor.precision;
         var input = $("<input type='text' style='text-align:right' class='l-text' />");
@@ -43,9 +41,6 @@ $.ligerDefaults.Grid.editors['numberbox'] = {
     {
         var column = editParm.column;
         var precision = column.editor.precision;
-        if(value==undefined){
-            value=0;
-        }
         input.val(value.toFixed(precision));
     },
     resize: function (input, width, height, editParm)
@@ -109,11 +104,160 @@ var root = "../../";
 var fieldTypeData = [{ value: 'text', text: '文本框' }, { value: 'textarea', text: '多行文本框' }, { value: 'date', text: '日期控件' }, { value: 'select', text: '下拉框' }, { value: 'digits', text: '整数输入框' }, { value: 'number', text: '浮点数输入框' }, { value: 'hidden', text: '隐藏控件'}];
 
 
+function init()
+{
+    bulidMainGrid();
+
+}
 
 
+function bulidMainGrid()
+{
+    var rows = [];
+    $(columns).each(function ()
+    {
+        var row = {
+            name: this.text,
+            display: this.text,
+            listwidth: 180,
+            type: 'text',
+            width: 220,
+            labelwidth: 100,
+            space: 30,
+            newline: true,
+            search_newline : false,
+            inlist: true,
+            insearch: false,
+            inform: true,
+            SourceTableName: this.sourceTableName,
+            SourceTableIDField: this.sourceTableIDField,
+            SourceTableTextField: this.sourceTableTextField
+        };
+        row.allownull = this.isNullable ? true : false;
+        row.type = this.inputType;
+        if (this.isAutoKey || this.isInForeignKey)
+        {
+            row.inlist = false;
+            row.type = "hidden";
+        }
+        if (row.SourceTableName)
+        {
+            row.type = "select";
+        }
+        if (this.isAutoKey)
+        {
+            row.insearch = false;
+        }
+        rows.push(row);
+    });
+    var gridPanle = $('<div style="margin:7px;" id="margin"></div>').appendTo('body');
+    var o = bulidData();
+    var out = [];
+    out.push('<div>');
+    out.push('  <div style=" width:98%">');
+    out.push('      <div class="searchtitle">');
+    out.push('          <span>搜索</span><img src="../icons/searchtool.gif" />');
+    out.push('          <div class="togglebtn"></div> ');
+    out.push('      </div>');
+    out.push('      <div class="navline" style="margin-bottom:4px; margin-top:4px;"></div>');
+    out.push('      <div class="searchbox">');
+    out.push('          <form></form>');
+    out.push('      <div class="l-clear"></div>');
+    out.push('      </div>');
+    out.push('  </div>');
+    out.push('  <div class="listgrid"></div> ');
+    out.push('</div>');
+    var listPanle = $(out.join(''));
+    listPanle.appendTo('body');
+    var searchform = $("form:first", listPanle);
+    searchform.ligerForm({ fields: o.search });
+    var listgrid = $(".listgrid:first", listPanle).ligerGrid({
+        columns: o.grid,
+        toolbar: listToolbar(), data: $.extend(true, {}, AllProductData),
+        width: '98%', height: '96%', checkbox: false
+    });
+    //搜索 按钮
+    lab.appendSearchButtons(searchform, listgrid, false, function ()
+    {
+        listgrid.options.data = $.extend(true, {}, AllProductData);
+    });
+    function listToolbar()
+    {
+        var items = [];
+        items.push({ text: '增加', click: grid_add, img: "../icons/page_add.png" });
+        items.push({ text: '修改', click: grid_edit, img: "../icons/edit.gif" });
+        items.push({ text: '删除', click: grid_delete, img: "../icons/delete.png" });
+        items.push({ text: '高级自定义查询', click: grid_search, icon: 'search2' });
+        return { items: items };
+
+        function grid_add()
+        {
+            clear();
+            showDetail(o.form);
+        }
+
+        function grid_edit()
+        {
+            clear();
+            var selected = listgrid.getSelected();
+            if (!selected) { lab.tip('请选择行'); return; }
+            showDetail(o.form, selected);
+        }
+
+        function grid_delete()
+        {
+            listgrid.deleteSelectedRow();
+        }
+
+        function grid_search()
+        {
+            listgrid.options.data = $.extend(true, {}, AllProductData);
+            listgrid.showFilter();
+        }
+        function showDetail(fields, data)
+        {
+            var form = $('<form></form> ');
+            form.ligerForm({ fields: fields });
+            $.ligerDialog.open({
+                title: '预览 明细 界面',
+                target: form,
+                width: 850, height: 400, isResize: true,
+                buttons: [{ text: '关闭', onclick: function (item, dialog) { dialog.hide(); } }]
+            });
+            lab.loadForm(form, data);
+        }
+    }
+    function clear()
+    {
+        var managers = $.ligerui.find($.ligerui.controls.Input);
+        for (var i = 0, l = managers.length; i < l; i++)
+        {
+            if (exits(managers[i].id))
+            {
+                managers[i].destroy();
+            }
+        }
+    }
+    function exits(id)
+    {
+        for (var i = 0, l = listgrid.rows.length; i < l; i++)
+        {
+            var name = listgrid.rows[i].name;
+            if (name == id) return true;
+        }
+        return false;
+    }
+}
 
 function createGridToolbar(tName)
 {
+    var items = [];
+    items.push({ text: '预览效果', click: preview, img: "../icons/application_view_list.png" });
+    items.push({ text: '导出JSON', click: outjson, img: "../icons/printer_48.png" });
+    items.push({ text: '上移', click: moveup, img: "../icons/sign_up.gif" });
+    items.push({ text: '下移', click: movedown, img: "../icons/arrow_down.gif" });
+    //items.push({ text: '自动翻译字段', click: translate, img: "../icons/world.gif" });
+    return { items: items };
 
 
 
@@ -133,7 +277,18 @@ function createGridToolbar(tName)
     }
 
 
-
+    function outjson()
+    {
+        var d = bulidData();
+        var textarea = $("<textarea />").width(400).height(120);
+        textarea.val($.ligerui.toJSON(d));
+        $.ligerDialog.open({
+            title: 'JSON',
+            target: textarea.wrap('<div></div>').parent().css('margin', 10),
+            width: 470, height: 200, isResize: true,
+            buttons: [{ text: '关闭', onclick: function (item, dialog) { dialog.hide(); } }]
+        });
+    }
     function translate()
     {
         var list = [];
@@ -168,47 +323,25 @@ function createGridToolbar(tName)
         if (!selected) return;
         grid.down(selected);
     }
-    function addRow(){
-        var manager = $("#gridP").ligerGetGridManager();
-        manager.addRow({
-
-        });
-
-
-    }
 }
 
 
 
 //获取 表单和表格 结构 所需要的数据
-function buildData(id)
+function bulidData()
 {
     var griddata = [], searchdata= [], formdata= [];
-    var rows = [];
-    $.ajax({
-        type:'post',
-        url:'designer.do?getColumns&ajax=true',
-        data:'id='+id,
-        dataType:'json',
-        async:false,
-        success:function(result){
-            rows = result;
-        },
-        error:function(e){
-            alert("出错了!~"+e);
-        }
-    });
-
-    for (var i = 0, l = rows.length; i < l; i++)
+    griddata.push({ display: "名称", name: "name", width: 120 });
+    /*for (var i = 0, l = grid.rows.length; i < l; i++)
     {
-        var o = rows[i];
+        var o = grid.rows[i];
         if (o.inlist)
             griddata.push({ display: o.display, name: o.name, width: o.listwidth });
         if (o.insearch)
             searchdata.push(getFieldData(o, true));
         if (o.inform)
             formdata.push(getFieldData(o));
-    }
+    }*/
     return { grid: griddata, search: searchdata, form: formdata };
 
     function getFieldData(o, search)
@@ -257,7 +390,6 @@ function fieldTypeRender(r, i, value)
 //是否类型的模拟复选框的渲染函数
 function checkboxRender(rowdata, rowindex, value, column)
 {
-
     var iconHtml = '<div class="chk-icon';
     if (value) iconHtml += " chk-icon-selected";
     iconHtml += '"';
@@ -285,96 +417,4 @@ $(".searchtitle .togglebtn").live('click', function ()
     else $(this).addClass("togglebtn-down");
     var searchbox = $(this).parent().nextAll("div.searchbox:first");
     searchbox.slideToggle('fast');
-});
-
-
-
-
-function preview(id)
-{
-
-    //clear();
-
-    var o = buildData(id);
-
-    var out = [];
-    out.push('<div>');
-    out.push('  <div style=" width:98%">');
-    out.push('      <div class="searchtitle">');
-    out.push('          <span>搜索</span><img src="../icons/searchtool.gif" />');
-    out.push('          <div class="togglebtn"></div> ');
-    out.push('      </div>');
-    out.push('      <div class="navline" style="margin-bottom:4px; margin-top:4px;"></div>');
-    out.push('      <div class="searchbox">');
-    out.push('          <form></form>');
-    out.push('      <div class="l-clear"></div>');
-    out.push('      </div>');
-    out.push('  </div>');
-    out.push('  <div class="listgrid"></div> ');
-    out.push('</div>');
-    var listPanle = $(out.join(''));
-
-    var searchform = $("form:first", listPanle);
-    searchform.ligerForm({ fields: o.search });
-    var listgrid = $(".listgrid:first", listPanle).ligerGrid({
-        columns: o.grid,
-        toolbar: listToolbar(), data: $.extend(true, {}, AllProductData),
-        width: '98%', height: 400, checkbox: false
-    });
-    //搜索 按钮
-    lab.appendSearchButtons(searchform, listgrid, false, function ()
-    {
-        listgrid.options.data = $.extend(true, {}, AllProductData);
-    });
-
-    $.ligerDialog.open({
-        title: '预览 列表 界面',
-        target: listPanle,
-        width: 950, height: 530, isResize: true,
-        buttons: [{ text: '关闭', onclick: function (item, dialog) { dialog.hide(); } }]
-    });
-
-
-    function listToolbar()
-    {
-        var items = [];
-        items.push({ text: '增加', click: grid_add, img: "../icons/page_add.png" });
-        items.push({ text: '修改', click: grid_edit, img: "../icons/edit.gif" });
-        items.push({ text: '删除', click: grid_delete, img: "../icons/delete.png" });
-        items.push({ text: '高级自定义查询', click: grid_search, icon: 'search2' });
-        return { items: items };
-
-        function grid_add()
-        {
-
-            showDetail(o.form);
-        }
-
-        function grid_edit()
-        {
-            clear();
-            var selected = listgrid.getSelected();
-            if (!selected) { lab.tip('请选择行'); return; }
-            showDetail(o.form, selected);
-        }
-
-        function grid_delete()
-        {
-            listgrid.deleteSelectedRow();
-        }
-
-        function grid_search()
-        {
-            listgrid.options.data = $.extend(true, {}, AllProductData);
-            listgrid.showFilter();
-        }
-    }
-}
-
-
-
-
-function init(){
-
-
-}
+}); 
