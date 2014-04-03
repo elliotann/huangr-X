@@ -375,6 +375,6 @@ function preview(id)
 
 
 function init(){
-    preview(7);
+
 
 }
