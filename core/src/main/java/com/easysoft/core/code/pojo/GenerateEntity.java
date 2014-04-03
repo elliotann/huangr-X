@@ -15,7 +15,7 @@ import java.util.Map;
  */
 public class GenerateEntity implements java.io.Serializable{
 	private static final long serialVersionUID = 7821940124097563556L;
-	private String entityPackage;// 包名（小写）
+	private String packageName;// 包名（小写）
 	private String entityName;// 实体名（首字母大写）
 	private String tableName; // 表名
 	private String tableTitle;// 功能描述
@@ -32,16 +32,16 @@ public class GenerateEntity implements java.io.Serializable{
 	 */
 	private Map<String,String[]> buttonSqlMap;
 
-	
-	public String getEntityPackage() {
-		return entityPackage;
-	}
 
-	public void setEntityPackage(String entityPackage) {
-		this.entityPackage = entityPackage;
-	}
+    public String getPackageName() {
+        return packageName;
+    }
 
-	public String getEntityName() {
+    public void setPackageName(String packageName) {
+        this.packageName = packageName;
+    }
+
+    public String getEntityName() {
 		return entityName;
 	}
 

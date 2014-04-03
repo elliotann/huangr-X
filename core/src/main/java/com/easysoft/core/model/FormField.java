@@ -32,6 +32,8 @@ public class FormField implements Serializable {
     private String space;
     private boolean newline;
     private String group;
+    //数据类型
+    private String dataType;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="id")
@@ -172,5 +174,14 @@ public class FormField implements Serializable {
 
     public void setGroup(String group) {
         this.group = group;
+    }
+    //数据类型
+    @Column(name="data_type")
+    public String getDataType() {
+        return dataType;
+    }
+
+    public void setDataType(String dataType) {
+        this.dataType = dataType;
     }
 }
