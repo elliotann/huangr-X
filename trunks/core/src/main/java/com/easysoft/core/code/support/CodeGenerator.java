@@ -69,7 +69,7 @@ public class CodeGenerator implements ICallBack {
             } else {
                 if ("01".equals(createFileProperty.getJspMode())) {
                     codeFactory.invoke("JspTableTemplate_add.ftl", "jsp_add");
-                    codeFactory.invoke("cgform_jspTableTemplate_update.ftl", "jsp_update");
+                    codeFactory.invoke("JspTableTemplate_update.ftl", "jsp_update");
                 }
                 if ("02".equals(createFileProperty.getJspMode())) {
                     codeFactory.invoke("JspTableTemplate_add.ftl", "jsp_add");
