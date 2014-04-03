@@ -105,8 +105,22 @@ $.ligerDefaults.Grid.editors['select'] =
 
 
 var root = "../../";
-var fieldTypeData = [{ value: 'text', text: '文本框' }, { value: 'textarea', text: '多行文本框' }, { value: 'date', text: '日期控件' }, { value: 'select', text: '下拉框' }, { value: 'digits', text: '整数输入框' }, { value: 'number', text: '浮点数输入框' }, { value: 'hidden', text: '隐藏控件'}];
-  
+var fieldTypeData = [
+    { value:'text', text:'文本框' },
+    { value:'textarea', text:'多行文本框' },
+    { value:'date', text:'日期控件' },
+    { value:'select', text:'下拉框' },
+    { value:'digits', text:'整数输入框' },
+    { value:'number', text:'浮点数输入框' },
+    { value:'hidden', text:'隐藏控件'}
+];
+
+var dataTypes = [
+    { value:'VARCHAR', text:'VARCHAR' },
+    { value:'INT', text:'INT' }
+
+];
+
 
 function init()
 {
@@ -157,6 +171,7 @@ function bulidMainGrid()
         row.isNullable = this.isNullable ? true : false;
         row.ispk = this.ispk?true:false;
         row.type = this.inputType;
+        row.dataType = this.dataType;
         if (this.isAutoKey || this.isInForeignKey)
         {
             row.inlist = false;
@@ -175,11 +190,12 @@ function bulidMainGrid()
     var gridPanle = $('<div style="margin:7px;" id="gridP"></div>').appendTo('body');
     window.grid =  gridPanle.ligerGrid({
         columns: [
-            { display: '基本信息', columns: [
-            { display: '字段名', name: 'fieldName', align: 'left', width: 110, minWidth: 30,editor: { type: 'text'} },
-            { display: '显示名', name: 'display', align: 'left', width: 110, minWidth: 30, editor: { type: 'text'} },
-            { display: '是否主键', name: 'ispk', align: 'left', width: 55,render: checkboxRender },
-            { display: '是否为空', name: 'isNullable', width: 55, render: checkboxRender}]
+            { display: '数据库', columns: [
+                { display: '字段名', name: 'fieldName', align: 'left', width: 110, minWidth: 30,editor: { type: 'text'} },
+                { display: '显示名', name: 'display', align: 'left', width: 110, minWidth: 30, editor: { type: 'text'} },
+                { display: '是否主键', name: 'ispk', align: 'left', width: 55,render: checkboxRender },
+                { display: '是否为空', name: 'isNullable', width: 55, render: checkboxRender},
+                { display: '数据类型', name: 'dataType', align: 'left', width: 80, minWidth: 30, editor: { type: 'select', data: dataTypes }, render: dataTypeRender }]
             },
             { display: '列表页设置', columns: [
             { display: '列表显示', name: 'inlist', width: 55, render: checkboxRender },
@@ -424,7 +440,7 @@ function bulidData()
     }
 }
 
-//字段类型渲染器
+//表单字段类型渲染器
 function fieldTypeRender(r, i, value)
 {
     for (var i = 0, l = fieldTypeData.length; i < l; i++)
@@ -433,6 +449,17 @@ function fieldTypeRender(r, i, value)
         if (o.value == value) return o.text || o.name;
     }
     return "文本框";
+}
+
+//字段类型渲染器
+function dataTypeRender(r, i, value)
+{
+    for (var i = 0, l = dataTypes.length; i < l; i++)
+    {
+        var o = dataTypes[i];
+        if (o.value == value) return o.text || o.name;
+    }
+    return "VARCHAR";
 }
 //是否类型的模拟复选框的渲染函数
 function checkboxRender(rowdata, rowindex, value, column)
