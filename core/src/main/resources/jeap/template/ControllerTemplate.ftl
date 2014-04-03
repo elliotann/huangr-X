@@ -63,7 +63,7 @@ public class ${entityName}Controller extends BaseController {
 	 */
 	@RequestMapping(params = "${entityName?uncap_first}")
 	public ModelAndView ${entityName?uncap_first}(HttpServletRequest request) {
-		return new ModelAndView("${bussiPackage?replace(".","/")}/${entityPackage}/${entityName?uncap_first}List");
+		return new ModelAndView("admin/component/${entityPackage}/${entityName?uncap_first}List");
 	}
 
 	/**
@@ -230,7 +230,7 @@ public class ${entityName}Controller extends BaseController {
 			${entityName?uncap_first} = ${entityName?uncap_first}Service.getEntity(${entityName}Entity.class, ${entityName?uncap_first}.getId());
 			req.setAttribute("${entityName?uncap_first}Page", ${entityName?uncap_first});
 		}
-		return new ModelAndView("${bussiPackage?replace(".","/")}/${entityPackage}/${entityName?uncap_first}-add");
+		return new ModelAndView("admin/component/${entityPackage}/${entityName?uncap_first}-add");
 	}
 	/**
 	 * ${ftl_description}编辑页面跳转
@@ -243,6 +243,6 @@ public class ${entityName}Controller extends BaseController {
 			${entityName?uncap_first} = ${entityName?uncap_first}Service.getEntity(${entityName}Entity.class, ${entityName?uncap_first}.getId());
 			req.setAttribute("${entityName?uncap_first}Page", ${entityName?uncap_first});
 		}
-		return new ModelAndView("${bussiPackage?replace(".","/")}/${entityPackage}/${entityName?uncap_first}-update");
+		return new ModelAndView("admin/component/${entityPackage}/${entityName?uncap_first}-update");
 	}
 }
