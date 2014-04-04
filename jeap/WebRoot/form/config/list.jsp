@@ -129,7 +129,7 @@
                         { display: '创建时间', name: 'createTime', minWidth: 140 },
                         { display: '操作', name: 'realname', minWidth: 140,render:function(rowdata,index,value){
 
-                              return "<a href='#' onclick='preview("+rowdata.id+")'>预览</a>&nbsp;&nbsp; <a href='#' onclick='preview("+rowdata.id+")'>功能</a>";
+                              return "<a href='#' onclick='preview("+rowdata.id+")'>预览</a>";
 
                         } }
                     ], url:'designer.do?dataGrid&ajax=yes',  pageSize:30 ,rownumbers:true,
