@@ -9,7 +9,7 @@
 <script src="/jeap/form/config/ligerGrid.showFilter.js" type="text/javascript"></script>
 <script src="/jeap/form/config/data.js" type="text/javascript"></script>
 <script src="/jeap/form/config/lab.js" type="text/javascript"></script>
-<script src = "webpage/${bussiPackage?replace('.','/')}/${entityPackage}/${entityName?uncap_first}List.js"></script>
+<script src = "admin/component/${entityPackage}/${entityName?uncap_first}List.js"></script>
 
 
 <body>
