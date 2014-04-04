@@ -28,18 +28,17 @@ ul{
 var app_path="<%=path%>";
 var mainpage=false;
 </script>
-<%--<script type="text/javascript" src="${staticserver }/js/common/common.js"></script>
-<script type="text/javascript" src="${staticserver }/js/admin/eop-min.js"></script>--%>
+
     <script type="text/javascript" src="${context}/js/plug-in/jquery/jquery-1.8.3.js"></script>
     <script type="text/javascript" src="${staticserver }/js/admin/jeap.js"></script>
-<script type="text/javascript" src="${staticserver }/js/common/SelectTree.js"></script>
-<script type="text/javascript" src="<%=path %>/editor/ckeditor362/ckeditor.js"></script>
+    <script type="text/javascript" src="${staticserver }/js/common/SelectTree.js"></script>
+    <script type="text/javascript" src="<%=path %>/editor/ckeditor362/ckeditor.js"></script>
 
-<link href="${context}/css/global.css" rel="stylesheet" type="text/css" />
-<link href="${context}/css/input.css" rel="stylesheet" type="text/css" />
-<link href="${context}/css/grid.css" rel="stylesheet" type="text/css" />
-<link href="${context}/css/validate.css" rel="stylesheet" type="text/css" />
-<link href="${context}/css/dialog.css" rel="stylesheet" type="text/css" />
+    <link href="${context}/css/global.css" rel="stylesheet" type="text/css" />
+    <link href="${context}/css/input.css" rel="stylesheet" type="text/css" />
+    <link href="${context}/css/grid.css" rel="stylesheet" type="text/css" />
+    <link href="${context}/css/validate.css" rel="stylesheet" type="text/css" />
+    <link href="${context}/css/dialog.css" rel="stylesheet" type="text/css" />
 
 </head>
 <body>
