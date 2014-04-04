@@ -39,6 +39,9 @@ var mainpage=false;
     <link href="${context}/css/grid.css" rel="stylesheet" type="text/css" />
     <link href="${context}/css/validate.css" rel="stylesheet" type="text/css" />
     <link href="${context}/css/dialog.css" rel="stylesheet" type="text/css" />
+    <link href="${context }/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
+    <link href="${context }/js/ligerui/skins/ligerui-icons.css" rel="stylesheet" type="text/css" />
+    <link href="${context }/js/ligerui/skins/Gray/css/all.css" rel="stylesheet" type="text/css" />
 
 </head>
 <body>
