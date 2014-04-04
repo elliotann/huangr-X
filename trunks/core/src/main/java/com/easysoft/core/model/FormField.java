@@ -18,6 +18,8 @@ public class FormField implements Serializable {
     private Integer id;
     private FormEntity form;
     private String fieldName;
+    //json用,不存数据库
+    private String name;
     private String display;
     private boolean ispk;
     private boolean isNullable;
@@ -183,5 +185,13 @@ public class FormField implements Serializable {
 
     public void setDataType(String dataType) {
         this.dataType = dataType;
+    }
+    @Transient
+    public String getName() {
+        return fieldName;
+    }
+
+    public void setName(String name) {
+        this.name = fieldName;
     }
 }
