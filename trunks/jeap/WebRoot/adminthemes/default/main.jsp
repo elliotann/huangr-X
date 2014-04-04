@@ -10,21 +10,19 @@
 <script>
 var founder= ${user.founder};
 </script>
-<%--<script type="text/javascript" src="${staticserver }/js/common/common.js"></script>--%>
-    <script type="text/javascript" src="${context}/js/plug-in/jquery/jquery-1.8.3.js"></script>
-<script type="text/javascript" src="${staticserver }/js/admin/jquery.timers-1.2.js"></script>
-<script type="text/javascript" src="${staticserver }/js/admin/short-msg.js"></script>
-<%--<script type="text/javascript" src="${staticserver }/js/admin/eop.js"></script>--%>
-<script type="text/javascript" src="${staticserver }/js/admin/jeap.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/editor/ckeditor362/ckeditor.js"></script>
 
-<link href="${context}/css/style.css" rel="stylesheet" type="text/css" />
-<link href="${context}/css/global.css" rel="stylesheet" type="text/css" />
-<link href="${context}/css/grid.css" rel="stylesheet" type="text/css" />
-<link href="${context}/css/input.css" rel="stylesheet" type="text/css" />
-<link href="${context}/css/validate.css" rel="stylesheet" type="text/css" />
-<link href="${context}/css/dialog.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="${context}/js/index.js"></script>
+    <script type="text/javascript" src="${context}/js/plug-in/jquery/jquery-1.8.3.js"></script>
+    <script type="text/javascript" src="${staticserver }/js/admin/jeap.js"></script>
+    <link href="${context}/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="${context}/css/global.css" rel="stylesheet" type="text/css" />
+    <link href="${context}/css/grid.css" rel="stylesheet" type="text/css" />
+    <link href="${context}/css/input.css" rel="stylesheet" type="text/css" />
+    <link href="${context}/css/validate.css" rel="stylesheet" type="text/css" />
+    <link href="${context}/css/dialog.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="${context}/js/index.js"></script>
+    <link href="${context }/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
+    <script src="${context }/js/ligerui/js/ligerui.all.js" type="text/javascript"></script>
+    <script src="${context }/js/ligerui/js/plugins/ligerTab.js"></script>
 </head>
 <body>
 	<div id="head">
@@ -56,9 +54,11 @@ var founder= ${user.founder};
 		<dl></dl>
 
 	</div>
-	<div id="right_content" >
 
-
+    <div id="right_content" >
+        <div tabid="home" title="我的主页" style="height:300px" >
+            <iframe frameborder="0" name="home" id="home" src="welcome.htm"></iframe>
+        </div>
 	</div>
 </body>
 </html>
