@@ -1,18 +1,5 @@
 package com.easysoft.core.common.service.impl;
 
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-
-import org.hibernate.Session;
-import org.hibernate.criterion.DetachedCriteria;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.easysoft.core.common.dao.hibernate.IGenericDAO;
 import com.easysoft.core.common.dao.hibernate.PageList;
 import com.easysoft.core.common.dao.hibernate.qbc.CriteriaQuery;
@@ -21,6 +8,17 @@ import com.easysoft.core.common.service.IGenericService;
 import com.easysoft.core.common.vo.DataTableReturn;
 import com.easysoft.core.common.vo.json.DataGridReturn;
 import com.easysoft.framework.db.core.DBTable;
+import org.hibernate.Session;
+import org.hibernate.criterion.DetachedCriteria;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 /**
  * User: andy
@@ -32,6 +30,7 @@ import com.easysoft.framework.db.core.DBTable;
 @Service("genericService")
 @Transactional
 public class GenericService<T> implements IGenericService<T> {
+    private Class<T> entityClass;
 
     @Autowired
     private IGenericDAO genericDAO;

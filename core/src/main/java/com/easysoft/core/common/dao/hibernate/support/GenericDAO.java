@@ -1,38 +1,5 @@
 package com.easysoft.core.common.dao.hibernate.support;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.hibernate.Criteria;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.criterion.CriteriaSpecification;
-import org.hibernate.criterion.Criterion;
-import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Example;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Projection;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
-import org.hibernate.internal.CriteriaImpl;
-import org.hibernate.metadata.ClassMetadata;
-import org.hibernate.persister.entity.AbstractEntityPersister;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.stereotype.Repository;
-import org.springframework.util.Assert;
-
 import com.easysoft.core.annotation.JeecgEntityTitle;
 import com.easysoft.core.common.dao.hibernate.IGenericDAO;
 import com.easysoft.core.common.dao.hibernate.PageList;
@@ -48,6 +15,27 @@ import com.easysoft.framework.db.core.DBTable;
 import com.easysoft.framework.db.core.common.hibernate.qbc.PagerUtil;
 import com.easysoft.framework.utils.MyBeanUtils;
 import com.easysoft.framework.utils.ToEntityUtil;
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.*;
+import org.hibernate.internal.CriteriaImpl;
+import org.hibernate.metadata.ClassMetadata;
+import org.hibernate.persister.entity.AbstractEntityPersister;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.Repository;
+import org.springframework.util.Assert;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * User: andy
@@ -66,6 +54,7 @@ public class GenericDAO<T> implements IGenericDAO<T> {
     private JdbcTemplate jdbcTemplate;
     public GenericDAO(Class<T> clazz) {
         this.entityClass = clazz;
+
     }
     @Autowired
     private SessionFactory sessionFactory;
@@ -75,9 +64,9 @@ public class GenericDAO<T> implements IGenericDAO<T> {
     @Override
     public <T> Serializable save(T entity) {
         Serializable id = getSession().save(entity);
-        if(logger.isDebugEnabled()){
+        /*if(logger.isDebugEnabled()){
             logger.debug("保存实体【"+entityClass.getName()+"】成功！");
-        }
+        }*/
         return id;
     }
     /**
