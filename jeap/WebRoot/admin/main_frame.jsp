@@ -33,6 +33,8 @@ var mainpage=false;
     <script type="text/javascript" src="${staticserver }/js/admin/jeap.js"></script>
     <script type="text/javascript" src="${staticserver }/js/common/SelectTree.js"></script>
     <script type="text/javascript" src="<%=path %>/editor/ckeditor362/ckeditor.js"></script>
+    <script src="${context }/js/ligerui/js/ligerui.all.js" type="text/javascript"></script>
+
 
     <link href="${context}/css/global.css" rel="stylesheet" type="text/css" />
     <link href="${context}/css/input.css" rel="stylesheet" type="text/css" />
