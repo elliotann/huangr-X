@@ -2,16 +2,6 @@
          pageEncoding="UTF-8"%>
 <%@ include file="/commons/taglibs.jsp"%>
 <%@ taglib uri="/WEB-INF/grid.tld" prefix="grid"%>
-
-
-<script src="${context }/js/ligerui/js/core/base.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerGrid.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerToolBar.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerResizable.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerCheckBox.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerDialog.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerDrag.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerForm.js" type="text/javascript"></script>
 <link href="/jeap/form/config/lab.css" rel="stylesheet" type="text/css" />
 <script src="/jeap/form/config/data.js" type="text/javascript"></script>
 <script src="/jeap/form/config/lab.js" type="text/javascript"></script>
@@ -19,7 +9,7 @@
 <script src="/jeap/form/config/ligerGrid.showFilter.js" type="text/javascript"></script>
 
 <script type="text/javascript">
-    var grid1;
+    var listgrid;
     function addForm(item)
     {
 
@@ -44,7 +34,7 @@
     function modifyForm(item)
     {
 
-        var row = grid1.getSelectedRow();
+        var row = listgrid.getSelectedRow();
         if(row==null){
             $.ligerDialog.error('请选择数据修改!');
             return;
@@ -102,7 +92,7 @@
     }
     $(function ()
     {
-        grid1 =
+        listgrid =
                 $("#maingrid").ligerGrid({
                     height:'99%',
                     columns: [
