@@ -1,124 +1,123 @@
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@include file="/context/mytags.jsp"%>
-<!DOCTYPE html>
-<html>
- <head>
-  <title>${ftl_description}</title>
-  <t:base type="jquery,easyui,tools,DatePicker"></t:base>
-  <script type="text/javascript" src="plug-in/ckeditor_new/ckeditor.js"></script>
-  <script type="text/javascript" src="plug-in/ckfinder/ckfinder.js"></script>
-  <script type="text/javascript">
-  //编写自定义JS代码
-  </script>
- </head>
- <body>
-  <t:formvalid formid="formobj" dialog="true" usePlugin="password" layout="table" action="${entityName?uncap_first}Controller.do?doAdd" tiptype="1">
-			<#list columns as po>
-				<#if po.inform>
-					<input id="${po.fieldName}" name="${po.fieldName}" type="hidden" value="${'$'}{${entityName?uncap_first}Page.${po.fieldName} }">
-				</#if>
-			</#list>
-		<table style="width: 600px;" cellpadding="0" cellspacing="1" class="formtable">
-			<#list pageColumns as po>
-			<#if (pageColumns?size>10)>
-			<#if po_index%2==0>
-				<tr>
-				</#if>
-			<#else>
-				<tr>
-			</#if>
-					<td align="right">
-						<label class="Validform_label">
-							${po.display}:
-						</label>
-					</td>
-					<td class="value">
-						 <#if po.type=='text'>
-					     	 <input id="${po.fieldName}" name="${po.fieldName}" type="text" style="width: 150px" class="inputxt"  
-					      						<#if po.fieldValidType?if_exists?html != ''>
-								               datatype="${po.fieldValidType?if_exists?html}"
-								               <#else>
-								               <#if po.type == 'int'>
-								               datatype="n" 
-								               <#elseif po.type=='double'>
-								               datatype="/^(-?\d+)(\.\d+)?$/" 
-								               <#else>
-								               <#if po.nullable>datatype="*"</#if>
-								               </#if>
-								               </#if>>
-						  <#elseif po.type=='textarea'>
-						  	 <textarea id="${po.fieldName}" name="${po.fieldName}"></textarea>
-					      <#elseif po.type=='password'>
-					      	<input id="${po.fieldName}" name="${po.fieldName}" type="password" style="width: 150px" class="inputxt"  
-					      						<#if po.fieldValidType?if_exists?html != ''>
-								               datatype="${po.fieldValidType?if_exists?html}"
-								               <#else>
-								               <#if po.type == 'int'>
-								               datatype="n" 
-								               <#elseif po.type=='double'>
-								               datatype="/^(-?\d+)(\.\d+)?$/" 
-								               <#else>
-								               <#if po.nullable>datatype="*"</#if>
-								               </#if>
-								               </#if>>
-							<#elseif po.type=='radio' || po.type=='select' || po.type=='checkbox' || po.type=='list'>
-							  <t:dictSelect field="${po.fieldName}" type="${po.type?if_exists?html}"
-									<#if po.dictTable?if_exists?html != ''>dictTable="${po.dictTable?if_exists?html}" dictField="${po.dictField?if_exists?html}" dictText="${po.dictText?if_exists?html}"<#else>typeGroupCode="${po.dictField}"</#if> defaultVal="${'$'}{${entityName?uncap_first}Page.${po.fieldName}}" hasLabel="false"  title="${po.content}"></t:dictSelect>     
-							<#elseif po.type=='date'>
-							   <input id="${po.fieldName}" name="${po.fieldName}" type="text" style="width: 150px" 
-					      						class="Wdate" onClick="WdatePicker()"
-					      						<#if po.fieldValidType?if_exists?html != ''>
-								               datatype="${po.fieldValidType?if_exists?html}"
-								               <#else>
-								               <#if po.nullable>datatype="*"</#if>
-								               </#if>>    
-					      	<#elseif po.type=='datetime'>
-							   <input id="${po.fieldName}" name="${po.fieldName}" type="text" style="width: 150px" 
-					      						 class="Wdate" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
-					      						<#if po.fieldValidType?if_exists?html != ''>
-								               datatype="${po.fieldValidType?if_exists?html}"
-								               <#else>
-								               <#if po.nullable>datatype="*"</#if>
-								               </#if>>
-							<#elseif po.type=='file'>
-								<input type="hidden" id="${po.fieldName}" name="${po.fieldName}" />
-								<a  target="_blank" id="${po.fieldName}_href">暂时未上传文件</a>
-								<input class="ui-button" type="button" value="上传附件"
-												onclick="browseFiles('${po.fieldName}','${po.fieldName}_href')"/>
-					      	<#else>
-					      		<input id="${po.fieldName}" name="${po.fieldName}" type="text" style="width: 150px" class="inputxt"  
-					      						<#if po.fieldValidType?if_exists?html != ''>
-								               datatype="${po.fieldValidType?if_exists?html}"
-								               <#else>
-								               <#if po.type == 'int'>
-								               datatype="n" 
-								               <#elseif po.type=='double'>
-								               datatype="/^(-?\d+)(\.\d+)?$/" 
-								               <#else>
-								               <#if po.nullable>datatype="*"</#if>
-								               </#if>
-								               </#if>>
-							</#if>
-							<span class="Validform_checktip"></span>
-							<label class="Validform_label" style="display: none;">${po.content?if_exists?html}</label>
-						</td>
-			<#if (columns?size>10)>
-				<#if (po_index%2==0)&&(!po_has_next)>
-				<td align="right">
-					<label class="Validform_label">
-					</label>
-				</td>
-				<td class="value">
-				</td>
-				</#if>
-				<#if (po_index%2!=0)||(!po_has_next)>
-					</tr>
-				</#if>
-				<#else>
-				</tr>
-			</#if>
-				</#list>
-			</table>
-		</t:formvalid>
- </body>
-  <script src = "webpage/${bussiPackage?replace('.','/')}/${entityPackage}/${entityName?uncap_first}.js"></script>		
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<link href="${r" ${context}"}/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
+<link href="${r" ${context}"}/js/ligerui/skins/Gray/css/all.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="${r" ${context}"}/js/plug-in/jquery/jquery-1.8.3.js"></script>
+<script src="${r" ${context}"}/js/ligerui/js/core/base.js" type="text/javascript"></script>
+<script src="${r" ${context}"}/js/ligerui/js/plugins/ligerForm.js" type="text/javascript"></script>
+<script src="${r" ${context}"}/js/ligerui/js/plugins/ligerDateEditor.js" type="text/javascript"></script>
+<script src="${r" ${context}"}/js/ligerui/js/plugins/ligerComboBox.js" type="text/javascript"></script>
+<script src="${r" ${context}"}/js/ligerui/js/plugins/ligerCheckBox.js" type="text/javascript"></script>
+<script src="${r" ${context}"}/js/ligerui/js/plugins/ligerButton.js" type="text/javascript"></script>
+<script src="${r" ${context}"}/js/ligerui/js/plugins/ligerDialog.js" type="text/javascript"></script>
+<script src="${r" ${context}"}/js/ligerui/js/plugins/ligerRadio.js" type="text/javascript"></script>
+<script src="${r" ${context}"}/js/ligerui/js/plugins/ligerSpinner.js" type="text/javascript"></script>
+<script src="${r" ${context}"}/js/ligerui/js/plugins/ligerTextBox.js" type="text/javascript"></script>
+<script src="${r" ${context}"}/js/ligerui/js/plugins/ligerTip.js" type="text/javascript"></script>
+
+<script src="${r" ${context}"}/js/plug-in/jquery-validation/jquery.validate.min.js"></script>
+<script src="${r" ${context}"}/js/plug-in/jquery-validation/jquery.metadata.js" type="text/javascript"></script>
+<script src="${r" ${context}"}/js/plug-in/jquery-validation/messages_cn.js" type="text/javascript"></script>
+<script type="text/javascript" src="${r" ${staticserver}"}/js/admin/jeap.js"></script>
+
+<script type="text/javascript">
+    var groupicon = "../../../lib/ligerUI/skins/icons/communication.gif";
+    var dialog = frameElement.dialog;
+    var fields;
+    $(function ()
+    {
+        $.metadata.setType("attr", "validate");
+        var fields;
+        $.ajax({
+            type:'post',
+            url:'designer.do?getColumns&ajax=true',
+            data:'id='+7,
+            dataType:'json',
+            async:false,
+            success:function(result){
+                fields = result;
+            },
+            error:function(){
+                alert("出错了!~"+e);
+            }
+        });
+
+        //创建表单结构
+        var mainform = $("form");
+        mainform.ligerForm({
+            inputWidth: 170, labelWidth: 90, space: 40,
+            fields:fields
+        });
+
+        var validator = $("form").validate({
+            //调试状态，不会提交数据的
+            debug: true,
+            errorPlacement: function (lable, element)
+            {
+
+                if (element.hasClass("l-textarea"))
+                {
+                    element.addClass("l-textarea-invalid");
+                }
+                else if (element.hasClass("l-text-field"))
+                {
+                    element.parent().addClass("l-text-invalid");
+                }
+                $(element).removeAttr("title").ligerHideTip();
+                $(element).attr("title", lable.html()).ligerTip();
+            },
+            success: function (lable)
+            {
+                var element = $("#" + lable.attr("for"));
+                if (element.hasClass("l-textarea"))
+                {
+                    element.removeClass("l-textarea-invalid");
+                }
+                else if (element.hasClass("l-text-field"))
+                {
+                    element.parent().removeClass("l-text-invalid");
+                }
+                $(element).removeAttr("title").ligerHideTip();
+            },
+            submitHandler: function ()
+            {
+                $("form .l-text,.l-textarea").ligerHideTip();
+                $("#form1").ajaxSubmit({
+                    url :"${entityName?uncap_first}.do?doAdd&ajax=true",
+                    type : "POST",
+                    dataType:"json",
+                    success : function(result) {
+
+                        if(result.success){
+                            alert("增加成功!");
+                            window.parent.listgrid.loadData();
+                            dialog.close();
+                        }else{
+                            alert(result.msg)
+                        }
+                    },
+                    error : function(e) {
+                        alert("出错啦:(");
+                    }
+                });
+            }
+        });
+    });
+
+    function formSubmit(){
+        $("#form1").submit();
+    }
+</script>
+
+
+
+<form name="form1" method="post"   id="form1">
+    <div id="formBefore"></div>
+    <br/>
+
+</form>
+
+<input type="button" value="提交" id="Button1" name="subBtn" class="l-button l-button-submit" onclick="formSubmit();"/>
+<input type="button" value="关闭" class="l-button l-button-test"/>
