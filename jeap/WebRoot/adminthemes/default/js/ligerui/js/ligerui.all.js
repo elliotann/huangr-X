@@ -1104,7 +1104,8 @@
             mozilla: /mozilla/.test(userAgent) && !/(compatible|webkit)/.test(userAgent)
         };
     }
-})(jQuery);﻿/**
+})(jQuery);
+/**
 * jQuery ligerUI 1.2.3
 * 
 * http://ligerui.com
@@ -1386,7 +1387,8 @@
         liger.inject.init();
     });
 
-})(jQuery);﻿/**
+})(jQuery);
+/**
 * jQuery ligerUI 1.2.3
 * 
 * http://ligerui.com
@@ -1569,7 +1571,8 @@
     });
 
 
-})(jQuery);﻿/**
+})(jQuery);
+/**
 * jQuery ligerUI 1.2.3
 * 
 * http://ligerui.com
@@ -1691,7 +1694,8 @@
     }); 
 
 
-})(jQuery);﻿/**
+})(jQuery);
+/**
 * jQuery ligerUI 1.2.3
 * 
 * http://ligerui.com
@@ -1818,7 +1822,7 @@
             }
         }
     });
-})(jQuery);﻿/**
+})(jQuery);/**
 * jQuery ligerUI 1.2.3
 * 
 * http://ligerui.com
@@ -2133,7 +2137,8 @@
     });
       
 
-})(jQuery);﻿/**
+})(jQuery);
+/**
 * jQuery ligerUI 1.2.3
 * 
 * http://ligerui.com
@@ -3435,7 +3440,7 @@
     $.ligerui.controls.ComboBox.prototype.setInputValue = $.ligerui.controls.ComboBox.prototype._changeValue;
     
 
-})(jQuery);﻿/**
+})(jQuery);/**
 * jQuery ligerUI 1.2.3
 * 
 * http://ligerui.com
@@ -4353,7 +4358,8 @@
     });
 
 
-})(jQuery);﻿/**
+})(jQuery);
+/**
 * jQuery ligerUI 1.2.3
 * 
 * http://ligerui.com
@@ -5472,7 +5478,8 @@
     };
 
 
-})(jQuery);﻿/**
+})(jQuery);
+/**
 * jQuery ligerUI 1.2.3
 * 
 * http://ligerui.com
@@ -5806,7 +5813,8 @@
 
     });
 
-})(jQuery);﻿/**
+})(jQuery);
+/**
 * jQuery ligerUI 1.2.3
 * 
 * http://ligerui.com
@@ -5886,7 +5894,8 @@
         }
     });
 
-})(jQuery);﻿/**
+})(jQuery);
+/**
 * jQuery ligerUI 1.2.3
 * 
 * http://ligerui.com
@@ -6434,7 +6443,8 @@
 
     });
 
-})(jQuery);﻿/**
+})(jQuery);
+/**
 * jQuery ligerUI 1.2.3
 * 
 * http://ligerui.com
@@ -7294,7 +7304,8 @@
         return out.join( '' );
     }
 
-} )( jQuery );﻿/**
+} )( jQuery );
+/**
 * jQuery ligerUI 1.2.3
 * 
 * http://ligerui.com
