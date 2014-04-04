@@ -1,21 +1,6 @@
 package com.easysoft.component.entity.cms;
 
-import java.math.BigDecimal;
-import java.util.Date;
-import java.lang.String;
-import java.lang.Double;
-import java.lang.Integer;
-import java.math.BigDecimal;
-import javax.xml.soap.Text;
-import java.sql.Blob;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import org.hibernate.annotations.GenericGenerator;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
 
 /**   
  * @Title: Entity
@@ -30,7 +15,7 @@ import javax.persistence.SequenceGenerator;
 @SuppressWarnings("serial")
 public class ProvideLoanInfoEntity implements java.io.Serializable {
 	/**主键*/
-	private java.lang.Integer id;
+	private java.lang.Integer uid;
 	/**名称*/
 	private java.lang.String name;
 	/**借款金额*/
@@ -41,19 +26,18 @@ public class ProvideLoanInfoEntity implements java.io.Serializable {
 	 *@return: java.lang.Integer  主键
 	 */
 	@Id
-	@GeneratedValue(generator = "paymentableGenerator")
-	@GenericGenerator(name = "paymentableGenerator", strategy = "uuid")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name ="ID",nullable=false)
-	public java.lang.Integer getId(){
-		return this.id;
+	public java.lang.Integer getUid(){
+		return this.uid;
 	}
 
 	/**
 	 *方法: 设置java.lang.Integer
 	 *@param: java.lang.Integer  主键
 	 */
-	public void setId(java.lang.Integer id){
-		this.id = id;
+	public void setUid(java.lang.Integer id){
+		this.uid = id;
 	}
 	/**
 	 *方法: 取得java.lang.String

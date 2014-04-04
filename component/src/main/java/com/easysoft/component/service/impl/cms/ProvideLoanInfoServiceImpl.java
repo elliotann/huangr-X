@@ -1,13 +1,13 @@
 package com.easysoft.component.service.impl.cms;
 
+import com.easysoft.component.entity.cms.ProvideLoanInfoEntity;
+import com.easysoft.component.service.cms.ProvideLoanInfoServiceI;
+import com.easysoft.core.common.service.impl.GenericService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.easysoft.component.service.cms.ProvideLoanInfoServiceI;
-import com.easysoft.core.common.service.impl.GenericService;
-import com.easysoft.component.entity.cms.ProvideLoanInfoEntity;
-import java.util.UUID;
 import java.io.Serializable;
+import java.util.List;
 
 @Service("provideLoanInfoService")
 @Transactional
@@ -30,4 +30,9 @@ public class ProvideLoanInfoServiceImpl extends GenericService<ProvideLoanInfoEn
 
  	}
 
+    @Override
+    public List list() {
+
+        return getList(ProvideLoanInfoEntity.class);
+    }
 }

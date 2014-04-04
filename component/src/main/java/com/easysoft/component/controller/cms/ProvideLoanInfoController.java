@@ -4,7 +4,9 @@ import com.easysoft.component.service.cms.ProvideLoanInfoServiceI;
 import com.easysoft.core.common.controller.BaseController;
 import com.easysoft.core.common.dao.hibernate.DataGrid;
 import com.easysoft.core.common.vo.json.AjaxJson;
+import com.easysoft.core.common.vo.json.DataGridReturn;
 import com.easysoft.framework.utils.BeanUtils;
+import com.easysoft.framework.utils.JsonUtils;
 import com.easysoft.framework.utils.StringUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**   
  * @Title: Controller
@@ -66,8 +71,14 @@ public class ProvideLoanInfoController extends BaseController {
 	 */
 
 	@RequestMapping(params = "datagrid")
-	public void datagrid(ProvideLoanInfoEntity provideLoanInfo,HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid) {
-	}
+	public ModelAndView datagrid(ProvideLoanInfoEntity provideLoanInfo,HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid) {
+        List userList= this.provideLoanInfoService.list();
+        DataGridReturn dataGridReturn = new DataGridReturn(userList.size(),userList);
+        String json = JsonUtils.beanToJson(dataGridReturn);
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("json",json);
+        return new ModelAndView("admin/json_message",map);
+    }
 
 	/**
 	 * 删除借款信息
@@ -78,7 +89,7 @@ public class ProvideLoanInfoController extends BaseController {
 	@ResponseBody
 	public AjaxJson doDel(ProvideLoanInfoEntity provideLoanInfo, HttpServletRequest request) {
 		AjaxJson j = new AjaxJson();
-		provideLoanInfo = provideLoanInfoService.get(ProvideLoanInfoEntity.class, provideLoanInfo.getId());
+		provideLoanInfo = provideLoanInfoService.get(ProvideLoanInfoEntity.class, provideLoanInfo.getUid());
 		message = "借款信息删除成功";
 		try{
 			provideLoanInfoService.delete(provideLoanInfo);
@@ -113,7 +124,7 @@ public class ProvideLoanInfoController extends BaseController {
 	 */
 	@RequestMapping(params = "doAdd")
 	@ResponseBody
-	public AjaxJson doAdd(ProvideLoanInfoEntity provideLoanInfo, HttpServletRequest request) {
+	public AjaxJson doAdd(ProvideLoanInfoEntity provideLoanInfo) {
 		AjaxJson j = new AjaxJson();
 		message = "借款信息添加成功";
 		try{
@@ -122,7 +133,7 @@ public class ProvideLoanInfoController extends BaseController {
 		}catch(Exception e){
 			e.printStackTrace();
 			message = "借款信息添加失败";
-
+            j.setSuccess(false);
 		}
 		j.setMsg(message);
 		return j;
@@ -139,7 +150,7 @@ public class ProvideLoanInfoController extends BaseController {
 	public AjaxJson doUpdate(ProvideLoanInfoEntity provideLoanInfo, HttpServletRequest request) {
 		AjaxJson j = new AjaxJson();
 		message = "借款信息更新成功";
-		ProvideLoanInfoEntity t = provideLoanInfoService.get(ProvideLoanInfoEntity.class, provideLoanInfo.getId());
+		ProvideLoanInfoEntity t = provideLoanInfoService.get(ProvideLoanInfoEntity.class, provideLoanInfo.getUid());
 		try {
             BeanUtils.copyBeanNotNull2Bean(provideLoanInfo, t);
 			provideLoanInfoService.saveOrUpdate(t);
@@ -162,8 +173,8 @@ public class ProvideLoanInfoController extends BaseController {
 	 */
 	@RequestMapping(params = "goAdd")
 	public ModelAndView goAdd(ProvideLoanInfoEntity provideLoanInfo, HttpServletRequest req) {
-		if (StringUtil.isNotEmpty(provideLoanInfo.getId())) {
-			provideLoanInfo = provideLoanInfoService.getEntity(ProvideLoanInfoEntity.class, provideLoanInfo.getId());
+		if (StringUtil.isNotEmpty(provideLoanInfo.getUid())) {
+			provideLoanInfo = provideLoanInfoService.getEntity(ProvideLoanInfoEntity.class, provideLoanInfo.getUid());
 			req.setAttribute("provideLoanInfoPage", provideLoanInfo);
 		}
 		return new ModelAndView("admin/component/cms/provideLoanInfo-add");
@@ -175,8 +186,8 @@ public class ProvideLoanInfoController extends BaseController {
 	 */
 	@RequestMapping(params = "goUpdate")
 	public ModelAndView goUpdate(ProvideLoanInfoEntity provideLoanInfo, HttpServletRequest req) {
-		if (StringUtil.isNotEmpty(provideLoanInfo.getId())) {
-			provideLoanInfo = provideLoanInfoService.getEntity(ProvideLoanInfoEntity.class, provideLoanInfo.getId());
+		if (StringUtil.isNotEmpty(provideLoanInfo.getUid())) {
+			provideLoanInfo = provideLoanInfoService.getEntity(ProvideLoanInfoEntity.class, provideLoanInfo.getUid());
 			req.setAttribute("provideLoanInfoPage", provideLoanInfo);
 		}
 		return new ModelAndView("admin/component/cms/provideLoanInfo-update");
