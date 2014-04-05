@@ -16,6 +16,7 @@
         $.ligerDialog.open({
             height:500,
             width: 1000,
+            name:'openDia',
             title : '表单设计',
             url: 'designer.do?toDesigner',
             showMax: false,
@@ -23,13 +24,13 @@
             showMin: false,
             isResize: true,
             slide: false,
-            data: {
-                name: $("#txtValue").val()
-            },
-            //自定义参数
-            myDataName: $("#txtValue").val()
+            buttons:[ { text: '确定', onclick: btnOK }, { text: '取消', onclick: function (item, dialog) { dialog.close(); } } ]
         });
 
+    }
+
+    function btnOK(item,dialog){
+        openDia.closeDig();
     }
     function modifyForm(item)
     {

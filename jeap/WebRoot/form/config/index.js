@@ -221,9 +221,9 @@ function bulidMainGrid()
 function createGridToolbar(tName)
 {
     var items = [];
-    items.push({ text: '新增一行', click: addRow, img: "../icons/sign_up.gif" });
-    items.push({ text: '上移', click: moveup, img: "../icons/sign_up.gif" });
-    items.push({ text: '下移', click: movedown, img: "../icons/arrow_down.gif" }); 
+    items.push({ text: '新增一行', click: addRow, img: "/jeap/admin/images/icons/add.gif" });
+    items.push({ text: '上移', click: moveup, img: "/jeap/admin/images/icons/sign_up.gif" });
+    items.push({ text: '下移', click: movedown, img: "/jeap/admin/images/icons/arrow_down.gif" });
     //items.push({ text: '自动翻译字段', click: translate, img: "../icons/world.gif" });
     return { items: items };
 
