@@ -7,6 +7,7 @@ import com.easysoft.core.manager.IFormManager;
 import com.easysoft.core.model.FormEntity;
 import com.easysoft.core.model.FormField;
 import com.easysoft.framework.utils.JsonUtils;
+import com.easysoft.member.backend.manager.impl.UserServiceFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +36,21 @@ public class FormDesignerController extends BaseController {
     public ModelAndView toDesigner(){
         return new ModelAndView("form/config/addForm");
     }
+    @RequestMapping(params = {"delete"})
+    @ResponseBody
+    public AjaxJson delete(Integer id) throws Exception {
+        AjaxJson json = new AjaxJson();
+        try {
+            this.formManager.delFormById(id);
+            json.setMsg("表单删除成功");
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            json.setMsg("表单删除失败:" + e.getMessage());
+            json.setSuccess(false);
+        }
+
+        return json;
+    }
     @RequestMapping(params = {"dataGrid"})
     public ModelAndView dataGrid(){
         List userList= this.formManager.list();
@@ -48,6 +64,15 @@ public class FormDesignerController extends BaseController {
     public ModelAndView designer(){
         return new ModelAndView("form/config/designer");
     }
+    @RequestMapping(params = {"formList"})
+    public ModelAndView formList(){
+        return new ModelAndView("form/config/formlistdesigner");
+    }
+    @RequestMapping(params = {"formDesigner"})
+    public ModelAndView formDesigner(){
+        return new ModelAndView("form/config/formdesigner");
+    }
+
     @RequestMapping(params = {"save"})
     @ResponseBody
     public AjaxJson save(String data,String tableName,Integer formId){
@@ -58,6 +83,8 @@ public class FormDesignerController extends BaseController {
         FormEntity formEntity = (FormEntity)JsonUtils.jsonToBean(data, FormEntity.class,map);
         if(formId!=null&&formId!=0){
             formEntity.setId(formId);
+        }else{
+            formEntity.setCreateBy(UserServiceFactory.getUserService().getCurrentUser().getUsername());
         }
         formManager.addForm(formEntity);
         return result;
@@ -72,7 +99,7 @@ public class FormDesignerController extends BaseController {
             data = JsonUtils.beanToJsonArray(form.getFields());
         }else{
             data = "[\n" +
-                    "    {\"dataType\":\"VARCHAR\",\"isInForeignKey\":false, \"ispk\":true,\"isNullable\":true, \"inputType\":\"digits\", " +
+                    "    {\"dataType\":\"INTEGER\",\"isInForeignKey\":false, \"ispk\":true,\"isNullable\":true, \"inputType\":\"digits\", " +
                     "\"isAutoKey\":true, \"sourceTableName\":\"\", \"sourceTableIDField\":\"\", \"sourceTableTextField\":\"\", " +
                     "\"fieldName\":\"id\", \"display\":\"主键\", \"type\":\"column\", \"icon\":\"images/table_key.png\" }\n" +
                     "]";

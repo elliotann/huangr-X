@@ -29,6 +29,8 @@ public class FormField implements Serializable {
     private boolean search_newline;
     private boolean inform;
     private String type;
+    //控件显示类型
+    private String displayType;
     private String labelwidth;
     private String width;
     private String space;
@@ -193,5 +195,14 @@ public class FormField implements Serializable {
 
     public void setName(String name) {
         this.name = fieldName;
+    }
+
+    @Column(name="display_type")
+    public String getDisplayType() {
+        return displayType;
+    }
+
+    public void setDisplayType(String displayType) {
+        this.displayType = displayType;
     }
 }
