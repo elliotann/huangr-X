@@ -34,7 +34,6 @@
         $.metadata.setType("attr", "validate");
         var v = $("form").validate({
             debug: true,
-
             errorPlacement: function (lable, element)
             {
                 if (element.hasClass("l-textarea"))
@@ -59,6 +58,7 @@
             {
                 $("form .l-text,.l-textarea").ligerHideTip();
                 if(showmessage.outjson()){
+                    window.parent.listgrid.loadData();
                     dialog.close();//关闭dialog
                 }
             }
@@ -80,7 +80,8 @@
 
     });
 
-    function closeDig(){
+    function subForm(){
+        alert("here");
         $("#form1").submit();
     }
 </script>
@@ -99,7 +100,7 @@
         <tr>
             <td align="right" class="l-table-edit-td">表名:</td>
             <td align="left" class="l-table-edit-td">
-                <input name="tableName" type="text" id="tableName" ltype="text"  validate="{required:true,maxlength:60}" />
+                <input name="tableName" type="text" id="tableName" ltype="text"  validate="{required:true,maxlength:30}" />
             </td>
             <td align="right" class="l-table-edit-td">注释:</td>
             <td align="left" class="l-table-edit-td">
@@ -108,7 +109,7 @@
         </tr>
     </table>
     <br />
-    <div id="navtab1" style="width: 100%;overflow:hidden; border:1px solid #A3C0E8;height: 100% ">
+    <div id="navtab1" style="width: 100%;overflow:hidden; border:1px solid #A3C0E8;height: 370px ">
         <div tabid="home" title="字段" lselected="true"  style="height:470px" >
             <iframe frameborder="0" name="showmessage" src="designer.do?designer" id="showmessage"></iframe>
         </div>

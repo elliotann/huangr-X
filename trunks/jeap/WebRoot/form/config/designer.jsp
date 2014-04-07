@@ -10,7 +10,7 @@
     <script src="${context }/js/ligerui/js/ligerui.min.js" type="text/javascript"></script>
     <script src="/jeap/form/config/ligerGrid.showFilter.js" type="text/javascript"></script>
     <link href="/jeap/form/config/lab.css" rel="stylesheet" type="text/css" />
-    <script src="/jeap/form/config/data.js" type="text/javascript"></script>
+
     <script src="/jeap/form/config/lab.js" type="text/javascript"></script>
     <script src="/jeap/form/config/index.js" type="text/javascript"></script>
     <script type="text/javascript">
@@ -36,7 +36,6 @@
                 dataType:"json",
                 async:false,
                 success: function(html){
-                    alert(html);
                     return true;
                 },error:function(e){
                     alert(e);
