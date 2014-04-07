@@ -1,5 +1,6 @@
 package com.easysoft.core.manager;
 
+import com.easysoft.core.common.service.IGenericService;
 import com.easysoft.core.model.FormEntity;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
  *
  * @since:
  */
-public interface IFormManager {
+public interface IFormManager extends IGenericService<FormEntity> {
     /**
      * 获取所有表单
      * @return
@@ -21,5 +22,7 @@ public interface IFormManager {
     public void addForm(FormEntity entity);
 
     public FormEntity getFormById(Integer id);
+
+    public void delFormById(Integer id);
 
 }

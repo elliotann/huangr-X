@@ -1,5 +1,6 @@
 package com.easysoft.core.manager.impl;
 
+import com.easysoft.core.common.service.impl.GenericService;
 import com.easysoft.core.dao.IFormDao;
 import com.easysoft.core.dao.IFormFieldDao;
 import com.easysoft.core.manager.IFormManager;
@@ -18,7 +19,7 @@ import java.util.List;
  * @since:
  */
 @Service("formManager")
-public class FormManagerImpl implements IFormManager {
+public class FormManagerImpl extends GenericService<FormEntity> implements IFormManager {
     @Autowired
     private IFormDao formDao;
     @Autowired
@@ -48,5 +49,14 @@ public class FormManagerImpl implements IFormManager {
         List<FormField> fields = formFieldDao.queryForList(hql,params);
         result.setFields(fields);
         return result;
+    }
+
+    @Override
+    public void delFormById(Integer id) {
+        FormEntity result = getFormById(id);
+        for(FormField field : result.getFields()){
+            formFieldDao.delete(field);
+        }
+        formDao.delete(result);
     }
 }
