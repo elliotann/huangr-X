@@ -30,7 +30,8 @@
     }
 
     function btnOK(item,dialog){
-        openDia.closeDig();
+        openDia.subForm();
+
     }
     function modifyForm(item)
     {
@@ -60,7 +61,7 @@
     }
     function delUser(item)
     {
-        var row = grid1.getSelectedRow();
+        var row = listgrid.getSelectedRow();
         if(row==null){
             $.ligerDialog.error('请选择数据删除!');
             return;
@@ -69,13 +70,13 @@
             if(yes){
                 $.ajax({
                     type: "GET",
-                    url: "userAdmin.do?delete&id="+row.userid,
-                    data:"ajax=true&rmd="+ new Date().getTime(),
+                    url: "designer.do?delete",
+                    data:"ajax=true&id="+row.id,
                     dataType:"json",
                     success: function(result){
                         if(result.success){
                             $.ligerDialog.alert('删除成功!', '提示', type);
-                            grid1.loadData();
+                            listgrid.loadData();
                         }else{
                             $.ligerDialog.alert(result.msg, '提示', type);
 
@@ -131,11 +132,6 @@
 
         $("#pageloading").hide();
     });
-
-    function deleteRow()
-    {
-        g.deleteSelectedRow();
-    }
 
     function generatorCode(item){
         var row = grid1.getSelectedRow();

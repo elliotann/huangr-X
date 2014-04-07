@@ -116,6 +116,7 @@ var fieldTypeData = [
 ];
 
 var dataTypes = [
+    {value:'INTEGER',text:'INTEGER'},
     { value:'VARCHAR', text:'VARCHAR' },
     { value:'INT', text:'INT' }
 
@@ -205,7 +206,7 @@ function bulidMainGrid()
             },
             { display: '表单页设置', columns: [
             { display: '表单显示', name: 'inform', width: 55, render: checkboxRender },
-            { display: '控件类型', name: 'type', align: 'left', width: 80, minWidth: 30, editor: { type: 'select', data: fieldTypeData }, render: fieldTypeRender },
+            { display: '控件类型', name: 'displayType', align: 'left', width: 80, minWidth: 30, editor: { type: 'select', data: fieldTypeData }, render: fieldTypeRender },
             { display: '标签宽度', name: 'labelwidth', align: 'right', width: 55, editor: { type: 'numberbox'} },
             { display: '控件宽度', name: 'width', align: 'right', width: 55, editor: { type: 'numberbox'} },
             { display: '间隔宽度', name: 'space', align: 'right', width: 55, editor: { type: 'numberbox'} },
@@ -221,7 +222,8 @@ function bulidMainGrid()
 function createGridToolbar(tName)
 {
     var items = [];
-    items.push({ text: '新增一行', click: addRow, img: "/jeap/admin/images/icons/add.gif" });
+    items.push({ text: '新增行', click: addRow, img: "/jeap/admin/images/icons/add.gif" });
+    items.push({ text: '删除行', click: deleteRow, img: "/jeap/admin/images/icons/add.gif" });
     items.push({ text: '上移', click: moveup, img: "/jeap/admin/images/icons/sign_up.gif" });
     items.push({ text: '下移', click: movedown, img: "/jeap/admin/images/icons/arrow_down.gif" });
     //items.push({ text: '自动翻译字段', click: translate, img: "../icons/world.gif" });
@@ -380,10 +382,12 @@ function createGridToolbar(tName)
     function addRow(){
         var manager = $("#gridP").ligerGetGridManager();
         manager.addRow({
-
         });
-
-
+    }
+    function deleteRow()
+    {
+        var manager = $("#gridP").ligerGetGridManager();
+        manager.deleteSelectedRow();
     }
 }
 
@@ -441,7 +445,8 @@ function bulidData()
 //表单字段类型渲染器
 function fieldTypeRender(r, i, value)
 {
-    for (var i = 0, l = fieldTypeData.length; i < l; i++)
+    alert(r.displayType);
+    for (var i = 0; i < fieldTypeData.length; i++)
     {
         var o = fieldTypeData[i];
         if (o.value == value) return o.text || o.name;
@@ -457,7 +462,7 @@ function dataTypeRender(r, i, value)
         var o = dataTypes[i];
         if (o.value == value) return o.text || o.name;
     }
-    return "VARCHAR";
+    return "INTEGER";
 }
 //是否类型的模拟复选框的渲染函数
 function checkboxRender(rowdata, rowindex, value, column)
