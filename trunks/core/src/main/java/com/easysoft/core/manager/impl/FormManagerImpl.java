@@ -9,6 +9,7 @@ import com.easysoft.core.model.FormField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -48,6 +49,28 @@ public class FormManagerImpl extends GenericService<FormEntity> implements IForm
         Object[] params = new Object[]{id};
         List<FormField> fields = formFieldDao.queryForList(hql,params);
         result.setFields(fields);
+        return result;
+    }
+
+    @Override
+    public FormEntity getFormById(Integer id,String type) {
+        FormEntity result = formDao.get(id);
+        if(result==null) return null;
+        String hql = "from FormField f where f.form.id=?";
+        Object[] params = new Object[]{id};
+        List<FormField> fields = formFieldDao.queryForList(hql,params);
+        List<FormField> fieldsResult = new ArrayList<FormField>();
+        if("form".equals(type)){
+            for(FormField field : fields){
+                if(field.isInform()){
+                    fieldsResult.add(field);
+                }
+            }
+            result.setFields(fieldsResult);
+        }else{
+            result.setFields(fields);
+        }
+
         return result;
     }
 

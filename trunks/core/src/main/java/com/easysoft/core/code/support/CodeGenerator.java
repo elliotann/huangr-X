@@ -134,7 +134,7 @@ public class CodeGenerator implements ICallBack {
                     cf.setType("java.util.Date");
                 else if ("double".equalsIgnoreCase(type))
                     cf.setType("java.lang.Double");
-                else if ("int".equalsIgnoreCase(type))
+                else if ("int".equalsIgnoreCase(type)||"INTEGER".equalsIgnoreCase(type))
                     cf.setType("java.lang.Integer");
                 else if ("BigDecimal".equalsIgnoreCase(type))
                     cf.setType("java.math.BigDecimal");

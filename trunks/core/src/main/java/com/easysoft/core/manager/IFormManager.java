@@ -23,6 +23,8 @@ public interface IFormManager extends IGenericService<FormEntity> {
 
     public FormEntity getFormById(Integer id);
 
+    public FormEntity getFormById(Integer id,String type);
+
     public void delFormById(Integer id);
 
 }
