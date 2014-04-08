@@ -84,6 +84,7 @@ function grid_edit()
     var selected = listgrid.getSelected();
     if (!selected) { lab.tip('请选择行'); return; }
     $.ligerDialog.open({
+        name:'openDia',
         height:500,
         width: 1000,
         title : '修改${ftl_description}',
