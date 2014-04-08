@@ -1,13 +1,5 @@
 package com.easysoft.core.dispatcher.processor.backend;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.easysoft.core.context.ConnectType;
 import com.easysoft.core.context.EsfContext;
 import com.easysoft.core.dispatcher.FacadePage;
@@ -20,6 +12,13 @@ import com.easysoft.core.dispatcher.processor.backend.support.MenuJsonGetter;
 import com.easysoft.core.model.Site;
 import com.easysoft.member.backend.manager.IUserService;
 import com.easysoft.member.backend.manager.impl.UserServiceFactory;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 后台页面解析器
@@ -80,7 +79,8 @@ public class BackgroundProcessor implements Processor {
 			processor = new BackPageGetter(page); //负责显示后台内容界面
 		}
  		
-		Response response = processor.process(model, httpResponse, httpRequest);		
+		Response response = processor.process(model, httpResponse, httpRequest);
+
 		return response;
 	}
 }

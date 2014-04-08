@@ -95,7 +95,10 @@ public class CodeFactory extends BaseCodeFactory{
                 str.append(CodeResourceUtil.JSPPATH);
             else {
                 str.append(CodeResourceUtil.CODEPATH);
+
             }
+            str.append(StringUtils.lowerCase(entityPackage));
+            str.append("/");
             if ("Action".equalsIgnoreCase(codeType))
                 str.append(StringUtils.lowerCase("action"));
             else if ("ServiceImpl".equalsIgnoreCase(codeType))
@@ -107,8 +110,8 @@ public class CodeFactory extends BaseCodeFactory{
                 str.append(StringUtils.lowerCase(codeType));
             }
             str.append("/");
-            str.append(StringUtils.lowerCase(entityPackage));
-            str.append("/");
+
+
 
             if (("jsp".equals(type)) || ("jspList".equals(type))) {
                 String jspName = StringUtils.capitalize(entityName);

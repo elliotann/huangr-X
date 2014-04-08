@@ -93,7 +93,7 @@
                 <value>com.easysoft.framework.component</value>
                 <value>com.easysoft.member.model</value>
                 <value>com.easysoft.component.dform.model</value>
-                <value>com.easysoft.component.entity.cms</value>
+                <value>com.easysoft.component.*.entity</value>
 
             </list>
         </property>
