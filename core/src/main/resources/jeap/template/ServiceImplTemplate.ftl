@@ -1,14 +1,14 @@
-package ${bussiPackage}.service.impl.${entityPackage};
+package ${bussiPackage}.${entityPackage}.service.impl;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import ${bussiPackage}.service.${entityPackage}.${entityName}ServiceI;
+import ${bussiPackage}.${entityPackage}.service.${entityName}ServiceI;
 import com.easysoft.core.common.service.impl.GenericService;
-import ${bussiPackage}.entity.${entityPackage}.${entityName}Entity;
+import ${bussiPackage}.${entityPackage}.entity.${entityName}Entity;
 import java.util.UUID;
 import java.io.Serializable;
-
+import java.util.List;
 @Service("${entityName?uncap_first}Service")
 @Transactional
 public class ${entityName}ServiceImpl extends GenericService<${entityName}Entity> implements ${entityName}ServiceI {
@@ -29,5 +29,7 @@ public class ${entityName}ServiceImpl extends GenericService<${entityName}Entity
  		super.saveOrUpdate(entity);
 
  	}
-
+    public List list( ){
+        return null;
+    }
 }

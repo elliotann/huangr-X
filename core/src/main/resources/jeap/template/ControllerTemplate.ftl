@@ -1,4 +1,4 @@
-package ${bussiPackage}.controller.${entityPackage};
+package ${bussiPackage}.${entityPackage}.controller;
 import java.util.List;
 import java.text.SimpleDateFormat;
 import javax.servlet.http.HttpServletRequest;
@@ -10,28 +10,24 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
+import com.easysoft.core.common.vo.json.DataGridReturn;
+import com.easysoft.framework.utils.JsonUtils;
 import com.easysoft.core.common.controller.BaseController;
-import org.jeecgframework.core.common.exception.BusinessException;
-import org.jeecgframework.core.common.hibernate.qbc.CriteriaQuery;
 import com.easysoft.core.common.vo.json.AjaxJson;
 import com.easysoft.core.common.dao.hibernate.DataGrid;
-
 import com.easysoft.framework.utils.StringUtil;
-import org.jeecgframework.tag.core.easyui.TagUtil;
-
-
 import com.easysoft.framework.utils.BeanUtils;
-
-import ${bussiPackage}.entity.${entityPackage}.${entityName}Entity;
-import ${bussiPackage}.service.${entityPackage}.${entityName}ServiceI;
+import java.util.HashMap;
+import java.util.Map;
+import ${bussiPackage}.${entityPackage}.entity.${entityName}Entity;
+import ${bussiPackage}.${entityPackage}.service.${entityName}ServiceI;
 
 /**   
  * @Title: Controller
  * @Description: ${ftl_description}
  * @author onlineGenerator
  * @date ${ftl_create_time}
- * @version V1.0   
+ * @since : v1.0.0
  *
  */
 @Controller
@@ -75,39 +71,14 @@ public class ${entityName}Controller extends BaseController {
 	 * @param user
 	 */
 
-	@RequestMapping(params = "datagrid")
-	public void datagrid(${entityName}Entity ${entityName?uncap_first},HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid) {
-		<#--CriteriaQuery cq = new CriteriaQuery(${entityName}Entity.class, dataGrid);
-		//查询条件组装器
-		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, ${entityName?uncap_first}, request.getParameterMap());
-		try{
-		//自定义追加查询条件
-		<#list columns as po>
-		<#if po.isQuery =='Y' && po.queryMode =='group'>
-		String query_${po.fieldName}_begin = request.getParameter("${po.fieldName}_begin");
-		String query_${po.fieldName}_end = request.getParameter("${po.fieldName}_end");
-		if(StringUtil.isNotEmpty(query_${po.fieldName}_begin)){
-			<#if po.type == "java.util.Date">
-			cq.ge("${po.fieldName}", new SimpleDateFormat("yyyy-MM-dd").parse(query_${po.fieldName}_begin));
-			<#else>
-			cq.ge("${po.fieldName}", Integer.parseInt(query_${po.fieldName}_begin));
-			</#if>
-		}
-		if(StringUtil.isNotEmpty(query_${po.fieldName}_end)){
-			<#if po.type == "java.util.Date">
-			cq.le("${po.fieldName}", new SimpleDateFormat("yyyy-MM-dd").parse(query_${po.fieldName}_end));
-			<#else>
-			cq.le("${po.fieldName}", Integer.parseInt(query_${po.fieldName}_end));
-			</#if>
-		}
-		</#if>
-		</#list> 
-		}catch (Exception e) {
-			throw new BusinessException(e.getMessage());
-		}
-		cq.add();
-		this.${entityName?uncap_first}Service.getDataGridReturn(cq, true);
-		TagUtil.datagrid(response, dataGrid);-->
+	@RequestMapping(params = "dataGrid")
+	public ModelAndView datagrid(${entityName}Entity ${entityName?uncap_first},HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid) {
+        List entityist= this.provideLoanInfoService.loadAll(${entityName}Entity.class);
+        DataGridReturn dataGridReturn = new DataGridReturn(entityist.size(),entityist);
+        String json = JsonUtils.beanToJson(dataGridReturn);
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("json",json);
+        return new ModelAndView("admin/json_message",map);
 	}
 
 	/**
@@ -115,11 +86,11 @@ public class ${entityName}Controller extends BaseController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(params = "doDel")
+	@RequestMapping(params = "delete")
 	@ResponseBody
 	public AjaxJson doDel(${entityName}Entity ${entityName?uncap_first}, HttpServletRequest request) {
 		AjaxJson j = new AjaxJson();
-		${entityName?uncap_first} = ${entityName?uncap_first}Service.get(${entityName}Entity.class, ${entityName?uncap_first}.getId());
+		${entityName?uncap_first} = ${entityName?uncap_first}Service.get(${entityName}Entity.class, ${entityName?uncap_first}.getSid());
 		message = "${ftl_description}删除成功";
 		try{
 			${entityName?uncap_first}Service.delete(${entityName?uncap_first});
@@ -203,7 +174,7 @@ public class ${entityName}Controller extends BaseController {
 	public AjaxJson doUpdate(${entityName}Entity ${entityName?uncap_first}, HttpServletRequest request) {
 		AjaxJson j = new AjaxJson();
 		message = "${ftl_description}更新成功";
-		${entityName}Entity t = ${entityName?uncap_first}Service.get(${entityName}Entity.class, ${entityName?uncap_first}.getId());
+		${entityName}Entity t = ${entityName?uncap_first}Service.get(${entityName}Entity.class, ${entityName?uncap_first}.getSid());
 		try {
             BeanUtils.copyBeanNotNull2Bean(${entityName?uncap_first}, t);
 			${entityName?uncap_first}Service.saveOrUpdate(t);
@@ -226,8 +197,8 @@ public class ${entityName}Controller extends BaseController {
 	 */
 	@RequestMapping(params = "goAdd")
 	public ModelAndView goAdd(${entityName}Entity ${entityName?uncap_first}, HttpServletRequest req) {
-		if (StringUtil.isNotEmpty(${entityName?uncap_first}.getId())) {
-			${entityName?uncap_first} = ${entityName?uncap_first}Service.getEntity(${entityName}Entity.class, ${entityName?uncap_first}.getId());
+		if (StringUtil.isNotEmpty(${entityName?uncap_first}.getSid())) {
+			${entityName?uncap_first} = ${entityName?uncap_first}Service.getEntity(${entityName}Entity.class, ${entityName?uncap_first}.getSid());
 			req.setAttribute("${entityName?uncap_first}Page", ${entityName?uncap_first});
 		}
 		return new ModelAndView("admin/component/${entityPackage}/${entityName?uncap_first}-add");
@@ -239,8 +210,8 @@ public class ${entityName}Controller extends BaseController {
 	 */
 	@RequestMapping(params = "goUpdate")
 	public ModelAndView goUpdate(${entityName}Entity ${entityName?uncap_first}, HttpServletRequest req) {
-		if (StringUtil.isNotEmpty(${entityName?uncap_first}.getId())) {
-			${entityName?uncap_first} = ${entityName?uncap_first}Service.getEntity(${entityName}Entity.class, ${entityName?uncap_first}.getId());
+		if (StringUtil.isNotEmpty(${entityName?uncap_first}.getSid())) {
+			${entityName?uncap_first} = ${entityName?uncap_first}Service.getEntity(${entityName}Entity.class, ${entityName?uncap_first}.getSid());
 			req.setAttribute("${entityName?uncap_first}Page", ${entityName?uncap_first});
 		}
 		return new ModelAndView("admin/component/${entityPackage}/${entityName?uncap_first}-update");

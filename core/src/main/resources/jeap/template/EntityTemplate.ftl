@@ -1,4 +1,4 @@
-package ${bussiPackage}.entity.${entityPackage};
+package ${bussiPackage}.${entityPackage}.entity;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -42,7 +42,7 @@ public class ${entityName}Entity implements java.io.Serializable {
 	 *方法: 取得${po.type}
 	 *@return: ${po.type}  ${po.display}
 	 */
-	<#if po.fieldName == jeecg_table_id>
+	<#if po.fieldName == jeap_table_id>
 	<#if cgformConfig.formEntity.pkGeneratorPolicy?if_exists?html == "UUID">
 	@Id
 	@GeneratedValue(generator = "paymentableGenerator")
@@ -54,9 +54,8 @@ public class ${entityName}Entity implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="SEQ_GEN")  
 	<#else>
-	@Id
-	@GeneratedValue(generator = "paymentableGenerator")
-	@GenericGenerator(name = "paymentableGenerator", strategy = "uuid")
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
 	</#if>
 	</#if>
 	@Column(name ="${fieldMeta[po.fieldName]}",nullable=<#if po.nullable>true<#else>false</#if>)
