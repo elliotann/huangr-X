@@ -3,7 +3,7 @@
 <%@ include file="/commons/taglibs.jsp"%>
 <%@ taglib uri="/WEB-INF/grid.tld" prefix="grid"%>
 <link href="/jeap/form/config/lab.css" rel="stylesheet" type="text/css" />
-<script src="/jeap/form/config/data.js" type="text/javascript"></script>
+
 <script src="/jeap/form/config/lab.js" type="text/javascript"></script>
 <script src="/jeap/form/config/preview.js" type="text/javascript"></script>
 <script src="/jeap/form/config/ligerGrid.showFilter.js" type="text/javascript"></script>
@@ -15,7 +15,7 @@
 
         $.ligerDialog.open({
             height:500,
-            width: 1000,
+            width: 900,
             name:'openDia',
             title : '表单设计',
             url: 'designer.do?toDesigner',
@@ -42,6 +42,7 @@
             return;
         }
         $.ligerDialog.open({
+            name:'openDia',
             height:600,
             width: 900,
             title : '修改表单',
@@ -51,11 +52,7 @@
             showMin: false,
             isResize: true,
             slide: false,
-            data: {
-                name: $("#txtValue").val()
-            },
-            //自定义参数
-            myDataName: $("#txtValue").val()
+            buttons:[ { text: '确定', onclick: btnOK }, { text: '取消', onclick: function (item, dialog) { dialog.close(); } } ]
         });
 
     }
@@ -134,7 +131,7 @@
     });
 
     function generatorCode(item){
-        var row = grid1.getSelectedRow();
+        var row = listgrid.getSelectedRow();
         if(row==null){
             $.ligerDialog.error('请选择数据!');
             return;
@@ -148,12 +145,7 @@
             showToggle: true,
             showMin: false,
             isResize: true,
-            slide: false,
-            data: {
-                name: $("#txtValue").val()
-            },
-            //自定义参数
-            myDataName: $("#txtValue").val()
+            slide: false
         });
     }
 </script>

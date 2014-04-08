@@ -81,7 +81,6 @@
     });
 
     function subForm(){
-        alert("here");
         $("#form1").submit();
     }
 </script>

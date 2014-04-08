@@ -1,4 +1,4 @@
-﻿
+﻿var AllProductData;
 $(init);
 
 $.extend($.ligerDefaults.Grid, {

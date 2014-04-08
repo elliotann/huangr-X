@@ -69,9 +69,7 @@
                         { line: true },
                         { text: '修改', click: itemclick, icon: 'modify' },
                         { line: true },
-                        { text: '删除', click: itemclick, img: '${context }/js/ligerui/skins/icons/delete.gif' },
-                        { line: true },
-                        { text: '设计', click: formDesigner, icon: 'modify'}
+                        { text: '删除', click: delMenu, img: '${context }/js/ligerui/skins/icons/delete.gif' }
                     ]
                     }
                 }
@@ -108,30 +106,7 @@
 
     }
 
-    function formDesigner(item){
 
-        var row = grid.getSelectedRow();
-        if(row==null){
-            $.ligerDialog.error('请选择菜单设计!');
-            return;
-        }
-        $.ligerDialog.open({
-            height:500,
-            width: 1000,
-            title : '表单设计',
-            url: '${ctx}/core/admin/designer.do?toDesigner',
-            showMax: false,
-            showToggle: true,
-            showMin: false,
-            isResize: true,
-            slide: false,
-            data: {
-                name: $("#txtValue").val()
-            },
-            //自定义参数
-            myDataName: $("#txtValue").val()
-        });
-    }
 
     function addMenu(item){
         $.ligerDialog.open({

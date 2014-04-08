@@ -84,6 +84,10 @@
 
         dialog.close();//关闭dialog
     }
+    function subForm(){
+
+        $("#form1").submit();
+    }
 </script>
 <style type="text/css">
     body{ font-size:12px;}
@@ -116,8 +120,6 @@
             <iframe frameborder="0" name="showmessage" src="designer.do?designer" id="showmessage"></iframe>
         </div>
     </div>
-    <input type="submit" value="提交" id="Button1" name="subBtn" class="l-button l-button-submit" />
-    <input type="button" value="关闭" class="l-button l-button-test" onclick="closeDig()"/>
 </form>
 </body>
 
