@@ -91,11 +91,11 @@ public class FormDesignerController extends BaseController {
     }
 
     @RequestMapping(params = {"getColumns"})
-    public ModelAndView getColumns(Integer id){
+    public ModelAndView getColumns(Integer id,String type){
         String data = "";
         Map<String,Object> map = new HashMap<String, Object>();
         if(id!=null&&id!=0){
-            FormEntity form = formManager.getFormById(id);
+            FormEntity form = formManager.getFormById(id,type);
             data = JsonUtils.beanToJsonArray(form.getFields());
         }else{
             data = "[\n" +

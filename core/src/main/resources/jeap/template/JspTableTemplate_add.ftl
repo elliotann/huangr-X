@@ -119,5 +119,3 @@
 
 </form>
 
-<input type="button" value="提交" id="Button1" name="subBtn" class="l-button l-button-submit" onclick="formSubmit();"/>
-<input type="button" value="关闭" class="l-button l-button-test"/>

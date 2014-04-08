@@ -72,14 +72,12 @@ function grid_add()
         showMin: false,
         isResize: true,
         slide: false,
-        data: {
-        name: $("#txtValue").val()
-        },
-        //自定义参数
-        myDataName: $("#txtValue").val()
+        buttons:[ { text: '确定', onclick: btnOK }, { text: '取消', onclick: function (item, dialog) { dialog.close(); } } ]
     });
 }
-
+function btnOK(item,dialog){
+    openDia.formSubmit();
+}
 function grid_edit()
 {
     clear();
