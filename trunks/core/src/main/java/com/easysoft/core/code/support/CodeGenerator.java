@@ -76,6 +76,7 @@ public class CodeGenerator implements ICallBack {
                     codeFactory.invoke("cgform_jspDivTemplate_update.ftl", "jsp_update");
                 }
                 codeFactory.invoke("JspListTemplate.ftl", "jspList");
+                codeFactory.invoke("JsListEnhanceTemplate.ftl", "jsList");
 
             }
         }
@@ -108,7 +109,7 @@ public class CodeGenerator implements ICallBack {
 
         data.put("ftl_description", this.tableTitle);
 
-        data.put(FtlDef.JEECG_TABLE_ID, CodeResourceUtil.JEAP_GENERATE_TABLE_ID);
+        data.put(FtlDef.JEAP_TABLE_ID, CodeResourceUtil.JEAP_GENERATE_TABLE_ID);
 
         data.put(FtlDef.JEECG_PRIMARY_KEY_POLICY, this.primaryKeyPolicy);
         data.put(FtlDef.JEECG_SEQUENCE_CODE, this.sequenceCode);

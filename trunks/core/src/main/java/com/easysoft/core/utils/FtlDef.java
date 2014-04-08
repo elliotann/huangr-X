@@ -12,7 +12,7 @@ public class FtlDef {
 
     public static String FIELD_ROW_NAME = "field_row_num";
 
-    public static String JEECG_TABLE_ID = "jeecg_table_id";
+    public static String JEAP_TABLE_ID = "jeap_table_id";
 
     public static String SEARCH_FIELD_NUM = "search_field_num";
 
