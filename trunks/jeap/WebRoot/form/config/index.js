@@ -1,4 +1,5 @@
-﻿$(init);
+﻿var AllProductData;
+$(init);
 
 $.extend($.ligerDefaults.Grid, {
     rowHeight: 24,
@@ -171,7 +172,7 @@ function bulidMainGrid()
         };
         row.isNullable = this.isNullable ? true : false;
         row.ispk = this.ispk?true:false;
-        row.type = this.inputType;
+        row.displayType = this.displayType;
         row.dataType = this.dataType;
         if (this.isAutoKey || this.isInForeignKey)
         {
@@ -445,7 +446,7 @@ function bulidData()
 //表单字段类型渲染器
 function fieldTypeRender(r, i, value)
 {
-    alert(r.displayType);
+
     for (var i = 0; i < fieldTypeData.length; i++)
     {
         var o = fieldTypeData[i];
