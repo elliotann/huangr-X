@@ -1,8 +1,9 @@
-package ${bussiPackage}.service.${entityPackage};
+package ${bussiPackage}.${entityPackage}.service;
 
 import com.easysoft.core.common.service.IGenericService;
-import ${bussiPackage}.entity.${entityPackage}.${entityName}Entity;
+import ${bussiPackage}.${entityPackage}.entity.${entityName}Entity;
 import java.io.Serializable;
+
 
 public interface ${entityName}ServiceI extends IGenericService<${entityName}Entity>{
 	
