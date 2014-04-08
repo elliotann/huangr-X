@@ -63,9 +63,10 @@ function grid_add()
     clear();
 
     $.ligerDialog.open({
+        name:'openDia',
         height:500,
         width: 1000,
-        title : '增加借款',
+        title : '增加${ftl_description}',
         url: '${entityName?uncap_first}.do?goAdd',
         showMax: false,
         showToggle: true,
