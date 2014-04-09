@@ -171,7 +171,7 @@ function bulidMainGrid()
             SourceTableIDField: this.sourceTableIDField,
             SourceTableTextField: this.sourceTableTextField
         };
-        alert(this.newline);
+
         row.isNullable = this.isNullable ? true : false;
         row.ispk = this.ispk?true:false;
         row.displayType = this.displayType;
