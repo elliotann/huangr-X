@@ -1,4 +1,5 @@
 ﻿var AllProductData;
+var columns;
 $(init);
 
 $.extend($.ligerDefaults.Grid, {
@@ -161,15 +162,16 @@ function bulidMainGrid()
             width: 220,
             labelwidth: 100,
             space: 30,
-            newline: true,
+            newline: this.newline,
             search_newline : false,
-            inlist: true,
+            inlist: this.inlist,
             insearch: false,
-            inform: true,
+            inform: this.inform,
             SourceTableName: this.sourceTableName,
             SourceTableIDField: this.sourceTableIDField,
             SourceTableTextField: this.sourceTableTextField
         };
+        alert(this.newline);
         row.isNullable = this.isNullable ? true : false;
         row.ispk = this.ispk?true:false;
         row.displayType = this.displayType;
