@@ -7,6 +7,7 @@ import com.easysoft.core.manager.IFormManager;
 import com.easysoft.core.model.FormEntity;
 import com.easysoft.core.model.FormField;
 import com.easysoft.framework.utils.JsonUtils;
+import com.easysoft.framework.utils.StringUtil;
 import com.easysoft.member.backend.manager.impl.UserServiceFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -96,6 +97,27 @@ public class FormDesignerController extends BaseController {
         Map<String,Object> map = new HashMap<String, Object>();
         if(id!=null&&id!=0){
             FormEntity form = formManager.getFormById(id,type);
+
+            data = JsonUtils.beanToJsonArray(form.getFields());
+        }else{
+            data = "[\n" +
+                    "    {\"dataType\":\"INTEGER\",\"isInForeignKey\":false, \"ispk\":true,\"isNullable\":true, \"inputType\":\"digits\", " +
+                    "\"isAutoKey\":true, \"sourceTableName\":\"\", \"sourceTableIDField\":\"\", \"sourceTableTextField\":\"\", " +
+                    "\"fieldName\":\"id\", \"display\":\"主键\", \"type\":\"column\", \"icon\":\"images/table_key.png\" }\n" +
+                    "]";
+        }
+        map.put("json",data);
+        return new ModelAndView("admin/json_message",map);
+    }
+    @RequestMapping(params = {"getDisColumns"})
+    public ModelAndView getDisColumns(Integer id,String type){
+        String data = "";
+        Map<String,Object> map = new HashMap<String, Object>();
+        if(id!=null&&id!=0){
+            FormEntity form = formManager.getFormById(id,type);
+            for(FormField field : form.getFields()){
+                field.setFieldName(StringUtil.formatDBFieldName(field.getFieldName()));
+            }
             data = JsonUtils.beanToJsonArray(form.getFields());
         }else{
             data = "[\n" +
