@@ -6,6 +6,7 @@ import com.easysoft.core.dao.IFormFieldDao;
 import com.easysoft.core.manager.IFormManager;
 import com.easysoft.core.model.FormEntity;
 import com.easysoft.core.model.FormField;
+import com.easysoft.framework.utils.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

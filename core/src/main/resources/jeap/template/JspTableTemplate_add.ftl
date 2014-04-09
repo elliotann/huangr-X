@@ -32,7 +32,7 @@
         var fields;
         $.ajax({
             type:'post',
-            url:'designer.do?getColumns&ajax=true',
+            url:'designer.do?getDisColumns&ajax=true&type=form',
             data:'id='+7,
             dataType:'json',
             async:false,

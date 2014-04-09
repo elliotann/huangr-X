@@ -89,7 +89,7 @@ function grid_edit()
         height:500,
         width: 1000,
         title : '修改${ftl_description}',
-        url: '${entityName?uncap_first}.do?goAdd&id='+selected.id,
+        url: '${entityName?uncap_first}.do?goUpdate&sid='+selected.id,
         showMax: false,
         showToggle: true,
         showMin: false,
@@ -172,7 +172,7 @@ var griddata = [], searchdata= [], formdata= [];
 var rows = [];
 $.ajax({
 type:'post',
-url:'designer.do?getColumns&ajax=true',
+url:'designer.do?getDisColumns&ajax=true',
 data:'id='+id,
 dataType:'json',
 async:false,
