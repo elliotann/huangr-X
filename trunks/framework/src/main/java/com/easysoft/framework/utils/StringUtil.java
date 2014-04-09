@@ -2473,6 +2473,17 @@ public class StringUtil {
      * @param name
      * @return
      */
+    public static String formatDBFieldName(String name){
+        if(StringUtils.isEmpty(name)) return name;
+        name = name.toLowerCase();
+        String[] splitName = name.split("_");
+        if(splitName.length==1) return name;
+        String result = splitName[0];
+        for(int i=1;i<splitName.length;i++){
+            result += firstUpperCase(splitName[i]);
+        }
+        return result;
+    }
     public static String formatDBName(String name){
         if(StringUtils.isEmpty(name)) return name;
         name = name.toLowerCase();
