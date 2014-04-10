@@ -12,6 +12,7 @@
 <script src = "/jeap/admin/component/${entityPackage}/${entityName?uncap_first}List.js"></script>
 
 
-<body>
-</body>
+<div class="grid" id="grid">
+</div>
+
 
