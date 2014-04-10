@@ -89,17 +89,13 @@ function grid_edit()
         height:500,
         width: 1000,
         title : '修改${ftl_description}',
-        url: '${entityName?uncap_first}.do?goUpdate&sid='+selected.id,
+        url: '${entityName?uncap_first}.do?goUpdate&sid='+selected.sid,
         showMax: false,
         showToggle: true,
         showMin: false,
         isResize: true,
         slide: false,
-        data: {
-        name: $("#txtValue").val()
-        },
-        //自定义参数
-        myDataName: $("#txtValue").val()
+        buttons:[ { text: '确定', onclick: btnOK }, { text: '取消', onclick: function (item, dialog) { dialog.close(); } } ]
     });
 }
 
