@@ -69,7 +69,7 @@
                         { line: true },
                         { text: '修改', click: itemclick, icon: 'modify' },
                         { line: true },
-                        { text: '删除', click: delMenu, img: '${context }/js/ligerui/skins/icons/delete.gif' }
+                        { text: '删除', click: itemclick, img: '${context }/js/ligerui/skins/icons/delete.gif' }
                     ]
                     }
                 }

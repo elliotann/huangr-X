@@ -77,9 +77,13 @@ lab.loadForm = function (mainform, data, prefix)
     {
         for (var p in data)
         {
-            $("#" + prefix + p).val(data[p]);
+
+            $("input[name='"+p+"']").val(data[p]);
+
+            //$("#" + prefix + p).val(data[p]);
         }
     }
+
     //下面是更新表单的样式
     var managers = $.ligerui.find($.ligerui.controls.Input);
     for (var i = 0, l = managers.length; i < l; i++)
