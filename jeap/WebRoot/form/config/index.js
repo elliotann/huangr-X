@@ -120,7 +120,8 @@ var fieldTypeData = [
 var dataTypes = [
     {value:'INTEGER',text:'INTEGER'},
     { value:'VARCHAR', text:'VARCHAR' },
-    { value:'INT', text:'INT' }
+    { value:'INT', text:'INT' },
+    { value:'DATE', text:'DATE' }
 
 ];
 
@@ -158,7 +159,7 @@ function bulidMainGrid()
             fieldName: this.fieldName,
             display: this.display,
             listwidth: 180,
-            type: 'text',
+            type: this.displayType,
             width: 220,
             labelwidth: 100,
             space: 30,
