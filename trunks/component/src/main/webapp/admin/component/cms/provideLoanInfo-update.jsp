@@ -13,8 +13,9 @@
  </head>
  <body>
   <t:formvalid formid="formobj" dialog="true" usePlugin="password" layout="table" action="provideLoanInfoController.do?doUpdate" tiptype="1">
-					<input id="id" name="id" type="hidden" value="${provideLoanInfoPage.id }">
-					<input id="name" name="name" type="hidden" value="${provideLoanInfoPage.name }">
+					<input id="sid" name="sid" type="hidden" value="${provideLoanInfoPage.sid }">
+					<input id="itemName" name="itemName" type="hidden" value="${provideLoanInfoPage.itemName }">
+					<input id="createDate" name="createDate" type="hidden" value="${provideLoanInfoPage.createDate }">
 		<table style="width: 600px;" cellpadding="0" cellspacing="1" class="formtable">
 					<tr>
 						<td align="right">
@@ -23,9 +24,9 @@
 							</label>
 						</td>
 						<td class="value">
-						      		<input id="id" name="id" type="text" style="width: 150px" class="inputxt"  
+						      		<input id="sid" name="sid" type="text" style="width: 150px" class="inputxt"  
 									               
-									                 value='${provideLoanInfoPage.id}'>
+									                 value='${provideLoanInfoPage.sid}'>
 							<span class="Validform_checktip"></span>
 							<label class="Validform_label" style="display: none;"></label>
 						</td>
@@ -37,9 +38,23 @@
 							</label>
 						</td>
 						<td class="value">
-						      		<input id="name" name="name" type="text" style="width: 150px" class="inputxt"  
+						      		<input id="itemName" name="itemName" type="text" style="width: 150px" class="inputxt"  
 									               
-									                 value='${provideLoanInfoPage.name}'>
+									                 value='${provideLoanInfoPage.itemName}'>
+							<span class="Validform_checktip"></span>
+							<label class="Validform_label" style="display: none;"></label>
+						</td>
+					</tr>
+					<tr>
+						<td align="right">
+							<label class="Validform_label">
+								创建日期:
+							</label>
+						</td>
+						<td class="value">
+						      		<input id="createDate" name="createDate" type="text" style="width: 150px" class="inputxt"  
+									               
+									                 value='${provideLoanInfoPage.createDate}'>
 							<span class="Validform_checktip"></span>
 							<label class="Validform_label" style="display: none;"></label>
 						</td>
