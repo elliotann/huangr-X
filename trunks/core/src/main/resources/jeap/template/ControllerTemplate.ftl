@@ -73,7 +73,7 @@ public class ${entityName}Controller extends BaseController {
 
 	@RequestMapping(params = "dataGrid")
 	public ModelAndView datagrid(${entityName}Entity ${entityName?uncap_first},HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid) {
-        List entityist= this.provideLoanInfoService.loadAll(${entityName}Entity.class);
+        List entityist= this.${entityName?uncap_first}Service.loadAll(${entityName}Entity.class);
         DataGridReturn dataGridReturn = new DataGridReturn(entityist.size(),entityist);
         String json = JsonUtils.beanToJson(dataGridReturn);
         Map<String,Object> map = new HashMap<String, Object>();

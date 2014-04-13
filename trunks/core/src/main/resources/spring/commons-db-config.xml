@@ -69,7 +69,7 @@
 
 
 
-    <tx:annotation-driven transaction-manager="transactionManager"/>
+
     <aop:aspectj-autoproxy proxy-target-class="true"/>
 
 </beans>
