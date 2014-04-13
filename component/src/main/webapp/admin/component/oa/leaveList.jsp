@@ -9,9 +9,10 @@
 <script src="/jeap/form/config/ligerGrid.showFilter.js" type="text/javascript"></script>
 
 <script src="/jeap/form/config/lab.js" type="text/javascript"></script>
-<script src = "/jeap/admin/component/cms/provideLoanInfoList.js"></script>
+<script src = "/jeap/admin/component/oa/leaveList.js"></script>
 
 
-<body>
-</body>
+<div class="grid" id="grid">
+</div>
+
 

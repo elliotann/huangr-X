@@ -85,7 +85,7 @@
             {
                 $("form .l-text,.l-textarea").ligerHideTip();
                 $("#form1").ajaxSubmit({
-                    url :"provideLoanInfo.do?doAdd&ajax=true",
+                    url :"leave.do?doAdd&ajax=true",
                     type : "POST",
                     dataType:"json",
                     success : function(result) {

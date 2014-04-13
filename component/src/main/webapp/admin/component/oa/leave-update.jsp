@@ -21,6 +21,7 @@
 <script src=" ${context}/js/plug-in/jquery-validation/jquery.metadata.js" type="text/javascript"></script>
 <script src=" ${context}/js/plug-in/jquery-validation/messages_cn.js" type="text/javascript"></script>
 <script type="text/javascript" src=" ${staticserver}/js/admin/jeap.js"></script>
+<script src="/jeap/form/config/lab.js" type="text/javascript"></script>
 
 <script type="text/javascript">
     var groupicon = "../../../lib/ligerUI/skins/icons/communication.gif";
@@ -50,7 +51,8 @@
             inputWidth: 170, labelWidth: 90, space: 40,
             fields:fields
         });
-
+        var selected = parent.listgrid.getSelected();
+        lab.loadForm(mainform, selected);
         var validator = $("form").validate({
             //调试状态，不会提交数据的
             debug: true,
@@ -85,7 +87,7 @@
             {
                 $("form .l-text,.l-textarea").ligerHideTip();
                 $("#form1").ajaxSubmit({
-                    url :"provideLoanInfo.do?doAdd&ajax=true",
+                    url :"leave.do?doUpdate&ajax=true",
                     type : "POST",
                     dataType:"json",
                     success : function(result) {
@@ -114,8 +116,7 @@
 
 
 <form name="form1" method="post"   id="form1">
-    <div id="formBefore"></div>
-    <br/>
+
 
 </form>
 

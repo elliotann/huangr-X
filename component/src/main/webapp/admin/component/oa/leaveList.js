@@ -41,7 +41,7 @@ function bulidMainGrid()
     searchform.ligerForm({ fields: o.search });
     listgrid = $(".listgrid:first", listPanle).ligerGrid({
         columns: o.grid,
-        toolbar: listToolbar(), url:'provideLoanInfo.do?dataGrid&ajax=true',
+        toolbar: listToolbar(), url:'leave.do?dataGrid&ajax=true',
         width: '98%', height: '96%', checkbox: false
     });
 //搜索 按钮
@@ -66,8 +66,8 @@ function grid_add()
         name:'openDia',
         height:500,
         width: 1000,
-        title : '增加借款信息',
-        url: 'provideLoanInfo.do?goAdd',
+        title : '增加请假信息',
+        url: 'leave.do?goAdd',
         showMax: false,
         showToggle: true,
         showMin: false,
@@ -88,18 +88,14 @@ function grid_edit()
         name:'openDia',
         height:500,
         width: 1000,
-        title : '修改借款信息',
-        url: 'provideLoanInfo.do?goUpdate&sid='+selected.sid,
+        title : '修改请假信息',
+        url: 'leave.do?goUpdate&sid='+selected.sid,
         showMax: false,
         showToggle: true,
         showMin: false,
         isResize: true,
         slide: false,
-        data: {
-        name: $("#txtValue").val()
-        },
-        //自定义参数
-        myDataName: $("#txtValue").val()
+        buttons:[ { text: '确定', onclick: btnOK }, { text: '取消', onclick: function (item, dialog) { dialog.close(); } } ]
     });
 }
 
@@ -115,7 +111,7 @@ function grid_delete()
         if(yes){
             $.ajax({
             type: "GET",
-            url: "provideLoanInfo.do?delete&sid="+row.sid,
+            url: "leave.do?delete&sid="+row.sid,
             data:"ajax=true&rmd="+ new Date().getTime(),
             dataType:"json",
             success: function(result){
