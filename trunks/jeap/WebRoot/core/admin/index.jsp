@@ -43,7 +43,7 @@ function createItem(item_html,title,sort){
 	newitem.find(".body").append(item_html);
 	$("#item"+sort).append(newitem).find("a").each(function(){
 		$(this).click(function(){
-				parent.JEAP.AdminUI.load($(this));
+				parent.Jeap.AdminUI.load($(this));
 				return false;
 			});
 	});
