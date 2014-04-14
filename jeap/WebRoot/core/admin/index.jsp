@@ -18,13 +18,7 @@
     <div id="item6" class="item"></div>
 </div>
 
-<!-- 易族公告 -->
-<!-- 暂时为OEM客户关闭
-<div id="en_notice">
-<h3>易族公告</h3>
-<iframe src="http://www.enationsoft.com/notice.html" frameborder=0 width='100%' height="200px"></iframe>
-</div>
--->
+
 <script>
 function addItem(title,itemurl,sort){
 	$.ajax({
@@ -49,7 +43,7 @@ function createItem(item_html,title,sort){
 	newitem.find(".body").append(item_html);
 	$("#item"+sort).append(newitem).find("a").each(function(){
 		$(this).click(function(){
-				parent.Eop.AdminUI.load($(this));
+				parent.JEAP.AdminUI.load($(this));
 				return false;
 			});
 	});

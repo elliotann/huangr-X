@@ -46,7 +46,7 @@ var founder= ${user.founder};
 			<ul>
 			</ul>
 
-			<div class="desktop"><a href="../core/admin/index.do">桌面</a></div>
+			<div class="desktop"><a href="../core/admin/index.do?list">桌面</a></div>
 
 		</div>
 	</div>
