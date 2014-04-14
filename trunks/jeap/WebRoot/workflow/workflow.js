@@ -6,7 +6,7 @@ function graphTrace(options) {
     };
     var opts = $.extend(true, _defaults, options);
 
-    // 处理使用js跟踪当前节点坐标错乱问题
+    /*// 处理使用js跟踪当前节点坐标错乱问题
     $('#changeImg').live('click', function() {
         $('#workflowTraceDialog').dialog('close');
         if ($('#imgDialog').length > 0) {
@@ -24,7 +24,7 @@ function graphTrace(options) {
             height: document.documentElement.clientHeight * 0.95
         });
     });
-
+*/
     // 获取图片资源
     var imageUrl = "/workflow/resource/process-instance?pid=" + opts.pid + "&type=image";
     $.getJSON('/jeap/core/admin/workflow.do?trace&pid=' + opts.pid, function(infos) {
@@ -72,7 +72,7 @@ function graphTrace(options) {
             height:600,
             width: 800,
             title : '增加管理员',
-            url: 'userAdmin.do?add',
+            content:'fsafa',
             showMax: false,
             showToggle: true,
             showMin: false,
