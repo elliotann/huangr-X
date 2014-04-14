@@ -7,27 +7,21 @@ import com.easysoft.core.utils.WorkflowUtils;
 import com.easysoft.framework.utils.JsonUtils;
 import com.easysoft.member.backend.manager.impl.UserServiceFactory;
 import com.easysoft.member.backend.model.AdminUser;
+import com.easysoft.workflow.manager.impl.WorkflowTraceService;
 import com.easysoft.workflow.vo.DefAndDeployVo;
-import org.activiti.bpmn.converter.BpmnXMLConverter;
 import org.activiti.bpmn.model.BpmnModel;
-import org.activiti.editor.constants.ModelDataJsonConstants;
-import org.activiti.editor.language.json.converter.BpmnJsonConverter;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
-import org.activiti.engine.identity.User;
 import org.activiti.engine.impl.bpmn.diagram.ProcessDiagramGenerator;
 import org.activiti.engine.impl.context.Context;
 import org.activiti.engine.repository.Deployment;
-import org.activiti.engine.repository.Model;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.repository.ProcessDefinitionQuery;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.activiti.spring.ProcessEngineFactoryBean;
 import org.apache.commons.io.FilenameUtils;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.node.ObjectNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,18 +33,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamReader;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -83,6 +69,8 @@ public class ActivitiController {
 
     @Autowired
     ProcessEngineFactoryBean processEngine;
+    @Autowired
+    protected WorkflowTraceService traceService;
 
     /**
      * 流程定义列表
@@ -177,8 +165,8 @@ public class ActivitiController {
      * 待办任务--Portlet
      */
     @RequestMapping(params = {"taskTodoList"})
-    @ResponseBody
-    public List<Map<String, Object>> todoList() throws Exception {
+
+    public ModelAndView todoList() throws Exception {
         AdminUser user = UserServiceFactory.getUserService().getCurrentUser();
         List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
@@ -195,7 +183,7 @@ public class ActivitiController {
         }
 
         // 等待签收的任务
-        List<Task> toClaimList = taskService.createTaskQuery().taskCandidateUser(user.getUserid().toString()).active().list();
+        List<Task> toClaimList = taskService.createTaskQuery().taskCandidateUser(user.getUsername().toString()).active().list();
         for (Task task : toClaimList) {
             String processDefinitionId = task.getProcessDefinitionId();
             ProcessDefinition processDefinition = getProcessDefinition(processDefinitionId);
@@ -204,8 +192,9 @@ public class ActivitiController {
             singleTask.put("status", "claim");
             result.add(singleTask);
         }
-
-        return result;
+        Map<String,Object> params = new HashMap<String,Object>();
+        params.put("result",result);
+        return new ModelAndView("workflow/task/tasklist",params);
     }
 
     private ProcessDefinition getProcessDefinition(String processDefinitionId) {
@@ -225,5 +214,44 @@ public class ActivitiController {
         singleTask.put("pdversion", processDefinition.getVersion());
         singleTask.put("pid", task.getProcessInstanceId());
         return singleTask;
+    }
+
+    /**
+     * 读取带跟踪的图片
+     */
+    @RequestMapping(value = "/trace/auto/{executionId}")
+    public void readResource(@PathVariable("executionId") String executionId, HttpServletResponse response)
+            throws Exception {
+        ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceId(executionId).singleResult();
+        BpmnModel bpmnModel = repositoryService.getBpmnModel(processInstance.getProcessDefinitionId());
+        List<String> activeActivityIds = runtimeService.getActiveActivityIds(executionId);
+        // 不使用spring请使用下面的两行代码
+//    ProcessEngineImpl defaultProcessEngine = (ProcessEngineImpl) ProcessEngines.getDefaultProcessEngine();
+//    Context.setProcessEngineConfiguration(defaultProcessEngine.getProcessEngineConfiguration());
+
+        // 使用spring注入引擎请使用下面的这行代码
+        Context.setProcessEngineConfiguration(processEngine.getProcessEngineConfiguration());
+
+        InputStream imageStream = ProcessDiagramGenerator.generateDiagram(bpmnModel, "png", activeActivityIds);
+
+        // 输出资源内容到相应对象
+        byte[] b = new byte[1024];
+        int len;
+        while ((len = imageStream.read(b, 0, 1024)) != -1) {
+            response.getOutputStream().write(b, 0, len);
+        }
+    }
+    /**
+     * 输出跟踪流程信息
+     *
+     * @param processInstanceId
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(params = {"trace"})
+    @ResponseBody
+    public List<Map<String, Object>> traceProcess(@RequestParam("pid") String processInstanceId) throws Exception {
+        List<Map<String, Object>> activityInfos = traceService.traceProcess("5");
+        return activityInfos;
     }
 }
