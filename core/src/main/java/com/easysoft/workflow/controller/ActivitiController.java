@@ -251,7 +251,38 @@ public class ActivitiController {
     @RequestMapping(params = {"trace"})
     @ResponseBody
     public List<Map<String, Object>> traceProcess(@RequestParam("pid") String processInstanceId) throws Exception {
-        List<Map<String, Object>> activityInfos = traceService.traceProcess("5");
+        List<Map<String, Object>> activityInfos = traceService.traceProcess(processInstanceId);
         return activityInfos;
     }
+
+    /**
+     * 读取资源，通过流程ID
+     *
+     * @param resourceType      资源类型(xml|image)
+     * @param processInstanceId 流程实例ID
+     * @param response
+     * @throws Exception
+     */
+    @RequestMapping(params = {"pInstanceRes"})
+    public void loadByProcessInstance(@RequestParam("type") String resourceType, @RequestParam("pid") String processInstanceId, HttpServletResponse response)
+            throws Exception {
+        InputStream resourceAsStream = null;
+        ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId).singleResult();
+        ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery().processDefinitionId(processInstance.getProcessDefinitionId())
+                .singleResult();
+
+        String resourceName = "";
+        if (resourceType.equals("image")) {
+            resourceName = processDefinition.getDiagramResourceName();
+        } else if (resourceType.equals("xml")) {
+            resourceName = processDefinition.getResourceName();
+        }
+        resourceAsStream = repositoryService.getResourceAsStream(processDefinition.getDeploymentId(), resourceName);
+        byte[] b = new byte[1024];
+        int len = -1;
+        while ((len = resourceAsStream.read(b, 0, 1024)) != -1) {
+            response.getOutputStream().write(b, 0, len);
+        }
+    }
+
 }
