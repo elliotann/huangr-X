@@ -37,15 +37,16 @@ function addItem(title,itemurl,sort){
 }
 
 function createItem(item_html,title,sort){
+
 	var newitem = $("#template").clone();
 	newitem.removeAttr("id");
 	newitem.find(".title>h3").append(title);
 	newitem.find(".body").append(item_html);
 	$("#item"+sort).append(newitem).find("a").each(function(){
-		$(this).click(function(){
+		/*$(this).click(function(){
 				parent.Jeap.AdminUI.load($(this));
 				return false;
-			});
+			});*/
 	});
 }
 
