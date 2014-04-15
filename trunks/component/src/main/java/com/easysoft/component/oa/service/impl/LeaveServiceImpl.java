@@ -14,6 +14,7 @@ import org.activiti.engine.task.Task;
 import org.activiti.engine.task.TaskQuery;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.restlet.engine.util.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -110,8 +111,15 @@ public class LeaveServiceImpl extends GenericService<LeaveEntity> implements Lea
             }
             LeaveEntity leave = this.get(LeaveEntity.class, new Integer(businessKey));
             leave.setTask(task);
+            leave.setTaskName(task.getName());
+            leave.setTaskId(task.getId());
+            leave.setTaskCreateTime(DateUtils.format(task.getCreateTime(),"yyyy-MM-dd HH:mm:ss"));
+            leave.setProcessInstanceState(processInstance.isSuspended());
+            ProcessDefinition processDefinition =   getProcessDefinition(processInstance.getProcessDefinitionId());
             leave.setProcessInstance(processInstance);
-            leave.setProcessDefinition(getProcessDefinition(processInstance.getProcessDefinitionId()));
+            leave.setDefVersion(processDefinition.getVersion()+"");
+            leave.setProcessDefinition(processDefinition);
+            leave.setAssignee(task.getAssignee());
             results.add(leave);
         }
 
