@@ -29,7 +29,7 @@ function graphTrace(options) {
     var imageUrl = "/workflow/resource/process-instance?pid=" + opts.pid + "&type=image";
     $.getJSON('/jeap/core/admin/workflow.do?trace&pid=' + opts.pid, function(infos) {
 
-        var positionHtml = "";
+        var positionHtml = "fsdfdas";
 
         // 生成图片
         var varsArray = new Array();
@@ -51,13 +51,13 @@ function graphTrace(options) {
             var $border = $('<div/>', {
                 'class': 'activity-attr-border'
             }).css({
-                position: 'absolute',
-                left: (v.x - 1),
-                top: (v.y - 1),
-                width: (v.width - 4),
-                height: (v.height - 3),
-                zIndex: $.fn.qtip.zindex - 2
-            });
+                    position: 'absolute',
+                    left: (v.x - 1),
+                    top: (v.y - 1),
+                    width: (v.width - 4),
+                    height: (v.height - 3),
+                    zIndex: $.fn.qtip.zindex - 2
+                });
 
             if (v.currentActiviti) {
                 $border.addClass('ui-corner-all-12').css({
@@ -67,8 +67,8 @@ function graphTrace(options) {
             positionHtml += $positionDiv.outerHTML() + $border.outerHTML();
             varsArray[varsArray.length] = v.vars;
         });
-        positionHtml =  '<div style="position: absolute; left: 89px; top: 79px; width: 103px; height: 53px; background-color: rgb(0, 0, 0); opacity: 0; z-index: 14999;" class="activity-attr"></div><div style="position: absolute; left: 89px; top: 79px; width: 101px; height: 52px; z-index: 14998; border: 3px solid red;" class="activity-attr-border ui-corner-all-12"></div><div style="position: absolute; left: 249px; top: 86px; width: 38px; height: 38px; background-color: rgb(0, 0, 0); opacity: 0; z-index: 14999;" class="activity-attr"></div><div style="position: absolute; left: 249px; top: 86px; width: 36px; height: 37px; z-index: 14998;" class="activity-attr-border"></div><div style="position: absolute; left: 217px; top: 189px; width: 103px; height: 53px; background-color: rgb(0, 0, 0); opacity: 0; z-index: 14999;" class="activity-attr"></div><div style="position: absolute; left: 217px; top: 189px; width: 101px; height: 52px; z-index: 14998;" class="activity-attr-border"></div><div style="position: absolute; left: 357px; top: 79px; width: 103px; height: 53px; background-color: rgb(0, 0, 0); opacity: 0; z-index: 14999;" class="activity-attr"></div><div style="position: absolute; left: 357px; top: 79px; width: 101px; height: 52px; z-index: 14998;" class="activity-attr-border"></div><div style="position: absolute; left: 494px; top: 86px; width: 38px; height: 38px; background-color: rgb(0, 0, 0); opacity: 0; z-index: 14999;" class="activity-attr"></div><div style="position: absolute; left: 494px; top: 86px; width: 36px; height: 37px; z-index: 14998;" class="activity-attr-border"></div><div style="position: absolute; left: 589px; top: 79px; width: 103px; height: 53px; background-color: rgb(0, 0, 0); opacity: 0; z-index: 14999;" class="activity-attr"></div><div style="position: absolute; left: 589px; top: 79px; width: 101px; height: 52px; z-index: 14998;" class="activity-attr-border"></div><div style="position: absolute; left: 249px; top: 279px; width: 38px; height: 38px; background-color: rgb(0, 0, 0); opacity: 0; z-index: 14999;" class="activity-attr"></div><div style="position: absolute; left: 249px; top: 279px; width: 36px; height: 37px; z-index: 14998;" class="activity-attr-border"></div><div style="position: absolute; left: 9px; top: 89px; width: 33px; height: 33px; background-color: rgb(0, 0, 0); opacity: 0; z-index: 14999;" class="activity-attr"></div><div style="position: absolute; left: 9px; top: 89px; width: 31px; height: 32px; z-index: 14998;" class="activity-attr-border"></div><div style="position: absolute; left: 624px; top: 282px; width: 33px; height: 33px; background-color: rgb(0, 0, 0); opacity: 0; z-index: 14999;" class="activity-attr"></div><div style="position: absolute; left: 624px; top: 282px; width: 31px; height: 32px; z-index: 14998;" class="activity-attr-border"></div>';
-        $.ligerDialog.open({
+
+           $.ligerDialog.open({
             height:600,
             width: 800,
             title : '增加管理员',
