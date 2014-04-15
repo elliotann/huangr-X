@@ -35,7 +35,11 @@ public class JsonUtils {
 	}
 
     public static String beanToJson(Object bean){
-        JSONObject jsonObject = JSONObject.fromObject(bean);
+
+        JsonConfig config = new JsonConfig();
+        config.setJavaPropertyFilter(new InvisibleFilter("List"));
+        config.setExcludes(new String[]{"form"});
+        JSONObject jsonObject = JSONObject.fromObject(bean,config);
         return jsonObject.toString();
     }
 

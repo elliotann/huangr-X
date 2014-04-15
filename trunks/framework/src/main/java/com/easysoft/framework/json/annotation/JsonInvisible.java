@@ -1,4 +1,4 @@
-package com.easysoft.core.annotation;
+package com.easysoft.framework.json.annotation;
 
 import java.lang.annotation.*;
 
