@@ -1,21 +1,11 @@
 package com.easysoft.component.oa.entity;
 
-import java.math.BigDecimal;
-import java.util.Date;
-import java.lang.String;
-import java.lang.Double;
-import java.lang.Integer;
-import java.math.BigDecimal;
-import javax.xml.soap.Text;
-import java.sql.Blob;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import org.hibernate.annotations.GenericGenerator;
-import javax.persistence.SequenceGenerator;
+import com.easysoft.core.annotation.JsonInvisible;
+import org.activiti.engine.repository.ProcessDefinition;
+import org.activiti.engine.runtime.ProcessInstance;
+import org.activiti.engine.task.Task;
+
+import javax.persistence.*;
 
 /**   
  * @Title: Entity
@@ -41,6 +31,16 @@ public class LeaveEntity implements java.io.Serializable {
 	private java.lang.String reason;
     private String processInstanceId;
 	private String userId;
+
+
+    //-- 临时属性 --//
+
+    // 流程任务
+    private Task task;
+    // 运行中的流程实例
+    private ProcessInstance processInstance;
+    // 流程定义
+    private ProcessDefinition processDefinition;
 	/**
 	 *方法: 取得java.lang.Integer
 	 *@return: java.lang.Integer  主键
@@ -138,5 +138,32 @@ public class LeaveEntity implements java.io.Serializable {
 
     public void setProcessInstanceId(String processInstanceId) {
         this.processInstanceId = processInstanceId;
+    }
+    @JsonInvisible("List")
+    @Transient
+    public Task getTask() {
+        return task;
+    }
+
+    public void setTask(Task task) {
+        this.task = task;
+    }
+    @JsonInvisible("List")
+    @Transient
+    public ProcessInstance getProcessInstance() {
+        return processInstance;
+    }
+
+    public void setProcessInstance(ProcessInstance processInstance) {
+        this.processInstance = processInstance;
+    }
+    @JsonInvisible("List")
+    @Transient
+    public ProcessDefinition getProcessDefinition() {
+        return processDefinition;
+    }
+
+    public void setProcessDefinition(ProcessDefinition processDefinition) {
+        this.processDefinition = processDefinition;
     }
 }
