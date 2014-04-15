@@ -1,26 +1,30 @@
 package com.easysoft.component.oa.controller;
-import java.util.List;
-import java.text.SimpleDateFormat;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
+import com.easysoft.component.oa.entity.LeaveEntity;
+import com.easysoft.component.oa.service.LeaveServiceI;
+import com.easysoft.core.common.controller.BaseController;
+import com.easysoft.core.common.dao.hibernate.DataGrid;
+import com.easysoft.core.common.vo.json.AjaxJson;
+import com.easysoft.core.common.vo.json.DataGridReturn;
+import com.easysoft.framework.utils.BeanUtils;
+import com.easysoft.framework.utils.JsonUtils;
+import com.easysoft.framework.utils.StringUtil;
+import com.easysoft.member.backend.manager.impl.UserServiceFactory;
+import com.easysoft.member.backend.manager.impl.UserUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import com.easysoft.core.common.vo.json.DataGridReturn;
-import com.easysoft.framework.utils.JsonUtils;
-import com.easysoft.core.common.controller.BaseController;
-import com.easysoft.core.common.vo.json.AjaxJson;
-import com.easysoft.core.common.dao.hibernate.DataGrid;
-import com.easysoft.framework.utils.StringUtil;
-import com.easysoft.framework.utils.BeanUtils;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import com.easysoft.component.oa.entity.LeaveEntity;
-import com.easysoft.component.oa.service.LeaveServiceI;
 
 /**   
  * @Title: Controller
@@ -63,7 +67,7 @@ public class LeaveController extends BaseController {
 	}
 
 	/**
-	 * easyui AJAX请求数据
+	 * AJAX请求数据
 	 * 
 	 * @param request
 	 * @param response
@@ -194,4 +198,30 @@ public class LeaveController extends BaseController {
 		}
 		return new ModelAndView("admin/component/oa/leave-update");
 	}
+    /**
+     * 任务列表
+     *
+     * @param leave
+     */
+    @RequestMapping(params ={"listtask"} )
+    public ModelAndView taskList(HttpSession session, HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView("/oa/leave/taskList");
+
+
+
+
+        return mav;
+    }
+
+    @RequestMapping(params = "taskDataGrid")
+    public ModelAndView taskDataGrid(LeaveEntity leave,HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid) {
+        String userName = UserServiceFactory.getUserService().getCurrentUser().getUsername();
+
+        List entityist =leaveService.findTodoTasks(userName, null, null);
+        DataGridReturn dataGridReturn = new DataGridReturn(entityist.size(),entityist);
+        String json = JsonUtils.beanToJson(dataGridReturn);
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("json",json);
+        return new ModelAndView("admin/json_message",map);
+    }
 }
