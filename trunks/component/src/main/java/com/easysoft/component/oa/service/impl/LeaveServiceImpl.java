@@ -1,23 +1,28 @@
 package com.easysoft.component.oa.service.impl;
 
+import com.easysoft.component.oa.entity.LeaveEntity;
+import com.easysoft.component.oa.service.LeaveServiceI;
+import com.easysoft.core.common.service.impl.GenericService;
 import com.easysoft.member.backend.manager.impl.UserServiceFactory;
 import org.activiti.engine.IdentityService;
+import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
+import org.activiti.engine.TaskService;
+import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
+import org.activiti.engine.task.Task;
+import org.activiti.engine.task.TaskQuery;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.easysoft.component.oa.service.LeaveServiceI;
-import com.easysoft.core.common.service.impl.GenericService;
-import com.easysoft.component.oa.entity.LeaveEntity;
-
-import java.util.Map;
-import java.util.UUID;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 @Service("leaveService")
 @Transactional
 public class LeaveServiceImpl extends GenericService<LeaveEntity> implements LeaveServiceI {
@@ -26,6 +31,10 @@ public class LeaveServiceImpl extends GenericService<LeaveEntity> implements Lea
     private IdentityService identityService;
     @Autowired
     private RuntimeService runtimeService;
+    @Autowired
+    protected TaskService taskService;
+    @Autowired
+    protected RepositoryService repositoryService;
  	public <T> void delete(T entity) {
  		super.delete(entity);
 
@@ -70,5 +79,53 @@ public class LeaveServiceImpl extends GenericService<LeaveEntity> implements Lea
             identityService.setAuthenticatedUserId(null);
         }
         return processInstance;
+    }
+
+    @Override
+    public List<LeaveEntity> findTodoTasks(String userId, Page<LeaveEntity> page, int[] pageParams) {
+        List<LeaveEntity> results = new ArrayList<LeaveEntity>();
+        List<Task> tasks = new ArrayList<Task>();
+
+        // 根据当前人的ID查询
+        TaskQuery todoQuery = taskService.createTaskQuery().processDefinitionKey("leave").taskAssignee(userId).active().orderByTaskId().desc()
+                .orderByTaskCreateTime().desc();
+        List<Task> todoList = todoQuery.listPage(1, 100);
+
+        // 根据当前人未签收的任务
+        TaskQuery claimQuery = taskService.createTaskQuery().processDefinitionKey("leave").taskCandidateUser(userId).active().orderByTaskId().desc()
+                .orderByTaskCreateTime().desc();
+        List<Task> unsignedTasks = claimQuery.listPage(1, 100);
+
+        // 合并
+        tasks.addAll(todoList);
+        tasks.addAll(unsignedTasks);
+
+        // 根据流程的业务ID查询实体并关联
+        for (Task task : tasks) {
+            String processInstanceId = task.getProcessInstanceId();
+            ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId).active().singleResult();
+            String businessKey = processInstance.getBusinessKey();
+            if (businessKey == null) {
+                continue;
+            }
+            LeaveEntity leave = this.get(LeaveEntity.class, new Integer(businessKey));
+            leave.setTask(task);
+            leave.setProcessInstance(processInstance);
+            leave.setProcessDefinition(getProcessDefinition(processInstance.getProcessDefinitionId()));
+            results.add(leave);
+        }
+
+
+        return results;
+    }
+    /**
+     * 查询流程定义对象
+     *
+     * @param processDefinitionId 流程定义ID
+     * @return
+     */
+    protected ProcessDefinition getProcessDefinition(String processDefinitionId) {
+        ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery().processDefinitionId(processDefinitionId).singleResult();
+        return processDefinition;
     }
 }
