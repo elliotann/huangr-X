@@ -37,8 +37,11 @@ public class JsonUtils {
     public static String beanToJson(Object bean){
 
         JsonConfig config = new JsonConfig();
-        config.setJavaPropertyFilter(new InvisibleFilter("List"));
-        config.setExcludes(new String[]{"form"});
+
+
+        config.setExcludes(new String[]{"processDefinition","processInstance","task"});
+
+
         JSONObject jsonObject = JSONObject.fromObject(bean,config);
         return jsonObject.toString();
     }
@@ -64,6 +67,7 @@ public class JsonUtils {
         JsonConfig config = new JsonConfig();
         config.setJavaPropertyFilter(new InvisibleFilter("List"));
         config.setExcludes(new String[]{"form"});
+
         JSONArray jsonArray = JSONArray.fromObject(beans,config);
         return jsonArray.toString();
     }
