@@ -115,17 +115,23 @@
                         { display: '结束时间', name: 'endTime'},
                         { display: '当前节点', name: 'taskName'},
                         { display: '任务创建时间', name: 'taskCreateTime'},
-                        { display: '流程状态', name: 'processInstanceState',render:function(value){
+                        { display: '流程状态', name: 'processInstanceState',render:function(rowdata, index, value){
                             if(value){
                                 return "已挂起";
                             }else{
                                 return "正常";
                             }
                         }},
-                        { display: '版本', name: 'defVersion',render:function(value){
+                        { display: '版本', name: 'defVersion',render:function(rowdata, index, value){
                             return "V:" + value;
                         }},
-                        { display: '操作', name: 'assignee'}
+                        { display: '操作', name: 'assignee',render:function(rowdata, index, value){
+                            if(value==""){
+                                return '<a class="claim" href="${ctx }/oa/leave/task/claim">签收</a>';
+                            }else{
+                                return '<a class="handle"  href="#">办理</a>';
+                            }
+                        }}
                     ], url:'leave.do?taskDataGrid&ajax=yes',  pageSize:30 ,rownumbers:true,
                     toolbar: { items: [
                         { text: '增加', click: addUser, icon: 'add' },
