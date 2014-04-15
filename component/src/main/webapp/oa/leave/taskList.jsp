@@ -108,15 +108,24 @@
                 $("#maingrid").ligerGrid({
                     height:'99%',
                     columns: [
-                        { display: '业务种类', name: 'userid', align: 'left', width: 100, minWidth: 60 },
-                        { display: '申请人', name: 'username', minWidth: 120 },
-                        { display: '申请时间', name: 'realname', minWidth: 140 },
-                        { display: '开始时间', name: 'state'},
-                        { display: '结束时间', name: 'state'},
-                        { display: '当前节点', name: 'state'},
-                        { display: '任务创建时间', name: 'state'},
-                        { display: '流程状态', name: 'state'},
-                        { display: '操作', name: 'state'}
+                        { display: '业务种类', name: 'leaveType', align: 'left', width: 100, minWidth: 60 },
+                        { display: '申请人', name: 'userId', minWidth: 120 },
+                        { display: '申请时间', name: 'applyTime', minWidth: 140 },
+                        { display: '开始时间', name: 'startTime'},
+                        { display: '结束时间', name: 'endTime'},
+                        { display: '当前节点', name: 'taskName'},
+                        { display: '任务创建时间', name: 'taskCreateTime'},
+                        { display: '流程状态', name: 'processInstanceState',render:function(value){
+                            if(value){
+                                return "已挂起";
+                            }else{
+                                return "正常";
+                            }
+                        }},
+                        { display: '版本', name: 'defVersion',render:function(value){
+                            return "V:" + value;
+                        }},
+                        { display: '操作', name: 'assignee'}
                     ], url:'leave.do?taskDataGrid&ajax=yes',  pageSize:30 ,rownumbers:true,
                     toolbar: { items: [
                         { text: '增加', click: addUser, icon: 'add' },

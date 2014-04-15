@@ -34,9 +34,17 @@ public class LeaveEntity implements java.io.Serializable {
 
 
     //-- 临时属性 --//
-
+     private String taskName;
+    //任务创建时间
+    private String taskCreateTime;
+    //定义版本
+    private String defVersion;
+    private String taskId;
+    private String taskDefinitionKey;
+    private  String assignee;
     // 流程任务
     private Task task;
+    private boolean processInstanceState;
     // 运行中的流程实例
     private ProcessInstance processInstance;
     // 流程定义
@@ -165,5 +173,61 @@ public class LeaveEntity implements java.io.Serializable {
 
     public void setProcessDefinition(ProcessDefinition processDefinition) {
         this.processDefinition = processDefinition;
+    }
+    @Transient
+    public String getTaskName() {
+        return taskName;
+    }
+
+    public void setTaskName(String taskName) {
+        this.taskName = taskName;
+    }
+    @Transient
+    public String getTaskCreateTime() {
+        return taskCreateTime;
+    }
+
+    public void setTaskCreateTime(String taskCreateTime) {
+        this.taskCreateTime = taskCreateTime;
+    }
+    @Transient
+    public String getDefVersion() {
+        return defVersion;
+    }
+
+    public void setDefVersion(String defVersion) {
+        this.defVersion = defVersion;
+    }
+    @Transient
+    public String getTaskId() {
+        return taskId;
+    }
+
+    public void setTaskId(String taskId) {
+        this.taskId = taskId;
+    }
+    @Transient
+    public String getTaskDefinitionKey() {
+        return taskDefinitionKey;
+    }
+
+    public void setTaskDefinitionKey(String taskDefinitionKey) {
+        this.taskDefinitionKey = taskDefinitionKey;
+    }
+    @Transient
+    public String getAssignee() {
+        return assignee;
+    }
+
+    public void setAssignee(String assignee) {
+        this.assignee = assignee;
+    }
+    @Transient
+    public boolean getProcessInstanceState() {
+        return processInstanceState;
+    }
+
+    public void setProcessInstanceState(boolean processInstanceState) {
+        this.processInstanceState = processInstanceState;
     }
 }
