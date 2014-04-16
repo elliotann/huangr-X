@@ -1,12 +1,14 @@
 package com.easysoft.framework.utils;
 
 import com.easysoft.framework.json.filter.InvisibleFilter;
+import com.easysoft.framework.utils.json.DateJsonValueProcessor;
 import net.sf.ezmorph.object.DateMorpher;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 import net.sf.json.util.JSONUtils;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +40,7 @@ public class JsonUtils {
 
         JsonConfig config = new JsonConfig();
 
-
+        config.registerJsonValueProcessor(Date.class,new DateJsonValueProcessor(null));
         config.setExcludes(new String[]{"processDefinition","processInstance","task"});
 
 
