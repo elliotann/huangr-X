@@ -20,17 +20,21 @@
         listgrid =
                 $("#maingrid").ligerGrid({
                     height:'99%',
+                    width:'100%',
                     columns: [
-                        { display: '定义Id', name: 'defId', align: 'left', width: 100, minWidth: 60 },
-                        { display: '部署Id', name: 'deploymentId', minWidth: 120 },
-                        { display: '名称', name: 'defName', minWidth: 140 },
-                        { display: 'KEY', name: 'defKey'},
-                        { display: '版本号', name: 'defVersion'},
-                        { display: 'XML', name: 'resourceName'},
-                        { display: '图片', name: 'diagramResourceName'},
+                        { display: '定义Id', name: 'defId', align: 'center', width: 100, minWidth: 60 },
+                        { display: '部署Id', name: 'deploymentId', minWidth: 60,width: 90 },
+                        { display: '名称', name: 'defName', minWidth: 100 },
+                        { display: 'KEY', name: 'defKey',width:50},
+                        { display: '版本号', name: 'defVersion',width:30},
+                        { display: 'XML', name: 'resourceName',render:function(rowdata,index,value){
+                            return "<a target='_blank' href='${ctx }/core/admin/workflow.do?readResouce&processDefinitionId="+rowdata.defId+"&resourceType=xml'>"+value+"</a>";
+                        }},
+                        { display: '图片', name: 'diagramResourceName',render:function(rowdata,index,value){
+                            return "<a target='_blank' href='${ctx }/core/admin/workflow.do?readResouce&processDefinitionId="+rowdata.defId+"&resourceType=image'>"+value+"</a>";
+                        }},
                         { display: '部署时间', name: 'deploymentTime',type:'date'},
-                        { display: '是否挂起', name: 'suspended'},
-                        { display: '操作'}
+                        { display: '是否挂起', name: 'suspended',width:50}
                     ], url:'workflow.do?dataGrid&ajax=yes',  pageSize:30 ,rownumbers:true,
                     toolbar: { items: [
                         { text: '部署流程', click: deploy, icon: 'add' },
@@ -46,20 +50,15 @@
     });
     function deploy(item){
         $.ligerDialog.open({
-            height:600,
-            width: 800,
+            height:300,
+            width: 600,
             title : '部署流程',
             url: 'workflow.do?toDeploy',
             showMax: false,
             showToggle: true,
             showMin: false,
             isResize: true,
-            slide: false,
-            data: {
-                name: $("#txtValue").val()
-            },
-            //自定义参数
-            myDataName: $("#txtValue").val()
+            slide: false
         });
     }
     function addProcess(item){
@@ -72,12 +71,7 @@
             showToggle: true,
             showMin: false,
             isResize: true,
-            slide: false,
-            data: {
-                name: $("#txtValue").val()
-            },
-            //自定义参数
-            myDataName: $("#txtValue").val()
+            slide: false
         });
     }
 
@@ -113,10 +107,7 @@
         });
     }
     </script>
-
-
-        <div class="grid">
-            <div id="maingrid"></div>
-        </div>
-
-        <div style="display:none;">
+<div class="grid">
+    <div id="maingrid"></div>
+</div>
+<div style="display:none;">
