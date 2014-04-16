@@ -16,7 +16,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.restlet.engine.util.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -83,7 +82,7 @@ public class LeaveServiceImpl extends GenericService<LeaveEntity> implements Lea
     }
 
     @Override
-    public List<LeaveEntity> findTodoTasks(String userId, Page<LeaveEntity> page, int[] pageParams) {
+    public List<LeaveEntity> findTodoTasks(String userId,  int[] pageParams) {
         List<LeaveEntity> results = new ArrayList<LeaveEntity>();
         List<Task> tasks = new ArrayList<Task>();
 
