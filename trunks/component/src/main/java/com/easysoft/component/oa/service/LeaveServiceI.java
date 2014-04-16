@@ -3,7 +3,6 @@ package com.easysoft.component.oa.service;
 import com.easysoft.component.oa.entity.LeaveEntity;
 import com.easysoft.core.common.service.IGenericService;
 import org.activiti.engine.runtime.ProcessInstance;
-import org.springframework.data.domain.Page;
 
 import java.io.Serializable;
 import java.util.List;
@@ -32,5 +31,5 @@ public interface LeaveServiceI extends IGenericService<LeaveEntity>{
      * @param pageParams
      * @return
      */
-    public List<LeaveEntity> findTodoTasks(String userId, Page<LeaveEntity> page, int[] pageParams);
+    public List<LeaveEntity> findTodoTasks(String userId, int[] pageParams);
 }

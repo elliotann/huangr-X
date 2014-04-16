@@ -221,7 +221,7 @@ public class LeaveController extends BaseController {
     public ModelAndView taskDataGrid(LeaveEntity leave,HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid) {
         String userName = UserServiceFactory.getUserService().getCurrentUser().getUsername();
 
-        List entityist =leaveService.findTodoTasks(userName, null, null);
+        List entityist =leaveService.findTodoTasks(userName, null);
         DataGridReturn dataGridReturn = new DataGridReturn(entityist.size(),entityist);
         String json = JsonUtils.beanToJson(dataGridReturn);
         Map<String,Object> map = new HashMap<String, Object>();
