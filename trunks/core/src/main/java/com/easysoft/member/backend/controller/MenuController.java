@@ -46,6 +46,8 @@ public class MenuController extends BaseController {
     @RequestMapping(params = {"add"})
     public ModelAndView add(){
         List<Menu> menuList  = this.menuManager.getMenuList();
+
+
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("menuList",menuList);
         return new ModelAndView("core/admin/menu/add",map);
