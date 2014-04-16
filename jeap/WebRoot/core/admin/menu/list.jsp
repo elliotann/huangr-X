@@ -24,10 +24,6 @@
 </style>
 <script type="text/javascript">
     var grid;
-
-
-
-
     $(function ()
     {
         window.dialog = $.ligerDialog.open({
@@ -47,18 +43,18 @@
         grid = $("#maingrid").ligerGrid({
                     height:'99%',
                     columns: [
-                        { display: '名称', name: 'title', id: 'title', width: 250, align: 'left' },
+                        { display: '名称', name: 'title', id: 'title',  align: 'left' },
                         { display: 'url', name: 'url', id: 'url', width: 250, align: 'left' },
-                        { display: '类型', name: 'menutype', id:'menutype',width: 140, type: 'int', align: 'left',render:function(rowdata,index,value){
+                        { display: '类型', name: 'menutype', id:'menutype',width: 100, type: 'int', align: 'left',render:function(rowdata,index,value){
                             if(value==1){
                                 return "系统菜单";
                             }else{
                                 return "应用菜单";
                             }
                         } },
-                        { display: '排序', name: 'sorder', align: 'left' },
-                        { display: 'target', name: 'target', align: 'left' }
-                    ], width: '100%', pageSizeOptions: [5, 10, 15, 20],
+                        { display: '排序', name: 'sorder', align: 'left',width:100 },
+                        { display: 'target', name: 'target', align: 'left',width: 50 }
+                    ], width: '100%', usePager:false,
                     url: 'menu.do?dataGrid&ajax=yes', alternatingRow: false, tree: {
                         columnId: 'title',
                         //columnName: 'name',
@@ -110,8 +106,9 @@
 
     function addMenu(item){
         $.ligerDialog.open({
+            name:'openDia',
             height:400,
-            width: 800,
+            width: 400,
             title : '增加菜单',
             url: 'menu.do?add',
             showMax: false,
@@ -119,12 +116,11 @@
             showMin: false,
             isResize: true,
             slide: false,
-            data: {
-                name: $("#txtValue").val()
-            },
-            //自定义参数
-            myDataName: $("#txtValue").val()
+            buttons:[ { text: '确定', onclick: btnOK }, { text: '取消', onclick: function (item, dialog) { dialog.close(); } } ]
         });
+    }
+    function btnOK(item,dialog){
+        openDia.formSubmit();
     }
 </script>
 

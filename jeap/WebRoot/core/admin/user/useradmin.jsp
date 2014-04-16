@@ -23,8 +23,6 @@
     var grid;
     function addUser(item)
     {
-
-
             $.ligerDialog.open({
                 height:600,
                 width: 800,
