@@ -19,7 +19,7 @@ function bulidMainGrid()
 {
     var rows = [];
     $('<div style="margin:7px;" id="margin"></div>').appendTo('body');
-    var o = bulidData(11);
+    var o = bulidData(7);
     var out = [];
     out.push('<div>');
     out.push('  <div style=" width:98%">');

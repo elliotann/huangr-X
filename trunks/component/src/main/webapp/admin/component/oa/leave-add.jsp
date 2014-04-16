@@ -33,7 +33,7 @@
         $.ajax({
             type:'post',
             url:'designer.do?getDisColumns&ajax=true&type=form',
-            data:'id='+11,
+            data:'id='+7,
             dataType:'json',
             async:false,
             success:function(result){
