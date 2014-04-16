@@ -23,8 +23,6 @@
     var grid;
     function addUser(item)
     {
-
-
         $.ligerDialog.open({
             height:600,
             width: 800,
@@ -126,10 +124,15 @@
                             return "V:" + value;
                         }},
                         { display: '操作', name: 'assignee',render:function(rowdata, index, value){
+                            var taskId= rowdata.taskId+"";
                             if(value==""){
-                                return '<a class="claim" href="${ctx }/oa/leave/task/claim">签收</a>';
+
+                                var url =   "leave.do?claim&taskId="+taskId;
+
+                                return '<a class="claim" href="'+url+'">签收</a>';
                             }else{
-                                return '<a class="handle"  href="#">办理</a>';
+                                var sid = rowdata.sid;
+                                return '<a class="handle"  href="#" onclick="handle('+sid+','+taskId+');">办理</a>';
                             }
                         }}
                     ], url:'leave.do?taskDataGrid&ajax=yes',  pageSize:30 ,rownumbers:true,
@@ -152,6 +155,25 @@
         g.deleteSelectedRow();
     }
 
+    function handle(sid,taskId){
+        $.ligerDialog.open({
+            name:'openDia',
+            height:400,
+            width: 400,
+            title : '流程办理',
+            url: 'leave.do?detail&id='+sid+'&taskId='+taskId,
+            showMax: false,
+            showToggle: true,
+            showMin: false,
+            isResize: true,
+            slide: false,
+            buttons:[ { text: '同意', onclick: btnOK },{ text: '驳回', onclick: btnOK }, { text: '取消', onclick: function (item, dialog) { dialog.close(); } } ]
+        });
+    }
+
+    function btnOK(item,dialog){
+        openDia.submitForm();
+    }
 </script>
 
 

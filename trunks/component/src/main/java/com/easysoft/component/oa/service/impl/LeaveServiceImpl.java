@@ -90,12 +90,12 @@ public class LeaveServiceImpl extends GenericService<LeaveEntity> implements Lea
         // 根据当前人的ID查询
         TaskQuery todoQuery = taskService.createTaskQuery().processDefinitionKey("leave").taskAssignee(userId).active().orderByTaskId().desc()
                 .orderByTaskCreateTime().desc();
-        List<Task> todoList = todoQuery.listPage(1, 100);
+        List<Task> todoList = todoQuery.listPage(0, 100);
 
         // 根据当前人未签收的任务
         TaskQuery claimQuery = taskService.createTaskQuery().processDefinitionKey("leave").taskCandidateUser(userId).active().orderByTaskId().desc()
                 .orderByTaskCreateTime().desc();
-        List<Task> unsignedTasks = claimQuery.listPage(1, 100);
+        List<Task> unsignedTasks = claimQuery.listPage(0, 100);
 
         // 合并
         tasks.addAll(todoList);

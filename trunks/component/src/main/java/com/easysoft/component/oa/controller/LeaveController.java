@@ -4,18 +4,20 @@ import com.easysoft.component.oa.entity.LeaveEntity;
 import com.easysoft.component.oa.service.LeaveServiceI;
 import com.easysoft.core.common.controller.BaseController;
 import com.easysoft.core.common.dao.hibernate.DataGrid;
+import com.easysoft.core.common.vo.Variable;
 import com.easysoft.core.common.vo.json.AjaxJson;
 import com.easysoft.core.common.vo.json.DataGridReturn;
 import com.easysoft.framework.utils.BeanUtils;
 import com.easysoft.framework.utils.JsonUtils;
 import com.easysoft.framework.utils.StringUtil;
 import com.easysoft.member.backend.manager.impl.UserServiceFactory;
-import com.easysoft.member.backend.manager.impl.UserUtil;
+import org.activiti.engine.TaskService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -44,6 +46,8 @@ public class LeaveController extends BaseController {
 
 	@Autowired
 	private LeaveServiceI leaveService;
+    @Autowired
+    protected TaskService taskService;
 
 	private String message;
 	
@@ -223,5 +227,48 @@ public class LeaveController extends BaseController {
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("json",json);
         return new ModelAndView("admin/json_message",map);
+    }
+
+    /**
+     * 签收任务
+     */
+    @RequestMapping(params = {"claim"})
+    @ResponseBody
+    public AjaxJson claim(String taskId, HttpSession session) {
+        AjaxJson result =  new AjaxJson();
+        String userId = UserServiceFactory.getUserService().getCurrentUser().getUsername();
+        taskService.claim(taskId, userId);
+        result.setMsg("任务已签收");
+        return result;
+    }
+
+    @RequestMapping(params = {"detail"})
+    public ModelAndView detail(Integer id,String taskId){
+        LeaveEntity leave = leaveService.get(LeaveEntity.class,id);
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("leave",leave);
+        map.put("taskId",taskId);
+        return new ModelAndView("admin/component/oa/leave-detail",map);
+    }
+
+    /**
+     * 完成任务
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping(params = {"complete"}, method = {RequestMethod.POST, RequestMethod.GET})
+    @ResponseBody
+    public AjaxJson complete(String taskId, Variable var) {
+        AjaxJson result = new AjaxJson();
+        try {
+            Map<String, Object> variables = var.getVariableMap();
+            taskService.complete(taskId, variables);
+
+        } catch (Exception e) {
+            result.setSuccess(false);
+
+        }
+        return result;
     }
 }
