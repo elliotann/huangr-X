@@ -35,7 +35,7 @@
                     toolbar: { items: [
                         { text: '部署流程', click: deploy, icon: 'add' },
                         { line: true },
-                        { text: '修改', click: deploy, icon: 'modify' },
+                        { text: '新增流程', click: addProcess, icon: 'add' },
                         { line: true },
                         { text: '删除', click: delDeploy, img: '${context }/js/ligerui/skins/icons/delete.gif' }
                     ]
@@ -62,6 +62,26 @@
             myDataName: $("#txtValue").val()
         });
     }
+    function addProcess(item){
+        $.ligerDialog.open({
+            height:600,
+            width: 800,
+            title : '新增流程',
+            url: 'workflow.do?toDesigner',
+            showMax: false,
+            showToggle: true,
+            showMin: false,
+            isResize: true,
+            slide: false,
+            data: {
+                name: $("#txtValue").val()
+            },
+            //自定义参数
+            myDataName: $("#txtValue").val()
+        });
+    }
+
+
     function delDeploy(item)
     {
         var row = listgrid.getSelectedRow();
