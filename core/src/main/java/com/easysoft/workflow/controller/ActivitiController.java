@@ -284,5 +284,28 @@ public class ActivitiController {
             response.getOutputStream().write(b, 0, len);
         }
     }
-
+    /**
+     * 读取资源，通过部署ID
+     *
+     * @param processDefinitionId 流程定义
+     * @param resourceType        资源类型(xml|image)
+     * @throws Exception
+     */
+    @RequestMapping(params = {"readResouce"})
+    public void loadByDeployment(String processDefinitionId, String resourceType,
+                                 HttpServletResponse response) throws Exception {
+        ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery().processDefinitionId(processDefinitionId).singleResult();
+        String resourceName = "";
+        if (resourceType.equals("image")) {
+            resourceName = processDefinition.getDiagramResourceName();
+        } else if (resourceType.equals("xml")) {
+            resourceName = processDefinition.getResourceName();
+        }
+        InputStream resourceAsStream = repositoryService.getResourceAsStream(processDefinition.getDeploymentId(), resourceName);
+        byte[] b = new byte[1024];
+        int len = -1;
+        while ((len = resourceAsStream.read(b, 0, 1024)) != -1) {
+            response.getOutputStream().write(b, 0, len);
+        }
+    }
 }
