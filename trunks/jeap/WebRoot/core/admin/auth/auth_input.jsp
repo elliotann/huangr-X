@@ -17,10 +17,12 @@
 <script src="${context }/js/plug-in/jquery-validation/messages_cn.js" type="text/javascript"></script>
 <script type="text/javascript" src="${staticserver }/js/admin/jeap.js"></script>
 <script src="/jeap/admin/js/common/crud.js" type="text/javascript"></script>
+<script src="${context }/js/ligerui/js/plugins/ligerTree.js" type="text/javascript"></script>
 <script type="text/javascript">
-    var dialog = frameElement.dialog;
+    var dialog1 = frameElement.dialog;
+    var manager = null;
     $(function (){
-
+        $("#tree1").ligerTree({ url: 'json.txt', ajaxType: 'get' });
         $.metadata.setType("attr", "validate");
         var v = $("form").validate({
             debug: true,
@@ -69,7 +71,7 @@
         });
         $("form").ligerForm();
 
-        AuthAction.init();
+        manager = $("#tree1").ligerGetTreeManager();
     });
 
     function submitForm(){
@@ -103,11 +105,13 @@
         <tr>
             <td align="right" class="l-table-edit-td">菜单：</td>
             <td align="left" class="l-table-edit-td">
-                <textarea name="rolememo" cols="100" rows="4" class="l-textarea" id="rolememo" style="width:400px"></textarea>
+                <ul id="tree1">   </ul>
             </td>
             <td align="left"></td>
         </tr>
 
     </table>
 </form>
+
+
 

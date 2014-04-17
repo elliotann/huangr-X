@@ -22,9 +22,9 @@
 
 <script type="text/javascript">
     var listgrid;
-    function addUser(item)
+    function addRole(item)
     {
-        addOrUpdateDialog(item,'增加角色','role.do?add',600,800);
+        addOrUpdateDialog(item,'增加角色','role.do?add',400,600);
     }
     function modifyUser(item)
     {
@@ -101,7 +101,7 @@
                         { display: '描述', name: 'realname', minWidth: 140 }
                     ], url:'role.do?dataGrid&ajax=yes',  pageSize:30 ,rownumbers:true,
                     toolbar: { items: [
-                        { text: '增加', click: addUser, icon: 'add' },
+                        { text: '增加', click: addRole, icon: 'add' },
                         { line: true },
                         { text: '修改', click: modifyUser, icon: 'modify' },
                         { line: true },
