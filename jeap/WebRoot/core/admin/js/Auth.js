@@ -3,21 +3,24 @@ var AuthAction={
 	init:function(){
 		var self = this;
 		$("#new_action").click(function(){
+
 			self.newAction();
 		});
-		self.bindBoxEvent();
-        Jeap.Dialog.init({id:"actionDlg",title:"权限点"});
+
+
 	},
 	newAction:function(){
+        alert("here");
 		var self  = this;
-		$("#actionDlg").load('auth.do?add&ajax=yes',function(){
+        addOrUpdateDialog(null,'权限点','auth.do?add&ajax=yes',300,500);
+		/*$("#actionDlg").load('auth.do?add&ajax=yes',function(){
 			self.createTree();
 			$("ul.checktree").checkTree();
 			$("#authBtn").click(function(){
 				self.saveAuth();
 			});
 		});
-        Jeap.Dialog.open("actionDlg");
+        Jeap.Dialog.open("actionDlg");*/
 	},
 	/**
 	创建菜单树
@@ -39,12 +42,12 @@ var AuthAction={
 		var self = this;
 		$.each(menuAr,function(k,v){
 			var li = self.createNode(v);
-		
-			//如果有子则递归 
+
+			//如果有子则递归
 			var children =v.children;
 			if(children && children.length>0){
 				li.append(self.createChildren(children));
-			}	
+			}
 			ul.append(li);
 		});
 		return ul;
@@ -57,7 +60,7 @@ var AuthAction={
 		return li;
 	},
 	/**
-	保存权限 
+	保存权限
 	*/
 	saveAuth:function(){
 		var self= this;
@@ -65,13 +68,13 @@ var AuthAction={
 		if(authname == ''){
 			 alert("请输入权限名称");
 			 return ;
-		}		 
+		}
 		$.Loading.show('正在保存，请稍侯...');
 		var options = {
 				url :"auth.do?save&ajax=yes",
 				type : "POST",
 				dataType : 'json',
-				success : function(result) {				
+				success : function(result) {
 				 	if(result.success==true){
 				 		$.Loading.hide();
 				 		var isEdit  = $("#isEdit").val();
@@ -92,10 +95,10 @@ var AuthAction={
                     Jeap.Dialog.close("actionDlg");
  				}
  		};
-		$("#authForm").ajaxSubmit(options);	
-	} 
+		$("#authForm").ajaxSubmit(options);
+	}
 	,
-	
+
 	//绑定修改和删除事件
 	bindBoxEvent:function(){
 		var self=this;
@@ -106,7 +109,7 @@ var AuthAction={
 			self.deleteAuth($(this).attr("authid"));
 		});
 	},
-	
+
 	/**
 	 * 绑定对话框打开后各种事件
 	 */
@@ -125,7 +128,7 @@ var AuthAction={
 		$("ul.checktree").checkTree();
 		$("#authBtn").click(function(){
 			self.saveAuth();
-		});		
+		});
 	}
 	,
 	modifyAuth:function(authid){
@@ -136,20 +139,20 @@ var AuthAction={
         Jeap.Dialog.open("actionDlg");
 	},
 	deleteAuth:function(authid){
-		
+
 		if(!confirm("确认删除此权限吗?")){
 			return ;
 		}
-		
+
 		$.ajax( {
 			url :"auth.do?delete&ajax=yes",
 			data:'authid='+authid,
 			type : "POST",
 			dataType : 'json',
-			success : function(result) {				
+			success : function(result) {
 			 	if(result.success==true){
 			 		$.Loading.hide();
-			 		$("#li_"+result.attributes[].authid).remove();
+			 		/*$("#li_"+result.attributes[].authid).remove();*/
 			 	}else{
 			 		alert(result.msg);
 			 	}

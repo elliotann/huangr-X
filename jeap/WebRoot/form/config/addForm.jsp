@@ -77,7 +77,7 @@
 
         $("#navtab1").ligerTab();
         tab = $("#framecenter").ligerGetTabManager();
-
+        AuthAction.init();
     });
 
     function subForm(){
