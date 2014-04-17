@@ -31,7 +31,7 @@
                             return "<a target='_blank' href='${ctx }/core/admin/workflow.do?readResouce&processDefinitionId="+rowdata.defId+"&resourceType=xml'>"+value+"</a>";
                         }},
                         { display: '图片', name: 'diagramResourceName',render:function(rowdata,index,value){
-                            return "<a target='_blank' href='${ctx }/core/admin/workflow.do?readResouce&processDefinitionId="+rowdata.defId+"&resourceType=image'>"+value+"</a>";
+                            return "<a target='_blank' href='${ctx }/core/admin/workflow.do?readResouce&ajax=true&processDefinitionId="+rowdata.defId+"&resourceType=image'>"+value+"</a>";
                         }},
                         { display: '部署时间', name: 'deploymentTime',type:'date'},
                         { display: '是否挂起', name: 'suspended',width:50}
@@ -58,24 +58,29 @@
             showToggle: true,
             showMin: false,
             isResize: true,
-            slide: false
+            slide: false,
+            buttons:[ { text: '确定', onclick: btnOK }, { text: '取消', onclick: function (item, dialog) { dialog.close(); } } ]
         });
     }
     function addProcess(item){
         $.ligerDialog.open({
+            name:'openDia',
             height:600,
-            width: 800,
+            width: 900,
             title : '新增流程',
-            url: 'workflow.do?toDesigner',
+            url: 'workflow.do?toFlowDesigner',
             showMax: false,
             showToggle: true,
             showMin: false,
             isResize: true,
-            slide: false
+            slide: false,
+            buttons:[ { text: '确定', onclick: btnOK }, { text: '取消', onclick: function (item, dialog) { dialog.close(); } } ]
         });
     }
 
-
+    function btnOK(item,dialog){
+        openDia.submitForm();
+    }
     function delDeploy(item)
     {
         var row = listgrid.getSelectedRow();
