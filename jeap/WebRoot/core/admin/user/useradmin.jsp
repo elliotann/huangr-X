@@ -83,8 +83,13 @@
                     dataType:"json",
                     success: function(result){
                         if(result.success){
-                            $.ligerDialog.alert('删除成功!', '提示', type);
-                            grid.loadData();
+                            $.ligerDialog.waitting('正在保存中,请稍候...');
+                            setTimeout(function ()
+                            {
+                                $.ligerDialog.closeWaitting();
+                                grid.loadData();
+                            }, 1000);
+
                         }else{
                             $.ligerDialog.alert(result.msg, '提示', type);
 
