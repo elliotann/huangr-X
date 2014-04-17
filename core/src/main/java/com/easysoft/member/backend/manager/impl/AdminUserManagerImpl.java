@@ -12,7 +12,6 @@ import com.easysoft.member.backend.manager.IAdminUserManager;
 import com.easysoft.member.backend.manager.IPermissionManager;
 import com.easysoft.member.backend.manager.UserContext;
 import com.easysoft.member.backend.model.AdminUser;
-import com.easysoft.member.backend.model.Role;
 import org.activiti.engine.IdentityService;
 import org.activiti.engine.identity.User;
 import org.activiti.engine.identity.UserQuery;
@@ -46,7 +45,8 @@ public class AdminUserManagerImpl implements IAdminUserManager {
 		adminUser.setPassword( StringUtil.md5(adminUser.getPassword()) );
 		//添加管理员
         adminUserDao.save(adminUser);
-		
+        //增加审批用户
+        saveToApproUser(adminUser,true);
 		//给用户赋予角色
 		permissionManager.giveRolesToUser(adminUser.getUserid(), adminUser.getRoleids());
 		return adminUser.getUserid();
@@ -70,13 +70,14 @@ public class AdminUserManagerImpl implements IAdminUserManager {
                 User approveUser = identityService.newUser(adminUser.getUsername());
                 contructApprUser(adminUser,approveUser);
                 identityService.saveUser(approveUser);
+                addMemberShip(adminUser.getUsername(),adminUser.getRoleids());
             }
         }
     }
 
-    private void addMemberShip(String username,List<Role> roles){
-        for(Role role : roles){
-            identityService.createMembership(username,role.getRoleid()+"");
+    private void addMemberShip(String username,int[] roles){
+        for(int i=0;i<roles.length;i++){
+            identityService.createMembership(username,roles[i]+"");
         }
     }
 
