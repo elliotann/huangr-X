@@ -23,7 +23,15 @@
 <script type="text/javascript">
     var dialog = frameElement.dialog;
     $(function (){
-
+        $.validator.addMethod(
+                "notnull",
+                function (value, element, regexp)
+                {
+                    if (!value) return true;
+                    return !$(element).hasClass("l-text-field-null");
+                },
+                "不能为空"
+        );
         $.metadata.setType("attr", "validate");
         var v = $("form").validate({
             debug: true,
@@ -31,27 +39,38 @@
             {
                 if (element.hasClass("l-textarea"))
                 {
-                    element.ligerTip({ content: lable.html(), target: element[0] });
+                    element.addClass("l-textarea-invalid");
                 }
                 else if (element.hasClass("l-text-field"))
                 {
-                    element.parent().ligerTip({ content: lable.html(), target: element[0] });
+                    element.parent().addClass("l-text-invalid");
                 }
-                else
-                {
-                    lable.appendTo(element.parents("td:first").next("td"));
-                }
+                $(element).removeAttr("title").ligerHideTip();
+                $(element).attr("title", lable.html()).ligerTip();
             },
             success: function (lable)
             {
-                lable.ligerHideTip();
-                lable.remove();
+                var element = $("#" + lable.attr("for"));
+                if (element.hasClass("l-textarea"))
+                {
+                    element.removeClass("l-textarea-invalid");
+                }
+                else if (element.hasClass("l-text-field"))
+                {
+                    element.parent().removeClass("l-text-invalid");
+                }
+                $(element).removeAttr("title").ligerHideTip();
             },
             submitHandler: function ()
             {
                 $("form .l-text,.l-textarea").ligerHideTip();
+                var roleid = $("#roleid").val();
+                var url = "role.do?saveAdd";
+                if(roleid!=""){
+                    url = "role.do?saveEdit";
+                }
                 $("#objForm").ajaxSubmit({
-                    url :"userAdmin.do?addSave&ajax=true",
+                    url :url,
                     type : "POST",
                     dataType:"json",
                     success : function(result) {
@@ -86,51 +105,26 @@
     .l-table-edit-td{ padding:4px;}
     .l-button-submit,.l-button-test{width:80px; float:left; margin-left:10px; padding-bottom:2px;}
     .l-verify-tip{ left:230px; top:120px;}
-    #new_action{
-        cursor:pointer;
-        text-indent:-9999px;
-        display:block;
-    }
-    #actbox {width:300px}
-    #actbox li{
-        margin-top:5px;
-        background-color:#F4F9FF;
-    }
 </style>
 <form name="objForm" method="post"   id="objForm">
+    <input type="hidden" name="roleid" id="roleid" value="${role.roleid }" />
     <div>
     </div>
     <table cellpadding="0" cellspacing="0" class="l-table-edit" >
         <tr>
             <td align="right" class="l-table-edit-td">角色名称:</td>
             <td align="left" class="l-table-edit-td">
-                <input name="rolename" type="text" id="rolename" ltype="text" />
+                <input name="rolename" type="text" id="rolename" ltype="text" validate="{required:true,minlength:3,maxlength:10,notnull:true}" nullText="不能为空!" value="${role.rolename}"/>
             </td>
             <td align="left"></td>
         </tr>
         <tr>
             <td align="right" class="l-table-edit-td">描述：</td>
             <td align="left" class="l-table-edit-td">
-                <textarea name="rolememo" cols="100" rows="4" class="l-textarea" id="rolememo" style="width:400px"></textarea>
+                <textarea name="rolememo" cols="100" rows="4" class="l-textarea" id="rolememo" style="width:400px">${role.rolememo}</textarea>
             </td>
             <td align="left"></td>
         </tr>
-        <tr>
-            <td align="right" class="l-table-edit-td">选择权限：</td>
-            <td align="left" class="l-table-edit-td">
-                <div id="actbox">
-                <div id="opbar"><span id="new_action" class="add">新增</span></div>
-                <ul>
-                    <c:forEach items="${authList}" var="act">
-                        <li id="li_${act.actid }"><input type="checkbox" name="acts" value="${act.actid }" /><span>${act.name }</span>
-                            <img class="modify" src="images/transparent.gif" authid="${act.actid }">&nbsp; <img authid="${act.actid }" class="delete" src="images/transparent.gif" >
 
-                        </li>
-                    </c:forEach>
-                </ul>
-                    </div>
-            </td>
-            <td align="left"></td>
-        </tr>
     </table>
 </form>
