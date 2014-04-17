@@ -2,6 +2,9 @@ package com.easysoft.member.backend.manager.impl;
 
 import java.util.List;
 
+import org.activiti.engine.IdentityService;
+import org.activiti.engine.identity.Group;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +22,8 @@ import com.easysoft.member.backend.model.Role;
  */
 @Service("roleManager")
 public class RoleManager extends BaseSupport<Role> implements IRoleManager {
-
+    @Autowired
+    private IdentityService identityService;
 	/**
 	 * 添加一个角色
 	 * @param role 角色实体
@@ -44,6 +48,20 @@ public class RoleManager extends BaseSupport<Role> implements IRoleManager {
 		}
 		
 	}
+
+    /**
+     * 同步所有角色数据到{@link Group}
+    */
+    private void synRoleToActiviti(Role role,boolean  synRoleToApprove) {
+        if(synRoleToApprove){
+            String groupId = role.getRoleid()+"";
+            Group group = identityService.newGroup(groupId);
+            group.setName(role.getRolename());
+            group.setType(role.getType());
+            identityService.saveGroup(group);
+        }
+
+    }
 
 	/**
 	 * 删除某角色

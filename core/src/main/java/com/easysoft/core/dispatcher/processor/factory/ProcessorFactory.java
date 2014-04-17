@@ -97,7 +97,7 @@ public abstract class ProcessorFactory {
 
     private static boolean isExinclude(String uri)
     {
-        String[] exts = { "jpg", "gif", "js", "png", "css", "doc", "xls", "swf","json" };
+        String[] exts = { "jpg", "gif", "js", "png", "css", "doc", "xls", "swf","json","txt" };
         for (String ext : exts) {
             if (uri.toUpperCase().endsWith(ext.toUpperCase())) {
                 return true;
