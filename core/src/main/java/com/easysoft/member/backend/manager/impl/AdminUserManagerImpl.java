@@ -1,14 +1,5 @@
 package com.easysoft.member.backend.manager.impl;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.easysoft.core.context.EsfContext;
 import com.easysoft.core.model.MultiSite;
 import com.easysoft.core.model.Site;
@@ -21,6 +12,18 @@ import com.easysoft.member.backend.manager.IAdminUserManager;
 import com.easysoft.member.backend.manager.IPermissionManager;
 import com.easysoft.member.backend.manager.UserContext;
 import com.easysoft.member.backend.model.AdminUser;
+import com.easysoft.member.backend.model.Role;
+import org.activiti.engine.IdentityService;
+import org.activiti.engine.identity.User;
+import org.activiti.engine.identity.UserQuery;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 管理员管理实现
@@ -32,6 +35,8 @@ public class AdminUserManagerImpl implements IAdminUserManager {
     private IAdminUserDao adminUserDao;
     @Autowired
 	private IPermissionManager permissionManager;
+
+    private IdentityService identityService;
 	
 	public void clean() {
         adminUserDao.executeSQL("truncate table es_adminuser");
@@ -46,6 +51,44 @@ public class AdminUserManagerImpl implements IAdminUserManager {
 		permissionManager.giveRolesToUser(adminUser.getUserid(), adminUser.getRoleids());
 		return adminUser.getUserid();
 	}
+
+    /**
+     * 更新审批用户
+     * @param adminUser
+     * @param toApprove
+     */
+    private void saveToApproUser(AdminUser adminUser,boolean toApprove){
+        if(toApprove){
+            UserQuery userQuery = identityService.createUserQuery();
+            List<User> approveUserList = userQuery.userId(adminUser.getUsername()).list();
+            if(approveUserList.size()>1){
+                throw new RuntimeException("发现重复用户!");
+            }else if(approveUserList.size()==1){
+                //更新操作
+            }else{
+                //新增操作
+                User approveUser = identityService.newUser(adminUser.getUsername());
+                contructApprUser(adminUser,approveUser);
+                identityService.saveUser(approveUser);
+            }
+        }
+    }
+
+    private void addMemberShip(String username,List<Role> roles){
+        for(Role role : roles){
+            identityService.createMembership(username,role.getRoleid()+"");
+        }
+    }
+
+    /**
+     * 构建审批用户
+     * @return
+     */
+    private void contructApprUser(AdminUser adminUser,User approveUser){
+        approveUser.setId(adminUser.getUsername());
+        approveUser.setPassword(adminUser.getPassword());
+        approveUser.setFirstName(adminUser.getRealname());
+    }
 
 
 	/**
@@ -199,8 +242,12 @@ public class AdminUserManagerImpl implements IAdminUserManager {
 	public void setPermissionManager(IPermissionManager permissionManager) {
 		this.permissionManager = permissionManager;
 	}
-	
 
-
-
+    public void setAdminUserDao(IAdminUserDao adminUserDao) {
+        this.adminUserDao = adminUserDao;
+    }
+    @Autowired
+    public void setIdentityService(IdentityService identityService) {
+        this.identityService = identityService;
+    }
 }
