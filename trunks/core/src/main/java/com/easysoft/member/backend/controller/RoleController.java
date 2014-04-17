@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.easysoft.core.common.vo.json.DataGridReturn;
+import com.easysoft.framework.utils.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,11 +19,8 @@ import com.easysoft.member.backend.manager.IRoleManager;
 import com.easysoft.member.backend.model.Role;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Administrator
+ * User: andy
  * Date: 14-2-21
- * Time: 下午9:13
- * To change this template use File | Settings | File Templates.
  */
 @Controller
 @RequestMapping({"/core/admin/role"})
@@ -38,13 +37,22 @@ public class RoleController extends BaseController {
         map.put("roleList",roleList);
         return new ModelAndView("core/admin/auth/rolelist",map);
     }
+    @RequestMapping(params = {"dataGrid"})
+    public ModelAndView dataGrid(){
+        List roleList = roleManager.list();
+        DataGridReturn dataGridReturn = new DataGridReturn(roleList.size(),roleList);
+        String json = JsonUtils.beanToJson(dataGridReturn);
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("json",json);
+        return new ModelAndView("admin/json_message",map);
+    }
     @RequestMapping(params = {"add"})
     public ModelAndView add(){
         List authList = authActionManager.list();
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("authList",authList);
         map.put("isEdit",0);
-        return new ModelAndView("core/admin/auth/roleinput",map);
+        return new ModelAndView("core/admin/auth/addrole",map);
     }
 
     //保存修改
@@ -54,8 +62,6 @@ public class RoleController extends BaseController {
         AjaxJson result = new AjaxJson();
         this.roleManager.edit(role, acts);
         result.setMsg("角色修改成功");
-       /* this.msgs.add("角色修改成功");
-        this.urls.put("角色列表", "role!list.do");*/
         return result;
     }
 
