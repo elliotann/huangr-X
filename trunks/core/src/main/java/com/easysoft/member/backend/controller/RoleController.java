@@ -72,8 +72,6 @@ public class RoleController extends BaseController {
         AjaxJson result = new AjaxJson();
         this.roleManager.add(role, acts);
         result.setMsg("角色添加成功");
-
-
         return result;
     }
 }
