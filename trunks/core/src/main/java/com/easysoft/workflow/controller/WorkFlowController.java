@@ -51,7 +51,7 @@ import java.util.zip.ZipInputStream;
  */
 @Controller
 @RequestMapping(value = "/core/admin/workflow")
-public class ActivitiController {
+public class WorkFlowController {
 
     protected Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -292,6 +292,7 @@ public class ActivitiController {
      * @throws Exception
      */
     @RequestMapping(params = {"readResouce"})
+    @ResponseBody
     public void loadByDeployment(String processDefinitionId, String resourceType,
                                  HttpServletResponse response) throws Exception {
         ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery().processDefinitionId(processDefinitionId).singleResult();
@@ -307,5 +308,14 @@ public class ActivitiController {
         while ((len = resourceAsStream.read(b, 0, 1024)) != -1) {
             response.getOutputStream().write(b, 0, len);
         }
+    }
+
+    /**
+     * 到设计界面
+     * @return
+     */
+    @RequestMapping(params = {"toFlowDesigner"})
+    public ModelAndView toFlowDesigner(){
+        return new ModelAndView("workflow/designer/designer");
     }
 }
