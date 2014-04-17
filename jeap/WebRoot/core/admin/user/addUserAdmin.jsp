@@ -161,15 +161,7 @@
             </td>
             <td align="left"></td>
         </tr>
-        <tr>
-            <td align="right" class="l-table-edit-td">确认密码:</td>
-            <td align="left" class="l-table-edit-td">
-                <input name="repassword" type="password" id="repassword" ltype="text" validate="{required:true,minlength:1,maxlength:18,equalTo:'#password'}" />
-            </td>
-            <td align="left"></td>
-        </tr>
-
-        <tr>
+         <tr>
             <td align="right" class="l-table-edit-td" valign="top">类型:</td>
             <td align="left" class="l-table-edit-td">
                 <input id="notSuperChk" type="radio" name="founder" value="0" checked="checked" /><label for="notSuperChk">普通管理员</label>
