@@ -35,6 +35,25 @@
         $.metadata.setType("attr", "validate");
         var v = $("form").validate({
             debug: true,
+            rules:{
+                rolename:{
+                    required:true,
+                    minlength:3,
+                    maxlength:10,
+                    notnull:true,
+                    remote:{
+                        url:'role.do?checkNameExist&ajax=true',
+                        type:'post',
+                        dataType:'json',
+                        data:{
+                            rolename:function(){return $("#rolename").val();},
+                            roleid:function(){return $("#roleid").val();}
+                        }
+
+                    }
+                }
+            },
+
             errorPlacement: function (lable, element)
             {
                 if (element.hasClass("l-textarea"))
@@ -66,17 +85,24 @@
                 $("form .l-text,.l-textarea").ligerHideTip();
                 var roleid = $("#roleid").val();
                 var url = "role.do?saveAdd";
-                if(roleid!=""){
+                if(roleid!=0){
                     url = "role.do?saveEdit";
                 }
+                alert(url);
                 $("#objForm").ajaxSubmit({
                     url :url,
                     type : "POST",
                     dataType:"json",
                     success : function(result) {
                         if(result.success){
-                            alert("增加成功!");
-                            window.parent.grid.loadData();
+                            $.ligerDialog.waitting('增加成功');
+                            setTimeout(function ()
+                            {
+                                $.ligerDialog.closeWaitting();
+                                grid.loadData();
+                            }, 1000);
+
+                            window.parent.listgrid.loadData();
                             dialog.close();
                         }else{
                             alert(result.msg)
@@ -87,6 +113,12 @@
                     }
                 });
 
+            },
+            messages:{
+                rolename:{
+                    required:"Please enter your username",
+                    remote:"角色名已经存在!"
+                }
             }
         });
         $("form").ligerForm();
@@ -107,14 +139,15 @@
     .l-verify-tip{ left:230px; top:120px;}
 </style>
 <form name="objForm" method="post"   id="objForm">
-    <input type="hidden" name="roleid" id="roleid" value="${role.roleid }" />
+    <input type="hidden" name="roleid" id="roleid" value="${role.roleid==null?0:role.roleid }" />
+    <input type="hidden" name="ajax"  value="true" />
     <div>
     </div>
     <table cellpadding="0" cellspacing="0" class="l-table-edit" >
         <tr>
             <td align="right" class="l-table-edit-td">角色名称:</td>
             <td align="left" class="l-table-edit-td">
-                <input name="rolename" type="text" id="rolename" ltype="text" validate="{required:true,minlength:3,maxlength:10,notnull:true}" nullText="不能为空!" value="${role.rolename}"/>
+                <input name="rolename" type="text" id="rolename" ltype="text" nullText="不能为空!" value="${role.rolename}"/>
             </td>
             <td align="left"></td>
         </tr>

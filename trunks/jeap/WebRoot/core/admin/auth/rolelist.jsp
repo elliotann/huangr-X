@@ -29,65 +29,23 @@
     function modifyUser(item)
     {
 
-        var row = grid.getSelectedRow();
+        var row = listgrid.getSelectedRow();
         if(row==null){
             $.ligerDialog.error('请选择数据修改!');
             return;
         }
-        $.ligerDialog.open({
-            height:600,
-            width: 800,
-            title : '修改管理员',
-            url: 'userAdmin.do?edit&id='+row.userid,
-            showMax: false,
-            showToggle: true,
-            showMin: false,
-            isResize: true,
-            slide: false,
-            data: {
-                name: $("#txtValue").val()
-            },
-            //自定义参数
-            myDataName: $("#txtValue").val()
-        });
+        addOrUpdateDialog(item,'修改角色','role.do?edit&roleid='+row.roleid,400,600);
+
 
     }
     function delUser(item)
     {
-        var row = grid.getSelectedRow();
+        var row = listgrid.getSelectedRow();
         if(row==null){
             $.ligerDialog.error('请选择数据删除!');
             return;
         }
-        $.ligerDialog.confirm('确定删除？', function (yes) {
-            if(yes){
-                $.ajax({
-                    type: "GET",
-                    url: "userAdmin.do?delete&id="+row.userid,
-                    data:"ajax=true&rmd="+ new Date().getTime(),
-                    dataType:"json",
-                    success: function(result){
-                        if(result.success){
-                            $.ligerDialog.waitting('正在保存中,请稍候...');
-                            setTimeout(function ()
-                            {
-                                $.ligerDialog.closeWaitting();
-                                grid.loadData();
-                            }, 1000);
-
-                        }else{
-                            $.ligerDialog.alert(result.msg, '提示', type);
-
-                        }
-                    },error:function(e){
-                        $.ligerDialog.alert('出错了!', '提示', type)
-
-                    }
-                });
-            }
-        });
-
-
+        delObj(item,'role.do?delete&id=',row.roleid);
 
     }
     $(function ()
@@ -96,9 +54,9 @@
                 $("#maingrid").ligerGrid({
                     height:'99%',
                     columns: [
-                        { display: 'id', name: 'userid', align: 'left', width: 100, minWidth: 60 },
-                        { display: '角色名称', name: 'username', minWidth: 120 },
-                        { display: '描述', name: 'realname', minWidth: 140 }
+                        { display: 'id', name: 'roleid', align: 'left', width: 100, minWidth: 60 },
+                        { display: '角色名称', name: 'rolename', minWidth: 120 },
+                        { display: '描述', name: 'rolememo', minWidth: 140 }
                     ], url:'role.do?dataGrid&ajax=yes',  pageSize:30 ,rownumbers:true,
                     toolbar: { items: [
                         { text: '增加', click: addRole, icon: 'add' },
