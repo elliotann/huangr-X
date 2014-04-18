@@ -1,7 +1,10 @@
 package com.easysoft.member.backend.manager.impl;
 
-import java.util.List;
-
+import com.easysoft.core.common.service.impl.GenericService;
+import com.easysoft.framework.utils.StringUtil;
+import com.easysoft.member.backend.manager.IRoleManager;
+import com.easysoft.member.backend.model.AuthAction;
+import com.easysoft.member.backend.model.Role;
 import org.activiti.engine.IdentityService;
 import org.activiti.engine.identity.Group;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.easysoft.core.common.dao.spring.BaseSupport;
-import com.easysoft.framework.utils.StringUtil;
-import com.easysoft.member.backend.manager.IRoleManager;
-import com.easysoft.member.backend.model.AuthAction;
-import com.easysoft.member.backend.model.Role;
+import java.util.List;
 
 /**
  * 角色管理
@@ -21,7 +20,7 @@ import com.easysoft.member.backend.model.Role;
  * @since : 1.0
  */
 @Service("roleManager")
-public class RoleManager extends BaseSupport<Role> implements IRoleManager {
+public class RoleManager extends GenericService<Role> implements IRoleManager {
     @Autowired
     private IdentityService identityService;
 	/**
@@ -33,18 +32,15 @@ public class RoleManager extends BaseSupport<Role> implements IRoleManager {
 	public void add(Role role, int[] authids) {
 		
 		//添加角色并
-		this.baseDaoSupport.insert("role", role);
-		
+        this.save(role);
+        //添加到审批用户组中
+        synRoleToActiviti(role,true);
 		//不赋予权限则直接返回
 		if(authids==null) return ;
-		
-		//获取角色id
-		int roleid =  this.baseDaoSupport.getLastId("role");
-		
-		
+
 		//为这个角色 赋予权限点，写入角色权限对照表
 		for(int authid:authids){
-			this.baseDaoSupport.execute("insert into role_auth(roleid,authid)values(?,?)", roleid,authid);
+            this.executeSql("insert into role_auth(roleid,authid)values(?,?)", role.getRoleid(),authid);
 		}
 		
 	}
@@ -57,7 +53,7 @@ public class RoleManager extends BaseSupport<Role> implements IRoleManager {
             String groupId = role.getRoleid()+"";
             Group group = identityService.newGroup(groupId);
             group.setName(role.getRolename());
-            group.setType(role.getType());
+           // group.setType(role.getType());
             identityService.saveGroup(group);
         }
 
@@ -71,13 +67,15 @@ public class RoleManager extends BaseSupport<Role> implements IRoleManager {
 	public void delete(int roleid) {
 		
 		//删除用户角色
-		this.baseDaoSupport.execute("delete from user_role where roleid=?", roleid);
-		
+        this.executeSql("delete from t_user_role where roleid=?", roleid);
+
 		//删除角色权限
-		this.baseDaoSupport.execute("delete from role_auth where roleid =?", roleid);
+        this.executeSql("delete from t_role_auth where roleid =?", roleid);
 		
-		//删除角色 
-		this.baseDaoSupport.execute("delete from role where roleid =?", roleid);
+		//删除角色
+        this.executeSql("delete from t_role where roleid =?", roleid);
+        //删除审批角色
+        identityService.deleteGroup(roleid+"");
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED)
@@ -87,14 +85,14 @@ public class RoleManager extends BaseSupport<Role> implements IRoleManager {
 		if(StringUtil.isEmpty( role.getRolename())) throw new IllegalArgumentException("编辑角色时名称不可为空");
 		
 		//清除角色的权限
-		this.baseDaoSupport.execute("delete from role_auth where roleid=?", role.getRoleid());
+        this.executeSql("delete from t_role_auth where roleid=?", role.getRoleid());
 
 		//为这个角色 赋予权限点，写入角色权限对照表
 		for(int authid:authids){
-			this.baseDaoSupport.execute("insert into role_auth(roleid,authid)values(?,?)", role.getRoleid(),authid);
+            this.executeSql("insert into t_role_auth(roleid,authid)values(?,?)", role.getRoleid(),authid);
 		}		
 		//更新角色基本信息
-		this.baseDaoSupport.update("role", role, "roleid="+role.getRoleid());
+        this.updateEntitie(role);
 	}
 
 	/**
@@ -114,9 +112,9 @@ public class RoleManager extends BaseSupport<Role> implements IRoleManager {
 	 * @return 权限id存于role.actids数组中
 	 */
 	public Role get(int roleid){
-		String sql ="select * from "+ this.getTableName("auth_action") +" where actid in(select authid from "+this.getTableName("role_auth")+" where roleid =?)";
+		String sql ="select * from t_auth_action where actid in(select authid from t_role_auth where roleid =?)";
 		List  actlist = this.daoSupport.queryForList(sql,AuthAction.class, roleid);
-		Role role = this.baseDaoSupport.queryForObject("select * from role where roleid=?", Role.class, roleid);
+		Role role =  this.get(Role.class,roleid);
 		
 		if(actlist!=null){
 			int[] actids = new int[ actlist.size()];
@@ -128,4 +126,14 @@ public class RoleManager extends BaseSupport<Role> implements IRoleManager {
 		return  role;
 	}
 
+    @Override
+    public Role getRoleByName(String roleName,int roleid) {
+        String hql = "from Role r where r.rolename = '"+roleName+"'";
+        if(roleid!=0){
+            hql += " and roleid!="+roleid;
+        }
+        List<Role> roles = this.findByQueryString(hql);
+        if(roles.isEmpty()) return null;
+        return roles.get(0);
+    }
 }
