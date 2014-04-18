@@ -1,14 +1,15 @@
 package com.easysoft.member.backend.manager;
 
-import java.util.List;
-
+import com.easysoft.core.common.service.IGenericService;
 import com.easysoft.member.backend.model.Role;
+
+import java.util.List;
 
 /**
  * 角色管理接口
  * @author andy
  */
-public interface IRoleManager {
+public interface IRoleManager extends IGenericService<Role> {
 	
 	/**
 	 * 读取所有角色列表 
@@ -48,5 +49,12 @@ public interface IRoleManager {
 	 * @return 权限id存于role.actids数组中
 	 */
 	public Role get(int roleid);
+
+    /**
+     * 根据角色名称查询角色
+     * @param roleName
+     * @return
+     */
+    public Role getRoleByName(String roleName,int roleid);
 
 }

@@ -4,6 +4,7 @@ import com.easysoft.core.common.dao.hibernate.IGenericDAO;
 import com.easysoft.core.common.dao.hibernate.PageList;
 import com.easysoft.core.common.dao.hibernate.qbc.CriteriaQuery;
 import com.easysoft.core.common.dao.hibernate.qbc.HqlQuery;
+import com.easysoft.core.common.dao.spring.BaseSupport;
 import com.easysoft.core.common.service.IGenericService;
 import com.easysoft.core.common.vo.DataTableReturn;
 import com.easysoft.core.common.vo.json.DataGridReturn;
@@ -29,7 +30,7 @@ import java.util.Map;
  */
 @Service("genericService")
 @Transactional
-public class GenericService<T> implements IGenericService<T> {
+public class GenericService<T> extends BaseSupport<T> implements IGenericService<T> {
     private Class<T> entityClass;
 
     @Autowired
