@@ -72,11 +72,37 @@
         });
         $("form").ligerForm();
 
-        manager = $("#tree1").ligerGetTreeManager();
-        createTree();
-        $("#tree1").ligerTree({onAfterAppend:function(){collapseAll();} });
-    });
 
+
+        $("#tree1").ligerTree(
+                {
+                    data:[{"id":"1","pid":"0","children":[],"text":"综合","isexpand":"false"}],
+                    idFieldName :'id',
+                    parentIDFieldName :'pid',
+                    nodeWidth : 200,
+                    onBeforeExpand: onBeforeExpand,
+                    onExpand: onExpand,
+                    onSelect:onSelect
+                });
+
+        manager = $("#tree1").ligerGetTreeManager();
+
+    });
+    function onSelect(note)
+    {
+        alert('onSelect:' + note.data.id);
+    }
+    function onBeforeExpand(note)
+    {
+        if (note.data.children && note.data.children.length == 0)
+        {
+            //这里模拟一个加载节点的方法，append方法也用loadData(target,url)代替
+            manager.append(note.target, [{id:"2" , text: "111" }]);
+        }
+    }
+    function onExpand(note)
+    {
+    }
     function createTree(){
         $.each(menu.app,function(k,v){
             var li = createNode(v);
