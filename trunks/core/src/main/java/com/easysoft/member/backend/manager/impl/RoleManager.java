@@ -84,13 +84,13 @@ public class RoleManager extends GenericService<Role> implements IRoleManager {
 		if(role.getRoleid()==0) throw new IllegalArgumentException("编辑角色时id不可为空");
 		if(StringUtil.isEmpty( role.getRolename())) throw new IllegalArgumentException("编辑角色时名称不可为空");
 		
-		//清除角色的权限
+		/*//清除角色的权限
         this.executeSql("delete from t_role_auth where roleid=?", role.getRoleid());
 
 		//为这个角色 赋予权限点，写入角色权限对照表
 		for(int authid:authids){
             this.executeSql("insert into t_role_auth(roleid,authid)values(?,?)", role.getRoleid(),authid);
-		}		
+		}		*/
 		//更新角色基本信息
         this.updateEntitie(role);
 	}
