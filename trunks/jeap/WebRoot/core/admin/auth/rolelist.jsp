@@ -63,7 +63,9 @@
                         { line: true },
                         { text: '修改', click: modifyUser, icon: 'modify' },
                         { line: true },
-                        { text: '删除', click: delUser, img: '${context }/js/ligerui/skins/icons/delete.gif' }
+                        { text: '删除', click: delUser, img: '${context }/js/ligerui/skins/icons/delete.gif' },
+                        { line: true },
+                        { text: '设置权限', click: setAuth, icon: 'modify' }
                     ]
                     }
                 });
@@ -72,10 +74,10 @@
         $("#pageloading").hide();
     });
 
-    function deleteRow()
-    {
-        g.deleteSelectedRow();
+    function setAuth(item){
+        addOrUpdateDialog(null,'权限点','auth.do?add&ajax=yes',300,500);
     }
+
 
 </script>
 
