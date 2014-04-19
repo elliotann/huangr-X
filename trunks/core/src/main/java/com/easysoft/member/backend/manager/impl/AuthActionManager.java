@@ -54,7 +54,7 @@ public class AuthActionManager extends BaseSupport<AuthAction> implements IAuthA
 /*  81 */     if (menuidAr == null) return;
 /*  82 */     AuthAction authAction = get(actid);
 /*  83 */     String menuStr = authAction.getObjvalue();
-/*  84 */     if (StringUtil.isEmpty(menuStr)) {
+/*  84 */     if (StringUtils.isEmpty(menuStr)) {
 /*  85 */       return;
 /*     */     }
 /*     */
