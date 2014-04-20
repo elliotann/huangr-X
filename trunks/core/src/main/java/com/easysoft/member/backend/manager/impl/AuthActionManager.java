@@ -1,24 +1,23 @@
 package com.easysoft.member.backend.manager.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.easysoft.core.common.service.impl.GenericService;
+import com.easysoft.framework.utils.StringUtil;
+import com.easysoft.member.backend.manager.IAuthActionManager;
+import com.easysoft.member.backend.model.AuthAction;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.easysoft.core.common.dao.spring.BaseSupport;
-import com.easysoft.framework.utils.StringUtil;
-import com.easysoft.member.backend.manager.IAuthActionManager;
-import com.easysoft.member.backend.model.AuthAction;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 权限点管理
  * @author andy
  */
 @Service("authActionManager")
-public class AuthActionManager extends BaseSupport<AuthAction> implements IAuthActionManager {
+public class AuthActionManager extends GenericService<AuthAction> implements IAuthActionManager {
 
 	@Transactional(propagation = Propagation.REQUIRED)
 	public int add(AuthAction act) {
@@ -26,7 +25,15 @@ public class AuthActionManager extends BaseSupport<AuthAction> implements IAuthA
 		return this.baseDaoSupport.getLastId("auth_action");
 	}
 
-	@Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public int add(AuthAction auth, int roleId) {
+        int actId = add(auth);
+        //增加角色权限关系表
+        this.executeSql("insert into t_role_auth(roleid,authid)values(?,?)",roleId,actId);
+        return actId;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
 	public void delete(int actid) {
 		//删除角色权限表中对应的数据
 		this.baseDaoSupport.execute("delete from role_auth where authid=?", actid);
