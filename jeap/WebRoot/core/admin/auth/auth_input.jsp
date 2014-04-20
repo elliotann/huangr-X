@@ -21,126 +21,59 @@
 <script type="text/javascript" src="/jeap/admin/menu.do"></script>
 <script type="text/javascript">
     var dialog1 = frameElement.dialog;
-    var manager = null;
+    var manager;
     $(function (){
 
-        $.metadata.setType("attr", "validate");
-        var v = $("form").validate({
-            debug: true,
-            errorPlacement: function (lable, element)
-            {
-                if (element.hasClass("l-textarea"))
-                {
-                    element.ligerTip({ content: lable.html(), target: element[0] });
-                }
-                else if (element.hasClass("l-text-field"))
-                {
-                    element.parent().ligerTip({ content: lable.html(), target: element[0] });
-                }
-                else
-                {
-                    lable.appendTo(element.parents("td:first").next("td"));
-                }
-            },
-            success: function (lable)
-            {
-                lable.ligerHideTip();
-                lable.remove();
-            },
-            submitHandler: function ()
-            {
-                $("form .l-text,.l-textarea").ligerHideTip();
-                $("#objForm").ajaxSubmit({
-                    url :"userAdmin.do?addSave&ajax=true",
-                    type : "POST",
-                    dataType:"json",
-                    success : function(result) {
-                        if(result.success){
-                            alert("增加成功!");
-                            window.parent.grid.loadData();
-                            dialog.close();
-                        }else{
-                            alert(result.msg)
-                        }
-                    },
-                    error : function(e) {
-                        alert("出错啦:(");
-                    }
-                });
-
-            }
-        });
         $("form").ligerForm();
 
 
 
         $("#tree1").ligerTree(
                 {
-                    data:[{"id":"1","pid":"0","children":[],"text":"综合","isexpand":"false"}],
+                    data:menu.app,
                     idFieldName :'id',
                     parentIDFieldName :'pid',
-                    nodeWidth : 200,
-                    onBeforeExpand: onBeforeExpand,
-                    onExpand: onExpand,
-                    onSelect:onSelect
+                    nodeWidth : 200
                 });
 
         manager = $("#tree1").ligerGetTreeManager();
+        manager.collapseAll();
+
 
     });
-    function onSelect(note)
-    {
-        alert('onSelect:' + note.data.id);
-    }
-    function onBeforeExpand(note)
-    {
-        if (note.data.children && note.data.children.length == 0)
-        {
-            //这里模拟一个加载节点的方法，append方法也用loadData(target,url)代替
-            manager.append(note.target, [{id:"2" , text: "111" }]);
-        }
-    }
-    function onExpand(note)
-    {
-    }
-    function createTree(){
-        $.each(menu.app,function(k,v){
-            var li = createNode(v);
-            var ul = createChildren(v.children);
-            li.append(ul);
 
-            $("#tree1").append(li);
-        });
 
-    }
+
+
 
     function submitForm(){
-        $("#objForm").submit();
-    }
+        var notes = manager.getChecked();
+        var ids = new Array();
+        for (var i = 0; i < notes.length; i++)
+        {
+            ids.push(notes[i].data.id);
 
-    /**
-     根据menu json创建菜单节点
-     */
-    function createNode(v){
-        var li = $("<li><span>"+v.text+"</span></li>");
-        return li;
-    }
-
-    function createChildren(menuAr){
-        var ul=$("<ul></ul>");
-        var self = this;
-        $.each(menuAr,function(k,v){
-            var li = self.createNode(v);
-
-            //如果有子则递归
-            var children =v.children;
-            if(children && children.length>0){
-                li.append(self.createChildren(children));
+        }
+        $.ajax({
+            url:'auth.do?save',
+            type:'post',
+            dataType:'json',
+            data: {
+                menuids:ids,
+                roleId: $("#roleId").val(),
+                edit:0,
+                ajax:'true'
+            },
+            success:function(data){
+                if(data.success){
+                    dialog1.close();
+                }
             }
-            ul.append(li);
         });
-        return ul;
+
     }
+
+
 
 </script>
 <style type="text/css">
@@ -154,6 +87,7 @@
 
 <form name="objForm" method="post"   id="objForm">
     <input type="hidden" name="isEdit" id="isEdit" value="${isEdit }" />
+    <input type="hidden" name="roleId" value="${roleId}" id="roleId" />
     <input type="hidden" name="authid" value="${auth.actid}" />
     <input type="hidden" id="objvalue" value="${auth.objvalue }" />
     <div>
