@@ -2,6 +2,7 @@ package com.easysoft.member.backend.manager;
 
 import java.util.List;
 
+import com.easysoft.core.common.service.IGenericService;
 import com.easysoft.member.backend.model.AuthAction;
 import com.easysoft.member.backend.model.Role;
 
@@ -11,7 +12,7 @@ import com.easysoft.member.backend.model.Role;
  * @author andy
  * @since : 1.0
  */
-public interface IPermissionManager {
+public interface IPermissionManager extends IGenericService {
 
     public boolean checkHaveAuth(int actid);
 	
@@ -49,5 +50,7 @@ public interface IPermissionManager {
 	 * @param userid 要删除角色的用户
 	 */
 	public void cleanUserRoles(int userid);
+
+    public List<AuthAction> getAuthActionsByRoleId(int roleId);
 	
 }

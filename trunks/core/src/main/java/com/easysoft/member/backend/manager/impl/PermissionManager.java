@@ -1,7 +1,12 @@
 package com.easysoft.member.backend.manager.impl;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
+import com.easysoft.core.common.service.IGenericService;
+import com.easysoft.core.common.service.impl.GenericService;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 import com.easysoft.core.common.dao.spring.BaseSupport;
@@ -18,7 +23,7 @@ import com.easysoft.member.backend.model.Role;
  * @since : 1.0
  */
 @Service("permissionManager")
-public class PermissionManager extends BaseSupport implements IPermissionManager {
+public class PermissionManager extends GenericService implements IPermissionManager {
     public boolean checkHaveAuth(int actid) {
         WebSessionContext sessonContext = ThreadContextHolder.getSessionContext();
 
@@ -85,4 +90,20 @@ public class PermissionManager extends BaseSupport implements IPermissionManager
 		this.baseDaoSupport.execute("delete from user_role where userid=?", userid);
 	}
 
+    @Override
+    public List<AuthAction> getAuthActionsByRoleId(int roleId) {
+
+        return this.baseDaoSupport.queryForList("select * from t_auth_action where actid in(select authid from t_role_auth where roleid=?)",new RowMapper(){
+
+            @Override
+            public Object mapRow(ResultSet rs, int i) throws SQLException {
+                AuthAction authAction = new AuthAction();
+                authAction.setActid(rs.getInt("actid"));
+                authAction.setName(rs.getString("name"));
+                authAction.setType(rs.getString("type"));
+                authAction.setObjvalue(rs.getString("objvalue"));
+                return authAction;
+            }
+        },roleId);
+    }
 }

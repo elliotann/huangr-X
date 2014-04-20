@@ -108,17 +108,17 @@ public class MenuManagerImpl extends BaseSupport<Menu> implements IMenuManager {
 		sql ="delete from menu where id=?";
 		this.baseDaoSupport.execute(sql, id);
 	}
-    public Menu get(String title) {
-/*  79 */     String sql = "select * from menu where title=?";
-/*  80 */     List menuList = this.baseDaoSupport.queryForList(sql, Menu.class, new Object[] { title });
-/*     */
-/*  82 */     if (menuList.isEmpty()) return null;
-/*  83 */     return (Menu)menuList.get(0);
-/*     */   }
 
-    public void delete(String title)
-/*     */   {
-/* 120 */     String sql = "delete from menu where title=?";
-/* 121 */     this.baseDaoSupport.execute(sql, new Object[] { title });
-/*     */   }
+    public Menu get(String title) {
+        String sql = "select * from menu where title=?";
+        List menuList = this.baseDaoSupport.queryForList(sql, Menu.class, new Object[]{title});
+
+        if (menuList.isEmpty()) return null;
+        return (Menu) menuList.get(0);
+    }
+
+    public void delete(String title) {
+        String sql = "delete from menu where title=?";
+        this.baseDaoSupport.execute(sql, new Object[]{title});
+    }
 }
