@@ -33,6 +33,8 @@ public interface IAuthActionManager {
 	 * @return 返回添加的权限点id
 	 */
 	public int add(AuthAction act);
+
+    public int add(AuthAction auth,int roleId);
 	
 	
 	

@@ -1,19 +1,18 @@
 package com.easysoft.member.backend.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.easysoft.core.common.controller.BaseController;
 import com.easysoft.core.common.vo.json.AjaxJson;
 import com.easysoft.framework.utils.StringUtil;
 import com.easysoft.member.backend.manager.IAuthActionManager;
-import com.easysoft.member.backend.vo.AuthVO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -28,33 +27,35 @@ public class AuthController extends BaseController {
     @Autowired
     private IAuthActionManager authActionManager;
     @RequestMapping(params = {"add"})
-    public ModelAndView add(){
+    public ModelAndView add(int roleId){
         Map<String,Object> map = new HashMap<String,Object>();
         map.put("isEdit",0);
+        map.put("roleId",roleId);
         return new ModelAndView("core/admin/auth/auth_input",map);
     }
     @RequestMapping(params = {"save"})
     @ResponseBody
-    public AjaxJson save(AuthVO authVO){
+    public AjaxJson save(@RequestParam(value = "menuids[]")Integer[] menuids,int roleId,int edit){
         AjaxJson result = new AjaxJson();
 
-        if(authVO.getEdit()==0){
-            return this.saveAdd(authVO.getName(),authVO.getMenuids());
+        if(edit==0){
+            return this.saveAdd("权限点",menuids,roleId);
         }else {
-            return this.saveEdit(authVO.getName(),authVO.getMenuids(),authVO.getAuthIdInt());
+            return this.saveEdit("权限点",menuids,0);
         }
 
     }
     @RequestMapping(params = {"saveAdd"})
     @ResponseBody
-    public AjaxJson saveAdd(String name,Integer[] menuids){
+    public AjaxJson saveAdd(String name,Integer[] menuids,int roleId){
         AjaxJson result = new AjaxJson();
         try{
             com.easysoft.member.backend.model.AuthAction act = new com.easysoft.member.backend.model.AuthAction();
+
             act.setName(name);
             act.setType("menu");
             act.setObjvalue(StringUtil.arrayToString(menuids, ","));
-            int authid = this.authActionManager.add(act);
+            int authid = this.authActionManager.add(act,roleId);
             result.addAttribute("authid",authid);
 
         }catch(RuntimeException e){
