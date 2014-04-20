@@ -18,7 +18,7 @@
 <script type="text/javascript" src="${staticserver }/js/admin/jeap.js"></script>
 <script src="/jeap/admin/js/common/crud.js" type="text/javascript"></script>
 <script src="${context }/js/ligerui/js/plugins/ligerTree.js" type="text/javascript"></script>
-<script type="text/javascript" src="/jeap/admin/menu.do"></script>
+<script type="text/javascript" src="/jeap/admin/menu.do?roleId=${roleId}"></script>
 <script type="text/javascript">
     var dialog1 = frameElement.dialog;
     var manager;
