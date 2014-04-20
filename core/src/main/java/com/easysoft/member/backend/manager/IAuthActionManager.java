@@ -17,9 +17,6 @@ public interface IAuthActionManager {
 	 * @return
 	 */
 	public AuthAction get(int autid);
-	
-	
-	
 	/**
 	 * 读取所有权限点
 	 * @return
@@ -35,9 +32,6 @@ public interface IAuthActionManager {
 	public int add(AuthAction act);
 
     public int add(AuthAction auth,int roleId);
-	
-	
-	
 	/**
 	 * 修改权限点
 	 * @param act

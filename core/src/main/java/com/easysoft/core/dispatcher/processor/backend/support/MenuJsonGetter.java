@@ -13,6 +13,7 @@ import com.easysoft.member.backend.manager.IAdminUserManager;
 import com.easysoft.member.backend.manager.IPermissionManager;
 import com.easysoft.member.backend.model.AdminUser;
 import com.easysoft.member.backend.model.AuthAction;
+import org.apache.commons.lang.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -24,15 +25,67 @@ public class MenuJsonGetter extends AbstractFacadeProcessor {
 	}
 
 	
-	protected Response process() {		
-	 
+	protected Response process() {
+        String roleId = this.httpRequest.getParameter("roleId");
 		Response response = new StringResponse();
-		String menu = getMenuJson();
+        String menu = "";
+        if(StringUtils.isNotEmpty(roleId)){
+            menu = getAuthMenuJson(roleId);
+        }else{
+            menu = getMenuJson();
+        }
+
 		response.setContent(menu);
 		return response;
 	}
-	
+    public  String getAuthMenuJson(String roleId){
+
+        StringBuffer json = new StringBuffer();
+
+        /*
+           * 调用核心api读取站点的菜单
+           */
+        IMenuManager menuManager = SpringContextHolder.getBean("menuManager");
+        List<Menu> tempMenuList  = menuManager.getMenuList();
+        List<Menu> menuList=  new ArrayList<Menu>();
+        IPermissionManager permissionManager = SpringContextHolder.getBean("permissionManager");
+        IAdminUserManager adminUserManager =  SpringContextHolder.getBean("adminUserManager");
+        AdminUser user  =adminUserManager.getCurrentUser();
+        user = adminUserManager.get(user.getUserid());
+        List<AuthAction> authList = permissionManager.getAuthActionsByRoleId(Integer.parseInt(roleId));
+
+        for(Menu menu:tempMenuList){
+            menuList.add(menu);
+        }
+        //List<Menu> syslist  = getMenuList(Menu.MENU_TYPE_SYS,menuList);
+        List<Menu> applist  = getMenuList(Menu.MENU_TYPE_APP,menuList);
+        List<Menu> extlist  = getMenuList(Menu.MENU_TYPE_EXT,menuList);
+
+       /* json.append("var menu ={");
+        json.append("'sys':[");
+        json.append(toJson(syslist,menuList,authList));
+        json.append("]");*/
+        json.append("var menu ={");
+        json.append("'app':[");
+        json.append(toJson(applist,menuList,authList));
+        json.append("]");
+
+        json.append(",'ext':[");
+        json.append(toJson(extlist,menuList,authList));
+        json.append("]");
+        json.append("};");
+        HttpServletRequest request  = ThreadContextHolder.getHttpRequest();
+        json.append("var mainpage=true;");
+        json.append("var domain='"+request.getServerName()+"';");
+        json.append("var runmode="+ ParamSetting.RUNMODE+";");
+        json.append("var app_path='"+request.getContextPath()+"';");
+
+        return json.toString();
+
+
+    }
 	public  String getMenuJson(){
+
 		StringBuffer json = new StringBuffer();
 		
 		/*
@@ -106,6 +159,21 @@ public class MenuJsonGetter extends AbstractFacadeProcessor {
 		
 		return menuItem.toString();
 	}
+
+    public  String toJson(List<Menu> menuList,List<Menu> allList,List<AuthAction> authList){
+        StringBuffer menuItem = new StringBuffer();
+        int i =0;
+
+        for(Menu menu:menuList ){
+
+            if(i!=0) menuItem.append(",");
+            menuItem.append( toJson (menu,allList,authList));
+            i++;
+
+        }
+
+        return menuItem.toString();
+    }
 	
 	
 	private boolean checkPermssion(Menu menu,List<AuthAction> authList){
@@ -180,6 +248,77 @@ public class MenuJsonGetter extends AbstractFacadeProcessor {
 		
 		return menuItem.toString();
 	}
+
+    /**
+     * 根据menu实体生成json字串
+     * @param menu
+     * @return
+     */
+    private  String toJson(Menu menu,List<Menu> menuList,List<AuthAction> authList){
+
+
+        String title  =  menu.getTitle();
+        String url = menu.getUrl();
+        Integer selected = menu.getSelected();
+        String type  = menu.getDatatype();
+        String target=menu.getTarget();
+
+        if(!"_blank".equals(target)){
+            String ctx= ParamSetting.CONTEXT_PATH;
+            ctx=ctx.equals("/")?"":ctx;
+            url=ctx + url;
+        }
+
+
+        StringBuffer menuItem = new StringBuffer();
+
+        menuItem.append("{");
+
+        menuItem.append("id:");
+        menuItem.append(menu.getId());
+
+
+        menuItem.append(",text:'");
+        menuItem.append(title);
+        menuItem.append("'");
+
+        menuItem.append(",url:'");
+        menuItem.append(url);
+        menuItem.append("'");
+
+
+        menuItem.append(",'default':");
+        menuItem.append(selected);
+        if(getChildrenJson(menu.getId()).size()>0){
+            menuItem.append(",children:");
+            menuItem.append(getChildrenJson(menu.getId(), menuList,authList));
+        }
+
+        menuItem.append(",type:'");
+        menuItem.append(type);
+        menuItem.append("'");
+        for(AuthAction authAction :authList){
+            String objValue = authAction.getObjvalue();
+            String[] menuIds=objValue.split(",");
+            for(String menuId : menuIds){
+                if(Integer.parseInt(menuId)==menu.getId()){
+                    menuItem.append(",ischecked:'");
+                    menuItem.append("true");
+                    menuItem.append("'");
+                    break;
+                }
+            }
+
+        }
+
+        menuItem.append(",target:'");
+        menuItem.append(target);
+        menuItem.append("'");
+
+        menuItem.append("}");
+
+        return menuItem.toString();
+    }
 	
 	
 	/**
@@ -224,7 +363,28 @@ public class MenuJsonGetter extends AbstractFacadeProcessor {
 		return json.toString();
 	}
 
-	
+    /**
+     * 读取
+     * @param menuId
+     * @param menuList
+     * @return
+     */
+    private  String  getChildrenJson(Integer menuId,List<Menu> menuList,List<AuthAction> authList){
+        StringBuffer json = new StringBuffer();
+        json.append("[");
+        int i=0;
+        for (Menu menu : menuList) {
+
+            if (menuId.intValue() == menu.getPid().intValue()) {
+                if(i!=0)
+                    json.append(",");
+                json.append(toJson(menu, menuList));
+                i++;
+            }
+        }
+        json.append("]");
+        return json.toString();
+    }
 
 	
 	
