@@ -75,7 +75,12 @@
     });
 
     function setAuth(item){
-        addOrUpdateDialog(null,'权限点','auth.do?add&ajax=yes',300,500);
+        var row = listgrid.getSelectedRow();
+        if(row==null){
+            $.ligerDialog.error('请选择数据修改!');
+            return;
+        }
+        addOrUpdateDialog(null,'权限点','auth.do?add&ajax=yes&roleId='+row.roleid,300,500);
     }
 
 
