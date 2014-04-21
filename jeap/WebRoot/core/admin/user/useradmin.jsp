@@ -2,10 +2,6 @@
          pageEncoding="UTF-8"%>
 <%@ include file="/commons/taglibs.jsp"%>
 <%@ taglib uri="/WEB-INF/grid.tld" prefix="grid"%>
-
-
-
-
 <script type="text/javascript" src="${staticserver }/js/common/jquery-1.10.js"></script>
 <link href="${context }/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
 <link href="${context }/js/ligerui/skins/ligerui-icons.css" rel="stylesheet" type="text/css" />
@@ -18,28 +14,13 @@
 <script src="${context }/js/ligerui/js/plugins/ligerCheckBox.js" type="text/javascript"></script>
 <script src="${context }/js/ligerui/js/plugins/ligerDialog.js" type="text/javascript"></script>
 <script src="${context }/js/ligerui/js/plugins/ligerDrag.js" type="text/javascript"></script>
+<script src="${ctx}/admin/js/common/crud.js" type="text/javascript"></script>
 
 <script type="text/javascript">
     var grid;
     function addUser(item)
     {
-            $.ligerDialog.open({
-                height:600,
-                width: 800,
-                title : '增加管理员',
-                url: 'userAdmin.do?add',
-                showMax: false,
-                showToggle: true,
-                showMin: false,
-                isResize: true,
-                slide: false,
-                data: {
-                    name: $("#txtValue").val()
-                },
-                //自定义参数
-                myDataName: $("#txtValue").val()
-            });
-
+        addOrUpdateDialog(item,'增加管理员','userAdmin.do?add',500,700);
     }
     function modifyUser(item)
     {
@@ -49,22 +30,7 @@
             $.ligerDialog.error('请选择数据修改!');
             return;
         }
-        $.ligerDialog.open({
-            height:600,
-            width: 800,
-            title : '修改管理员',
-            url: 'userAdmin.do?edit&id='+row.userid,
-            showMax: false,
-            showToggle: true,
-            showMin: false,
-            isResize: true,
-            slide: false,
-            data: {
-                name: $("#txtValue").val()
-            },
-            //自定义参数
-            myDataName: $("#txtValue").val()
-        });
+        addOrUpdateDialog(item,'修改管理员','userAdmin.do?edit&id='+row.userid,500,700);
 
     }
     function delUser(item)

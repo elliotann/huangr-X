@@ -181,6 +181,9 @@
 
 
                 });
+                function submitForm(){
+                    $("#objForm").submit();
+                }
             </script>
         </c:if>
         <tr>
@@ -260,8 +263,6 @@
         </tr>
 
     </table>
-    <br />
-    <input type="submit" value="提交" id="Button1" name="subBtn" class="l-button l-button-submit" />
-    <input type="button" value="关闭" name="clsBtn" class="l-button l-button-test"/>
+
 </form>
 

@@ -23,11 +23,7 @@
     var dialog1 = frameElement.dialog;
     var manager;
     $(function (){
-
         $("form").ligerForm();
-
-
-
         $("#tree1").ligerTree(
                 {
                     data:menu.app,
@@ -38,15 +34,10 @@
 
         manager = $("#tree1").ligerGetTreeManager();
         manager.collapseAll();
-
-
     });
 
-
-
-
-
     function submitForm(){
+
         var notes = manager.getChecked();
         var ids = new Array();
         for (var i = 0; i < notes.length; i++)
@@ -61,19 +52,20 @@
             data: {
                 menuids:ids,
                 roleId: $("#roleId").val(),
-                edit:0,
-                ajax:'true'
+                edit:$("#isEdit").val(),
+                ajax:'true',
+                actid:$("#actid").val()
             },
             success:function(data){
                 if(data.success){
                     dialog1.close();
                 }
+            },error:function(e){
+                alert(e);
             }
         });
 
     }
-
-
 
 </script>
 <style type="text/css">
@@ -88,7 +80,7 @@
 <form name="objForm" method="post"   id="objForm">
     <input type="hidden" name="isEdit" id="isEdit" value="${isEdit }" />
     <input type="hidden" name="roleId" value="${roleId}" id="roleId" />
-    <input type="hidden" name="authid" value="${auth.actid}" />
+    <input type="hidden" name="actid" value="${actid}" id="actid"/>
     <input type="hidden" id="objvalue" value="${auth.objvalue }" />
     <div>
     </div>
@@ -109,7 +101,3 @@
 
     </table>
 </form>
-
-
-
-
