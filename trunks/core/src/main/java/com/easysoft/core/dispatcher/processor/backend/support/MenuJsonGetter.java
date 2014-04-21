@@ -46,32 +46,27 @@ public class MenuJsonGetter extends AbstractFacadeProcessor {
            * 调用核心api读取站点的菜单
            */
         IMenuManager menuManager = SpringContextHolder.getBean("menuManager");
-        List<Menu> tempMenuList  = menuManager.getMenuList();
-        List<Menu> menuList=  new ArrayList<Menu>();
+        List<Menu> tempMenuList  = menuManager.getMenuTree(0);
+
         IPermissionManager permissionManager = SpringContextHolder.getBean("permissionManager");
-        IAdminUserManager adminUserManager =  SpringContextHolder.getBean("adminUserManager");
-        AdminUser user  =adminUserManager.getCurrentUser();
-        user = adminUserManager.get(user.getUserid());
+
+
+
         List<AuthAction> authList = permissionManager.getAuthActionsByRoleId(Integer.parseInt(roleId));
 
-        for(Menu menu:tempMenuList){
-            menuList.add(menu);
-        }
-        //List<Menu> syslist  = getMenuList(Menu.MENU_TYPE_SYS,menuList);
-        List<Menu> applist  = getMenuList(Menu.MENU_TYPE_APP,menuList);
-        List<Menu> extlist  = getMenuList(Menu.MENU_TYPE_EXT,menuList);
 
-       /* json.append("var menu ={");
-        json.append("'sys':[");
-        json.append(toJson(syslist,menuList,authList));
-        json.append("]");*/
+
+        List<Menu> applist  = getMenuList(Menu.MENU_TYPE_APP,tempMenuList);
+        List<Menu> extlist  = getMenuList(Menu.MENU_TYPE_EXT,tempMenuList);
+
+
         json.append("var menu ={");
         json.append("'app':[");
-        json.append(toJson(applist,menuList,authList));
+        json.append(toJson(applist,tempMenuList,authList));
         json.append("]");
 
         json.append(",'ext':[");
-        json.append(toJson(extlist,menuList,authList));
+        json.append(toJson(extlist,tempMenuList,authList));
         json.append("]");
         json.append("};");
         HttpServletRequest request  = ThreadContextHolder.getHttpRequest();
@@ -289,7 +284,7 @@ public class MenuJsonGetter extends AbstractFacadeProcessor {
 
         menuItem.append(",'default':");
         menuItem.append(selected);
-        if(getChildrenJson(menu.getId()).size()>0){
+        if(menu.getChildren().size()>0){
             menuItem.append(",children:");
             menuItem.append(getChildrenJson(menu.getId(), menuList,authList));
         }
