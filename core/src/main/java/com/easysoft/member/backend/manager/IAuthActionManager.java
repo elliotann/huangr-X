@@ -49,4 +49,11 @@ public interface IAuthActionManager {
     public void deleteMenu(int actid, Integer[] menuidAr);
 
     public void addMenu(int actid, Integer[] menuidAr);
+
+    /**
+     * 根据角色ID查询权限点
+     * @param roleId
+     * @return
+     */
+    public List<AuthAction> getAuthActionByRoleId(int roleId);
 }

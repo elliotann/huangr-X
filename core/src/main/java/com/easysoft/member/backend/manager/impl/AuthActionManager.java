@@ -43,7 +43,7 @@ public class AuthActionManager extends GenericService<AuthAction> implements IAu
 
 	
 	public void edit(AuthAction act) {
-		this.baseDaoSupport.update("auth_action", act, "actid="+act.getActid());
+        this.updateEntitie(act);
 	}
 
 	
@@ -138,4 +138,9 @@ public class AuthActionManager extends GenericService<AuthAction> implements IAu
 /*     */
 /* 127 */     return (String[])newList.toArray(new String[newList.size()]);
 /*     */   }
+
+    @Override
+    public List<AuthAction> getAuthActionByRoleId(int roleId) {
+        return this.baseDaoSupport.queryForList("select * from t_auth_action where actid in (select authid from t_role_auth where roleid=?)", AuthAction.class,roleId);
+    }
 }

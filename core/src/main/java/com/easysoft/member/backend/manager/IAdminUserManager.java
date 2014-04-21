@@ -1,5 +1,6 @@
 package com.easysoft.member.backend.manager;
 
+import com.easysoft.core.common.service.IGenericService;
 import com.easysoft.member.backend.model.AdminUser;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.Map;
  * 管理员管理接口
  * @author andy
  */
-public interface IAdminUserManager {
+public interface IAdminUserManager extends IGenericService<AdminUser>{
 	
 
 
@@ -113,4 +114,12 @@ public interface IAdminUserManager {
 	 * 一般安装所用
 	 */
 	public void clean();
+
+    /**
+     * 根据用户名查询用户，当为修改查询时，userId不为0
+     * @param name
+     * @param userId
+     * @return
+     */
+    public AdminUser getAdminUserByName(String name,Integer userId);
 }

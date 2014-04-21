@@ -9,6 +9,7 @@ import com.easysoft.member.backend.manager.IAdminUserManager;
 import com.easysoft.member.backend.manager.IPermissionManager;
 import com.easysoft.member.backend.manager.IRoleManager;
 import com.easysoft.member.backend.model.AdminUser;
+import com.easysoft.member.backend.model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -144,5 +145,14 @@ public class UserAdminController extends BaseController{
     public String editPassword() throws Exception {
         return "editPassword";
     }
+    @RequestMapping(params = {"checkNameExist"})
+    @ResponseBody
+    public boolean checkNameExist(String username,Integer userid){
+        AdminUser adminUser = adminUserManager.getAdminUserByName(username,userid);
+        if(adminUser!=null){
+            return false;
+        }
 
+        return true;
+    }
 }
