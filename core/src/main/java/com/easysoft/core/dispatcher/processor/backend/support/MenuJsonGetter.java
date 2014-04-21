@@ -286,7 +286,7 @@ public class MenuJsonGetter extends AbstractFacadeProcessor {
         menuItem.append(selected);
         if(menu.getChildren().size()>0){
             menuItem.append(",children:");
-            menuItem.append(getChildrenJson(menu.getId(), menuList,authList));
+            menuItem.append(getChildrenJson(menu.getId(), menu.getChildren(),authList));
         }
 
         menuItem.append(",type:'");
@@ -370,13 +370,13 @@ public class MenuJsonGetter extends AbstractFacadeProcessor {
         int i=0;
         for (Menu menu : menuList) {
 
-            if (menuId.intValue() == menu.getPid().intValue()) {
+
                 if(i!=0)
                     json.append(",");
                 json.append(toJson(menu, menuList));
                 i++;
             }
-        }
+
         json.append("]");
         return json.toString();
     }
