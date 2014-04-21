@@ -42,31 +42,23 @@ public class MenuJsonGetter extends AbstractFacadeProcessor {
 
         StringBuffer json = new StringBuffer();
 
-        /*
-           * 调用核心api读取站点的菜单
-           */
+        //取立点树形应用菜单
         IMenuManager menuManager = SpringContextHolder.getBean("menuManager");
         List<Menu> tempMenuList  = menuManager.getMenuTree(0);
-
+        //获取解决所拥有的权限集合
         IPermissionManager permissionManager = SpringContextHolder.getBean("permissionManager");
-
-
-
         List<AuthAction> authList = permissionManager.getAuthActionsByRoleId(Integer.parseInt(roleId));
-
-
 
         List<Menu> applist  = getMenuList(Menu.MENU_TYPE_APP,tempMenuList);
         List<Menu> extlist  = getMenuList(Menu.MENU_TYPE_EXT,tempMenuList);
 
-
         json.append("var menu ={");
         json.append("'app':[");
-        json.append(toJson(applist,tempMenuList,authList));
+        json.append(toJson(applist,authList));
         json.append("]");
 
         json.append(",'ext':[");
-        json.append(toJson(extlist,tempMenuList,authList));
+        json.append(toJson(extlist,authList));
         json.append("]");
         json.append("};");
         HttpServletRequest request  = ThreadContextHolder.getHttpRequest();
@@ -155,14 +147,14 @@ public class MenuJsonGetter extends AbstractFacadeProcessor {
 		return menuItem.toString();
 	}
 
-    public  String toJson(List<Menu> menuList,List<Menu> allList,List<AuthAction> authList){
+    public  String toJson(List<Menu> menuList,List<AuthAction> authList){
         StringBuffer menuItem = new StringBuffer();
         int i =0;
 
         for(Menu menu:menuList ){
 
             if(i!=0) menuItem.append(",");
-            menuItem.append( toJson (menu,allList,authList));
+            menuItem.append( toJson (menu,authList));
             i++;
 
         }
@@ -249,7 +241,7 @@ public class MenuJsonGetter extends AbstractFacadeProcessor {
      * @param menu
      * @return
      */
-    private  String toJson(Menu menu,List<Menu> menuList,List<AuthAction> authList){
+    private  String toJson(Menu menu,List<AuthAction> authList){
 
 
         String title  =  menu.getTitle();
