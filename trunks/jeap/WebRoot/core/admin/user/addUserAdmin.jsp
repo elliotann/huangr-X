@@ -1,33 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/commons/taglibs.jsp"%>
-
-
-
-
-    <link href="${context }/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
-    <link href="${context }/js/ligerui/skins/Gray/css/all.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="${context}/js/plug-in/jquery/jquery-1.8.3.js"></script>
-    <script src="${context }/js/ligerui/js/core/base.js" type="text/javascript"></script>
-    <script src="${context }/js/ligerui/js/plugins/ligerForm.js" type="text/javascript"></script>
-    <script src="${context }/js/ligerui/js/plugins/ligerDateEditor.js" type="text/javascript"></script>
-    <script src="${context }/js/ligerui/js/plugins/ligerComboBox.js" type="text/javascript"></script>
-    <script src="${context }/js/ligerui/js/plugins/ligerCheckBox.js" type="text/javascript"></script>
-    <script src="${context }/js/ligerui/js/plugins/ligerButton.js" type="text/javascript"></script>
-    <script src="${context }/js/ligerui/js/plugins/ligerDialog.js" type="text/javascript"></script>
-    <script src="${context }/js/ligerui/js/plugins/ligerRadio.js" type="text/javascript"></script>
-    <script src="${context }/js/ligerui/js/plugins/ligerSpinner.js" type="text/javascript"></script>
-    <script src="${context }/js/ligerui/js/plugins/ligerTextBox.js" type="text/javascript"></script>
-    <script src="${context }/js/ligerui/js/plugins/ligerTip.js" type="text/javascript"></script>
-
-    <script src="${context }/js/plug-in/jquery-validation/jquery.validate.min.js"></script>
-    <script src="${context }/js/plug-in/jquery-validation/jquery.metadata.js" type="text/javascript"></script>
-    <script src="${context }/js/plug-in/jquery-validation/messages_cn.js" type="text/javascript"></script>
-    <script type="text/javascript" src="${staticserver }/js/admin/jeap.js"></script>
-
-
-
-
+<link href="${context }/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
+<link href="${context }/js/ligerui/skins/Gray/css/all.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="${context}/js/plug-in/jquery/jquery-1.8.3.js"></script>
+<script src="${context }/js/ligerui/js/core/base.js" type="text/javascript"></script>
+<script src="${context }/js/ligerui/js/plugins/ligerForm.js" type="text/javascript"></script>
+<script src="${context }/js/ligerui/js/plugins/ligerDateEditor.js" type="text/javascript"></script>
+<script src="${context }/js/ligerui/js/plugins/ligerComboBox.js" type="text/javascript"></script>
+<script src="${context }/js/ligerui/js/plugins/ligerCheckBox.js" type="text/javascript"></script>
+<script src="${context }/js/ligerui/js/plugins/ligerButton.js" type="text/javascript"></script>
+<script src="${context }/js/ligerui/js/plugins/ligerDialog.js" type="text/javascript"></script>
+<script src="${context }/js/ligerui/js/plugins/ligerRadio.js" type="text/javascript"></script>
+<script src="${context }/js/ligerui/js/plugins/ligerSpinner.js" type="text/javascript"></script>
+<script src="${context }/js/ligerui/js/plugins/ligerTextBox.js" type="text/javascript"></script>
+<script src="${context }/js/ligerui/js/plugins/ligerTip.js" type="text/javascript"></script>
+<script src="${context }/js/plug-in/jquery-validation/jquery.validate.min.js"></script>
+<script src="${context }/js/plug-in/jquery-validation/jquery.metadata.js" type="text/javascript"></script>
+<script src="${context }/js/plug-in/jquery-validation/messages_cn.js" type="text/javascript"></script>
+<script type="text/javascript" src="${staticserver }/js/admin/jeap.js"></script>
 <script type="text/javascript">
 
     var groupicon = "${context }/js/ligerui/skins/icons/communication.gif";
@@ -39,26 +30,49 @@
         $.metadata.setType("attr", "validate");
         var v = $("form").validate({
             debug: true,
+            rules:{
+                username:{
+                    required:true,
+                    minlength:3,
+                    maxlength:10,
+                    notnull:true,
+                    remote:{
+                        url:'userAdmin.do?checkNameExist&ajax=true',
+                        type:'post',
+                        dataType:'json',
+                        data:{
+                            rolename:function(){return $("#rolename").val();},
+                            roleid:function(){return $("#roleid").val();}
+                        }
 
+                    }
+                }
+            },
             errorPlacement: function (lable, element)
             {
                 if (element.hasClass("l-textarea"))
                 {
-                    element.ligerTip({ content: lable.html(), target: element[0] });
+                    element.addClass("l-textarea-invalid");
                 }
                 else if (element.hasClass("l-text-field"))
                 {
-                    element.parent().ligerTip({ content: lable.html(), target: element[0] });
+                    element.parent().addClass("l-text-invalid");
                 }
-                else
-                {
-                    lable.appendTo(element.parents("td:first").next("td"));
-                }
+                $(element).removeAttr("title").ligerHideTip();
+                $(element).attr("title", lable.html()).ligerTip();
             },
             success: function (lable)
             {
-                lable.ligerHideTip();
-                lable.remove();
+                var element = $("#" + lable.attr("for"));
+                if (element.hasClass("l-textarea"))
+                {
+                    element.removeClass("l-textarea-invalid");
+                }
+                else if (element.hasClass("l-text-field"))
+                {
+                    element.parent().removeClass("l-text-invalid");
+                }
+                $(element).removeAttr("title").ligerHideTip();
             },
             submitHandler: function ()
             {
@@ -104,7 +118,9 @@
         });
 
     });
-
+    function submitForm(){
+        $("#objForm").submit();
+    }
 
 </script>
 <style type="text/css">
@@ -114,7 +130,7 @@
     .l-button-submit,.l-button-test{width:80px; float:left; margin-left:10px; padding-bottom:2px;}
     .l-verify-tip{ left:230px; top:120px;}
 </style>
-<form name="form1" method="post"   id="form1">
+<form name="objForm" method="post"   id="objForm">
     <div>
     </div>
     <table cellpadding="0" cellspacing="0" class="l-table-edit" >
@@ -210,8 +226,5 @@
         </tr>
 
     </table>
-    <br />
-    <input type="submit" value="提交" id="Button1" name="subBtn" class="l-button l-button-submit" />
-    <input type="button" value="关闭" class="l-button l-button-test"/>
 </form>
 
