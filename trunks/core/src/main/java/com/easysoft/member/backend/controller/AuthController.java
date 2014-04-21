@@ -4,6 +4,7 @@ import com.easysoft.core.common.controller.BaseController;
 import com.easysoft.core.common.vo.json.AjaxJson;
 import com.easysoft.framework.utils.StringUtil;
 import com.easysoft.member.backend.manager.IAuthActionManager;
+import com.easysoft.member.backend.model.AuthAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -29,19 +31,26 @@ public class AuthController extends BaseController {
     @RequestMapping(params = {"add"})
     public ModelAndView add(int roleId){
         Map<String,Object> map = new HashMap<String,Object>();
-        map.put("isEdit",0);
+        List<AuthAction> authActions = authActionManager.getAuthActionByRoleId(roleId);
+        if(!authActions.isEmpty()){
+            map.put("isEdit",1);
+            map.put("actid",authActions.get(0).getActid());
+        }else{
+            map.put("isEdit",0);
+        }
+
         map.put("roleId",roleId);
         return new ModelAndView("core/admin/auth/auth_input",map);
     }
     @RequestMapping(params = {"save"})
     @ResponseBody
-    public AjaxJson save(@RequestParam(value = "menuids[]")Integer[] menuids,int roleId,int edit){
+    public AjaxJson save(@RequestParam(value = "menuids[]")Integer[] menuids,int roleId,int edit,int actid){
         AjaxJson result = new AjaxJson();
 
         if(edit==0){
             return this.saveAdd("权限点",menuids,roleId);
         }else {
-            return this.saveEdit("权限点",menuids,0);
+            return this.saveEdit("权限点",menuids,actid);
         }
 
     }
@@ -82,6 +91,7 @@ public class AuthController extends BaseController {
         }catch(RuntimeException e){
             this.logger.error(e.getMessage(), e.fillInStackTrace());
             result.setMsg(e.getMessage());
+            result.setSuccess(false);
         }
         return result;
     }

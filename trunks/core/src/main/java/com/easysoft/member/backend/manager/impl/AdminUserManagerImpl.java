@@ -1,5 +1,6 @@
 package com.easysoft.member.backend.manager.impl;
 
+import com.easysoft.core.common.service.impl.GenericService;
 import com.easysoft.core.context.EsfContext;
 import com.easysoft.core.model.MultiSite;
 import com.easysoft.core.model.Site;
@@ -29,7 +30,7 @@ import java.util.Map;
  * @author andy
  */
 @Service("adminUserManager")
-public class AdminUserManagerImpl implements IAdminUserManager {
+public class AdminUserManagerImpl extends GenericService<AdminUser> implements IAdminUserManager {
     @Autowired
     private IAdminUserDao adminUserDao;
     @Autowired
@@ -250,5 +251,16 @@ public class AdminUserManagerImpl implements IAdminUserManager {
     @Autowired
     public void setIdentityService(IdentityService identityService) {
         this.identityService = identityService;
+    }
+
+    @Override
+    public AdminUser getAdminUserByName(String name, Integer userId) {
+        String hql = "from AdminUser a where a.username=?";
+        if(userId!=null&&userId!=0){
+            hql += " and a.userid!="+userId;
+        }
+        List<AdminUser> results = this.findHql(hql,userId);
+        if(results.isEmpty()) return null;
+        return results.get(0);
     }
 }
