@@ -27,8 +27,14 @@
                         tools : {
                             save : {
                                 onclick : function(data) {
+                                    alert(data);
                                     $.ajax({
-
+                                        type:'post',
+                                        url:'workflow.do?designerDeploy&jsonData='+data,
+                                        dataType:'json',
+                                        success:function(result){
+                                            alert(result);
+                                        }
                                     });
                                 }
                             }

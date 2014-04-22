@@ -54,7 +54,7 @@
                 roleId: $("#roleId").val(),
                 edit:$("#isEdit").val(),
                 ajax:'true',
-                actid:$("#actid").val()
+                actid:$("#actid").val()==''?'0':$("#actid").val()
             },
             success:function(data){
                 if(data.success){

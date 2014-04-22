@@ -13,6 +13,8 @@
 <script src="${context }/js/ligerui/js/plugins/ligerCheckBox.js" type="text/javascript"></script>
 <script src="${context }/js/ligerui/js/plugins/ligerDialog.js" type="text/javascript"></script>
 <script src="${context }/js/ligerui/js/plugins/ligerDrag.js" type="text/javascript"></script>
+<script src="${ctx }/admin/js/common/crud.js" type="text/javascript"></script>
+
 <script type="text/javascript">
     var listgrid;
     $(function() {
@@ -48,35 +50,16 @@
 
 
     });
+
     function deploy(item){
-        $.ligerDialog.open({
-            height:300,
-            width: 600,
-            title : '部署流程',
-            url: 'workflow.do?toDeploy',
-            showMax: false,
-            showToggle: true,
-            showMin: false,
-            isResize: true,
-            slide: false,
-            buttons:[ { text: '确定', onclick: btnOK }, { text: '取消', onclick: function (item, dialog) { dialog.close(); } } ]
-        });
+        addOrUpdateDialog(item,'部署流程','workflow.do?toDeploy',600,900);
+
     }
     function addProcess(item){
-        $.ligerDialog.open({
-            name:'openDia',
-            height:600,
-            width: 900,
-            title : '新增流程',
-            url: 'workflow.do?toFlowDesigner',
-            showMax: false,
-            showToggle: true,
-            showMin: false,
-            isResize: true,
-            slide: false,
-            buttons:[ { text: '确定', onclick: btnOK }, { text: '取消', onclick: function (item, dialog) { dialog.close(); } } ]
-        });
+        addOrUpdateDialog(item,'新增流程','workflow.do?toFlowDesigner',600,900);
+
     }
+
 
     function btnOK(item,dialog){
         openDia.submitForm();
