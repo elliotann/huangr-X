@@ -22,7 +22,8 @@ public class BPMTest {
         RepositoryService repositoryService = processEngine.getRepositoryService();
         repositoryService.createDeployment().addClasspathResource("com/easysoft/core/bpm/VacationRequest.bpmn20.xml").deploy();
         System.out.println(repositoryService.createDeploymentQuery().count());
-        repositoryService.suspendProcessDefinitionByKey("vacationRequest");
+
+
         Map<String,Object> variables = new HashMap<String,Object>();
         variables.put("employeeName","andy");
         variables.put("numberOfDays",new Integer(4));
