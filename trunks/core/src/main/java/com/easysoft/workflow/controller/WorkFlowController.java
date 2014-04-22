@@ -145,6 +145,10 @@ public class WorkFlowController {
 
         return "redirect:/workflow/process-list";
     }
+    @RequestMapping(params = {"designerDeploy"})
+    public String designerDeploy(String jsonData){
+        return null;
+    }
 
     @RequestMapping(params = {"delete"})
     @ResponseBody

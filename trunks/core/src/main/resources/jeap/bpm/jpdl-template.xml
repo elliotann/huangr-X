@@ -7,7 +7,7 @@
              xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema"
              expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.easysoft.jeap.com/activiti/${processKey}">
     <process id="${processKey}" name="${processName}">
-        <documentation>请假流程演示</documentation>
+        <documentation>${displayName}</documentation>
         <startEvent id="startevent1" name="Start" activiti:initiator="applyUserId"></startEvent>
         <userTask id="deptLeaderAudit" name="部门领导审批" activiti:candidateGroups="deptLeader"></userTask>
         <exclusiveGateway id="exclusivegateway5" name="Exclusive Gateway"></exclusiveGateway>
