@@ -27,6 +27,15 @@
     var dialog = frameElement.dialog;
     $(function ()
     {
+        $.validator.addMethod(
+                "notnull",
+                function (value, element, regexp)
+                {
+                    if (!value) return true;
+                    return !$(element).hasClass("l-text-field-null");
+                },
+                "不能为空"
+        );
         $.metadata.setType("attr", "validate");
         var v = $("form").validate({
             debug: true,
@@ -77,14 +86,19 @@
             submitHandler: function ()
             {
                 $("form .l-text,.l-textarea").ligerHideTip();
-                $("#form1").ajaxSubmit({
+                $("#objForm").ajaxSubmit({
                     url :"userAdmin.do?addSave&ajax=true",
                     type : "POST",
                     dataType:"json",
                     success : function(result) {
 
                         if(result.success){
-                            alert("增加成功!");
+                            $.ligerDialog.waitting('增加成功');
+                            setTimeout(function ()
+                            {
+                                $.ligerDialog.closeWaitting();
+                                grid.loadData();
+                            }, 1000);
                             window.parent.grid.loadData();
                             dialog.close();
                         }else{
