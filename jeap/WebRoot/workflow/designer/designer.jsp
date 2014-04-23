@@ -120,8 +120,7 @@
 <div id="myflow_tools"
      style="position: absolute; top: 10; left: 10; background-color: #fff; width: 70px; cursor: default; padding: 3px;"
      class="ui-widget-content">
-    <div id="myflow_tools_handle" style="text-align: center;"
-         class="ui-widget-header">工具集</div>
+    <div id="myflow_tools_handle" style="text-align: center;" class="ui-widget-header">工具集</div>
 
 
     <div class="node" id="myflow_save"><img src="img/save.gif" />&nbsp;&nbsp;保存</div>

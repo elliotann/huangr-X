@@ -228,6 +228,7 @@
 	}
 
 	myflow.rect = function(o, r) {
+
 		var _this = this, _uid = myflow.util.nextId(), _o = $.extend(true, {},
 				myflow.config.rect, o), _id = 'rect' + _uid, _r = r, // Raphael画笔
 		_rect, _img, // 图标
@@ -1339,6 +1340,7 @@
 
 		// 添加状态
 		$(_r).bind('addrect', function(e, type, o) {
+
 			// $('body').append(type+', ');
 			var rect = new myflow.rect($.extend(true, {},
 							myflow.config.tools.states[type], o), _r)
@@ -1391,7 +1393,7 @@
 					});
 
 			$('#myflow_save').click(function() {// 保存
-						var data = '{states:{';
+						var data = '{nodes:{';
 						for (var k in _states) {
 							if (_states[k]) {
 								data += _states[k].getId() + ':'
@@ -1400,7 +1402,7 @@
 						}
 						if (data.substring(data.length - 1, data.length) == ',')
 							data = data.substring(0, data.length - 1);
-						data += '},paths:{';
+						data += '},flowsequences:{';
 						for (var k in _paths) {
 							if (_paths[k]) {
 								data += _paths[k].getId() + ':'
@@ -1428,8 +1430,6 @@
 		}
 		// 恢复
 		if (o.restore) {
-			// var data = ((typeof o.restore === 'string') ? eval(o.restore) :
-			// o.restore);
 			var data = o.restore;
 			var rmap = {};
 			if (data.states) {
