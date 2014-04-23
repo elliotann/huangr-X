@@ -26,7 +26,7 @@
 							tools : {
 								save : {
 									onclick : function(data) {
-										alert('save:\n' + data);
+										$("#dataDiv").html(data);
 									}
 								}
 							}
@@ -104,6 +104,7 @@ body {
 </style>
 </head>
 <body>
+<div id="dataDiv"></div>
 <div id="myflow_tools"
 	style="position: absolute; top: 10; left: 10; background-color: #fff; width: 70px; cursor: default; padding: 3px;"
 	class="ui-widget-content">
