@@ -16,6 +16,14 @@
     <script type="text/javascript" src="/jeap/workflow/js/myflow/myflow.js"></script>
     <script type="text/javascript" src="/jeap/workflow/js/myflow/myflow.jpdl4.js"></script>
     <script type="text/javascript" src="/jeap/workflow/js/myflow/myflow.editors.js"></script>
+    <link href="../../../lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css"/>
+    <link href="../../../lib/ligerUI/skins/Gray/css/all.css" rel="stylesheet" type="text/css"/>
+    <link href="../../../lib/ligerUI/skins/ligerui-icons.css" rel="stylesheet"/>
+
+    <script src="../../../lib/ligerUI/js/ligerui.all.js" type="text/javascript"></script>
+    <script src="../../../lib/ligerUI/js/plugins/ligerForm.js"></script>
+    <script src="../../../lib/ligerUI/js/plugins/ligerAccordion.js" type="text/javascript"></script>
+    <script src="../../../lib/ligerUI/js/plugins/ligerDrag.js" type="text/javascript"></script>
     <script type="text/javascript">
         var designerFlow;
         $(function() {
