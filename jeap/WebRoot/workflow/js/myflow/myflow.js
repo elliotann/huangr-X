@@ -472,6 +472,7 @@
 		// 事件处理--------------------------------
 		$([_rect.node, _text.node, _name.node, _img.node]).bind('click',
 				function() {
+			
 					if (!myflow.config.editable)
 						return;
 
@@ -1028,6 +1029,7 @@
 
 		// 处理点击事件，线或矩形
 		var clickHandler = function(e, src) {
+		
 			if (!myflow.config.editable)
 				return;
 			if (src && src.getId() == _id) {
@@ -1218,13 +1220,14 @@
 	};
 
 	myflow.props = function(o, r) {
+
 		var _this = this, _pdiv = $('#myflow_props').hide().draggable({
 					handle : '#myflow_props_handle'
 				}).resizable().css(myflow.config.props.attr).bind('click',
 				function() {
 					return false;
 				}), _tb = _pdiv.find('table'), _r = r, _src;
-
+		//显示属性框
 		var showpropsHandler = function(e, props, src) {
 			if (_src && _src.getId() == src.getId()) {// 连续点击不刷新
 				return;
@@ -1237,7 +1240,9 @@
 					});
 
 			_tb.empty();
+            alert(_pdiv.html());
 			_pdiv.show();
+
 			for (var k in props) {
 				_tb.append('<tr><th>' + props[k].label + '</th><td><div id="p'
 						+ k + '" class="editor"></div></td></tr>');
@@ -1253,6 +1258,7 @@
 	// 属性编辑器
 	myflow.editors = {
 		textEditor : function() {
+			
 			var _props, _k, _div, _src, _r;
 			this.init = function(props, k, div, src, r) {
 				_props = props;
@@ -1266,7 +1272,7 @@
 							props[_k].value = $(this).val();
 							$(_r).trigger('textchange', [$(this).val(), _src]);
 						}).appendTo('#' + _div);
-				// $('body').append('aaaa');
+				
 
 				$('#' + _div).data('editor', this);
 			};
@@ -1306,10 +1312,9 @@
 					$(_r).removeData('currNode');
 				}
 			}
-				// alert(arg.keyCode);
 			});
-
-		$(document).click(function() {
+		//当设置区被点击，弹出属性框
+		$("#myflow").click(function() {
 					$(_r).data('currNode', null);
 					$(_r).trigger('click', {
 								getId : function() {
