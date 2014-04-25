@@ -28,12 +28,36 @@
     <script type="text/javascript" src="/jeap/workflow/js/myflow/myflow.jpdl4.js"></script>
     <script type="text/javascript" src="/jeap/workflow/js/myflow/myflow.editors.js"></script>
     <script type="text/javascript">
+
         $(function () {
+            $("#layout1").ligerLayout({
+                leftWidth:200,
+                rightWidth:250,
+                height:'100%',
+                heightDiff:-4,
+                space:4
+            });
+            var formProperty = $("#formProperty").ligerForm({
+                onAfterSetFields: function ()
+                {
+                    var g = this, p = this.options;
+                    if (!p.fields || !p.fields.length)
+                    {
+                        $("#btnSaveProperty").hide();
+                    }
+                    else
+                    {
+                        $("#btnSaveProperty").show();
+                    }
+                }
+            });
+
             $('#myflow')
                     .myflow(
                     {
                         basePath:"",
                         restore:eval(""),
+                        formProperty:formProperty,
                         tools:{
                             save:{
                                 onclick:function (data) {
@@ -43,13 +67,7 @@
                         }
                     });
 
-            $("#layout1").ligerLayout({
-                leftWidth:200,
-                rightWidth:250,
-                height:'100%',
-                heightDiff:-4,
-                space:4
-            });
+
 
         });
     </script>
@@ -177,20 +195,7 @@
                 </div>
             </div>
 
-            <div id="myflow_props"
-                 style="position: absolute; top: 30; right: 50; background-color: #fff; width: 220px; padding: 3px;"
-                 class="ui-widget-content">
-                <div id="myflow_props_handle" class="ui-widget-header">属性</div>
-                <table border="1" width="100%" cellpadding="0" cellspacing="0">
-                    <tr>
-                        <td>aaa</td>
-                    </tr>
-                    <tr>
-                        <td>aaa</td>
-                    </tr>
-                </table>
-                <div>&nbsp;</div>
-            </div>
+
 
             <div id="myflow"></div>
 
@@ -199,6 +204,7 @@
 
     <div position="right" id="framecenter" title="属性设置">
         <div id="formProperty">
+
         </div>
         <div id="btnSaveProperty" style="margin:5px;"></div>
     </div>

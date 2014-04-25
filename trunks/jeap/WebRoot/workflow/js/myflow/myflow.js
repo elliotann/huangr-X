@@ -1,11 +1,13 @@
 (function($) {
 
 	var myflow = {};
+    var dragging = false;
 
 	myflow.config = {
 		editable : true,
 		lineHeight : 15,
 		basePath : '',
+        formProperty:null,
 		rect : {// 状态
 			attr : {
 				x : 10,
@@ -1222,7 +1224,7 @@
 	myflow.props = function(o, r) {
 
 		var _this = this, _pdiv = $('#myflow_props').hide().draggable({
-					handle : '#myflow_props_handle'
+					handle : '#framecenter'
 				}).resizable().css(myflow.config.props.attr).bind('click',
 				function() {
 					return false;
@@ -1240,7 +1242,7 @@
 					});
 
 			_tb.empty();
-            alert(_pdiv.html());
+
 			_pdiv.show();
 
 			for (var k in props) {
@@ -1250,11 +1252,41 @@
 					props[k].editor().init(props, k, 'p' + k, src, _r);
 				// $('body').append(props[i].editor+'a');
 			}
+            if (dragging) return;
+            var selected = $(this).hasClass("l-fieldcontainer-selected");
+            $("li.l-fieldcontainer-selected").removeClass("l-fieldcontainer-selected");
+            if (!selected)
+            {
+                $(this).addClass("l-fieldcontainer-selected");
+            }
+
+            f_setProperty(myflow.config.formProperty,props);
 		};
 		$(_r).bind('showprops', showpropsHandler);
 
 	};
 
+
+    //获取field属性编辑框列表，初始化值
+    function f_setProperty(formProperty,props)
+    {
+        /*var selected = $("li.l-fieldcontainer-selected");
+        if (!selected.length)
+        {
+            formProperty.set('fields', []);
+        }
+        var fieldindex = selected.attr("fieldindex");
+        var field = formDesign.getField(fieldindex);
+        if (field == null)
+        {
+            formProperty.set('fields', []);
+        }*/
+        var fields =  [{"name":"label","label":"标签","width":110,"newline":true,"type":"text"},{"name":"width","label":"宽度","width":110,"newline":true,"type":"int"},{"name":"labelWidth","label":"标签宽度","width":110,"newline":true,"type":"int"},{"name":"space","label":"间隔","width":110,"newline":true,"type":"int"},{"name":"newline","label":"在新行显示","width":110,"newline":true,"type":"checkbox"},{"name":"type","label":"编辑器类型","width":110,"newline":true,"type":"select","editor":{"data":[{"id":"text","text":"文本框"},{"id":"int","text":"整数编辑框"},{"id":"number","text":"浮点数编辑框"},{"id":"currency","text":"货币编辑框"},{"id":"combobox","text":"表格下拉框"},{"id":"select","text":"简单下拉框"},{"id":"popup","text":"弹出选取框"},{"id":"date","text":"日期编辑"},{"id":"checkbox","text":"复选框"},{"id":"listbox","text":"列表框"},{"id":"radiolist","text":"单选框列表"},{"id":"checkboxlist","text":"多选复选框"},{"id":"textarea","text":"多行编辑框"},{"id":"htmleditor","text":"HTML编辑框"}]}},{"name":"group","label":"分组","width":110,"newline":true,"type":"text"}];
+
+        //var fields = f_getFieldProperties(field,fieldindex);
+        formProperty.set('fields', fields);
+        formProperty.setData(field);
+    }
 	// 属性编辑器
 	myflow.editors = {
 		textEditor : function() {
@@ -1514,4 +1546,7 @@
 	};
 
 	$.myflow = myflow;
+
+
+
 })(jQuery);

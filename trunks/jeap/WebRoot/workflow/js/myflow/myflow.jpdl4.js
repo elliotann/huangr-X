@@ -13,7 +13,8 @@ $.extend(true,myflow.config.rect,{
 $.extend(true,myflow.config.props.props,{
 	name : {name:'name', label:'名称', value:'新建流程', editor:function(){return new myflow.editors.inputEditor();}},
 	key : {name:'key', label:'标识', value:'', editor:function(){return new myflow.editors.inputEditor();}},
-	desc : {name:'desc', label:'描述', value:'', editor:function(){return new myflow.editors.inputEditor();}}
+	desc : {name:'desc', label:'描述', value:'', editor:function(){return new myflow.editors.inputEditor();}},
+    312 : {name:'desc', label:'描述', value:'', editor:function(){return new myflow.editors.inputEditor();}}
 });
 
 
