@@ -1246,6 +1246,7 @@
 			_pdiv.show();
 
 			for (var k in props) {
+                alert(k);
 				_tb.append('<tr><th>' + props[k].label + '</th><td><div id="p'
 						+ k + '" class="editor"></div></td></tr>');
 				if (props[k].editor)
@@ -1281,6 +1282,7 @@
         {
             formProperty.set('fields', []);
         }*/
+
         var fields =  [{"name":"label","label":"标签","width":110,"newline":true,"type":"text"},{"name":"width","label":"宽度","width":110,"newline":true,"type":"int"},{"name":"labelWidth","label":"标签宽度","width":110,"newline":true,"type":"int"},{"name":"space","label":"间隔","width":110,"newline":true,"type":"int"},{"name":"newline","label":"在新行显示","width":110,"newline":true,"type":"checkbox"},{"name":"type","label":"编辑器类型","width":110,"newline":true,"type":"select","editor":{"data":[{"id":"text","text":"文本框"},{"id":"int","text":"整数编辑框"},{"id":"number","text":"浮点数编辑框"},{"id":"currency","text":"货币编辑框"},{"id":"combobox","text":"表格下拉框"},{"id":"select","text":"简单下拉框"},{"id":"popup","text":"弹出选取框"},{"id":"date","text":"日期编辑"},{"id":"checkbox","text":"复选框"},{"id":"listbox","text":"列表框"},{"id":"radiolist","text":"单选框列表"},{"id":"checkboxlist","text":"多选复选框"},{"id":"textarea","text":"多行编辑框"},{"id":"htmleditor","text":"HTML编辑框"}]}},{"name":"group","label":"分组","width":110,"newline":true,"type":"text"}];
 
         //var fields = f_getFieldProperties(field,fieldindex);
@@ -1320,8 +1322,7 @@
 
 	// 初始化流程
 	myflow.init = function(c, o) {
-		var _w = $(window).width(), _h = $(window).height(), _r = Raphael(c, _w
-						* 1.5, _h * 1.5), _states = {}, _paths = {};
+		var _w = $(window).width(), _h = $(window).height(), _r = Raphael(c, _w, _h), _states = {}, _paths = {};
 
 		$.extend(true, myflow.config, o);
 
@@ -1329,7 +1330,7 @@
 		 * 删除： 删除状态时，触发removerect事件，连接在这个状态上当路径监听到这个事件，触发removepath删除自身；
 		 * 删除路径时，触发removepath事件
 		 */
-		$(document).keydown(function(arg) {
+		$("#myflow").keydown(function(arg) {
 			if (!myflow.config.editable)
 				return;
 			if (arg.keyCode == 46) {
@@ -1353,6 +1354,7 @@
 									return '00000000';
 								}
 							});
+
 					$(_r).trigger('showprops', [myflow.config.props.props, {
 										getId : function() {
 											return '00000000';
@@ -1378,7 +1380,6 @@
 		// 添加状态
 		$(_r).bind('addrect', function(e, type, o) {
 
-			// $('body').append(type+', ');
 			var rect = new myflow.rect($.extend(true, {},
 							myflow.config.tools.states[type], o), _r)
 			_states[rect.getId()] = rect;
@@ -1425,7 +1426,7 @@
 													y : ui.helper.offset().top
 												}
 											}]);
-							// $('body').append($(ui).attr('type')+'drop.');
+
 						}
 					});
 
