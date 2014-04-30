@@ -13,8 +13,7 @@ $.extend(true,myflow.config.rect,{
 $.extend(true,myflow.config.props.props,{
 	name : {name:'name', label:'名称', value:'新建流程', editor:function(){return new myflow.editors.inputEditor();}},
 	key : {name:'key', label:'标识', value:'', editor:function(){return new myflow.editors.inputEditor();}},
-	desc : {name:'desc', label:'描述', value:'', editor:function(){return new myflow.editors.inputEditor();}},
-    312 : {name:'desc', label:'描述', value:'', editor:function(){return new myflow.editors.inputEditor();}}
+	desc : {name:'desc', label:'描述', value:'', editor:function(){return new myflow.editors.inputEditor();}}
 });
 
 
@@ -78,7 +77,7 @@ $.extend(true,myflow.config.tools.states,{
 				props : {
 					text: {name:'text', label: '显示', value:'', editor: function(){return new myflow.editors.textEditor();}, value:'分支'},
 					temp1: {name:'temp1', label: '文本', value:'', editor: function(){return new myflow.editors.inputEditor();}},
-					temp2: {name:'temp2', label : '选择', value:'', editor: function(){return new myflow.editors.selectEditor('select.json');}}
+					temp2: {name:'temp2', label : '选择', value:'', editor: function(){return new myflow.editors.selectEditor('/jeap/workflow/js/myflow/select.json');}}
 				}},
 			join : {showType: 'image',type : 'join',
 				name : {text:'<<join>>'},
@@ -88,7 +87,7 @@ $.extend(true,myflow.config.tools.states,{
 				props : {
 					text: {name:'text', label: '显示', value:'', editor: function(){return new myflow.editors.textEditor();}, value:'合并'},
 					temp1: {name:'temp1', label: '文本', value:'', editor: function(){return new myflow.editors.inputEditor();}},
-					temp2: {name:'temp2', label : '选择', value:'', editor: function(){return new myflow.editors.selectEditor('select.json');}}
+					temp2: {name:'temp2', label : '选择', value:'', editor: function(){return new myflow.editors.selectEditor('/jeap/workflow/js/myflow/select.json');}}
 				}},
 			task : {showType: 'text',type : 'task',
 				name : {text:'<<task>>'},
@@ -96,7 +95,7 @@ $.extend(true,myflow.config.tools.states,{
 				img : {src : 'img/48/task_empty.png',width :48, height:48},
 				props : {
 					text: {name:'text', label: '显示', value:'', editor: function(){return new myflow.editors.textEditor();}, value:'任务'},
-					assignee: {name:'assignee', label: '用户', value:'', editor: function(){return new myflow.editors.selectEditor('../js/myflow/select.json');}},
+					assignee: {name:'assignee', label: '用户', value:'', editor: function(){return new myflow.editors.selectEditor('/jeap/workflow/js/myflow/select.json');}},
 					desc: {name:'desc', label : '描述', value:'', editor: function(){return new myflow.editors.inputEditor();}}
 				}},
 			decision : {showType: 'image',type : 'decision',

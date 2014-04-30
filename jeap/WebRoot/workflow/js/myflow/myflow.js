@@ -1246,7 +1246,7 @@
 			_pdiv.show();
 
 			for (var k in props) {
-                alert(k);
+
 				_tb.append('<tr><th>' + props[k].label + '</th><td><div id="p'
 						+ k + '" class="editor"></div></td></tr>');
 				if (props[k].editor)
@@ -1282,8 +1282,12 @@
         {
             formProperty.set('fields', []);
         }*/
+        var fields =[];
+        for (var k in props) {
+            fields.push(props[k]);
 
-        var fields =  [{"name":"label","label":"标签","width":110,"newline":true,"type":"text"},{"name":"width","label":"宽度","width":110,"newline":true,"type":"int"},{"name":"labelWidth","label":"标签宽度","width":110,"newline":true,"type":"int"},{"name":"space","label":"间隔","width":110,"newline":true,"type":"int"},{"name":"newline","label":"在新行显示","width":110,"newline":true,"type":"checkbox"},{"name":"type","label":"编辑器类型","width":110,"newline":true,"type":"select","editor":{"data":[{"id":"text","text":"文本框"},{"id":"int","text":"整数编辑框"},{"id":"number","text":"浮点数编辑框"},{"id":"currency","text":"货币编辑框"},{"id":"combobox","text":"表格下拉框"},{"id":"select","text":"简单下拉框"},{"id":"popup","text":"弹出选取框"},{"id":"date","text":"日期编辑"},{"id":"checkbox","text":"复选框"},{"id":"listbox","text":"列表框"},{"id":"radiolist","text":"单选框列表"},{"id":"checkboxlist","text":"多选复选框"},{"id":"textarea","text":"多行编辑框"},{"id":"htmleditor","text":"HTML编辑框"}]}},{"name":"group","label":"分组","width":110,"newline":true,"type":"text"}];
+        }
+       // var fields =  [{"name":"label","label":"标签","width":110,"newline":true,"type":"text"},{"name":"width","label":"宽度","width":110,"newline":true,"type":"int"},{"name":"labelWidth","label":"标签宽度","width":110,"newline":true,"type":"int"},{"name":"space","label":"间隔","width":110,"newline":true,"type":"int"},{"name":"newline","label":"在新行显示","width":110,"newline":true,"type":"checkbox"},{"name":"type","label":"编辑器类型","width":110,"newline":true,"type":"select","editor":{"data":[{"id":"text","text":"文本框"},{"id":"int","text":"整数编辑框"},{"id":"number","text":"浮点数编辑框"},{"id":"currency","text":"货币编辑框"},{"id":"combobox","text":"表格下拉框"},{"id":"select","text":"简单下拉框"},{"id":"popup","text":"弹出选取框"},{"id":"date","text":"日期编辑"},{"id":"checkbox","text":"复选框"},{"id":"listbox","text":"列表框"},{"id":"radiolist","text":"单选框列表"},{"id":"checkboxlist","text":"多选复选框"},{"id":"textarea","text":"多行编辑框"},{"id":"htmleditor","text":"HTML编辑框"}]}},{"name":"group","label":"分组","width":110,"newline":true,"type":"text"}];
 
         //var fields = f_getFieldProperties(field,fieldindex);
         formProperty.set('fields', fields);
@@ -1460,7 +1464,7 @@
 						data += '}}}';
 
 						myflow.config.tools.save.onclick(data);
-						// alert(data);
+
 					});
 
 			// 属性框
