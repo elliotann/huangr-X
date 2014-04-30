@@ -1245,14 +1245,7 @@
 
 			_pdiv.show();
 
-			for (var k in props) {
 
-				_tb.append('<tr><th>' + props[k].label + '</th><td><div id="p'
-						+ k + '" class="editor"></div></td></tr>');
-				if (props[k].editor)
-					props[k].editor().init(props, k, 'p' + k, src, _r);
-				// $('body').append(props[i].editor+'a');
-			}
             if (dragging) return;
             var selected = $(this).hasClass("l-fieldcontainer-selected");
             $("li.l-fieldcontainer-selected").removeClass("l-fieldcontainer-selected");
@@ -1291,7 +1284,7 @@
 
         //var fields = f_getFieldProperties(field,fieldindex);
         formProperty.set('fields', fields);
-        formProperty.setData(field);
+        //formProperty.setData(field);
     }
 	// 属性编辑器
 	myflow.editors = {
