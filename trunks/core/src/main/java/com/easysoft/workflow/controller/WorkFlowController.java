@@ -9,6 +9,7 @@ import com.easysoft.member.backend.manager.impl.UserServiceFactory;
 import com.easysoft.member.backend.model.AdminUser;
 import com.easysoft.workflow.manager.impl.WorkflowTraceService;
 import com.easysoft.workflow.vo.DefAndDeployVo;
+import com.easysoft.workflow.vo.FlowDefTlp;
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
@@ -145,9 +146,13 @@ public class WorkFlowController {
 
         return "redirect:/workflow/process-list";
     }
+    //新建流程部署
     @RequestMapping(params = {"designerDeploy"})
-    public String designerDeploy(String jsonData){
-        return null;
+    @ResponseBody
+    public AjaxJson designerDeploy(String jsonData){
+        AjaxJson result = new AjaxJson();
+        FlowDefTlp flowDefTlp = (FlowDefTlp)JsonUtils.jsonToBean(jsonData,FlowDefTlp.class,null);
+        return result;
     }
 
     @RequestMapping(params = {"delete"})
