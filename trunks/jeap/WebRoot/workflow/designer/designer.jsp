@@ -28,7 +28,7 @@
     <script type="text/javascript" src="/jeap/workflow/js/myflow/myflow.jpdl4.js"></script>
     <script type="text/javascript" src="/jeap/workflow/js/myflow/myflow.editors.js"></script>
     <script type="text/javascript">
-
+        var  flowdata;
         $(function () {
             $("#layout1").ligerLayout({
                 leftWidth:200,
@@ -52,7 +52,7 @@
                 }
             });
 
-            $('#myflow')
+            flowdata=$('#myflow')
                     .myflow(
                     {
                         basePath:"",
@@ -62,6 +62,15 @@
                             save:{
                                 onclick:function (data) {
                                     $("#dataDiv").html(data);
+                                    $.ajax({
+                                        type:'post',
+                                        url:'workflow.do?designerDeploy&jsonData='+data,
+                                        dataType:'json',
+                                        success:function(result){
+                                            alert(result);
+                                        }
+
+                                    });
                                 }
                             }
                         }
@@ -70,6 +79,10 @@
 
 
         });
+
+        function submitForm(){
+            $("#myflow_save").click();
+        }
     </script>
     <style type="text/css">
         #designSpace {
