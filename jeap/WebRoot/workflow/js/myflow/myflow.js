@@ -232,7 +232,7 @@
 	myflow.rect = function(o, r) {
 
 		var _this = this, _uid = myflow.util.nextId(), _o = $.extend(true, {},
-				myflow.config.rect, o), _id = 'rect' + _uid, _r = r, // Raphael画笔
+				myflow.config.rect, o), _id = 'node' + _uid, _r = r, // Raphael画笔
 		_rect, _img, // 图标
 		_name, // 状态名称
 		_text, // 显示文本
@@ -1228,22 +1228,27 @@
 				}).resizable().css(myflow.config.props.attr).bind('click',
 				function() {
 					return false;
-				}), _tb = _pdiv.find('table'), _r = r, _src;
+				});
+        var _tb = [], _r = r, _src;
 		//显示属性框
 		var showpropsHandler = function(e, props, src) {
 			if (_src && _src.getId() == src.getId()) {// 连续点击不刷新
 				return;
 			}
 			_src = src;
-			$(_tb).find('.editor').each(function() {
-						var e = $(this).data('editor');
-						if (e)
-							e.destroy();
-					});
+            _tb = JSON.stringify(myflow.config.formProperty.get("fields"));
+            alert(_tb);
+            $(_tb).each(function() {
+                var e = $(this).data('editor');
+                if (e)
+                    e.destroy();
+            });
 
-			_tb.empty();
+            _tb.empty();
 
-			_pdiv.show();
+
+
+
 
 
             if (dragging) return;
@@ -1308,11 +1313,11 @@
 				$('#' + _div).data('editor', this);
 			};
 			this.destroy = function() {
+
 				$('#' + _div + ' input').each(function() {
 							_props[_k].value = $(this).val();
 							$(_r).trigger('textchange', [$(this).val(), _src]);
 						});
-				// $('body').append('destroy.');
 			};
 		}
 	};
@@ -1446,15 +1451,16 @@
 						}
 						if (data.substring(data.length - 1, data.length) == ',')
 							data = data.substring(0, data.length - 1);
-						data += '},props:{props:{';
+						data += '},';
 						for (var k in myflow.config.props.props) {
-							data += k + ":{value:'"
+                            alert(k);
+							data += k + ":'"
 									+ myflow.config.props.props[k].value
-									+ "'},";
+									+ "',";
 						}
 						if (data.substring(data.length - 1, data.length) == ',')
 							data = data.substring(0, data.length - 1);
-						data += '}}}';
+						data += '}';
 
 						myflow.config.tools.save.onclick(data);
 
