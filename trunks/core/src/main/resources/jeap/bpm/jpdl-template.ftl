@@ -9,28 +9,21 @@
     <process id="${processKey}" name="${processName}">
         <documentation>${displayName}</documentation>
         <#list flowDefTlp.nodes as item>
-            <#if item.name=="start">
-                <startEvent id="startevent1" name="Start" activiti:initiator="applyUserId"></startEvent>
+            <#if item.nodeType=="start">
+                <startEvent id="${item.props['key']}" name="${item.props['name']}" activiti:initiator="${item.props['initiator']}"></startEvent>
             </#if>
-
+            <#if item.nodeType=="task">
+                <userTask id="deptLeaderAudit" name="部门领导审批" activiti:candidateGroups="deptLeader"></userTask>
+            </#if>
+            <#if item.nodeType=="end">
+                <endEvent id="endevent1" name="End"></endEvent>
+            </#if>
         </#list>
 
-        <userTask id="deptLeaderAudit" name="部门领导审批" activiti:candidateGroups="deptLeader"></userTask>
-        <exclusiveGateway id="exclusivegateway5" name="Exclusive Gateway"></exclusiveGateway>
-        <userTask id="modifyApply" name="调整申请" activiti:assignee="${applyUserId}">
-            <extensionElements>
-                <activiti:taskListener event="complete" delegateExpression="${afterModifyApplyContentProcessor}"></activiti:taskListener>
-            </extensionElements>
-        </userTask>
-        <userTask id="hrAudit" name="人事审批" activiti:candidateGroups="hr"></userTask>
-        <exclusiveGateway id="exclusivegateway6" name="Exclusive Gateway"></exclusiveGateway>
-        <userTask id="reportBack" name="销假" activiti:assignee="${applyUserId}">
-            <extensionElements>
-                <activiti:taskListener event="complete" delegateExpression="${reportBackEndProcessor}"></activiti:taskListener>
-            </extensionElements>
-        </userTask>
-        <endEvent id="endevent1" name="End"></endEvent>
-        <exclusiveGateway id="exclusivegateway7" name="Exclusive Gateway"></exclusiveGateway>
+
+
+
+
         <sequenceFlow id="flow2" name="" sourceRef="startevent1" targetRef="deptLeaderAudit"></sequenceFlow>
         <sequenceFlow id="flow3" name="" sourceRef="deptLeaderAudit" targetRef="exclusivegateway5"></sequenceFlow>
         <sequenceFlow id="flow4" name="不同意" sourceRef="exclusivegateway5" targetRef="modifyApply">
