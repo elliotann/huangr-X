@@ -5,17 +5,17 @@
              xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
              xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC"
              xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema"
-             expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.easysoft.jeap.com/activiti/leave">
-    <process id="leave" name="leave">
-        <documentation>leave approve</documentation>
-                <startEvent id="startEvent1" name="start" activiti:initiator="applyUserId"></startEvent>
+             expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.easysoft.jeap.com/activiti/">
+    <process id="" name="??°???????¨?">
+        <documentation></documentation>
+                <startEvent id="" name="????§?1" activiti:initiator=""></startEvent>
                 <userTask id="deptLeaderAudit" name="部门领导审批" activiti:candidateGroups="deptLeader"></userTask>
                 <endEvent id="endevent1" name="End"></endEvent>
 
 
 
 
-        <exclusiveGateway id="exclusivegateway7" name="Exclusive Gateway"></exclusiveGateway>
+
         <sequenceFlow id="flow2" name="" sourceRef="startevent1" targetRef="deptLeaderAudit"></sequenceFlow>
         <sequenceFlow id="flow3" name="" sourceRef="deptLeaderAudit" targetRef="exclusivegateway5"></sequenceFlow>
         <sequenceFlow id="flow4" name="不同意" sourceRef="exclusivegateway5" targetRef="modifyApply">
@@ -40,35 +40,19 @@
             <conditionExpression xsi:type="tFormalExpression"></conditionExpression>
         </sequenceFlow>
     </process>
-    <bpmndi:BPMNDiagram id="BPMNDiagram_leave">
-        <bpmndi:BPMNPlane bpmnElement="leave" id="BPMNPlane_leave">
-            <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
-                <omgdc:Bounds height="35" width="35" x="10" y="90"></omgdc:Bounds>
+    <bpmndi:BPMNDiagram id="BPMNDiagram_">
+        <bpmndi:BPMNPlane bpmnElement="" id="BPMNPlane_">
+            <bpmndi:BPMNShape bpmnElement="" id="BPMNShape_">
+                <omgdc:Bounds height="50" width="50" x="411" y="115"></omgdc:Bounds>
             </bpmndi:BPMNShape>
-            <bpmndi:BPMNShape bpmnElement="deptLeaderAudit" id="BPMNShape_deptLeaderAudit">
-                <omgdc:Bounds height="55" width="105" x="90" y="80"></omgdc:Bounds>
+            <bpmndi:BPMNShape bpmnElement="" id="BPMNShape_">
+                <omgdc:Bounds height="50" width="100" x="390" y="260"></omgdc:Bounds>
             </bpmndi:BPMNShape>
-            <bpmndi:BPMNShape bpmnElement="exclusivegateway5" id="BPMNShape_exclusivegateway5">
-                <omgdc:Bounds height="40" width="40" x="250" y="87"></omgdc:Bounds>
+            <bpmndi:BPMNShape bpmnElement="" id="BPMNShape_">
+                <omgdc:Bounds height="50" width="50" x="395" y="440"></omgdc:Bounds>
             </bpmndi:BPMNShape>
-            <bpmndi:BPMNShape bpmnElement="modifyApply" id="BPMNShape_modifyApply">
-                <omgdc:Bounds height="55" width="105" x="218" y="190"></omgdc:Bounds>
-            </bpmndi:BPMNShape>
-            <bpmndi:BPMNShape bpmnElement="hrAudit" id="BPMNShape_hrAudit">
-                <omgdc:Bounds height="55" width="105" x="358" y="80"></omgdc:Bounds>
-            </bpmndi:BPMNShape>
-            <bpmndi:BPMNShape bpmnElement="exclusivegateway6" id="BPMNShape_exclusivegateway6">
-                <omgdc:Bounds height="40" width="40" x="495" y="87"></omgdc:Bounds>
-            </bpmndi:BPMNShape>
-            <bpmndi:BPMNShape bpmnElement="reportBack" id="BPMNShape_reportBack">
-                <omgdc:Bounds height="55" width="105" x="590" y="80"></omgdc:Bounds>
-            </bpmndi:BPMNShape>
-            <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
-                <omgdc:Bounds height="35" width="35" x="625" y="283"></omgdc:Bounds>
-            </bpmndi:BPMNShape>
-            <bpmndi:BPMNShape bpmnElement="exclusivegateway7" id="BPMNShape_exclusivegateway7">
-                <omgdc:Bounds height="40" width="40" x="250" y="280"></omgdc:Bounds>
-            </bpmndi:BPMNShape>
+
+
             <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
                 <omgdi:waypoint x="45" y="107"></omgdi:waypoint>
                 <omgdi:waypoint x="90" y="107"></omgdi:waypoint>
