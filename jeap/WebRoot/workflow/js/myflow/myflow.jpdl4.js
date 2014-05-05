@@ -28,8 +28,8 @@ $.extend(true,myflow.config.tools.states,{
 				props : {
                     key: {name:'key', label : 'ID', value:'',"width":130, editor: function(){return new myflow.editors.inputEditor();}},
                     name: {name:'name',label: '名称', value:'',"width":130, editor: function(){return new myflow.editors.textEditor();}, value:'开始'},
-                    desc: {name:'desc', label : '描述',"width":130, value:'', editor: function(){return new myflow.editors.selectEditor([{name:'aaa',value:1},{name:'bbb',value:2}]);}},
-                    initiator: {name:'initiator', label : 'initiator',"width":130, value:'', editor: function(){return new myflow.editors.selectEditor([{name:'aaa',value:1},{name:'bbb',value:2}]);}}
+                    desc: {name:'desc', label : '描述',"width":130, value:'', editor: function(){return new myflow.editors.inputEditor();}},
+                    initiator: {name:'initiator', label : 'initiator',"width":130, value:'', editor: function(){return new myflow.editors.inputEditor();}}
 				}},
 			end : {showType: 'image',type : 'end',
 				name : {text:'<<end>>'},
@@ -37,9 +37,9 @@ $.extend(true,myflow.config.tools.states,{
 				img : {src : 'img/48/end_event_terminate.png',width : 48, height:48},
 				attr : {width:50 ,heigth:50 },
 				props : {
-					text: {name:'text',label: '显示', value:'', editor: function(){return new myflow.editors.textEditor();}, value:'结束'},
-					temp1: {name:'temp1', label : '文本', value:'', editor: function(){return new myflow.editors.inputEditor();}},
-					temp2: {name:'temp2', label : '选择', value:'', editor: function(){return new myflow.editors.selectEditor([{name:'aaa',value:1},{name:'bbb',value:2}]);}}
+                    key: {name:'key', label : 'ID', value:'',"width":130, editor: function(){return new myflow.editors.inputEditor();}},
+                    name: {name:'name',label: '名称', value:'',"width":130, editor: function(){return new myflow.editors.textEditor();}, value:'结束'},
+                    desc: {name:'desc', label : '描述',"width":130, value:'', editor: function(){return new myflow.editors.inputEditor();}}
 				}},
 			'end-cancel' : {showType: 'image',type : 'end-cancel',
 				name : {text:'<<end-cancel>>'},
@@ -95,9 +95,11 @@ $.extend(true,myflow.config.tools.states,{
 				text : {text:'任务'},
 				img : {src : 'img/48/task_empty.png',width :48, height:48},
 				props : {
-					text: {name:'text', label: '显示', value:'', editor: function(){return new myflow.editors.textEditor();}, value:'任务'},
-					assignee: {name:'assignee', label: '用户', value:'', editor: function(){return new myflow.editors.selectEditor('/jeap/workflow/js/myflow/select.json');}},
-					desc: {name:'desc', label : '描述', value:'', editor: function(){return new myflow.editors.inputEditor();}}
+                    key: {name:'key', label : 'ID', value:'',"width":130, editor: function(){return new myflow.editors.inputEditor();}},
+                    name: {name:'name',label: '名称', value:'',"width":130, editor: function(){return new myflow.editors.textEditor();}, value:'开始'},
+                    desc: {name:'desc', label : '描述',"width":130, value:'', editor: function(){return new myflow.editors.inputEditor();}},
+					assignee: {name:'assignee', label: '用户', value:'', editor: function(){return new myflow.editors.selectEditor('/jeap/workflow/js/myflow/select.json');}}
+
 				}},
 			decision : {showType: 'image',type : 'decision',
                 name : {text:'<<decision>>'},
