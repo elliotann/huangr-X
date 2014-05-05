@@ -8,7 +8,13 @@
              expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.easysoft.jeap.com/activiti/${processKey}">
     <process id="${processKey}" name="${processName}">
         <documentation>${displayName}</documentation>
-        <startEvent id="startevent1" name="Start" activiti:initiator="applyUserId"></startEvent>
+        <#list flowDefTlp.nodes as item>
+            <#if item.name=="start">
+                <startEvent id="startevent1" name="Start" activiti:initiator="applyUserId"></startEvent>
+            </#if>
+
+        </#list>
+
         <userTask id="deptLeaderAudit" name="部门领导审批" activiti:candidateGroups="deptLeader"></userTask>
         <exclusiveGateway id="exclusivegateway5" name="Exclusive Gateway"></exclusiveGateway>
         <userTask id="modifyApply" name="调整申请" activiti:assignee="${applyUserId}">
@@ -28,29 +34,29 @@
         <sequenceFlow id="flow2" name="" sourceRef="startevent1" targetRef="deptLeaderAudit"></sequenceFlow>
         <sequenceFlow id="flow3" name="" sourceRef="deptLeaderAudit" targetRef="exclusivegateway5"></sequenceFlow>
         <sequenceFlow id="flow4" name="不同意" sourceRef="exclusivegateway5" targetRef="modifyApply">
-            <conditionExpression xsi:type="tFormalExpression"><![CDATA[${!deptLeaderPass}]]></conditionExpression>
+            <conditionExpression xsi:type="tFormalExpression"></conditionExpression>
         </sequenceFlow>
         <sequenceFlow id="flow5" name="同意" sourceRef="exclusivegateway5" targetRef="hrAudit">
-            <conditionExpression xsi:type="tFormalExpression"><![CDATA[${deptLeaderPass}]]></conditionExpression>
+            <conditionExpression xsi:type="tFormalExpression"></conditionExpression>
         </sequenceFlow>
         <sequenceFlow id="flow6" name="" sourceRef="hrAudit" targetRef="exclusivegateway6"></sequenceFlow>
         <sequenceFlow id="flow7" name="同意" sourceRef="exclusivegateway6" targetRef="reportBack">
-            <conditionExpression xsi:type="tFormalExpression"><![CDATA[${hrPass}]]></conditionExpression>
+            <conditionExpression xsi:type="tFormalExpression"></conditionExpression>
         </sequenceFlow>
         <sequenceFlow id="flow8" name="" sourceRef="reportBack" targetRef="endevent1"></sequenceFlow>
         <sequenceFlow id="flow9" name="不同意" sourceRef="exclusivegateway6" targetRef="modifyApply">
-            <conditionExpression xsi:type="tFormalExpression"><![CDATA[${!hrPass}]]></conditionExpression>
+            <conditionExpression xsi:type="tFormalExpression"></conditionExpression>
         </sequenceFlow>
         <sequenceFlow id="flow10" name="重新申请" sourceRef="exclusivegateway7" targetRef="deptLeaderAudit">
-            <conditionExpression xsi:type="tFormalExpression"><![CDATA[${reApply}]]></conditionExpression>
+            <conditionExpression xsi:type="tFormalExpression"></conditionExpression>
         </sequenceFlow>
         <sequenceFlow id="flow11" name="" sourceRef="modifyApply" targetRef="exclusivegateway7"></sequenceFlow>
         <sequenceFlow id="flow12" name="结束流程" sourceRef="exclusivegateway7" targetRef="endevent1">
-            <conditionExpression xsi:type="tFormalExpression"><![CDATA[${!reApply}]]></conditionExpression>
+            <conditionExpression xsi:type="tFormalExpression"></conditionExpression>
         </sequenceFlow>
     </process>
-    <bpmndi:BPMNDiagram id="BPMNDiagram_leave">
-        <bpmndi:BPMNPlane bpmnElement="leave" id="BPMNPlane_leave">
+    <bpmndi:BPMNDiagram id="BPMNDiagram_${processKey}">
+        <bpmndi:BPMNPlane bpmnElement="${processKey}" id="BPMNPlane_${processKey}">
             <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
                 <omgdc:Bounds height="35" width="35" x="10" y="90"></omgdc:Bounds>
             </bpmndi:BPMNShape>
