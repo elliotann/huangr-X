@@ -1,0 +1,6 @@
+{
+    nodes:[
+        {nodeType:'start',name:'开始1',  x:440, y:230, width:50, height:50, props:{key:{value:''},name:{value:'开始'},desc:{value:''},initiator:{value:''}}}
+       ],
+    paths:{},
+    name:'新建流程',key:'',desc:''}
