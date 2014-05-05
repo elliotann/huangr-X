@@ -10,6 +10,11 @@ import com.easysoft.member.backend.model.AdminUser;
 import com.easysoft.workflow.manager.impl.WorkflowTraceService;
 import com.easysoft.workflow.vo.DefAndDeployVo;
 import com.easysoft.workflow.vo.FlowDefTlp;
+import com.easysoft.workflow.vo.UserNode;
+import freemarker.template.Configuration;
+import freemarker.template.DefaultObjectWrapper;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
@@ -37,7 +42,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.InputStream;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -151,7 +156,34 @@ public class WorkFlowController {
     @ResponseBody
     public AjaxJson designerDeploy(String jsonData){
         AjaxJson result = new AjaxJson();
-        FlowDefTlp flowDefTlp = (FlowDefTlp)JsonUtils.jsonToBean(jsonData,FlowDefTlp.class,null);
+        Map<String,Class> map = new HashMap<String,Class>();
+        map.put("nodes", UserNode.class);
+        FlowDefTlp flowDefTlp = (FlowDefTlp)JsonUtils.jsonToBean(jsonData,FlowDefTlp.class,map);
+        Configuration cfg = new Configuration();
+        try {
+            cfg.setDirectoryForTemplateLoading(new File("E:\\jeap\\core\\src\\main\\resources\\jeap\\bpm"));
+            cfg.setObjectWrapper(new DefaultObjectWrapper());
+            Template template = cfg.getTemplate("jpdl-template.ftl","UTF-8");
+            Map data = new HashMap();
+            data.put("processKey",flowDefTlp.getKey());
+            data.put("processName",flowDefTlp.getName());
+            data.put("displayName",flowDefTlp.getDesc());
+            data.put("applyUserId","applyUserId");
+            data.put("afterModifyApplyContentProcessor","afterModifyApplyContentProcessor");
+            data.put("reportBackEndProcessor","reportBackEndProcessor");
+            data.put("flowDefTlp",flowDefTlp);
+            File dirFile = new File("E:\\jeap\\core\\src\\main\\resources\\jeap\\bpm\\temp.xml");
+            if(!dirFile.exists()){
+                dirFile.createNewFile();
+            }
+            Writer out = new BufferedWriter(new FileWriter(dirFile));
+            template.process(data,out);
+            out.flush();
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (TemplateException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
         return result;
     }
 
