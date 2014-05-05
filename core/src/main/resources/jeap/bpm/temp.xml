@@ -5,26 +5,16 @@
              xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
              xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC"
              xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema"
-             expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.easysoft.jeap.com/activiti/">
-    <process id="" name="??°???????¨?">
-        <documentation></documentation>
-            ????§?1
-        <startEvent id="startevent1" name="Start" activiti:initiator="applyUserId"></startEvent>
-        <userTask id="deptLeaderAudit" name="部门领导审批" activiti:candidateGroups="deptLeader"></userTask>
-        <exclusiveGateway id="exclusivegateway5" name="Exclusive Gateway"></exclusiveGateway>
-        <userTask id="modifyApply" name="调整申请" activiti:assignee="applyUserId">
-            <extensionElements>
-                <activiti:taskListener event="complete" delegateExpression="afterModifyApplyContentProcessor"></activiti:taskListener>
-            </extensionElements>
-        </userTask>
-        <userTask id="hrAudit" name="人事审批" activiti:candidateGroups="hr"></userTask>
-        <exclusiveGateway id="exclusivegateway6" name="Exclusive Gateway"></exclusiveGateway>
-        <userTask id="reportBack" name="销假" activiti:assignee="applyUserId">
-            <extensionElements>
-                <activiti:taskListener event="complete" delegateExpression="reportBackEndProcessor"></activiti:taskListener>
-            </extensionElements>
-        </userTask>
-        <endEvent id="endevent1" name="End"></endEvent>
+             expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.easysoft.jeap.com/activiti/leave">
+    <process id="leave" name="leave">
+        <documentation>leave approve</documentation>
+                <startEvent id="startEvent1" name="start" activiti:initiator="applyUserId"></startEvent>
+                <userTask id="deptLeaderAudit" name="部门领导审批" activiti:candidateGroups="deptLeader"></userTask>
+                <endEvent id="endevent1" name="End"></endEvent>
+
+
+
+
         <exclusiveGateway id="exclusivegateway7" name="Exclusive Gateway"></exclusiveGateway>
         <sequenceFlow id="flow2" name="" sourceRef="startevent1" targetRef="deptLeaderAudit"></sequenceFlow>
         <sequenceFlow id="flow3" name="" sourceRef="deptLeaderAudit" targetRef="exclusivegateway5"></sequenceFlow>
@@ -50,8 +40,8 @@
             <conditionExpression xsi:type="tFormalExpression"></conditionExpression>
         </sequenceFlow>
     </process>
-    <bpmndi:BPMNDiagram id="BPMNDiagram_">
-        <bpmndi:BPMNPlane bpmnElement="" id="BPMNPlane_">
+    <bpmndi:BPMNDiagram id="BPMNDiagram_leave">
+        <bpmndi:BPMNPlane bpmnElement="leave" id="BPMNPlane_leave">
             <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
                 <omgdc:Bounds height="35" width="35" x="10" y="90"></omgdc:Bounds>
             </bpmndi:BPMNShape>
