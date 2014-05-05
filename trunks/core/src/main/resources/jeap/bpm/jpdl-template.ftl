@@ -13,7 +13,7 @@
                 <startEvent id="${item.props['key']}" name="${item.props['name']}" activiti:initiator="${item.props['initiator']}"></startEvent>
             </#if>
             <#if item.nodeType=="task">
-                <userTask id="deptLeaderAudit" name="部门领导审批" activiti:candidateGroups="deptLeader"></userTask>
+                <userTask id="${item.props['key']}" name="${item.props['name']}" activiti:candidateGroups="deptLeader"></userTask>
             </#if>
             <#if item.nodeType=="end">
                 <endEvent id="endevent1" name="End"></endEvent>

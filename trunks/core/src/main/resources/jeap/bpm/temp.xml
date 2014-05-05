@@ -5,12 +5,11 @@
              xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
              xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC"
              xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema"
-             expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.easysoft.jeap.com/activiti/">
-    <process id="" name="??°???????¨?">
-        <documentation></documentation>
-                <startEvent id="" name="????§?1" activiti:initiator=""></startEvent>
-                <userTask id="deptLeaderAudit" name="部门领导审批" activiti:candidateGroups="deptLeader"></userTask>
-                <endEvent id="endevent1" name="End"></endEvent>
+             expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.easysoft.jeap.com/activiti/leave">
+    <process id="leave" name="leave">
+        <documentation>leave approve</documentation>
+                <startEvent id="startEvent1" name="start" activiti:initiator="applyUser"></startEvent>
+                <userTask id="leaderApprover" name="é?¨é?¨é???????????" activiti:candidateGroups="deptLeader"></userTask>
 
 
 
@@ -40,16 +39,13 @@
             <conditionExpression xsi:type="tFormalExpression"></conditionExpression>
         </sequenceFlow>
     </process>
-    <bpmndi:BPMNDiagram id="BPMNDiagram_">
-        <bpmndi:BPMNPlane bpmnElement="" id="BPMNPlane_">
-            <bpmndi:BPMNShape bpmnElement="" id="BPMNShape_">
-                <omgdc:Bounds height="50" width="50" x="411" y="115"></omgdc:Bounds>
+    <bpmndi:BPMNDiagram id="BPMNDiagram_leave">
+        <bpmndi:BPMNPlane bpmnElement="leave" id="BPMNPlane_leave">
+            <bpmndi:BPMNShape bpmnElement="startEvent1" id="BPMNShape_startEvent1">
+                <omgdc:Bounds height="50" width="50" x="421" y="92"></omgdc:Bounds>
             </bpmndi:BPMNShape>
-            <bpmndi:BPMNShape bpmnElement="" id="BPMNShape_">
-                <omgdc:Bounds height="50" width="100" x="390" y="260"></omgdc:Bounds>
-            </bpmndi:BPMNShape>
-            <bpmndi:BPMNShape bpmnElement="" id="BPMNShape_">
-                <omgdc:Bounds height="50" width="50" x="395" y="440"></omgdc:Bounds>
+            <bpmndi:BPMNShape bpmnElement="leaderApprover" id="BPMNShape_leaderApprover">
+                <omgdc:Bounds height="50" width="100" x="397" y="229"></omgdc:Bounds>
             </bpmndi:BPMNShape>
 
 
