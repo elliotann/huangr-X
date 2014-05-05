@@ -160,6 +160,7 @@ public class WorkFlowController {
         map.put("nodes", UserNode.class);
         FlowDefTlp flowDefTlp = (FlowDefTlp)JsonUtils.jsonToBean(jsonData,FlowDefTlp.class,map);
         Configuration cfg = new Configuration();
+        Writer out = null;
         try {
             cfg.setDirectoryForTemplateLoading(new File("E:\\jeap\\core\\src\\main\\resources\\jeap\\bpm"));
             cfg.setObjectWrapper(new DefaultObjectWrapper());
@@ -176,13 +177,19 @@ public class WorkFlowController {
             if(!dirFile.exists()){
                 dirFile.createNewFile();
             }
-            Writer out = new BufferedWriter(new FileWriter(dirFile));
+            out = new BufferedWriter(new FileWriter(dirFile));
             template.process(data,out);
             out.flush();
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         } catch (TemplateException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } finally {
+            if(out!=null) try {
+                out.close();
+            } catch (IOException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
         }
         return result;
     }
