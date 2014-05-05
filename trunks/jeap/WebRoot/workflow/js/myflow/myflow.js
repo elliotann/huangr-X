@@ -621,15 +621,15 @@
         // 函数----------------
         // 转化json字串
         this.toJson = function() {
-            var data = "{type:'" + _o.type + "',text:{text:'"
-                + _text.attr('text') + "'}, attr:{ x:"
+            var data = "{nodeType:'" + _o.type + "',name:'"
+                + _text.attr('text') + "',  x:"
                 + Math.round(_rect.attr('x')) + ", y:"
                 + Math.round(_rect.attr('y')) + ", width:"
                 + Math.round(_rect.attr('width')) + ", height:"
-                + Math.round(_rect.attr('height')) + "}, props:{";
+                + Math.round(_rect.attr('height')) + ", props:{";
             for (var k in _o.props) {
-                data += k + ":{value:'"
-                    + _o.props[k].value + "'},";
+                data += k + ":'"
+                    + _o.props[k].value + "',";
             }
             if (data.substring(data.length - 1, data.length) == ',')
                 data = data.substring(0, data.length - 1);
@@ -1339,7 +1339,6 @@
 
         // 添加状态
         $(_r).bind('addrect', function(e, type, o) {
-            // $('body').append(type+', ');
             var rect = new myflow.rect($.extend(true, {},
                 myflow.config.tools.states[type], o), _r)
             _states[rect.getId()] = rect;
@@ -1391,16 +1390,16 @@
             });
 
             $('#myflow_save').click(function() {// 保存
-                var data = '{nodes:{';
+                var data = '{nodes:[';
                 for (var k in _states) {
                     if (_states[k]) {
-                        data += _states[k].getId() + ':'
-                            + _states[k].toJson() + ',';
+
+                        data +=  _states[k].toJson() + ',';
                     }
                 }
                 if (data.substring(data.length - 1, data.length) == ',')
                     data = data.substring(0, data.length - 1);
-                data += '},paths:{';
+                data += '],paths:{';
                 for (var k in _paths) {
                     if (_paths[k]) {
                         data += _paths[k].getId() + ':'
