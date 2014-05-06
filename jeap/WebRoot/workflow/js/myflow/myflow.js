@@ -91,9 +91,9 @@
                 }
             },
             props : {
-                text : {
-                    name : 'text',
-                    label : '显示',
+                name : {
+                    name : 'name',
+                    label : '',
                     value : '',
                     editor : function() {
                         return new myflow.editors.textEditor();
@@ -678,7 +678,7 @@
     };
 
     myflow.path = function(o, r, from, to) {
-        var _this = this, _r = r, _o = $.extend(true, {}, myflow.config.path), _path, _arrow, _text, _textPos = _o.text.textPos, _ox, _oy, _from = from, _to = to, _id = 'path'
+        var _this = this, _r = r, _o = $.extend(true, {}, myflow.config.path), _path, _arrow, _text, _textPos = _o.text.textPos, _ox, _oy, _from = from, _to = to, _id = 'flow'
             + myflow.util.nextId(), _dotList, _autoText = true;
 
         // 点
@@ -839,7 +839,6 @@
                             _rt.right().left(_rt.left());
                             _rt = _rt.right();
                             rt.remove();
-                            // $('body').append('ok.');
                         }
                         break;
                     case 'small' :// 移动小点时，转变为大点，增加俩个小点
@@ -881,7 +880,7 @@
         }
 
         function dotList() {
-            // if(!_from) throw '没有from节点!';
+
             var _fromDot, _toDot, _fromBB = _from.getBBox(), _toBB = _to
                 .getBBox(), _fromPos, _toPos;
 
@@ -1027,6 +1026,7 @@
 
         // 处理点击事件，线或矩形
         var clickHandler = function(e, src) {
+
             if (!myflow.config.editable)
                 return;
             if (src && src.getId() == _id) {
@@ -1133,11 +1133,31 @@
         };
         // 转化json数据
         this.toJson = function() {
-            var data = "{from:'" + _from.getId() + "',to:'" + _to.getId()
+
+            var p = _dotList.toPathString(), mid = _dotList.midDot().pos();
+
+            var sourcePoint = p[0].substring(1,p[0].indexOf("L",1));
+            var sourcePoints = sourcePoint.split(" ");
+
+            var targetPoint = p[1].substring(p[1].lastIndexOf("L")+1,p[1].lastIndexOf("z"));
+            var targetPoints = targetPoint.split(" ");
+            var fromObj = eval("("+_from.toJson() + ")");
+            var fromId=fromObj.props.key;
+            if(fromId==""){
+                fromId= _from.getId();
+            }
+
+            var toObj = eval("("+_to.toJson() + ")");
+            var toId=toObj.props.key;
+            if(toId==""){
+                toId= _to.getId();
+            }
+
+            var data = "{id:'"+_id+"',from:'" + fromId + "',to:'" + toId
                 + "', dots:" + _dotList.toJson() + ",text:{text:'"
                 + _text.attr('text') + "',textPos:{x:"
                 + Math.round(_textPos.x) + ",y:" + Math.round(_textPos.y)
-                + "}}, props:{";
+                + "}},sourcePoint:{x:"+Math.round(sourcePoints[0])+",y:"+Math.round(sourcePoints[1])+"},targetPoint:{x:"+Math.round(targetPoints[0])+",y:"+Math.round(targetPoints[1])+"}, props:{";
             for (var k in _o.props) {
                 data += k + ":{value:'"
                     + _o.props[k].value + "'},";
@@ -1385,7 +1405,7 @@
                             y : ui.helper.offset().top
                         }
                     }]);
-                    // $('body').append($(ui).attr('type')+'drop.');
+
                 }
             });
 
@@ -1399,16 +1419,15 @@
                 }
                 if (data.substring(data.length - 1, data.length) == ',')
                     data = data.substring(0, data.length - 1);
-                data += '],paths:{';
+                data += '],paths:[';
                 for (var k in _paths) {
                     if (_paths[k]) {
-                        data += _paths[k].getId() + ':'
-                            + _paths[k].toJson() + ',';
+                        data += _paths[k].toJson() + ',';
                     }
                 }
                 if (data.substring(data.length - 1, data.length) == ',')
                     data = data.substring(0, data.length - 1);
-                data += '},';
+                data += '],';
                 for (var k in myflow.config.props.props) {
                     data += k + ":'"
                         + myflow.config.props.props[k].value
