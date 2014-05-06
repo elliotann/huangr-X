@@ -6,15 +6,11 @@
 <link href="${context }/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
 <link href="${context }/js/ligerui/skins/ligerui-icons.css" rel="stylesheet" type="text/css" />
 <link href="${context }/js/ligerui/skins/Gray/css/all.css" rel="stylesheet" type="text/css" />
-
-<script src="${context }/js/ligerui/js/core/base.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerGrid.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerToolBar.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerResizable.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerCheckBox.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerDialog.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerDrag.js" type="text/javascript"></script>
+<script src=" ${context }/js/ligerui/js/ligerui.all.js" type="text/javascript"></script>
 <script src="/jeap/form/config/ligerGrid.showFilter.js" type="text/javascript"></script>
+
+<script src="/jeap/form/config/lab.js" type="text/javascript"></script>
+
 <script src="${ctx}/admin/js/common/crud.js" type="text/javascript"></script>
 
 <script type="text/javascript">
