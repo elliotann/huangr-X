@@ -1,5 +1,7 @@
 package com.easysoft.workflow.vo;
 
+import java.util.Map;
+
 /**
  * User: andy
  * Date: 14-5-6
@@ -14,6 +16,7 @@ public class SequenceFlowVo {
     private String to;
     private Point sourcePoint;
     private Point targetPoint;
+    private Map<String,String> props;
 
     public String getId() {
         return id;
@@ -61,5 +64,13 @@ public class SequenceFlowVo {
 
     public void setTargetPoint(Point targetPoint) {
         this.targetPoint = targetPoint;
+    }
+
+    public Map<String, String> getProps() {
+        return props;
+    }
+
+    public void setProps(Map<String, String> props) {
+        this.props = props;
     }
 }
