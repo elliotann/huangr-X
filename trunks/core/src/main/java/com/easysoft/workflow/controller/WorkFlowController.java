@@ -10,6 +10,7 @@ import com.easysoft.member.backend.model.AdminUser;
 import com.easysoft.workflow.manager.impl.WorkflowTraceService;
 import com.easysoft.workflow.vo.DefAndDeployVo;
 import com.easysoft.workflow.vo.FlowDefTlp;
+import com.easysoft.workflow.vo.SequenceFlowVo;
 import com.easysoft.workflow.vo.UserNode;
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
@@ -158,6 +159,7 @@ public class WorkFlowController {
         AjaxJson result = new AjaxJson();
         Map<String,Class> map = new HashMap<String,Class>();
         map.put("nodes", UserNode.class);
+        map.put("paths", SequenceFlowVo.class);
         FlowDefTlp flowDefTlp = (FlowDefTlp)JsonUtils.jsonToBean(jsonData,FlowDefTlp.class,map);
         Configuration cfg = new Configuration();
         Writer out = null;
@@ -173,7 +175,7 @@ public class WorkFlowController {
             data.put("afterModifyApplyContentProcessor","afterModifyApplyContentProcessor");
             data.put("reportBackEndProcessor","reportBackEndProcessor");
             data.put("flowDefTlp",flowDefTlp);
-            File dirFile = new File("E:\\jeap\\core\\src\\main\\resources\\jeap\\bpm\\temp.xml");
+            File dirFile = new File("E:\\jeap\\core\\src\\main\\resources\\jeap\\bpm\\temp.bpmn20.xml");
             if(!dirFile.exists()){
                 dirFile.createNewFile();
             }
