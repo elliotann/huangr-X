@@ -14,10 +14,11 @@
 <script src="${context }/js/ligerui/js/plugins/ligerCheckBox.js" type="text/javascript"></script>
 <script src="${context }/js/ligerui/js/plugins/ligerDialog.js" type="text/javascript"></script>
 <script src="${context }/js/ligerui/js/plugins/ligerDrag.js" type="text/javascript"></script>
+<script src="/jeap/form/config/ligerGrid.showFilter.js" type="text/javascript"></script>
 <script src="${ctx}/admin/js/common/crud.js" type="text/javascript"></script>
 
 <script type="text/javascript">
-    var grid;
+    var listgrid;
     function addUser(item)
     {
         addOrUpdateDialog(item,'增加管理员','userAdmin.do?add',500,700);
@@ -25,7 +26,7 @@
     function modifyUser(item)
     {
 
-        var row = grid.getSelectedRow();
+        var row = listgrid.getSelectedRow();
         if(row==null){
             $.ligerDialog.error('请选择数据修改!');
             return;
@@ -35,7 +36,7 @@
     }
     function delUser(item)
     {
-        var row = grid.getSelectedRow();
+        var row = listgrid.getSelectedRow();
         if(row==null){
             $.ligerDialog.error('请选择数据删除!');
             return;
@@ -73,7 +74,7 @@
     }
     $(function ()
     {
-        grid =
+        listgrid =
                 $("#maingrid").ligerGrid({
                     height:'99%',
                     columns: [
@@ -93,7 +94,9 @@
                         { line: true },
                         { text: '修改', click: modifyUser, icon: 'modify' },
                         { line: true },
-                        { text: '删除', click: delUser, img: '${context }/js/ligerui/skins/icons/delete.gif' }
+                        { text: '删除', click: delUser, img: '${context }/js/ligerui/skins/icons/delete.gif' },
+                        { line: true },
+                        { text: '高级自定义查询', click: grid_search, icon: 'search2' }
                     ]
                     }
                 });
@@ -106,7 +109,11 @@
     {
         g.deleteSelectedRow();
     }
-
+    function grid_search()
+    {
+        listgrid.options.data = $.extend(true, {}, listgrid.getData());
+        listgrid.showFilter();
+    }
 </script>
 
 
