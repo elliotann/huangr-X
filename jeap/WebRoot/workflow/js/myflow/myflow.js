@@ -1159,8 +1159,8 @@
                 + Math.round(_textPos.x) + ",y:" + Math.round(_textPos.y)
                 + "}},sourcePoint:{x:"+Math.round(sourcePoints[0])+",y:"+Math.round(sourcePoints[1])+"},targetPoint:{x:"+Math.round(targetPoints[0])+",y:"+Math.round(targetPoints[1])+"}, props:{";
             for (var k in _o.props) {
-                data += k + ":{value:'"
-                    + _o.props[k].value + "'},";
+                data += k + ":'"
+                    + _o.props[k].value + "',";
             }
             if (data.substring(data.length - 1, data.length) == ',')
                 data = data.substring(0, data.length - 1);
