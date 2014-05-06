@@ -13,6 +13,7 @@ public class FlowDefTlp {
     private String name;
     private String desc;
     private List<UserNode> nodes;
+    private List<SequenceFlowVo> paths;
     public String getKey() {
         return key;
     }
@@ -43,5 +44,13 @@ public class FlowDefTlp {
 
     public void setNodes(List<UserNode> nodes) {
         this.nodes = nodes;
+    }
+
+    public List<SequenceFlowVo> getPaths() {
+        return paths;
+    }
+
+    public void setPaths(List<SequenceFlowVo> paths) {
+        this.paths = paths;
     }
 }
