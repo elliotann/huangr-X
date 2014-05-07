@@ -42,7 +42,9 @@ public class Page implements Serializable {
 	public Page(long start, long totalSize, int pageSize, Object data) {
 		setParam(start, totalSize, pageSize, data);
 	}
-
+    public void setPageSize(int pageSize){
+        this.pageSize = pageSize;
+    }
 	public void setParam(long start, long totalSize, int pageSize, Object data) {
 		this.pageSize = pageSize;
 		this.start = start;
