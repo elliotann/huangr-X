@@ -27,9 +27,6 @@
     $.ligerDefaults.Filter.operators['string'] =
             $.ligerDefaults.Filter.operators['text'] =
                     ["like" , "equal", "notequal", "startwith", "endwith" ];
-
-    //这个例子展示了本地过滤，你也可以在服务器端过滤(将过滤规则组成json，以一个参数提交给服务器)
-    //相见ligerGrid.showFilter.js
     $(function ()
     {
 
@@ -47,8 +44,8 @@
                                 return "禁用";
                             }
                         } }
-                    ], url:'userAdmin.do?dataGrid&ajax=yes',  pageSize:30 ,rownumbers:true,
-                    toolbar: { items: [
+                    ], url:'userAdmin.do?dataGrid&ajax=yes',  pageSize:10 ,rownumbers:true,pagesizeParmName:'pageSize',
+                            toolbar: { items: [
                         { text: '增加', click: addUser, icon: 'add' },
                         { line: true },
                         { text: '修改', click: modifyUser, icon: 'modify' },
@@ -62,13 +59,14 @@
         //创建表单结构
        $("#searchForm").ligerForm({
             fields: [
-                { display: "产品名称", name: "ProductName", newline: true, type: "text" }
+                { display: "用户名", name: "username",  type: "text" }
             ]
         });
         var AllProductData;
         //搜索 按钮
         lab.appendSearchButtons($("#searchForm"), listgrid, false, function ()
         {
+            alert("here");
             listgrid.options.data = $.extend(true, {}, AllProductData);
         });
         //搜索框 收缩/展开
@@ -108,42 +106,9 @@
             return;
         }
 
-
-        $.ligerDialog.confirm('确定删除？', function (yes) {
-            if(yes){
-                $.ajax({
-                    type: "GET",
-                    url: "userAdmin.do?delete&id="+row.userid,
-                    data:"ajax=true&rmd="+ new Date().getTime(),
-                    dataType:"json",
-                    success: function(result){
-                        if(result.success){
-                            $.ligerDialog.waitting('正在保存中,请稍候...');
-                            setTimeout(function ()
-                            {
-                                $.ligerDialog.closeWaitting();
-                                grid.loadData();
-                            }, 1000);
-
-                        }else{
-                            $.ligerDialog.alert(result.msg, '提示', type);
-
-                        }
-                    },error:function(e){
-                        $.ligerDialog.alert('出错了!', '提示', type)
-
-                    }
-                });
-            }
-        });
-
-
-
+        delObj(item,"userAdmin.do?delete&id=",row.userid);
     }
 </script>
-
-
-
 
 <div class="grid">
     <div>

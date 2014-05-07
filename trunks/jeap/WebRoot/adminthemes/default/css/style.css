@@ -110,7 +110,7 @@ position:absolute;
 /*======左侧菜单样式=====*/
 #leftMenus{
 	border-bottom:3px solid #D3E9F8;border-right:2px solid #D3E9F8;
-	width:143px;
+	width:100%;
 	float:left;
 	background:#f4f9ff;
 }
