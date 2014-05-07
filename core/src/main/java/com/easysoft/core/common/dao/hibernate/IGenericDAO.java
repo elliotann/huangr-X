@@ -1,19 +1,18 @@
 package com.easysoft.core.common.dao.hibernate;
 
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-
-import org.hibernate.Session;
-import org.hibernate.criterion.DetachedCriteria;
-
 import com.easysoft.core.common.dao.hibernate.qbc.CriteriaQuery;
 import com.easysoft.core.common.dao.hibernate.qbc.HqlQuery;
 import com.easysoft.core.common.vo.DataTableReturn;
 import com.easysoft.core.common.vo.json.DataGridReturn;
 import com.easysoft.framework.db.Page;
 import com.easysoft.framework.db.core.DBTable;
+import org.hibernate.Session;
+import org.hibernate.criterion.DetachedCriteria;
+
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 /**
  * User: andy
@@ -23,6 +22,12 @@ import com.easysoft.framework.db.core.DBTable;
  * @since:
  */
 public interface IGenericDAO<T> {
+    /**
+     * 加载全部实体数据
+     * @param entityClass
+     * @return
+     */
+    public List<T> queryForAll(Class<T> entityClass);
     /**保存实体**/
     public  <T> Serializable save(T entity);
     /**保存更新实体**/
@@ -215,14 +220,7 @@ public interface IGenericDAO<T> {
      * @return
      */
     public <T> T getEntity(Class entityName, Serializable id);
-    /**
-     * 加载全部实体
-     *
-     * @param <T>
-     * @param entityClass
-     * @return
-     */
-    public <T> List<T> loadAll(final Class<T> entityClass);
+
 
     /**
      * 根据ID删除实体

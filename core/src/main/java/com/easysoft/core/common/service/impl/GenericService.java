@@ -32,9 +32,18 @@ import java.util.Map;
 @Transactional
 public class GenericService<T> extends BaseSupport<T> implements IGenericService<T> {
     private Class<T> entityClass;
-
     @Autowired
     private IGenericDAO genericDAO;
+
+    /**
+     * 加载全部实体
+     * @param entityClass
+     * @return
+     */
+    public List<T> queryForAll(final Class<T> entityClass) {
+        return genericDAO.queryForAll(entityClass);
+    }
+
     /**
      * 获取所有数据库表
      *
@@ -88,16 +97,6 @@ public class GenericService<T> extends BaseSupport<T> implements IGenericService
         return (T)genericDAO.get(class1, id);
     }
 
-    /**
-     * 根据实体名返回全部对象
-     *
-     * @param <T>
-     * @param clas
-     * @return
-     */
-    public <T> List<T> getList(Class clas) {
-        return genericDAO.loadAll(clas);
-    }
 
     /**
      * 根据实体名获取对象
@@ -129,16 +128,7 @@ public class GenericService<T> extends BaseSupport<T> implements IGenericService
         return genericDAO.findByProperty(entityClass, propertyName, value);
     }
 
-    /**
-     * 加载全部实体
-     *
-     * @param <T>
-     * @param entityClass
-     * @return
-     */
-    public <T> List<T> loadAll(final Class<T> entityClass) {
-        return genericDAO.loadAll(entityClass);
-    }
+
 
     public <T> T singleResult(String hql) {
         return (T)genericDAO.singleResult(hql);

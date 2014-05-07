@@ -116,7 +116,7 @@ public class LoginProcessor implements Processor {
 			if(!valid_code.equals(realCode)){
 				throw new EopException("验证码输入错误");
 			}
-			
+
 			/*
 			 * 登录校验
 			 */
