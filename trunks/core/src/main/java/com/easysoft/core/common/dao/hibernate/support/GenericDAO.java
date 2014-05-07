@@ -340,7 +340,7 @@ public class GenericDAO<T> implements IGenericDAO<T> {
         }
         return t;
     }
-    public <T> List<T> loadAll(final Class<T> entityClass) {
+    public  List<T> queryForAll(Class<T> entityClass) {
         Criteria criteria = createCriteria(entityClass);
         return criteria.list();
     }

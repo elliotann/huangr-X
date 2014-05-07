@@ -1,15 +1,15 @@
 package com.easysoft.member.backend.controller;
 
-import com.easysoft.core.common.vo.json.DataGridReturn;
-import com.easysoft.core.context.EsfContext;
 import com.easysoft.core.common.controller.BaseController;
 import com.easysoft.core.common.vo.json.AjaxJson;
+import com.easysoft.core.common.vo.json.DataGridReturn;
+import com.easysoft.core.context.EsfContext;
+import com.easysoft.framework.db.Page;
 import com.easysoft.framework.utils.JsonUtils;
 import com.easysoft.member.backend.manager.IAdminUserManager;
 import com.easysoft.member.backend.manager.IPermissionManager;
 import com.easysoft.member.backend.manager.IRoleManager;
 import com.easysoft.member.backend.model.AdminUser;
-import com.easysoft.member.backend.model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,7 +43,7 @@ public class UserAdminController extends BaseController{
         return new ModelAndView("core/admin/user/useradmin");
     }
     @RequestMapping(params = {"dataGrid"})
-    public ModelAndView dataGrid(){
+    public ModelAndView dataGrid(Page page){
         List userList= this.adminUserManager.list();
         DataGridReturn dataGridReturn = new DataGridReturn(userList.size(),userList);
         String json = JsonUtils.beanToJson(dataGridReturn);

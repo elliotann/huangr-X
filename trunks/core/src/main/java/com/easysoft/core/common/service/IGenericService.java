@@ -1,19 +1,18 @@
 package com.easysoft.core.common.service;
 
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-
-import org.hibernate.Session;
-import org.hibernate.criterion.DetachedCriteria;
-
 import com.easysoft.core.common.dao.hibernate.PageList;
 import com.easysoft.core.common.dao.hibernate.qbc.CriteriaQuery;
 import com.easysoft.core.common.dao.hibernate.qbc.HqlQuery;
 import com.easysoft.core.common.vo.DataTableReturn;
 import com.easysoft.core.common.vo.json.DataGridReturn;
 import com.easysoft.framework.db.core.DBTable;
+import org.hibernate.Session;
+import org.hibernate.criterion.DetachedCriteria;
+
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 /**
  * User: andy
@@ -23,6 +22,12 @@ import com.easysoft.framework.db.core.DBTable;
  * @since:
  */
 public interface IGenericService<T> {
+    /**
+     * 加载全部实体
+     * @param entityClass
+     * @return 根据实体类类型加载所有数据
+     */
+    public List<T> queryForAll(final Class<T> entityClass);
     public void dropTable(String sql);
 
     /**
@@ -87,14 +92,7 @@ public interface IGenericService<T> {
     public <T> List<T> findByProperty(Class<T> entityClass,
                                       String propertyName, Object value);
 
-    /**
-     * 加载全部实体
-     *
-     * @param <T>
-     * @param entityClass
-     * @return
-     */
-    public <T> List<T> loadAll(final Class<T> entityClass);
+
 
     /**
      * 删除实体主键删除
@@ -155,8 +153,6 @@ public interface IGenericService<T> {
      */
     public <T> List<T> findByPropertyisOrder(Class<T> entityClass,
                                              String propertyName, Object value, boolean isAsc);
-
-    public <T> List<T> getList(Class clas);
 
     public <T> T singleResult(String hql);
 
