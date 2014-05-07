@@ -171,7 +171,7 @@ $(function(){
 })
 
 function f_addTab(tabid, text, url) {
-    tab.addTabItem({ tabid: tabid, text: text, url: url });
+    tab.addTabItem({ tabid: tabid, text: text, url: url,height:700 });
 }
 
 
