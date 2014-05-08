@@ -334,7 +334,9 @@ public class MenuJsonGetter extends AbstractFacadeProcessor {
         menuItem.append(",text:'");
         menuItem.append(title);
         menuItem.append("'");
-
+        menuItem.append(",ico:'");
+        menuItem.append(menu.getIco());
+        menuItem.append("'");
         menuItem.append(",url:'");
         menuItem.append(url);
         menuItem.append("'");
