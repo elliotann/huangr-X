@@ -85,6 +85,7 @@ var BackendUi={
 		var leftMenu = $("#leftMenus");
 		leftMenu.empty();
 		$.each(children,function(k,menu){
+
             var item = $('<div title="' + menu.text + '"><ul class="menulist"></ul></div>');
 			if(this.children){
 				$.each(this.children,function(k,submenu){
@@ -94,7 +95,8 @@ var BackendUi={
                         tabid: "tabid" + submenu.id,
                         menuno: submenu.id
                     });
-                    $("img", subitem).attr("src", "/jeap/adminthemes/default/images/system/70.png");
+
+                    $("img", subitem).attr("src", submenu.ico);
                     $("span", subitem).html(submenu.text ||submenu.text);
                     $("ul:first", item).append(subitem);
 
@@ -171,7 +173,7 @@ $(function(){
 })
 
 function f_addTab(tabid, text, url) {
-    tab.addTabItem({ tabid: tabid, text: text, url: url,height:700 });
+    tab.addTabItem({ tabid: tabid, text: text, url: url,height:790 });
 }
 
 

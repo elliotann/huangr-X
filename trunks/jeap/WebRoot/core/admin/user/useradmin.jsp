@@ -66,7 +66,7 @@
         //搜索 按钮
         lab.appendSearchButtons($("#searchForm"), listgrid, false, function ()
         {
-            alert("here");
+
             listgrid.options.data = $.extend(true, {}, AllProductData);
         });
         //搜索框 收缩/展开

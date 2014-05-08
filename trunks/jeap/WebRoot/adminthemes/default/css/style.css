@@ -161,7 +161,7 @@ position:absolute;
 	float:left;
 }
 #right_content{
-	overflow-y:auto;
+	overflow-y:hidden;
 }
 #short_msg {
     border: 1px solid #C4D5E0;

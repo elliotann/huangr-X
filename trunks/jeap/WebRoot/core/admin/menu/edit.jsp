@@ -56,7 +56,7 @@
             {
                 $("form .l-text,.l-textarea").ligerHideTip();
                 $("#form1").ajaxSubmit({
-                    url :"menu.do?saveAdd&ajax=true",
+                    url :"menu.do?saveEdit&ajax=true",
                     type : "POST",
                     dataType:"json",
                     success : function(result) {
@@ -106,13 +106,14 @@
     .l-verify-tip{ left:230px; top:120px;}
 </style>
 <form name="form1" method="post"   id="form1" enctype="multipart/form-data">
+    <input type="hidden" name="id" value="${menu.id}" />
     <div>
     </div>
     <table cellpadding="0" cellspacing="0" class="l-table-edit" >
         <tr>
             <td align="right" class="l-table-edit-td">名称:</td>
             <td align="left" class="l-table-edit-td">
-                <input name="title" type="text" id="title" ltype="text"  validate="{required:true,maxlength:60}" />
+                <input name="title" type="text" id="title" ltype="text" value="${menu.title}"  validate="{required:true,maxlength:60}" />
             </td>
             <td align="left"></td>
         </tr>
@@ -120,8 +121,8 @@
             <td align="right" class="l-table-edit-td">类型:</td>
             <td align="left" class="l-table-edit-td">
                 <select  id="menutype" name="menutype" ltype="select">
-                    <option value="2" >应用</option>
-                    <option value="1" >系统</option>
+                    <option value="2" <c:if test="${menu.menutype==2}">selected="true"</c:if>>应用</option>
+                    <option value="1" <c:if test="${menu.menutype==1}">selected="true"</c:if>>系统</option>
                 </select>
             </td>
             <td align="left"></td>
@@ -131,8 +132,9 @@
             <td align="left" class="l-table-edit-td">
                 <select  id="pid" name="pid" ltype="select">
                     <option value="0">顶级菜单</option>
-                    <c:forEach var="menu" items="${menuList }">
-                        <option value="${menu.id}" >${menu.title}</option>
+                    <c:forEach var="menu1" items="${menuList }">
+
+                        <option value="${menu1.id}" <c:if test="${menu.pid == menu1.id}">selected="true"</c:if> >${menu1.title}</option>
                     </c:forEach>
                 </select>
             </td>
@@ -141,28 +143,29 @@
         <tr>
             <td align="right" class="l-table-edit-td">url:</td>
             <td align="left" class="l-table-edit-td">
-                <input name="url" type="text" id="url" ltype="text"  validate="{required:true}" />
+                <input name="url" type="text" id="url" ltype="text" value="${menu.url}" validate="{required:true}" />
             </td>
             <td align="left"></td>
         </tr>
         <tr>
             <td align="right" class="l-table-edit-td">target:</td>
             <td align="left" class="l-table-edit-td">
-                <input name="target" type="text" id="target" ltype="text"/>
+                <input name="target" type="text" id="target" ltype="text" value="${menu.target}"/>
             </td>
             <td align="left"></td>
         </tr>
         <tr>
             <td align="right" class="l-table-edit-td">排序:</td>
             <td align="left" class="l-table-edit-td">
-                <input name="sorder" type="text" id="sorder" ltype="text" validate="{required:true}" value="0"/>
+                <input name="sorder" type="text" id="sorder" ltype="text" validate="{required:true}" value="0" value="${menu.sorder}"/>
             </td>
             <td align="left"></td>
         </tr>
         <tr>
             <td align="right" class="l-table-edit-td">图标:</td>
             <td align="left" class="l-table-edit-td">
-                <input name="icoFile" type="file" id="ico" ltype="file" validate="{required:true}" value="0"/>
+                <input name="ico" type="hidden" id="ico" value="${menu.ico}"/>
+                <input name="icoFile" type="file" id="icoFile" ltype="file" validate="{required:true}" value="0"/>
             </td>
             <td align="left"></td>
         </tr>
