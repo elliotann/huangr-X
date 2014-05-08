@@ -24,7 +24,7 @@ public class Menu extends Resource {
 
 	private List<Menu> children;
 	private boolean hasChildren ;
-
+    private String ico;
 
 	@NotDbField
 	public boolean getHasChildren() {
@@ -99,5 +99,12 @@ public class Menu extends Resource {
 	public void setAppid(String appid) {
 		this.appid = appid;
 	}
-    
+
+    public String getIco() {
+        return ico;
+    }
+
+    public void setIco(String ico) {
+        this.ico = ico;
+    }
 }
