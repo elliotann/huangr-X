@@ -12,6 +12,7 @@
 <script src="${context }/js/ligerui/js/plugins/ligerDrag.js"></script>
 <script src="${context }/js/ligerui/js/plugins/ligerDialog.js"></script>
 <script src="${context }/js/ligerui/js/plugins/ligerToolBar.js" type="text/javascript"></script>
+<script src="${ctx}/admin/js/common/crud.js" type="text/javascript"></script>
 <style>
     .message {
         width: 99%;
@@ -23,7 +24,7 @@
     }
 </style>
 <script type="text/javascript">
-    var grid;
+    var listgrid;
     $(function ()
     {
         window.dialog = $.ligerDialog.open({
@@ -40,20 +41,22 @@
             dialog.show();
         }
 
-        grid = $("#maingrid").ligerGrid({
+        listgrid = $("#maingrid").ligerGrid({
                     height:'99%',
                     columns: [
-                        { display: '名称', name: 'title', id: 'title',  align: 'left' },
-                        { display: 'url', name: 'url', id: 'url', width: 250, align: 'left' },
-                        { display: '类型', name: 'menutype', id:'menutype',width: 100, type: 'int', align: 'left',render:function(rowdata,index,value){
+                        { display: '名称', name: 'title', id: 'title',  align: 'left',width:250 },
+                        { display: 'url', name: 'url', id: 'url', width: 400, align: 'left' },
+                        { display: '类型', name: 'menutype', id:'menutype',width: 100, type: 'int', align: 'center',render:function(rowdata,index,value){
                             if(value==1){
                                 return "系统菜单";
                             }else{
                                 return "应用菜单";
                             }
                         } },
-                        { display: '排序', name: 'sorder', align: 'left',width:100 },
-                        { display: 'target', name: 'target', align: 'left',width: 50 }
+                        { display: 'target', name: 'target', align: 'left',width: 50 },
+                        { display: '排序', name: 'sorder', align: 'center',width:100 },
+                        { display: '图标', name: 'sorder', align: 'left',width:400 }
+
                     ], width: '100%', usePager:false,
                     url: 'menu.do?dataGrid&ajax=yes', alternatingRow: false, tree: {
                         columnId: 'title',
@@ -63,7 +66,7 @@
                     },toolbar: { items: [
                         { text: '增加', click: addMenu, icon: 'add' },
                         { line: true },
-                        { text: '修改', click: itemclick, icon: 'modify' },
+                        { text: '修改', click: updateMenu, icon: 'modify' },
                         { line: true },
                         { text: '删除', click: itemclick, img: '${context }/js/ligerui/skins/icons/delete.gif' }
                     ]
@@ -74,29 +77,29 @@
 
     function getParent()
     {
-        var row = grid.getParent(grid.getSelectedRow());
+        var row = listgrid.getParent(listgrid.getSelectedRow());
         alert(JSON.stringify(row));
     }
     function getSelected()
     {
-        var row = grid.getSelectedRow();
+        var row = listgrid.getSelectedRow();
         if (!row) { alert('请选择行'); return; }
         alert(JSON.stringify(row));
     }
     function getData()
     {
-        var data = grid.getData();
+        var data = listgrid.getData();
         alert(JSON.stringify(data));
     }
     function hasChildren()
     {
-        var row = grid.getSelectedRowObj();
-        alert(grid.hasChildren(row));
+        var row = listgrid.getSelectedRowObj();
+        alert(listgrid.hasChildren(row));
     }
     function isLeaf()
     {
-        var row = grid.getSelectedRowObj();
-        alert(grid.isLeaf(row));
+        var row = listgrid.getSelectedRowObj();
+        alert(listgrid.isLeaf(row));
     }
     function itemclick(item){
 
@@ -105,23 +108,20 @@
 
 
     function addMenu(item){
-        $.ligerDialog.open({
-            name:'openDia',
-            height:400,
-            width: 400,
-            title : '增加菜单',
-            url: 'menu.do?add',
-            showMax: false,
-            showToggle: true,
-            showMin: false,
-            isResize: true,
-            slide: false,
-            buttons:[ { text: '确定', onclick: btnOK }, { text: '取消', onclick: function (item, dialog) { dialog.close(); } } ]
-        });
+        addOrUpdateDialog(item,'增加菜单','menu.do?add',400,400);
+
     }
-    function btnOK(item,dialog){
-        openDia.formSubmit();
+
+    function updateMenu(item){
+        var row = listgrid.getSelectedRow();
+        if(row==null){
+            $.ligerDialog.error('请选择数据修改!');
+            return;
+        }
+        addOrUpdateDialog(item,'修改菜单','menu.do?edit&id='+row.id,500,700);
+
     }
+
 </script>
 
 <div class="searchBar">
