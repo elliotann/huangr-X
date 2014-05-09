@@ -102,7 +102,13 @@
         alert(listgrid.isLeaf(row));
     }
     function delMenu(item){
+        var row = listgrid.getSelectedRow();
+        if(row==null){
+            $.ligerDialog.error('请选择数据删除!');
+            return;
+        }
 
+        delObj(item,"menu.do?delete&id=",row.id);
     }
 
 
