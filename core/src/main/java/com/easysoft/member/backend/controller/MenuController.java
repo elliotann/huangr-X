@@ -135,6 +135,20 @@ public class MenuController extends BaseController {
         }
         return icoPath+file.getOriginalFilename();
     }
+    @RequestMapping(params = {"delete"})
+    @ResponseBody
+    public AjaxJson delete(Integer id){
+        AjaxJson json = new AjaxJson();
+        try{
+            this.menuManager.delete(id);
+            json.setMsg("删除菜单成功");
+        }catch(RuntimeException e){
+            this.logger.error(e.getMessage(), e);
+            json.setMsg(e.getMessage());
+            json.setSuccess(false);
+        }
+        return json;
+    }
 
 
 }
