@@ -80,7 +80,7 @@
             $.ligerDialog.error('请选择数据修改!');
             return;
         }
-        addOrUpdateDialog(null,'权限点','auth.do?add&ajax=yes&roleId='+row.roleid,300,500);
+        addOrUpdateDialog(null,'权限点','auth.do?add&ajax=yes&roleId='+row.roleid,500,700);
     }
 
 
