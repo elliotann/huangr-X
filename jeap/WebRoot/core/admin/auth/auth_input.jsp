@@ -13,6 +13,7 @@
 <script src="${context }/js/ligerui/js/plugins/ligerTextBox.js" type="text/javascript"></script>
 <script src="${context }/js/ligerui/js/plugins/ligerTip.js" type="text/javascript"></script>
 <script src="${context}/js/ligerui/js/plugins/ligerLayout.js" type="text/javascript"></script>
+<script src="${context }/js/ligerui/js/plugins/ligerGrid.js" type="text/javascript"></script>
 
 <script src="${context }/js/plug-in/jquery-validation/jquery.validate.min.js"></script>
 <script src="${context }/js/plug-in/jquery-validation/jquery.metadata.js" type="text/javascript"></script>
@@ -24,6 +25,7 @@
 <script type="text/javascript">
     var dialog1 = frameElement.dialog;
     var manager;
+    var listgrid;
     $(function (){
 
         $("form").ligerForm();
@@ -32,14 +34,79 @@
                     data:menu.app,
                     idFieldName :'id',
                     parentIDFieldName :'pid',
-                    nodeWidth : 200
+                    nodeWidth : 200,
+                    onSelect: onSelect
                 });
 
         manager = $("#tree1").ligerGetTreeManager();
         manager.collapseAll();
         $("#layout1").ligerLayout({ leftWidth: 150, allowLeftResize: false, allowLeftCollapse: true, space: 2 });
-    });
+        listgrid = $("#maingrid4").ligerGrid({
+            columns: [
+                { display: 'ID', name: 'id', width: 50 },
+                { display: '菜单名称', name: 'title', align: 'left',width: 50},
+                {
+                    display: '按钮权限', name: 'Menu_icon', align: 'left',  render: function (item) {
+                    //var html = "<div style='vertical-align:middle;color: #FF0000;background:yellow'>";
+                    var html = "<div style='vertical-align:middle;'>";
+                    var returntxt = item.Sysroler;
 
+                    var arrstr = new Array();
+                    var arrstr1 = new Array();
+                    var arrid = new Array();
+                    var arrname = new Array();
+                    arrstr = returntxt.split(",");
+
+                    for (var j = 0; j < arrstr.length - 1; j++) {
+                        arrstr1 = arrstr[j].split("|");
+                        arrid = arrstr1[0];
+                        arrname = arrstr1[1];
+                        html += "<input type='checkbox' ";
+                        html += "value='" + arrid + "' ";
+                        html += " id='b" + arrid + "'";
+                        html += ">";
+                        html += arrname;
+                        html += "&nbsp;&nbsp;";
+                    }
+                    html += "</div>";
+                    return html;
+                }
+                }
+
+            ],
+            rowid: "Menu_id",
+            dataAction: 'local',
+            pageSize: 30,
+            pageSizeOptions: [20, 30, 50, 100],
+            enabledEdit: true,
+            checkbox: true,
+
+            width: '100%', height: '100%',
+            usePager: false,
+            tree: { columnName: 'Menu_name' },
+            heightDiff: -3
+        });
+    });
+    function onSelect(node){
+        alert(node.data.id);
+        //加载数据
+        var manager = $("#maingrid4").ligerGetGridManager();
+
+
+        $.ajax({
+            type: 'post',
+            url: "auth.do?getMenuTreeById&id=" + node.data.id+"&ajax=true",
+            dataType:'json',
+            success: function (data) {
+                alert(data.obj);
+                manager.loadData(data);
+
+            },
+            error: function (e) {
+
+            }
+        });
+    }
     function submitForm(){
 
         var notes = manager.getChecked();
