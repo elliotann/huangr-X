@@ -68,7 +68,7 @@
                         { line: true },
                         { text: '修改', click: updateMenu, icon: 'modify' },
                         { line: true },
-                        { text: '删除', click: itemclick, img: '${context }/js/ligerui/skins/icons/delete.gif' }
+                        { text: '删除', click: delMenu, img: '${context }/js/ligerui/skins/icons/delete.gif' }
                     ]
                     }
                 }
@@ -101,7 +101,7 @@
         var row = listgrid.getSelectedRowObj();
         alert(listgrid.isLeaf(row));
     }
-    function itemclick(item){
+    function delMenu(item){
 
     }
 
