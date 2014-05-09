@@ -2,9 +2,13 @@ package com.easysoft.member.backend.controller;
 
 import com.easysoft.core.common.controller.BaseController;
 import com.easysoft.core.common.vo.json.AjaxJson;
+import com.easysoft.core.common.vo.json.DataGridReturn;
+import com.easysoft.core.manager.IMenuManager;
+import com.easysoft.framework.utils.JsonUtils;
 import com.easysoft.framework.utils.StringUtil;
 import com.easysoft.member.backend.manager.IAuthActionManager;
 import com.easysoft.member.backend.model.AuthAction;
+import com.easysoft.member.backend.model.Menu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +32,8 @@ import java.util.Map;
 public class AuthController extends BaseController {
     @Autowired
     private IAuthActionManager authActionManager;
+    @Autowired
+    private IMenuManager menuManager;
     @RequestMapping(params = {"add"})
     public ModelAndView add(int roleId){
         Map<String,Object> map = new HashMap<String,Object>();
@@ -108,6 +114,16 @@ public class AuthController extends BaseController {
             result.setSuccess(false);
             result.setMsg(e.getMessage());
         }
+        return result;
+    }
+    @RequestMapping(params = {"getMenuTreeById"})
+    @ResponseBody
+    public AjaxJson getMenuTreeById(Integer id){
+        AjaxJson result = new AjaxJson();
+        List<Menu> menus = menuManager.getMenuTree(id);
+        DataGridReturn dataGridReturn = new DataGridReturn(menus.size(),menus);
+        String json = JsonUtils.beanToJson(dataGridReturn);
+        result.setObj(json);
         return result;
     }
 }
