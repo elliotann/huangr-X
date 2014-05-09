@@ -12,6 +12,8 @@
 <script src="${context }/js/ligerui/js/plugins/ligerSpinner.js" type="text/javascript"></script>
 <script src="${context }/js/ligerui/js/plugins/ligerTextBox.js" type="text/javascript"></script>
 <script src="${context }/js/ligerui/js/plugins/ligerTip.js" type="text/javascript"></script>
+<script src="${context}/js/ligerui/js/plugins/ligerLayout.js" type="text/javascript"></script>
+
 <script src="${context }/js/plug-in/jquery-validation/jquery.validate.min.js"></script>
 <script src="${context }/js/plug-in/jquery-validation/jquery.metadata.js" type="text/javascript"></script>
 <script src="${context }/js/plug-in/jquery-validation/messages_cn.js" type="text/javascript"></script>
@@ -23,6 +25,7 @@
     var dialog1 = frameElement.dialog;
     var manager;
     $(function (){
+
         $("form").ligerForm();
         $("#tree1").ligerTree(
                 {
@@ -34,6 +37,7 @@
 
         manager = $("#tree1").ligerGetTreeManager();
         manager.collapseAll();
+        $("#layout1").ligerLayout({ leftWidth: 150, allowLeftResize: false, allowLeftCollapse: true, space: 2 });
     });
 
     function submitForm(){
@@ -74,9 +78,23 @@
     .l-table-edit-td{ padding:4px;}
     .l-button-submit,.l-button-test{width:80px; float:left; margin-left:10px; padding-bottom:2px;}
     .l-verify-tip{ left:230px; top:120px;}
+    #layout1{  width:100%; margin:40px;  height:100%;
+        margin:0; padding:0;}
 </style>
+<div id="layout1">
+    <div position="left" title="系统目录">
+        <div id="treediv1" style="width: 250px; height: 100%; margin: -1px; float: left; border: 1px solid #ccc; overflow: auto;">
+            <ul id="tree1"></ul>
+        </div>
+    </div>
+    <div position="center">
 
 
+        <div id="maingrid4" style="margin: -1px;"></div>
+    </div>
+</div>
+
+<%--
 <form name="objForm" method="post"   id="objForm">
     <input type="hidden" name="isEdit" id="isEdit" value="${isEdit }" />
     <input type="hidden" name="roleId" value="${roleId}" id="roleId" />
@@ -100,4 +118,4 @@
         </tr>
 
     </table>
-</form>
+</form>--%>

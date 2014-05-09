@@ -31,9 +31,9 @@ var mainpage=false;
 
     <script type="text/javascript" src="${context}/js/plug-in/jquery/jquery-1.8.3.js"></script>
     <script type="text/javascript" src="${staticserver }/js/admin/jeap.js"></script>
-    <script type="text/javascript" src="${staticserver }/js/common/SelectTree.js"></script>
-    <script type="text/javascript" src="<%=path %>/editor/ckeditor362/ckeditor.js"></script>
-    <script src="${context }/js/ligerui/js/ligerui.all.js" type="text/javascript"></script>
+
+
+
 
 
     <link href="${context}/css/global.css" rel="stylesheet" type="text/css" />
@@ -41,9 +41,7 @@ var mainpage=false;
     <link href="${context}/css/grid.css" rel="stylesheet" type="text/css" />
     <link href="${context}/css/validate.css" rel="stylesheet" type="text/css" />
     <link href="${context}/css/dialog.css" rel="stylesheet" type="text/css" />
-    <link href="${context }/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
-    <link href="${context }/js/ligerui/skins/ligerui-icons.css" rel="stylesheet" type="text/css" />
-    <link href="${context }/js/ligerui/skins/Gray/css/all.css" rel="stylesheet" type="text/css" />
+
 
 </head>
 <body>

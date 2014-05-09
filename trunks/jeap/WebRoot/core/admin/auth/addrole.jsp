@@ -14,6 +14,7 @@
 <script src="${context }/js/ligerui/js/plugins/ligerSpinner.js" type="text/javascript"></script>
 <script src="${context }/js/ligerui/js/plugins/ligerTextBox.js" type="text/javascript"></script>
 <script src="${context }/js/ligerui/js/plugins/ligerTip.js" type="text/javascript"></script>
+
 <script src="${context }/js/plug-in/jquery-validation/jquery.validate.min.js"></script>
 <script src="${context }/js/plug-in/jquery-validation/jquery.metadata.js" type="text/javascript"></script>
 <script src="${context }/js/plug-in/jquery-validation/messages_cn.js" type="text/javascript"></script>
@@ -23,6 +24,7 @@
 <script type="text/javascript">
     var dialog = frameElement.dialog;
     $(function (){
+
         $.validator.addMethod(
                 "notnull",
                 function (value, element, regexp)
