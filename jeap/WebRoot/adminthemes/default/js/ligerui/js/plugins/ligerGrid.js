@@ -652,6 +652,7 @@
         _setData: function (value)
         {
             this.loadData(this.options.data);
+
         },
         //刷新数据
         loadData: function (loadDataParm)
@@ -758,6 +759,13 @@
             }
             g.loading = false;
         },
+        //刷新数据
+        setData: function (data)
+        {
+            this.options.data = data;
+            g._showData();
+
+        },
         _convertTreeData: function ()
         {
             var g = this, p = this.options;
@@ -789,6 +797,8 @@
                 },
                 success: function (data)
                 {
+
+
                     g.trigger('success', [data, g]);
                     if (!data || !data[p.root] || !data[p.root].length)
                     {
@@ -805,6 +815,7 @@
                         g._showData();
                         return;
                     }
+
                     g.data = data;
                     //保存缓存数据-记录总数
                     if (g.data[p.record] != null && g.cacheData.records)
