@@ -3,6 +3,7 @@ package com.easysoft.member.backend.model;
 import com.easysoft.core.model.Resource;
 import com.easysoft.framework.db.NotDbField;
 
+import javax.persistence.*;
 import java.util.List;
 
 
@@ -10,8 +11,43 @@ import java.util.List;
  * @author andy
  * @version 1.0
  */
-public class Menu extends Resource {
+@Entity
+@Table(name="t_menu")
+public class Menu {
+    private Integer id;
 
+    private Integer deleteflag = 0;
+
+    private String productId;
+
+
+    public Integer getDeleteflag() {
+        return deleteflag;
+    }
+
+    public void setDeleteflag(Integer deleteflag) {
+        this.deleteflag = deleteflag;
+    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name ="id")
+    public Integer getId() {
+        return id;
+    }
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+
+    @NotDbField
+    @Transient
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
 	private Integer pid;
 	private String title;
 	private String url;
@@ -27,6 +63,7 @@ public class Menu extends Resource {
     private String ico;
 
 	@NotDbField
+    @Transient
 	public boolean getHasChildren() {
 		hasChildren = this.children==null|| this.children.isEmpty() ?false:true;
 		return hasChildren;
@@ -87,6 +124,7 @@ public class Menu extends Resource {
 	public void setMenutype(Integer menutype) {
 		this.menutype = menutype;
 	}
+    @Transient
 	public List<Menu> getChildren() {
 		return children;
 	}
