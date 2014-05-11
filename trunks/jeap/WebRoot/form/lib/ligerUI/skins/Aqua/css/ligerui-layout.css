@@ -20,7 +20,7 @@
 .l-layout-right .l-layout-header-inner { padding-left:22px; padding-right:auto;}
 .l-layout-header-over{background:#EFF4FE url('../images/layout/layout-header-over.gif') repeat-x;} 
 
-.l-layout-collapse-left,.l-layout-collapse-right{ width:24px; background:#EAF2FE;border:1px solid #B8D0D6; position:absolute;top:0px;   display:none; height:100%;z-index:10;}
+.l-layout-collapse-left,.l-layout-collapse-right{ width:0px; background:#EAF2FE;border:1px solid #B8D0D6; position:absolute;top:0px;   display:none; height:100%;z-index:10;}
 .l-layout-collapse-left-over,.l-layout-collapse-right-over{background:#F5F9FA;}
 .l-layout-collapse-left-toggle,.l-layout-collapse-right-toggle{position:absolute; height:20px; width:20px; overflow:hidden; background:url('../images/layout/togglebar.gif');cursor:pointer;}
 .l-layout-collapse-left{left:2px;}

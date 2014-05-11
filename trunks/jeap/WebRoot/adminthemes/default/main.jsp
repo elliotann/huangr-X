@@ -40,6 +40,7 @@
         .menulist li.over .menuitem-l, .menulist li.selected .menuitem-l { background: url('Images/index/menuitem.gif') repeat-x 0px -24px; width: 2px; height: 24px; position: absolute; left: 0; top: 0; }
         .menulist li.over .menuitem-r, .menulist li.selected .menuitem-r { background: url('Images/index/menuitem.gif') repeat-x -1px -24px; width: 2px; height: 24px; position: absolute; right: 0; top: 0; }
         #portrait { border-radius: 4px; box-shadow: 1px 1px 1px #111; position: absolute; width: 48px; height: 48px; right: 7px; top: 10px; background: #d2d2f2 /*url(images/icons/32X32/user.gif) no-repeat center center*/; border: 3px solid #fff; behavior: url(css/pie.htc); text-align: center; }
+
     </style>
 </head>
 <body>
@@ -72,8 +73,8 @@
     <div position="left" id="leftMenus">
     </div>
     <div position="center" id="right_content">
-        <div id="navtab1" style="width: 100%;height:100%;overflow:hidden; border:1px solid #A3C0E8; ">
-            <div tabid="home" title="桌面" lselected="true"  style="height:300px" >
+        <div id="navtab1" style="width: 100%;height:528px;overflow:hidden; border:1px solid #A3C0E8; ">
+            <div tabid="home" title="桌面" lselected="true" >
                 <iframe frameborder="0" name="showmessage" src="../core/admin/index.do?list"></iframe>
             </div>
 
