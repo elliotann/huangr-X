@@ -6,6 +6,8 @@ import java.util.List;
 
 import com.easysoft.core.common.service.IGenericService;
 import com.easysoft.core.common.service.impl.GenericService;
+import com.easysoft.member.backend.model.OperationBtn;
+import com.easysoft.member.backend.vo.FunAndOperationVO;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
@@ -106,4 +108,22 @@ public class PermissionManager extends GenericService implements IPermissionMana
             }
         },roleId);
     }
+
+    @Override
+    public List<FunAndOperationVO> getFunAndOperations() {
+        List<FunAndOperationVO> funAndOperationVOs = this.baseDaoSupport.queryForList("select * from t_menu m where m.menutype=2",new RowMapper(){
+
+            @Override
+            public Object mapRow(ResultSet rs, int i) throws SQLException {
+                FunAndOperationVO funAndOperationVO = new FunAndOperationVO();
+                funAndOperationVO.setMenuId(rs.getInt("id"));
+                funAndOperationVO.setMenuName(rs.getString("title"));
+                funAndOperationVO.setPid(rs.getInt("pid"));
+                return funAndOperationVO;
+            }
+        });
+
+        return funAndOperationVOs;
+    }
+
 }

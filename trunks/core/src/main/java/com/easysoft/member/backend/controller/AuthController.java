@@ -7,8 +7,12 @@ import com.easysoft.core.manager.IMenuManager;
 import com.easysoft.framework.utils.JsonUtils;
 import com.easysoft.framework.utils.StringUtil;
 import com.easysoft.member.backend.manager.IAuthActionManager;
+import com.easysoft.member.backend.manager.IOperationBtnManager;
+import com.easysoft.member.backend.manager.IPermissionManager;
 import com.easysoft.member.backend.model.AuthAction;
 import com.easysoft.member.backend.model.Menu;
+import com.easysoft.member.backend.model.OperationBtn;
+import com.easysoft.member.backend.vo.FunAndOperationVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,10 +38,21 @@ public class AuthController extends BaseController {
     private IAuthActionManager authActionManager;
     @Autowired
     private IMenuManager menuManager;
+    @Autowired
+    private IPermissionManager permissionManager;
+    @Autowired
+    private IOperationBtnManager operationBtnManager;
     @RequestMapping(params = {"add"})
     public ModelAndView add(int roleId){
         Map<String,Object> map = new HashMap<String,Object>();
         List<AuthAction> authActions = authActionManager.getAuthActionByRoleId(roleId);
+        List<OperationBtn> operationBtns = operationBtnManager.queryForAll(OperationBtn.class);
+        String operations = "";
+        for(OperationBtn operationBtn : operationBtns){
+            operations += "<input type='checkbox' name='name' value='add'/>";
+            operations += operationBtn.getName();
+        }
+        map.put("operationBtns",operations);
         if(!authActions.isEmpty()){
             map.put("isEdit",1);
             map.put("actid",authActions.get(0).getActid());
@@ -47,6 +62,15 @@ public class AuthController extends BaseController {
 
         map.put("roleId",roleId);
         return new ModelAndView("core/admin/auth/auth_input",map);
+    }
+    @RequestMapping(params = {"dataGrid"})
+    public ModelAndView dataGrid(){
+        List<FunAndOperationVO> menuList  = permissionManager.getFunAndOperations();
+        DataGridReturn dataGridReturn = new DataGridReturn(menuList.size(),menuList);
+        String json = JsonUtils.beanToJson(dataGridReturn);
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("json",json);
+        return new ModelAndView("admin/json_message",map);
     }
     @RequestMapping(params = {"save"})
     @ResponseBody
@@ -118,12 +142,17 @@ public class AuthController extends BaseController {
     }
     @RequestMapping(params = {"getMenuTreeById"})
     @ResponseBody
-    public AjaxJson getMenuTreeById(Integer id){
+    public String getMenuTreeById(Integer id){
+        id=2;
+        if(id==null||id==0){
+            return "";
+        }
         AjaxJson result = new AjaxJson();
         List<Menu> menus = menuManager.getMenuTree(id);
         DataGridReturn dataGridReturn = new DataGridReturn(menus.size(),menus);
         String json = JsonUtils.beanToJson(dataGridReturn);
+        json = "{ rows: [{ \"id\": '01',\"children\": [{ \"id\": '0101', \"amount\":400 },{ \"id\": '0102',  \"children\":[{ \"id\": '010201', \"amount\": 200 },{ \"id\": '010202', \"amount\": 100 }]},{ \"id\": '0103', \"amount\": 100 }]},{ \"id\": '02', \"amount\": 100 },{ \"id\": '03', \"amount:\" 100 }],\"total\":0}";
         result.setObj(json);
-        return result;
+        return json;
     }
 }

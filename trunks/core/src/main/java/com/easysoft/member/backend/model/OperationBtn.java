@@ -19,6 +19,7 @@ public class OperationBtn implements Serializable {
     private String name;
     private String ico;
     private int status;
+    private String operType;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="ope_id")
@@ -60,5 +61,13 @@ public class OperationBtn implements Serializable {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public String getOperType() {
+        return operType;
+    }
+
+    public void setOperType(String operType) {
+        this.operType = operType;
     }
 }

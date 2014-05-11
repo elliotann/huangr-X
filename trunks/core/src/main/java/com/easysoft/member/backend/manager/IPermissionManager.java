@@ -5,6 +5,7 @@ import java.util.List;
 import com.easysoft.core.common.service.IGenericService;
 import com.easysoft.member.backend.model.AuthAction;
 import com.easysoft.member.backend.model.Role;
+import com.easysoft.member.backend.vo.FunAndOperationVO;
 
 
 /**
@@ -52,5 +53,11 @@ public interface IPermissionManager extends IGenericService {
 	public void cleanUserRoles(int userid);
 
     public List<AuthAction> getAuthActionsByRoleId(int roleId);
+
+    /**
+     * 获取功能及其操作对象集合
+     * @return
+     */
+    public List<FunAndOperationVO> getFunAndOperations();
 	
 }
