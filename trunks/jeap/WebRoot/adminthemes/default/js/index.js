@@ -177,7 +177,7 @@ function f_addTab(tabid, text, url) {
 
 
     var tabHeight = document.getElementById("layout1").offsetHeight-30;
-    tab.addTabItem({ tabid: tabid, text: text, url: url,height:tabHeight });
+    tab.addTabItem({ tabid: tabid, text: text, url: url,height:500 });
 
 }
 
