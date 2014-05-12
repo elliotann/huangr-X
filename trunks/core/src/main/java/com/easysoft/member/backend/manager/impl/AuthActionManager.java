@@ -3,8 +3,13 @@ package com.easysoft.member.backend.manager.impl;
 import com.easysoft.core.common.service.impl.GenericService;
 import com.easysoft.framework.utils.StringUtil;
 import com.easysoft.member.backend.manager.IAuthActionManager;
+import com.easysoft.member.backend.manager.IFunAndOperManager;
 import com.easysoft.member.backend.model.AuthAction;
+import com.easysoft.member.backend.model.FunAndOper;
+import com.easysoft.member.backend.model.Role;
+import com.easysoft.member.backend.model.RoleAuth;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +23,8 @@ import java.util.List;
  */
 @Service("authActionManager")
 public class AuthActionManager extends GenericService<AuthAction> implements IAuthActionManager {
-
+    @Autowired
+    private IFunAndOperManager funAndOperManager;
 	@Transactional(propagation = Propagation.REQUIRED)
 	public int add(AuthAction act) {
 		this.baseDaoSupport.insert("auth_action", act);
@@ -41,8 +47,29 @@ public class AuthActionManager extends GenericService<AuthAction> implements IAu
 		this.baseDaoSupport.execute("delete from auth_action where actid=?", actid);
 	}
 
-	
-	public void edit(AuthAction act) {
+    @Override
+    public int batAddRoleAuth(Integer roleId, List<FunAndOper> funAndOpers) {
+        RoleAuth roleAuth;
+        Role role = new Role();
+        role.setRoleid(roleId);
+        for(FunAndOper funAndOper : funAndOpers){
+            roleAuth = new RoleAuth();
+            roleAuth.setRole(role);
+            roleAuth.setAuthType(RoleAuth.AuthType.FUNCTION);
+            roleAuth.setFunOrDataId(funAndOper.getId());
+        }
+        return 0;
+    }
+
+    @Override
+    public int batAddFunAndOper(List<FunAndOper> funAndOpers) {
+        for(FunAndOper funAndOper : funAndOpers){
+            funAndOperManager.save(funAndOper);
+        }
+        return 0;
+    }
+
+    public void edit(AuthAction act) {
         this.updateEntitie(act);
 	}
 

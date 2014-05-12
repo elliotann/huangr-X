@@ -2,6 +2,7 @@ package com.easysoft.member.backend.manager;
 
 
 import com.easysoft.member.backend.model.AuthAction;
+import com.easysoft.member.backend.model.FunAndOper;
 
 import java.util.List;
 
@@ -30,6 +31,21 @@ public interface IAuthActionManager {
 	 * @return 返回添加的权限点id
 	 */
 	public int add(AuthAction act);
+
+    /**
+     * 批量增加角色权限
+     * @param roleId
+     * @param menus
+     * @return
+     */
+    public int batAddRoleAuth(Integer roleId,List<FunAndOper> funAndOpers);
+
+    /**
+     * 批量增加系统功能
+     * @param funAndOpers
+     * @return
+     */
+    public int batAddFunAndOper(List<FunAndOper> funAndOpers);
 
     public int add(AuthAction auth,int roleId);
 	/**

@@ -10,9 +10,10 @@ import com.easysoft.member.backend.manager.IAuthActionManager;
 import com.easysoft.member.backend.manager.IOperationBtnManager;
 import com.easysoft.member.backend.manager.IPermissionManager;
 import com.easysoft.member.backend.model.AuthAction;
+import com.easysoft.member.backend.model.FunAndOper;
 import com.easysoft.member.backend.model.Menu;
 import com.easysoft.member.backend.model.OperationBtn;
-import com.easysoft.member.backend.vo.FunAndOperationVO;
+import com.easysoft.member.backend.vo.AuthOperationVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,11 +50,12 @@ public class AuthController extends BaseController {
         List<AuthAction> authActions = authActionManager.getAuthActionByRoleId(roleId);
         List<OperationBtn> operationBtns = operationBtnManager.queryForAll(OperationBtn.class);
         String operations = "";
+
         for(OperationBtn operationBtn : operationBtns){
-            operations += "<input type='checkbox' name='name' value='add'/>";
+            operations += "<input type='checkbox' name='name' value='add' />";
             operations += operationBtn.getName();
         }
-        map.put("operationBtns",operations);
+        map.put("operationBtns",operationBtns);
         if(!authActions.isEmpty()){
             map.put("isEdit",1);
             map.put("actid",authActions.get(0).getActid());
@@ -65,7 +68,7 @@ public class AuthController extends BaseController {
     }
     @RequestMapping(params = {"dataGrid"})
     public ModelAndView dataGrid(){
-        List<FunAndOperationVO> menuList  = permissionManager.getFunAndOperations();
+        List<Menu> menuList  = menuManager.getMenuTree(0);
         DataGridReturn dataGridReturn = new DataGridReturn(menuList.size(),menuList);
         String json = JsonUtils.beanToJson(dataGridReturn);
         Map<String,Object> map = new HashMap<String, Object>();
@@ -154,5 +157,48 @@ public class AuthController extends BaseController {
         json = "{ rows: [{ \"id\": '01',\"children\": [{ \"id\": '0101', \"amount\":400 },{ \"id\": '0102',  \"children\":[{ \"id\": '010201', \"amount\": 200 },{ \"id\": '010202', \"amount\": 100 }]},{ \"id\": '0103', \"amount\": 100 }]},{ \"id\": '02', \"amount\": 100 },{ \"id\": '03', \"amount:\" 100 }],\"total\":0}";
         result.setObj(json);
         return json;
+    }
+    @RequestMapping(params = {"saveAuth"})
+    @ResponseBody
+    public AjaxJson saveAuth(String postdata,Integer roleId){
+        AjaxJson result = new AjaxJson();
+        AuthOperationVo authOperationVo = (AuthOperationVo)JsonUtils.jsonToBean(postdata, AuthOperationVo.class,null);
+        String menu = authOperationVo.getMenu();
+
+        String[] menusStr=menu.split(",");
+        List<Integer> menuids = new ArrayList<Integer>();
+
+        for(int i=0;i<menusStr.length;i++ ){
+            String menuStr = menusStr[i];
+            menuids.add(Integer.parseInt(menuStr.substring(1)));
+        }
+
+        String btn = authOperationVo.getBtn();
+
+        String[] btnsStr = btn.split(",");
+        List<FunAndOper> funAndOpers = new ArrayList<FunAndOper>();
+        for(Integer menuId : menuids){
+            FunAndOper funAndOper = new FunAndOper();
+            Menu menuTemp = new Menu();
+            menuTemp.setId(menuId);
+            funAndOper.setMenu(menuTemp);
+            for(int i=0;i<btnsStr.length;i++){
+                String btnStr = btnsStr[i];
+                btnStr.substring(0,btnStr.indexOf("|"));
+
+                if(menuids.contains(Integer.parseInt(btnStr.substring(0,btnStr.indexOf("|"))))){
+                    OperationBtn obtn = new OperationBtn();
+                    obtn.setCode(btnStr.substring(btnStr.indexOf("|")+1));
+                    funAndOper.setOperationBtn(obtn);
+                }
+                funAndOpers.add(funAndOper);
+            }
+
+        }
+
+        authActionManager.batAddFunAndOper(funAndOpers);
+        authActionManager.batAddRoleAuth(roleId,funAndOpers);
+        return result;
+
     }
 }
