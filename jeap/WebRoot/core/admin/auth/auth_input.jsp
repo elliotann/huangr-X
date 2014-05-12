@@ -14,23 +14,7 @@
     <script src="../TreeData.js" type="text/javascript"></script>
     <script type="text/javascript">
 
-        function f_renderAmount(rowdata, index, value)
-        {
-            if (!this.hasChildren(rowdata))
-            {
-                return value;
-            }
-            else
-            {
-                var children = this.getChildren(rowdata, true);
-                var sum = 0;
-                for (var i = 0, l = children.length; i < l; i++)
-                {
-                    sum += children[i].amount || 0;
-                }
-                return sum;
-            }
-        }
+
 
 
         var manager;
@@ -41,10 +25,18 @@
             listgrid = $("#maingrid").ligerGrid({
                         height:400,
                         columns: [
-                            { display: 'id', name: 'menuId', id: 'menuId',  align: 'center',width:60 },
-                            { display: '名称', name: 'menuName', id: 'menuName',  align: 'left',width:250 },
+                            { display: 'id', name: 'id', id: 'menuId',  align: 'center',width:60 },
+                            { display: '名称', name: 'title', id: 'menuName',  align: 'left',width:250 },
                             { display: '操作', name: 'ico',  align: 'left',width:300,render:function(item){
-                                var html="${operationBtns}";
+                                var html="";
+                                if(item.hasChildren){
+                                    return html;
+                                }
+                                <c:forEach var="operBtn" items="${operationBtns}">
+                                    html += "<input type='checkbox' name='operBtn' value='${operBtn.code}' id='"+item.id+"|${operBtn.code}'/>${operBtn.name}&nbsp;&nbsp;";
+
+                                </c:forEach>
+
 
                                 return html;
                             } }
@@ -52,7 +44,7 @@
                         url: 'auth.do?dataGrid&ajax=yes', alternatingRow: false,selectRowButtonOnly:true, tree: {
                             columnId: 'menuName',
                             //columnName: 'name',
-                            idField: 'menuId',
+                            idField: 'id',
                             parentIDField: 'pid'
                         }
                     }
@@ -84,6 +76,40 @@
         {
             var row = manager.getSelectedRowObj();
             alert(manager.isLeaf(row));
+        }
+
+        function submitForm(){
+            var manager = $("#maingrid").ligerGetGridManager();
+            var rows = manager.getCheckedRows();
+
+            var menu = "";
+            $(rows).each(function () {
+                menu += "m" + this.id + ",";
+            });
+
+            var btn = "";
+            $("input[type='checkbox']").each(function (i) {
+                if ($(this).attr("checked")&&$(this).attr("name")) {
+                    btn += $(this).attr("id") + ",";
+                }
+            })
+            var savetext = "{role_id:'" + 1 + "',";
+            savetext += "menu:'" + menu + "',";
+            savetext += "btn:'" + btn + "'}";
+            $.ajax({
+                type: 'post',
+                url: "auth.do?saveAuth&postdata=" + savetext + '&roleId='+${roleId},
+                success: function (data) {
+                    //alert(data);
+                    setTimeout(function () {
+                        f_success();
+                    }, 10);
+
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    f_error("授权失败！");
+                }
+            });
         }
 
     </script>
