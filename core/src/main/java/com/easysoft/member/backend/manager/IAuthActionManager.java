@@ -40,12 +40,6 @@ public interface IAuthActionManager {
      */
     public int batAddRoleAuth(Integer roleId,List<FunAndOper> funAndOpers);
 
-    /**
-     * 批量增加系统功能
-     * @param funAndOpers
-     * @return
-     */
-    public int batAddFunAndOper(List<FunAndOper> funAndOpers);
 
     public int add(AuthAction auth,int roleId);
 	/**

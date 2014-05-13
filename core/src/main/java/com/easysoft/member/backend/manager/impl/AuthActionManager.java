@@ -4,6 +4,7 @@ import com.easysoft.core.common.service.impl.GenericService;
 import com.easysoft.framework.utils.StringUtil;
 import com.easysoft.member.backend.manager.IAuthActionManager;
 import com.easysoft.member.backend.manager.IFunAndOperManager;
+import com.easysoft.member.backend.manager.IRoleAuthManager;
 import com.easysoft.member.backend.model.AuthAction;
 import com.easysoft.member.backend.model.FunAndOper;
 import com.easysoft.member.backend.model.Role;
@@ -25,6 +26,8 @@ import java.util.List;
 public class AuthActionManager extends GenericService<AuthAction> implements IAuthActionManager {
     @Autowired
     private IFunAndOperManager funAndOperManager;
+    @Autowired
+    private IRoleAuthManager roleAuthManager;
 	@Transactional(propagation = Propagation.REQUIRED)
 	public int add(AuthAction act) {
 		this.baseDaoSupport.insert("auth_action", act);
@@ -52,20 +55,22 @@ public class AuthActionManager extends GenericService<AuthAction> implements IAu
         RoleAuth roleAuth;
         Role role = new Role();
         role.setRoleid(roleId);
+
+        List<RoleAuth> roleAuths = roleAuthManager.findByProperty(RoleAuth.class,"role.id",roleId);
+        for(RoleAuth roleAuthTemp : roleAuths){
+            funAndOperManager.deleteEntityById(FunAndOper.class,roleAuthTemp.getFunOrDataId());
+        }
+        //删除角色权限表中对应的数据
+        this.baseDaoSupport.execute("delete from role_auth where role_id=?", roleId);
         for(FunAndOper funAndOper : funAndOpers){
+            funAndOperManager.save(funAndOper);
             roleAuth = new RoleAuth();
             roleAuth.setRole(role);
             roleAuth.setAuthType(RoleAuth.AuthType.FUNCTION);
             roleAuth.setFunOrDataId(funAndOper.getId());
+            roleAuthManager.save(roleAuth);
         }
-        return 0;
-    }
 
-    @Override
-    public int batAddFunAndOper(List<FunAndOper> funAndOpers) {
-        for(FunAndOper funAndOper : funAndOpers){
-            funAndOperManager.save(funAndOper);
-        }
         return 0;
     }
 
@@ -83,21 +88,22 @@ public class AuthActionManager extends GenericService<AuthAction> implements IAu
 	public AuthAction get(int authid) {
 		return this.baseDaoSupport.queryForObject("select * from auth_action where actid=?", AuthAction.class, authid);
 	}
-    public void deleteMenu(int actid, Integer[] menuidAr)
-/*     */   {
-/*  81 */     if (menuidAr == null) return;
-/*  82 */     AuthAction authAction = get(actid);
-/*  83 */     String menuStr = authAction.getObjvalue();
-/*  84 */     if (StringUtils.isEmpty(menuStr)) {
-/*  85 */       return;
-/*     */     }
-/*     */
-/*  88 */     String[] oldMenuAr = StringUtils.split(menuStr, ","); menuStr.split(",");
-/*  89 */     oldMenuAr = delete(menuidAr, oldMenuAr);
-/*  90 */     menuStr = StringUtil.arrayToString(oldMenuAr, ",");
-/*  91 */     authAction.setObjvalue(menuStr);
-/*  92 */     edit(authAction);
-/*     */   }
+
+    public void deleteMenu(int actid, Integer[] menuidAr) {
+        if (menuidAr == null) return;
+        AuthAction authAction = get(actid);
+        String menuStr = authAction.getObjvalue();
+        if (StringUtils.isEmpty(menuStr)) {
+            return;
+        }
+
+        String[] oldMenuAr = StringUtils.split(menuStr, ",");
+        menuStr.split(",");
+        oldMenuAr = delete(menuidAr, oldMenuAr);
+        menuStr = StringUtil.arrayToString(oldMenuAr, ",");
+        authAction.setObjvalue(menuStr);
+        edit(authAction);
+    }
 
     public static String[] delete(Integer[] ar1, String[] ar2)
 /*     */   {

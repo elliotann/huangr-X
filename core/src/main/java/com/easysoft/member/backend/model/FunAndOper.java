@@ -17,7 +17,7 @@ public class FunAndOper {
     private String code;
 
     private Menu menu;
-    private OperationBtn operationBtn;
+    private String operation;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,13 +56,12 @@ public class FunAndOper {
     public void setMenu(Menu menu) {
         this.menu = menu;
     }
-    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.REFRESH }, optional = false)
-    @JoinColumn(name = "oper_id")
-    public OperationBtn getOperationBtn() {
-        return operationBtn;
+
+    public String getOperation() {
+        return operation;
     }
 
-    public void setOperationBtn(OperationBtn operationBtn) {
-        this.operationBtn = operationBtn;
+    public void setOperation(String operation) {
+        this.operation = operation;
     }
 }
