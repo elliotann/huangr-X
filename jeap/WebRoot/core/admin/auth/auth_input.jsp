@@ -33,7 +33,7 @@
                                     return html;
                                 }
                                 <c:forEach var="operBtn" items="${operationBtns}">
-                                    html += "<input type='checkbox' name='operBtn' value='${operBtn.code}' id='"+item.id+"|${operBtn.code}'/>${operBtn.name}&nbsp;&nbsp;";
+                                    html += "<input type='checkbox' name='operBtn' value='${operBtn.code}' id='"+item.id+"|${operBtn.id}'/>${operBtn.name}&nbsp;&nbsp;";
 
                                 </c:forEach>
 
@@ -84,6 +84,7 @@
 
             var menu = "";
             $(rows).each(function () {
+
                 menu += "m" + this.id + ",";
             });
 
