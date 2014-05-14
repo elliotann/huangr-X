@@ -4,6 +4,7 @@ import com.easysoft.core.common.controller.BaseController;
 import com.easysoft.core.common.vo.json.AjaxJson;
 import com.easysoft.core.common.vo.json.DataGridReturn;
 import com.easysoft.core.manager.IMenuManager;
+import com.easysoft.core.utils.http.FileUploader;
 import com.easysoft.framework.utils.JsonUtils;
 import com.easysoft.member.backend.model.Menu;
 import org.apache.commons.lang.StringUtils;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +29,12 @@ import java.util.Map;
 public class MenuController extends BaseController {
     @Autowired
     private IMenuManager menuManager;
-
+    // 可接受的文件类型
+    private static final String[] ACCEPT_TYPES    = {"txt", "pdf", "doc", ".Jpg", "*.zip", "*.RAR"};
+    // 总上传文件大小限制
+    private static final long MAX_SIZE            = 1024 * 1024 * 100;
+    // 单个传文件大小限制
+    private static final long MAX_FILE_SIZE        = 1024 * 1024 * 10;
     @RequestMapping(params = {"listframe"})
     public ModelAndView listframe(){
 
@@ -85,11 +93,14 @@ public class MenuController extends BaseController {
     }
     @RequestMapping(params = {"saveEdit"})
     @ResponseBody
-    public AjaxJson saveEdit(Menu menu,@RequestParam MultipartFile icoFile){
+    public AjaxJson saveEdit(Menu menu,@RequestParam MultipartFile icoFile,HttpServletRequest request,HttpServletResponse response){
         AjaxJson json = new AjaxJson();
         try{
             if(StringUtils.isNotEmpty(icoFile.getOriginalFilename())){
-                menu.setIco(updateFile(icoFile));
+                FileUploader fileUploader = new FileUploader("adminthemes\\default\\images\\system\\ico\\",ACCEPT_TYPES,MAX_SIZE,MAX_FILE_SIZE);
+                // 执行上传并获取操作结果
+                FileUploader.Result result = fileUploader.upload(request, icoFile);
+                menu.setIco(request.getContextPath()+"/adminthemes/default/images/system/ico/"+icoFile.getOriginalFilename());
             }
             this.menuManager.edit(menu);
             json.setMsg("修改菜单成功");
