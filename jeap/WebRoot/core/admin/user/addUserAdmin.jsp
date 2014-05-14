@@ -97,9 +97,9 @@
                             setTimeout(function ()
                             {
                                 $.ligerDialog.closeWaitting();
-                                grid.loadData();
+                                listgrid.loadData();
                             }, 1000);
-                            window.parent.grid.loadData();
+                            window.parent.listgrid.loadData();
                             dialog.close();
                         }else{
                             alert(result.msg)

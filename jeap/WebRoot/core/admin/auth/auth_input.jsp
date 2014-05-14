@@ -10,13 +10,11 @@
     <script src="${context }/js/ligerui/js/plugins/ligerSpinner.js" type="text/javascript"></script>
     <script src="${context }/js/ligerui/js/plugins/ligerResizable.js" type="text/javascript"></script>
     <script src="${context }/js/ligerui/js/plugins/ligerResizable.js" type="text/javascript"></script>
+    <script src="${context }/js/ligerui/js/plugins/ligerDialog.js" type="text/javascript"></script>
 
     <script src="../TreeData.js" type="text/javascript"></script>
     <script type="text/javascript">
-
-
-
-
+        var dialog = frameElement.dialog;
         var manager;
         $(function ()
         {
@@ -28,13 +26,42 @@
                             { display: 'id', name: 'id', id: 'menuId',  align: 'center',width:60 },
                             { display: '名称', name: 'title', id: 'menuName',  align: 'left',width:250 },
                             { display: '操作', name: 'ico',  align: 'left',width:300,render:function(item){
+                                var menuId= item.id;
+                                <c:forEach var="funAndOper" items="${funAndOpers}">
+
+                                    if("${funAndOper.menu.id}" ==menuId){
+                                        this.select(item);
+                                    }
+                                </c:forEach>
+
+
                                 var html="";
                                 if(item.hasChildren){
                                     return html;
                                 }
+                                var ischecked = "";
                                 <c:forEach var="operBtn" items="${operationBtns}">
-                                    html += "<input type='checkbox' name='operBtn' value='${operBtn.code}' id='"+item.id+"|${operBtn.id}'/>${operBtn.name}&nbsp;&nbsp;";
 
+                                    <c:forEach var="funAndOper" items="${funAndOpers}">
+
+                                        if("${funAndOper.menu.id}" ==menuId&&ischecked==""){
+                                            var oper = "${funAndOper.operation}";
+
+                                            var opers = oper.split(',');
+                                            for(var i=0;i<opers.length;i++){
+
+                                                if(opers[i]=="${operBtn.id}"){
+                                                    ischecked = "checked";
+
+                                                    break;
+                                                }
+                                            }
+                                        }
+
+                                    </c:forEach>
+
+                                    html += "<input type='checkbox' name='operBtn' value='${operBtn.code}' id='"+item.id+"|${operBtn.id}' "+ischecked+"/>${operBtn.name}&nbsp;&nbsp;";
+                                    ischecked="";
                                 </c:forEach>
 
 
@@ -46,15 +73,34 @@
                             //columnName: 'name',
                             idField: 'id',
                             parentIDField: 'pid'
-                        }
+                        },onCheckRow:onCheckRow
+
                     }
             );
+            manager = $("#maingrid").ligerGetGridManager();
         });
 
-        function getParent()
-        {
-            var row = manager.getParent(manager.getSelectedRow());
-            alert(JSON.stringify(row));
+
+        function onCheckRow(checked,data,rowid,rowdata){
+
+
+            var parent = manager.getParent(data);
+            if(parent!=null){
+                manager.select(parent);
+                if(parent.pid!=0){
+                    selectParent(manager.getParent(parent));
+                }
+
+            }
+
+
+        }
+
+        function selectParent(data){
+            manager.select(data);
+            if(data.pid!=0){
+                selectParent(manager.getParent(data));
+            }
         }
         function getSelected()
         {
@@ -79,7 +125,7 @@
         }
 
         function submitForm(){
-            var manager = $("#maingrid").ligerGetGridManager();
+
             var rows = manager.getCheckedRows();
 
             var menu = "";
@@ -99,12 +145,21 @@
             savetext += "btn:'" + btn + "'}";
             $.ajax({
                 type: 'post',
-                url: "auth.do?saveAuth&postdata=" + savetext + '&roleId='+${roleId},
-                success: function (data) {
-                    //alert(data);
-                    setTimeout(function () {
-                        f_success();
-                    }, 10);
+                url: "auth.do?saveAuth&ajax=true&postdata=" + savetext + '&roleId='+${roleId},
+                dataType:'json',
+                success: function (result) {
+
+                    if(result.success){
+                        $.ligerDialog.waitting('增加成功');
+                        setTimeout(function ()
+                        {
+                            $.ligerDialog.closeWaitting();
+                            dialog.close();
+                        }, 1000);
+
+
+
+                    }
 
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -120,7 +175,6 @@
 
         <div id="maingrid">
         </div>
-
 
 
 </body>
