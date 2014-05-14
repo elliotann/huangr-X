@@ -7,11 +7,12 @@ import com.easysoft.core.manager.IMenuManager;
 import com.easysoft.framework.utils.JsonUtils;
 import com.easysoft.framework.utils.StringUtil;
 import com.easysoft.member.backend.manager.IAuthActionManager;
+import com.easysoft.member.backend.manager.IFunAndOperManager;
 import com.easysoft.member.backend.manager.IOperationBtnManager;
 import com.easysoft.member.backend.manager.IPermissionManager;
-import com.easysoft.member.backend.manager.IRoleAuthManager;
 import com.easysoft.member.backend.model.*;
 import com.easysoft.member.backend.vo.AuthOperationVo;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,7 +38,7 @@ public class AuthController extends BaseController {
     @Autowired
     private IAuthActionManager authActionManager;
     @Autowired
-    private IRoleAuthManager roleAuthManager;
+    private IFunAndOperManager funAndOperManager;
     @Autowired
     private IMenuManager menuManager;
     @Autowired
@@ -50,10 +51,11 @@ public class AuthController extends BaseController {
         List<AuthAction> authActions = authActionManager.getAuthActionByRoleId(roleId);
         List<OperationBtn> operationBtns = operationBtnManager.queryForAll(OperationBtn.class);
         map.put("operationBtns",operationBtns);
-        List<RoleAuth> roleAuths = roleAuthManager.findByProperty(RoleAuth.class,"role.id",roleId);
-        if(!authActions.isEmpty()){
+        List<FunAndOper> funAndOpers = funAndOperManager.queryFunAndOpersByRoleId(roleId);
+        if(!funAndOpers.isEmpty()){
             map.put("isEdit",1);
-            map.put("actid",authActions.get(0).getActid());
+            //map.put("actid",authActions.get(0).getActid());
+            map.put("funAndOpers",funAndOpers);
         }else{
             map.put("isEdit",0);
         }
@@ -168,11 +170,14 @@ public class AuthController extends BaseController {
             menuids.add(Integer.parseInt(menuStr.substring(1)));
         }
 
-        String btn = authOperationVo.getBtn();
 
-        String[] btnsStr = btn.split(",");
         List<FunAndOper> funAndOpers = new ArrayList<FunAndOper>();
 
+        String btn = authOperationVo.getBtn();
+        String[] btnsStr=null;
+        if(StringUtils.isNotEmpty(btn)){
+            btnsStr = btn.split(",");
+        }
 
         for(Integer menuId : menuids){
             FunAndOper funAndOper = new FunAndOper();
@@ -180,14 +185,16 @@ public class AuthController extends BaseController {
             menuTemp.setId(menuId);
             funAndOper.setMenu(menuTemp);
             String opers = "";
+            if(btnsStr!=null){
+                for(int i=0;i<btnsStr.length;i++){
+                    String btnStr = btnsStr[i];
+                    if(menuId==Integer.parseInt(btnStr.substring(0,btnStr.indexOf("|")))){
+                        opers += btnStr.substring(btnStr.indexOf("|")+1)+",";
+                    }
 
-            for(int i=0;i<btnsStr.length;i++){
-                String btnStr = btnsStr[i];
-                if(menuId==Integer.parseInt(btnStr.substring(0,btnStr.indexOf("|")))){
-                    opers += btnStr.substring(btnStr.indexOf("|")+1)+",";
                 }
-
             }
+
             funAndOper.setOperation(opers);
             funAndOpers.add(funAndOper);
 

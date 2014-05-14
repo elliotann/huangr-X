@@ -1,23 +1,18 @@
 package com.easysoft.member.backend.manager.impl;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
-
-import com.easysoft.core.common.service.IGenericService;
 import com.easysoft.core.common.service.impl.GenericService;
-import com.easysoft.member.backend.model.OperationBtn;
+import com.easysoft.framework.context.webcontext.ThreadContextHolder;
+import com.easysoft.framework.context.webcontext.WebSessionContext;
+import com.easysoft.member.backend.manager.IPermissionManager;
+import com.easysoft.member.backend.model.*;
 import com.easysoft.member.backend.vo.FunAndOperationVO;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
-import com.easysoft.core.common.dao.spring.BaseSupport;
-import com.easysoft.framework.context.webcontext.ThreadContextHolder;
-import com.easysoft.framework.context.webcontext.WebSessionContext;
-import com.easysoft.member.backend.manager.IPermissionManager;
-import com.easysoft.member.backend.model.AdminUser;
-import com.easysoft.member.backend.model.AuthAction;
-import com.easysoft.member.backend.model.Role;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 权限管理
@@ -66,15 +61,32 @@ public class PermissionManager extends GenericService implements IPermissionMana
 		String sql ="select * from "+ this.getTableName("auth_action")+" where type=? ";
 		//并且 权限id在用户的角色权限范围内
 		sql+=" and actid in(select authid from  "+this.getTableName("role_auth")+" where roleid in ";
-		//查询用户的角色列表
+        //查询用户的角色列表
 		sql+=" (select roleid from "+this.getTableName("user_role")+" where userid=?)";
 		sql+=" )";
 	 
 		return this.daoSupport.queryForList(sql,AuthAction.class,acttype,userid);
 	}
 
-	
-	/**
+    @Override
+    public List<FunAndOper> getUesrAct4New(int userid, String acttype) {
+        //String sql = "select f.* from t_role_auth a where role_id in (SELECT roleid FROM t_user_role t where userid=?) and auth_type=? and f.fun_oper_id=a.funOrDataId";
+        List<UserRole> userRoles = this.findHql("from UserRole ur where ur.adminUser.userid=?",userid);
+        List<RoleAuth> results = new ArrayList<RoleAuth>();
+        for(UserRole userRole : userRoles){
+            List<RoleAuth> roleAuths = this.findHql("from RoleAuth ra where ra.role.id=? and ra.authType=?",userRole.getRole().getRoleid(),RoleAuth.AuthType.FUNCTION);
+            results.addAll(roleAuths);
+        }
+        List<FunAndOper> funAndOpers = new ArrayList<FunAndOper>();
+        for(RoleAuth roleAuth : results){
+            funAndOpers.addAll(this.findHql("from FunAndOper fo where fo.id=?",roleAuth.getFunOrDataId()));
+
+        }
+
+        return funAndOpers;
+    }
+
+    /**
 	 * 读取某用户的角色集合
 	 * @param userid
 	 * @return 此用户的角色集合
