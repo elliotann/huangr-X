@@ -1,11 +1,12 @@
 package com.easysoft.member.backend.manager;
 
-import java.util.List;
-
 import com.easysoft.core.common.service.IGenericService;
 import com.easysoft.member.backend.model.AuthAction;
+import com.easysoft.member.backend.model.FunAndOper;
 import com.easysoft.member.backend.model.Role;
 import com.easysoft.member.backend.vo.FunAndOperationVO;
+
+import java.util.List;
 
 
 /**
@@ -44,6 +45,14 @@ public interface IPermissionManager extends IGenericService {
 	 * @return
 	 */
 	public List<AuthAction> getUesrAct(int userid,String acttype);
+
+    /**
+     * 读取某用户的权限点
+     * @param userid 用户id
+     * @param acttype 权限类型
+     * @return
+     */
+    public List<FunAndOper> getUesrAct4New(int userid,String acttype);
 	
 	
 	/**

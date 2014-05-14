@@ -5,6 +5,7 @@ import com.easysoft.core.dispatcher.core.Response;
 import com.easysoft.core.dispatcher.core.StringResponse;
 import com.easysoft.core.dispatcher.processor.facade.AbstractFacadeProcessor;
 import com.easysoft.core.manager.IMenuManager;
+import com.easysoft.member.backend.model.FunAndOper;
 import com.easysoft.member.backend.model.Menu;
 import com.easysoft.framework.ParamSetting;
 import com.easysoft.framework.context.webcontext.ThreadContextHolder;
@@ -195,13 +196,13 @@ public class MenuJsonGetter extends AbstractFacadeProcessor {
         IAdminUserManager adminUserManager =  SpringContextHolder.getBean("adminUserManager");
         AdminUser user  =adminUserManager.getCurrentUser();
         user = adminUserManager.get(user.getUserid());
-        List<AuthAction> authList = permissionManager.getUesrAct(user.getUserid(), "menu");
+        List<FunAndOper> authList = permissionManager.getUesrAct4New(user.getUserid(), "FUNCTION");
 
         for(Menu menu:tempMenuList){
             if(menu.getMenutype().intValue() == Menu.MENU_TYPE_APP){
 
                 if(user.getFounder()!=1){
-                    if( !checkPermssion(menu,authList) ){
+                    if( !checkPermssion4New(menu, authList) ){
                         continue;
                     }
                 }
@@ -299,6 +300,19 @@ public class MenuJsonGetter extends AbstractFacadeProcessor {
             }
         }
         return false;
+    }
+
+    private boolean checkPermssion4New(Menu menu, List<FunAndOper> authList) {
+        for (FunAndOper auth : authList) {
+            Integer menuId = auth.getMenu().getId();
+            if (menuId != null) {
+                if (menuId == menu.getId().intValue()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+
     }
 
 
