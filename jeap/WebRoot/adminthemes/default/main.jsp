@@ -74,7 +74,7 @@
     </div>
     <div position="center" id="right_content">
         <div id="navtab1" style="width: 100%;height:100%;overflow:hidden; border:1px solid #A3C0E8; ">
-            <div tabid="home" title="桌面" lselected="true" >
+            <div tabid="home" title="桌面" lselected="true"  style="height: 100%">
                 <iframe frameborder="0" name="showmessage" src="../core/admin/index.do?list"></iframe>
             </div>
 
