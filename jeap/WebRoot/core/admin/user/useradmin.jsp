@@ -45,16 +45,7 @@
                             }
                         } }
                     ], url:'userAdmin.do?dataGrid&ajax=yes',  pageSize:10 ,rownumbers:true,pagesizeParmName:'pageSize',
-                            toolbar: { items: [
-                        { text: '增加', click: addUser, icon: 'add' },
-                        { line: true },
-                        { text: '修改', click: modifyUser, icon: 'modify' },
-                        { line: true },
-                        { text: '删除', click: delUser, img: '${context }/js/ligerui/skins/icons/delete.gif' },
-                        { line: true },
-                        { text: '高级自定义查询', click: itemclick, icon: 'search2' }
-                    ]
-                    }
+                            toolbar: listToolbar()
                 });
         //创建表单结构
        $("#searchForm").ligerForm({
@@ -78,6 +69,17 @@
             searchbox.slideToggle('fast');
         });
     });
+    function listToolbar(){
+        var items = [];
+        items.push({ text: '增加', click: addUser, icon: 'add' });
+        items.push({ line: true });
+        items.push({ text: '修改', click: modifyUser, icon: 'modify' });
+        items.push({ line: true });
+        items.push({ text: '删除', click: delUser, img: '${context }/js/ligerui/skins/icons/delete.gif' });
+        items.push({ line: true });
+        items.push({ text: '高级自定义查询', click: itemclick, icon: 'search2' });
+        return { items: items };
+    }
     function itemclick()
     {
         listgrid.options.data = $.extend(true,{}, CustomersData);

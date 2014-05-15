@@ -130,17 +130,7 @@
 
 </script>
 
-<div class="searchBar">
-    <form action="#">
-        <table>
-            <tr>
-                <td>用户名:</td>
-                <td><input type="text" name="username"/></td>
-                <td><input type="button" value="搜索"/></td>
-            </tr>
-        </table>
-    </form>
-</div>
+
 <div class="grid">
 <div id="maingrid"></div>
  </div>
