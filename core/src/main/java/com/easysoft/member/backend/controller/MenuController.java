@@ -55,6 +55,15 @@ public class MenuController extends BaseController {
         map.put("json",json);
         return new ModelAndView("admin/json_message",map);
     }
+    @RequestMapping(params = {"addOrUpdateGrid"})
+    public ModelAndView addOrUpdateGrid(){
+        List<Menu> menuList  = this.menuManager.getMenuList();
+
+        String json = JsonUtils.beanToJsonArray(menuList);
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("json",json);
+        return new ModelAndView("admin/json_message",map);
+    }
     @RequestMapping(params = {"add"})
     public ModelAndView add(){
         List<Menu> menuList  = this.menuManager.getMenuList();
@@ -93,7 +102,8 @@ public class MenuController extends BaseController {
     }
     @RequestMapping(params = {"saveEdit"})
     @ResponseBody
-    public AjaxJson saveEdit(Menu menu,@RequestParam MultipartFile icoFile,HttpServletRequest request,HttpServletResponse response){
+    public AjaxJson saveEdit(Menu menu,Integer menuId,@RequestParam MultipartFile icoFile,HttpServletRequest request,HttpServletResponse response){
+        menu.setId(menuId);
         AjaxJson json = new AjaxJson();
         try{
             if(StringUtils.isNotEmpty(icoFile.getOriginalFilename())){
