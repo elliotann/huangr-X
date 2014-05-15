@@ -15,11 +15,12 @@
 <script src="${context }/js/ligerui/js/plugins/ligerSpinner.js" type="text/javascript"></script>
 <script src="${context }/js/ligerui/js/plugins/ligerTextBox.js" type="text/javascript"></script>
 <script src="${context }/js/ligerui/js/plugins/ligerTip.js" type="text/javascript"></script>
-
+<script src="${context }/js/ligerui/js/plugins/ligerTree.js" type="text/javascript"></script>
 <script src="${context }/js/plug-in/jquery-validation/jquery.validate.min.js"></script>
 <script src="${context }/js/plug-in/jquery-validation/jquery.metadata.js" type="text/javascript"></script>
 <script src="${context }/js/plug-in/jquery-validation/messages_cn.js" type="text/javascript"></script>
-<script type="text/javascript" src="${staticserver }/js/admin/jeap.js"></script>
+<script src="${context }/js/plug-in/jquery-plugs/form/jquery.form.js" type="text/javascript"></script>
+
 <script type="text/javascript">
 
     var groupicon = "${context }/js/ligerui/skins/icons/communication.gif";
@@ -28,6 +29,15 @@
 
     $(function ()
     {
+        $.validator.addMethod(
+                "notnull",
+                function (value, element, regexp)
+                {
+                    if (!value) return true;
+                    return !$(element).hasClass("l-text-field-null");
+                },
+                "不能为空"
+        );
         $.metadata.setType("attr", "validate");
         var v = $("form").validate({
             debug: true,
@@ -36,25 +46,32 @@
             {
                 if (element.hasClass("l-textarea"))
                 {
-                    element.ligerTip({ content: lable.html(), target: element[0] });
+                    element.addClass("l-textarea-invalid");
                 }
                 else if (element.hasClass("l-text-field"))
                 {
-                    element.parent().ligerTip({ content: lable.html(), target: element[0] });
+                    element.parent().addClass("l-text-invalid");
                 }
-                else
-                {
-                    lable.appendTo(element.parents("td:first").next("td"));
-                }
+                $(element).removeAttr("title").ligerHideTip();
+                $(element).attr("title", lable.html()).ligerTip();
             },
             success: function (lable)
             {
-                lable.ligerHideTip();
-                lable.remove();
+                var element = $("#" + lable.attr("for"));
+                if (element.hasClass("l-textarea"))
+                {
+                    element.removeClass("l-textarea-invalid");
+                }
+                else if (element.hasClass("l-text-field"))
+                {
+                    element.parent().removeClass("l-text-invalid");
+                }
+                $(element).removeAttr("title").ligerHideTip();
             },
             submitHandler: function ()
             {
                 $("form .l-text,.l-textarea").ligerHideTip();
+
                 $("#form1").ajaxSubmit({
                     url :"menu.do?saveAdd&ajax=true",
                     type : "POST",
@@ -62,8 +79,13 @@
                     success : function(result) {
 
                         if(result.success){
-                            alert("增加成功!");
-                            window.parent.grid.loadData();
+                            $.ligerDialog.waitting('操作成功...');
+                            setTimeout(function ()
+                            {
+                                $.ligerDialog.closeWaitting();
+
+                            }, 1000);
+                            window.parent.listgrid.loadData();
                             dialog.close();
                         }else{
                             alert(result.msg)
@@ -119,22 +141,16 @@
         <tr>
             <td align="right" class="l-table-edit-td">类型:</td>
             <td align="left" class="l-table-edit-td">
-                <select  id="menutype" name="menutype" ltype="select">
-                    <option value="2" >应用</option>
-                    <option value="1" >系统</option>
-                </select>
+                <input type="text" id="menuType" name="menuType" style="width: 50px" ltype="select" ligerui="{width:178,data:[{id:'2',text:'应用'},{id:'1',text:'系统'}],initValue:'2',valueFieldID:'menutype'}" validate="{required:true}" />
+
             </td>
             <td align="left"></td>
         </tr>
         <tr>
             <td align="right" class="l-table-edit-td">上级菜单:</td>
             <td align="left" class="l-table-edit-td">
-                <select  id="pid" name="pid" ltype="select">
-                    <option value="0">顶级菜单</option>
-                    <c:forEach var="menu" items="${menuList }">
-                        <option value="${menu.id}" >${menu.title}</option>
-                    </c:forEach>
-                </select>
+                <input type="text" id="menupid" name="menupid" style="width: 170px" ltype="select" ligerui="{width: 180,valueFieldID:'pid',selectBoxWidth: 200, selectBoxHeight: 200,valueField: 'id',textField:'title',treeLeafOnly:false, tree: { url: 'menu.do?addOrUpdateGrid&ajax=true', checkbox: false, ajaxType: 'get',textFieldName:'title',parentIDFieldName:'pid' }}" validate="{required:true}" />
+
             </td>
             <td align="left"></td>
         </tr>

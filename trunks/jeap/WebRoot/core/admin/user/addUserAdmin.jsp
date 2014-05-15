@@ -97,7 +97,7 @@
                             setTimeout(function ()
                             {
                                 $.ligerDialog.closeWaitting();
-                                listgrid.loadData();
+
                             }, 1000);
                             window.parent.listgrid.loadData();
                             dialog.close();

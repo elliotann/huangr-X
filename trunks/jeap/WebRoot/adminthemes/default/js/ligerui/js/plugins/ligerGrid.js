@@ -1,5 +1,5 @@
 ﻿/**
-* jQuery ligerUI 1.2.3
+* jQuery ligerUI 1.2.4
 * 
 * http://ligerui.com
 *  
@@ -101,6 +101,7 @@
         toolbar: null,                           //工具条,参数同 ligerToolbar的,额外参数有title、icon
         toolbarShowInLeft: true,               //工具条显示在左边
         headerImg: null,                        //表格头部图标  
+        editorTopDiff : 0,                      //编辑器top误差
         unSetValidateAttr: true,             //是否不设置validate属性到inuput
         onDragCol: null,                       //拖动列事件
         onToggleCol: null,                     //切换列事件
@@ -550,7 +551,7 @@
                         g.gridview.height(Math.max(g.gridview1.height(), g.gridview2.height()));
                 });
                 return;
-            } 
+            }
             h = g._calculateGridBodyHeight(h);
             if (h > 0)
             {
@@ -652,7 +653,6 @@
         _setData: function (value)
         {
             this.loadData(this.options.data);
-
         },
         //刷新数据
         loadData: function (loadDataParm)
@@ -759,13 +759,6 @@
             }
             g.loading = false;
         },
-        //刷新数据
-        setData: function (data)
-        {
-            this.options.data = data;
-            g._showData();
-
-        },
         _convertTreeData: function ()
         {
             var g = this, p = this.options;
@@ -797,8 +790,6 @@
                 },
                 success: function (data)
                 {
-
-
                     g.trigger('success', [data, g]);
                     if (!data || !data[p.root] || !data[p.root].length)
                     {
@@ -815,12 +806,11 @@
                         g._showData();
                         return;
                     }
-
                     g.data = data;
                     //保存缓存数据-记录总数
                     if (g.data[p.record] != null && g.cacheData.records)
                     {
-                        g.cacheData.records  = g.data[p.record];
+                        g.cacheData.records = g.data[p.record];
                     }
                     if (p.dataAction == "server") //服务器处理好分页排序数据
                     {
@@ -2264,7 +2254,7 @@
         collapseAll: function ()
         {
             var g = this, p = this.options;
-            $(g.rows).each(function (rowIndex,rowParm)
+            $(g.rows).each(function (rowIndex, rowParm)
             {
                 var targetRowObj = g.getRowObj(rowParm);
                 var linkbtn = $(".l-grid-tree-link", targetRowObj);
@@ -2309,8 +2299,8 @@
             if (g.enabledFrozen()) targetRowObj.push(g.getRowObj(rowdata, true));
             var level = rowdata['__level'], indexInCollapsedRows;
             var linkbtn = $(".l-grid-tree-link:first", targetRowObj);
-            var opening = true; 
-            g.collapsedRows = g.collapsedRows || []; 
+            var opening = true;
+            g.collapsedRows = g.collapsedRows || [];
             if (linkbtn.hasClass("l-grid-tree-link-close")) //收缩
             {
                 if (g.hasBind('treeExpand') && g.trigger('treeExpand', [rowdata]) == false) return false;
@@ -2856,6 +2846,7 @@
                 gridhtmlarr.push(g._getHtmlFromData(data, frozen));
             }
             gridhtmlarr.push('</tbody></table></div>');
+            if (frozen) gridhtmlarr.push('<div class="l-jplace"></div>');
             (frozen ? g.f.gridbody : g.gridbody).html(gridhtmlarr.join(''));
             //分组时不需要            
             if (!g.enabledGroup())
@@ -2967,7 +2958,7 @@
                 var cell1 = g.getCellObj(rowid, column1), cell2 = g.getCellObj(rowid, column2);
                 var height = Math.max($(cell1).height(), ($(cell2).height()));
                 $(cell1).add(cell2).height(height);
-            } 
+            }
         },
         _getRowDomId: function (rowdata, frozen)
         {
@@ -3225,9 +3216,9 @@
                     top = pc.top + pb.top + pv.top + topbarHeight;
 
                 jcell.html("");
-                g.setCellEditing(rowdata, column, true);
+                g.setCellEditing(rowdata, column, true); 
                 container
-                    .css({ left: left, top: $.browser.safari ? top + 2 : top + 1 })
+                    .css({ left: left, top: ($.browser.safari ? top : top - 1) + p.editorTopDiff })
                     .show();
                 if (column.textField) editParm.text = g._getValueByName(rowdata, column.textField);
                 var editorInput = g._createEditor(editor, container, editParm, width, height - 1);
@@ -3236,24 +3227,27 @@
                 g.bind('sysEndEdit', function ()
                 {
                     var newValue = editor.getValue(editorInput, editParm);
+                    if (column.textField && editor.getText)
+                    {
+                        editParm.text = editor.getText(editorInput, editParm);
+                    }
+                    if (editor.getSelected)
+                    {
+                        editParm.selected = editor.getSelected(editorInput, editParm);
+                    }
                     if (newValue != currentdata)
                     {
                         $(rowcell).addClass("l-grid-row-cell-edited");
                         g.changedCells[rowid + "_" + column['__id']] = true;
-                        editParm.value = newValue;
-                        if (column.textField && editor.getText)
+                        if (column.textField != column.name) //如果textField跟name一样，那么获取text就可以
                         {
-                            editParm.text = editor.getText(editorInput, editParm);
+                            editParm.value = newValue;
                         }
-                        if (editor.getSelected)
-                        {
-                            editParm.selected = editor.getSelected(editorInput, editParm);
-                        }
-                        if (column.editor.onChange) column.editor.onChange(editParm);
-                        if (g._checkEditAndUpdateCell(editParm))
-                        {
-                            if (column.editor.onChanged) column.editor.onChanged(editParm);
-                        }
+                    }
+                    if (column.editor.onChange) column.editor.onChange(editParm);
+                    if (g._checkEditAndUpdateCell(editParm))
+                    {
+                        if (column.editor.onChanged) column.editor.onChanged(editParm);
                     }
                 });
             }
@@ -3622,7 +3616,7 @@
                 if (scrollLeft != null)
                     g.gridheader[0].scrollLeft = scrollLeft;
                 if (scrollTop != null)
-                    g.f.gridbody[0].scrollTop = scrollTop; 
+                    g.f.gridbody[0].scrollTop = scrollTop;
                 g.trigger('SysGridHeightChanged');
             });
             //工具条 - 切换每页记录数事件
@@ -3632,7 +3626,7 @@
                     return false;
                 p.newPage = 1;
                 p.pageSize = this.value;
-                g.loadData(p.dataAction != "local" ? p.where : false); 
+                g.loadData(p.dataAction != "local" ? p.where : false);
             });
             //工具条 - 切换当前页事件
             $('span.pcontrol :text', g.toolbar).blur(function (e)

@@ -1,5 +1,5 @@
 ﻿/**
-* jQuery ligerUI 1.2.3
+* jQuery ligerUI 1.2.4
 * 
 * http://ligerui.com
 *  
@@ -236,7 +236,7 @@
         }, 
         getSelectedItems: function()
         {
-            var g = this, p = this.options;
+            var g = this, p = this.options; 
             if (!g.data) return null;
             var value = g.getValue();
             if (!value) return null;

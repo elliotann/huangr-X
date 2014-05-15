@@ -9,6 +9,23 @@ scrollbar-darkshadow-color: white;
 SCROLLBAR-BASE-COLOR:#F1F1F1;
 }
 
+.l-panel-btn-l { 
+    background:none;
+}
+.l-panel-btn-r { 
+   background:none;
+}
+.l-panel-btn {
+    padding-top:1px; padding-left:1px;
+} 
+.l-panel-btn-over, .l-panel-btn-selected {
+    background: #E0EDFF url(../images/ui/panel-btn.gif) repeat-x; border:1px solid #d4d4d4;
+     padding-top:0px; padding-left:0px;
+     -moz-border-radius: 4px;      /* Gecko browsers */
+    -webkit-border-radius: 4px;   /* Webkit browsers */
+    border-radius:4px;            /* W3C syntax */
+}
+
 
 /* -----------------------
    * 表格 *
@@ -260,7 +277,9 @@ line-height: 22px;
 text-align: center;
 }
 
-.l-toolbar-item,.l-bar-separator { margin-top:5px;}
+.l-toolbar-item,.l-bar-separator { 
+    margin-top:5px;
+}
 
 .l-bar-separator {
 border-left: 1px solid #D6D6D6;
@@ -277,9 +296,18 @@ margin: 2px; margin-top:9px;
     background:white  url('../images/ui/gridbar.jpg') repeat-x; height:28px;  line-height:28px;
     border:none; 
 }
+
+.l-toolbar {
+    background:none;
+    height: 32px;
+    border: 1px solid #D3d3d3; background:#F7F7F7
+}
 .l-toolbar-item
 {
     float:left;margin-left:4px;
+}
+.l-toolbar-text {
+    line-height:32px; font-weight:bold;margin:0;padding:0;border:0;margin:0px 6px;
 }
 .l-toolbar-item .l-icon{ position:absolute; left:2px; top:2px;}
 .l-toolbar-item-hasicon{ padding-left:20px;}

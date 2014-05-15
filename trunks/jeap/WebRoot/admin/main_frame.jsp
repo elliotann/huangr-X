@@ -30,6 +30,7 @@ var mainpage=false;
 </script>
 
     <script type="text/javascript" src="${context}/js/plug-in/jquery/jquery-1.8.3.js"></script>
+
     <script type="text/javascript" src="${staticserver }/js/admin/jeap.js"></script>
 
 

@@ -71,6 +71,7 @@
 </div>
 <div id="layout1">
     <div position="left" id="leftMenus">
+
     </div>
     <div position="center" id="right_content">
         <div id="navtab1" style="width: 100%;height:100%;overflow:hidden; border:1px solid #A3C0E8; ">

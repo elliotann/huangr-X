@@ -1,5 +1,5 @@
 ﻿/**
-* jQuery ligerUI 1.2.3
+* jQuery ligerUI 1.2.4
 * 
 * http://ligerui.com
 *  
@@ -121,6 +121,11 @@
         {
             var g = this, p = this.options;
             $("> .l-menu-item[menuitemid=" + itemid + "]", g.menu.items).removeClass("l-menu-item-disable");
+        },
+        setMenuText : function(itemid,text)
+        {
+            var g = this, p = this.options;
+            $("> .l-menu-item[menuitemid=" + itemid + "] >.l-menu-item-text:first", g.menu.items).html(text);
         },
         setDisabled: function (itemid)
         {

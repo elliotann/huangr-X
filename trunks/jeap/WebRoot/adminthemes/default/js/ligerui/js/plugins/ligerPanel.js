@@ -1,5 +1,5 @@
 ﻿/**
-* jQuery ligerUI 1.2.3
+* jQuery ligerUI 1.2.4
 * 
 * http://ligerui.com
 *  
@@ -74,6 +74,52 @@
                     g.close();
                 }
             });
+        },
+        _setChildren: function(children)
+        {
+            var g = this, p = this.options;
+            var tagNames = {
+                input : ["textbox", "combobox", "select"] 
+            };
+            var PluginNameMatchs  = 
+            {
+                "grid" : "ligerGrid",
+                "toolbar":"ligerToolBar",
+                "tree":"ligerTree",
+                "form":"ligerForm",
+                "menu":"ligerMenu",
+                "menubar":"ligerMenuBar",
+                "portal":"ligerPortal",
+                "combobox":"ligerComboBox",
+                "textbox":"ligerTextBox",
+                "spinner":"ligerSpinner",
+                "listbox":"ligerListBox",
+                "checkbox":"ligerCheckBox",
+                "radio":"ligerRadio",
+                "checkboxlist":"ligerCheckBoxList",
+                "radiolist":"ligerRadioList",
+                "popupedit":"ligerPopupEdit",
+                "button":"ligerButton",
+                "dateeditor":"ligerDateEditor",
+                "dialog":"ligerDialog",
+                "panel":"ligerPanel",
+                "layout":"ligerLayout",
+                "accordion":"ligerAccordion",
+                "tab":"ligerTab" 
+            }; 
+            if (!children || !children.length) return;
+            for (var i = 0; i < children.length; i++)
+            {
+                var child = children[i], type = child.type;
+                var tagName = tagNames[type] || "div"; 
+                var plugin = PluginNameMatchs[type];
+                if (!plugin) continue;
+                var element = document.createElement(tagName);
+                g.panel.find(".l-panel-content").append(element);
+                var childOp = $.extend({},child);
+                childOp.type = null;
+                $(element)[plugin](childOp);
+            }
         },
         collapse: function ()
         {
