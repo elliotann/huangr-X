@@ -1,5 +1,5 @@
 ﻿/**
-* jQuery ligerUI 1.2.3
+* jQuery ligerUI 1.2.4
 * 
 * http://ligerui.com
 *  
@@ -252,6 +252,19 @@
                     g.close();
             });
             if (!p.fixedType)
+            { 
+                if (p.width == 'auto')
+                {
+                    setTimeout(function ()
+                    {
+                        resetPos()
+                    }, 100);
+                } else
+                {
+                    resetPos();
+                }
+            }
+            function resetPos()
             {
                 //位置初始化
                 var left = 0;

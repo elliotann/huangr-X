@@ -10,7 +10,20 @@
 .l-dialog-bl,.l-dialog-bc,.l-dialog-br{ height:0px; line-height:0px;}
 
 .l-dialog-tl{ background:none;border-bottom: 1px solid #f5f5f5;}
-.l-dialog-tc{font-size: 14px;font-weight: bold;height: 30px;line-height: 30px;background: -webkit-gradient(linear, 0 0, 0 100%, from(#fcfcfc), to(#f4f4f4));border-bottom: 1px solid #d3d3d3;padding-left: 10px;}
+.l-dialog-tc {
+    font-size: 14px;
+    font-weight: bold;
+    height: 30px;
+    line-height: 30px;
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(#fcfcfc), to(#f4f4f4));
+    _background:#fcfcfc;
+    border-bottom: 1px solid #d3d3d3;
+    padding-left: 10px;
+    background: -o-linear-gradient(top, #fcfcfc, #f4f4f4);
+    background: -ms-linear-gradient(top, #fcfcfc 0%,#f4f4f4 100%);
+    background: linear-gradient(top, #fcfcfc, #f4f4f4);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fcfcfc', endColorstr='#f4f4f4');background: -moz-linear-gradient(top, #fcfcfc, #f4f4f4);
+}
 .l-dialog-tr{background:none;border-bottom: 1px solid #f5f5f5;}
 .l-dialog-bl{background:none;}
 .l-dialog-bc{background:none;}

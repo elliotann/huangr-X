@@ -1,5 +1,5 @@
 ﻿/**
-* jQuery ligerUI 1.2.3
+* jQuery ligerUI 1.2.4
 * 
 * http://ligerui.com
 *  
@@ -651,11 +651,7 @@
                 return false;
             var tabid = options.tabid;
             if (tabid == undefined) tabid = g.getNewTabid();
-            var url = options.url;
-            var content = options.content;
-            var text = options.text;
-            var showClose = options.showClose;
-            var height = options.height;
+            var url = options.url, content = options.content, text = options.text, showClose = options.showClose, height = options.height;
             //如果已经存在
             if (g.isTabItemExist(tabid))
             {
@@ -672,9 +668,10 @@
                 contentitem.height(newheight);
             }
             tabitem.attr("tabid", tabid);
-            contentitem.attr("tabid", tabid);
+            contentitem.attr("tabid", tabid); 
             if (url)
             {
+                iframe[0].tab = g;//增加iframe对tab对象的引用 
                 iframe.attr("name", tabid)
                  .attr("id", tabid)
                  .attr("src", url)
@@ -693,10 +690,14 @@
             if (content)
             {
                 contentitem.html(content);
+                if (options.callback)
+                    options.callback();
             }
             else if (options.target)
             {
                 contentitem.append(options.target);
+                if (options.callback)
+                    options.callback();
             }
             if (showClose == undefined) showClose = true;
             if (showClose == false) $(".l-tab-links-item-close", tabitem).remove();

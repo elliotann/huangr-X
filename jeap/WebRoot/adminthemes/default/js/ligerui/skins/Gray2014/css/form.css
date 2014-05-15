@@ -1,4 +1,6 @@
-﻿
+﻿.l-form li {
+    line-height: 34px;
+}
 .l-hidden{ display:none;}
 .l-form .l-group
 { 
@@ -271,4 +273,5 @@ width: 100%;
 /* -----------------------
    *   验证 *
 * ----------------------- */
- 
+
+
