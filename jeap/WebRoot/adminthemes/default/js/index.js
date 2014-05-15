@@ -36,7 +36,7 @@ var BackendUi={
 			 $("<li/>").appendTo( $(".sysmenu>ul") ).append(link);
 			 if(v.target!='_blank'){
 				link.click(function(){
-                        //Jeap.AdminUI.load($(this));
+                        Jeap.AdminUI.load($(this));
 						return false;
 					});
 			 }
