@@ -78,7 +78,7 @@
         });
         $("form").ligerForm();
 
-        $("#menupid").ligerGetComboBoxManager().selectValue(${menu.id});
+        $("#menupid").ligerGetComboBoxManager().selectValue(${menu.pid});
 
         $("#notSuperChk").click(function(){
 
