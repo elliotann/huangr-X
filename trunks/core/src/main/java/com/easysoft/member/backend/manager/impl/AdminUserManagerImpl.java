@@ -77,6 +77,7 @@ public class AdminUserManagerImpl extends GenericService<AdminUser> implements I
     }
 
     private void addMemberShip(String username,int[] roles){
+        if(roles==null) return;
         for(int i=0;i<roles.length;i++){
             identityService.createMembership(username,roles[i]+"");
         }

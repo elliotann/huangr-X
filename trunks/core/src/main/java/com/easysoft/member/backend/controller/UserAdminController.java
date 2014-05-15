@@ -85,6 +85,7 @@ public class UserAdminController extends BaseController{
             json.setMsg("新增管理员成功");
 
         } catch (RuntimeException e) {
+            e.printStackTrace();
             json.setMsg(e.getMessage());
             json.setSuccess(false);
         }
