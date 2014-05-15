@@ -70,7 +70,6 @@
                         ], width: '100%', usePager:false, checkbox: true,
                         url: 'auth.do?dataGrid&ajax=yes', alternatingRow: false,selectRowButtonOnly:true, tree: {
                             columnId: 'menuName',
-                            //columnName: 'name',
                             idField: 'id',
                             parentIDField: 'pid'
                         },onCheckRow:onCheckRow
@@ -126,7 +125,7 @@
 
         function submitForm(){
 
-            var rows = manager.getCheckedRows();
+            var rows = manager.getSelectedRows();
 
             var menu = "";
             $(rows).each(function () {
