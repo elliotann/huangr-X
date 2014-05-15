@@ -62,9 +62,14 @@
                     success : function(result) {
 
                         if(result.success){
-                            alert("增加成功!");
-                            window.parent.listgrid.loadData();
-                            dialog.close();
+                            $.ligerDialog.waitting('操作成功...');
+                            setTimeout(function ()
+                            {
+                                $.ligerDialog.closeWaitting();
+                                window.parent.listgrid.loadData();
+                                dialog.close();
+                            }, 1000);
+
                         }else{
                             alert(result.msg)
                         }

@@ -83,10 +83,10 @@
                             setTimeout(function ()
                             {
                                 $.ligerDialog.closeWaitting();
-
+                                window.parent.listgrid.loadData();
+                                dialog.close();
                             }, 1000);
-                            window.parent.listgrid.loadData();
-                            dialog.close();
+
                         }else{
                             alert(result.msg)
                         }
