@@ -28,6 +28,15 @@
 
     $(function ()
     {
+        $.validator.addMethod(
+                "notnull",
+                function (value, element, regexp)
+                {
+                    if (!value) return true;
+                    return !$(element).hasClass("l-text-field-null");
+                },
+                "不能为空"
+        );
         $.metadata.setType("attr", "validate");
         var v = $("form").validate({
             debug: true,
@@ -36,21 +45,27 @@
             {
                 if (element.hasClass("l-textarea"))
                 {
-                    element.ligerTip({ content: lable.html(), target: element[0] });
+                    element.addClass("l-textarea-invalid");
                 }
                 else if (element.hasClass("l-text-field"))
                 {
-                    element.parent().ligerTip({ content: lable.html(), target: element[0] });
+                    element.parent().addClass("l-text-invalid");
                 }
-                else
-                {
-                    lable.appendTo(element.parents("td:first").next("td"));
-                }
+                $(element).removeAttr("title").ligerHideTip();
+                $(element).attr("title", lable.html()).ligerTip();
             },
             success: function (lable)
             {
-                lable.ligerHideTip();
-                lable.remove();
+                var element = $("#" + lable.attr("for"));
+                if (element.hasClass("l-textarea"))
+                {
+                    element.removeClass("l-textarea-invalid");
+                }
+                else if (element.hasClass("l-text-field"))
+                {
+                    element.parent().removeClass("l-text-invalid");
+                }
+                $(element).removeAttr("title").ligerHideTip();
             },
             submitHandler: function ()
             {
