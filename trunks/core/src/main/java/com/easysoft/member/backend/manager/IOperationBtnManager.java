@@ -11,4 +11,5 @@ import com.easysoft.member.backend.model.OperationBtn;
  * To change this template use File | Settings | File Templates.
  */
 public interface IOperationBtnManager extends IGenericService<OperationBtn> {
+
 }

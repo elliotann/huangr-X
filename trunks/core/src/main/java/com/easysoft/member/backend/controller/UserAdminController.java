@@ -40,10 +40,12 @@ public class UserAdminController extends BaseController{
 
     @RequestMapping(params = {"list"})
     public ModelAndView list() throws Exception{
+
         return new ModelAndView("core/admin/user/useradmin");
     }
     @RequestMapping(params = {"dataGrid"})
     public ModelAndView dataGrid(Page page){
+
         List userList= this.adminUserManager.list();
         DataGridReturn dataGridReturn = new DataGridReturn(userList.size(),userList);
         String json = JsonUtils.beanToJson(dataGridReturn);

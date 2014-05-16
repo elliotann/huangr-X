@@ -3,6 +3,7 @@ package com.easysoft.member.backend.manager;
 import com.easysoft.core.common.service.IGenericService;
 import com.easysoft.member.backend.model.AuthAction;
 import com.easysoft.member.backend.model.FunAndOper;
+import com.easysoft.member.backend.model.OperationBtn;
 import com.easysoft.member.backend.model.Role;
 import com.easysoft.member.backend.vo.FunAndOperationVO;
 
@@ -25,8 +26,14 @@ public interface IPermissionManager extends IGenericService {
 	 * @param roleids 角色id数组
 	 */
 	public void giveRolesToUser(int userid,int[] roleids);
-	
-	
+
+    /**
+     * 根据用户ID和点击的菜单ID查询此功能所拥有的操作权限
+     * @param username
+     * @param menuId
+     * @return
+     */
+	public List<OperationBtn> queryBtnByUsernameAndMenuId(int userid, String acttype,Integer menuId);
 	
 	
 	/**
