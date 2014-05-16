@@ -35,7 +35,18 @@ public class PermissionManager extends GenericService implements IPermissionMana
 
         return false;
     }
-	/**
+
+    @Override
+    public List<OperationBtn> queryBtnByUsernameAndMenuId(int userid, String acttype,Integer menuId) {
+        List<FunAndOper> funAndOpers = getUesrAct4New(userid,acttype);
+        List<OperationBtn> results = new ArrayList
+        for(FunAndOper funAndOper : funAndOpers){
+
+        }
+        return null;
+    }
+
+    /**
 	 * 为某个用户赋予某些角色<br>
 	 * 会清除此用户的前角色，重新赋予
 	 * @param userid  用户id

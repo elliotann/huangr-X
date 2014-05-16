@@ -21,6 +21,7 @@ public class AppCacheProxy extends AbstractCacheProxy<List<JEAPApp>> implements 
 	
 	private IAppManager appManager;
 	private static final String APP_LIST_CACHE_KEY = "applist";
+    public AppCacheProxy(){}
 	@Autowired
 	public  AppCacheProxy(IAppManager appManager){
 		super(CacheFactory.APP_CACHE_NAME_KEY  );

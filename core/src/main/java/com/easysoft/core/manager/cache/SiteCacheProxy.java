@@ -25,6 +25,7 @@ public class SiteCacheProxy extends AbstractCacheProxy<Site> implements ISiteMan
 	private ISiteManager siteManager;
 	private IDomainManager domainManager;
 	private static final String SITE_LIST_CACHE_KEY ="eopDNS";
+    public  SiteCacheProxy(){}
     @Autowired
 	public SiteCacheProxy(ISiteManager siteManager) {
 		super(CacheFactory.SITE_CACHE_NAME_KEY);
