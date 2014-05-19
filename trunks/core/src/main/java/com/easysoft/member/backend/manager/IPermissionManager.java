@@ -29,11 +29,12 @@ public interface IPermissionManager extends IGenericService {
 
     /**
      * 根据用户ID和点击的菜单ID查询此功能所拥有的操作权限
-     * @param username
+     * @param userid
+     * @param acttype
      * @param menuId
      * @return
      */
-	public List<OperationBtn> queryBtnByUsernameAndMenuId(int userid, String acttype,Integer menuId);
+	public List<OperationBtn> queryBtnByUsernameAndMenuId(Integer userid, String acttype,Integer menuId);
 	
 	
 	/**
