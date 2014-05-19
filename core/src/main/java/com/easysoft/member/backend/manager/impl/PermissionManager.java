@@ -6,6 +6,7 @@ import com.easysoft.framework.context.webcontext.WebSessionContext;
 import com.easysoft.member.backend.manager.IPermissionManager;
 import com.easysoft.member.backend.model.*;
 import com.easysoft.member.backend.vo.FunAndOperationVO;
+import org.apache.commons.lang.xwork.StringUtils;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
@@ -37,13 +38,21 @@ public class PermissionManager extends GenericService implements IPermissionMana
     }
 
     @Override
-    public List<OperationBtn> queryBtnByUsernameAndMenuId(int userid, String acttype,Integer menuId) {
+    public List<OperationBtn> queryBtnByUsernameAndMenuId(Integer userid, String acttype,Integer menuId) {
         List<FunAndOper> funAndOpers = getUesrAct4New(userid,acttype);
-        List<OperationBtn> results = new ArrayList
+        List<OperationBtn> results = new ArrayList<OperationBtn>();
         for(FunAndOper funAndOper : funAndOpers){
-
+            if(funAndOper.getMenu().getId()==menuId){
+                String operation = funAndOper.getOperation();
+                if(StringUtils.isNotEmpty(operation)){
+                    String [] btns = operation.split(",");
+                    for(String btnId : btns){
+                        results.add((OperationBtn)this.get(OperationBtn.class,Integer.parseInt(btnId)));
+                    }
+                }
+            }
         }
-        return null;
+        return results;
     }
 
     /**

@@ -9,7 +9,11 @@ import com.easysoft.framework.utils.JsonUtils;
 import com.easysoft.member.backend.manager.IAdminUserManager;
 import com.easysoft.member.backend.manager.IPermissionManager;
 import com.easysoft.member.backend.manager.IRoleManager;
+import com.easysoft.member.backend.manager.impl.UserServiceFactory;
 import com.easysoft.member.backend.model.AdminUser;
+import com.easysoft.member.backend.model.FunAndOper;
+import com.easysoft.member.backend.model.OperationBtn;
+import com.easysoft.member.backend.model.RoleAuth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,9 +43,12 @@ public class UserAdminController extends BaseController{
     private IPermissionManager permissionManager;
 
     @RequestMapping(params = {"list"})
-    public ModelAndView list() throws Exception{
-
-        return new ModelAndView("core/admin/user/useradmin");
+    public ModelAndView list(Integer menuId) throws Exception{
+        List<OperationBtn> operationBtns = permissionManager.queryBtnByUsernameAndMenuId(UserServiceFactory.getUserService().getCurrentUser().getUserid(), RoleAuth.AuthType.FUNCTION.name(),menuId);
+        String operationJson = JsonUtils.beanToJsonArray(operationBtns);
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("operationJson",operationJson);
+        return new ModelAndView("core/admin/user/useradmin",map);
     }
     @RequestMapping(params = {"dataGrid"})
     public ModelAndView dataGrid(Page page){
