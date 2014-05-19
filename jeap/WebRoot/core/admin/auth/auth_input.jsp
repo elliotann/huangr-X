@@ -6,6 +6,7 @@
     <link href="${context }/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="${context}/js/plug-in/jquery/jquery-1.8.3.js"></script>
     <script src="${context }/js/ligerui/js/core/base.js" type="text/javascript"></script>
+    <script src="${context}/js/ligerui/js/plugins/ligerLayout.js" type="text/javascript"></script>
     <script src="${context }/js/ligerui/js/plugins/ligerGrid.js" type="text/javascript"></script>
     <script src="${context }/js/ligerui/js/plugins/ligerSpinner.js" type="text/javascript"></script>
     <script src="${context }/js/ligerui/js/plugins/ligerResizable.js" type="text/javascript"></script>
@@ -19,7 +20,7 @@
         $(function ()
         {
 
-
+            $("#layout1").ligerLayout({ rightWidth: 200});
             listgrid = $("#maingrid").ligerGrid({
                         height:400,
                         columns: [
@@ -72,17 +73,24 @@
                             columnId: 'menuName',
                             idField: 'id',
                             parentIDField: 'pid'
-                        },onCheckRow:onCheckRow
+                        },onCheckRow:onCheckRow,onSelectRow:onSelectRow
 
                     }
             );
             manager = $("#maingrid").ligerGetGridManager();
         });
 
+        function onSelectRow(rowdata, rowid, rowobj){
+            alert("here");
+            $.ajax({
 
+            });
+            $("#operationsa").html("<input type='checkbox'>增加");
+            return false;
+        }
         function onCheckRow(checked,data,rowid,rowdata){
 
-
+            alert("checked");
             var parent = manager.getParent(data);
             if(parent!=null){
                 manager.select(parent);
@@ -171,9 +179,20 @@
 </head>
 
 <body style="padding: 4px">
+<div id="layout1" style="height: 100%">
 
+    <div position="center" title="功能权限">
         <div id="maingrid">
         </div>
+    </div>
+    <div position="right" title="操作权限">
+        <div id="operationsa">
+            <input type="checkbox">删除
+        </div>
+
+    </div>
+</div>
+
 
 
 </body>
