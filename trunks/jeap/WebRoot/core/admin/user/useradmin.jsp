@@ -70,14 +70,14 @@
         });
     });
     function listToolbar(){
-        var items = [];
-        items.push({ text: '增加', click: addUser, icon: 'add' });
+        var items = ${operationJson};
+        /*items.push({ text: '增加', click: addUser, icon: 'add' });
         items.push({ line: true });
         items.push({ text: '修改', click: modifyUser, icon: 'modify' });
         items.push({ line: true });
         items.push({ text: '删除', click: delUser, img: '${context }/js/ligerui/skins/icons/delete.gif' });
         items.push({ line: true });
-        items.push({ text: '高级自定义查询', click: itemclick, icon: 'search2' });
+        items.push({ text: '高级自定义查询', click: itemclick, icon: 'search2' });*/
         return { items: items };
     }
     function itemclick()
