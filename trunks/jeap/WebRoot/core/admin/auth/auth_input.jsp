@@ -25,55 +25,13 @@
                         height:400,
                         columns: [
                             { display: 'id', name: 'id', id: 'menuId',  align: 'center',width:60 },
-                            { display: '名称', name: 'title', id: 'menuName',  align: 'left',width:250 },
-                            { display: '操作', name: 'ico',  align: 'left',width:300,render:function(item){
-                                var menuId= item.id;
-                                <c:forEach var="funAndOper" items="${funAndOpers}">
-
-                                    if("${funAndOper.menu.id}" ==menuId){
-                                        this.select(item);
-                                    }
-                                </c:forEach>
-
-
-                                var html="";
-                                if(item.hasChildren){
-                                    return html;
-                                }
-                                var ischecked = "";
-                                <c:forEach var="operBtn" items="${operationBtns}">
-
-                                    <c:forEach var="funAndOper" items="${funAndOpers}">
-
-                                        if("${funAndOper.menu.id}" ==menuId&&ischecked==""){
-                                            var oper = "${funAndOper.operation}";
-
-                                            var opers = oper.split(',');
-                                            for(var i=0;i<opers.length;i++){
-
-                                                if(opers[i]=="${operBtn.id}"){
-                                                    ischecked = "checked";
-
-                                                    break;
-                                                }
-                                            }
-                                        }
-
-                                    </c:forEach>
-
-                                    html += "<input type='checkbox' name='operBtn' value='${operBtn.code}' id='"+item.id+"|${operBtn.id}' "+ischecked+"/>${operBtn.name}&nbsp;&nbsp;";
-                                    ischecked="";
-                                </c:forEach>
-
-
-                                return html;
-                            } }
+                            { display: '名称', name: 'title', id: 'menuName',  align: 'left',width:250 }
                         ], width: '100%', usePager:false, checkbox: true,
                         url: 'auth.do?dataGrid&ajax=yes', alternatingRow: false,selectRowButtonOnly:true, tree: {
                             columnId: 'menuName',
                             idField: 'id',
                             parentIDField: 'pid'
-                        },onCheckRow:onCheckRow,onSelectRow:onSelectRow
+                        },onCheckRow:onCheckRow,onDblClickRow:onSelectRow
 
                     }
             );
@@ -81,16 +39,20 @@
         });
 
         function onSelectRow(rowdata, rowid, rowobj){
-            alert("here");
-            $.ajax({
 
+            $.ajax({
+                url:'auth.do?getBtnByMenuId&id='+rowdata.id+"&ajax=yes",
+                type:'post',
+                dataType:'json',
+                success:function(data){
+
+                    $("#operationsa").html(data);
+                }
             });
-            $("#operationsa").html("<input type='checkbox'>增加");
+
             return false;
         }
         function onCheckRow(checked,data,rowid,rowdata){
-
-            alert("checked");
             var parent = manager.getParent(data);
             if(parent!=null){
                 manager.select(parent);
