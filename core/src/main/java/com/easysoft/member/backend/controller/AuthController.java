@@ -140,18 +140,21 @@ public class AuthController extends BaseController {
         }
         return result;
     }
-    @RequestMapping(params = {"getMenuTreeById"})
+    @RequestMapping(params = {"getBtnByMenuId"})
     @ResponseBody
-    public String getMenuTreeById(Integer id){
-        id=2;
+    public String getBtnByMenuId(Integer id){
+
         if(id==null||id==0){
             return "";
         }
         AjaxJson result = new AjaxJson();
-        List<Menu> menus = menuManager.getMenuTree(id);
-        DataGridReturn dataGridReturn = new DataGridReturn(menus.size(),menus);
-        String json = JsonUtils.beanToJson(dataGridReturn);
-        json = "{ rows: [{ \"id\": '01',\"children\": [{ \"id\": '0101', \"amount\":400 },{ \"id\": '0102',  \"children\":[{ \"id\": '010201', \"amount\": 200 },{ \"id\": '010202', \"amount\": 100 }]},{ \"id\": '0103', \"amount\": 100 }]},{ \"id\": '02', \"amount\": 100 },{ \"id\": '03', \"amount:\" 100 }],\"total\":0}";
+        List<OperationBtn> operationBtns = permissionManager.getOperationBtnsByMenuId(id);
+        String json = "";
+        for(OperationBtn btn : operationBtns){
+            json += "&nbsp;&nbsp;<input type='checkbox'/>"+btn.getName()+"</br>";
+        }
+
+
         result.setObj(json);
         return json;
     }

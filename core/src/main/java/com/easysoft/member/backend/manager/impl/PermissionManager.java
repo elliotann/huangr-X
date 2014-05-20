@@ -158,4 +158,9 @@ public class PermissionManager extends GenericService implements IPermissionMana
         return funAndOperationVOs;
     }
 
+    @Override
+    public List<OperationBtn> getOperationBtnsByMenuId(Integer menuId) {
+        List<OperationBtn> operationBtns = this.findHql("from OperationBtn ob where ob.menuId=?",menuId+"");
+        return operationBtns;
+    }
 }
