@@ -76,5 +76,12 @@ public interface IPermissionManager extends IGenericService {
      * @return
      */
     public List<FunAndOperationVO> getFunAndOperations();
+
+    /**
+     * 根据菜单id查询其操作权限
+     * @param menuId
+     * @return
+     */
+    public List<OperationBtn> getOperationBtnsByMenuId(Integer menuId);
 	
 }
