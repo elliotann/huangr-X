@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Basic Droppable - jQuery EasyUI Demo</title>
+	
+</head>
+<body>
+
+	<div style="margin:10px 0;"></div>
+
+	<div style="float:left;width:100%;">
+	
+		<div id="myDiv"  class="easyui-droppable targetarea"
+				data-options="
+					accept: '.tree-title',
+					onDragEnter:function(e,source){
+						
+					},
+					onDragLeave: function(e,source){
+						
+					},
+					onDrop: function(e,source){
+		
+                        alert('here');
+						new TextInput($(source).html(), x, y, 150, 25); 	
+						
+
+					}
+				" onmousemove="getPoint(event)">
+				
+				
+		</div>
+	</div>
+	<div style="clear:both"></div>
+	<style type="text/css">
+		.targetarea{
+			border:1px solid #83e7e3;
+			height:630px;
+		}
+		.proxy{
+			border:1px solid #ccc;
+			width:80px;
+			background:#fafafa;
+		}
+
+		.tableTest{
+			border:1px solid #ccc;
+			width:80px;
+			background:#98bf21;
+		}
+		
+		
+	</style>
+	<script>
+		var x,y;
+		$(function(){
+
+			$('.tree-title').draggable({
+				revert:true,
+				deltaX:10,
+				deltaY:10,
+				proxy:function(source){
+					var n = $('<div class="proxy"></div>');
+					n.html($(source).html()).appendTo('body');
+					return n;
+				}
+			});
+		});
+
+		function getX(obj) {   
+  var ParentObj=obj;   
+  var left=obj.offsetLeft;   
+  while(ParentObj=ParentObj.offsetParent){   
+   left+=ParentObj.offsetLeft;
+   return left;
+  }
+ }
+function getY(obj){   
+	var ParentObj=obj;   
+	var top=obj.offsetTop;   
+	while(ParentObj=ParentObj.offsetParent){   
+	top+=ParentObj.offsetTop;     return top;  } }    
+function getPoint(event)    {
+	var top,left,oDiv;   
+	oDiv=document.getElementById("myDiv");   
+	top=getY(oDiv);   
+	left=getX(oDiv);   
+
+	x = (event.clientX-left+document.body.scrollLeft)  -2;  
+	y = (event.clientY-top+document.body.scrollTop)+30;
+
+}
+
+	</script>
+</body>
+</html>
