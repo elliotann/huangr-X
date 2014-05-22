@@ -1,1 +1,0 @@
-{nodes:{node1:{type:'start',text:{text:'开始1'}, attr:{ x:467, y:180, width:50, height:50}, props:{key:{value:''},name:{value:'开始'},desc:{value:''},initiator:{value:''}}}},flowsequences:{},name:'新建流程',key:'',desc:''}
