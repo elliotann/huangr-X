@@ -1,0 +1,7 @@
+{states:{
+	rect1:{type:'start',text:{text:'开始1'},attr:{ x:423, y:76, width:50, height:50},props:{text:{value:'开始1'},temp1:{value:''},temp2:{value:''}}},
+	rect2:{type:'task',text:{text:'任务2'},attr:{ x:401, y:234, width:100, height:50},props:{text:{value:'任务2'},assignee:{value:''},desc:{value:''}}}
+	},
+    paths:{path3:{from:'rect1',to:'rect2', dots:[],text:{text:'TO 任务2',textPos:{x:0,y:-10}},props:{text:{value:''}}}},
+	props:{props:{name:{value:'新建流程'},key:{value:''},desc:{value:''}}}
+}
