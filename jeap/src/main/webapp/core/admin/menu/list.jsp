@@ -68,7 +68,8 @@
                         { line: true },
                         { text: '修改', click: updateMenu, icon: 'modify' },
                         { line: true },
-                        { text: '删除', click: delMenu, img: '${context }/js/ligerui/skins/icons/delete.gif' }
+                        { text: '删除', click: delMenu, img: '${context }/js/ligerui/skins/icons/delete.gif' },
+                        { text: '增加按钮', click: addBtn, icon: 'add' }
                     ]
                     }
                 }
@@ -115,6 +116,16 @@
 
     function addMenu(item){
         addOrUpdateDialog(item,'增加菜单','menu.do?add',400,400);
+
+    }
+
+    function addBtn(item){
+        var row = listgrid.getSelectedRow();
+        if(row==null){
+            $.ligerDialog.error('请选择数据操作!');
+            return;
+        }
+        addOrUpdateDialog(item,'增加按钮','oper.do?add&menuId='+row.id,400,400);
 
     }
 
