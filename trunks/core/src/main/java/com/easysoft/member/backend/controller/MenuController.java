@@ -74,6 +74,10 @@ public class MenuController extends BaseController {
         return new ModelAndView("core/admin/menu/add",map);
     }
 
+
+
+
+
     @RequestMapping(params = {"saveAdd"})
     @ResponseBody
     public AjaxJson saveAdd(Menu menu,@RequestParam MultipartFile icoFile){

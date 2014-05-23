@@ -124,7 +124,7 @@ public class ComponentManager extends BaseSupport
                     componentDao.save(temp);
                 }
                 else {
-                    componentDao.updateBySqlString("update es_component set install_state=1 where componentid='"+componentView.getComponentid()+"'");
+                    componentDao.updateBySqlString("update t_component set install_state=1 where componentid='"+componentView.getComponentid()+"'");
 
                 }
             }
@@ -152,7 +152,7 @@ public class ComponentManager extends BaseSupport
                 temp.setInstall_state(0);
                 componentDao.save( temp);
             } else {
-                componentDao.executeSql("update es_component set install_state=0 where componentid=?", new Object[] { componentView.getComponentid() });
+                componentDao.executeSql("update t_component set install_state=0 where componentid=?", new Object[] { componentView.getComponentid() });
 
             }
         }
@@ -189,7 +189,7 @@ public class ComponentManager extends BaseSupport
             WidgetContext.putWidgetState(widgetid, Boolean.valueOf(true));
         }
 
-        String sql = "update es_component set enable_state=1 where componentid=?";
+        String sql = "update t_component set enable_state=1 where componentid=?";
         componentDao.executeSql(sql, new Object[]{componentid});
 
 

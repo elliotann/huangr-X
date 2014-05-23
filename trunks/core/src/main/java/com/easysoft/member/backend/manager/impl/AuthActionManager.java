@@ -5,10 +5,7 @@ import com.easysoft.framework.utils.StringUtil;
 import com.easysoft.member.backend.manager.IAuthActionManager;
 import com.easysoft.member.backend.manager.IFunAndOperManager;
 import com.easysoft.member.backend.manager.IRoleAuthManager;
-import com.easysoft.member.backend.model.AuthAction;
-import com.easysoft.member.backend.model.FunAndOper;
-import com.easysoft.member.backend.model.Role;
-import com.easysoft.member.backend.model.RoleAuth;
+import com.easysoft.member.backend.model.*;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -176,4 +173,60 @@ public class AuthActionManager extends GenericService<AuthAction> implements IAu
     public List<AuthAction> getAuthActionByRoleId(int roleId) {
         return this.baseDaoSupport.queryForList("select * from t_auth_action where actid in (select authid from t_role_auth where roleid=?)", AuthAction.class,roleId);
     }
+
+    @Override
+    public void saveAuth(Integer roleId,Integer operId,boolean isCheck,String[] menuIds) {
+        for(String menuStr : menuIds){
+            Integer menuId = Integer.parseInt(menuStr);
+            List<RoleAuth> roleAuths = this.findHql("from RoleAuth ra where ra.role.id=? and ra.authType=?",roleId,RoleAuth.AuthType.FUNCTION);
+            FunAndOper haveFun = null;
+            //检验角色是否有此功能
+            for(RoleAuth roleAuth : roleAuths){
+                List<FunAndOper> funAndOpers = this.findHql("from FunAndOper f where f.menu.id=? and f.id=?",menuId,roleAuth.getFunOrDataId());
+                if(funAndOpers.size()>0){
+                    haveFun = funAndOpers.get(0);
+                    break;
+                }
+            }
+            if(haveFun==null){
+                if(!isCheck&&(operId!=null&&operId!=0)) return;
+                FunAndOper funAndOper = new FunAndOper();
+                Menu menu = new Menu();
+                menu.setId(menuId);
+                funAndOper.setMenu(menu);
+                funAndOper.setOperation(operId+"");
+                funAndOperManager.save(funAndOper);
+
+                RoleAuth roleAuth = new RoleAuth();
+                Role role = new Role();
+                role.setRoleid(roleId);
+                roleAuth.setRole(role);
+                roleAuth.setAuthType(RoleAuth.AuthType.FUNCTION);
+                roleAuth.setFunOrDataId(funAndOper.getId());
+                roleAuthManager.save(roleAuth);
+            }else{
+                if(isCheck){
+                    haveFun.setOperation(haveFun.getOperation()+","+operId);
+                }else{
+                    String operation = "";
+                    String[] operations = haveFun.getOperation().split(",");
+                    for(String opt:operations){
+
+                        if(!opt.equals(operId+"")){
+
+                            operation += opt +",";
+
+
+                        }
+                    }
+                    if(operation.endsWith(",")) operation = operation.substring(0,operation.length()-1);
+                    haveFun.setOperation(operation);
+                }
+
+                funAndOperManager.updateEntitie(haveFun);
+            }
+        }
+
+    }
+
 }

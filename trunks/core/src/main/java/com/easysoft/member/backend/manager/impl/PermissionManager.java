@@ -6,7 +6,8 @@ import com.easysoft.framework.context.webcontext.WebSessionContext;
 import com.easysoft.member.backend.manager.IPermissionManager;
 import com.easysoft.member.backend.model.*;
 import com.easysoft.member.backend.vo.FunAndOperationVO;
-import org.apache.commons.lang.xwork.StringUtils;
+
+import org.apache.commons.lang.StringUtils;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
@@ -162,5 +163,28 @@ public class PermissionManager extends GenericService implements IPermissionMana
     public List<OperationBtn> getOperationBtnsByMenuId(Integer menuId) {
         List<OperationBtn> operationBtns = this.findHql("from OperationBtn ob where ob.menuId=?",menuId+"");
         return operationBtns;
+    }
+
+    @Override
+    public boolean hasOperationByRoleAndMenu(Integer roleId, Integer menuId,String operId) {
+        List<FunAndOper> funAndOpers = this.baseDaoSupport.queryForList("select * from t_fun_operation where  fun_oper_id in (select funOrDataId FROM t_role_auth t where t.role_id=?) and menu_id=?",new RowMapper(){
+            @Override
+            public Object mapRow(ResultSet rs, int i) throws SQLException {
+                FunAndOper funAndOper = new FunAndOper();
+                funAndOper.setOperation(rs.getString("operation"));
+                return funAndOper;
+            }
+        },roleId,menuId);
+        if(funAndOpers.size()>0){
+            String operation = funAndOpers.get(0).getOperation();
+            String[] operations = operation.split(",");
+            for(String operStr:operations){
+                if(operStr.equals(operId)){
+                    return true;
+                }
+            }
+        }
+        return false;
+
     }
 }

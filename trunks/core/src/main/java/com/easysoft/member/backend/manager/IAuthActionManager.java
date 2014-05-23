@@ -38,10 +38,10 @@ public interface IAuthActionManager {
      * @param menus
      * @return
      */
-    public int batAddRoleAuth(Integer roleId,List<FunAndOper> funAndOpers);
+    public int batAddRoleAuth(Integer roleId, List<FunAndOper> funAndOpers);
 
 
-    public int add(AuthAction auth,int roleId);
+    public int add(AuthAction auth, int roleId);
 	/**
 	 * 修改权限点
 	 * @param act
@@ -66,4 +66,11 @@ public interface IAuthActionManager {
      * @return
      */
     public List<AuthAction> getAuthActionByRoleId(int roleId);
+
+    /**
+     * 保存权限
+     * @param menuId
+     * @param roleId
+     */
+    public void saveAuth(Integer roleId, Integer operId,boolean isCheck,String[] menuIds);
 }

@@ -137,6 +137,7 @@ public class InstallController extends BaseController{
         props.setProperty("jdbc.password", dbConfig.getPassword());
         props.setProperty("validationQuery.sqlserver", "SELECT 1");
         props.setProperty("hibernate.hbm2ddl.auto", "update");
+        props.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
         saveProperties(props);
     }
 
