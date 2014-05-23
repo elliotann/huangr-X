@@ -81,5 +81,7 @@ public interface IMenuManager {
     public Menu get(String title);
 
     public void delete(String title);
+
+    public List<Menu> getMenuTreeByRoleId(Integer roleId);
 	
 }

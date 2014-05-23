@@ -2,13 +2,14 @@ package com.easysoft.core.model;
 
 import com.easysoft.framework.db.NotDbField;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * @author andy
  * @version 1.0
  */
-public class JEAPApp {
+public class JEAPApp implements Serializable{
 	
 	private Integer id;
 	private String appid;

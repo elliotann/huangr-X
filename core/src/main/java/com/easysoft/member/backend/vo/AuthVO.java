@@ -1,6 +1,7 @@
 package com.easysoft.member.backend.vo;
 
-import org.apache.commons.lang.xwork.StringUtils;
+
+import org.apache.commons.lang.StringUtils;
 
 /**
  * Created with IntelliJ IDEA.

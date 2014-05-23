@@ -83,5 +83,7 @@ public interface IPermissionManager extends IGenericService {
      * @return
      */
     public List<OperationBtn> getOperationBtnsByMenuId(Integer menuId);
+
+    public boolean hasOperationByRoleAndMenu(Integer roleId,Integer menuId,String operId);
 	
 }

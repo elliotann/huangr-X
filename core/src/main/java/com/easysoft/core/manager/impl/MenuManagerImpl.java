@@ -3,7 +3,11 @@ package com.easysoft.core.manager.impl;
 import com.easysoft.core.common.dao.spring.BaseSupport;
 import com.easysoft.core.dao.IMenuDao;
 import com.easysoft.core.manager.IMenuManager;
+import com.easysoft.member.backend.manager.IFunAndOperManager;
+import com.easysoft.member.backend.manager.IRoleAuthManager;
+import com.easysoft.member.backend.model.FunAndOper;
 import com.easysoft.member.backend.model.Menu;
+import com.easysoft.member.backend.model.RoleAuth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -20,6 +24,9 @@ import java.util.List;
 public class MenuManagerImpl extends BaseSupport<Menu> implements IMenuManager {
     @Autowired
     private IMenuDao menuDao;
+
+    @Autowired
+    private IFunAndOperManager funAndOperManager;
 	public void clean() {
 		this.baseDaoSupport.execute("truncate table menu");
 	}
@@ -120,5 +127,16 @@ public class MenuManagerImpl extends BaseSupport<Menu> implements IMenuManager {
     public void delete(String title) {
         String sql = "delete from menu where title=?";
         this.baseDaoSupport.execute(sql, new Object[]{title});
+    }
+
+    @Override
+    public List<Menu> getMenuTreeByRoleId(Integer roleId) {
+        List<Menu> results = new ArrayList<Menu>();
+        List<FunAndOper> funAndOpers = funAndOperManager.queryFunAndOpersByRoleId(roleId);
+        for(FunAndOper funAndOper : funAndOpers){
+            results.add(this.get(funAndOper.getMenu().getId()));
+        }
+
+        return results;
     }
 }

@@ -52,6 +52,10 @@ public class AuthController extends BaseController {
         List<OperationBtn> operationBtns = operationBtnManager.queryForAll(OperationBtn.class);
         map.put("operationBtns",operationBtns);
         List<FunAndOper> funAndOpers = funAndOperManager.queryFunAndOpersByRoleId(roleId);
+        //猎取权限菜单
+        List<Menu> selectMenus = menuManager.getMenuTreeByRoleId(roleId);
+
+        map.put("selectMenus",JsonUtils.beanToJsonArray(selectMenus));
         if(!funAndOpers.isEmpty()){
             map.put("isEdit",1);
             //map.put("actid",authActions.get(0).getActid());
@@ -89,7 +93,7 @@ public class AuthController extends BaseController {
     public AjaxJson saveAdd(String name,Integer[] menuids,int roleId){
         AjaxJson result = new AjaxJson();
         try{
-            com.easysoft.member.backend.model.AuthAction act = new com.easysoft.member.backend.model.AuthAction();
+            AuthAction act = new AuthAction();
 
             act.setName(name);
             act.setType("menu");
@@ -110,7 +114,7 @@ public class AuthController extends BaseController {
     public AjaxJson saveEdit(String name,Integer[] menuids,int authid){
         AjaxJson result = new AjaxJson();
         try{
-            com.easysoft.member.backend.model.AuthAction act = new com.easysoft.member.backend.model.AuthAction();
+            AuthAction act = new AuthAction();
             act.setName(name);
             act.setType("menu");
             act.setActid(authid);
@@ -142,7 +146,7 @@ public class AuthController extends BaseController {
     }
     @RequestMapping(params = {"getBtnByMenuId"})
     @ResponseBody
-    public String getBtnByMenuId(Integer id){
+    public String getBtnByMenuId(Integer id,Integer roleId){
 
         if(id==null||id==0){
             return "";
@@ -151,7 +155,13 @@ public class AuthController extends BaseController {
         List<OperationBtn> operationBtns = permissionManager.getOperationBtnsByMenuId(id);
         String json = "";
         for(OperationBtn btn : operationBtns){
-            json += "&nbsp;&nbsp;<input type='checkbox'/>"+btn.getName()+"</br>";
+            boolean isChecked = permissionManager.hasOperationByRoleAndMenu(roleId,id,btn.getId()+"");
+            if(isChecked){
+                json += "&nbsp;&nbsp;<input type='checkbox' id='"+btn.getCode()+"_"+id+"' onclick='checkOperation(this)' value='"+btn.getId()+"' checked/>"+btn.getName();
+            }else{
+                json += "&nbsp;&nbsp;<input type='checkbox' id='"+btn.getCode()+"_"+id+"' onclick='checkOperation(this)' value='"+btn.getId()+"'/>"+btn.getName();
+            }
+
         }
 
 
@@ -160,50 +170,11 @@ public class AuthController extends BaseController {
     }
     @RequestMapping(params = {"saveAuth"})
     @ResponseBody
-    public AjaxJson saveAuth(String postdata,Integer roleId){
+    public AjaxJson saveAuth(Integer menuId,Integer roleId,Integer operId,boolean isCheck,@RequestParam(value = "menuIds[]")String[] menuIds){
         AjaxJson result = new AjaxJson();
-        AuthOperationVo authOperationVo = (AuthOperationVo)JsonUtils.jsonToBean(postdata, AuthOperationVo.class,null);
-        String menu = authOperationVo.getMenu();
-
-        String[] menusStr=menu.split(",");
-        List<Integer> menuids = new ArrayList<Integer>();
-
-        for(int i=0;i<menusStr.length;i++ ){
-            String menuStr = menusStr[i];
-            menuids.add(Integer.parseInt(menuStr.substring(1)));
-        }
 
 
-        List<FunAndOper> funAndOpers = new ArrayList<FunAndOper>();
-
-        String btn = authOperationVo.getBtn();
-        String[] btnsStr=null;
-        if(StringUtils.isNotEmpty(btn)){
-            btnsStr = btn.split(",");
-        }
-
-        for(Integer menuId : menuids){
-            FunAndOper funAndOper = new FunAndOper();
-            Menu menuTemp = new Menu();
-            menuTemp.setId(menuId);
-            funAndOper.setMenu(menuTemp);
-            String opers = "";
-            if(btnsStr!=null){
-                for(int i=0;i<btnsStr.length;i++){
-                    String btnStr = btnsStr[i];
-                    if(menuId==Integer.parseInt(btnStr.substring(0,btnStr.indexOf("|")))){
-                        opers += btnStr.substring(btnStr.indexOf("|")+1)+",";
-                    }
-
-                }
-            }
-
-            funAndOper.setOperation(opers);
-            funAndOpers.add(funAndOper);
-
-        }
-
-        authActionManager.batAddRoleAuth(roleId,funAndOpers);
+        authActionManager.saveAuth(roleId,operId,isCheck,menuIds);
         return result;
 
     }
