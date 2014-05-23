@@ -787,7 +787,7 @@ public class StringUtil {
 		// BASE64Encoder().encode("search-cat{3}keyword{板材}brand{80}prop{1_1,0_1}mate{0}color{1}price{100-300}.html".getBytes());
 		// System.out.println(str);
 		String rd = "" + System.currentTimeMillis();
-		String str = StringUtil.md5(rd).substring(0, 22);
+		String str = StringUtil.md5("1");
 
 		System.out.println(str);
 	}

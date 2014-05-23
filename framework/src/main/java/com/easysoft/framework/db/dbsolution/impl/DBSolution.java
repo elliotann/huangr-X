@@ -52,10 +52,11 @@ public abstract class DBSolution implements IDBSolution {
 	 * @return
 	 */
 	protected String getTableName(String table) {
+        prefix = "";
 		return StringUtil.addPrefix(table, prefix);
 	}
     protected String getSaasTableName(String table, int userid, int siteid) {
-        if (table.toLowerCase().startsWith("eop_")) {
+        if (table.toLowerCase().startsWith("JEAP_")) {
             return getTableName(table);
         }
         return getTableName(table) + "_" + userid + "_" + siteid;
