@@ -70,17 +70,17 @@
         });
     });
     function listToolbar(){
-        var items = ${operationJson};
-        /*items.push({ text: '增加', click: addUser, icon: 'add' });
-        items.push({ line: true });
-        items.push({ text: '修改', click: modifyUser, icon: 'modify' });
-        items.push({ line: true });
-        items.push({ text: '删除', click: delUser, img: '${context }/js/ligerui/skins/icons/delete.gif' });
-        items.push({ line: true });
-        items.push({ text: '高级自定义查询', click: itemclick, icon: 'search2' });*/
+        var items = [];
+        <c:forEach var="btn" items="${operationBtns}" varStatus="status">
+            items.push({text:'${btn.name}',click:${btn.operType},icon:'${btn.ico}'});
+            items.push({ line: true });
+
+        </c:forEach>
+
+
         return { items: items };
     }
-    function itemclick()
+    function customSearch()
     {
         listgrid.options.data = $.extend(true,{}, CustomersData);
         listgrid.showFilter();

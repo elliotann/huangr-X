@@ -128,7 +128,7 @@
     .l-verify-tip{ left:230px; top:120px;}
 </style>
 <form name="form1" method="post"   id="form1" enctype="multipart/form-data">
-    <input type="hidden" value="${menuId}" id="id"/>
+    <input type="hidden" value="${menuId}" id="menuId" name="menuId"/>
     <div>
     </div>
     <table cellpadding="0" cellspacing="0" class="l-table-edit" >

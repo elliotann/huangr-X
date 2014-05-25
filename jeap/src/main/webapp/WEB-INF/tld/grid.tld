@@ -9,13 +9,64 @@
 	<display-name>jeap Server Components tld</display-name>
 	<tlib-version>1.0</tlib-version>
 	<short-name>tree</short-name>
-	<uri>http://www.javashop.cn/grid</uri>
+	<uri>http://www.jeap.cn/grid</uri>
     
-    
+    <tag>
+        <description>grid tag</description>
+        <name>dataGrid</name>
+        <tag-class>com.easysoft.tag.webapp.taglib.html.support.DataGridTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>action</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>height</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    <tag>
+        <description>grid column tag</description>
+        <name>column</name>
+        <tag-class>com.easysoft.tag.webapp.taglib.html.support.DataGridColumnTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>title</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>field</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>width</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>minWidth</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>align</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>renderFun</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
     <tag>
 		<description>grid tag</description>
 		<name>grid</name>
-		<tag-class>com.easysoft.tag.webapp.taglib.html.GridTaglib</tag-class>
+		<tag-class>com.easysoft.tag.webapp.taglib.html.GridTaglibTemp</tag-class>
 		<body-content>JSP</body-content>
 		
 		<attribute>
