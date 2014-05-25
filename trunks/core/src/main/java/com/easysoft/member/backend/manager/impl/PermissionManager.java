@@ -3,11 +3,13 @@ package com.easysoft.member.backend.manager.impl;
 import com.easysoft.core.common.service.impl.GenericService;
 import com.easysoft.framework.context.webcontext.ThreadContextHolder;
 import com.easysoft.framework.context.webcontext.WebSessionContext;
+import com.easysoft.member.backend.manager.IOperationBtnManager;
 import com.easysoft.member.backend.manager.IPermissionManager;
 import com.easysoft.member.backend.model.*;
 import com.easysoft.member.backend.vo.FunAndOperationVO;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,8 @@ import java.util.List;
  */
 @Service("permissionManager")
 public class PermissionManager extends GenericService implements IPermissionManager {
+    @Autowired
+    private IOperationBtnManager operationBtnManager;
     public boolean checkHaveAuth(int actid) {
         WebSessionContext sessonContext = ThreadContextHolder.getSessionContext();
 
@@ -40,10 +44,15 @@ public class PermissionManager extends GenericService implements IPermissionMana
 
     @Override
     public List<OperationBtn> queryBtnByUsernameAndMenuId(Integer userid, String acttype,Integer menuId) {
-        List<FunAndOper> funAndOpers = getUesrAct4New(userid,acttype);
+        AdminUser adminUser = UserServiceFactory.getUserService().getCurrentUser();
         List<OperationBtn> results = new ArrayList<OperationBtn>();
+        if(adminUser.getFounder()==1){
+            return operationBtnManager.findByQueryString("from OperationBtn ob where ob.menuId="+menuId);
+        }
+        List<FunAndOper> funAndOpers = getUesrAct4New(userid,acttype);
+
         for(FunAndOper funAndOper : funAndOpers){
-            if(funAndOper.getMenu().getId()==menuId){
+            if(funAndOper.getMenu().getId().intValue()==menuId.intValue()){
                 String operation = funAndOper.getOperation();
                 if(StringUtils.isNotEmpty(operation)){
                     String [] btns = operation.split(",");
@@ -187,4 +196,6 @@ public class PermissionManager extends GenericService implements IPermissionMana
         return false;
 
     }
+
+
 }
