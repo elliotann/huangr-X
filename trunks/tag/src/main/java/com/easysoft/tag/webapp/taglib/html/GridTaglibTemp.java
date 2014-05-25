@@ -12,7 +12,7 @@ import com.easysoft.tag.webapp.taglib.html.support.GridAjaxPageHtmlBuilder;
  * @author andy
  *
  */
-public class GridTaglib extends HtmlTaglib {
+public class GridTaglibTemp extends HtmlTaglib {
 
 	private String from;
 	private String pager; //是否显示分页
