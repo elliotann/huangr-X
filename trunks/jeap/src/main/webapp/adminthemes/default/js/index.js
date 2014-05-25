@@ -91,7 +91,7 @@ var BackendUi={
 				$.each(this.children,function(k,submenu){
                     var subitem = $('<li><img/><span></span><div class="menuitem-l"></div><div class="menuitem-r"></div></li>');
                     subitem.attr({
-                        url: submenu.url+"&menuid="+submenu.id,
+                        url: submenu.url+"&menuId="+submenu.id,
                         tabid: "tabid" + submenu.id,
                         menuno: submenu.id
                     });

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ include file="/commons/taglibs.jsp"%>
-<%@ taglib uri="/WEB-INF/grid.tld" prefix="grid"%>
+
 <script type="text/javascript" src="${staticserver }/js/common/jquery-1.10.js"></script>
 <link href="${context }/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
 <link href="${context }/js/ligerui/skins/ligerui-icons.css" rel="stylesheet" type="text/css" />
@@ -104,46 +104,7 @@
 
 
     }
-    $(function ()
-    {
-        listgrid =
-                $("#maingrid").ligerGrid({
-                    height:'99%',
-                    columns: [
-                        { display: 'id', name: 'id', align: 'left', width: 100, minWidth: 60 },
-                        { display: '表名', name: 'tableName', minWidth: 120 },
-                        { display: '表描述', name: 'tableTitle', minWidth: 140 },
-                        { display: '版本', name: 'version', minWidth: 140 },
-                        { display: '同步数据库', name: 'realname', minWidth: 140,render:function(rowdata,index,value){
-                            if(value==1){
-                                return "已同步";
-                            }else{
-                                return "未同步";
-                            }
-                        } },
-                        { display: '创建人', name: 'createBy', minWidth: 140 },
-                        { display: '创建时间', name: 'createTime', minWidth: 140 },
-                        { display: '操作', name: 'realname', minWidth: 140,render:function(rowdata,index,value){
 
-                              return "<a href='#' onclick='preview("+rowdata.id+")'>预览</a>";
-
-                        } }
-                    ], url:'designer.do?dataGrid&ajax=yes',  pageSize:30 ,rownumbers:true,
-                    toolbar: { items: [
-                        { text: '增加', click: addForm, icon: 'add' },
-                        { line: true },
-                        { text: '修改', click: modifyForm, icon: 'modify' },
-                        { line: true },
-                        { text: '删除', click: delUser, img: '${context }/js/ligerui/skins/icons/delete.gif' },
-                        { line: true },
-                        { text: '生成代码', click: generatorCode, icon: 'modify' }
-                    ]
-                    }
-                });
-
-
-        $("#pageloading").hide();
-    });
 
     function generatorCode(item){
         var row = listgrid.getSelectedRow();
@@ -165,11 +126,16 @@
     }
 </script>
 
-
-
+<grid:dataGrid action="designer.do?dataGrid&ajax=yes" height="99%">
+    <grid:column title="id" field="id" align="left" width="100" minWidth="60"/>
+    <grid:column title="表名" field="tableName"  minWidth="120"/>
+    <grid:column title="表描述" field="tableTitle"  minWidth="140"/>
+    <grid:column title="版本" field="version"  minWidth="140"/>
+    <grid:column title="同步数据库" field="isSynDB"  minWidth="140" renderFun="isSynDB"/>
+</grid:dataGrid>
 
 <div class="grid">
-<div id="maingrid"></div>
+    <div id="maingrid"></div>
 </div>
 
 <div style="display:none;">
