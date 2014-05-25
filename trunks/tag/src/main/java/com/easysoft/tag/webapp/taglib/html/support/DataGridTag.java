@@ -74,6 +74,7 @@ public class DataGridTag extends BodyTagSupport{
     public String end(){
         height=(height==null)?"auto":height;
         StringBuilder sb = new StringBuilder("<script type=\"text/javascript\">");
+        sb.append("var listgrid;");
         sb.append("$(function (){");
         sb.append("listgrid = $(\"#maingrid\").ligerGrid({");
         sb.append("height:'"+height+"',");
@@ -115,6 +116,9 @@ public class DataGridTag extends BodyTagSupport{
         sb.append("});");
         sb.append("});");
         sb.append("</script>");
+        sb.append("<div class=\"grid\">");
+        sb.append("<div id=\"maingrid\"></div>");
+        sb.append("</div>");
         return sb.toString();
     }
 
