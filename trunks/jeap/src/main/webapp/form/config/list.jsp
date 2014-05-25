@@ -24,7 +24,7 @@
 
 
 <script type="text/javascript">
-    var listgrid;
+
     function addForm(item)
     {
 
@@ -124,6 +124,14 @@
             slide: false
         });
     }
+
+    function isSynDB(rowdata,index,value){
+        if(value==1){
+            return "已同步";
+        }else{
+            return "未同步";
+        }
+    }
 </script>
 
 <grid:dataGrid action="designer.do?dataGrid&ajax=yes" height="99%">
@@ -132,12 +140,6 @@
     <grid:column title="表描述" field="tableTitle"  minWidth="140"/>
     <grid:column title="版本" field="version"  minWidth="140"/>
     <grid:column title="同步数据库" field="isSynDB"  minWidth="140" renderFun="isSynDB"/>
+    <grid:column title="创建人" field="createBy"  minWidth="140"/>
+    <grid:column title="创建时间" field="createTime"  minWidth="140"/>
 </grid:dataGrid>
-
-<div class="grid">
-    <div id="maingrid"></div>
-</div>
-
-<div style="display:none;">
-
-</div>
