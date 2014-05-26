@@ -37,6 +37,7 @@ public class DataGridTag extends BodyTagSupport{
 
     @Override
     public int doStartTag() throws JspException {
+        columns.clear();
         return EVAL_PAGE;
     }
 
@@ -54,22 +55,12 @@ public class DataGridTag extends BodyTagSupport{
             e.printStackTrace();
         }
         return EVAL_PAGE;
+
     }
 
-    @Override
-    public void setBodyContent(BodyContent b) {
-        super.setBodyContent(b);
-    }
 
-    @Override
-    public void doInitBody() throws JspException {
-        super.doInitBody();
-    }
 
-    @Override
-    public int doAfterBody() throws JspException {
-        return super.doAfterBody();
-    }
+
 
     public String end(){
         height=(height==null)?"auto":height;
