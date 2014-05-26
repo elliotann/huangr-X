@@ -59,6 +59,7 @@
             {
                 $("form .l-text,.l-textarea").ligerHideTip();
                 if(showmessage.outjson()){
+                    window.parent.listgrid.loadData();
                     dialog.close();//关闭dialog
                 }
             }
