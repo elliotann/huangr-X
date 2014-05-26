@@ -138,8 +138,12 @@
     <grid:column title="id" field="id" align="left" width="100" minWidth="60"/>
     <grid:column title="表名" field="tableName"  minWidth="120"/>
     <grid:column title="表描述" field="tableTitle"  minWidth="140"/>
-    <grid:column title="版本" field="version"  minWidth="140"/>
-    <grid:column title="同步数据库" field="isSynDB"  minWidth="140" renderFun="isSynDB"/>
-    <grid:column title="创建人" field="createBy"  minWidth="140"/>
+    <grid:column title="版本" field="version"  minWidth="100"/>
+    <grid:column title="同步数据库" field="isSynDB"  minWidth="100" renderFun="isSynDB"/>
+    <grid:column title="创建人" field="createBy"  minWidth="100"/>
     <grid:column title="创建时间" field="createTime"  minWidth="140"/>
 </grid:dataGrid>
+
+<div class="grid">
+<div id="maingrid"></div>
+</div>
