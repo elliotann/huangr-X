@@ -5,7 +5,6 @@ import com.easysoft.core.common.vo.json.AjaxJson;
 import com.easysoft.member.backend.manager.IOperationBtnManager;
 import com.easysoft.member.backend.model.Menu;
 import com.easysoft.member.backend.model.OperationBtn;
-import com.easysoft.member.backend.model.Role;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,11 +19,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Administrator on 14-5-23.
+ * 操作按钮ACTION
+ * Created by huangxa on 2014/5/23.
  */
 @Controller
 @RequestMapping({"/core/admin/oper"})
@@ -37,18 +36,15 @@ public class OperationController extends BaseController {
         map.put("menuId",menuId);
         return new ModelAndView("core/admin/menu/addOperation",map);
     }
-
     @RequestMapping(params = {"saveAdd"})
     @ResponseBody
-    public AjaxJson saveAdd(OperationBtn operationBtn,@RequestParam MultipartFile icoFile,String menuId){
+    public AjaxJson saveAdd(OperationBtn operationBtn,@RequestParam MultipartFile icoFile){
         AjaxJson json = new AjaxJson();
         try{
             if(StringUtils.isNotEmpty(icoFile.getOriginalFilename())){
                 operationBtn.setIco(updateFile(icoFile));
             }
-            operationBtn.setMenuId(menuId);
-            operationBtnManager.save(operationBtn);
-
+            this.operationBtnManager.save(operationBtn);
             json.setMsg("新增菜单成功");
 
         }catch(RuntimeException e){
@@ -64,7 +60,7 @@ public class OperationController extends BaseController {
         try {
             in = file.getInputStream();
 
-            File path = new File(icoPath+file.getOriginalFilename());
+            File path = new File("E:\\jeap\\jeap\\WebRoot\\adminthemes\\default\\images\\system\\ico\\"+file.getOriginalFilename());
             if(!path.exists()){
                 path.createNewFile();
             }
