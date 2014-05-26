@@ -78,7 +78,6 @@ public class FormDesignerController extends BaseController {
     @ResponseBody
     public AjaxJson save(String data,String tableName,Integer formId){
         AjaxJson result = new AjaxJson();
-
         Map<String,Class> map = new HashMap<String,Class>();
         map.put("fields", FormField.class);
         FormEntity formEntity = (FormEntity)JsonUtils.jsonToBean(data, FormEntity.class,map);
