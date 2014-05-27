@@ -141,6 +141,31 @@ public final class FreeMarkerParser {
 
 		return "widget  processor error";
 	}
+    //处理xml内容
+    public String processXmlContent(){
+
+        try {
+            String name = this.clazz.getSimpleName();
+            pageExt = pageExt == null ? ".html" : pageExt;
+            name = this.pageName == null ? name : pageName;
+
+            cfg = this.getCfg();
+            cfg.setNumberFormat("0.##");
+            Template temp = cfg.getTemplate(name + pageExt);
+            ByteOutputStream stream = new ByteOutputStream();
+            Writer out = new OutputStreamWriter(stream);
+            temp.process(data, out);
+            out.flush();
+            String content = stream.toString();
+            return content;
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (TemplateException e) {
+            e.printStackTrace();
+        }
+
+        return "widget  processor error";
+    }
 		
 	
 	private static   Configuration  cfg;
