@@ -8,8 +8,8 @@ import java.util.regex.Pattern;
  * @author andy
  *2010-4-10下午01:55:50
  */
-public class EopUtil {
-	private EopUtil(){}
+public class JeapUtil {
+	private JeapUtil(){}
 	
 	/**
 	 * 包装 html中的css路径<br>
