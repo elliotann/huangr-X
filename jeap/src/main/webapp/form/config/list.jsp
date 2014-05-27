@@ -112,6 +112,7 @@
             $.ligerDialog.error('请选择数据!');
             return;
         }
+
         $.ligerDialog.open({
             height:600,
             width: 900,
@@ -131,17 +132,25 @@
             $.ligerDialog.error('请选择数据!');
             return;
         }
-        $.ligerDialog.open({
-            height:600,
-            width: 900,
-            title : '代码生成',
-            url: '${ctx}//core/admin/code.do?synDb&formId='+row.id,
-            showMax: false,
-            showToggle: true,
-            showMin: false,
-            isResize: true,
-            slide: false
+        $.ajax({
+            type: "post",
+            url: '${ctx}//core/admin/code.do?synDb',
+            data:"ajax=true&formId="+row.id,
+            dataType:"json",
+            success: function(result){
+                if(result.success){
+                    $.ligerDialog.alert('删除成功!', '提示', type);
+                    listgrid.loadData();
+                }else{
+                    $.ligerDialog.alert(result.msg, '提示', type);
+
+                }
+            },error:function(e){
+                $.ligerDialog.alert('出错了!', '提示', type)
+
+            }
         });
+
     }
 
     function isSynDB(rowdata,index,value){
