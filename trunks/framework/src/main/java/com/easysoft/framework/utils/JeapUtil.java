@@ -4,9 +4,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * eop工具类
+ * JEAP工具类
  * @author andy
- *2010-4-10下午01:55:50
  */
 public class JeapUtil {
 	private JeapUtil(){}
