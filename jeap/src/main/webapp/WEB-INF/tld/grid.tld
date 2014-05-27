@@ -64,6 +64,29 @@
         </attribute>
     </tag>
     <tag>
+        <description>data grid toolbar</description>
+        <name>toolbar</name>
+        <tag-class>com.easysoft.tag.webapp.taglib.html.support.DataGridToolBarTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>title</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>clickFun</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>icon</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+
+    <tag>
 		<description>grid tag</description>
 		<name>grid</name>
 		<tag-class>com.easysoft.tag.webapp.taglib.html.GridTaglibTemp</tag-class>

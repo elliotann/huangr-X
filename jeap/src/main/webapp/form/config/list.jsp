@@ -142,6 +142,10 @@
     <grid:column title="同步数据库" field="isSynDB"  minWidth="100" renderFun="isSynDB"/>
     <grid:column title="创建人" field="createBy"  minWidth="100"/>
     <grid:column title="创建时间" field="createTime"  minWidth="140"/>
+    <grid:toolbar title="增加" clickFun="addForm" icon="add"/>
+    <grid:toolbar title="修改" clickFun="modifyForm" icon="modify"/>
+    <grid:toolbar title="删除" clickFun="delUser" icon="del"/>
+    <grid:toolbar title="生成代码" clickFun="generatorCode" icon="modify"/>
 </grid:dataGrid>
 
 <div class="grid">
