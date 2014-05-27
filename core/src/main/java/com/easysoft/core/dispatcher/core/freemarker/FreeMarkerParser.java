@@ -3,7 +3,7 @@ package com.easysoft.core.dispatcher.core.freemarker;
 import com.easysoft.framework.ParamSetting;
 import com.easysoft.framework.context.webcontext.ThreadContextHolder;
 import com.easysoft.core.freemarker.utils.FreeMarkerUtil;
-import com.easysoft.framework.utils.EopUtil;
+import com.easysoft.framework.utils.JeapUtil;
 import com.sun.xml.messaging.saaj.util.ByteOutputStream;
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
@@ -126,15 +126,12 @@ public final class FreeMarkerParser {
 			String content = stream.toString();
 			
 			if(wrapPath){
-//				System.out.println("before:---------------------------");
-//				System.out.println(content);
-				
-				content = EopUtil.wrapjavascript(content, this.getResPath());
-				content =  EopUtil.wrapcss(content, getResPath());
-//				System.out.println("after:---------------------------");
-//				System.out.println(content);
+
+				content = JeapUtil.wrapjavascript(content, this.getResPath());
+				content =  JeapUtil.wrapcss(content, getResPath());
+
 			}
-			//content= StringUtil.compressHtml(content);
+
 			return content;
 		} catch (IOException e) {
 			e.printStackTrace();

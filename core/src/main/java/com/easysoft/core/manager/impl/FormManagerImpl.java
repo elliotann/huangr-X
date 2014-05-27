@@ -7,9 +7,12 @@ import com.easysoft.core.manager.IFormManager;
 import com.easysoft.core.model.FormEntity;
 import com.easysoft.core.model.FormField;
 import com.easysoft.framework.utils.StringUtil;
+import freemarker.template.Template;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.StringWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,5 +85,21 @@ public class FormManagerImpl extends GenericService<FormEntity> implements IForm
             formFieldDao.delete(field);
         }
         formDao.delete(result);
+    }
+
+    @Override
+    public void synDb(Integer formId) {
+        //获取表单
+        FormEntity formEntity = formDao.get(formId);
+        Template t;
+        t = getConfig("/org/jeecgframework/web/cgform/engine/hibernate").getTemplate("tableTemplate.ftl");
+        Writer out = new StringWriter();
+        //模板对于数字超过1000，会自动格式为1,,000(禁止转换)
+        t.setNumberFormat("0.#####################");
+        t.process(getRootMap(table,DbTableUtil.getDataType(session)), out);
+        String xml = out.toString();
+        logger.info(xml);
+        createTable(xml, table, session);
+
     }
 }

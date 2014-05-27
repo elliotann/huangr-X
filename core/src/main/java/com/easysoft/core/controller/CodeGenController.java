@@ -65,4 +65,16 @@ public class CodeGenController extends BaseController {
 
         return result;
     }
+
+    /**
+     * 同步数据库
+     * @return
+     */
+    @RequestMapping(params={"synDb"})
+    @ResponseBody
+    public AjaxJson synDb(Integer formId){
+        AjaxJson result = new AjaxJson();
+
+        return result;
+    }
 }
