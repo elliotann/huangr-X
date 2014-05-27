@@ -3,6 +3,7 @@ package com.easysoft.core.manager.impl;
 import com.easysoft.core.common.service.impl.GenericService;
 import com.easysoft.core.dao.IFormDao;
 import com.easysoft.core.dao.IFormFieldDao;
+import com.easysoft.core.dispatcher.core.freemarker.FreeMarkerParser;
 import com.easysoft.core.manager.IFormManager;
 import com.easysoft.core.model.FormEntity;
 import com.easysoft.core.model.FormField;
@@ -91,15 +92,10 @@ public class FormManagerImpl extends GenericService<FormEntity> implements IForm
     public void synDb(Integer formId) {
         //获取表单
         FormEntity formEntity = formDao.get(formId);
-        Template t;
-        t = getConfig("/org/jeecgframework/web/cgform/engine/hibernate").getTemplate("tableTemplate.ftl");
-        Writer out = new StringWriter();
-        //模板对于数字超过1000，会自动格式为1,,000(禁止转换)
-        t.setNumberFormat("0.#####################");
-        t.process(getRootMap(table,DbTableUtil.getDataType(session)), out);
-        String xml = out.toString();
+        FreeMarkerParser freeMarkerParser = FreeMarkerParser.getInstance();
+        String xml = freeMarkerParser.processXmlContent();
         logger.info(xml);
-        createTable(xml, table, session);
+
 
     }
 }

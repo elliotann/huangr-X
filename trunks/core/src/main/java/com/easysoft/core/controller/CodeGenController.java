@@ -74,7 +74,7 @@ public class CodeGenController extends BaseController {
     @ResponseBody
     public AjaxJson synDb(Integer formId){
         AjaxJson result = new AjaxJson();
-
+        formManager.synDb(formId);
         return result;
     }
 }
