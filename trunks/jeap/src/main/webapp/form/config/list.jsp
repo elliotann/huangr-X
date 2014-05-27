@@ -125,6 +125,25 @@
         });
     }
 
+    function synDB(item){
+        var row = listgrid.getSelectedRow();
+        if(row==null){
+            $.ligerDialog.error('请选择数据!');
+            return;
+        }
+        $.ligerDialog.open({
+            height:600,
+            width: 900,
+            title : '代码生成',
+            url: '${ctx}//core/admin/code.do?synDb&formId='+row.id,
+            showMax: false,
+            showToggle: true,
+            showMin: false,
+            isResize: true,
+            slide: false
+        });
+    }
+
     function isSynDB(rowdata,index,value){
         if(value==1){
             return "已同步";
@@ -145,6 +164,7 @@
     <grid:toolbar title="增加" clickFun="addForm" icon="add"/>
     <grid:toolbar title="修改" clickFun="modifyForm" icon="modify"/>
     <grid:toolbar title="删除" clickFun="delUser" icon="del"/>
+    <grid:toolbar title="同步数据库" clickFun="synDB" icon="modify"/>
     <grid:toolbar title="生成代码" clickFun="generatorCode" icon="modify"/>
 </grid:dataGrid>
 
