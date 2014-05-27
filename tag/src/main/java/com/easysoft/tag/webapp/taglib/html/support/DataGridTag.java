@@ -47,7 +47,6 @@ public class DataGridTag extends BodyTagSupport{
     @Override
     public int doEndTag() throws JspException {
         JspWriter out = pageContext.getOut();
-
         try {
             if("ligerui".equals(style)){
                 out.write(end());
