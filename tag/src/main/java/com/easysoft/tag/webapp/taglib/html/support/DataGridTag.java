@@ -1,6 +1,7 @@
 package com.easysoft.tag.webapp.taglib.html.support;
 
 import com.easysoft.tag.webapp.taglib.vo.DataGridColumn;
+import com.easysoft.tag.webapp.taglib.vo.ToolBar;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.jsp.JspException;
@@ -20,6 +21,7 @@ public class DataGridTag extends BodyTagSupport{
     private String height;
 
     private List<DataGridColumn> columns = new ArrayList<DataGridColumn>();
+    private List<ToolBar> toolBars = new ArrayList<ToolBar>();
 
     public void setAction(String action) {
         this.action = action;
@@ -38,6 +40,7 @@ public class DataGridTag extends BodyTagSupport{
     @Override
     public int doStartTag() throws JspException {
         columns.clear();
+        toolBars.clear();
         return EVAL_PAGE;
     }
 
@@ -96,13 +99,20 @@ public class DataGridTag extends BodyTagSupport{
         sb.append("],");
         sb.append("url:'"+action+"',  pageSize:30 ,rownumbers:true,");
         sb.append("toolbar: { items: [");
-        sb.append("{ text: '增加', click: addForm, icon: 'add' },");
-        sb.append("{ line: true },");
-        sb.append("{ text: '修改', click: modifyForm, icon: 'modify' },");
-        sb.append("{ line: true },");
-        sb.append("{ text: '删除', click: delUser, img: '${context }/js/ligerui/skins/icons/delete.gif' },");
-        sb.append("{ line: true },");
-        sb.append("{ text: '生成代码', click: generatorCode, icon: 'modify' }");
+        int j=0;
+        for(ToolBar toolBar : toolBars){
+            sb.append("{");
+            sb.append("text:'"+toolBar.getTitle()+"',");
+            sb.append("click:"+toolBar.getClickFun()+",");
+            sb.append("icon:'"+toolBar.getIcon()+"'");
+            if(j==toolBars.size()-1){
+                sb.append("}");
+            }else{
+                sb.append("},");
+                sb.append("{ line: true },");
+            }
+            j++;
+        }
         sb.append("]}");
         sb.append("});");
         sb.append("});");
@@ -115,5 +125,8 @@ public class DataGridTag extends BodyTagSupport{
 
     public void setColumns(DataGridColumn column){
         columns.add(column);
+    }
+    public void setToolBars(ToolBar toolBar){
+        toolBars.add(toolBar);
     }
 }
