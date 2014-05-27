@@ -27,4 +27,10 @@ public interface IFormManager extends IGenericService<FormEntity> {
 
     public void delFormById(Integer id);
 
+    /**
+     * 同步数据库
+     * @param formId
+     */
+    public void synDb(Integer formId);
+
 }
