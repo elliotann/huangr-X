@@ -69,8 +69,10 @@ public class MySQLSolution extends DBSolution {
         if ("int".equals(type)) {
             if ("1".equals(size))
                 return "smallint(1)";
-            else
+            else{
                 return "int";
+            }
+
         }
 
         if ("memo".equals(type))
