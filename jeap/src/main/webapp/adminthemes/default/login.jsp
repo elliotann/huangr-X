@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link type="image/x-icon" href="${ico}" rel="icon" />
 <link type="image/x-icon" href="${ico}" rel="bookmark" />
-<script type="text/javascript" src="${staticserver }/js/common/jquery-1.10.js"></script>
+<script type="text/javascript" src="${staticserver }/js/common/jquery-1.8.3.js"></script>
 <SCRIPT  src="${staticserver }/js/common/jquery-form-2.33.js" type="text/javascript"></SCRIPT>
 <script type="text/javascript" src="${staticserver }/js/admin/EADP.SSO.js"></script>
 <link href="${context}/css/login.css" rel="stylesheet" type="text/css" />

@@ -3,6 +3,7 @@
  
 .chk-icon{ background:url(../lib/ligerUI/skins/Aqua/images/controls/checkbox.gif) 0px 0px; height:13px; line-height:13px; width:13px; margin:4px 20px; display:block; cursor:pointer;}
 .chk-icon-selected{ background-position:0px -13px;}
+.chk-icon-display{ background-position:26px 0px;}
 
 /* 按钮 */
 .button{line-height:25px;height:25px;background:url('images/button1.gif') repeat-x; position:relative; margin-top:8px; margin-bottom:8px;color:#2C69A2; width:120px; cursor:pointer;}

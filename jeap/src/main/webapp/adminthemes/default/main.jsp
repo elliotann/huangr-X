@@ -15,7 +15,7 @@
     <link href="${context}/css/input.css" rel="stylesheet" type="text/css" />
     <link href="${context}/css/validate.css" rel="stylesheet" type="text/css" />
     <link href="${context}/css/dialog.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="${context}/js/plug-in/jquery/jquery-1.8.3.js"></script>
+    <script type="text/javascript" src="${staticserver }/js/common/jquery-1.6.4.js"></script>
     <script src="${context}/js/ligerui/js/core/base.js" type="text/javascript"></script>
     <script src="${context}/js/ligerui/js/plugins/ligerLayout.js" type="text/javascript"></script>
     <script src="${context}/js/ligerui/js/plugins/ligerTab.js" type="text/javascript"></script>
@@ -36,14 +36,15 @@
         .menulist { margin-left: 2px; margin-right: 2px; margin-top: 2px; text-align: left; color: #000; }
         .menulist li { height: 24px; line-height: 24px; padding-left: 24px; display: block; position: relative; cursor: pointer; text-align: left; }
         .menulist li img { position: absolute; left: 4px; top: 4px; width: 16px; height: 16px; }
-        .menulist li.over, .menulist li.selected { background: url('Images/index/menuitem.gif') repeat-x 0px 0px; }
-        .menulist li.over .menuitem-l, .menulist li.selected .menuitem-l { background: url('Images/index/menuitem.gif') repeat-x 0px -24px; width: 2px; height: 24px; position: absolute; left: 0; top: 0; }
-        .menulist li.over .menuitem-r, .menulist li.selected .menuitem-r { background: url('Images/index/menuitem.gif') repeat-x -1px -24px; width: 2px; height: 24px; position: absolute; right: 0; top: 0; }
+        .menulist li.over, .menulist li.selected { background: url('${context}/images/menubg.gif') repeat-x 0px 0px; }
+        .menulist li.over .menuitem-l, .menulist li.selected .menuitem-l { background: url('${context}/images/menubg.gif') repeat-x 0px -24px; width: 2px; height: 24px; position: absolute; left: 0; top: 0; }
+        .menulist li.over .menuitem-r, .menulist li.selected .menuitem-r { background: url('${context}/images/menubg.gif') repeat-x -1px -24px; width: 2px; height: 24px; position: absolute; right: 0; top: 0; }
         #portrait { border-radius: 4px; box-shadow: 1px 1px 1px #111; position: absolute; width: 48px; height: 48px; right: 7px; top: 10px; background: #d2d2f2 /*url(images/icons/32X32/user.gif) no-repeat center center*/; border: 3px solid #fff; behavior: url(css/pie.htc); text-align: center; }
 
     </style>
 </head>
 <body>
+<input id="context" value="${context}"/>
 <div id="head">
     <div class="logo"><a href="#"><img src="${bklogo}" style="width:100px"/></a><span class="version">v${version}</span></div>
     <div id="short_msg"  >

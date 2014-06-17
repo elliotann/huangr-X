@@ -134,6 +134,7 @@
         <servlet-name>ValidCodeServlet</servlet-name>
         <url-pattern>/validcode.do</url-pattern>
     </servlet-mapping>
+
     <servlet>
         <servlet-name>JspSupportServlet</servlet-name>
         <servlet-class>org.apache.struts2.views.JspSupportServlet</servlet-class>
