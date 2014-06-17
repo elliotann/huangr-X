@@ -4,6 +4,7 @@ import com.easysoft.framework.image.ThumbnailCreatorFactory;
 import com.easysoft.framework.utils.FileUtil;
 import com.easysoft.framework.utils.PathUtil;
 import com.easysoft.framework.utils.StringUtil;
+import org.apache.commons.lang.StringUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -206,7 +207,7 @@ public class ParamSetting {
         TEMPLATEENGINE = StringUtil.isEmpty(templateengine) ? TEMPLATEENGINE : templateengine;
 
         String thumbnailcreator = props.getProperty("thumbnailcreator");
-        THUMBNAILCREATOR = StringUtil.isEmpty(thumbnailcreator) ? THUMBNAILCREATOR : thumbnailcreator;
+        THUMBNAILCREATOR = StringUtils.isEmpty(thumbnailcreator) ? THUMBNAILCREATOR : thumbnailcreator;
         ThumbnailCreatorFactory.CREATORTYPE = THUMBNAILCREATOR;
 
         VERSION = props.getProperty("version");
