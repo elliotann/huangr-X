@@ -4,7 +4,6 @@
 
 <link href=" ${context}/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
 <link href=" ${context}/js/ligerui/skins/Gray/css/all.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src=" ${context}/js/plug-in/jquery/jquery-1.8.3.js"></script>
 <script src=" ${context}/js/ligerui/js/core/base.js" type="text/javascript"></script>
 <script src=" ${context}/js/ligerui/js/plugins/ligerForm.js" type="text/javascript"></script>
 <script src=" ${context}/js/ligerui/js/plugins/ligerDateEditor.js" type="text/javascript"></script>
@@ -33,7 +32,7 @@
         $.ajax({
             type:'post',
             url:'designer.do?getDisColumns&ajax=true&type=form',
-            data:'id='+7,
+            data:'id='+9,
             dataType:'json',
             async:false,
             success:function(result){

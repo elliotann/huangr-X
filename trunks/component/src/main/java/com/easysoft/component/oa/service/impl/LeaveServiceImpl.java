@@ -14,7 +14,8 @@ import org.activiti.engine.task.Task;
 import org.activiti.engine.task.TaskQuery;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.restlet.engine.util.DateUtils;
+
+import org.apache.tools.ant.util.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -67,12 +68,13 @@ public class LeaveServiceImpl extends GenericService<LeaveEntity> implements Lea
         ProcessInstance processInstance = null;
         try {
             // 用来设置启动流程的人员ID，引擎会自动把用户ID保存到activiti:initiator中
-            identityService.setAuthenticatedUserId(UserServiceFactory.getUserService().getCurrentUser().getUserid().toString());
+            identityService.setAuthenticatedUserId("dev");
 
-            processInstance = runtimeService.startProcessInstanceByKey("leave", businessKey, variables);
+            processInstance = runtimeService.startProcessInstanceByKey("simpleOrderBook", businessKey, variables);
             String processInstanceId = processInstance.getId();
             entity.setProcessInstanceId(processInstanceId);
-
+            List<Task> taskList = taskService.createTaskQuery().taskCandidateUser("dev").list();
+            System.out.println("found task "+taskList.get(0).getName());
         }catch (Exception e){
             e.printStackTrace();
         }finally {
@@ -112,7 +114,7 @@ public class LeaveServiceImpl extends GenericService<LeaveEntity> implements Lea
             leave.setTask(task);
             leave.setTaskName(task.getName());
             leave.setTaskId(task.getId());
-            leave.setTaskCreateTime(DateUtils.format(task.getCreateTime(),"yyyy-MM-dd HH:mm:ss"));
+            leave.setTaskCreateTime(DateUtils.format(task.getCreateTime(), "yyyy-MM-dd HH:mm:ss"));
             leave.setProcessInstanceState(processInstance.isSuspended());
             ProcessDefinition processDefinition =   getProcessDefinition(processInstance.getProcessDefinitionId());
             leave.setProcessInstance(processInstance);

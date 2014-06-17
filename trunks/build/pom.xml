@@ -13,7 +13,7 @@
         <module>../core</module>
         <module>../tag</module>
         <module>../shop</module>
-        <module>../jeap</module>
+        <module>../webapp</module>
     </modules>
 
 </project>

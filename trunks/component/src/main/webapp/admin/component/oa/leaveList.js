@@ -19,7 +19,7 @@ function bulidMainGrid()
 {
     var rows = [];
     $('<div style="margin:7px;" id="margin"></div>').appendTo('body');
-    var o = bulidData(7);
+    var o = bulidData(9);
     var out = [];
     out.push('<div>');
     out.push('  <div style=" width:98%">');
@@ -164,31 +164,31 @@ return false;
 //获取 表单和表格 结构 所需要的数据
 function bulidData(id)
 {
-var griddata = [], searchdata= [], formdata= [];
-var rows = [];
-$.ajax({
-type:'post',
-url:'designer.do?getDisColumns&ajax=true',
-data:'id='+id,
-dataType:'json',
-async:false,
-success:function(result){
-rows = result;
-},
-error:function(e){
-alert("出错了!~"+e);
-}
+    var griddata = [], searchdata= [], formdata= [];
+    var rows = [];
+    $.ajax({
+        type:'post',
+        url:'designer.do?getDisColumns&ajax=true',
+        data:'id='+id,
+        dataType:'json',
+        async:false,
+        success:function(result){
+            rows = result;
+        },
+        error:function(e){
+            alert("出错了!~"+e);
+        }
 });
 
 for (var i = 0, l = rows.length; i < l; i++)
 {
-var o = rows[i];
-if (o.inlist)
-griddata.push({ display: o.display, name: o.fieldName, width: parseInt(o.listwidth) });
+    var o = rows[i];
+    if (o.inlist)
+        griddata.push({ display: o.labelName, name: o.fieldName, width: parseInt(o.listwidth) });
 if (o.insearch)
 searchdata.push(getFieldData(o, true));
 if (o.inform)
-formdata.push(getFieldData(o));
+    formdata.push(getFieldData(o));
 }
 return { grid: griddata, search: searchdata, form: formdata };
 
