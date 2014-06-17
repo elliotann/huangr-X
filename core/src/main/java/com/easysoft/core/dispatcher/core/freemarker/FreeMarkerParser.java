@@ -113,7 +113,7 @@ public final class FreeMarkerParser {
 		
 		try {
 			String name = this.clazz.getSimpleName();
-			pageExt = pageExt == null ? ".html" : pageExt;		
+			pageExt = pageExt == null ? ".html" : pageExt;
 			name = this.pageName == null ? name : pageName;
 		 
 			cfg = this.getCfg();
@@ -146,7 +146,7 @@ public final class FreeMarkerParser {
 
         try {
             String name = this.clazz.getSimpleName();
-            pageExt = pageExt == null ? ".html" : pageExt;
+            pageExt = pageExt == null ? ".ftl" : pageExt;
             name = this.pageName == null ? name : pageName;
 
             cfg = this.getCfg();

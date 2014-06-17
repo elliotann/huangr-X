@@ -7,6 +7,8 @@ import com.easysoft.core.dispatcher.core.freemarker.FreeMarkerParser;
 import com.easysoft.core.manager.IFormManager;
 import com.easysoft.core.model.FormEntity;
 import com.easysoft.core.model.FormField;
+import com.easysoft.core.solution.factory.DBSolutionFactory;
+import com.easysoft.framework.db.dbsolution.IDBSolution;
 import com.easysoft.framework.utils.StringUtil;
 import freemarker.template.Template;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,9 @@ import org.springframework.stereotype.Service;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * User: andy
@@ -91,11 +95,18 @@ public class FormManagerImpl extends GenericService<FormEntity> implements IForm
     @Override
     public void synDb(Integer formId) {
         //获取表单
-        FormEntity formEntity = formDao.get(formId);
+        FormEntity formEntity = this.getFormById(formId);
         FreeMarkerParser freeMarkerParser = FreeMarkerParser.getInstance();
+        freeMarkerParser.setClz(this.getClass());
+        freeMarkerParser.setPageName("TableTemplate");
+        Map<String,Object> datas = new HashMap<String,Object>();
+        datas.put("formEntity",formEntity);
+        freeMarkerParser.putData(datas);
         String xml = freeMarkerParser.processXmlContent();
         logger.info(xml);
-
-
+        IDBSolution dbsolution = DBSolutionFactory.getDBSolution();
+        dbsolution.dbImport(xml);
+        formEntity.setIsSynDB("1");
+        this.updateEntitie(formEntity);
     }
 }
