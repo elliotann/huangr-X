@@ -15,6 +15,7 @@ public class DataGridColumnTag extends BodyTagSupport {
     private String minWidth;
     private String align;
     private String renderFun;
+    private String sortType;
 
     public void setTitle(String title) {
         this.title = title;
@@ -40,6 +41,10 @@ public class DataGridColumnTag extends BodyTagSupport {
         this.renderFun = renderFun;
     }
 
+    public void setSortType(String sortType) {
+        this.sortType = sortType;
+    }
+
     @Override
     public int doEndTag() throws JspException {
         DataGridTag parent = (DataGridTag)findAncestorWithClass(this,DataGridTag.class);
@@ -50,6 +55,8 @@ public class DataGridColumnTag extends BodyTagSupport {
         column.setWidth(width);
         column.setMinWidth(minWidth);
         column.setRenderFun(renderFun);
+        column.setSortType(sortType);
+        column.setId(id);
         parent.setColumns(column);
         return EVAL_PAGE;
     }
