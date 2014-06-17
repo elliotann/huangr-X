@@ -28,15 +28,8 @@ ul{
 var app_path="<%=path%>";
 var mainpage=false;
 </script>
-
-    <script type="text/javascript" src="${context}/js/plug-in/jquery/jquery-1.8.3.js"></script>
-
+    <script type="text/javascript" src="${staticserver }/js/common/jquery-1.6.4.js"></script>
     <script type="text/javascript" src="${staticserver }/js/admin/jeap.js"></script>
-
-
-
-
-
     <link href="${context}/css/global.css" rel="stylesheet" type="text/css" />
     <link href="${context}/css/input.css" rel="stylesheet" type="text/css" />
     <link href="${context}/css/grid.css" rel="stylesheet" type="text/css" />

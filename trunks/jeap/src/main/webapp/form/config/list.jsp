@@ -2,7 +2,7 @@
          pageEncoding="UTF-8"%>
 <%@ include file="/commons/taglibs.jsp"%>
 
-<script type="text/javascript" src="${staticserver }/js/common/jquery-1.10.js"></script>
+
 <link href="${context }/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
 <link href="${context }/js/ligerui/skins/ligerui-icons.css" rel="stylesheet" type="text/css" />
 <link href="${context }/js/ligerui/skins/Gray/css/all.css" rel="stylesheet" type="text/css" />
@@ -16,10 +16,8 @@
 <script src="${context }/js/ligerui/js/plugins/ligerDrag.js" type="text/javascript"></script>
 <script src="${context }/js/ligerui/js/plugins/ligerForm.js" type="text/javascript"></script>
 <link href="/jeap/form/config/lab.css" rel="stylesheet" type="text/css" />
-<script src="/jeap/form/config/data.js" type="text/javascript"></script>
 <script src="/jeap/form/config/lab.js" type="text/javascript"></script>
 <script src="/jeap/form/config/preview.js" type="text/javascript"></script>
-<script src="/jeap/form/config/AllProductData.js" type="text/javascript"></script>
 <script src="/jeap/form/config/ligerGrid.showFilter.js" type="text/javascript"></script>
 
 
@@ -125,7 +123,7 @@
             slide: false
         });
     }
-
+    //同步数据库
     function synDB(item){
         var row = listgrid.getSelectedRow();
         if(row==null){
@@ -139,8 +137,14 @@
             dataType:"json",
             success: function(result){
                 if(result.success){
-                    $.ligerDialog.alert('删除成功!', '提示', type);
-                    listgrid.loadData();
+                    $.ligerDialog.waitting('操作成功...');
+                    setTimeout(function ()
+                    {
+                        $.ligerDialog.closeWaitting();
+                        listgrid.loadData();
+                        dialog.close();
+                    }, 1000);
+
                 }else{
                     $.ligerDialog.alert(result.msg, '提示', type);
 
@@ -163,7 +167,7 @@
 </script>
 
 <grid:dataGrid action="designer.do?dataGrid&ajax=yes" height="99%">
-    <grid:column title="id" field="id" align="left" width="100" minWidth="60"/>
+    <grid:column title="id" field="id" align="center" width="100" minWidth="60"/>
     <grid:column title="表名" field="tableName"  minWidth="120"/>
     <grid:column title="表描述" field="tableTitle"  minWidth="140"/>
     <grid:column title="版本" field="version"  minWidth="100"/>
@@ -176,7 +180,3 @@
     <grid:toolbar title="同步数据库" clickFun="synDB" icon="modify"/>
     <grid:toolbar title="生成代码" clickFun="generatorCode" icon="modify"/>
 </grid:dataGrid>
-
-<div class="grid">
-<div id="maingrid"></div>
-</div>

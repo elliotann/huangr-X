@@ -95,8 +95,13 @@ var BackendUi={
                         tabid: "tabid" + submenu.id,
                         menuno: submenu.id
                     });
+                    if(submenu.ico=="null"){
+                        var context = $("#context").val();
+                        $("img", subitem).attr("src", context+"/images/system/ico/default_menu.png");
+                    }else{
+                        $("img", subitem).attr("src", submenu.ico);
+                    }
 
-                    $("img", subitem).attr("src", submenu.ico);
                     $("span", subitem).html(submenu.text ||submenu.text);
                     $("ul:first", item).append(subitem);
 
