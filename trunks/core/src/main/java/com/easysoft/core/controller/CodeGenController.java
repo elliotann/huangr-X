@@ -9,6 +9,8 @@ import com.easysoft.core.manager.IFormManager;
 import com.easysoft.core.model.FormEntity;
 import com.easysoft.framework.utils.StringUtil;
 import freemarker.template.TemplateException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +31,7 @@ import java.util.Map;
 @Controller
 @RequestMapping({"/core/admin/code"})
 public class CodeGenController extends BaseController {
+    private static final Log logger = LogFactory.getLog(CodeGenController.class);
     @Autowired
     private IFormManager formManager;
     @RequestMapping(params = {"toGenerate"})
@@ -74,7 +77,14 @@ public class CodeGenController extends BaseController {
     @ResponseBody
     public AjaxJson synDb(Integer formId){
         AjaxJson result = new AjaxJson();
-        formManager.synDb(formId);
+        try{
+            formManager.synDb(formId);
+        }catch(Exception e){
+            logger.error("同步数据库出错!",e);
+            result.setSuccess(false);
+            result.setMsg(e.getMessage());
+        }
+
         return result;
     }
 }

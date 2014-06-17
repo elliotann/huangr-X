@@ -5,7 +5,6 @@ import org.dom4j.Document;
 /**
  * 应用接口
  * @author andy
- * 2010-1-23下午06:18:11
  */
 public interface IApp {
 	

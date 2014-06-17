@@ -88,6 +88,7 @@
             <list>
                 <!--<value>com.easysoft.system.pojo.*</value>
                 <value>com.easysoft.cgform.entity.*</value>-->
+                <value>com.easysoft.component.oa.entity</value>
                 <value>com.easysoft.core.model</value>
                 <value>com.easysoft.member.backend.model</value>
                 <value>com.easysoft.framework.component</value>

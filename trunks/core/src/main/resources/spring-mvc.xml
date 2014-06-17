@@ -69,6 +69,6 @@
         </mvc:interceptor>
     </mvc:interceptors>-->
     <!-- 支持上传文件 -->
-    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" p:defaultEncoding="utf-8" />
     <util:properties id="APP_PROPERTIES" location="classpath:application.properties" local-override="true"/>
 </beans>

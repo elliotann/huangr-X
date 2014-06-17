@@ -16,14 +16,24 @@ import java.io.Serializable;
 @Table(name = "t_form_field")
 public class FormField implements Serializable {
     private Integer id;
-    private FormEntity form;
+    /*================数据库字段===================*/
     private String fieldName;
-    //json用,不存数据库
-    private String name;
-    private String display;
+    private String labelName;
+    //数据类型
+    private String dataType;
     private boolean ispk;
     private boolean isNullable;
+    //数据类型长度
+    private int dataTypeLength;
+
+    /*================列表信息===================*/
     private boolean inlist;
+
+    /*================表单信息===================*/
+    //json用,不存数据库
+    private String name;
+
+
     private String listwidth;
     private boolean insearch;
     private boolean search_newline;
@@ -36,8 +46,10 @@ public class FormField implements Serializable {
     private String space;
     private boolean newline;
     private String group;
-    //数据类型
-    private String dataType;
+
+    private FormEntity form;
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="id")
@@ -66,13 +78,13 @@ public class FormField implements Serializable {
     public void setFieldName(String fieldName) {
         this.fieldName = fieldName;
     }
-    @Column(name="display")
-    public String getDisplay() {
-        return display;
+    @Column(name="label_name")
+    public String getLabelName() {
+        return labelName;
     }
 
-    public void setDisplay(String display) {
-        this.display = display;
+    public void setLabelName(String labelName) {
+        this.labelName = labelName;
     }
     @Column(name="is_PK")
     public boolean isIspk() {
@@ -204,5 +216,17 @@ public class FormField implements Serializable {
 
     public void setDisplayType(String displayType) {
         this.displayType = displayType;
+    }
+    @Column(name="data_type_length")
+    public int getDataTypeLength() {
+        return dataTypeLength;
+    }
+
+    public void setDataTypeLength(int dataTypeLength) {
+        this.dataTypeLength = dataTypeLength;
+    }
+    @Transient
+    public String getDisplay() {
+        return labelName;
     }
 }

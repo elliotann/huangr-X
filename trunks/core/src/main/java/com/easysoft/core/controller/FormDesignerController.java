@@ -61,9 +61,9 @@ public class FormDesignerController extends BaseController {
         map.put("json",json);
         return new ModelAndView("admin/json_message",map);
     }
-    @RequestMapping(params = {"designer"})
-    public ModelAndView designer(){
-        return new ModelAndView("form/config/designer");
+    @RequestMapping(params = {"dbFormEle"})
+    public ModelAndView dbFormEle(){
+        return new ModelAndView("form/config/dbFormEle");
     }
     @RequestMapping(params = {"formList"})
     public ModelAndView formList(){
@@ -100,9 +100,9 @@ public class FormDesignerController extends BaseController {
             data = JsonUtils.beanToJsonArray(form.getFields());
         }else{
             data = "[\n" +
-                    "    {\"dataType\":\"INTEGER\",\"isInForeignKey\":false, \"ispk\":true,\"isNullable\":true, \"inputType\":\"digits\", " +
+                    "    {\"dataType\":\"INTEGER\",\"isInForeignKey\":false, \"ispk\":true,\"isNullable\":false, \"inputType\":\"digits\", " +
                     "\"isAutoKey\":true, \"sourceTableName\":\"\", \"sourceTableIDField\":\"\", \"sourceTableTextField\":\"\", " +
-                    "\"fieldName\":\"id\", \"display\":\"主键\", \"type\":\"column\", \"icon\":\"images/table_key.png\" }\n" +
+                    "\"fieldName\":\"id\", \"labelName\":\"主键\", \"type\":\"column\", \"icon\":\"images/table_key.png\" }\n" +
                     "]";
         }
         map.put("json",data);
@@ -120,9 +120,9 @@ public class FormDesignerController extends BaseController {
             data = JsonUtils.beanToJsonArray(form.getFields());
         }else{
             data = "[\n" +
-                    "    {\"dataType\":\"INTEGER\",\"isInForeignKey\":false, \"ispk\":true,\"isNullable\":true, \"inputType\":\"digits\", " +
+                    "    {\"dataType\":\"INTEGER\",\"isInForeignKey\":false, \"ispk\":true,\"isNullable\":false, \"inputType\":\"digits\", " +
                     "\"isAutoKey\":true, \"sourceTableName\":\"\", \"sourceTableIDField\":\"\", \"sourceTableTextField\":\"\", " +
-                    "\"fieldName\":\"id\", \"display\":\"主键\", \"type\":\"column\", \"icon\":\"images/table_key.png\" }\n" +
+                    "\"fieldName\":\"id\", \"labelName\":\"主键\", \"type\":\"column\", \"icon\":\"images/table_key.png\" }\n" +
                     "]";
         }
         map.put("json",data);
