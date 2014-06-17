@@ -10,6 +10,8 @@ public class DataGridColumn {
     private String minWidth;
     private String align;
     private String renderFun;
+    private String sortType;//排序类型
+    private String id;//主要用于树模式下
 
     public String getTitle() {
         return title;
@@ -57,5 +59,21 @@ public class DataGridColumn {
 
     public void setRenderFun(String renderFun) {
         this.renderFun = renderFun;
+    }
+
+    public String getSortType() {
+        return sortType;
+    }
+
+    public void setSortType(String sortType) {
+        this.sortType = sortType;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
