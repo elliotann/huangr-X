@@ -81,7 +81,7 @@ public class LeaveController extends BaseController {
 
 	@RequestMapping(params = "dataGrid")
 	public ModelAndView datagrid(LeaveEntity leave,HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid) {
-        List entityist= this.leaveService.loadAll(LeaveEntity.class);
+        List entityist= this.leaveService.queryForAll(LeaveEntity.class);
         DataGridReturn dataGridReturn = new DataGridReturn(entityist.size(),entityist);
         String json = JsonUtils.beanToJson(dataGridReturn);
         Map<String,Object> map = new HashMap<String, Object>();
@@ -135,11 +135,12 @@ public class LeaveController extends BaseController {
 	@ResponseBody
 	public AjaxJson doAdd(LeaveEntity leave, HttpServletRequest request) {
 		AjaxJson j = new AjaxJson();
-		message = "请假信息添加成功";
 		try{
 			leaveService.save(leave);
             Map<String, Object> variables = new HashMap<String, Object>();
+            variables.put("isbn",leave.getReason());
             leaveService.startWorkflow(leave,variables);
+            message = "请假信息添加成功";
 		}catch(Exception e){
 			e.printStackTrace();
 			message = "请假信息添加失败";
