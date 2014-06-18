@@ -162,7 +162,7 @@ public class InstallController extends BaseController{
      */
     private void saveParams(String dbType,int resourcemode,String staticpath,String solutionpath,String staticdomain,HttpServletRequest request){
         this.prosessPath(staticpath,solutionpath,staticdomain);
-        InputStream in = FileUtil.getResourceAsStream("esf.properties");
+        InputStream in = FileUtil.getResourceAsStream("jeap.properties");
         String webroot = PathUtil.getRootPath();
         Properties props = new Properties();
         try {
@@ -203,9 +203,9 @@ public class InstallController extends BaseController{
             props.setProperty("storage.EOPServer", webroot);
             props.setProperty("path.context_path", request.getContextPath());
 
-            String path = PathUtil.getRootPath("esf.properties");
+            String path = PathUtil.getRootPath("jeap.properties");
             File file  = new File(path);
-            props.store(new FileOutputStream(file), "esf.properties");
+            props.store(new FileOutputStream(file), "jeap.properties");
             ParamSetting.init(props);
             SysParamSetting.init(props);
         } catch (IOException e) {

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<query-config>
+
+    <query id="savePerson" dialect="SQL/MYSQL">
+        <statement>
+            INSERT INTO T_PERSON (name) VALUES(#person.name#)
+        </statement>
+    </query>
+    
+    <query id="retrievePersonById" dialect="SQL/MYSQL">
+        <statement>
+            select * from t_person where id=#id#
+        </statement>
+    </query>
+    
+    <query id="retrievePersonById" dialect="SQL/MYSQL">
+        <statement>
+            select * from t_person
+        </statement>
+    </query>
+ </query-config>
