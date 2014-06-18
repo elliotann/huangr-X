@@ -16,6 +16,7 @@
 <script src="/jeap/adminthemes/default/js/ligerui/js/grid/CustomersData.js" type="text/javascript"></script>
 <script src="/jeap/form/config/lab.js" type="text/javascript"></script>
 <link href="/jeap/admin/component/cms/lab.css" rel="stylesheet" type="text/css" />
+
 <script src="${ctx}/admin/js/common/crud.js" type="text/javascript"></script>
 
 <script type="text/javascript">
@@ -26,7 +27,6 @@
                     ["like" , "equal", "notequal", "startwith", "endwith" ];
     $(function ()
     {
-
         //创建表单结构
        $("#searchForm").ligerForm({
             fields: [
@@ -90,54 +90,25 @@
 
         delObj(item,"userAdmin.do?delete&id=",row.userid);
     }
+
+    function getStatusName(rowdata,index,value){
+        if(value==1){
+            return "启用";
+        } else{
+            return "禁用";
+        }
+    }
 </script>
 
-<div class="grid">
-    <div>
-        <div style=" width:100%">
-            <div class="searchtitle">
-                <span>搜索</span><img src="/jeap/core/icons/searchtool.gif" />
-                <div class="togglebtn"></div>
-            </div>
-            <div class="navline" style="margin-bottom:4px; margin-top:4px;"></div>
-            <div class="searchbox">
-                <form id="searchForm">
-
-
-                </form>
-                <div class="l-clear"></div>
-            </div>
-        </div>
-
-    </div>
-    <grid:dataGrid action="userAdmin.do?dataGrid&ajax=yes" height="99%" usePager="false"  width="100%">
-        <grid:column title="userid" field="id" align="left" width="100" minWidth="60"/>
-        <grid:column title="用户名" field="username"  minWidth="120"/>
-        <grid:column title="类型" field="menutype"  width="100" align="center" sortType="int" renderFun="getMenuType" id="menutype"/>
-        <grid:column title="target" field="target" align="left"  width="50" id="target"/>
-        <grid:column title="排序" field="sorder" align="center"  width="100"/>
-        <grid:column title="图标" field="ico" align="center"  width="400" renderFun="showIco"/>
-        <grid:toolbar title="增加" clickFun="addMenu" icon="add"/>
-        <grid:toolbar title="修改" clickFun="updateMenu" icon="modify"/>
-        <grid:toolbar title="删除" clickFun="delMenu" icon="delete"/>
-        <grid:toolbar title="增加按钮" clickFun="addBtn" icon="add"/>
-    </grid:dataGrid>
+<grid:dataGrid action="userAdmin.do?dataGrid&ajax=yes" height="99%" width="100%" rownumbers="true" hasSearchBar="true">
+    <grid:column title="userid" field="id" align="left" width="100" minWidth="60"/>
+    <grid:column title="用户名" field="username"  minWidth="120"/>
+    <grid:column title="姓名" field="realname"  minWidth="140"/>
+    <grid:column title="状态" field="state" renderFun="getStatusName"/>
+    <grid:toolbar title="增加" clickFun="addUser" icon="add"/>
+    <grid:toolbar title="修改" clickFun="modifyUser" icon="modify"/>
+    <grid:toolbar title="删除" clickFun="delUser" icon="delete"/>
+    <grid:toolbar title="自定义搜索" clickFun="customSearch" icon="delete"/>
+</grid:dataGrid>
+<div style="display: none;">
 </div>
-
-listgrid =
-/*$("#maingrid").ligerGrid({
-height:'99%',
-columns: [
-
-{ display: '用户名', name: 'username', minWidth: 120 },
-{ display: '姓名', name: 'realname', minWidth: 140 },
-{ display: '状态', name: 'state',render:function(rowdata, index, value){
-if(value==1){
-return "启用";
-} else{
-return "禁用";
-}
-} }
-], url:'userAdmin.do?dataGrid&ajax=yes',  pageSize:10 ,rownumbers:true,pagesizeParmName:'pageSize',
-toolbar: listToolbar()
-});*/
