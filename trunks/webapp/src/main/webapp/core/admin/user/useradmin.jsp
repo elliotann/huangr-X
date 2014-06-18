@@ -16,7 +16,6 @@
 <script src="/jeap/adminthemes/default/js/ligerui/js/grid/CustomersData.js" type="text/javascript"></script>
 <script src="/jeap/form/config/lab.js" type="text/javascript"></script>
 <link href="/jeap/admin/component/cms/lab.css" rel="stylesheet" type="text/css" />
-
 <script src="${ctx}/admin/js/common/crud.js" type="text/javascript"></script>
 
 <script type="text/javascript">
@@ -28,23 +27,6 @@
     $(function ()
     {
 
-        listgrid =
-                $("#maingrid").ligerGrid({
-                    height:'99%',
-                    columns: [
-                        { display: 'id', name: 'userid', align: 'left', width: 100, minWidth: 60 },
-                        { display: '用户名', name: 'username', minWidth: 120 },
-                        { display: '姓名', name: 'realname', minWidth: 140 },
-                        { display: '状态', name: 'state',render:function(rowdata, index, value){
-                            if(value==1){
-                                return "启用";
-                            } else{
-                                return "禁用";
-                            }
-                        } }
-                    ], url:'userAdmin.do?dataGrid&ajax=yes',  pageSize:10 ,rownumbers:true,pagesizeParmName:'pageSize',
-                            toolbar: listToolbar()
-                });
         //创建表单结构
        $("#searchForm").ligerForm({
             fields: [
@@ -128,7 +110,34 @@
         </div>
 
     </div>
-    <div id="maingrid"></div>
+    <grid:dataGrid action="userAdmin.do?dataGrid&ajax=yes" height="99%" usePager="false"  width="100%">
+        <grid:column title="userid" field="id" align="left" width="100" minWidth="60"/>
+        <grid:column title="用户名" field="username"  minWidth="120"/>
+        <grid:column title="类型" field="menutype"  width="100" align="center" sortType="int" renderFun="getMenuType" id="menutype"/>
+        <grid:column title="target" field="target" align="left"  width="50" id="target"/>
+        <grid:column title="排序" field="sorder" align="center"  width="100"/>
+        <grid:column title="图标" field="ico" align="center"  width="400" renderFun="showIco"/>
+        <grid:toolbar title="增加" clickFun="addMenu" icon="add"/>
+        <grid:toolbar title="修改" clickFun="updateMenu" icon="modify"/>
+        <grid:toolbar title="删除" clickFun="delMenu" icon="delete"/>
+        <grid:toolbar title="增加按钮" clickFun="addBtn" icon="add"/>
+    </grid:dataGrid>
 </div>
-<div style="display: none;">
-</div>
+
+listgrid =
+/*$("#maingrid").ligerGrid({
+height:'99%',
+columns: [
+
+{ display: '用户名', name: 'username', minWidth: 120 },
+{ display: '姓名', name: 'realname', minWidth: 140 },
+{ display: '状态', name: 'state',render:function(rowdata, index, value){
+if(value==1){
+return "启用";
+} else{
+return "禁用";
+}
+} }
+], url:'userAdmin.do?dataGrid&ajax=yes',  pageSize:10 ,rownumbers:true,pagesizeParmName:'pageSize',
+toolbar: listToolbar()
+});*/
