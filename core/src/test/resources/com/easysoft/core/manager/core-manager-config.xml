@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+        "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+     <!--the factory of commons dao-->
+    <bean id="daoFactory" class="org.mangocube.corenut.pf.core.DaoProxyFactory"/>
+
+     <!--dao beans -->
+    <!--instance the purchase order dao-->
+
+    <bean id="personDao" factory-bean="daoFactory" factory-method="getDAO" singleton="true">
+        <constructor-arg value="com.easysoft.core.dao.PersonDao"/>
+    </bean>
+
+    <!-- manager beans-->
+     <bean id="personManager" class="com.easysoft.core.manager.PersonManagerImpl">
+         <property name="personDao" ref="personDao"></property>
+     </bean>
+
+</beans>

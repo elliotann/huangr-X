@@ -17,7 +17,7 @@ public class SysParamSetting {
     public static String runmode = "2";
     static {
         try{
-            InputStream in  = FileUtil.getResourceAsStream("esf.properties");
+            InputStream in  = FileUtil.getResourceAsStream("jeap.properties");
             Properties props = new Properties();
             props.load(in);
             init(props);
