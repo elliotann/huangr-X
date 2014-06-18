@@ -24,6 +24,8 @@ public class DataGridTag extends BodyTagSupport{
     private String tree;
     private boolean rownumbers;//是否显示行号
 
+    private boolean hasSearchBar = false;//是否有搜索栏
+
 
     private List<DataGridColumn> columns = new ArrayList<DataGridColumn>();
     private List<ToolBar> toolBars = new ArrayList<ToolBar>();
@@ -54,6 +56,10 @@ public class DataGridTag extends BodyTagSupport{
 
     public void setWidth(String width) {
         this.width = width;
+    }
+
+    public void setHasSearchBar(boolean hasSearchBar) {
+        this.hasSearchBar = hasSearchBar;
     }
 
     @Override
@@ -93,8 +99,10 @@ public class DataGridTag extends BodyTagSupport{
         sb.append("height:'"+height+"',");
         sb.append("width:'"+width+"',");
         sb.append("usePager:"+usePager+",");
+        if(StringUtils.isNotEmpty(tree)){
+            sb.append("tree:{columnId: 'title',idField: 'id',parentIDField: 'pid'},");
+        }
 
-        sb.append("tree:{columnId: 'title',idField: 'id',parentIDField: 'pid'},");
         sb.append("rownumbers:"+rownumbers+",");
         sb.append("columns: [");
         int i=0;
@@ -150,7 +158,28 @@ public class DataGridTag extends BodyTagSupport{
         sb.append("});");
         sb.append("</script>");
         sb.append("<div class=\"grid\">");
+        if(this.hasSearchBar){
+            sb.append(buildSearchBar());
+        }
         sb.append("<div id=\"maingrid\"></div>");
+        sb.append("</div>");
+        return sb.toString();
+    }
+
+    private String buildSearchBar(){
+        StringBuilder sb = new StringBuilder("<div>");
+        sb.append("<div style=\" width:100%\">");
+        sb.append("<div class=\"searchtitle\">");
+        sb.append("<span>搜索</span><img src=\"/jeap/statics/images/default/searchtool.gif\" />");
+        sb.append(" <div class=\"togglebtn\"></div>");
+        sb.append("  </div>");
+        sb.append("<div class=\"navline\" style=\"margin-bottom:4px; margin-top:4px;\"></div>");
+        sb.append(" <div class=\"searchbox\">");
+        sb.append("<form id=\"searchForm\">");
+        sb.append("</form>");
+        sb.append("<div class=\"l-clear\"></div>");
+        sb.append("</div>");
+        sb.append("</div>");
         sb.append("</div>");
         return sb.toString();
     }
