@@ -21,7 +21,7 @@
                 <li class="top2"></li>
                 <li class="topA"></li>
                 <li class="topB"><span>
-                <img src="../images/login/logo.gif" alt="" class="logo" />
+                <img src="${staticserver }/images/logo.gif" alt="" class="logo" />
             </span></li>
                 <li class="topC"></li>
                 <li class="topD">
