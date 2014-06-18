@@ -47,9 +47,7 @@ public class UserAdminController extends BaseController{
     @RequestMapping(params = {"list"})
     public ModelAndView list(Integer menuId) throws Exception{
         List<OperationBtn> operationBtns = permissionManager.queryBtnByUsernameAndMenuId(UserServiceFactory.getUserService().getCurrentUser().getUserid(), RoleAuth.AuthType.FUNCTION.name(),menuId);
-
         Map<String,Object> map = new HashMap<String, Object>();
-
         map.put("operationBtns",operationBtns);
         return new ModelAndView("core/admin/user/useradmin",map);
     }
