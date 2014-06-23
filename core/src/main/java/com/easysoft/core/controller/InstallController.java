@@ -24,11 +24,11 @@ import java.io.*;
 import java.util.Properties;
 
 /**
+ * 安装controller
  * User: andy
  * Date: 14-1-16
  * Time: 下午3:21
- *
- * @since:
+ * @since :1.0
  */
 @Controller
 @RequestMapping({"/install/install"})
