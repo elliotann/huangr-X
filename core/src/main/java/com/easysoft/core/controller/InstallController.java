@@ -45,7 +45,6 @@ public class InstallController extends BaseController{
 
     /**
      * 第一步，显示协议
-     * @return
      */
     @RequestMapping(params = {"step1"})
     public ModelAndView step1(){
