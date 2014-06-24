@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>欢迎使用系统 安装向导</title>
-    <script type="text/javascript" src="../statics/js/common/jquery-1.10.js"></script>
+    <script type="text/javascript" src="${staticserver }/js/common/jquery-1.6.4.js"></script>
     <script type="text/javascript" src="../statics/js/common/fn-1.0.js"></script>
     <link href="images/png.css" rel="stylesheet" type="text/css"  />
     <link href="images/install.css" rel="stylesheet" type="text/css" />
