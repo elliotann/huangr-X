@@ -1,84 +1,111 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
-<title>${title }</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link type="image/x-icon" href="${ico}" rel="icon" />
-<link type="image/x-icon" href="${ico}" rel="bookmark" />
-<script type="text/javascript" src="${staticserver }/js/common/jquery-1.6.4.js"></script>
-<SCRIPT  src="${staticserver }/js/common/jquery-form-2.33.js" type="text/javascript"></SCRIPT>
-<script type="text/javascript" src="${staticserver }/js/admin/EADP.SSO.js"></script>
-<link href="${context}/css/login.css" rel="stylesheet" type="text/css" />
+    <title></title>
+    <link rel="shortcut icon" href="resources/fc/images/icon/favicon.ico">
+    <!--[if lt IE 9]>
+    <script src="plug-in/login/js/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 7]>
+    <script src="plug-in/login/js/iepng.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        EvPNG.fix('div, ul, img, li, input'); //EvPNG.fix('包含透明PNG图片的标签'); 多个标签之间用英文逗号隔开。
+    </script>
+    <![endif]-->
+    <link href="plug-in/login/css/zice.style.css" rel="stylesheet" type="text/css" />
+    <link href="plug-in/login/css/buttons.css" rel="stylesheet" type="text/css" />
+    <link href="plug-in/login/css/icon.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="plug-in/login/css/tipsy.css" media="all" />
+    <style type="text/css">
+        html {
+            background-image: none;
+        }
+
+        label.iPhoneCheckLabelOn span {
+            padding-left: 0px
+        }
+
+        #versionBar {
+            background-color: #212121;
+            position: fixed;
+            width: 100%;
+            height: 35px;
+            bottom: 0;
+            left: 0;
+            text-align: center;
+            line-height: 35px;
+            z-index: 11;
+            -webkit-box-shadow: black 0px 10px 10px -10px inset;
+            -moz-box-shadow: black 0px 10px 10px -10px inset;
+            box-shadow: black 0px 10px 10px -10px inset;
+        }
+
+        .copyright {
+            text-align: center;
+            font-size: 10px;
+            color: #CCC;
+        }
+
+        .copyright a {
+            color: #A31F1A;
+            text-decoration: none
+        }
+
+        .on_off_checkbox {
+            width: 0px;
+        }
+
+        #login .logo {
+            width: 500px;
+            height: 51px;
+        }
+    </style>
 </head>
 <body>
-    <form id="form1" runat="server">
+<div id="alertMessage"></div>
+<div id="successLogin"></div>
+<div class="text_success"><img src="plug-in/login/images/loader_green.gif" alt="Please wait" /> <span>登陆成功!请稍后....</span></div>
+<div id="login">
+    <div class="ribbon" style="background-image: url(plug-in/login/images/typelogin.png);"></div>
+    <div class="inner">
+        <div class="logo"><img src="plug-in/login/images/head.png" /><img src="plug-in/login/images/foot.png" /></div>
+        <div class="formLogin">
+            <form name="formLogin" id="formLogin" action="loginController.do?login" check="loginController.do?checkuser" method="post"><input name="userKey" type="hidden" id="userKey"
+                                                                                                                                              value="D1B5CC2FE46C4CC983C073BCA897935608D926CD32992B5900" />
+                <div class="tip"><input class="userName" name="userName" type="text" id="userName" title="用户名" iscookie="true" value="admin" nullmsg="请输入用户名!" /></div>
+                <div class="tip"><input class="password" name="password" type="password" id="password" title="密码" value="123456" nullmsg="请输入密码!" /></div>
+                <div class="loginButton">
+                    <div style="float: left; margin-left: -9px;"><input type="checkbox" id="on_off" name="remember" checked="ture" class="on_off_checkbox" value="0" /> <span class="f_help">是否记住用户名 ?</span></div>
 
-        <div class="Main">
-            <ul>
-                <li class="top"></li>
-                <li class="top2"></li>
-                <li class="topA"></li>
-                <li class="topB"><span>
-                <img src="${staticserver }/images/default/logo.gif" alt="" class="logo" />
-            </span></li>
-                <li class="topC"></li>
-                <li class="topD">
-                    <ul class="login">
-                        <li><span class="left">用户名：</span> <span style="left">
-                            <input type="text" id="username" name="username" class="txt" value="${username}"/>
-
-                    </span></li>
-                        <li><span class="left">密 码：</span> <span style="left">
-                            <input type="password" name="password" class="txt"  value="${password}"/>
-
-                    </span></li>
-                        <li><span class="left">验证码：</span> <span style="left">
-                            <input type="input" id="valid_code" name="valid_code" class="txtCode" /> <img id="code_img" class="code_img" />
-                    </span>
-
-
-
-                        </li>
-
-                        <li>
-                            <span class="left">记住我：</span>
-                            <input type="checkbox" value="1" checked="" name="remember_login_name">
-
-
-
-                        </li>
-
-                    </ul>
-                </li>
-                <li class="topE"></li>
-                <li class="middle_A"></li>
-                <li class="middle_B"></li>
-                <li class="middle_C">
-            <span class="btn">
-
-                  <input type="button" name="login_btn" id="login_btn" value="登录后台" class="loginbtnfocus" />
-
-
-            </span>
-                </li>
-                <li class="middle_D"></li>
-                <li class="bottom_A"></li>
-                <li class="bottom_B">
-                    jeap企业级开发平台
-                </li>
-            </ul>
+                    <div style="float: right; padding: 3px 0; margin-right: -12px;">
+                        <div>
+                            <ul class="uibutton-group">
+                                <li><a class="uibutton normal" href="#" id="but_login">登陆</a></li>
+                                <li><a class="uibutton normal" href="#" id="forgetpass">重置</a></li>
+                            </ul>
+                        </div>
+                        <div style="float: left; margin-left: 30px;"><a href="init.jsp"><span class="f_help">是否初始化数据</span></a></div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </form>
         </div>
-    </form>
-<script>
-$(function(){
-	var bkloginpicfile = '${bkloginpicfile}';
-	if(bkloginpicfile!=''){
-		$(".logo").css("src","${bkloginpicfile}");
-	}
-	if($("#username").val()){$("#psdinput").focus();}
-});
-</script>
+    </div>
+    <div class="shadow"></div>
+</div>
+<!--Login div-->
+<div class="clear"></div>
+<div id="versionBar">
+    <div class="copyright">&copy; 版权所有 <span class="tip"><a href="#" title="JEECG 微云快速开发平台">jeecg</a> (推荐使用IE8+,谷歌浏览器可以获得更快,更安全的页面响应速度)技术支持:<a href="#" title="JEECG 微云快速开发平台">jeecg</a></span></div>
+</div>
+<!-- Link JScript-->
+<script type="text/javascript" src="plug-in/jquery/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="plug-in/jquery/jquery.cookie.js"></script>
+<script type="text/javascript" src="plug-in/login/js/jquery-jrumble.js"></script>
+<script type="text/javascript" src="plug-in/login/js/jquery.tipsy.js"></script>
+<script type="text/javascript" src="plug-in/login/js/iphone.check.js"></script>
+<script type="text/javascript" src="plug-in/login/js/login.js"></script>
+<script type="text/javascript" src="plug-in/lhgDialog/lhgdialog.min.js"></script>
 </body>
 </html>
