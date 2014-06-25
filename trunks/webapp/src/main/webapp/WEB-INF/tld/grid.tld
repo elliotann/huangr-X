@@ -124,7 +124,7 @@
     <tag>
 		<description>grid tag</description>
 		<name>grid</name>
-		<tag-class>com.easysoft.tag.webapp.taglib.html.GridTaglibTemp</tag-class>
+		<tag-class>com.easysoft.tag.webapp.taglib.html.GridTaglib</tag-class>
 		<body-content>JSP</body-content>
 		
 		<attribute>

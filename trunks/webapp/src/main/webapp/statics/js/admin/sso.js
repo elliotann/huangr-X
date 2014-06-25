@@ -2,8 +2,8 @@
  * 单点登录js
  * Created by huangxa on 2014/6/25.
  */
-var EOP={};
-EOP.SSO={
+var jeap={};
+jeap.SSO={
     login_btn:undefined,
     domains:undefined,
     userid:undefined,
@@ -151,7 +151,7 @@ EOP.SSO={
 };
 
 $(function(){
-    EOP.SSO.init({
+    jeap.SSO.init({
         success:function(){
             location.href ="main.jsp";
         },
