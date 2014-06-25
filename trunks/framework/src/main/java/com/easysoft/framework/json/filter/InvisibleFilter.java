@@ -1,7 +1,7 @@
 package com.easysoft.framework.json.filter;
 
-import com.alibaba.druid.util.StringUtils;
 import com.easysoft.framework.json.annotation.JsonInvisible;
+import org.apache.commons.lang.StringUtils;
 
 import java.lang.reflect.Method;
 
