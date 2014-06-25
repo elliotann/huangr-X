@@ -1,0 +1,6 @@
+(function ($)
+{
+    $.jeap.Dialog ={
+
+    };
+})(jQuery);
