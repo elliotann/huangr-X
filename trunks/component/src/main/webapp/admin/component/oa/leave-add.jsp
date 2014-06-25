@@ -1,120 +1,38 @@
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>表单</title>
+    <link href="${context}/css/form.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top_bit">
+
+    <h1></h1>
 
 
-<link href=" ${context}/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
-<link href=" ${context}/js/ligerui/skins/Gray/css/all.css" rel="stylesheet" type="text/css" />
-<script src=" ${context}/js/ligerui/js/core/base.js" type="text/javascript"></script>
-<script src=" ${context}/js/ligerui/js/plugins/ligerForm.js" type="text/javascript"></script>
-<script src=" ${context}/js/ligerui/js/plugins/ligerDateEditor.js" type="text/javascript"></script>
-<script src=" ${context}/js/ligerui/js/plugins/ligerComboBox.js" type="text/javascript"></script>
-<script src=" ${context}/js/ligerui/js/plugins/ligerCheckBox.js" type="text/javascript"></script>
-<script src=" ${context}/js/ligerui/js/plugins/ligerButton.js" type="text/javascript"></script>
-<script src=" ${context}/js/ligerui/js/plugins/ligerDialog.js" type="text/javascript"></script>
-<script src=" ${context}/js/ligerui/js/plugins/ligerRadio.js" type="text/javascript"></script>
-<script src=" ${context}/js/ligerui/js/plugins/ligerSpinner.js" type="text/javascript"></script>
-<script src=" ${context}/js/ligerui/js/plugins/ligerTextBox.js" type="text/javascript"></script>
-<script src=" ${context}/js/ligerui/js/plugins/ligerTip.js" type="text/javascript"></script>
+</div>
+<form action="formdemo.php" method="post">
+    <label for="name">Name:</label>
+    <input type="text" name="name" required placeholder="Name" />
 
-<script src=" ${context}/js/plug-in/jquery-validation/jquery.validate.min.js"></script>
-<script src=" ${context}/js/plug-in/jquery-validation/jquery.metadata.js" type="text/javascript"></script>
-<script src=" ${context}/js/plug-in/jquery-validation/messages_cn.js" type="text/javascript"></script>
-<script type="text/javascript" src=" ${staticserver}/js/admin/jeap.js"></script>
+    <label for="email">Email:</label>
+    <input type="email" name="email" required placeholder="email@chinaz.com" />
 
-<script type="text/javascript">
-    var groupicon = "../../../lib/ligerUI/skins/icons/communication.gif";
-    var dialog = frameElement.dialog;
-    var fields;
-    $(function ()
-    {
-        $.metadata.setType("attr", "validate");
-        var fields;
-        $.ajax({
-            type:'post',
-            url:'designer.do?getDisColumns&ajax=true&type=form',
-            data:'id='+9,
-            dataType:'json',
-            async:false,
-            success:function(result){
-                fields = result;
-            },
-            error:function(){
-                alert("出错了!~"+e);
-            }
-        });
+    <label for="website">Website:</label>
+    <input type="url" name="website" required placeholder="http://sc.chinaz.com" />
 
-        //创建表单结构
-        var mainform = $("form");
-        mainform.ligerForm({
-            inputWidth: 170, labelWidth: 90, space: 40,
-            fields:fields
-        });
+    <label for="number">Number:</label>
+    <input type="number" name="number" min="0" max="10" step="2" required placeholder="Even num < 10">
 
-        var validator = $("form").validate({
-            //调试状态，不会提交数据的
-            debug: true,
-            errorPlacement: function (lable, element)
-            {
+    <label for="range">Range:</label>
+    <input type="range" name="range" min="0" max="10" step="2" />
 
-                if (element.hasClass("l-textarea"))
-                {
-                    element.addClass("l-textarea-invalid");
-                }
-                else if (element.hasClass("l-text-field"))
-                {
-                    element.parent().addClass("l-text-invalid");
-                }
-                $(element).removeAttr("title").ligerHideTip();
-                $(element).attr("title", lable.html()).ligerTip();
-            },
-            success: function (lable)
-            {
-                var element = $("#" + lable.attr("for"));
-                if (element.hasClass("l-textarea"))
-                {
-                    element.removeClass("l-textarea-invalid");
-                }
-                else if (element.hasClass("l-text-field"))
-                {
-                    element.parent().removeClass("l-text-invalid");
-                }
-                $(element).removeAttr("title").ligerHideTip();
-            },
-            submitHandler: function ()
-            {
-                $("form .l-text,.l-textarea").ligerHideTip();
-                $("#form1").ajaxSubmit({
-                    url :"leave.do?doAdd&ajax=true",
-                    type : "POST",
-                    dataType:"json",
-                    success : function(result) {
+    <label for="message">Message:</label>
+    <textarea name="message" required></textarea>
 
-                        if(result.success){
-                            alert("增加成功!");
-                            window.parent.listgrid.loadData();
-                            dialog.close();
-                        }else{
-                            alert(result.msg)
-                        }
-                    },
-                    error : function(e) {
-                        alert("出错啦:(");
-                    }
-                });
-            }
-        });
-    });
-
-    function formSubmit(){
-        $("#form1").submit();
-    }
-</script>
-
-
-
-<form name="form1" method="post"   id="form1">
-    <div id="formBefore"></div>
-    <br/>
-
+    <input type="submit" value="Send Message" />
 </form>
 
+</body>
+</html>
