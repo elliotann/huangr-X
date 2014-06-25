@@ -17,6 +17,7 @@
     <link href="plug-in/login/css/buttons.css" rel="stylesheet" type="text/css" />
     <link href="plug-in/login/css/icon.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="plug-in/login/css/tipsy.css" media="all" />
+    <link href="${context}/css/login.css" rel="stylesheet" type="text/css" />
     <style type="text/css">
         html {
             background-image: none;
@@ -69,19 +70,19 @@
 <div id="login">
     <div class="ribbon" style="background-image: url(plug-in/login/images/typelogin.png);"></div>
     <div class="inner">
-        <div class="logo"><img src="plug-in/login/images/head.png" /><img src="plug-in/login/images/foot.png" /></div>
+        <div class="logo"></div>
         <div class="formLogin">
-            <form name="formLogin" id="formLogin" action="loginController.do?login" check="loginController.do?checkuser" method="post"><input name="userKey" type="hidden" id="userKey"
-                                                                                                                                              value="D1B5CC2FE46C4CC983C073BCA897935608D926CD32992B5900" />
-                <div class="tip"><input class="userName" name="userName" type="text" id="userName" title="用户名" iscookie="true" value="admin" nullmsg="请输入用户名!" /></div>
-                <div class="tip"><input class="password" name="password" type="password" id="password" title="密码" value="123456" nullmsg="请输入密码!" /></div>
+            <form name="formLogin" id="formLogin" action="login.do" check="loginController.do?checkuser" method="post">
+                <div class="tip"><input class="userName" name="username" type="text" id="userName" title="用户名" iscookie="true" value="${username}" nullmsg="请输入用户名!" /></div>
+                <div class="tip"><input class="password" name="password" type="password" id="password" title="密码" value="${password}" nullmsg="请输入密码!" /></div>
+                <div class="tip"><input type="text" id="valid_code" name="valid_code" class="txtCode" nullmsg="请输入验证码!"/> <img id="code_img" class="code_img" /></div>
                 <div class="loginButton">
-                    <div style="float: left; margin-left: -9px;"><input type="checkbox" id="on_off" name="remember" checked="ture" class="on_off_checkbox" value="0" /> <span class="f_help">是否记住用户名 ?</span></div>
+                    <div style="float: left; margin-left: -9px;"><input type="checkbox" id="on_off" name="remember_login_name" checked="ture" class="on_off_checkbox" value="1" /> <span class="f_help">是否记住用户名 ?</span></div>
 
                     <div style="float: right; padding: 3px 0; margin-right: -12px;">
                         <div>
                             <ul class="uibutton-group">
-                                <li><a class="uibutton normal" href="#" id="but_login">登陆</a></li>
+                                <li><a class="uibutton normal" href="#" id="login_btn">登陆</a></li>
                                 <li><a class="uibutton normal" href="#" id="forgetpass">重置</a></li>
                             </ul>
                         </div>
@@ -97,15 +98,17 @@
 <!--Login div-->
 <div class="clear"></div>
 <div id="versionBar">
-    <div class="copyright">&copy; 版权所有 <span class="tip"><a href="#" title="JEECG 微云快速开发平台">jeecg</a> (推荐使用IE8+,谷歌浏览器可以获得更快,更安全的页面响应速度)技术支持:<a href="#" title="JEECG 微云快速开发平台">jeecg</a></span></div>
+    <div class="copyright">&copy; 版权所有 <span class="tip"><a href="#" title="JEAP开发平台">jeecg</a> (推荐使用IE8+,谷歌浏览器可以获得更快,更安全的页面响应速度)技术支持:<a href="#" title="JEAP开发平台">jeap</a></span></div>
 </div>
 <!-- Link JScript-->
-<script type="text/javascript" src="plug-in/jquery/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="${staticserver }/js/common/jquery-1.6.4.js"></script>
 <script type="text/javascript" src="plug-in/jquery/jquery.cookie.js"></script>
 <script type="text/javascript" src="plug-in/login/js/jquery-jrumble.js"></script>
 <script type="text/javascript" src="plug-in/login/js/jquery.tipsy.js"></script>
 <script type="text/javascript" src="plug-in/login/js/iphone.check.js"></script>
 <script type="text/javascript" src="plug-in/login/js/login.js"></script>
 <script type="text/javascript" src="plug-in/lhgDialog/lhgdialog.min.js"></script>
+<script type="text/javascript" src="${staticserver }/js/admin/sso.js"></script>
+<SCRIPT  src="${staticserver }/js/common/jquery-form-2.33.js" type="text/javascript"></SCRIPT>
 </body>
 </html>
