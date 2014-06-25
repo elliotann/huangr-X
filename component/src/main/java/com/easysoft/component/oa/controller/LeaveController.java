@@ -67,7 +67,10 @@ public class LeaveController extends BaseController {
 	 */
 	@RequestMapping(params = "leave")
 	public ModelAndView leave(HttpServletRequest request) {
-		return new ModelAndView("admin/component/oa/leaveList");
+        List entityist= this.leaveService.queryForAll(LeaveEntity.class);
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("entityist",entityist);
+		return new ModelAndView("admin/component/oa/leaveList",map);
 	}
 
 	/**

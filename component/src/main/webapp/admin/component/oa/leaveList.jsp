@@ -1,18 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<link href=" ${context }/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
-<link href=" ${context }/js/ligerui/skins/Gray/css/all.css" rel="stylesheet" type="text/css" />
-<link href=" ${context }/js/ligerui/skins/ligerui-icons.css" rel="stylesheet" type="text/css" />
-<link href="/jeap/admin/component/cms/lab.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src=" ${context}/js/plug-in/jquery/jquery-1.3.2.min.js"></script>
-<script src="/jeap/admin/component/cms/AllProductData.js" type="text/javascript"></script>
-<script src=" ${context }/js/ligerui/js/ligerui.all.js" type="text/javascript"></script>
-<script src="/jeap/form/config/ligerGrid.showFilter.js" type="text/javascript"></script>
-
-<script src="/jeap/form/config/lab.js" type="text/javascript"></script>
-<script src = "/jeap/admin/component/oa/leaveList.js"></script>
-
-
-<div class="grid" id="grid">
+<%@ include file="/commons/taglibs.jsp"%>
+<link href="${context}/css/table.css" rel="stylesheet" type="text/css" />
+<div class="toolbar">
+    <input type="button" value="增加"/>
 </div>
-
-
+<grid:grid from="entityist" pager="yes">
+    <grid:header>
+        <grid:cell>id</grid:cell>
+        <grid:cell>名称</grid:cell>
+    </grid:header>
+    <grid:body item="leave">
+        <grid:cell>${leave.sid}</grid:cell>
+        <grid:cell>${leave.reason}</grid:cell>
+    </grid:body>
+</grid:grid>
