@@ -18,7 +18,7 @@ public class GridBodyTaglib extends ListTaglibSupport {
 		Tag tag = this.getParent();
 		
 		if(tag!=null){
-			GridTaglibTemp gridTaglib =(GridTaglibTemp)tag;
+			GridTaglib gridTaglib =(GridTaglib)tag;
 			GridBodyParam bodyparm = new GridBodyParam();
 			bodyparm.setFrom( gridTaglib.getFrom() );
 			this.param =  bodyparm;

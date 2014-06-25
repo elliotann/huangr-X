@@ -2,7 +2,7 @@ package com.easysoft.tag.webapp.taglib.html.support;
 
 import com.easysoft.tag.webapp.plugin.AbstractPluginsBundle;
 import com.easysoft.tag.webapp.taglib.html.GridCellTaglib;
-import com.easysoft.tag.webapp.taglib.html.GridTaglibTemp;
+import com.easysoft.tag.webapp.taglib.html.GridTaglib;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -101,7 +101,7 @@ public class GridCellProvider extends AbstractPluginsBundle {
 	}
 	
 	private void init(){
-		GridTaglibTemp tag = (GridTaglibTemp)celltaglib.getParent().getParent();
+		GridTaglib tag = (GridTaglib)celltaglib.getParent().getParent();
 	}
 
 	/**
