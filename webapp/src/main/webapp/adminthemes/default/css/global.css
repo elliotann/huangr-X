@@ -111,12 +111,25 @@ ul.tab li.active a{
 /*定义列表容器中工具栏的样式，使用div元素*/
  
 .toolbar{
+    border: solid #ccc 1px;
 	overflow:hidden;
-	background:none repeat scroll 0 0 #97D8EF;
 	height:25px;
-	margin:5px;
-	padding:5px 0 5px 10px;
+	padding:5px 5px;
 	text-align:left;
+    background-color: #F3F3F3;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#FCFCFC), to(#F3F3F3));
+    background-image: -webkit-linear-gradient(top, #FCFCFC, #F3F3F3);
+    background-image: -moz-linear-gradient(top, #FCFCFC, #F3F3F3);
+    background-image: -ms-linear-gradient(top, #FCFCFC, #F3F3F3);
+    background-image: -o-linear-gradient(top, #FCFCFC, #F3F3F3);
+    background-image: linear-gradient(top, #FCFCFC, #F3F3F3);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#FCFCFC, endColorstr=#F3F3F3);
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient (GradientType=0, startColorstr=#ebf3fc, endColorstr=#dce9f9)";
+    -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
+    -moz-box-shadow:0 1px 0 rgba(255,255,255,.8) inset;
+    box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
+    border-top: none;
+    text-shadow: 0 1px 0 rgba(255,255,255,.5);
 }
 
 /*定义列表容器中工具栏列表的样式，使用ul元素*/
@@ -143,6 +156,8 @@ ul.tab li.active a{
 	float: left;
 	text-decoration: none;
 }
+
+
 
 
 .modify{
