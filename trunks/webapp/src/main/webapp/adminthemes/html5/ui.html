@@ -153,22 +153,22 @@
 			<div id="content" class="span10">
 			<!-- content starts -->
 			
-
+		
 			<div>
 				<ul class="breadcrumb">
 					<li>
 						<a href="#">Home</a> <span class="divider">/</span>
 					</li>
 					<li>
-						<a href="#">Forms</a>
+						<a href="#">UI Features</a>
 					</li>
 				</ul>
 			</div>
 			
-			<div class="row-fluid sortable">
+			<div class="row-fluid sortable">	
 				<div class="box span12">
 					<div class="box-header well" data-original-title>
-						<h2><i class="icon-edit"></i> Form Elements</h2>
+						<h2><i class="icon-plus"></i> Extended Elements</h2>
 						<div class="box-icon">
 							<a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
 							<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
@@ -176,52 +176,73 @@
 						</div>
 					</div>
 					<div class="box-content">
-						<form class="form-horizontal">
-						  <fieldset>
-							<legend>Datepicker, Autocomplete, WYSIWYG</legend>
-							<div class="control-group">
-							  <label class="control-label" for="typeahead">Auto complete </label>
-							  <div class="controls">
-								<input type="text" class="span6 typeahead" id="typeahead"  data-provide="typeahead" data-items="4" data-source='["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Dakota","North Carolina","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"]'>
-								<p class="help-block">Start typing to activate auto complete!</p>
-							  </div>
-							</div>
-							<div class="control-group">
-							  <label class="control-label" for="date01">Date input</label>
-							  <div class="controls">
-								<input type="text" class="input-xlarge datepicker" id="date01" value="02/16/12">
-							  </div>
-							</div>
-
-							<div class="control-group">
-							  <label class="control-label" for="fileInput">File input</label>
-							  <div class="controls">
-								<input class="input-file uniform_on" id="fileInput" type="file">
-							  </div>
-							</div>          
-							<div class="control-group">
-							  <label class="control-label" for="textarea2">Textarea WYSIWYG</label>
-							  <div class="controls">
-								<textarea class="cleditor" id="textarea2" rows="3"></textarea>
-							  </div>
-							</div>
-							<div class="form-actions">
-							  <button type="submit" class="btn btn-primary">Save changes</button>
-							  <button type="reset" class="btn">Cancel</button>
-							</div>
-						  </fieldset>
-						</form>   
-
-					</div>
+						<table class="table table-bordered table-striped">
+							<tr>
+								<td><h3>Multiple File Upload</h3></td>
+								<td>
+									<input data-no-uniform="true" type="file" name="file_upload" id="file_upload" />
+								</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td><h3>Star Rating</h3></td>
+								<td>
+									<div class="raty"></div>
+								</td>
+								<td><code>&lt;div class="raty"&gt;&lt;/div&gt;</code></td>
+							</tr>
+							<tr>
+								<td><h3>Toggle Switch</h3></td>
+								<td>
+									<input data-no-uniform="true" checked type="checkbox" class="iphone-toggle">
+								</td>
+								<td><code>&lt;input data-no-uniform="true" type="checkbox" class="iphone-toggle"&gt;</code></td>
+							</tr>
+							<tr>
+								<td><h3>Auto Growing Textarea</h3></td>
+								<td>
+									<textarea class="autogrow">Press enter here, it will grow automatically.</textarea>
+								</td>
+								<td><code>&lt;textarea class="autogrow"&gt;&lt;/textarea&gt;</code></td>
+							</tr>
+							<tr>
+								<td><h3>Popover</h3></td>
+								<td>
+									<a href="#" class="btn btn-danger" data-rel="popover" data-content="And here's some amazing content. It's very engaging. right?" title="A Title">Hover for popover</a>
+								</td>
+								<td><code>&lt;a href="#" class="btn btn-danger" data-rel="popover" data-content="And here's some amazing content. It's very engaging. right?" title="A Title"&gt;hover for popover&lt;/a&gt;</code></td>
+							</tr>
+							<tr>
+								<td><h3>Slider</h3></td>
+								<td>
+									<div class="slider"></div>
+								</td>
+								<td><code>&lt;div class="slider"&gt;&lt;/div&gt;</code></td>
+							</tr>
+							<tr>
+								<td><h3>Dialog</h3></td>
+								<td>
+									<a href="#" class="btn btn-info btn-setting">Click for dialog</a>
+								</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td><h3>Tooltip</h3></td>
+								<td>
+									<a href="#" title="Tooltip, you can change the position." data-rel="tooltip" class="btn btn-warning">Hover for tooltip</a>
+								</td>
+								<td><code>&lt;a href="#" title="Tooltip, you can change the position." data-rel="tooltip" class="btn btn-warning"&gt;Hover for tooltip&lt;/a&gt;</code></td>
+							</tr>
+						</table>
+					</div>	
 				</div><!--/span-->
-
+				
 			</div><!--/row-->
 
-
 			<div class="row-fluid sortable">
-				<div class="box span12">
+				<div class="box span6">
 					<div class="box-header well" data-original-title>
-						<h2><i class="icon-edit"></i> Form Elements</h2>
+						<h2><i class="icon-tasks"></i> Progress Bars</h2>
 						<div class="box-icon">
 							<a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
 							<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
@@ -229,260 +250,198 @@
 						</div>
 					</div>
 					<div class="box-content">
-						<form class="form-horizontal">
-							<fieldset>
-							  <div class="control-group">
-								<label class="control-label" for="focusedInput">Focused input</label>
-								<div class="controls">
-								  <input class="input-xlarge focused" id="focusedInput" type="text" value="This is focused…">
-								</div>
-							  </div>
-							  <div class="control-group">
-								<label class="control-label">Uneditable input</label>
-								<div class="controls">
-								  <span class="input-xlarge uneditable-input">Some value here</span>
-								</div>
-							  </div>
-							  <div class="control-group">
-								<label class="control-label" for="disabledInput">Disabled input</label>
-								<div class="controls">
-								  <input class="input-xlarge disabled" id="disabledInput" type="text" placeholder="Disabled input here…" disabled="">
-								</div>
-							  </div>
-							  <div class="control-group">
-								<label class="control-label" for="optionsCheckbox2">Disabled checkbox</label>
-								<div class="controls">
-								  <label class="checkbox">
-									<input type="checkbox" id="optionsCheckbox2" value="option1" disabled="">
-									This is a disabled checkbox
-								  </label>
-								</div>
-							  </div>
-							  <div class="control-group warning">
-								<label class="control-label" for="inputWarning">Input with warning</label>
-								<div class="controls">
-								  <input type="text" id="inputWarning">
-								  <span class="help-inline">Something may have gone wrong</span>
-								</div>
-							  </div>
-							  <div class="control-group error">
-								<label class="control-label" for="inputError">Input with error</label>
-								<div class="controls">
-								  <input type="text" id="inputError">
-								  <span class="help-inline">Please correct the error</span>
-								</div>
-							  </div>
-							  <div class="control-group success">
-								<label class="control-label" for="inputSuccess">Input with success</label>
-								<div class="controls">
-								  <input type="text" id="inputSuccess">
-								  <span class="help-inline">Woohoo!</span>
-								</div>
-							  </div>
-							  <div class="control-group">
-								<label class="control-label" for="selectError3">Plain Select</label>
-								<div class="controls">
-								  <select id="selectError3">
-									<option>Option 1</option>
-									<option>Option 2</option>
-									<option>Option 3</option>
-									<option>Option 4</option>
-									<option>Option 5</option>
-								  </select>
-								</div>
-							  </div>
-							  <div class="control-group">
-								<label class="control-label" for="selectError">Modern Select</label>
-								<div class="controls">
-								  <select id="selectError" data-rel="chosen">
-									<option>Option 1</option>
-									<option>Option 2</option>
-									<option>Option 3</option>
-									<option>Option 4</option>
-									<option>Option 5</option>
-								  </select>
-								</div>
-							  </div>
-							  <div class="control-group">
-								<label class="control-label" for="selectError1">Multiple Select / Tags</label>
-								<div class="controls">
-								  <select id="selectError1" multiple data-rel="chosen">
-									<option>Option 1</option>
-									<option selected>Option 2</option>
-									<option>Option 3</option>
-									<option>Option 4</option>
-									<option>Option 5</option>
-								  </select>
-								</div>
-							  </div>
-							  <div class="control-group">
-								<label class="control-label" for="selectError2">Group Select</label>
-								<div class="controls">
-									<select data-placeholder="Your Favorite Football Team" id="selectError2" data-rel="chosen">
-										<option value=""></option>
-										<optgroup label="NFC EAST">
-										  <option>Dallas Cowboys</option>
-										  <option>New York Giants</option>
-										  <option>Philadelphia Eagles</option>
-										  <option>Washington Redskins</option>
-										</optgroup>
-										<optgroup label="NFC NORTH">
-										  <option>Chicago Bears</option>
-										  <option>Detroit Lions</option>
-										  <option>Green Bay Packers</option>
-										  <option>Minnesota Vikings</option>
-										</optgroup>
-										<optgroup label="NFC SOUTH">
-										  <option>Atlanta Falcons</option>
-										  <option>Carolina Panthers</option>
-										  <option>New Orleans Saints</option>
-										  <option>Tampa Bay Buccaneers</option>
-										</optgroup>
-										<optgroup label="NFC WEST">
-										  <option>Arizona Cardinals</option>
-										  <option>St. Louis Rams</option>
-										  <option>San Francisco 49ers</option>
-										  <option>Seattle Seahawks</option>
-										</optgroup>
-										<optgroup label="AFC EAST">
-										  <option>Buffalo Bills</option>
-										  <option>Miami Dolphins</option>
-										  <option>New England Patriots</option>
-										  <option>New York Jets</option>
-										</optgroup>
-										<optgroup label="AFC NORTH">
-										  <option>Baltimore Ravens</option>
-										  <option>Cincinnati Bengals</option>
-										  <option>Cleveland Browns</option>
-										  <option>Pittsburgh Steelers</option>
-										</optgroup>
-										<optgroup label="AFC SOUTH">
-										  <option>Houston Texans</option>
-										  <option>Indianapolis Colts</option>
-										  <option>Jacksonville Jaguars</option>
-										  <option>Tennessee Titans</option>
-										</optgroup>
-										<optgroup label="AFC WEST">
-										  <option>Denver Broncos</option>
-										  <option>Kansas City Chiefs</option>
-										  <option>Oakland Raiders</option>
-										  <option>San Diego Chargers</option>
-										</optgroup>
-								  </select>
-								</div>
-							  </div>
-							  <div class="form-actions">
-								<button type="submit" class="btn btn-primary">Save changes</button>
-								<button class="btn">Cancel</button>
-							  </div>
-							</fieldset>
-						  </form>
-					
+						<h3>Basic</h3>
+						<div class="progress">
+							<div class="bar" style="width: 70%;"></div>
+						</div>
+						<h3>Striped</h3>
+						<div class="progress progress-striped">
+							<div class="bar" style="width: 30%;"></div>
+						</div>
+						<h3>Animated</h3>
+						<div class="progress progress-striped progress-success active">
+							<div class="bar" style="width: 50%;"></div>
+						</div>
+						<h3>Additional Colors</h3>
+						<div class="progress progress-info progress-striped" style="margin-bottom: 9px;">
+							<div class="bar" style="width: 20%"></div>
+						</div>
+						<div class="progress progress-success" style="margin-bottom: 9px;">
+							<div class="bar" style="width: 40%"></div>
+						</div>
+						<div class="progress progress-warning progress-striped active" style="margin-bottom: 9px;">
+							<div class="bar" style="width: 60%"></div>
+						</div>
+						<div class="progress progress-danger progress-striped" style="margin-bottom: 9px;">
+							<div class="bar" style="width: 80%"></div>
+						</div>
 					</div>
 				</div><!--/span-->
+				
+				<div class="box span6">
+					<div class="box-header well">
+						<h2><i class="icon-eye-open"></i> Labels and Annotations</h2>
+						<div class="box-icon">
+							<a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
+							<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+							<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+						</div>
+					</div>
+					<div class="box-content">
+						<table class="table table-bordered table-striped">
+							<thead>
+							  <tr>
+								<th>Labels</th>
+								<th>Markup</th>
+							  </tr>
+							</thead>
+							<tbody>
+							  <tr>
+								<td>
+								  <span class="label">Default</span>
+								</td>
+								<td>
+								  <code>&lt;span class="label"&gt;Default&lt;/span&gt;</code>
+								</td>
+							  </tr>
+							  <tr>
+								<td>
+								  <span class="label label-success">Success</span>
+								</td>
+								<td>
+								  <code>&lt;span class="label label-success"&gt;Success&lt;/span&gt;</code>
+								</td>
+							  </tr>
+							  <tr>
+								<td>
+								  <span class="label label-warning">Warning</span>
+								</td>
+								<td>
+								  <code>&lt;span class="label label-warning"&gt;Warning&lt;/span&gt;</code>
+								</td>
+							  </tr>
+							  <tr>
+								<td>
+								  <span class="label label-important">Important</span>
+								</td>
+								<td>
+								  <code>&lt;span class="label label-important"&gt;Important&lt;/span&gt;</code>
+								</td>
+							  </tr>
+							  <tr>
+								<td>
+								  <span class="label label-info">Info</span>
+								</td>
+								<td>
+								  <code>&lt;span class="label label-info"&gt;Info&lt;/span&gt;</code>
+								</td>
+							  </tr>
+							  <tr>
+								<td>
+								  <span class="label label-inverse">Inverse</span>
+								</td>
+								<td>
+								  <code>&lt;span class="label label-inverse"&gt;Inverse&lt;/span&gt;</code>
+								</td>
+							  </tr>
+							</tbody>
+						  </table>
+					</div>
+				</div><!--/span-->
+				
+			</div><!--/row-->
+			<div class="row-fluid sortable">
+				<div class="box span5">
+					<div class="box-header well">
+						<h2><i class="icon-bullhorn"></i> Alerts</h2>
+						<div class="box-icon">
+							<a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
+							<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+							<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+						</div>
+					</div>
+					<div class="box-content alerts">
+						<div class="alert alert-error">
+							<button type="button" class="close" data-dismiss="alert">×</button>
+							<strong>Oh snap!</strong> Change a few things up and try submitting again.
+						</div>
+						<div class="alert alert-success">
+							<button type="button" class="close" data-dismiss="alert">×</button>
+							<strong>Well done!</strong> You successfully read this important alert message.
+						</div>
+						<div class="alert alert-info">
+							<button type="button" class="close" data-dismiss="alert">×</button>
+							<strong>Heads up!</strong> This alert needs your attention, but it's not super important.
+						</div>
+						<div class="alert alert-block ">
+							<button type="button" class="close" data-dismiss="alert">×</button>
+							<h4 class="alert-heading">Warning!</h4>
+							<p>Best check yo self, you're not looking too good. Nulla vitae elit libero, a pharetra augue. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
+						</div>
+					</div>	
+				</div><!--/span-->
+				
+				<div class="box span7">
+					<div class="box-header well" data-original-title>
+						<h2><i class="icon-bell"></i> Notifications</h2>
+						<div class="box-icon">
+							<a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
+							<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+							<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+						</div>
+					</div>
+					<div class="box-content">
+						<div class="alert alert-info">
+							Click buttons below to see Pop Notifications.
+						</div>
+						<p class="center">
+							<button class="btn btn-primary noty" data-noty-options='{"text":"This is a success notification","layout":"topLeft","type":"success"}'><i class="icon-bell icon-white"></i> Top Left</button>
+							<button class="btn btn-primary noty" data-noty-options='{"text":"This is an alert notification with fade effect","layout":"topCenter","type":"alert","animateOpen": {"opacity": "show"}}'><i class="icon-bell icon-white"></i> Top Center (fade)</button>
+							<button class="btn btn-primary noty" data-noty-options='{"text":"This is an error notification","layout":"topRight","type":"error"}'><i class="icon-bell icon-white"></i> Top Right</button>
+							<button class="btn btn-primary noty" data-noty-options='{"text":"This is a success information","layout":"top","type":"information"}'><i class="icon-bell icon-white"></i> Top Full Width</button>
+						</p>
+						<p class="center">
+							<button class="btn btn-primary noty" data-noty-options='{"text":"This is an alert notification with fade effect","layout":"center","type":"alert","animateOpen": {"opacity": "show"}}'><i class="icon-bell icon-white"></i> Center (fade)</button>
+							<button class="btn btn-primary noty" data-noty-options='{"text":"This is an error notification","layout":"center","type":"error"}'><i class="icon-bell icon-white"></i> Center</button>
+						</p>
+						
+						<p class="center">
+							<button class="btn btn-primary noty" data-noty-options='{"text":"This is an error notification","layout":"bottomLeft","type":"error"}'><i class="icon-bell icon-white"></i> Bottom Left</button>
+							<button class="btn btn-primary noty" data-noty-options='{"text":"This is an alert notification with fade effect","layout":"bottomRight","type":"alert","animateOpen": {"opacity": "show"}}'><i class="icon-bell icon-white"></i> Bottom Right (fade)</button>
+						</p>
+
+						<p class="center">
+							<button class="btn btn-primary noty" data-noty-options='{"text":"This is an alert","layout":"bottom","type":"alert","closeButton":"true"}'><i class="icon-bell icon-white"></i> Bottom Full Width with Close Button</button>
+						</p>
+					</div>	
+				</div><!--/span-->
+				
+				<div class="box span7">
+					<div class="box-header well" data-original-title>
+						<h2><i class="icon-refresh"></i> Ajax Loaders</h2>
+						<div class="box-icon">
+							<a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
+							<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+							<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+						</div>
+					</div>
+					<div class="box-content">
+						<ul class="ajax-loaders">
+														<li><img src="img/ajax-loaders/ajax-loader-1.gif" title="img/ajax-loaders/ajax-loader-1.gif" ></li>
+														<li><img src="img/ajax-loaders/ajax-loader-2.gif" title="img/ajax-loaders/ajax-loader-2.gif" ></li>
+														<li><img src="img/ajax-loaders/ajax-loader-3.gif" title="img/ajax-loaders/ajax-loader-3.gif" ></li>
+														<li><img src="img/ajax-loaders/ajax-loader-4.gif" title="img/ajax-loaders/ajax-loader-4.gif" ></li>
+														<li><img src="img/ajax-loaders/ajax-loader-5.gif" title="img/ajax-loaders/ajax-loader-5.gif" ></li>
+														<li><img src="img/ajax-loaders/ajax-loader-6.gif" title="img/ajax-loaders/ajax-loader-6.gif" ></li>
+														<li><img src="img/ajax-loaders/ajax-loader-7.gif" title="img/ajax-loaders/ajax-loader-7.gif" ></li>
+														<li><img src="img/ajax-loaders/ajax-loader-8.gif" title="img/ajax-loaders/ajax-loader-8.gif" ></li>
+												</ul>
+						<span class="clearfix">From / More <a href="http://ajaxload.info/" target="_blank">http://ajaxload.info/</a></span>
+					</div>	
+				</div><!--/span-->
+			</div><!--/row-->
 			
-			</div><!--/row-->
-			
-			<div class="row-fluid sortable">
-				<div class="box span12">
-					<div class="box-header well" data-original-title>
-						<h2><i class="icon-edit"></i> Form Elements</h2>
-						<div class="box-icon">
-							<a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
-							<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
-							<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
-						</div>
-					</div>
-					<div class="box-content">
-						<form class="form-horizontal">
-							<fieldset>
-							  <div class="control-group">
-								<label class="control-label" for="prependedInput">Prepended text</label>
-								<div class="controls">
-								  <div class="input-prepend">
-									<span class="add-on">@</span><input id="prependedInput" size="16" type="text">
-								  </div>
-								  <p class="help-block">Here's some help text</p>
-								</div>
-							  </div>
-							  <div class="control-group">
-								<label class="control-label" for="appendedInput">Appended text</label>
-								<div class="controls">
-								  <div class="input-append">
-									<input id="appendedInput" size="16" type="text"><span class="add-on">.00</span>
-								  </div>
-								  <span class="help-inline">Here's more help text</span>
-								</div>
-							  </div>
-							  <div class="control-group">
-								<label class="control-label" for="appendedPrependedInput">Append and prepend</label>
-								<div class="controls">
-								  <div class="input-prepend input-append">
-									<span class="add-on">$</span><input id="appendedPrependedInput" size="16" type="text"><span class="add-on">.00</span>
-								  </div>
-								</div>
-							  </div>
-							  <div class="control-group">
-								<label class="control-label" for="appendedInputButton">Append with button</label>
-								<div class="controls">
-								  <div class="input-append">
-									<input id="appendedInputButton" size="16" type="text"><button class="btn" type="button">Go!</button>
-								  </div>
-								</div>
-							  </div>
-							  <div class="control-group">
-								<label class="control-label" for="appendedInputButtons">Two-button append</label>
-								<div class="controls">
-								  <div class="input-append">
-									<input id="appendedInputButtons" size="16" type="text"><button class="btn" type="button">Search</button><button class="btn" type="button">Options</button>
-								  </div>
-								</div>
-							  </div>
-							  <div class="control-group">
-								<label class="control-label">Checkboxes</label>
-								<div class="controls">
-								  <label class="checkbox inline">
-									<input type="checkbox" id="inlineCheckbox1" value="option1"> Option 1
-								  </label>
-								  <label class="checkbox inline">
-									<input type="checkbox" id="inlineCheckbox2" value="option2"> Option 2
-								  </label>
-								  <label class="checkbox inline">
-									<input type="checkbox" id="inlineCheckbox3" value="option3"> Option 3
-								  </label>
-								</div>
-							  </div>
-							  <div class="control-group">
-								<label class="control-label">File Upload</label>
-								<div class="controls">
-								  <input type="file">
-								</div>
-							  </div>
-							  <div class="control-group">
-								<label class="control-label">Radio buttons</label>
-								<div class="controls">
-								  <label class="radio">
-									<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
-									Option one is this and that—be sure to include why it's great
-								  </label>
-								  <div style="clear:both"></div>
-								  <label class="radio">
-									<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-									Option two can be something else and selecting it will deselect option one
-								  </label>
-								</div>
-							  </div>
-							  <div class="form-actions">
-								<button type="submit" class="btn btn-primary">Save changes</button>
-								<button class="btn">Cancel</button>
-							  </div>
-							</fieldset>
-						</form>
-					</div>
-				</div><!--/span-->
-
-			</div><!--/row-->
-    
+		
 					<!-- content ends -->
 			</div><!--/#content.span10-->
 				</div><!--/fluid-row-->

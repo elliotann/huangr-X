@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="js/jquery-1.6.4.js"></script>
+    <script type="text/javascript" src="js/fn1.0.js"></script>
+    <script type="text/javascript" src="js/jeapDialog.js"></script>
+
+    <link href="css/ligerui-all.css" rel="stylesheet" type="text/css" />
+    <link href="css/all.css" rel="stylesheet" type="text/css" />
+    <link href="ligerui-icons.css" rel="stylesheet" type="text/css" />
+    <script>
+
+        $(function(){
+
+        });
+        function showMyDialog(){
+
+            $.ligerDialog.open({
+                name:'openDia',
+                height:600,
+                width: 600,
+                title : 'fsdfa',
+                url: 'fdsfa',
+                showMax: false,
+                showToggle: true,
+                showMin: false,
+                isResize: true,
+                slide: false
+
+            });
+        }
+
+
+    </script>
+</head>
+<body>
+
+<input type="button" onclick="showMyDialog()">
+
+</body>
+</html>
