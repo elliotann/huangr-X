@@ -1,19 +1,17 @@
 /*======公式样式=====*/
-html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, code, del, dfn, em, img, q, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {border:0 none;font-family:inherit;font-size:100%;font-style:inherit;margin:0;padding:0;	vertical-align:baseline;}
-body {color:#222222;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:12px;line-height:1.5;}
-a{text-decoration:none;	color:#000;}
+
 ul{	list-style-type:none;}
 /*======  html{overflow-y: hidden;} =====*/
 /*======顶部样式=====*/
 #head{
-	background:#4E6A81 url("../images/head_bg.jpg") repeat-x;
-	color:#FFFFFF;
-	height:97px;
-	margin:0 auto;
 
+    background:#4E6A81 url("../images/navbar.png") repeat-x;
+    color:#FFFFFF;
+    height:97px;
+    margin:0 auto;
 }
 #head .top{
-	background:url("../images/logo_bg.jpg") no-repeat;
+	background:url("../images/navbar.png") no-repeat;
 	height:95px;
 	margin:0 auto;
 
@@ -95,7 +93,7 @@ a{outline:0;}
 
 #head .appmenu li.current a{
 color:#000;
-font-size:14px;	
+font-size:14px;
 }
 
 
@@ -171,7 +169,7 @@ position:absolute;
     line-height: 30px;
 	position: absolute;
 	left:550px;
-	top:20px;    
+	top:20px;
     width: 250px;
    	text-align:center;
 }
@@ -180,7 +178,7 @@ position:absolute;
 #short_msg .msglist li{
   	border-bottom:1px dashed #D8ECFF;
     height: 25px;
-    line-height: 25px;	
+    line-height: 25px;
     width: 250px;
 	}
 #short_msg .msglist li .name{width:150px}
