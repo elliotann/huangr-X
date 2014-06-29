@@ -15,6 +15,8 @@
     <link href="${context}/css/input.css" rel="stylesheet" type="text/css" />
     <link href="${context}/css/validate.css" rel="stylesheet" type="text/css" />
     <link href="${context}/css/dialog.css" rel="stylesheet" type="text/css" />
+    <link href="${context}/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="${context}/css/menu.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="${staticserver }/js/common/jquery-1.6.4.js"></script>
     <script src="${context}/js/ligerui/js/core/base.js" type="text/javascript"></script>
     <script src="${context}/js/ligerui/js/plugins/ligerLayout.js" type="text/javascript"></script>
@@ -32,7 +34,7 @@
         h4{ margin:20px;}
     </style>
     <style type="text/css">
-            /* 菜单列表 */
+        /* 菜单列表 */
         .menulist { margin-left: 2px; margin-right: 2px; margin-top: 2px; text-align: left; color: #000; }
         .menulist li { height: 24px; line-height: 24px; padding-left: 24px; display: block; position: relative; cursor: pointer; text-align: left; }
         .menulist li img { position: absolute; left: 4px; top: 4px; width: 16px; height: 16px; }
@@ -44,30 +46,40 @@
     </style>
 </head>
 <body>
-<input id="context" value="${context}"/>
-<div id="head">
-    <div class="logo"><a href="#"><img src="${bklogo}" style="width:100px"/></a><span class="version">v${version}</span></div>
-    <div id="short_msg"  >
-        您好${user.username }, <span>您没有新短消息</span>
-        <div class="msglist">
-            <ul></ul>
+<input id="context" value="${context}" type="hidden"/>
+<div class="navbar">
+
+</div>
+<div id="navbar" class="navbar">
+    <div class="navbar-inner">
+        <div class="logo"><a href="#"><img src="${bklogo}" style="width:100px"/></a><span class="version">v${version}</span></div>
+        <div id="short_msg"  >
+            您好${user.username }, <span>您没有新短消息</span>
+            <div class="msglist">
+                <ul></ul>
+            </div>
+        </div>
+        <!-- user dropdown starts -->
+        <div class="btn-group pull-right" >
+
+        </div>
+        <div class="top">
+
+            <%--<div class="sysmenu">
+
+                <ul>
+                    <li><a href='javascript:;' id='cache_btn'></a></li>
+                </ul>
+            </div>--%>
         </div>
     </div>
-    <div class="top">
 
-        <div class="sysmenu">
-
+    <div class="navbar-menu">
+        <div class="navMenu">
             <ul>
-                <li><a href='javascript:;' id='cache_btn'></a></li>
+
             </ul>
         </div>
-    </div>
-    <div class="appmenu">
-        <ul>
-        </ul>
-
-        <div class="desktop"><a href="../core/admin/index.do?list">桌面</a></div>
-
     </div>
 </div>
 <div id="layout1">

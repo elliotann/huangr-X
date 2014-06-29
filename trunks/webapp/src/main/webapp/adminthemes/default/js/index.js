@@ -3,78 +3,45 @@
  * @author andy
  */
 var BackendUi={
-	menu:undefined,
+    menu:undefined,
     accordion:undefined,
-	init:function(menu,accordion){
+    init:function(menu,accordion){
         //Jeap.AdminUI.init({wrapper:$("#right_content")});
 
-		$(".desktop a").click(function(){
+        $(".desktop a").click(function(){
             //Jeap.AdminUI.load($(this));
-			return false;
-		});
+            return false;
+        });
 
 
-		this.menu =menu;
+        this.menu =menu;
         this.accordion = accordion;
-		this.autoHeight();
-		var self =this;
-		$(window).resize(function(){self.autoHeight();});
-	},
-	disMenu:function(){
-		this.disSysMenu();
-		this.disAppMenu();
-	},
+        this.autoHeight();
+        var self =this;
+        $(window).resize(function(){self.autoHeight();});
+    },
+    disMenu:function(){
+        this.disSysMenu();
+        this.disAppMenu();
+    },
 
-	/**
-	 * 显示系统菜单
-	 */
-	disSysMenu:function(){
-		var self =this;
-		var menu = this.menu;
-		$.each(menu.sys,function(k,v){
-			var link = self.createLink(v);
-			 $("<li/>").appendTo( $(".sysmenu>ul") ).append(link);
-			 if(v.target!='_blank'){
-				link.click(function(){
-                        Jeap.AdminUI.load($(this));
-						return false;
-					});
-			 }
-		});
-	},
-	/**
-	 * 显示应用菜单
-	 */
-	disAppMenu:function(){
-		var self=this;
-		var menu = this.menu;
-		var i=0;
-		$.each(menu.app,function(k,v){
-			if(founder ==1 && (v.id==237 || v.id==244 ||v.id==266)){}else{
-				var link = $("<a  target='"+v.target+"' href='"+ v.url +"' >" + v.text + "</a>");
-				$("<li><span></span></li>").appendTo($(".appmenu>ul")).children("span").append(link);
-				var children = v.children;
-
-					link.click(function(){
-						if(children)
-						$(".appmenu li").removeClass("current");
-						$(this).parent().parent().addClass("current");
-						return false;
-					});
-
-					if(i==0){
-						var href= link.attr("href");
-						var target=link.attr("target");
-						link.attr("href",app_path+"/core/admin/index.do");
-						link.removeAttr("target");
-						link.click();
-						link.attr("href",href);
-						link.attr("target",target);
-					}
-					i++;
-			}
-		});
-	},
+    /**
+     * 显示系统菜单
+     */
+    disSysMenu:function(){
+        var self =this;
+        var menu = this.menu;
+        $.each(menu.sys,function(k,v){
+            var link = self.createLink(v);
+            $("<li/>").appendTo( $(".sysmenu>ul") ).append(link);
+            if(v.target!='_blank'){
+                link.click(function(){
+                    Jeap.AdminUI.load($(this));
+                    return false;
+                });
+            }
+        });
+    },
     /**
      * 显示应用菜单
      */
@@ -84,13 +51,13 @@ var BackendUi={
         var i=0;
         $.each(menu.app,function(k,v){
             if(founder ==1 && (v.id==237 || v.id==244 ||v.id==266)){}else{
-                var link = $("<a target='"+v.target+"' href='"+v.url+"'><img src='/jeap/adminthemes/default/images/admin.png'  height='50px'/></a>");
-                $("<li></li>").appendTo($(".navMenu>ul")).append(link);
+                var link = $("<a  target='"+v.target+"' href='"+ v.url +"' >" + v.text + "</a>");
+                $("<li><span></span></li>").appendTo($(".appmenu>ul")).children("span").append(link);
                 var children = v.children;
 
                 link.click(function(){
                     if(children)
-                        $(".navMenu li").removeClass("current");
+                        $(".appmenu li").removeClass("current");
                     $(this).parent().parent().addClass("current");
                     return false;
                 });
@@ -108,18 +75,52 @@ var BackendUi={
             }
         });
     },*/
-	/**
-	 * 显示应用的子菜单
-	 */
-	disAppChildren:function(children){
-		var self= this;
-		var leftMenu = $("#leftMenus");
-		leftMenu.empty();
-		$.each(children,function(k,menu){
+    /**
+     * 显示应用菜单
+     */
+     disAppMenu:function(){
+     var self=this;
+     var menu = this.menu;
+     var i=0;
+     $.each(menu.app,function(k,v){
+     if(founder ==1 && (v.id==237 || v.id==244 ||v.id==266)){}else{
+     var link = $("<a target='"+v.target+"' href='"+v.url+"'><img src='/jeap/adminthemes/default/"+ v.ico+"'  height='50px'/>"+v.text+"</a>");
+     $("<li></li>").appendTo($(".navMenu>ul")).append(link);
+     var children = v.children;
+
+     link.click(function(){
+     if(children)
+         self.disAppChildren(children);
+    /* $(".navMenu li").removeClass("current");
+     $(this).parent().parent().addClass("current");*/
+     return false;
+     });
+
+     if(i==0){
+     var href= link.attr("href");
+     var target=link.attr("target");
+     link.attr("href",app_path+"/core/admin/index.do");
+     link.removeAttr("target");
+     link.click();
+     link.attr("href",href);
+     link.attr("target",target);
+     }
+     i++;
+     }
+     });
+     },
+    /**
+     * 显示应用的子菜单
+     */
+    disAppChildren:function(children){
+        var self= this;
+        var leftMenu = $("#leftMenus");
+        leftMenu.empty();
+        $.each(children,function(k,menu){
 
             var item = $('<div title="' + menu.text + '"><ul class="menulist"></ul></div>');
-			if(this.children){
-				$.each(this.children,function(k,submenu){
+            if(this.children){
+                $.each(this.children,function(k,submenu){
                     var subitem = $('<li><img/><span></span><div class="menuitem-l"></div><div class="menuitem-r"></div></li>');
                     subitem.attr({
                         url: submenu.url+"&menuId="+submenu.id,
@@ -136,10 +137,10 @@ var BackendUi={
                     $("span", subitem).html(submenu.text ||submenu.text);
                     $("ul:first", item).append(subitem);
 
-				});
-			}
+                });
+            }
             leftMenu.append(item);
-		});
+        });
         this.accordion._render();
         this.accordion.setHeight($(".l-layout-center").height() - 25);
         //菜单初始化
@@ -170,26 +171,26 @@ var BackendUi={
             }
 
         }).live('mouseover', function () {
-                var jitem = $(this);
-                jitem.addClass("over");
-            }).live('mouseout', function () {
-                var jitem = $(this);
-                jitem.removeClass("over");
-            });
-	},
-	createLink:function(v){
-		var link = $("<a  target='"+v.target+"' href='"+ v.url +"' >" + v.text + "</a>");
-		return link;
-	},
-	autoHeight:function(){
-		var height= $(window).height()-100;
-		$("#leftMenus").height(height);
-		//$("#right_content").height(height);
+            var jitem = $(this);
+            jitem.addClass("over");
+        }).live('mouseout', function () {
+            var jitem = $(this);
+            jitem.removeClass("over");
+        });
+    },
+    createLink:function(v){
+        var link = $("<a  target='"+v.target+"' href='"+ v.url +"' >" + v.text + "</a>");
+        return link;
+    },
+    autoHeight:function(){
+        var height= $(window).height()-100;
+        $("#leftMenus").height(height);
+        //$("#right_content").height(height);
 
-	}
+    }
 
 };
- var tab;
+var tab;
 $(function(){
     //布局
     $("#layout1").ligerLayout({ leftWidth: 200});
