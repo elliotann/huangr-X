@@ -57,8 +57,6 @@ var BackendUi={
 
 					link.click(function(){
 						if(children)
-							self.disAppChildren(children);
-                        //Jeap.AdminUI.load($(this));
 						$(".appmenu li").removeClass("current");
 						$(this).parent().parent().addClass("current");
 						return false;
@@ -77,6 +75,39 @@ var BackendUi={
 			}
 		});
 	},
+    /**
+     * 显示应用菜单
+     */
+   /* disAppMenu:function(){
+        var self=this;
+        var menu = this.menu;
+        var i=0;
+        $.each(menu.app,function(k,v){
+            if(founder ==1 && (v.id==237 || v.id==244 ||v.id==266)){}else{
+                var link = $("<a target='"+v.target+"' href='"+v.url+"'><img src='/jeap/adminthemes/default/images/admin.png'  height='50px'/></a>");
+                $("<li></li>").appendTo($(".navMenu>ul")).append(link);
+                var children = v.children;
+
+                link.click(function(){
+                    if(children)
+                        $(".navMenu li").removeClass("current");
+                    $(this).parent().parent().addClass("current");
+                    return false;
+                });
+
+                if(i==0){
+                    var href= link.attr("href");
+                    var target=link.attr("target");
+                    link.attr("href",app_path+"/core/admin/index.do");
+                    link.removeAttr("target");
+                    link.click();
+                    link.attr("href",href);
+                    link.attr("target",target);
+                }
+                i++;
+            }
+        });
+    },*/
 	/**
 	 * 显示应用的子菜单
 	 */
