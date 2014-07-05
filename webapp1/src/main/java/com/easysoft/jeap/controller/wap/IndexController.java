@@ -8,10 +8,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Created by huangxa on 2014/7/4.
  */
 @Controller
-@RequestMapping("/wap")
 public class IndexController {
-    @RequestMapping("/main")
-    public String index(){
+    @RequestMapping("/wap/main")
+    public String wapIndex(String type){
+
         return "wap/main/main";
+
+
+    }
+    @RequestMapping("/admin/main")
+    public String adminIndex(String type){
+
+        return "adminthemes/default/main";
+
+
     }
 }
