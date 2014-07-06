@@ -7,6 +7,9 @@
     <link rel="stylesheet" type="text/css" href="../admin/css/index.css" />
     <link rel="stylesheet" type="text/css" href="../adminthemes/default/css/main.css" />
     <link rel="stylesheet" type="text/css" href="../adminthemes/default/css/menu.css" />
+    <link rel="stylesheet" type="text/css" href="../adminthemes/default/css/tab.css" />
+    <script type="text/javascript" src="../js/common/jquery.min.js"></script>
+    <script type="text/javascript" src="../adminthemes/default/js/tab-control.js"></script>
 </head>
 <body>
 
@@ -20,15 +23,9 @@
                 </div>
             </div>
         </div>
-        <div class="navbar-menu">
-            <div class="navMenu">
-                <ul>
-
-                </ul>
-            </div>
-        </div>
     </div>
     <div id="navigator">
+        <div class="msgContent">您好admin, <span>您没有新短消息</span></div>
         <div id="leftMenu">
             <ul class="menu">
                 <li class="item1" id="one"><a href="#one">Friends <span>340</span></a>
@@ -70,12 +67,57 @@
             </ul>
         </div>
     </div>
-    <div id="main">
-        <iframe name="MainFrame" src="main.html"></iframe>
-    </div>
+
+        <!-- 选项卡 -->
+        <div class="tab-control">
+
+            <!-- 标签 -->
+            <div class="tab simple">
+
+                <form>
+                    <input class="prev" type="button" />
+                    <input class="next" type="button" />
+                    <input class="find" type="button" />
+                </form>
+
+                <ul>
+
+                    <!-- <li>标签<a href="javascript:;">关闭</a></li> -->
+
+                </ul>
+
+            </div>
+
+            <!-- 标签查找 -->
+            <div class="tab-find hidden">
+
+                <form>
+                    <input class="text" type="text" />
+                </form>
+
+                <ul>
+
+                    <!-- <li>标签<a href="javascript:;">关闭</a></li> -->
+
+                </ul>
+
+            </div>
+
+            <!-- 主体 -->
+
+            <div class="main" id="main">
+
+                <!-- <iframe scrolling="auto" frameborder="0"></iframe> -->
+
+            </div>
+
+        </div>
+
     <div id="footer">Copyright © 20014-2017 All Rights Reserved Powered By JEAP</div>
 
 </body>
+<script type="text/javascript" src="../js/common/jquery.min.js"></script>
+<script type="text/javascript" src="../adminthemes/default/js/tab-control.js"></script>
 <script type="text/javascript">
     function screenAdapter(){
         document.getElementById('footer').style.top=document.documentElement.scrollTop+document.documentElement.clientHeight- document.getElementById('footer').offsetHeight+"px";
@@ -87,5 +129,14 @@
     window.onscroll=function(){screenAdapter()};
     window.onresize=function(){screenAdapter()};
     window.onload=function(){screenAdapter()};
+</script>
+<script type="text/javascript">
+    //<![CDATA[
+    TabControlAppend('1', 'jQuery特效', 'fsafas');
+    TabControlAppend('2', '幻灯片代码', 'fdsafas');
+    TabControlAppend('3', '网站导航菜单', 'fdsafasd');
+    TabControlAppend('4', 'CSS3特效', 'fdsafas');
+    TabControlAppend('5', 'HTML5代码', 'fsdafdasfas');
+    //]]>
 </script>
 </html>

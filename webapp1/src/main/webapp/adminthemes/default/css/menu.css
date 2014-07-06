@@ -1,6 +1,6 @@
 #leftMenu {
     width: 200px;
-    margin: 4px auto;
+    margin: 0px auto;
     font-size: 0.8125em;
 }
 ul, ul ul {
@@ -180,4 +180,13 @@ background: #fff;
 .menu > li:target > ul {
     height: /*7.9em*/auto; /*using auto nullifies the height transitions, but it makes things flexible which is more important*/
     border-bottom: 1px solid #51555a;
+}
+
+
+@charset "utf-8";
+
+div.menu {
+    position:relative;
+    height:80px;
+    background-image:url("../img/menu_background.png");
 }
