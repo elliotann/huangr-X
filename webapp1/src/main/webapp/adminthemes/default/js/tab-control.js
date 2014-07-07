@@ -135,7 +135,7 @@
         var append = function(i/* String index */, t/* String tab */, h/* String href */, r/* String reload */) {
 
           var $1 = jQuery(tabControl_tab_ul).find('li');
-          var $2 = jQuery(tabControl_main)  .find('iframe');
+          var $2 = jQuery(tabControl_main).find('iframe');
 
           for(var $ = -1, j = 0; $1[j]; j++) {
 

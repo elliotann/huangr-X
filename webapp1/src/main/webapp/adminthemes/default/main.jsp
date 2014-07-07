@@ -74,47 +74,17 @@
     <div id="rightContent">
         <!-- 选项卡 -->
         <div class="tab-control">
-
             <!-- 标签 -->
             <div class="tab simple">
-
-                <form>
-                    <input class="prev" type="button" />
-                    <input class="next" type="button" />
-                    <input class="find" type="button" />
-                </form>
-
                 <ul>
-
-                    <!-- <li>标签<a href="javascript:;">关闭</a></li> -->
-
+                    <li>管理员管理<a href="javascript:;">关闭</a></li>
+                    <li>角色管理<a href="javascript:;">关闭</a></li>
                 </ul>
-
             </div>
-
-            <!-- 标签查找 -->
-            <div class="tab-find hidden">
-
-                <form>
-                    <input class="text" type="text" />
-                </form>
-
-                <ul>
-
-                    <!-- <li>标签<a href="javascript:;">关闭</a></li> -->
-
-                </ul>
-
-            </div>
-
-            <!-- 主体 -->
-
-
-
         </div>
         <div class="main">
 
-            <%-- <iframe scrolling="auto" frameborder="0" src="../adminthemes/default/main.html"></iframe>--%>
+            <iframe scrolling="auto" frameborder="0" src="../adminthemes/default/main.html"></iframe>
 
         </div>
 
@@ -124,7 +94,7 @@
 
 </body>
 <script type="text/javascript" src="../js/common/jquery.min.js"></script>
-<script type="text/javascript" src="../adminthemes/default/js/tab-control.js"></script>
+<script type="text/javascript" src="../adminthemes/default/js/tabs.js"></script>
 <script type="text/javascript">
     function screenAdapter(){
         document.getElementById('footer').style.top=document.documentElement.scrollTop+document.documentElement.clientHeight- document.getElementById('footer').offsetHeight+"px";
@@ -137,13 +107,5 @@
     window.onresize=function(){screenAdapter()};
     window.onload=function(){screenAdapter()};
 </script>
-<script type="text/javascript">
-    //<![CDATA[
-    TabControlAppend('1', 'jQuery特效', 'fsafas');
-    TabControlAppend('2', '幻灯片代码', 'fdsafas');
-    TabControlAppend('3', '网站导航菜单', 'fdsafasd');
-    TabControlAppend('4', 'CSS3特效', 'fdsafas');
-    TabControlAppend('5', 'HTML5代码', 'fsdafdasfas');
-    //]]>
-</script>
+
 </html>

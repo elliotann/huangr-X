@@ -1,4 +1,4 @@
 (function ($)
 {
-
+    alert("here");
 })(jQuery);
