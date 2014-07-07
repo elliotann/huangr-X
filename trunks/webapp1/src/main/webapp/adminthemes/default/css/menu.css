@@ -77,7 +77,6 @@ ul, ul ul {
 }
 .menu > li > a:before {
     content: '';
-    background-image: url(../images/sprite.png);
     background-repeat: no-repeat;
     font-size: 36px;
     height: 1em;

@@ -5,6 +5,7 @@ div.tab-control {
     margin-left:2px;
     margin-right:2px;
     margin-top: 0px;
+    background-color: #000000;
 }
 
 div.tab-control * {
@@ -135,11 +136,21 @@ div.tab-control div.tab-find ul a {
 
 /* main */
 
-div.tab-control div.main {
+div.main {
     position:relative;
+    float:left;
+    width: 100%;
+    height:100%;
+    margin:0px;
+    left:0px;
+    border-color: #77D1F6;
+    border-width: 2px;
+    border-style: solid;
+    -moz-box-shadow: 6px 6px 12px #282828;
+    -webkit-box-shadow: 6px 6px 12px #282828;
 }
 
-div.tab-control div.main iframe {
+div.main iframe {
     width:100%;
     height:100%;
     box-shadow:0 0 2px #000;
