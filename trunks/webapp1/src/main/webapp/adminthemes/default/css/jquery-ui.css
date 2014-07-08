@@ -1,0 +1,329 @@
+
+.ui-datepicker {
+    background: url("../../images/blacktrans.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border-radius: 3px;
+}
+.ui-datepicker {
+    display: none;
+    padding: 5px;
+    z-index: 100 !important;
+}
+.ui-datepicker-header {
+    background: url("../../images/blacktrans1.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    color: #FFFFFF;
+    padding: 5px;
+    position: relative;
+    text-align: center;
+}
+.ui-datepicker-calendar {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-collapse: collapse;
+    border-color: -moz-use-text-color #CCCCCC #CCCCCC;
+    border-image: none;
+    border-right: 1px solid #CCCCCC;
+    border-style: none solid solid;
+    border-width: 0 1px 1px;
+}
+.ui-datepicker-calendar thead th {
+    color: #666666;
+    font-size: 10px;
+    font-weight: normal;
+    text-transform: uppercase;
+}
+.ui-datepicker-calendar thead th {
+    background: url("../../images/thead.png") repeat-x scroll left top rgba(0, 0, 0, 0);
+    border-bottom: 1px solid #CCCCCC;
+}
+.ui-datepicker-calendar td {
+    border-left: 1px solid #CCCCCC;
+    border-top: 1px solid #CCCCCC;
+    text-align: right;
+}
+.ui-datepicker-calendar td {
+    background: url("../../images/thead.png") repeat-x scroll left top rgba(0, 0, 0, 0);
+    padding: 1px;
+}
+.ui-datepicker-calendar td a {
+    color: #666666;
+    display: block;
+    padding: 2px 8px;
+    text-shadow: 1px 1px #F7F7F7;
+}
+.ui-datepicker-calendar td a:hover {
+    background: none repeat scroll 0 0 #C8D9ED;
+    color: #333333;
+    text-decoration: none;
+}
+.ui-datepicker-calendar td:first-child {
+    border-left: 1px solid #CCCCCC;
+}
+.ui-datepicker-prev, .ui-datepicker-next {
+    display: inline-block;
+    height: 14px;
+    width: 14px;
+}
+.ui-datepicker-prev span, .ui-datepicker-next span {
+    display: none;
+}
+.ui-datepicker-prev {
+    background: url("../../images/icons/calarrow.png") no-repeat scroll 3px -39px rgba(0, 0, 0, 0);
+    left: 5px;
+    position: absolute;
+    top: 9px;
+}
+.ui-datepicker-next {
+    background: url("../../images/icons/calarrow.png") no-repeat scroll 3px 1px rgba(0, 0, 0, 0);
+    position: absolute;
+    right: 5px;
+    top: 9px;
+}
+.ui-tabs {
+    background: none repeat scroll 0 0 #FCFCFC;
+    border: 1px solid #CCCCCC;
+    border-radius: 3px;
+}
+.ui-tabs {
+    box-shadow: 1px 1px 2px #DDDDDD;
+}
+.ui-tabs-nav {
+    background: url("../../images/thead.png") repeat-x scroll left top #EEEEEE;
+    border-bottom: 1px solid #CCCCCC;
+    list-style: none outside none;
+}
+.ui-tabs-nav {
+    border-radius: 3px 3px 0 0;
+    height: 41px;
+    position: relative;
+}
+.ui-tabs-nav li {
+    display: inline-block;
+    float: left;
+}
+.ui-tabs-nav li:first-child a {
+    border-radius: 3px 0 0;
+}
+.ui-tabs-nav li a {
+    background: none repeat scroll 0 0 #EEEEEE;
+    border-bottom: 1px solid #CCCCCC;
+    border-right: 1px solid #CCCCCC;
+    color: #333333;
+    display: block;
+    padding: 10px 20px;
+}
+.ui-tabs-nav li a:hover {
+    background: none repeat scroll 0 0 #E7E7E7;
+    text-decoration: none;
+}
+.ui-tabs-nav li.ui-state-active a {
+    background: none repeat scroll 0 0 #FCFCFC;
+    border-bottom: 1px solid #FCFCFC;
+    color: #006699;
+}
+.ui-tabs-hide {
+    display: none;
+}
+.ui-tabs-panel {
+    padding: 15px;
+}
+.accordion {
+    background: none repeat scroll 0 0 #FCFCFC;
+    border: 1px solid #CCCCCC;
+    border-radius: 3px;
+    overflow: hidden;
+}
+.accordion {
+    box-shadow: 1px 1px 3px #DDDDDD;
+}
+.ui-accordion-header {
+    background: url("../../images/thead.png") repeat-x scroll left top #EEEEEE;
+    border-top: 1px solid #CCCCCC;
+    position: relative;
+}
+.ui-accordion-header {
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: normal;
+    text-shadow: 1px 1px #F7F7F7;
+    text-transform: uppercase;
+}
+.ui-accordion-header:first-child {
+    border-top: 0 none;
+}
+.ui-accordion-header a {
+    color: #333333;
+    display: block;
+    padding: 10px;
+}
+.ui-accordion-header a:hover {
+    color: #006699;
+    text-decoration: none;
+}
+.ui-accordion-content {
+    border-top: 1px solid #CCCCCC;
+    color: #666666;
+    overflow: hidden;
+    padding: 10px;
+}
+.ui-accordion-header .ui-icon {
+    background: url("../../images/arrow.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    display: inline-block;
+    height: 10px;
+    position: absolute;
+    right: 10px;
+    top: 18px;
+    width: 10px;
+}
+.ui-state-active .ui-icon {
+    background: url("../../images/arrow.png") no-repeat scroll 0 -45px rgba(0, 0, 0, 0);
+    display: inline-block;
+    height: 5px;
+    position: absolute;
+    right: 10px;
+    top: 18px;
+    width: 10px;
+}
+.ui-slider {
+    background: none repeat scroll 0 0 #EEEEEE;
+    border: 1px solid #CCCCCC;
+    margin: 10px 0;
+    position: relative;
+}
+.ui-slider {
+    box-shadow: 1px 1px 2px #CCCCCC inset;
+}
+.ui-slider {
+    border-radius: 4px;
+}
+.ui-slider a {
+    display: inline-block;
+    z-index: 2;
+}
+.ui-slider-range {
+    border-radius: 4px;
+}
+.ui-slider-horizontal {
+    display: block;
+    height: 4px;
+}
+.ui-slider-horizontal a {
+    position: absolute;
+    top: -4px;
+}
+.ui-slider-horizontal a {
+    background: url("../../images/icons/hbutton.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    height: 12px;
+    width: 15px;
+}
+.ui-slider-horizontal a.ui-slider-handle {
+    margin-left: -8px;
+}
+.ui-slider-horizontal a.ui-state-active {
+    box-shadow: 0 0 2px #0099FF;
+}
+.ui-slider-horizontal .ui-slider-range {
+    background: none repeat scroll 0 0 #3399FF;
+    height: 5px;
+    position: absolute;
+}
+.ui-slider-horizontal .ui-slider-range {
+    box-shadow: 1px 1px 2px #006699 inset;
+}
+.ui-slider-horizontal .ui-slider-range-max {
+    right: 0;
+}
+.ui-slider-vertical {
+    width: 5px;
+}
+.ui-slider-vertical a {
+    left: -3px;
+    position: absolute;
+}
+.ui-slider-vertical a {
+    background: url("../../images/icons/vbutton.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    height: 15px;
+    width: 11px;
+}
+.ui-slider-vertical a.ui-slider-handle {
+    margin-bottom: -8px;
+}
+.ui-slider-vertical a.ui-state-active {
+    box-shadow: 0 0 2px #0099FF;
+}
+.ui-slider-vertical .ui-slider-range {
+    background: none repeat scroll 0 0 #3399FF;
+    left: -1px;
+    position: absolute;
+    width: 7px;
+}
+.ui-slider-vertical .ui-slider-range {
+    box-shadow: 1px 1px 2px #006699 inset;
+}
+.ui-slider-vertical .ui-slider-range-min {
+    bottom: 0;
+}
+.ui-slider-vertical .ui-slider-range-max {
+    right: 0;
+}
+.ui-dialog {
+    background: url("../../images/blacktrans1.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    padding: 5px;
+}
+.ui-dialog {
+    border-radius: 3px;
+    position: relative;
+}
+.ui-dialog-titlebar {
+    background: url("../../images/thead.png") repeat-x scroll left top #EEEEEE;
+    border-bottom: 1px solid #CCCCCC;
+    color: #FFFFFF;
+    padding: 8px 10px;
+}
+.ui-dialog-content {
+    background: none repeat scroll 0 0 #FFFFFF;
+    padding: 10px;
+}
+.ui-dialog-titlebar {
+    color: #006699;
+    font-weight: bold;
+}
+.ui-dialog-titlebar-close {
+    color: #666666;
+    font-size: 11px;
+    font-weight: normal;
+    position: absolute;
+    right: 15px;
+    top: 12px;
+}
+.ui-dialog-titlebar-close:hover {
+    color: #333333;
+    text-decoration: none;
+}
+.ui-dialog .wysiwyg legend {
+    font-size: 11px;
+    left: 15px;
+    position: absolute;
+    text-transform: uppercase;
+    top: 13px;
+}
+.ui-dialog .wysiwyg p {
+    margin: 8px 0;
+}
+.ui-dialog .wysiwyg input.submit {
+    background: url("../../images/buttonbg3.png") repeat-x scroll left top rgba(0, 0, 0, 0);
+    border: 1px solid #314A78;
+    color: #FFFFFF;
+    font-size: 11px;
+}
+.ui-dialog .wysiwyg input.reset {
+    background: url("../../images/thead.png") repeat-x scroll left top rgba(0, 0, 0, 0);
+    border: 1px solid #BBBBBB;
+    color: #333333;
+    font-size: 11px;
+}
+.ui-dialog .wysiwyg label {
+    float: left;
+    width: 100px;
+}
