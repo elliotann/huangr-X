@@ -131,8 +131,8 @@
                 <li><a class="error" href="404.html">404 Page</a></li>
             </ul>
         </div>
-        <h3 class="open">Custom Text</h3>
-        <div style="display: block;" class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna 		aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </div>
+        <h3 class="open"></h3>
+
     </div>
 
 </div>

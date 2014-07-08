@@ -31,74 +31,94 @@
 
     <div class="clear"></div>
 
-    <div class="widgetbox">
-        <h3 class=""><span>Sample Chart</span></h3>
-        <div class="content nopadding ohidden">
-            <table class="sTable3" cellpadding="0" cellspacing="0" width="100%">
-                <thead>
+    <div class="dataTables_wrapper" id="example_wrapper"><div id="example_length" class="dataTables_length"><label>Show <select name="example_length" size="1"><option value="10" selected="selected">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div><div class="dataTables_filter" id="example_filter"><label>Search: <input type="text"></label></div><table cellspacing="0" cellpadding="0" border="0" id="example" class="dyntable">
+        <thead>
 
-                <tr>
-                    <td>Column 1</td>
-                    <td>Column 2</td>
-                    <td>Column 3</td>
-                    <td align="right">Impressions</td>
-                    <td align="right">Percentage</td>
+        <tr><th class="head0 sorting_asc" rowspan="1" colspan="1" style="width: 245px;">Rendering engine</th><th class="head1 sorting" rowspan="1" colspan="1" style="width: 368px;">Browser</th><th class="head0 sorting" rowspan="1" colspan="1" style="width: 339px;">Platform(s)</th><th class="head1 sorting" rowspan="1" colspan="1" style="width: 209px;">Engine version</th><th class="head0 sorting" rowspan="1" colspan="1" style="width: 150px;">CSS grade</th></tr>
+        </thead>
+        <colgroup>
+            <col class="con0">
+            <col class="con1">
+            <col class="con0">
+            <col class="con1">
+            <col class="con0">
+        </colgroup>
 
-                    <td>Column 6</td>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>Row Text 1</td>
-                    <td>Row Text 2</td>
 
-                    <td>Row Text 3</td>
-                    <td align="right">2 100.00</td>
-                    <td align="right">20%</td>
-                    <td>Row Text 6</td>
-                </tr>
-                <tr class="even">
-                    <td>Row Text 1</td>
 
-                    <td>Row Text 2</td>
-                    <td>Row Text 3</td>
-                    <td align="right">2 100.00</td>
-                    <td align="right">20%</td>
-                    <td>Row Text 6</td>
-                </tr>
+        <tr><th class="head0" rowspan="1" colspan="1">Rendering engine</th><th class="head1" rowspan="1" colspan="1">Browser</th><th class="head0" rowspan="1" colspan="1">Platform(s)</th><th class="head1" rowspan="1" colspan="1">Engine version</th><th class="head0" rowspan="1" colspan="1">CSS grade</th></tr>
+        </tfoot>
+        <tbody><tr class="gradeA odd">
+            <td class=" sorting_1">Gecko</td>
+            <td>Firefox 1.0</td>
+            <td>Win 98+ / OSX.2+</td>
+            <td class="center">1.7</td>
 
-                <tr>
-                    <td>Row Text 1</td>
-                    <td>Row Text 2</td>
-                    <td>Row Text 3</td>
-                    <td align="right">2 100.00</td>
-                    <td align="right">20%</td>
+            <td class="center">A</td>
+        </tr><tr class="gradeA even">
+            <td class=" sorting_1">Gecko</td>
+            <td>Firefox 1.5</td>
+            <td>Win 98+ / OSX.2+</td>
+            <td class="center">1.8</td>
 
-                    <td>Row Text 6</td>
-                </tr>
-                <tr class="even">
-                    <td>Row Text 1</td>
-                    <td>Row Text 2</td>
-                    <td>Row Text 3</td>
-                    <td align="right">2 100.00</td>
+            <td class="center">A</td>
+        </tr><tr class="gradeA odd">
+            <td class=" sorting_1">Gecko</td>
+            <td>Firefox 2.0</td>
+            <td>Win 98+ / OSX.2+</td>
+            <td class="center">1.8</td>
 
-                    <td align="right">20%</td>
-                    <td>Row Text 6</td>
-                </tr>
-                <tr>
-                    <td>Row Text 1</td>
-                    <td>Row Text 2</td>
-                    <td>Row Text 3</td>
+            <td class="center">A</td>
+        </tr><tr class="gradeA even">
+            <td class=" sorting_1">Gecko</td>
+            <td>Firefox 3.0</td>
+            <td>Win 2k+ / OSX.3+</td>
+            <td class="center">1.9</td>
 
-                    <td align="right">2 100.00</td>
-                    <td align="right">20%</td>
-                    <td>Row Text 6</td>
-                </tr>
-                </tbody>
-            </table>
-        </div><!-- content -->
+            <td class="center">A</td>
+        </tr><tr class="gradeA odd">
+            <td class=" sorting_1">Gecko</td>
+            <td>Camino 1.0</td>
+            <td>OSX.2+</td>
+            <td class="center">1.8</td>
 
-    </div><!-- widgetbox2 -->
+            <td class="center">A</td>
+        </tr><tr class="gradeA even">
+            <td class=" sorting_1">Gecko</td>
+            <td>Camino 1.5</td>
+            <td>OSX.3+</td>
+            <td class="center">1.8</td>
+
+            <td class="center">A</td>
+        </tr><tr class="gradeA odd">
+            <td class=" sorting_1">Gecko</td>
+            <td>Netscape 7.2</td>
+            <td>Win 95+ / Mac OS 8.6-9.2</td>
+            <td class="center">1.7</td>
+
+            <td class="center">A</td>
+        </tr><tr class="gradeA even">
+            <td class=" sorting_1">Gecko</td>
+            <td>Netscape Browser 8</td>
+            <td>Win 98SE+</td>
+            <td class="center">1.7</td>
+
+            <td class="center">A</td>
+        </tr><tr class="gradeA odd">
+            <td class=" sorting_1">Gecko</td>
+            <td>Netscape Navigator 9</td>
+            <td>Win 98+ / OSX.2+</td>
+            <td class="center">1.8</td>
+
+            <td class="center">A</td>
+        </tr><tr class="gradeA even">
+            <td class=" sorting_1">Gecko</td>
+            <td>Mozilla 1.0</td>
+            <td>Win 95+ / OSX.1+</td>
+            <td class="center">1</td>
+
+            <td class="center">A</td>
+        </tr></tbody></table><div class="dataTables_info" id="example_info">Showing 1 to 10 of 51 entries</div><div class="dataTables_paginate paging_full_numbers" id="example_paginate"><span class="first paginate_button paginate_button_disabled" id="example_first">First</span><span class="previous paginate_button paginate_button_disabled" id="example_previous">Previous</span><span><span class="paginate_active">1</span><span class="paginate_button">2</span><span class="paginate_button">3</span><span class="paginate_button">4</span><span class="paginate_button">5</span></span><span class="next paginate_button" id="example_next">Next</span><span class="last paginate_button" id="example_last">Last</span></div></div>
     <br>
 
 </body>
