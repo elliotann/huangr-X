@@ -1,111 +1,167 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-    <title>Home Page</title>
-    <meta http-equiv="content-type" content="text/html;charset=UTF-8">
-    <link rel="stylesheet" type="text/css" href="../adminthemes/default/css/main.css" />
-    <link rel="stylesheet" type="text/css" href="../adminthemes/default/css/menu.css" />
-    <link rel="stylesheet" type="text/css" href="../adminthemes/default/css/tab.css" />
-    <link type="text/css" rel="stylesheet" href="../adminthemes/default/css/workspace.css" />
-    <link type="text/css" rel="stylesheet" href="../adminthemes/default/css/welcome.css" />
+    <meta charset="utf-8">
+    <title>无标题文档</title>
+    <link rel="stylesheet" href="../adminthemes/default/css/style.css"/>
+
+    <script src="../adminthemes/default/js/jquery-1.8.3.js"></script>
+    <script src="../adminthemes/default/js/jquery-ui-1.8.4.custom.min.js" type="text/javascript"></script>
+    <script src="../adminthemes/default/js/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="../adminthemes/default/js/jquery.colorbox-min.js" type="text/javascript"></script>
+    <script src="../adminthemes/default/js/jquery.flot.min.js" type="text/javascript"></script>
+    <script src="../adminthemes/default/js/general.js" type="text/javascript"></script>
+    <script src="../adminthemes/default/js/dashboard.js" type="text/javascript"></script>
 
 
-    <script type="text/javascript" src="../js/common/jquery.min.js"></script>
-    <script type="text/javascript" src="../adminthemes/default/js/tab-control.js"></script>
 </head>
-<body>
 
-    <div  class="navbar">
-        <div class="navbar-inner">
-            <div class="logo"><a href="#">logo</a><span class="version">v${version}</span></div>
-            <div id="short_msg"  >
-                您好${user.username }, <span>您没有新短消息</span>
-                <div class="msglist">
-                    <ul></ul>
-                </div>
-            </div>
+<body  class="bodygrey">
+<div style="display: none;" id="cboxOverlay"></div>
+<div id="colorbox" class="" style="padding-bottom: 20px; padding-right: 0px; display: none;">
+    <div id="cboxWrapper">
+        <div>
+            <div id="cboxTopLeft" style="float: left;"></div>
+            <div id="cboxTopCenter" style="float: left;"></div>
+            <div id="cboxTopRight" style="float: left;"></div>
+        </div>
+        <div style="clear: left;">
+            <div id="cboxMiddleLeft" style="float: left;"></div>
+            <div id="cboxContent" style="float: left;">
+                <div id="cboxLoadedContent" style="width: 0px; height: 0px; overflow: hidden; float: left;"></div>
+                <div id="cboxLoadingOverlay" style="float: left;"></div>
+                <div id="cboxLoadingGraphic" style="float: left;"></div>
+                <div id="cboxTitle" style="float: left;"></div>
+                <div id="cboxCurrent" style="float: left;"></div>
+                <div id="cboxNext" style="float: left;"></div>
+                <div id="cboxPrevious" style="float: left;"></div>
+                <div id="cboxSlideshow" style="float: left;"></div>
+                <div id="cboxClose" style="float: left;"></div>
+            </div><div id="cboxMiddleRight" style="float: left;"></div>
         </div>
     </div>
-    <div id="navigator">
-        <div class="msgContent">您好admin, <span>您没有新短消息</span></div>
-        <div id="leftMenu">
-            <ul class="menu">
-                <li class="item1" id="one"><a href="#one">权限管理 <span>340</span></a>
-                    <ul>
-                        <li class="subitem1"><a href="fsadfas.do">管理员管理 <span>14</span></a></li>
-                        <li class="subitem2"><a href="#">权限管理 <span>6</span></a></li>
-                    </ul>
-                </li>
-                <li class="item2" id="two"><a href="#two">Videos <span>147</span></a>
-                    <ul>
-                        <li class="subitem1"><a href="#">Cute Kittens <span>14</span></a></li>
-                        <li class="subitem2"><a href="#">Strange “Stuff” <span>6</span></a></li>
-                        <li class="subitem3"><a href="#">Automatic Fails <span>2</span></a></li>
-                        <li class="subitem2"><a href="#">Strange “Stuff” <span>6</span></a></li>
-                        <li class="subitem1"><a href="#">Cute Kittens <span>14</span></a></li>
-                        <li class="subitem2"><a href="#">Strange “Stuff” <span>6</span></a></li>
-                    </ul>
-                </li>
-                <li class="item3" id="three"><a href="#three">Galleries <span>340</span></a>
-                    <ul>
-                        <li class="subitem3"><a href="#">Automatic Fails <span>2</span></a></li>
-                    </ul>
-                </li>
-                <li class="item4" id="four"><a href="#four">Podcasts <span>222</span></a>
-                    <ul>
-                        <li class="subitem1"><a href="#">Cute Kittens <span>14</span></a></li>
-                        <li class="subitem2"><a href="#">Strange “Stuff” <span>6</span></a></li>
-                        <li class="subitem3"><a href="#">Automatic Fails <span>2</span></a></li>
-                    </ul>
-                </li>
-                <li class="item5" id="five"><a href="#five">Robots <span>16</span></a>
-                    <ul>
-                        <li class="subitem1"><a href="#">Cute Kittens <span>14</span></a></li>
-                        <li class="subitem2"><a href="#">Strange “Stuff” <span>6</span></a></li>
-                        <li class="subitem3"><a href="#">Automatic Fails <span>2</span></a></li>
-                    </ul>
-                </li>
+    <div style="clear: left;">
+        <div id="cboxBottomLeft" style="float: left;"></div>
+        <div id="cboxBottomCenter" style="float: left;"></div>
+        <div id="cboxBottomRight" style="float: left;"></div>
+    </div>
+</div>
+<div style="position: absolute; width: 9999px; visibility: hidden; display: none;"></div>
+</div>
+<div class="headerspace"></div>
+<div class="header">
+    <form method="post" action="" id="search">
+        <input type="text" name="keyword"> <button class="searchbutton"></button>
+    </form>
+    <div class="topheader">
+        <ul class="notebutton">
+            <li class="note">
+                <a class="messagenotify" href="pages/message.html">
+                    <span class="wrap">
+
+                        <span class="thicon msgicon"></span>
+                        <span class="count">1</span>
+                    </span>
+                </a>
+            </li>
+            <li class="note">
+                <a class="alertnotify" href="pages/info.html">
+                	<span class="wrap">
+
+                    	<span class="thicon infoicon"></span>
+                        <span class="count">5</span>
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </div><!-- topheader -->
+
+
+    <!-- logo -->
+    <a href=""><img alt="Logo" src="images/logo2.png"></a>
+
+    <div class="tabmenu">
+        <ul>
+            <li class="current"><a class="dashboard" href="dashboard.html"><span>系统管理</span></a></li>
+            <li><a class="elements" href="elements.html"><span>系统管理</span></a>
+                <ul class="subnav" style="visibility: hidden; display: block;">
+                    <li><a href=""><span>Sub Menu One</span></a></li>
+
+                    <li><a href=""><span>Sub Menu Two</span></a></li>
+                    <li><a href=""><span>Sub Menu Three</span></a></li>
+                </ul>
+            </li>
+            <li><a class="reports" href="reports.html"><span>报表统计</span></a></li>
+            <li><a class="users" href="users.html"><span>开发者</span></a></li>
+        </ul>
+
+    </div><!-- tabmenu -->
+
+    <div class="accountinfo">
+        <img alt="Avatar" src="images/avatar.png">
+        <div class="info">
+            <h3>Admin</h3>
+            <small>360042212@qq.com</small>
+            <p>
+                <a href="">账号设置</a> <a href="index.html">退出</a>
+
+            </p>
+        </div><!-- info -->
+    </div><!-- accountinfo -->
+</div>
+<div class="sidebar">
+    <div id="accordion">
+        <h3 class="open">权限管理</h3>
+        <div style="display: block;" class="content">
+
+            <ul class="leftmenu">
+                <li class="current"><a class="home" href="dashboard.html">管理员管理</a></li>
+                <li><a class="form" href="forms.html">角色管理</a></li>
+                <li><a class="table" href="tables.html">Table Styling</a></li>
+                <li><a class="gallery" href="gallery.html">Image Gallery</a></li>
+                <li><a class="grid" href="grid.html">Grid Styling</a></li>
+
+                <li><a class="calendar" href="calendar.html">Calendar</a></li>
+                <li><a class="buttons" href="buttons.html">Buttons &amp; Icons</a></li>
+                <li><a class="editor" href="editor.html">WYSIWYG Editor</a></li>
+                <li><a class="file" href="filemanager.html">File Manager</a></li>
+                <li><a class="form" href="invoice.html">Invoice</a></li>
+
+                <li><a class="error" href="404.html">404 Page</a></li>
             </ul>
         </div>
+        <h3 class="open">Custom Text</h3>
+        <div style="display: block;" class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna 		aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </div>
     </div>
 
+</div>
+<div class="maincontent">
+    <div class="breadcrumbs">
+        <a href="dashboard.html">权限管理</a>
+        <span>管理员管理</span>
+    </div><!-- breadcrumbs -->
+    <div class="left">
+        <iframe src="../adminthemes/default/user.jsp" scrolling="no" id="iframepage" onload="iFrameHeight()" name="iframepage"></iframe>
+    </div><!-- left -->
 
-    <div id="rightContent">
-        <!-- 选项卡 -->
-        <div class="tab-control">
-            <!-- 标签 -->
-            <div class="tab simple">
-                <ul>
-                    <li>管理员管理<a href="javascript:;">关闭</a></li>
-                    <li>角色管理<a href="javascript:;">关闭</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="main">
 
-            <iframe scrolling="auto" frameborder="0" src="../adminthemes/default/main.html"></iframe>
 
-        </div>
+    <br clear="all">
 
-    </div>
+</div><!--maincontent-->
 
-    <div id="footer">Copyright © 20014-2017 All Rights Reserved Powered By JEAP</div>
-
-</body>
-<script type="text/javascript" src="../js/common/jquery.min.js"></script>
-<script type="text/javascript" src="../adminthemes/default/js/tabs.js"></script>
+<br>
 <script type="text/javascript">
-    function screenAdapter(){
-        document.getElementById('footer').style.top=document.documentElement.scrollTop+document.documentElement.clientHeight- document.getElementById('footer').offsetHeight+"px";
-        document.getElementById('navigator').style.height=document.documentElement.clientHeight-150+"px";
-        document.getElementById('rightContent').style.height=document.documentElement.clientHeight-150+"px";
-        document.getElementById('rightContent').style.width=window.screen.width-230+"px";
+    function iFrameHeight(){
+        var ifm= document.getElementById("iframepage");
+        var subWeb = document.frames ? document.frames["iframepage"].document:ifm.contentDocument;
+        if(ifm != null && subWeb != null) {
+            ifm.height = subWeb.body.scrollHeight-89;
+        }
     }
-
-    window.onscroll=function(){screenAdapter()};
-    window.onresize=function(){screenAdapter()};
-    window.onload=function(){screenAdapter()};
 </script>
 
+
+</body>
 </html>
