@@ -116,7 +116,7 @@
         <div style="display: block;" class="content">
 
             <ul class="leftmenu">
-                <li class="current"><a class="home" href="dashboard.html">管理员管理</a></li>
+                <li class="current"><a class="home" href="dashboard.html" target="iframepage">管理员管理</a></li>
                 <li><a class="form" href="forms.html">角色管理</a></li>
                 <li><a class="table" href="tables.html">Table Styling</a></li>
                 <li><a class="gallery" href="gallery.html">Image Gallery</a></li>
@@ -157,7 +157,7 @@
         var ifm= document.getElementById("iframepage");
         var subWeb = document.frames ? document.frames["iframepage"].document:ifm.contentDocument;
         if(ifm != null && subWeb != null) {
-            ifm.height = subWeb.body.scrollHeight-89;
+            ifm.height = subWeb.body.scrollHeight;
         }
     }
 </script>

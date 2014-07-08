@@ -24,7 +24,7 @@
 
     <!-- START WIDGET LIST -->
     <ul class="widgetlist">
-
+        <button class="button button_blue">增加</button> &nbsp;
 
     </ul>
     <!-- END WIDGET LIST -->
