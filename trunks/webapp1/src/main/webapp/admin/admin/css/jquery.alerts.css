@@ -1,0 +1,72 @@
+
+#popup_container {
+    background: url("../../images/blacktrans1.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border-radius: 3px;
+    color: #666666;
+    font-family: DroidSansRegular,Arial,sans-serif;
+    font-size: 12px;
+    max-width: 600px;
+    min-width: 300px;
+    padding: 5px !important;
+}
+#popup_title {
+    background: url("../../images/thead.png") repeat-x scroll left top #EEEEEE;
+    border-bottom: 1px solid #CCCCCC;
+    color: #333333;
+    cursor: default;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 21px;
+    margin: 0;
+    padding: 10px;
+}
+#popup_content {
+    background: none repeat scroll 0 0 #FCFCFC;
+    margin: 0;
+    padding: 10px;
+}
+#popup_panel {
+    margin: 1em 0 0 1em;
+    text-align: center;
+}
+#popup_prompt {
+    margin: 0.5em 0;
+}
+#popup_overlay {
+    background: none repeat scroll 0 0 #000000 !important;
+    opacity: 0.5 !important;
+}
+#popup_ok, #popup_cancel {
+    border-radius: 3px;
+    display: inline-block;
+    font-size: 12px;
+    padding: 5px 15px;
+}
+#popup_ok, #popup_cancel {
+    box-shadow: 1px 1px 2px #EEEEEE;
+    cursor: pointer;
+}
+#popup_ok:hover, #popup_ok:active, #popup_cancel:hover, #popup_cancel:active {
+    background-position: 0 -39px;
+}
+#popup_ok {
+    background: url("../../images/buttons/button_blue.png") repeat-x scroll left top #EEEEEE;
+    border: 1px solid #39537F;
+    color: #FFFFFF;
+    text-shadow: 1px 1px #39537F;
+}
+#popup_ok:active {
+    box-shadow: 2px 2px 2px #12274C inset;
+}
+#popup_cancel {
+    background: url("../../images/buttons/button_white.png") repeat-x scroll left top #EEEEEE;
+    border: 1px solid #CCCCCC;
+    color: #333333;
+    text-shadow: 1px 1px #F7F7F7;
+}
+#popup_cancel:active {
+    box-shadow: 2px 2px 2px #CCCCCC inset;
+}
+#popup_prompt {
+    width: 270px !important;
+}

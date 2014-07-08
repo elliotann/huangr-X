@@ -140,18 +140,14 @@ document.write(unescape('%3C%73%63%72%69%70%74%20%74%79%70%65%3D%22%74%65%78%74%
 	
 </div>
 <div class="maincontent">
-	<div class="five_sixth maincontent_inner ">
+		<div class="breadcrumbs">
+			<a href="dashboard.html">权限管理</a>
+			<span>管理员管理</span>
+		</div><!-- breadcrumbs -->
     	<div class="left">
-        
-        	<div class="notification msginfo">
-            	<a class="close"></a>
-            	There are 3 submitted items from users. <a href="">Click to approve</a>
-            </div><!-- notification info -->
-
-        
             <!-- START WIDGET LIST -->
             <ul class="widgetlist">
-                <li><a href=""><img src="images/icons/document.png" alt="Document Icon"><span>Add New Article</span></a></li>
+                <li><a href=""><img src="images/icons/document.png" alt="Document Icon"><span>增加</span></a></li>
                 <li><a href=""><img src="images/icons/createreport.png" alt="Report Icon"><span>Create Report</span></a></li>
                 <li><a href=""><img src="images/icons/mail.png" alt="Mail Icon"><span>Compose Mail</span></a></li>
                 <li><a href=""><img src="images/icons/calendar.png" alt="Events Icon"><span>Manage Events</span></a></li>
@@ -230,99 +226,10 @@ document.write(unescape('%3C%73%63%72%69%70%74%20%74%79%70%65%3D%22%74%65%78%74%
                 </div><!-- content -->
 
             </div><!-- widgetbox2 -->
-            
-            <div class="widgetbox">
-            	<h3><span>Sample Chart</span></h3>
-                <div class="content">
-                	<div id="chartplace" style="height: 300px; padding: 0px; position: relative;"><canvas height="300" width="924" class="base"></canvas><canvas style="position: absolute; left: 0px; top: 0px;" height="300" width="924" class="overlay"></canvas><div class="tickLabels" style="font-size:smaller"><div class="xAxis x1Axis" style="color:#545454"><div class="tickLabel" style="position:absolute;text-align:center;left:-7px;top:279px;width:61px">0</div><div class="tickLabel" style="position:absolute;text-align:center;left:59px;top:279px;width:61px">1</div><div class="tickLabel" style="position:absolute;text-align:center;left:125px;top:279px;width:61px">2</div><div class="tickLabel" style="position:absolute;text-align:center;left:192px;top:279px;width:61px">3</div><div class="tickLabel" style="position:absolute;text-align:center;left:258px;top:279px;width:61px">4</div><div class="tickLabel" style="position:absolute;text-align:center;left:325px;top:279px;width:61px">5</div><div class="tickLabel" style="position:absolute;text-align:center;left:391px;top:279px;width:61px">6</div><div class="tickLabel" style="position:absolute;text-align:center;left:458px;top:279px;width:61px">7</div><div class="tickLabel" style="position:absolute;text-align:center;left:524px;top:279px;width:61px">8</div><div class="tickLabel" style="position:absolute;text-align:center;left:591px;top:279px;width:61px">9</div><div class="tickLabel" style="position:absolute;text-align:center;left:657px;top:279px;width:61px">10</div><div class="tickLabel" style="position:absolute;text-align:center;left:723px;top:279px;width:61px">11</div><div class="tickLabel" style="position:absolute;text-align:center;left:790px;top:279px;width:61px">12</div><div class="tickLabel" style="position:absolute;text-align:center;left:856px;top:279px;width:61px">13</div></div><div class="yAxis y1Axis" style="color:#545454"><div class="tickLabel" style="position:absolute;text-align:right;top:239px;right:908px;width:16px">-1.0</div><div class="tickLabel" style="position:absolute;text-align:right;top:183px;right:908px;width:16px">-0.5</div><div class="tickLabel" style="position:absolute;text-align:right;top:128px;right:908px;width:16px">0.0</div><div class="tickLabel" style="position:absolute;text-align:right;top:72px;right:908px;width:16px">0.5</div><div class="tickLabel" style="position:absolute;text-align:right;top:16px;right:908px;width:16px">1.0</div></div></div><div class="legend"><div style="position: absolute; width: 65px; height: 48px; top: 9px; right: 9px; background-color: rgb(252, 252, 252); opacity: 0.85;"> </div><table style="position:absolute;top:9px;right:9px;;font-size:smaller;color:#545454"><tbody><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid #069;overflow:hidden"></div></div></td><td class="legendLabel">Flash(x)</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid #ff0000;overflow:hidden"></div></div></td><td class="legendLabel">HTML5(x)</td></tr></tbody></table></div></div>
-                </div><!-- content -->
-            </div><!-- widgetbox2 -->
-            
-            <div class="widgetbox">
-
-                <h3><span>Buttons</span></h3>
-                <div class="content">
-                	<button class="button button_white">Button</button> &nbsp;
-                    <button class="button button_blue">Button</button> &nbsp;
-                    <button class="button button_black">Button</button> &nbsp;
-
-                    <button class="button button_red">Button</button> &nbsp;
-                    <button class="button button_yellow">Button</button> &nbsp;
-                    <button class="button button_green">Button</button> &nbsp;
-                    <button class="button button_brown">Button</button> &nbsp;
-                    <button class="button button_lblue">Button</button> <br>
-
-                </div><!-- conten t-->
-            </div><!-- widgetbox -->
-            
-            <div class="widgetbox">
-            	<h3><span>Form with validation</span></h3>
-                <div class="content">
-                	<form novalidate="novalidate" id="form" action="" method="post">
-                
-                    <div class="form_default">
-                            
-                            <p>
-
-                                <label for="name">Name</label>
-                                <input name="name" id="name" class="sf" type="text">
-                            </p>
-                            
-                            <p>
-                                <label for="email">Email</label>
-                                <input name="email" id="email" class="sf" type="text">
-                            </p>
-                            
-                            <p>
-
-                                <label for="location">Location</label>
-                                <textarea name="location" class="mf" rows="" cols=""></textarea>
-                            </p>
-                            
-                            <p>
-                                <label for="gender" class="nopadding">Gender</label>
-                                <input name="gender" value="0" type="radio"> Male &nbsp;&nbsp;&nbsp;&nbsp; <input name="gender" value="1" type="radio"> Female
-                            </p>
-
-                            
-                            <p>
-                                <label for="language" class="nopadding">Language</label>
-                                <input name="language[]" value="0" type="checkbox"> English &nbsp;&nbsp;&nbsp;&nbsp; 
-                                <input name="language[]" value="1" type="checkbox"> Mandarin &nbsp;&nbsp;&nbsp;&nbsp; 
-                                <input name="language[]" value="1" type="checkbox"> German
-                            </p>
-                            
-                            <p>
-
-                                <label for="occupation">Occupation</label>
-                                <select name="occupation" id="occupation">
-                                  <option selected="selected" value="">Choose One</option>
-                                  <option value="0">Web Designer</option>
-                                  <option value="1">Web Developer</option>
-                                  <option value="2">Software Engineer</option>
-
-                                  <option value="3">Application Engineer</option>
-                                  <option value="4">Programmer</option>
-                                  <option value="5">Analyst</option>
-                                        
-                                </select>
-                            </p>
-                            
-                            <p>
-                                <button>Submit</button>
-
-                            </p>
-        
-                    </div><!--form-->
-                	</form>
-                    
-                </div><!-- content -->
-            </div><!-- widgetbox -->
-            
             <br>
                         
         </div><!-- left -->            
-    </div><!-- two_third -->
+
     
     
     <br clear="all">
