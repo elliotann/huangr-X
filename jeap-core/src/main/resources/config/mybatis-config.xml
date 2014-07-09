@@ -5,6 +5,7 @@
 <configuration>
     <typeAliases>
         <typeAlias type="com.easysoft.jeap.bean.UserTable" alias="UserTable"/>
+        <typeAlias type="com.easysoft.jeap.core.member.entity.AdminUser" alias="AdminUser"/>
     </typeAliases>
     <mappers>
 
