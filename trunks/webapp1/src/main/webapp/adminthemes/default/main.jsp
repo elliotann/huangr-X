@@ -116,19 +116,9 @@
         <div style="display: block;" class="content">
 
             <ul class="leftmenu">
-                <li class="current"><a class="home" href="dashboard.html" target="iframepage">管理员管理</a></li>
+                <li class="current"><a class="home" href="adminuser/list.do" target="iframepage">管理员管理</a></li>
                 <li><a class="form" href="forms.html">角色管理</a></li>
-                <li><a class="table" href="tables.html">Table Styling</a></li>
-                <li><a class="gallery" href="gallery.html">Image Gallery</a></li>
-                <li><a class="grid" href="grid.html">Grid Styling</a></li>
 
-                <li><a class="calendar" href="calendar.html">Calendar</a></li>
-                <li><a class="buttons" href="buttons.html">Buttons &amp; Icons</a></li>
-                <li><a class="editor" href="editor.html">WYSIWYG Editor</a></li>
-                <li><a class="file" href="filemanager.html">File Manager</a></li>
-                <li><a class="form" href="invoice.html">Invoice</a></li>
-
-                <li><a class="error" href="404.html">404 Page</a></li>
             </ul>
         </div>
         <h3 class="open"></h3>
@@ -138,6 +128,7 @@
 </div>
 <div class="maincontent">
     <div class="breadcrumbs">
+        <a href="dashboard.html">系统管理</a>
         <a href="dashboard.html">权限管理</a>
         <span>管理员管理</span>
     </div><!-- breadcrumbs -->
