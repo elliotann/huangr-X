@@ -34,4 +34,21 @@ public class PageOption implements Serializable {
     public long getStart() {
         return start;
     }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+    //总页数
+    public long getTotalPage(){
+        if (totalCount % pageSize == 0)
+            return totalCount / pageSize;
+        else
+            return totalCount / pageSize + 1;
+    }
+    /**
+     * 取该页当前页码,页码从1开始.
+     */
+    public long getCurrentPageNo() {
+        return start / pageSize + 1;
+    }
 }
