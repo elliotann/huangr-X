@@ -64,9 +64,9 @@
         <tbody>
         <c:forEach items="${pageOption.data}" var="adminUser">
         <tr class="gradeA odd">
-            <td class=" sorting_1">${adminUser.id}</td>
-            <td>${adminUser.username}</td>
-            <td>${adminUser.password}</td>
+            <td class=" sorting_1" align="center">${adminUser.id}</td>
+            <td align="center">${adminUser.username}</td>
+            <td align="center">${adminUser.password}</td>
             <td class="center">1.7</td>
 
             <td class="center">A</td>
