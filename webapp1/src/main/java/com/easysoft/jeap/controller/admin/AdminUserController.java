@@ -22,7 +22,7 @@ public class AdminUserController {
     @Autowired
     private IAdminUserManager adminUserManager;
     @RequestMapping("/list")
-    public ModelAndView list(){
+    public ModelAndView list(Integer currentPage){
         PageOption pageOption = adminUserManager.queryByPage();
         Map<String,Object> params = new HashMap<String,Object>();
         params.put("pageOption",pageOption);
