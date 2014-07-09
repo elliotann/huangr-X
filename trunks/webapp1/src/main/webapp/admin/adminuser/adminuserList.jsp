@@ -39,7 +39,7 @@
         <option value="50">50</option>
         <option value="100">100</option>
     </select> 条</label></div>
-    <div class="dataTables_filter" id="example_filter"><label>Search: <input type="text"></label></div>
+    <div class="dataTables_filter" id="example_filter"><label>用户名: <input type="text"></label></div>
     <table cellspacing="0" cellpadding="0" border="0" id="example" class="sTable2">
         <thead>
 
@@ -75,16 +75,36 @@
 
         </tbody>
     </table>
-    <div class="dataTables_info" id="example_info">显示 1 至 10 总共 ${pageOption.totalCount} 条</div>
-    <div class="dataTables_paginate paging_full_numbers" id="example_paginate"><span
-            class="first paginate_button paginate_button_disabled" id="example_first">首页</span><span
-            class="previous paginate_button paginate_button_disabled" id="example_previous">上一页</span><span><span
-            class="paginate_active">1</span><span class="paginate_button">2</span><span class="paginate_button">3</span><span
-            class="paginate_button">4</span><span class="paginate_button">5</span></span><span
-            class="next paginate_button" id="example_next">下一页</span><span class="last paginate_button"
-                                                                           id="example_last">尾页</span></div>
+    <div class="dataTables_info" id="example_info">显示 ${pageOption.start} 至 ${pageOption.start+pageOption.pageSize-1}
+        总共 ${pageOption.totalCount} 条
+    </div>
+    <div class="dataTables_paginate paging_full_numbers" id="example_paginate">
+        <span class="first paginate_button paginate_button_disabled" id="example_first" onclick="goPage(2)">首页</span>
+        <span class="previous paginate_button paginate_button_disabled" id="example_previous" onclick="goPage(2)">上一页</span>
+        <span>
+
+            <c:forEach begin="1" end="${pageOption.totalPage}" varStatus="status">
+                <c:if test="${pageOption.currentPageNo==status.index}">
+                    <span class="paginate_active" onclick="goPage(${status.index})">${status.index}</span>
+                </c:if>
+
+                <c:if test="${pageOption.currentPageNo!=status.index}">
+                    <span class="paginate_button" onclick="goPage(${status.index})">${status.index}</span>
+                </c:if>
+
+
+            </c:forEach>
+
+        </span>
+        <span class="next paginate_button" id="example_next" onclick="goPage(1)">下一页</span>
+        <span class="last paginate_button" id="example_last" onclick="goPage(2)">尾页</span>
+    </div>
 </div>
 <br>
-
+<script>
+    function goPage(currentPage){
+        location.href = "list.do?currentPage="+currentPage;
+    }
+</script>
 </body>
 </html>
