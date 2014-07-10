@@ -10,15 +10,10 @@
 <html>
 <head>
     <title></title>
-    <link rel="stylesheet" href="../../adminthemes/default/css/style.css"/>
-    <script src="../../js/common/jquery-1.8.3.js"></script>
-    <script src="../../adminthemes/default/js/jquery-ui-1.8.4.custom.min.js" type="text/javascript"></script>
-    <script src="../../adminthemes/default/js/jquery.validate.min.js" type="text/javascript"></script>
-    <script src="../../adminthemes/default/js/jquery.colorbox-min.js" type="text/javascript"></script>
-    <script src="../../adminthemes/default/js/jquery.flot.min.js" type="text/javascript"></script>
-    <script src="../../adminthemes/default/js/general.js" type="text/javascript"></script>
-    <script src="../../adminthemes/default/js/dashboard.js" type="text/javascript"></script>
 
+    <script src="../../js/common/jquery-1.8.3.js"></script>
+    <script src="../../js/common/jquery.validate.min.js"></script>
+    <link rel="stylesheet" href="../../adminthemes/default/css/style.css"/>
 </head>
 <body style="background-color: #EEEEEE;">
 
@@ -76,7 +71,7 @@
             </p>
 
             <p>
-                <button>Submit</button>
+                <button onclick="submitForm()">Submit</button>
 
             </p>
 
@@ -84,6 +79,32 @@
     </div><!--form-->
 
 
+
 </form>
+<script>
+    $(function(){
+        $("#form").validate({
+            rules: {
+                name: "required",
+                email: {
+                    required: true,
+                    email: true
+                },
+                occupation: "required"
+            },
+            messages: {
+                name: "Please enter your name",
+                email: "Please enter a valid email address",
+                occupation: "Please select your occupation"
+            }
+        });
+    });
+
+    function submitForm(){
+
+        $("#form").submit();
+    }
+</script>
+
 </body>
 </html>
