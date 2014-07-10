@@ -1,6 +1,7 @@
 package com.easysoft.jeap.core.member.dao;
 
 import com.easysoft.jeap.core.member.entity.AdminUser;
+import com.easysoft.jeap.framework.db.PageOption;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -11,5 +12,5 @@ import java.util.List;
 
 public interface IAdminUserDao {
     public void save(AdminUser adminUser);
-    public List<AdminUser> queryForPage();
+    public List<AdminUser> queryForPage(PageOption pageOption);
 }

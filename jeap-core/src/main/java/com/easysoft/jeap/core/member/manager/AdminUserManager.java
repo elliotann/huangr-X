@@ -21,8 +21,10 @@ public class AdminUserManager implements IAdminUserManager {
     }
 
     @Override
-    public PageOption queryByPage() {
-        PageOption pageOption = new PageOption(1,10,20,adminUserDao.queryForPage());
+    public PageOption queryByPage(PageOption pageOption) {
+        if(pageOption==null) return null;
+        List<AdminUser> adminUsers = adminUserDao.queryForPage(pageOption);
+        pageOption.setData(adminUsers);
         return pageOption;
     }
 }
