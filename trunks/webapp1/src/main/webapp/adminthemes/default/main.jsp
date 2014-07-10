@@ -6,7 +6,7 @@
     <title>无标题文档</title>
     <link rel="stylesheet" href="../adminthemes/default/css/style.css"/>
 
-    <script src="../adminthemes/default/js/jquery-1.8.3.js"></script>
+    <script src="../js/common/jquery-1.8.3.js"></script>
     <script src="../adminthemes/default/js/jquery-ui-1.8.4.custom.min.js" type="text/javascript"></script>
     <script src="../adminthemes/default/js/jquery.validate.min.js" type="text/javascript"></script>
     <script src="../adminthemes/default/js/jquery.colorbox-min.js" type="text/javascript"></script>
