@@ -13,20 +13,20 @@
     <link rel="stylesheet" href="../../adminthemes/default/css/style.css"/>
     <script src="../../js/common/jquery-1.8.3.js"></script>
     <script src="../../adminthemes/default/js/jquery-ui-1.8.4.custom.min.js" type="text/javascript"></script>
-    <script src="../default/js/jquery.validate.min.js" type="text/javascript"></script>
-    <script src="../default/js/jquery.colorbox-min.js" type="text/javascript"></script>
-    <script src="../default/js/jquery.flot.min.js" type="text/javascript"></script>
-    <script src="../default/js/general.js" type="text/javascript"></script>
-    <script src="../default/js/dashboard.js" type="text/javascript"></script>
+    <script src="../../adminthemes/default/js/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="../../adminthemes/default/js/jquery.colorbox-min.js" type="text/javascript"></script>
+    <script src="../../adminthemes/default/js/jquery.flot.min.js" type="text/javascript"></script>
+    <script src="../../adminthemes/default/js/general.js" type="text/javascript"></script>
+    <script src="../../adminthemes/default/js/dashboard.js" type="text/javascript"></script>
+
 </head>
 <body style="background-color: #EEEEEE;">
 
 
 <!-- START WIDGET LIST -->
 <ul class="widgetlist">
-    <button class="button button_blue">增加</button>
+    <button class="button button_blue" onclick="addAdminUser()">增加</button>
     &nbsp;
-
 </ul>
 <!-- END WIDGET LIST -->
 
@@ -75,12 +75,25 @@
 
         </tbody>
     </table>
-    <div class="dataTables_info" id="example_info">显示 ${pageOption.start} 至 ${pageOption.start+pageOption.pageSize-1}
+    <div class="dataTables_info" id="example_info">显示 ${pageOption.pageSize*(pageOption.currentPageNo-1)+1} 至
+        <c:if test="${pageOption.totalCount<pageOption.pageSize}">
+            ${pageOption.totalCount}
+        </c:if>
+        <c:if test="${pageOption.totalCount>=pageOption.pageSize}">
+            ${pageOption.pageSize}
+        </c:if>
         总共 ${pageOption.totalCount} 条
     </div>
     <div class="dataTables_paginate paging_full_numbers" id="example_paginate">
-        <span class="first paginate_button paginate_button_disabled" id="example_first" onclick="goPage(2)">首页</span>
-        <span class="previous paginate_button paginate_button_disabled" id="example_previous" onclick="goPage(2)">上一页</span>
+        <c:if test="${pageOption.currentPageNo<=1}">
+            <span class="first paginate_button paginate_button_disabled" id="example_first">首页</span>
+            <span class="previous paginate_button paginate_button_disabled" id="example_previous">上一页</span>
+        </c:if>
+        <c:if test="${pageOption.currentPageNo>1}">
+            <span class="first paginate_button" id="example_first" onclick="goPage(1)">首页</span>
+            <span class="previous paginate_button" id="example_previous" onclick="goPage(${pageOption.currentPageNo-1})">上一页</span>
+        </c:if>
+
         <span>
 
             <c:forEach begin="1" end="${pageOption.totalPage}" varStatus="status">
@@ -96,14 +109,25 @@
             </c:forEach>
 
         </span>
-        <span class="next paginate_button" id="example_next" onclick="goPage(1)">下一页</span>
-        <span class="last paginate_button" id="example_last" onclick="goPage(2)">尾页</span>
+        <c:if test="${pageOption.currentPageNo>=pageOption.totalPage}">
+            <span class="next paginate_button paginate_button_disabled"  id="example_next">下一页</span>
+            <span class="last paginate_button paginate_button_disabled" id="example_last">尾页</span>
+        </c:if>
+        <c:if test="${pageOption.currentPageNo<pageOption.totalPage}">
+            <span class="next paginate_button"  id="example_next" onclick="goPage(${pageOption.currentPageNo+1})">下一页</span>
+            <span class="last paginate_button" id="example_last" onclick="goPage(${pageOption.totalPage})">尾页</span>
+        </c:if>
+
     </div>
 </div>
 <br>
 <script>
     function goPage(currentPage){
-        location.href = "list.do?currentPage="+currentPage;
+        alert(currentPage);
+        location.href = "list.do?currentPageNo="+currentPage;
+    }
+    function addAdminUser(){
+        location.href = "toAdd.do";
     }
 </script>
 </body>

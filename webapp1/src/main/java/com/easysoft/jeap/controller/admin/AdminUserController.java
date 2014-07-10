@@ -22,10 +22,14 @@ public class AdminUserController {
     @Autowired
     private IAdminUserManager adminUserManager;
     @RequestMapping("/list")
-    public ModelAndView list(Integer currentPage){
-        PageOption pageOption = adminUserManager.queryByPage();
+    public ModelAndView list(PageOption pageOption){
+        adminUserManager.queryByPage(pageOption);
         Map<String,Object> params = new HashMap<String,Object>();
         params.put("pageOption",pageOption);
         return new ModelAndView("/admin/adminuser/adminuserList",params);
+    }
+    @RequestMapping("/toAdd")
+    public String toAdd(){
+        return "/admin/adminuser/addAdminuser";
     }
 }
