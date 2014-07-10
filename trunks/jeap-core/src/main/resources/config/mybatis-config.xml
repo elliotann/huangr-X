@@ -7,7 +7,13 @@
         <typeAlias type="com.easysoft.jeap.bean.UserTable" alias="UserTable"/>
         <typeAlias type="com.easysoft.jeap.core.member.entity.AdminUser" alias="AdminUser"/>
     </typeAliases>
+    <plugins>
+        <plugin interceptor="com.easysoft.jeap.framework.db.PageInterceptor">
+            <property name="databaseType" value="mysql" />
+        </plugin>
+    </plugins>
     <mappers>
 
     </mappers>
+
 </configuration>

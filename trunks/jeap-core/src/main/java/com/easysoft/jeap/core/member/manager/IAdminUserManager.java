@@ -10,5 +10,5 @@ import java.util.List;
  */
 public interface IAdminUserManager {
     public void save(AdminUser adminUser);
-    public PageOption queryByPage();
+    public PageOption queryByPage(PageOption pageOption);
 }
