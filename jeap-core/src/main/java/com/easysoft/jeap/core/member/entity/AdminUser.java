@@ -21,6 +21,8 @@ public class AdminUser extends IdEntity {
 
     private UserStatus status;
 
+    private String email;
+
     public String getSn() {
         return sn;
     }
@@ -59,5 +61,13 @@ public class AdminUser extends IdEntity {
 
     public void setStatus(UserStatus status) {
         this.status = status;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
