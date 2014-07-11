@@ -1111,17 +1111,17 @@ input[type="radio"], input[type="checkbox"] {
     text-align: right;
     width: 150px;
 }
-.form_default input[type="text"] {
+.form_default input[type="text"], input[type="password"] {
     background: none repeat scroll 0 0 #FCFCFC;
     border: 1px solid #CCCCCC;
     font-size: 12px;
     outline: medium none;
     padding: 8px 5px;
 }
-.form_default input[type="text"] {
+.form_default input[type="text"], input[type="password"]  {
     box-shadow: 1px 1px 3px #CCCCCC inset;
 }
-.form_default input[type="text"] {
+.form_default input[type="text"], input[type="password"]  {
     border-radius: 3px;
     margin-right: 10px;
 }

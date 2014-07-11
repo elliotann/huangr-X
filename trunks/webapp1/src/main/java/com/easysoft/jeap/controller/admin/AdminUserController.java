@@ -1,5 +1,6 @@
 package com.easysoft.jeap.controller.admin;
 
+import com.easysoft.jeap.core.common.controller.BaseController;
 import com.easysoft.jeap.core.member.entity.AdminUser;
 import com.easysoft.jeap.core.member.manager.IAdminUserManager;
 import com.easysoft.jeap.framework.db.PageOption;
@@ -18,7 +19,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/admin/adminuser")
-public class AdminUserController {
+public class AdminUserController extends BaseController {
     @Autowired
     private IAdminUserManager adminUserManager;
     @RequestMapping("/list")
@@ -31,5 +32,10 @@ public class AdminUserController {
     @RequestMapping("/toAdd")
     public String toAdd(){
         return "/admin/adminuser/addAdminuser";
+    }
+    @RequestMapping("/save")
+    public String save(AdminUser adminUser){
+        adminUserManager.save(adminUser);
+        return "/admin/adminuser/adminuserList";
     }
 }
