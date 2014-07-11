@@ -7,7 +7,7 @@
         <id property="password" column="password"/>
     </resultMap>
     <insert id="save" parameterType="AdminUser">
-        insert t_adminuser (username,password) values ()
+        insert t_adminuser (username,password,status) values (#{username},#{password},#{status})
     </insert>
     <select id="queryForPage" parameterType="AdminUser" resultMap="adminUserMap">
         select * from t_adminuser
