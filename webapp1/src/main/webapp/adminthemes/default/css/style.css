@@ -1448,6 +1448,7 @@ input[type="radio"], input[type="checkbox"] {
 }
 .dataTables_length {
     padding: 10px;
+    min-height: 30px;
 }
 .dataTables_wrapper label {
     display: inline-block;

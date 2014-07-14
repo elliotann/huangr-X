@@ -31,7 +31,15 @@
 <!-- END WIDGET LIST -->
 
 <div class="clear"></div>
-
+<table:table >
+    <table:header>
+        <table:td style="width: 245px;">用户编号</table:td>
+        <table:td style="width: 368px;">用户名</table:td>
+        <table:td style="width: 339px;">密码</table:td>
+        <table:td style="width: 209px;">状态</table:td>
+        <table:td style="width: 150px;">操作</table:td>
+    </table:header>
+</table:table>
 <div class="dataTables_wrapper" id="example_wrapper">
     <div id="example_length" class="dataTables_length"><label>每页显示 <select name="example_length" size="1">
         <option value="10" selected="selected">10</option>
@@ -51,16 +59,6 @@
             <th class="head0 sorting" rowspan="1" colspan="1" style="width: 150px;">操作</th>
         </tr>
         </thead>
-        <colgroup>
-            <col class="con0">
-            <col class="con1">
-            <col class="con0">
-            <col class="con1">
-            <col class="con0">
-        </colgroup>
-
-
-
         <tbody>
         <c:forEach items="${pageOption.data}" var="adminUser">
         <tr class="gradeA odd">
@@ -75,7 +73,8 @@
 
         </tbody>
     </table>
-    <div class="dataTables_info" id="example_info">显示 ${pageOption.pageSize*(pageOption.currentPageNo-1)+1} 至
+    <div class="dataTables_info" id="example_info">
+        显示 ${pageOption.pageSize*(pageOption.currentPageNo-1)+1} 至
         <c:if test="${pageOption.totalCount<pageOption.pageSize}">
             ${pageOption.totalCount}
         </c:if>
