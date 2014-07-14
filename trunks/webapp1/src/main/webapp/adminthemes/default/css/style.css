@@ -1902,3 +1902,39 @@ iframe{
     width: 100%;
 
 }
+
+/*=================表格式内容模式=============*/
+.label-success{
+    background-color: #669533;
+}
+
+.label-success[href] {
+    background-color: #4c6f26;
+}
+
+label {
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 18px;
+}
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.label {
+    font-size: 10.998px;
+    font-weight: bold;
+    line-height: 14px;
+    color: #ffffff;
+    vertical-align: baseline;
+    white-space: nowrap;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    background-color: #999999;
+}
+.label {
+    padding: 1px 4px 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
