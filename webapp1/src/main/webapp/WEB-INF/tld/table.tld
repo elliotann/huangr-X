@@ -14,7 +14,7 @@
     <tag>
         <description>table tag</description>
         <name>table</name>
-        <tag-class>com.easysoft.jeap.tag.web.html.TableTaglib</tag-class>
+        <tag-class>com.easysoft.jeap.tag.web.html.support.TableTaglib</tag-class>
         <body-content>JSP</body-content>
         <attribute>
             <name>isPage</name>
@@ -25,13 +25,13 @@
     <tag>
         <description>table tag</description>
         <name>header</name>
-        <tag-class>com.easysoft.jeap.tag.web.html.TableHeaderTaglib</tag-class>
+        <tag-class>com.easysoft.jeap.tag.web.html.support.TableHeaderTaglib</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
         <description>table tag</description>
         <name>td</name>
-        <tag-class>com.easysoft.jeap.tag.web.html.TableTdTaglib</tag-class>
+        <tag-class>com.easysoft.jeap.tag.web.html.support.TableTdTaglib</tag-class>
         <body-content>JSP</body-content>
         <attribute>
             <name>style</name>
@@ -53,5 +53,12 @@
             <required>false</required>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+    </tag>
+    <tag>
+        <description>table tag</description>
+        <name>body</name>
+        <tag-class>com.easysoft.jeap.tag.web.html.support.TableBodyTaglib</tag-class>
+        <body-content>JSP</body-content>
+
     </tag>
 </taglib>
