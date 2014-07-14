@@ -74,6 +74,12 @@ public class TableTaglib extends HtmlTaglib {
 
         sb.append("总共 "+page.getTotalCount()+" 条");
         sb.append("</div>");
+        sb.append(" <div class=\"dataTables_paginate paging_full_numbers\" id=\"example_paginate\">");
+        if(page.getCurrentPageNo()<=1){
+            sb.append("<span class=\"first paginate_button paginate_button_disabled\" id=\"example_first\">首页</span>");
+            sb.append("<span class=\"previous paginate_button paginate_button_disabled\" id=\"example_previous\">上一页</span>");
+        }
+        sb.append("</div>");
         return sb.toString();
     }
 
