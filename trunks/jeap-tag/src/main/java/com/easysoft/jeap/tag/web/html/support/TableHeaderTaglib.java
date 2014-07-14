@@ -1,4 +1,4 @@
-package com.easysoft.jeap.tag.web.html;
+package com.easysoft.jeap.tag.web.html.support;
 
 import com.easysoft.jeap.tag.web.HtmlTaglib;
 
