@@ -31,7 +31,7 @@
 <!-- END WIDGET LIST -->
 
 <div class="clear"></div>
-<table:table >
+<table:table items="">
     <table:header>
         <table:td style="width: 245px;">用户编号</table:td>
         <table:td style="width: 368px;">用户名</table:td>
@@ -39,6 +39,9 @@
         <table:td style="width: 209px;">状态</table:td>
         <table:td style="width: 150px;">操作</table:td>
     </table:header>
+    <table:body>
+
+    </table:body>
 </table:table>
 <div class="dataTables_wrapper" id="example_wrapper">
     <div id="example_length" class="dataTables_length"><label>每页显示 <select name="example_length" size="1">
