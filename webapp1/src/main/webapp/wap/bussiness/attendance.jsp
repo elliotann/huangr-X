@@ -4,7 +4,7 @@
 <head>
     <title></title>
     <link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
-    <script type="text/javascript" src="../js/common/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/common/jquery-1.8.3.js"></script>
     <script type="text/javascript">
         var $ = jQuery.noConflict();
         $(function() {
@@ -122,7 +122,7 @@
 
             <div class="box_content_center">
                 <div class="form_content">
-                    <form action="#">
+                    <form action="/jeap/member/saveMember.do">
                         <label>微信号</label>
                         <input type="text" class="form_input_box" />
                         <label>人员名称</label>
