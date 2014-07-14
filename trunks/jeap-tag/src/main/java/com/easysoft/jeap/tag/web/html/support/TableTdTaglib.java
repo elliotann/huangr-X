@@ -12,6 +12,7 @@ public class TableTdTaglib extends HtmlTaglib {
     private String clazz = "head1 sorting";//样式
     private String rowspan = "1";
     private String colspan = "1";
+    private String align = "center";
     @Override
     protected String postStart() {
         StringBuilder sb = new StringBuilder();
@@ -21,6 +22,7 @@ public class TableTdTaglib extends HtmlTaglib {
             sb.append("<th");
         }else{//td
             sb.append("<td");
+            sb.append(" align=\""+align+"\"");
         }
         sb.append(" class=\""+clazz+"\"");
         sb.append(" rowspan=\""+rowspan+"\"");
@@ -76,5 +78,13 @@ public class TableTdTaglib extends HtmlTaglib {
 
     public void setColspan(String colspan) {
         this.colspan = colspan;
+    }
+
+    public String getAlign() {
+        return align;
+    }
+
+    public void setAlign(String align) {
+        this.align = align;
     }
 }
