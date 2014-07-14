@@ -7,6 +7,7 @@ import com.easysoft.jeap.tag.web.HtmlTaglib;
  */
 public class TableTaglib extends HtmlTaglib {
     private boolean isPage = true;//是否分页
+    private String items;//数据源
     @Override
     protected String postStart() {
         StringBuilder sb = new StringBuilder("<div class=\"dataTables_wrapper\" id=\"example_wrapper\"><div id=\"example_length\" class=\"dataTables_length\">");
@@ -60,5 +61,13 @@ public class TableTaglib extends HtmlTaglib {
         sb.append("总共 ${pageOption.totalCount} 条");
         sb.append("</div>");
         return sb.toString();
+    }
+
+    public String getItems() {
+        return items;
+    }
+
+    public void setItems(String items) {
+        this.items = items;
     }
 }
