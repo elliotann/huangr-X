@@ -13,12 +13,17 @@
 
     <script src="../../js/common/jquery-1.8.3.js"></script>
     <script src="../../js/common/jquery.validate.min.js"></script>
-    <link rel="stylesheet" href="../../adminthemes/default/css/style.css"/>
+    <script src="../../js/common/jquery.form.js"></script>
+    <link rel="stylesheet" href="/jeap/adminthemes/default/js/ligerui/skins/Aqua/css/ligerui-all.css" />
+    <link rel="stylesheet" href="/jeap/adminthemes/default/js/ligerui/skins/Gray/css/all.css" />
+    <script src="../../adminthemes/default/js/base.js"></script>
+    <script src="../../adminthemes/default/js/ligerDialog.js"></script>
+    <link rel="stylesheet" href="../../adminthemes/default/css/style.css" />
 </head>
 <body style="background-color: #EEEEEE;">
 
 
-<form method="post" action="save.do" id="form" novalidate="novalidate">
+<form method="post" id="form" novalidate="novalidate">
 
     <div class="form_default">
         <fieldset>
@@ -49,7 +54,7 @@
                 <input type="radio" value="INACTIVE" name="status"> 禁用 &nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" value="ACTIVE" name="status" CHECKED> 激活
             </p>
             <p>
-                <button onclick="submitForm()">Submit</button>
+                <button onclick="submitForm()">提交</button>
 
             </p>
 
@@ -63,23 +68,48 @@
     $(function(){
         $("#form").validate({
             rules: {
-                name: "required",
+                username: "required",
                 password: {
                     required: true
                 },
                 email: {
-                    required: true
+                    required: true,
+                    email:true
                 }
             },
             messages: {
-                name: "请输入用户名",
-                password: "请输入密码"
+                username: "请输入用户名",
+                password: "请输入密码",
+                email:"请输入正确格式的邮箱"
+            },
+            submitHandler:function(){
+                $("#form").ajaxSubmit({
+                    url :"save.do",
+                    type : "POST",
+                    dataType:"json",
+                    success : function(result) {
+
+                        if(result.success){
+                            $.ligerDialog.waitting('增加成功');
+                            setTimeout(function ()
+                            {
+                                $.ligerDialog.closeWaitting();
+                                location = "list.do";
+                            }, 1000);
+
+                        }else{
+                            alert(result.msg)
+                        }
+                    },
+                    error : function(e) {
+                        alert("出错啦:(");
+                    }
+                });
             }
         });
     });
 
     function submitForm(){
-
         $("#form").submit();
     }
 </script>

@@ -23,7 +23,7 @@ public class AttendanceController {
     @RequestMapping("/attendance")
     public ModelAndView attendanceOn(){
         Map<String,Object> params = new HashMap<String,Object>();
-        params.put("needReg",false);
+        params.put("needReg",true);
         params.put("attendTime", DateUtil.formatDate2String(new Date(),"yyyy-MM-dd HH:mm:ss"));
         return new ModelAndView("wap/bussiness/attendance",params);
     }

@@ -31,7 +31,7 @@
 <!-- END WIDGET LIST -->
 
 <div class="clear"></div>
-<table:table items="">
+<table:table items="${pageOption}">
     <table:header>
         <table:td style="width: 245px;">用户编号</table:td>
         <table:td style="width: 368px;">用户名</table:td>
@@ -39,8 +39,12 @@
         <table:td style="width: 209px;">状态</table:td>
         <table:td style="width: 150px;">操作</table:td>
     </table:header>
-    <table:body>
-
+    <table:body item="adminUser">
+        <table:td>${adminUser.id}</table:td>
+        <table:td>${adminUser.username}</table:td>
+        <table:td>${adminUser.realName}</table:td>
+        <table:td><span class="label label-success"> ${adminUser.status}</span></table:td>
+        <table:td><a href="toAdd.do?id=${adminUser.id}">修改</a> <a href="#">删除</a></table:td>
     </table:body>
 </table:table>
 <div class="dataTables_wrapper" id="example_wrapper">
@@ -53,11 +57,10 @@
     <div class="dataTables_filter" id="example_filter"><label>用户名: <input type="text"></label></div>
     <table cellspacing="0" cellpadding="0" border="0" id="example" class="sTable2">
         <thead>
-
         <tr>
             <th class="head0 sorting_asc" rowspan="1" colspan="1" style="width: 245px;">用户编号</th>
             <th class="head1 sorting" rowspan="1" colspan="1" style="width: 368px;">用户名</th>
-            <th class="head0 sorting" rowspan="1" colspan="1" style="width: 339px;">密码</th>
+            <th class="head0 sorting" rowspan="1" colspan="1" style="width: 339px;">真实姓名</th>
             <th class="head1 sorting" rowspan="1" colspan="1" style="width: 209px;">状态</th>
             <th class="head0 sorting" rowspan="1" colspan="1" style="width: 150px;">操作</th>
         </tr>
@@ -67,10 +70,12 @@
         <tr class="gradeA odd">
             <td class=" sorting_1" align="center">${adminUser.id}</td>
             <td align="center">${adminUser.username}</td>
-            <td align="center">${adminUser.password}</td>
-            <td class="center">1.7</td>
+            <td align="center">${adminUser.realName}</td>
+            <td align="center">
+                <span class="label label-success"> ${adminUser.status}</span>
+            </td>
 
-            <td class="center">A</td>
+            <td align="center"><a href="toAdd.do?id=${adminUser.id}">修改</a> <a href="#">删除</a></td>
         </tr>
         </c:forEach>
 
@@ -82,7 +87,7 @@
             ${pageOption.totalCount}
         </c:if>
         <c:if test="${pageOption.totalCount>=pageOption.pageSize}">
-            ${pageOption.pageSize}
+            ${pageOption.pageSize+pageOption.pageSize*(pageOption.currentPageNo-1)}
         </c:if>
         总共 ${pageOption.totalCount} 条
     </div>
@@ -125,7 +130,6 @@
 <br>
 <script>
     function goPage(currentPage){
-        alert(currentPage);
         location.href = "list.do?currentPageNo="+currentPage;
     }
     function addAdminUser(){

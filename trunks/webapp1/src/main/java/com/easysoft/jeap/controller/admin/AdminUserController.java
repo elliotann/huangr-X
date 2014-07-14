@@ -1,12 +1,14 @@
 package com.easysoft.jeap.controller.admin;
 
 import com.easysoft.jeap.core.common.controller.BaseController;
+import com.easysoft.jeap.core.common.vo.AjaxJson;
 import com.easysoft.jeap.core.member.entity.AdminUser;
 import com.easysoft.jeap.core.member.manager.IAdminUserManager;
 import com.easysoft.jeap.framework.db.PageOption;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
@@ -30,12 +32,16 @@ public class AdminUserController extends BaseController {
         return new ModelAndView("/admin/adminuser/adminuserList",params);
     }
     @RequestMapping("/toAdd")
-    public String toAdd(){
+    public String toAdd(Integer id){
+        if(id!=null&&id!=0){
+
+        }
         return "/admin/adminuser/addAdminuser";
     }
     @RequestMapping("/save")
-    public String save(AdminUser adminUser){
+    @ResponseBody
+    public AjaxJson save(AdminUser adminUser){
         adminUserManager.save(adminUser);
-        return "/admin/adminuser/adminuserList";
+        return new AjaxJson();
     }
 }
