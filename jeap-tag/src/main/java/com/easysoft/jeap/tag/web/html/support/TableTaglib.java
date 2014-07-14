@@ -1,5 +1,6 @@
 package com.easysoft.jeap.tag.web.html.support;
 
+import com.easysoft.jeap.framework.db.PageOption;
 import com.easysoft.jeap.tag.web.HtmlTaglib;
 
 /**
@@ -50,15 +51,28 @@ public class TableTaglib extends HtmlTaglib {
     }
 
     private String buildPageHtml(){
+        Object obj = this.pageContext.getAttribute(items);
+        PageOption page = null;
+        if(obj==null){
+            obj = this.pageContext.getRequest().getAttribute(items);
+            if(obj == null){
+                return "";
+            }
+
+            if(obj instanceof PageOption){
+                page = (PageOption)obj;
+            }
+        }
         StringBuilder sb = new StringBuilder("<div class=\"dataTables_info\" id=\"example_info\">");
-        sb.append("显示 ${pageOption.pageSize*(pageOption.currentPageNo-1)+1} 至");
-        sb.append("<c:if test=\"${pageOption.totalCount<pageOption.pageSize}\">");
-        sb.append("${pageOption.totalCount}");
-        sb.append("</c:if>");
-        sb.append("<c:if test=\"${pageOption.totalCount>=pageOption.pageSize}\">");
-        sb.append("${pageOption.pageSize}");
-        sb.append("</c:if>");
-        sb.append("总共 ${pageOption.totalCount} 条");
+        sb.append("显示 "+ (page.getPageSize()*(page.getCurrentPageNo()-1)+1)+" 至");
+        if(page.getTotalCount()<page.getPageSize()){
+            sb.append(page.getTotalCount());
+        }else if(page.getTotalCount()>=page.getPageSize()){
+            sb.append(page.getPageSize());
+        }
+
+
+        sb.append("总共 "+page.getTotalCount()+" 条");
         sb.append("</div>");
         return sb.toString();
     }
