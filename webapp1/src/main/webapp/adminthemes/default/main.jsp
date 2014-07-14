@@ -133,7 +133,7 @@
         <span>管理员管理</span>
     </div><!-- breadcrumbs -->
     <div class="left">
-        <iframe src="../adminthemes/default/user.jsp" scrolling="no" id="iframepage" onload="iFrameHeight()" name="iframepage"></iframe>
+        <iframe src="../adminthemes/default/welcome.jsp" scrolling="no" id="iframepage" onload="iFrameHeight()" name="iframepage"></iframe>
     </div><!-- left -->
 
 

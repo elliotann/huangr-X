@@ -64,6 +64,10 @@
         <name>body</name>
         <tag-class>com.easysoft.jeap.tag.web.html.support.TableBodyTaglib</tag-class>
         <body-content>JSP</body-content>
-
+        <attribute>
+            <name>item</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
     </tag>
 </taglib>
