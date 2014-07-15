@@ -1,7 +1,7 @@
 package com.easysoft.jeap.controller.admin;
 
 import com.easysoft.jeap.core.common.controller.BaseController;
-import com.easysoft.jeap.core.common.vo.AjaxJson;
+
 import com.easysoft.jeap.core.member.entity.AdminUser;
 import com.easysoft.jeap.core.member.manager.IAdminUserManager;
 import com.easysoft.jeap.framework.db.PageOption;
@@ -38,10 +38,10 @@ public class AdminUserController extends BaseController {
         }
         return "/admin/adminuser/addAdminuser";
     }
-    @RequestMapping("/save")
+    /*@RequestMapping("/save")
     @ResponseBody
     public AjaxJson save(AdminUser adminUser){
         adminUserManager.save(adminUser);
         return new AjaxJson();
-    }
+    }*/
 }
