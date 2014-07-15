@@ -1,8 +1,5 @@
 package com.easysoft.jeap.controller.member;
 
-import com.easysoft.jeap.core.member.dao.IMemberDao;
-import com.easysoft.jeap.core.member.entity.Member;
-import com.easysoft.jeap.core.member.manager.IMemberManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,11 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/member")
 public class MemberController {
-    @Autowired
+   /* @Autowired
     private IMemberManager memberManager;
     @RequestMapping("saveMember")
     public String saveMember(Member member){
         memberManager.save(member);
         return "";
-    }
+    }*/
 }
