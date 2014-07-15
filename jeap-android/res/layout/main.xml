@@ -3,11 +3,21 @@
               android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
+              android:layout_gravity="center_horizontal"
         >
-    <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Hello World, LoginActivity"
+    <GridView
+           android:id="@+id/mainGrid"
+           android:layout_width="fill_parent"
+           android:layout_height="match_parent"
+           android:numColumns="4"
+           android:gravity="center"
+           android:horizontalSpacing="1pt"
+           android:verticalSpacing="1pt"
             />
+    <ImageView
+            android:id="@+id/mainMenuImage"
+            android:layout_width="240dp"
+            android:layout_height="240dp"
+            android:layout_gravity="center_horizontal"/>
 </LinearLayout>
 
