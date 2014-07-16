@@ -13,4 +13,5 @@ import java.util.List;
 public interface IAdminUserDao {
     public void save(AdminUser adminUser);
     public List<AdminUser> queryForPage(PageOption pageOption);
+    public AdminUser queryById(Integer id);
 }
