@@ -32,16 +32,23 @@ public class AdminUserController extends BaseController {
         return new ModelAndView("/admin/adminuser/adminuserList",params);
     }
     @RequestMapping("/toAdd")
-    public String toAdd(Integer id){
+    public ModelAndView toAdd(Integer id){
+        Map<String,Object> params = new HashMap<String,Object>();
         if(id!=null&&id!=0){
-
+            AdminUser adminUser = adminUserManager.queryAdminUserById(id);
+            params.put("adminUser",adminUser);
         }
-        return "/admin/adminuser/addAdminuser";
+        return new ModelAndView("/admin/adminuser/addAdminuser",params);
     }
     /*@RequestMapping("/save")
     @ResponseBody
     public AjaxJson save(AdminUser adminUser){
-        adminUserManager.save(adminUser);
+        if(adminUser!=null&&adminUser.getId()!=0){
+
+        }else{
+            adminUserManager.save(adminUser);
+        }
+
         return new AjaxJson();
     }*/
 }

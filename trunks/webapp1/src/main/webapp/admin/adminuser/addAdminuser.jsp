@@ -24,7 +24,7 @@
 
 
 <form method="post" id="form" novalidate="novalidate">
-
+    <input type="hidden" name="id" value="${adminUser.id}">
     <div class="form_default">
         <fieldset>
             <legend>增加管理员</legend>
@@ -32,21 +32,21 @@
             <p>
                 <label for="username">用户名</label>
 
-                <input type="text" class="sf" id="username" name="username">
+                <input type="text" class="sf" id="username" name="username" value="${adminUser.username}">
             </p>
             <p>
                 <label for="password">密码</label>
 
-                <input type="password" class="sf" id="password" name="password">
+                <input type="password" class="sf" id="password" name="password" value="${adminUser.password}">
             </p>
             <p>
                 <label for="realName">真实姓名</label>
-                <input type="text" class="sf" id="realName" name="realName">
+                <input type="text" class="sf" id="realName" name="realName" value="${adminUser.realName}">
             </p>
 
             <p>
                 <label for="email">邮箱</label>
-                <input type="text" class="sf" id="email" name="email">
+                <input type="text" class="sf" id="email" name="email"  value="${adminUser.email}">
             </p>
 
             <p>
