@@ -31,11 +31,11 @@
 <!-- END WIDGET LIST -->
 
 <div class="clear"></div>
-<table:table items="${pageOption}">
+<table:table items="pageOption">
     <table:header>
         <table:td style="width: 245px;">用户编号</table:td>
         <table:td style="width: 368px;">用户名</table:td>
-        <table:td style="width: 339px;">密码</table:td>
+        <table:td style="width: 339px;">真实姓名</table:td>
         <table:td style="width: 209px;">状态</table:td>
         <table:td style="width: 150px;">操作</table:td>
     </table:header>
@@ -50,9 +50,6 @@
 
 <br>
 <script>
-    function goPage(currentPage){
-        location.href = "list.do?currentPageNo="+currentPage;
-    }
     function addAdminUser(){
         location.href = "toAdd.do";
     }
