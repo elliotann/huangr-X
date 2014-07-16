@@ -78,8 +78,35 @@ public class TableTaglib extends HtmlTaglib {
         if(page.getCurrentPageNo()<=1){
             sb.append("<span class=\"first paginate_button paginate_button_disabled\" id=\"example_first\">首页</span>");
             sb.append("<span class=\"previous paginate_button paginate_button_disabled\" id=\"example_previous\">上一页</span>");
+        }else{
+            sb.append("<span class=\"first paginate_button\" id=\"example_first\" onclick=\"goPage(1)\">首页</span>");
+            sb.append("<span class=\"previous paginate_button\" id=\"example_previous\" onclick=\"goPage(${pageOption.currentPageNo-1})\">上一页</span>");
+        }
+        sb.append("<span>");
+        for(int i=0;i<page.getTotalPage();i++){
+            if(page.getCurrentPageNo()==i){
+                sb.append(" <span class=\"paginate_active\" onclick=\"goPage("+(i+1)+")\">"+(i+1)+"</span>");
+            }else{
+                sb.append("<span class=\"paginate_button\" onclick=\"goPage("+(i+1)+")\">"+(i+1)+"</span>");
+            }
+        }
+        sb.append("</span>");
+        if(page.getCurrentPageNo()>=page.getTotalPage()){
+            sb.append("<span class=\"next paginate_button paginate_button_disabled\"  id=\"example_next\">下一页</span>");
+            sb.append("<span class=\"last paginate_button paginate_button_disabled\" id=\"example_last\">尾页</span>");
+        }else{
+
+
+            sb.append("<span class=\"next paginate_button\"  id=\"example_next\" onclick=\"goPage("+(page.getCurrentPageNo()+1)+")\">下一页</span>");
+            sb.append("<span class=\"last paginate_button\" id=\"example_last\" onclick=\"goPage("+page.getTotalPage()+"})\">尾页</span>");
         }
         sb.append("</div>");
+
+        sb.append("<script>");
+        sb.append("function goPage(currentPage){");
+        sb.append("location.href = \"list.do?currentPageNo=\"+currentPage;");
+        sb.append("}");
+        sb.append("</script>");
         return sb.toString();
     }
 
