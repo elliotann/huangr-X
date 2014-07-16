@@ -12,7 +12,7 @@ public class PageOption implements Serializable {
     private Object data; // 当前页中存放的记录,类型一般为List
     private long totalCount;//总记录数
     private long start; // 当前页第一条数据在List中的位置,从0开始
-    private long currentPageNo;
+    private long currentPageNo = 1;
     public PageOption(){
 
     }
@@ -50,7 +50,7 @@ public class PageOption implements Serializable {
      * 取该页当前页码,页码从1开始.
      */
     public long getCurrentPageNo() {
-        return start / pageSize + 1;
+        return this.currentPageNo;
     }
 
     public void setTotalCount(long totalCount) {
