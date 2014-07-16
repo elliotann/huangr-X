@@ -32,6 +32,11 @@ public class AdminUserManager implements IAdminUserManager {
 
     @Override
     public AdminUser queryAdminUserById(Integer id) {
-        return null;
+        return adminUserDao.queryById(id);
+    }
+
+    @Override
+    public void update(AdminUser adminUser) {
+        
     }
 }

@@ -13,6 +13,6 @@
         select * from t_adminuser
     </select>
     <select id="queryById" resultMap="adminUserMap">
-        select * from t_adminuser where
+        select * from t_adminuser where user_id=#{id}
     </select>
 </mapper>
