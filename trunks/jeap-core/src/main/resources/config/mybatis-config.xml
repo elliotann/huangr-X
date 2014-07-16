@@ -6,6 +6,7 @@
     <typeAliases>
         <typeAlias type="com.easysoft.jeap.bean.UserTable" alias="UserTable"/>
         <typeAlias type="com.easysoft.jeap.core.member.entity.AdminUser" alias="AdminUser"/>
+        <typeAlias type="com.easysoft.jeap.core.member.entity.Member" alias="Member"/>
     </typeAliases>
     <plugins>
         <plugin interceptor="com.easysoft.jeap.framework.db.PageInterceptor">

@@ -12,4 +12,7 @@
     <select id="queryForPage" parameterType="AdminUser" resultMap="adminUserMap">
         select * from t_adminuser
     </select>
+    <select id="queryById" resultMap="adminUserMap">
+        select * from t_adminuser where
+    </select>
 </mapper>
