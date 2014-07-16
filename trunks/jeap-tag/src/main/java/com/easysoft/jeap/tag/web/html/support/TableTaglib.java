@@ -80,11 +80,11 @@ public class TableTaglib extends HtmlTaglib {
             sb.append("<span class=\"previous paginate_button paginate_button_disabled\" id=\"example_previous\">上一页</span>");
         }else{
             sb.append("<span class=\"first paginate_button\" id=\"example_first\" onclick=\"goPage(1)\">首页</span>");
-            sb.append("<span class=\"previous paginate_button\" id=\"example_previous\" onclick=\"goPage(${pageOption.currentPageNo-1})\">上一页</span>");
+            sb.append("<span class=\"previous paginate_button\" id=\"example_previous\" onclick=\"goPage("+(page.getCurrentPageNo()-1)+")\">上一页</span>");
         }
         sb.append("<span>");
         for(int i=0;i<page.getTotalPage();i++){
-            if(page.getCurrentPageNo()==i){
+            if(page.getCurrentPageNo()==(i+1)){
                 sb.append(" <span class=\"paginate_active\" onclick=\"goPage("+(i+1)+")\">"+(i+1)+"</span>");
             }else{
                 sb.append("<span class=\"paginate_button\" onclick=\"goPage("+(i+1)+")\">"+(i+1)+"</span>");
