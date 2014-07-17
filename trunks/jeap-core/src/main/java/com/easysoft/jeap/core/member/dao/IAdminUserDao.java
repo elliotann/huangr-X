@@ -15,4 +15,6 @@ public interface IAdminUserDao {
     public void update(AdminUser adminUser);
     public List<AdminUser> queryForPage(PageOption pageOption);
     public AdminUser queryById(Integer id);
+    public AdminUser queryByUserName(Integer id, String username);
+    public AdminUser queryByEmail(Integer id, String email);
 }
