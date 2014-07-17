@@ -7,7 +7,7 @@
         <id property="password" column="password"/>
     </resultMap>
     <insert id="save" parameterType="AdminUser">
-        insert t_adminuser (username,password,status) values (#{username},#{password},#{status})
+        insert t_adminuser (username,password,status,realname) values (#{username},#{password},#{status},#{realName})
     </insert>
     <select id="queryForPage" parameterType="AdminUser" resultMap="adminUserMap">
         select * from t_adminuser
@@ -15,4 +15,12 @@
     <select id="queryById" resultMap="adminUserMap">
         select * from t_adminuser where user_id=#{id}
     </select>
+    <update id="update" parameterType="AdminUser">
+        UPDATE t_adminuser
+        SET username = #{username},
+        realname = #{realName},
+        status = #{status},
+        email = #{email}
+        WHERE user_id = #{id}
+    </update>
 </mapper>
