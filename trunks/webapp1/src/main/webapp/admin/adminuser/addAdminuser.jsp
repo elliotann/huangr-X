@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Administrator
-  Date: 2014/7/8
-  Time: 21:59
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="/admin/commons/taglibs.jsp"%>
 <html>
@@ -51,7 +44,7 @@
 
             <p>
                 <label class="nopadding" for="status">状态</label>
-                <input type="radio" value="INACTIVE" name="status"> 禁用 &nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" value="ACTIVE" name="status" CHECKED> 激活
+                <input type="radio" value="INACTIVE" name="status" <c:if test="${adminUser.status eq 'INACTIVE'}">CHECKED</c:if>> 禁用 &nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" value="ACTIVE" name="status" <c:if test="${adminUser.status ne 'INACTIVE'}">CHECKED</c:if>> 激活
             </p>
             <p>
                 <button onclick="submitForm()">提交</button>
@@ -68,7 +61,21 @@
     $(function(){
         $("#form").validate({
             rules: {
-                username: "required",
+                username: {
+                    required:true,
+                    minlength:3,
+                    maxlength:18,
+                    remote:{
+                        type:"post",
+                        url:"validateUsername.do",
+                        data:{
+                            username:function(){return $("#username").val()}
+                        },
+                        dataFilter:function(data, type) {
+                            alert(data);
+                        }
+                    }
+                },
                 password: {
                     required: true
                 },
@@ -78,8 +85,8 @@
                 }
             },
             messages: {
-                username: "请输入用户名",
-                password: "请输入密码",
+                username: "请输入3~18位用户名",
+                password: "请输入1~18位密码",
                 email:"请输入正确格式的邮箱"
             },
             submitHandler:function(){

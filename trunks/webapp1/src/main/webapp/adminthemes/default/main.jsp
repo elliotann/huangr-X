@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>无标题文档</title>
+    <title>jeap企业级开发平台</title>
     <link rel="stylesheet" href="../adminthemes/default/css/style.css"/>
 
     <script src="../js/common/jquery-1.8.3.js"></script>
