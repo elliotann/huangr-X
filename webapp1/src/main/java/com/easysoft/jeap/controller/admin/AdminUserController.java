@@ -52,4 +52,14 @@ public class AdminUserController extends BaseController {
 
         return new AjaxJson();
     }
+    @RequestMapping("/validateUsername")
+    @ResponseBody
+    public AjaxJson validateUsername(Integer id,String username){
+        return new AjaxJson();
+    }
+    @RequestMapping("/validateEmail")
+    @ResponseBody
+    public AjaxJson validateEmail(Integer id,String email){
+        return new AjaxJson();
+    }
 }
