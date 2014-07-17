@@ -13,4 +13,8 @@ public interface IAdminUserManager {
     public void update(AdminUser adminUser);
     public PageOption queryByPage(PageOption pageOption);
     public AdminUser queryAdminUserById(Integer id);
+    public AdminUser queryByUserName(Integer id,String username);
+    public AdminUser queryByEmail(Integer id,String email);
+
+    public boolean isExistUsernameOrEmail(Integer id,String username,String email);
 }

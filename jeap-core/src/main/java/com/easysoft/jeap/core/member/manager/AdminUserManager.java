@@ -4,6 +4,7 @@ import com.easysoft.jeap.core.member.dao.IAdminUserDao;
 import com.easysoft.jeap.core.member.entity.AdminUser;
 import com.easysoft.jeap.framework.db.PageOption;
 import com.easysoft.jeap.framework.utils.MD5Util;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,5 +39,26 @@ public class AdminUserManager implements IAdminUserManager {
     @Override
     public void update(AdminUser adminUser) {
         adminUserDao.update(adminUser);
+    }
+
+    @Override
+    public AdminUser queryByUserName(Integer id, String username) {
+        return null;
+    }
+
+    @Override
+    public AdminUser queryByEmail(Integer id, String email) {
+        return null;
+    }
+
+    @Override
+    public boolean isExistUsernameOrEmail(Integer id, String username, String email) {
+        AdminUser adminUser = null;
+        if(StringUtils.isNotEmpty(username)){
+            adminUser = this.queryByUserName(id,username);
+        }else if(StringUtils.isNotEmpty(email)){
+            adminUser = this.queryByEmail(id,email);
+        }
+        return adminUser!=null;
     }
 }
