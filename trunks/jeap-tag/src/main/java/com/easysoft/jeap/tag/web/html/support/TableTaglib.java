@@ -98,7 +98,7 @@ public class TableTaglib extends HtmlTaglib {
 
 
             sb.append("<span class=\"next paginate_button\"  id=\"example_next\" onclick=\"goPage("+(page.getCurrentPageNo()+1)+")\">下一页</span>");
-            sb.append("<span class=\"last paginate_button\" id=\"example_last\" onclick=\"goPage("+page.getTotalPage()+"})\">尾页</span>");
+            sb.append("<span class=\"last paginate_button\" id=\"example_last\" onclick=\"goPage("+page.getTotalPage()+")\">尾页</span>");
         }
         sb.append("</div>");
 
