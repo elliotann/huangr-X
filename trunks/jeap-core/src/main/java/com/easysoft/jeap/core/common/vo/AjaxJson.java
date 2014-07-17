@@ -1,7 +1,7 @@
 package com.easysoft.jeap.core.common.vo;
 
 /**
- * Created by Administrator on 2014/7/13.
+ * Created by huangxa on 2014/7/16.
  */
 public class AjaxJson {
     private boolean success = true;

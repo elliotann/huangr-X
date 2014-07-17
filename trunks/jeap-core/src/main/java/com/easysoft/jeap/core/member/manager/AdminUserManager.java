@@ -37,6 +37,6 @@ public class AdminUserManager implements IAdminUserManager {
 
     @Override
     public void update(AdminUser adminUser) {
-        
+        adminUserDao.update(adminUser);
     }
 }
