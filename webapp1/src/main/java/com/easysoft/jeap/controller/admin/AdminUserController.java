@@ -1,5 +1,7 @@
 package com.easysoft.jeap.controller.admin;
 
+import com.alibaba.druid.support.logging.Log;
+import com.alibaba.druid.support.logging.LogFactory;
 import com.easysoft.jeap.core.common.controller.BaseController;
 
 import com.easysoft.jeap.core.common.vo.AjaxJson;
@@ -23,6 +25,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/admin/adminuser")
 public class AdminUserController extends BaseController {
+    private static final Log logger = LogFactory.getLog(AdminUserController.class);
     @Autowired
     private IAdminUserManager adminUserManager;
     @RequestMapping("/list")
@@ -54,12 +57,38 @@ public class AdminUserController extends BaseController {
     }
     @RequestMapping("/validateUsername")
     @ResponseBody
-    public AjaxJson validateUsername(Integer id,String username){
-        return new AjaxJson();
+    public boolean validateUsername(Integer id,String username){
+        boolean exist = adminUserManager.isExistUsernameOrEmail(id,username,null);
+
+        if(exist){
+            return false;
+        }else{
+            return true;
+        }
+
+
     }
     @RequestMapping("/validateEmail")
     @ResponseBody
-    public AjaxJson validateEmail(Integer id,String email){
-        return new AjaxJson();
+    public boolean validateEmail(Integer id,String email){
+        boolean exist = adminUserManager.isExistUsernameOrEmail(id,null,email);
+
+        if(exist){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    @RequestMapping("/delAdminUser")
+    @ResponseBody
+    public AjaxJson delAdminUser(Integer id){
+        AjaxJson ajaxJson = new AjaxJson();
+        try{
+            adminUserManager.deleteById(id);
+        }catch (Exception e){
+            logger.error("删除失败!",e);
+            ajaxJson.setSuccess(false);
+        }
+        return ajaxJson;
     }
 }
