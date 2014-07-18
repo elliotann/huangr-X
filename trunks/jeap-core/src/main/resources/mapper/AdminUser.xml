@@ -23,4 +23,19 @@
         email = #{email}
         WHERE user_id = #{id}
     </update>
+    <select id="queryByUserNameOrEmail" resultMap="adminUserMap" parameterType="hashMap">
+       select * from t_adminuser where 1=1
+       <if test="id!=0">
+          and user_id!=#{id}
+       </if>
+        <if test="username!=null">
+            and username=#{username}
+        </if>
+        <if test="email!=null">
+            and email=#{email}
+        </if>
+    </select>
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from t_adminuser where user_id=#{id}
+    </delete>
 </mapper>

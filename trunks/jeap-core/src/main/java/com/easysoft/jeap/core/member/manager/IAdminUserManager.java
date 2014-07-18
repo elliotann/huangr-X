@@ -17,4 +17,6 @@ public interface IAdminUserManager {
     public AdminUser queryByEmail(Integer id,String email);
 
     public boolean isExistUsernameOrEmail(Integer id,String username,String email);
+
+    public void deleteById(Integer id);
 }
