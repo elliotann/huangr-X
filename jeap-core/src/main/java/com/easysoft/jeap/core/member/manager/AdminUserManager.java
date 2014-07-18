@@ -8,7 +8,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by huangxa on 2014/7/9.
@@ -43,12 +45,18 @@ public class AdminUserManager implements IAdminUserManager {
 
     @Override
     public AdminUser queryByUserName(Integer id, String username) {
-        return null;
+        Map<String,Object> params = new HashMap<String,Object>();
+        params.put("id",id);
+        params.put("username",username);
+        return adminUserDao.queryByUserNameOrEmail(params);
     }
 
     @Override
     public AdminUser queryByEmail(Integer id, String email) {
-        return null;
+        Map<String,Object> params = new HashMap<String,Object>();
+        params.put("id",id);
+        params.put("email",email);
+        return adminUserDao.queryByUserNameOrEmail(params);
     }
 
     @Override
@@ -60,5 +68,10 @@ public class AdminUserManager implements IAdminUserManager {
             adminUser = this.queryByEmail(id,email);
         }
         return adminUser!=null;
+    }
+
+    @Override
+    public void deleteById(Integer id) {
+        adminUserDao.deleteById(id);
     }
 }
