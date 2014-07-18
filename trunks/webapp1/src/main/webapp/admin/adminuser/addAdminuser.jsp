@@ -17,7 +17,7 @@
 
 
 <form method="post" id="form" novalidate="novalidate">
-    <input type="hidden" name="id" value="${adminUser.id}">
+    <input type="hidden" name="id" id="userId" value="${adminUser.id}">
     <div class="form_default">
         <fieldset>
             <legend>增加管理员</legend>
@@ -68,11 +68,10 @@
                     remote:{
                         type:"post",
                         url:"validateUsername.do",
+                        dataType:'json',
                         data:{
-                            username:function(){return $("#username").val()}
-                        },
-                        dataFilter:function(data, type) {
-                            alert(data);
+                            username:function(){return $("#username").val();},
+                            id:function(){return $("#userId").val();}
                         }
                     }
                 },
@@ -81,11 +80,25 @@
                 },
                 email: {
                     required: true,
-                    email:true
+                    email:true,
+                    remote:{
+                        type:"post",
+                        url:"validateEmail.do",
+                        dataType:'json',
+                        data:{
+                            username:function(){return $("#email").val();},
+                            id:function(){return $("#userId").val();}
+                        }
+                    }
                 }
             },
             messages: {
-                username: "请输入3~18位用户名",
+                username: {
+                    required:"用户名不能为空!",
+                    remote:"此用户名已经存在!",
+                    minlength:"用户名最少3位!",
+                    maxlength:"用户名最长18位!"
+                },
                 password: "请输入1~18位密码",
                 email:"请输入正确格式的邮箱"
             },

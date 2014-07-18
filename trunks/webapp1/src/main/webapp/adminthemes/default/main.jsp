@@ -118,7 +118,7 @@
             <ul class="leftmenu">
                 <li class="current"><a class="home" href="adminuser/list.do" target="iframepage">管理员管理</a></li>
                 <li><a class="form" href="forms.html">角色管理</a></li>
-
+                <li><a class="form" href="forms.html">菜单管理</a></li>
             </ul>
         </div>
         <h3 class="open"></h3>
