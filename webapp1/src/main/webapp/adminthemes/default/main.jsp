@@ -15,7 +15,7 @@
     <script src="../adminthemes/default/js/general.js" type="text/javascript"></script>
     <script src="../adminthemes/default/js/dashboard.js" type="text/javascript"></script>
 
-
+    <script src="../adminthemes/default/js/index.js" type="text/javascript"></script>
 </head>
 
 <body  class="bodygrey">
