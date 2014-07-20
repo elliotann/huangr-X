@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html>
@@ -83,17 +84,11 @@
 
     <div class="tabmenu">
         <ul>
-            <li class="current"><a class="dashboard" href="dashboard.html"><span>系统管理</span></a></li>
-            <li><a class="elements" href="elements.html"><span>系统管理</span></a>
-                <ul class="subnav" style="visibility: hidden; display: block;">
-                    <li><a href=""><span>Sub Menu One</span></a></li>
+            <c:forEach items="${rootMenus}" var="rootMenu">
+                <li class="current"><a class="dashboard" href="#"><span>系统管理</span></a></li>
+                <li><a class="users" href="users.html"><span>开发者</span></a></li>
+            </c:forEach>
 
-                    <li><a href=""><span>Sub Menu Two</span></a></li>
-                    <li><a href=""><span>Sub Menu Three</span></a></li>
-                </ul>
-            </li>
-            <li><a class="reports" href="reports.html"><span>报表统计</span></a></li>
-            <li><a class="users" href="users.html"><span>开发者</span></a></li>
         </ul>
 
     </div><!-- tabmenu -->
@@ -118,7 +113,7 @@
             <ul class="leftmenu">
                 <li class="current"><a class="home" href="adminuser/list.do" target="iframepage">管理员管理</a></li>
                 <li><a class="form" href="forms.html">角色管理</a></li>
-                <li><a class="form" href="forms.html">菜单管理</a></li>
+                <li><a class="form" href="menu/list.do" target="iframepage">菜单管理</a></li>
             </ul>
         </div>
         <h3 class="open"></h3>
