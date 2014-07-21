@@ -13,4 +13,8 @@ public interface IMenuManager {
     public List<Menu> queryMenusByPid(Integer pid);
     public void save(Menu menu);
     public void update(Menu menu);
+
+    public  String getMenuJson();
+
+    public void delMenu();
 }

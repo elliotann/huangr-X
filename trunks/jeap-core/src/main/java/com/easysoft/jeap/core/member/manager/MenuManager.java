@@ -35,6 +35,77 @@ public class MenuManager implements IMenuManager {
 
     @Override
     public List<Menu> queryMenusByPid(Integer pid) {
-        return menuDao.queryMenusByPid(pid);
+        List<Menu> menus = menuDao.queryMenusByPid(pid);
+        for(Menu menu:menus){
+            menu.setChildren(queryMenusByPid(menu.getId()));
+        }
+        return menus;
+    }
+
+    @Override
+    public String getMenuJson() {
+        StringBuffer json = new StringBuffer();
+        json.append("var menu={");
+        json.append("'app':[");
+        json.append(getJson());
+        json.append("]");
+        json.append("}");
+        return json.toString();
+    }
+
+    private String getJson(){
+        StringBuffer json = new StringBuffer();
+        List<Menu> rootMenus = queryMenusByPid(0);
+
+        int i=0;
+        for(Menu menu : rootMenus){
+            json.append("{'id':");
+            json.append(menu.getId());
+            json.append(",'name':'");
+            json.append(menu.getName()+"'");
+            json.append(",'pid':");
+            json.append(menu.getPid());
+            json.append(",'url':'");
+            json.append(menu.getUrl()+"'");
+            if(menu.getChildren().size()>0){
+                json.append(",'children':[");
+                json.append(getChildrenJson(menu.getChildren()));
+                json.append("]");
+            }
+
+            json.append("}");
+            if(i!=rootMenus.size()-1){
+                json.append(",");
+            }
+            i++;
+        }
+        return json.toString();
+    }
+    private String getChildrenJson(List<Menu> children){
+        StringBuffer json = new StringBuffer();
+        int i=0;
+        for(Menu menu : children){
+            json.append("{'id':");
+            json.append(menu.getId());
+            json.append(",'name':'");
+            json.append(menu.getName()+"'");
+            json.append(",'pid':");
+            json.append(menu.getPid());
+            json.append(",'url':'");
+            json.append(menu.getUrl()+"'");
+            if(menu.getChildren().size()>0){
+                json.append(",'children':[");
+                json.append(getChildrenJson(menu.getChildren()));
+                json.append("]");
+            }
+
+            json.append("}");
+            if(i!=children.size()-1){
+                json.append(",");
+            }
+            i++;
+        }
+
+        return json.toString();
     }
 }
