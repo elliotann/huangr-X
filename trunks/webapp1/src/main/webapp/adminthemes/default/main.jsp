@@ -5,6 +5,7 @@
 <head>
     <meta charset="utf-8">
     <title>jeap企业级开发平台</title>
+    <script type="text/javascript" src="menu/getMenuJson.do" charset="UTF-8"></script>
     <link rel="stylesheet" href="../adminthemes/default/css/style.css"/>
 
     <script src="../js/common/jquery-1.8.3.js"></script>
@@ -12,10 +13,8 @@
     <script src="../adminthemes/default/js/jquery.validate.min.js" type="text/javascript"></script>
     <script src="../adminthemes/default/js/jquery.colorbox-min.js" type="text/javascript"></script>
     <script src="../adminthemes/default/js/jquery.flot.min.js" type="text/javascript"></script>
-    <script src="../adminthemes/default/js/general.js" type="text/javascript"></script>
-    <script src="../adminthemes/default/js/dashboard.js" type="text/javascript"></script>
-
     <script src="../adminthemes/default/js/index.js" type="text/javascript"></script>
+
 </head>
 
 <body  class="bodygrey">
@@ -84,10 +83,10 @@
 
     <div class="tabmenu">
         <ul>
-            <c:forEach items="${rootMenus}" var="rootMenu">
+           <%-- <c:forEach items="${rootMenus}" var="rootMenu">
                 <li class="current"><a class="dashboard" href="#"><span>系统管理</span></a></li>
                 <li><a class="users" href="users.html"><span>开发者</span></a></li>
-            </c:forEach>
+            </c:forEach>--%>
 
         </ul>
 
@@ -107,16 +106,15 @@
 </div>
 <div class="sidebar">
     <div id="accordion">
-        <h3 class="open">权限管理</h3>
+        <%--<h3 class="open">权限管理</h3>
         <div style="display: block;" class="content">
-
             <ul class="leftmenu">
                 <li class="current"><a class="home" href="adminuser/list.do" target="iframepage">管理员管理</a></li>
                 <li><a class="form" href="forms.html">角色管理</a></li>
-                <li><a class="form" href="menu/list.do" target="iframepage">菜单管理</a></li>
+                <li><a class="form" href="menu/list.do" target="iframepage">菜单管理</a></li>&ndash;%&gt;
             </ul>
         </div>
-        <h3 class="open"></h3>
+        <h3 class="open"></h3>--%>
 
     </div>
 
