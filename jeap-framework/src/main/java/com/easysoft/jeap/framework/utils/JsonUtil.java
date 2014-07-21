@@ -4,16 +4,11 @@ package com.easysoft.jeap.framework.utils;
 import com.easysoft.jeap.framework.utils.json.DateJsonValueProcessor;
 import com.easysoft.jeap.framework.utils.json.InvisibleFilter;
 import net.sf.ezmorph.object.DateMorpher;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-import net.sf.json.JsonConfig;
+import net.sf.json.*;
 import net.sf.json.util.JSONUtils;
 
-import java.util.Date;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
-
 
 
 public class JsonUtil {
@@ -68,12 +63,13 @@ public class JsonUtil {
 
     public static String beanToJsonArray(List beans){
         JsonConfig config = new JsonConfig();
-        config.setJavaPropertyFilter(new InvisibleFilter("List"));
+        config.setJsonPropertyFilter(new InvisibleFilter("List"));
         config.setExcludes(new String[]{"form"});
 
         JSONArray jsonArray = JSONArray.fromObject(beans,config);
         return jsonArray.toString();
     }
+
 
 
 }
