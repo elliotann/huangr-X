@@ -16,5 +16,5 @@ public interface IMenuManager {
 
     public  String getMenuJson();
 
-    public void delMenu();
+    public void delMenu(Integer id) throws Exception;
 }

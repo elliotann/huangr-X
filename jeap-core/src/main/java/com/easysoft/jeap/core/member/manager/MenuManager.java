@@ -108,4 +108,13 @@ public class MenuManager implements IMenuManager {
 
         return json.toString();
     }
+
+    @Override
+    public void delMenu(Integer id) throws Exception{
+        List<Menu> menus = this.queryMenusByPid(id);
+        if(!menus.isEmpty()){
+            throw new Exception("有子菜单,不能删除");
+        }
+        menuDao.deleteById(id);
+    }
 }

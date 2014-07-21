@@ -25,4 +25,7 @@
     <select id="queryMenusByPid" resultMap="menuMap">
         select * from t_menu where pid=#{pid}
     </select>
+    <delete id="deleteById">
+        delete from t_menu where id=#{id}
+    </delete>
 </mapper>
