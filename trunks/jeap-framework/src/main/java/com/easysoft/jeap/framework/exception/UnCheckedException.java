@@ -1,7 +1,8 @@
 package com.easysoft.jeap.framework.exception;
 
 /**
- * Created by huangxa on 2014/7/21.
+ * @author : andy.huang
+ * @since : 1.0
  */
 public class UnCheckedException extends Exception {
 }
