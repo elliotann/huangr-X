@@ -46,7 +46,7 @@ public class MenuController {
     @RequestMapping("/save")
     @ResponseBody
     public AjaxJson save(Menu menu){
-        if(menu!=null&&menu.getId()!=0){
+        if(menu.getId()!=null&&menu.getId()!=0){
             menuManager.update(menu);
         }else{
             menuManager.save(menu);
@@ -59,5 +59,13 @@ public class MenuController {
     public String getMenuJson(){
         String result = menuManager.getMenuJson();
         return result;
+    }
+
+    @RequestMapping("/delMenu")
+    @ResponseBody
+    public AjaxJson delMenu(Integer id){
+
+
+        return new AjaxJson();
     }
 }

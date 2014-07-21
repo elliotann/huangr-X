@@ -64,6 +64,7 @@
 			return confirm("进入节点 -- " + treeNode.name + " 的编辑状态吗？");
 		}
 		function beforeRemove(treeId, treeNode) {
+		alert("here");
 			className = (className === "dark" ? "":"dark");
 			showLog("[ "+getTime()+" beforeRemove ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
 			var zTree = $.fn.zTree.getZTreeObj("treeDemo");
@@ -74,6 +75,7 @@
 			showLog("[ "+getTime()+" onRemove ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
 		}
 		function beforeRename(treeId, treeNode, newName, isCancel) {
+			
 			className = (className === "dark" ? "":"dark");
 			showLog((isCancel ? "<span style='color:red'>":"") + "[ "+getTime()+" beforeRename ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name + (isCancel ? "</span>":""));
 			if (newName.length == 0) {
@@ -88,6 +90,7 @@
 			showLog((isCancel ? "<span style='color:red'>":"") + "[ "+getTime()+" onRename ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name + (isCancel ? "</span>":""));
 		}
 		function showRemoveBtn(treeId, treeNode) {
+		
 			return !treeNode.isFirstNode;
 		}
 		function showRenameBtn(treeId, treeNode) {
@@ -111,6 +114,7 @@
 
 		var newCount = 1;
 		function addHoverDom(treeId, treeNode) {
+			
 			var sObj = $("#" + treeNode.tId + "_span");
 			if (treeNode.editNameFlag || $("#addBtn_"+treeNode.tId).length>0) return;
 			var addStr = "<span class='button add' id='addBtn_" + treeNode.tId
