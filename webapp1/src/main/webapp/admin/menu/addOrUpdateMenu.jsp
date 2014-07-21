@@ -14,8 +14,6 @@
     <link rel="stylesheet" href="../../adminthemes/default/css/style.css" />
 </head>
 <body style="background-color: #EEEEEE;">
-
-
 <form method="post" id="form" novalidate="novalidate">
     <input type="hidden" name="id" id="userId" value="${menu.id}">
     <div class="form_default">
@@ -128,6 +126,9 @@
 
     function submitForm(){
         $("#form").submit();
+    }
+    function addMenu(){
+        location = "toAdd.do";
     }
 </script>
 
