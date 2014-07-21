@@ -14,4 +14,5 @@ public interface IMenuDao {
     public void save(Menu menu);
     public void update(Menu menu);
     public List<Menu> queryMenusByPid(Integer pid);
+    public void deleteById(Integer id);;
 }
