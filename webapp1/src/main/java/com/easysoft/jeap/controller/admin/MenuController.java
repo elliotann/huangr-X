@@ -38,11 +38,12 @@ public class MenuController {
         Menu menu =  new Menu();
         if(id!=null&&id!=0){
             menu = menuManager.queryById(id);
-            params.put("menu",menu);
+
         }
-        if(pid!=0){
+        if(pid!=null&&pid!=0){
             menu.setPid(pid);
         }
+        params.put("menu",menu);
         List<Menu> menuList = menuManager.queryForAll();
         params.put("menus",menuList);
         return new ModelAndView("/admin/menu/addOrUpdateMenu",params);
