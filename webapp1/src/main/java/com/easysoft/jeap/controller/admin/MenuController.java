@@ -54,4 +54,10 @@ public class MenuController {
 
         return new AjaxJson();
     }
+    @RequestMapping(value = "/getMenuJson",produces = "text/plain;charset=UTF-8")
+    @ResponseBody
+    public String getMenuJson(){
+        String result = menuManager.getMenuJson();
+        return result;
+    }
 }

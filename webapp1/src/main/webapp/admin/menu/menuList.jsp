@@ -43,7 +43,7 @@
                         return false;
                     } else {
                         demoIframe.attr("src","toAdd.do?id="+treeNode.id);
-                        return true;
+                        return false;
                     }
                 }
             }

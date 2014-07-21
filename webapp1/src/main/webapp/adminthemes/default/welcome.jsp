@@ -15,8 +15,7 @@
     <script src="../default/js/jquery.validate.min.js" type="text/javascript"></script>
     <script src="../default/js/jquery.colorbox-min.js" type="text/javascript"></script>
     <script src="../default/js/jquery.flot.min.js" type="text/javascript"></script>
-    <script src="../default/js/general.js" type="text/javascript"></script>
-    <script src="../default/js/dashboard.js" type="text/javascript"></script>
+
 </head>
 <body style="background-color: #EEEEEE;">
     欢迎
