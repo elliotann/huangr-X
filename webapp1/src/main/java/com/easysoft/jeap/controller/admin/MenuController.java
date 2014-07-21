@@ -33,11 +33,15 @@ public class MenuController {
         return new ModelAndView("/admin/menu/menuList",params);
     }
     @RequestMapping("/toAdd")
-    public ModelAndView toAdd(Integer id){
+    public ModelAndView toAdd(Integer id,Integer pid){
         Map<String,Object> params = new HashMap<String,Object>();
+        Menu menu =  new Menu();
         if(id!=null&&id!=0){
-            Menu menu = menuManager.queryById(id);
+            menu = menuManager.queryById(id);
             params.put("menu",menu);
+        }
+        if(pid!=0){
+            menu.setPid(pid);
         }
         List<Menu> menuList = menuManager.queryForAll();
         params.put("menus",menuList);
@@ -64,8 +68,13 @@ public class MenuController {
     @RequestMapping("/delMenu")
     @ResponseBody
     public AjaxJson delMenu(Integer id){
-
-
-        return new AjaxJson();
+        AjaxJson ajaxJson = new AjaxJson();
+        try {
+            menuManager.delMenu(id);
+        } catch (Exception e) {
+            ajaxJson.setSuccess(false);
+            ajaxJson.setMsg(e.getMessage());
+        }
+        return ajaxJson;
     }
 }

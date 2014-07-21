@@ -90,6 +90,7 @@
             if (btn) btn.bind("click", function(){
                 var zTree = $.fn.zTree.getZTreeObj("tree");
                 //zTree.addNodes(treeNode, {id:(100 + newCount), pId:treeNode.id, name:"new node" + (newCount++)});
+                alert(treeNode.id);
                 demoIframe.attr("src","toAdd.do?pid="+treeNode.id);
                 return false;
             });
