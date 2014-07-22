@@ -2,6 +2,9 @@ package com.easysoft.jeap.core.member.manager;
 
 import com.easysoft.jeap.core.member.dao.IMenuDao;
 import com.easysoft.jeap.core.member.entity.Menu;
+import com.easysoft.jeap.framework.exception.ErrorCode;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +15,14 @@ import java.util.List;
  */
 @Service("menuManager")
 public class MenuManager implements IMenuManager {
+    private static final Log logger = LogFactory.getLog(MenuManager.class);
+    public enum MenuManagerError {
+        /**
+         * When property name is null.
+         */
+        @ErrorCode(comment = "Has child menu!")
+        HAS_CHILD_MENU,
+    }
     @Autowired
     private IMenuDao menuDao;
     @Override
@@ -110,10 +121,10 @@ public class MenuManager implements IMenuManager {
     }
 
     @Override
-    public void delMenu(Integer id) throws Exception{
+    public void delMenu(Integer id) throws PermissionException{
         List<Menu> menus = this.queryMenusByPid(id);
         if(!menus.isEmpty()){
-            throw new Exception("有子菜单,不能删除");
+            throw new PermissionException(MenuManagerError.HAS_CHILD_MENU);
         }
         menuDao.deleteById(id);
     }
