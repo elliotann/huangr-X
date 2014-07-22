@@ -73,6 +73,7 @@ public class MenuController {
         try {
             menuManager.delMenu(id);
         } catch (Exception e) {
+            e.printStackTrace();
             ajaxJson.setSuccess(false);
             ajaxJson.setMsg(e.getMessage());
         }

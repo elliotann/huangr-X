@@ -7,11 +7,12 @@
     <script src="../../js/common/jquery-1.8.3.js"></script>
     <script src="../../js/common/jquery.validate.min.js"></script>
     <script src="../../js/common/jquery.form.js"></script>
+
+    <link rel="stylesheet" href="../../adminthemes/default/css/style.css" />
     <link rel="stylesheet" href="/jeap/adminthemes/default/js/ligerui/skins/Aqua/css/ligerui-all.css" />
     <link rel="stylesheet" href="/jeap/adminthemes/default/js/ligerui/skins/Gray/css/all.css" />
     <script src="../../adminthemes/default/js/base.js"></script>
     <script src="../../adminthemes/default/js/ligerui/js/plugins/ligerDialog.js"></script>
-    <link rel="stylesheet" href="../../adminthemes/default/css/style.css" />
 </head>
 <body style="background-color: #EEEEEE;">
 

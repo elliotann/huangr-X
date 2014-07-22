@@ -1,0 +1,20 @@
+
+.navbar-inner {
+    background: -moz-linear-gradient(center top , #3993BA 0%, #067EAD 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+.navbar .nav .active > a, .navbar .nav .active > a:hover {
+    background: none repeat scroll 0 0 #206484 !important;
+}
+.navbar .divider-vertical {
+    border-left-color: #2078A1;
+    border-right-color: #3497C2;
+}
+.dropdown-menu li > a:hover, .dropdown-menu .active > a, .dropdown-menu .active > a:hover, .nav-list > .active > a, .nav-list > .active > a:hover, span.dynatree-active a {
+    background: none repeat scroll 0 0 #48A6D2 !important;
+}
+.table thead th {
+    background-color: #EBF2F6 !important;
+}
+.dataTables_wrapper th.sorting_asc, .dataTables_wrapper th.sorting_desc {
+    background-color: #D4E3EB !important;
+}
