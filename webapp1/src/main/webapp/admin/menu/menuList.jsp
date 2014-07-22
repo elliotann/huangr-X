@@ -16,6 +16,10 @@
     <script type="text/javascript" src="/jeap/js/common/zTree_v3/js/jquery.ztree.excheck-3.5.js"></script>
     <script type="text/javascript" src="/jeap/js/common/zTree_v3/js/jquery.ztree.exedit-3.5.js"></script>
     <link rel="stylesheet" href="/jeap/js/common/zTree_v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+    <link rel="stylesheet" href="/jeap/adminthemes/default/js/ligerui/skins/Aqua/css/ligerui-all.css" />
+    <link rel="stylesheet" href="/jeap/adminthemes/default/js/ligerui/skins/Gray/css/all.css" />
+    <script src="../../adminthemes/default/js/base.js"></script>
+    <script src="../../adminthemes/default/js/ligerui/js/plugins/ligerDialog.js"></script>
     <SCRIPT type="text/javascript" >
         <!--
         var zTree;
@@ -100,14 +104,7 @@
         function showRemoveBtn(treeId, treeNode) {
             return !treeNode.isFirstNode;
         }
-        function beforeRemove(treeId, treeNode) {
-            alert("here");
-            className = (className === "dark" ? "":"dark");
-            showLog("[ "+getTime()+" beforeRemove ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
-            var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-            zTree.selectNode(treeNode);
-            return confirm("确认删除 节点 -- " + treeNode.name + " 吗？");
-        }
+
         function showLog(str) {
             if (!log) log = $("#log");
             log.append("<li class='"+className+"'>"+str+"</li>");
@@ -124,15 +121,30 @@
                 $.ajax({
                     type:'post',
                     url:'delMenu.do',
-                    data:'',
+                    data:'id='+treeNode.id,
                     success:function(result){
                         if(result.success){
+                            $.ligerDialog.waitting('操作成功');
+                            setTimeout(function ()
+                            {
+                                $.ligerDialog.closeWaitting();
+                            }, 1000);
                             return true;
                         }else{
+                            $.ligerDialog.waitting('操作失败,有子菜单存在！');
+                            setTimeout(function ()
+                            {
+                                $.ligerDialog.closeWaitting();
+                            }, 1000);
                             return false;
                         }
                     },
                     error:function(e){
+                        $.ligerDialog.waitting(e);
+                        setTimeout(function ()
+                        {
+                            $.ligerDialog.closeWaitting();
+                        }, 1000);
                         return false;
                     }
                 });

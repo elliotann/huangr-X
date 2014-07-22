@@ -1,0 +1,394 @@
+
+.fc {
+    direction: ltr;
+    text-align: left;
+}
+.fc table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+html .fc, .fc table {
+    font-size: 1em;
+}
+.fc td, .fc th {
+    padding: 0;
+    vertical-align: top;
+}
+.fc-header td {
+    white-space: nowrap;
+}
+.fc-header-left {
+    text-align: left;
+    width: 25%;
+}
+.fc-header-right {
+    text-align: right;
+    width: 25%;
+}
+.fc-header-title {
+    display: inline-block;
+    vertical-align: middle;
+}
+.fc-header-title h2 {
+    margin-top: 0;
+    white-space: nowrap;
+}
+.fc .fc-header-space {
+    padding-left: 10px;
+}
+.fc-header .fc-button {
+    margin-bottom: 1em;
+    margin-right: -1px;
+    vertical-align: top;
+}
+.fc-header .ui-corner-right {
+    margin-right: 0;
+}
+.fc-header .fc-state-hover, .fc-header .ui-state-hover {
+    z-index: 2;
+}
+.fc-header .fc-state-down {
+    z-index: 3;
+}
+.fc-header .fc-state-active, .fc-header .ui-state-active {
+    z-index: 4;
+}
+.fc-content {
+    clear: both;
+}
+.fc-view {
+    overflow: hidden;
+    width: 100%;
+}
+.fc-widget-header, .fc-widget-content {
+    border: 1px solid #E5E5E5;
+}
+.fc-state-highlight {
+    background: none repeat scroll 0 0 #FFFAD7;
+}
+.fc-cell-overlay {
+    background: none repeat scroll 0 0 #99CCFF;
+    opacity: 0.2;
+}
+.fc-state-disabled {
+    cursor: default;
+}
+.fc-state-disabled .fc-button-effect {
+    display: none;
+}
+.fc-event {
+    border-style: solid;
+    border-width: 0;
+    cursor: default;
+    font-size: 0.85em;
+}
+a.fc-event, .fc-event-draggable {
+    cursor: pointer;
+}
+a.fc-event {
+    text-decoration: none;
+}
+.fc-rtl .fc-event {
+    text-align: right;
+}
+.fc-event-skin {
+    background-color: #3366CC;
+    border-color: #3366CC;
+    color: #1C546D;
+}
+.fc-event-inner {
+    border-style: solid;
+    border-width: 0;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+.fc-event-time, .fc-event-title {
+    padding: 0 1px;
+}
+.fc .ui-resizable-handle {
+    display: block;
+    font-size: 300%;
+    line-height: 50%;
+    overflow: hidden;
+    position: absolute;
+    z-index: 99999;
+}
+.fc-event-hori {
+    border-width: 1px 0;
+    margin-bottom: 1px;
+}
+.fc-event-hori .ui-resizable-e {
+    cursor: e-resize;
+    height: 100% !important;
+    right: -3px !important;
+    top: 0 !important;
+    width: 7px !important;
+}
+.fc-event-hori .ui-resizable-w {
+    cursor: w-resize;
+    height: 100% !important;
+    left: -3px !important;
+    top: 0 !important;
+    width: 7px !important;
+}
+.fc-event-hori .ui-resizable-handle {
+}
+.fc-corner-left {
+    margin-left: 1px;
+}
+.fc-corner-left .fc-button-inner, .fc-corner-left .fc-event-inner {
+    margin-left: -1px;
+}
+.fc-corner-right .fc-button-inner, .fc-corner-right .fc-event-inner {
+    margin-right: -1px;
+}
+.fc-corner-top {
+    margin-top: 1px;
+}
+.fc-corner-top .fc-event-inner {
+    border-top-width: 1px;
+    margin-top: -1px;
+}
+.fc-corner-bottom {
+    margin-bottom: 1px;
+}
+.fc-corner-bottom .fc-event-inner {
+    border-bottom-width: 1px;
+    margin-bottom: -1px;
+}
+.fc-corner-left .fc-event-inner {
+    border-left-width: 1px;
+}
+.fc-border-separate th, .fc-border-separate td {
+    border-width: 1px 0 0 1px;
+}
+.fc-border-separate tr.fc-last th, .fc-border-separate tr.fc-last td {
+    border-bottom-width: 1px;
+}
+.fc-grid .fc-day-number {
+    float: left;
+    padding: 0 2px;
+}
+.fc-grid .fc-other-month .fc-day-number {
+    opacity: 0.4;
+}
+.fc-grid .fc-day-content {
+    clear: both;
+    padding: 2px 2px 1px;
+}
+.fc-grid .fc-event-time {
+    font-weight: 700;
+}
+.fc-rtl .fc-grid .fc-day-number {
+    float: left;
+}
+.fc-rtl .fc-grid .fc-event-time {
+    float: right;
+}
+.fc-agenda .fc-agenda-axis {
+    font-weight: 400;
+    padding: 0 4px;
+    text-align: right;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: 50px;
+}
+.fc-agenda .fc-day-content {
+    padding: 2px 2px 1px;
+}
+.fc-agenda-days .fc-col0 {
+    border-left-width: 0;
+}
+.fc-agenda-allday .fc-day-content {
+    min-height: 34px;
+}
+.fc-agenda-divider-inner {
+    height: 2px;
+    overflow: hidden;
+}
+.fc-widget-header .fc-agenda-divider-inner {
+    background: none repeat scroll 0 0 #EEEEEE;
+}
+.fc-agenda-slots th {
+    border-width: 1px 1px 0;
+}
+.fc-agenda-slots td {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border-width: 1px 0 0;
+}
+.fc-agenda-slots td div {
+    height: 20px;
+}
+.fc-agenda-slots tr.fc-minor th, .fc-agenda-slots tr.fc-minor td {
+    border-top-style: dotted;
+}
+.fc-agenda-slots tr.fc-minor th.ui-widget-header {
+    border-top-style: solid;
+}
+.fc-event-vert .fc-event-head, .fc-event-vert .fc-event-content {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    z-index: 2;
+}
+.fc-event-vert .fc-event-time {
+    font-size: 10px;
+    white-space: nowrap;
+}
+.fc-event-vert .fc-event-bg {
+    background: none repeat scroll 0 0 #FFFFFF;
+    height: 100%;
+    left: 0;
+    opacity: 0.3;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+.fc .ui-draggable-dragging .fc-event-bg, .fc-select-helper .fc-event-bg {
+}
+.fc-event-vert .ui-resizable-s {
+    bottom: 0 !important;
+    cursor: s-resize;
+    font-family: monospace;
+    font-size: 11px !important;
+    height: 8px !important;
+    line-height: 8px !important;
+    overflow: hidden !important;
+    text-align: center;
+    width: 100% !important;
+}
+.fc-agenda .ui-resizable-resizing {
+}
+.fc-header-center, .fc-grid th, .fc-agenda-days th {
+    text-align: center;
+}
+.fc-header .fc-corner-right, .fc-corner-right {
+    margin-right: 1px;
+}
+.fc-corner-right .fc-event-inner, .fc-border-separate th.fc-last, .fc-border-separate td.fc-last, .fc-agenda-days .fc-agenda-axis {
+    border-right-width: 1px;
+}
+table.fc-border-separate, .fc-agenda table {
+    border-collapse: separate;
+}
+.fc-border-separate tbody tr.fc-first td, .fc-border-separate tbody tr.fc-first th, .fc-agenda-slots tr.fc-slot0 th, .fc-agenda-slots tr.fc-slot0 td {
+    border-top-width: 0;
+}
+.fc-agenda-allday th, .fc-event-vert {
+    border-width: 0 1px;
+}
+.fc thead {
+    background: -moz-linear-gradient(center top , #F9F9F9 0%, #ECECEC 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+.fc tbody {
+    background: none repeat scroll 0 0 #FFFFFF;
+}
+.fc thead th {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border-color: #E5E5E5 #E5E5E5 #DADADA;
+    font-size: 14px;
+    padding: 10px 0;
+}
+.fc-header {
+    position: relative;
+}
+.fc-header-left {
+    float: none;
+    height: 38px;
+    overflow: hidden;
+    width: 100%;
+}
+.fc-header-center {
+    left: 10%;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 80%;
+}
+.fc-header-title h2 {
+    color: #222222;
+    font-family: 'PT Sans',sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+}
+.fc-header-right {
+    position: absolute;
+    right: 10px;
+    top: -48px;
+    width: auto;
+}
+.fc-header-right > .fc-btn {
+    border: 1px solid rgba(0, 0, 0, 0);
+    color: #0088CC;
+    display: block;
+    float: left;
+    line-height: 26px;
+    margin-right: 2px;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+.fc-header-right .fc-state-hover {
+    background: none repeat scroll 0 0 #EEEEEE;
+    border-radius: 4px;
+}
+.fc-header-right .fc-state-active {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #FFFFFF !important;
+    border-color: #DDDDDD #DDDDDD rgba(0, 0, 0, 0);
+    border-image: none;
+    border-radius: 4px 4px 0 0;
+    border-style: solid;
+    border-width: 1px;
+    color: #555555;
+    cursor: default;
+    line-height: 30px;
+    position: relative;
+    top: -2px;
+}
+.fc-btn {
+    cursor: pointer;
+}
+.cal_prev {
+    float: left;
+    margin: 11px 0 0 8px;
+}
+.cal_next {
+    float: right;
+    margin: 11px 8px 0 0;
+}
+.cal_prev, .cal_next {
+    opacity: 0.7;
+}
+.cal_prev:hover, .cal_next:hover {
+    opacity: 1;
+}
+.fc-state-hover .table_prev {
+    background-position: 0 -26px;
+}
+.fc-state-hover .table_next {
+    background-position: right -26px;
+}
+.fc-day-number {
+    color: #777777;
+    font-size: 11px;
+}
+.fc-event-title, .fc-event-time {
+    padding-left: 3px;
+}
+.fc-button-today {
+    color: #0088CC;
+    display: inline-block;
+    font-size: 11px;
+    margin-left: 15px;
+    vertical-align: middle;
+}
+.fc-button-today.fc-state-disabled {
+    color: #999999;
+    cursor: default;
+}
