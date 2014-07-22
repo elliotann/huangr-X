@@ -66,7 +66,7 @@ public class UncheckedException extends RuntimeException {
         super(throwable);
         errorRec = new ErrorRecord(errorCode);
     }
-    
+
     public UncheckedException(Enum errorCode, Throwable throwable, Object... para) {
         super(throwable);
         errorRec = new ErrorRecord(errorCode, para);
