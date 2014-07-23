@@ -1,11 +1,4 @@
 
-body {
-    color: #222222;
-    padding: 0;
-}
-html, body {
-    height: 100%;
-}
 input[type="text"], input[type="email"], input[type="search"], input[type="password"] {
     -moz-appearance: none;
 }
@@ -139,9 +132,7 @@ h4 small, h5 {
 .row + .row {
     margin-top: 20px;
 }
-.alert {
-    padding: 8px 14px;
-}
+
 .modal-header {
     background: none repeat scroll 0 0 #E4E4E4;
     border-color: #D4D4D4;
@@ -326,21 +317,7 @@ a.rowlink {
 .modal-open .colorpicker.dropdown-menu, .modal-open .datepicker.dropdown-menu {
     z-index: 10000;
 }
-.alert-dismissable .close {
-    right: -2px;
-    top: -1px;
-}
-.alert-heading {
-    font-size: 14px;
-    margin: 0 0 6px;
-}
-.alert ul {
-    margin: 0 0 10px 20px;
-    padding: 0;
-}
-.alert p + p {
-    margin-top: 10px;
-}
+
 .panel-group .panel + .panel {
     margin-top: 3px;
 }
