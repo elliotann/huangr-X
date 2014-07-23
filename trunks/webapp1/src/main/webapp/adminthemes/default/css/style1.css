@@ -1,0 +1,13 @@
+.heading {
+    border-bottom: 1px solid #DCDCDC;
+    margin-bottom: 18px;
+    padding-bottom: 5px;
+}
+.heading h1, .heading h2, .heading h3, h1.heading, h2.heading, h3.heading, .modal-header h3, .modal-header h4 {
+    font-family: 'PT Sans',sans-serif;
+    font-weight: 400;
+}
+.heading .btn {
+    margin-left: 10px;
+    vertical-align: bottom;
+}

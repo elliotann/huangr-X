@@ -10,11 +10,6 @@
 <head>
     <title></title>
     <link rel="stylesheet" href="../default/css/style.css"/>
-    <script src="../default/js/jquery-1.8.3.js"></script>
-    <script src="../default/js/jquery-ui-1.8.4.custom.min.js" type="text/javascript"></script>
-    <script src="../default/js/jquery.validate.min.js" type="text/javascript"></script>
-    <script src="../default/js/jquery.colorbox-min.js" type="text/javascript"></script>
-    <script src="../default/js/jquery.flot.min.js" type="text/javascript"></script>
 
 </head>
 <body style="background-color: #EEEEEE;">
