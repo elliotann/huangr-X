@@ -1,30 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ include file="/admin/commons/taglibs.jsp"%>
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Gebo Admin Panel</title>
-
-    <!-- Bootstrap framework -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-
-
-
-    <!-- main styles -->
-    <link href="css/style.css" rel="stylesheet">
-    <!-- theme color-->
-    <link id="link_theme" href="css/blue.css" rel="stylesheet">
-
-
-    <!-- favicon -->
-    <link href="favicon.ico" rel="shortcut icon">
-
-
-
+    <title></title>
+    <link rel="stylesheet" href="../../adminthemes/default/css/style1.css"/>
+    <link rel="stylesheet" href="../../adminthemes/default/css/table.css"/>
+    <link rel="stylesheet" href="../../adminthemes/default/css/button.css"/>
 </head>
-<body>
-
+<body style="background-color: #FFFFFF;">
 <div class="row">
     <div class="col-sm-12 col-md-12">
         <h3 class="heading">Table with action button</h3>
@@ -97,7 +80,6 @@
 
     </div>
 </div>
-
 
 <div class="row">
     <div class="col-sm-12 col-md-12">
@@ -247,41 +229,5 @@
 
     </div>
 </div>
-
-
-
-<script src="js/jquery.min.js"></script>
-<!-- js cookie plugin -->
-<script src="js/jquery_cookie_min.js"></script>
-<!-- main bootstrap js -->
-<script src="js/bootstrap.min.js"></script>
-
-<!-- typeahead -->
-<script src="lib/typeahead/typeahead.min.js"></script>
-<!-- code prettifier -->
-<script src="lib/google-code-prettify/prettify.min.js"></script>
-
-
-<!-- lightbox -->
-<script src="lib/colorbox/jquery.colorbox.min.js"></script>
-<!-- jBreadcrumbs -->
-<script src="lib/jBreadcrumbs/js/jquery.jBreadCrumb.1.1.min.js"></script>
-<!-- hidden elements width/height -->
-<script src="js/jquery.actual.min.js"></script>
-
-
-<!-- to top -->
-<script src="lib/UItoTop/jquery.ui.totop.min.js"></script>
-<!-- mobile nav -->
-<script src="js/selectNav.js"></script>
-<!-- datatable -->
-<script src="lib/datatables/jquery.dataTables.min.js"></script>
-<!-- additional sorting for datatables -->
-<script src="lib/datatables/jquery.dataTables.sorting.js"></script>
-<!-- datatables bootstrap integration -->
-<script src="lib/datatables/jquery.dataTables.bootstrap.min.js"></script>
-<!-- tables functions -->
-<script src="js/gebo_tables.js"></script>
-
 </body>
 </html>

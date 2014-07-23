@@ -1,10 +1,5 @@
 
-@import "colorbox.css";
-@import "colorpicker.css";
-@import "jquery-ui.css";
-@import "jquery.jgrowl.css";
-@import "jquery.alerts.css";
-@import "fullcalendar.css";
+
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
     background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
     border: 0 none;
@@ -16,14 +11,13 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     font-family: "DroidSansRegular";
     font-style: normal;
     font-weight: normal;
-    src: url("../fonts/droidsans-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/droidsans-webfont.woff") format("woff"), url("../fonts/droidsans-webfont.ttf") format("truetype"), url("../fonts/droidsans-webfont.svg#DroidSansRegular") format("svg");
 }
 body {
     font-family: DroidSansRegular,"Segoe UI","Lucida Sans Unicode","Lucida Grande",sans-serif;
     font-size: 12px;
 }
 body {
-    background: url("../images/texturebg.png") repeat scroll 0 0 #333333;
+    background: url("../images/texturebg.png") repeat scroll 0 0 #2289B4;
     line-height: 21px;
 }
 input, select, textarea, button {
