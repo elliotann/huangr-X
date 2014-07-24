@@ -11,13 +11,13 @@ public class TableTaglib extends HtmlTaglib {
     private String items;//数据源
     @Override
     protected String postStart() {
-        StringBuilder sb = new StringBuilder("<div class=\"dataTables_wrapper\" id=\"example_wrapper\"><div id=\"example_length\" class=\"dataTables_length\">");
+        StringBuilder sb = new StringBuilder();
         //分页
-        if(isPage){
+        /*if(isPage){
             sb.append(buildPageSizeHtml());
         }
-        sb.append("</div>");
-        sb.append("<table cellspacing=\"0\" cellpadding=\"0\" border=\"0\" id=\"example\" class=\"sTable2\">");
+        sb.append("</div>");*/
+        sb.append("<table id=\"smpl_tbl\" class=\"table table-bordered table-striped\">");
         return sb.toString();
     }
 
@@ -28,7 +28,7 @@ public class TableTaglib extends HtmlTaglib {
         if(isPage){
             sb.append(buildPageHtml());
         }
-        sb.append("</div>");
+
         return sb.toString();
     }
 
@@ -63,7 +63,8 @@ public class TableTaglib extends HtmlTaglib {
                 page = (PageOption)obj;
             }
         }
-        StringBuilder sb = new StringBuilder("<div class=\"dataTables_info\" id=\"example_info\">");
+        StringBuilder sb = new StringBuilder("<div>");
+        sb.append("</div>")
         sb.append("显示 "+ (page.getPageSize()*(page.getCurrentPageNo()-1)+1)+" 至");
         if(page.getTotalCount()<page.getPageSize()){
             sb.append(page.getTotalCount());
