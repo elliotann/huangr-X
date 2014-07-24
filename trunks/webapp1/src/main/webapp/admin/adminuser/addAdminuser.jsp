@@ -8,16 +8,91 @@
     <script src="../../js/common/jquery.validate.min.js"></script>
     <script src="../../js/common/jquery.form.js"></script>
 
-    <link rel="stylesheet" href="../../adminthemes/default/css/style.css" />
-    <link rel="stylesheet" href="/jeap/adminthemes/default/js/ligerui/skins/Aqua/css/ligerui-all.css" />
-    <link rel="stylesheet" href="/jeap/adminthemes/default/js/ligerui/skins/Gray/css/all.css" />
-    <script src="../../adminthemes/default/js/base.js"></script>
-    <script src="../../adminthemes/default/js/ligerui/js/plugins/ligerDialog.js"></script>
+    <link rel="stylesheet" href="../../adminthemes/default/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../adminthemes/default/css/style1.css"/>
+    <link rel="stylesheet" href="../../adminthemes/default/css/blue.css"/>
+    <link rel="stylesheet" href="../../adminthemes/default/css/form.css"/>
+
+    <script src="/jeap/adminthemes/default/js/mylib/jeap.js"></script>
+
+    <script src="/jeap/adminthemes/default/js/mylib/bootstrap.min.js"></script>
+   <%-- <script src="/jeap/adminthemes/blue/js/gebo_validation.js"></script>--%>
+
 </head>
 <body style="background-color: #EEEEEE;">
+<div class="row">
 
+    <div class="col-sm-12 col-md-12">
+        <h3 class="heading">增加管理员</h3>
+        <form class="form_validation_reg" novalidate="novalidate" id="form">
+            <div class="formSep">
+                <div class="row">
+                    <div class="col-sm-6 col-md-6">
+                        <label>用户名 <span class="f_req">*</span></label>
+                        <input type="text" class="form-control" name="reg_first_name" style="width:200px">
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <label>密码 <span class="f_req">*</span></label>
+                        <input type="password" class="form-control" name="reg_last_name"  style="width:200px">
+                    </div>
+                </div>
+            </div>
+            <div class="formSep">
+                <div class="row">
+                    <div class="col-sm-6 col-md-6">
+                        <label>City <span class="f_req">*</span></label>
+                        <input type="text" class="form-control" name="reg_city">
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <label>Zip Code</label>
+                        <input type="text" class="form-control" name="reg_zip">
+                    </div>
+                </div>
+            </div>
+            <div class="formSep">
+                <label>Your message <span class="f_req">*</span></label>
+                <textarea class="form-control" rows="3" cols="10" id="reg_your_message" name="reg_your_message"></textarea>
+            </div>
+            <div class="formSep">
+                <label><span class="error_placement">Checkboxes</span> <span class="f_req">*</span></label>
+                <br>
+                <label class="checkbox-inline">
+                    <input type="checkbox" name="reg_days" value="option1"> Monday
+                </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" name="reg_days" value="option2"> Tuesday
+                </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" name="reg_days" value="option3"> Wednesday
+                </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" name="reg_days" value="option4"> Thursday
+                </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" name="reg_days" value="option5"> Friday
+                </label>
+            </div>
+            <div class="formSep">
+                <label><span class="error_placement">Gender</span> <span class="f_req">*</span></label>
+                <br>
+                <label class="radio-inline">
+                    <input type="radio" name="reg_gender" value="option6">
+                    Male
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="reg_gender" value="option7">
+                    Female
+                </label>
+            </div>
+        </form></div>
+    <div class="form-actions">
+        <button type="button" class="btn btn-default" onclick="submitForm()">Save changes</button>
+        <button class="btn btn-default">Cancel</button>
+    </div>
 
-<form method="post" id="form" novalidate="novalidate">
+</div>
+
+<%--<form method="post" id="form" novalidate="novalidate">
     <input type="hidden" name="id" id="userId" value="${adminUser.id}">
     <div class="form_default">
         <fieldset>
@@ -57,10 +132,37 @@
 
 
 
-</form>
+</form>--%>
 <script>
     $(function(){
-        $("#form").validate({
+         $('.form_validation_reg').validate({
+            onkeyup: false,
+            errorClass: 'error',
+            validClass: 'valid',
+            highlight: function(element) {
+                $(element).closest('div').addClass("f_error");
+            },
+            unhighlight: function(element) {
+                $(element).closest('div').removeClass("f_error");
+            },
+            errorPlacement: function(error, element) {
+                $(element).closest('div').append(error);
+            },
+            rules: {
+                reg_first_name: { required: true, minlength: 3 },
+                reg_last_name: { required: true, minlength: 3 },
+                reg_your_message: { required: true, minlength: 20 },
+                reg_days: { required: true, minlength: 2 },
+                reg_gender: { required: true },
+                reg_address2: { required: true, minlength: 5 },
+                reg_city: { required: true, minlength: 2 },
+                reg_state: { required: true, minlength: 3 }
+            },
+            invalidHandler: function(form, validator) {
+               /* $.sticky("There are some errors. Please corect them and submit again.", {autoclose : 5000, position: "top-right", type: "st-error" });*/
+            }
+        })
+       /* $("#form").validate({
             rules: {
                 username: {
                     required:true,
@@ -128,6 +230,7 @@
                 });
             }
         });
+        */
     });
 
     function submitForm(){
