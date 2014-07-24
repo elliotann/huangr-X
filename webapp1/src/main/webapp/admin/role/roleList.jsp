@@ -92,7 +92,7 @@
             <div class="pagedetail">
                 显示 1 至5总共 5 条
             </div>
-            <div class="dataTables_paginate paging_bootstrap">
+            <div class="dataTables_paginate paging_bootstrap pagenumber">
                 <ul class="pagination pagination-sm">
                     <li class="prev disabled"><a href="#">上一页</a></li>
                     <li class="active"><a href="#">1</a></li>
