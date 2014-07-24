@@ -64,7 +64,7 @@ public class TableTaglib extends HtmlTaglib {
             }
         }
         StringBuilder sb = new StringBuilder("<div>");
-        sb.append("</div>")
+        sb.append("<div class=\"pagedetail\">");
         sb.append("显示 "+ (page.getPageSize()*(page.getCurrentPageNo()-1)+1)+" 至");
         if(page.getTotalCount()<page.getPageSize()){
             sb.append(page.getTotalCount());
@@ -75,6 +75,31 @@ public class TableTaglib extends HtmlTaglib {
 
         sb.append("总共 "+page.getTotalCount()+" 条");
         sb.append("</div>");
+        sb.append("<div class=\"dataTables_paginate paging_bootstrap\">");
+        sb.append("<ul class=\"pagination pagination-sm\">");
+        if(page.getCurrentPageNo()<=1){
+            sb.append(" <li class=\"prev disabled\"><a href=\"#\">上一页</a></li>");
+        }else{
+            sb.append(" <li class=\"prev\"><a href=\"#\" onclick=\"goPage("+(page.getCurrentPageNo()-1)+")\">上一页</a></li>");
+        }
+        for(int i=0;i<page.getTotalPage();i++){
+            if(page.getCurrentPageNo()==(i+1)){
+                sb.append(" <li class=\"active\"><a href=\"#\" onclick=\"goPage(\"+(i+1)+\")\">"+(i+1)+"</a></li>");
+            }else{
+                sb.append(" <li><a href=\"#\" onclick=\"goPage("+(i+1)+")\">"+(i+1)+"</a></li>");
+            }
+        }
+        if(page.getCurrentPageNo()>=page.getTotalPage()){
+            sb.append("<li class=\"next disabled\"><a href=\"#\">下一页</a></li>");
+        }else{
+            sb.append("<li class=\"xt\"><a href=\"#\" onclick=\"goPage("+(page.getCurrentPageNo()+1)+")\">下一页</a></li>");
+        }
+
+        sb.append("</ul>");
+        sb.append("</div>");
+        sb.append("</div>");
+
+        /*sb.append("</div>");
         sb.append(" <div class=\"dataTables_paginate paging_full_numbers\" id=\"example_paginate\">");
         if(page.getCurrentPageNo()<=1){
             sb.append("<span class=\"first paginate_button paginate_button_disabled\" id=\"example_first\">首页</span>");
@@ -101,7 +126,7 @@ public class TableTaglib extends HtmlTaglib {
             sb.append("<span class=\"next paginate_button\"  id=\"example_next\" onclick=\"goPage("+(page.getCurrentPageNo()+1)+")\">下一页</span>");
             sb.append("<span class=\"last paginate_button\" id=\"example_last\" onclick=\"goPage("+page.getTotalPage()+")\">尾页</span>");
         }
-        sb.append("</div>");
+        sb.append("</div>");*/
 
         sb.append("<script>");
         sb.append("function goPage(currentPage){");
