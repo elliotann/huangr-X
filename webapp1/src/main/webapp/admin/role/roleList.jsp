@@ -18,11 +18,7 @@
     </script>
 </head>
 <body style="background-color: #FFFFFF;">
-<div class="row">
-    <div class="col-sm-12 col-md-12">
-        <a class="btn btn-default btn-sm" href="#modal_form" data-toggle="modal">Open modal with some elements</a>
-    </div>
-</div>
+
 <div class="row">
     <div class="col-sm-12 col-md-12">
         <div class="btn-group sepH_b">
@@ -42,10 +38,10 @@
                 <th class="table_checkbox"><input type="checkbox" data-tableid="smpl_tbl" class="select_rows"
                                                   name="select_rows"></th>
                 <th>id</th>
-                <th class="sorting_asc">Customer</th>
-                <th>Status</th>
-                <th>Date Added</th>
-                <th>Total</th>
+                <th class="sorting_asc">名称</th>
+                <th>状态</th>
+                <th>创建日期</th>
+                <th>操作</th>
             </tr>
             </thead>
             <tbody>
@@ -98,12 +94,13 @@
             </div>
             <div class="dataTables_paginate paging_bootstrap">
                 <ul class="pagination pagination-sm">
-                    <li class="prev disabled"><a href="#">首页</a></li>
-                    <li class="prev disabled"><a href="#">上一页</a></li>
+                    <li class="prev disabled"><a href="#">Previous</a></li>
                     <li class="active"><a href="#">1</a></li>
-                    <li class="active"><a href="#">2</a></li>
-                    <li class="next disabled"><a href="#">下一页</a></li>
-                    <li class="next disabled"><a href="#">尾页</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li class="next"><a href="#">Next</a></li>
                 </ul>
             </div>
         </div>
