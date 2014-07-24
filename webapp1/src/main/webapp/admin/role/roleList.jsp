@@ -94,13 +94,13 @@
             </div>
             <div class="dataTables_paginate paging_bootstrap">
                 <ul class="pagination pagination-sm">
-                    <li class="prev disabled"><a href="#">Previous</a></li>
+                    <li class="prev disabled"><a href="#">上一页</a></li>
                     <li class="active"><a href="#">1</a></li>
                     <li><a href="#">2</a></li>
                     <li><a href="#">3</a></li>
                     <li><a href="#">4</a></li>
                     <li><a href="#">5</a></li>
-                    <li class="next"><a href="#">Next</a></li>
+                    <li class="xt"><a href="#">下一页</a></li>
                 </ul>
             </div>
         </div>

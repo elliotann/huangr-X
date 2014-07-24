@@ -3,27 +3,30 @@
 <html>
 <head>
     <title></title>
-    <link rel="stylesheet" href="../../adminthemes/default/css/style.css"/>
+    <link rel="stylesheet" href="../../adminthemes/default/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../adminthemes/default/css/style1.css"/>
+    <link rel="stylesheet" href="../../adminthemes/default/css/blue.css"/>
+    <link rel="stylesheet" href="../../adminthemes/default/css/table.css"/>
     <script src="/jeap/js/common/jquery-1.8.3.js"></script>
-    <script src="../../adminthemes/default/js/jquery-ui-1.8.4.custom.min.js" type="text/javascript"></script>
-    <script src="../../adminthemes/default/js/jquery.colorbox-min.js" type="text/javascript"></script>
-    <script src="../../adminthemes/default/js/jquery.flot.min.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="/jeap/adminthemes/default/js/ligerui/skins/Aqua/css/ligerui-all.css" />
-    <link rel="stylesheet" href="/jeap/adminthemes/default/js/ligerui/skins/Gray/css/all.css" />
-    <script src="../../adminthemes/default/js/base.js"></script>
-    <script src="../../adminthemes/default/js/ligerui/js/plugins/ligerDialog.js"></script>
+    <script src="/jeap/adminthemes/default/js/mylib/jeap.js"></script>
+    <script src="/jeap/adminthemes/default/js/mylib/table.js"></script>
+    <script src="/jeap/adminthemes/default/js/mylib/bootstrap.min.js"></script>
 </head>
-<body style="background-color: #EEEEEE;">
+<body style="background-color: #FFFFFF;">
 
 
-<!-- START WIDGET LIST -->
-<ul class="widgetlist">
-    <button class="button button_blue" onclick="addAdminUser()">增加</button>
-    &nbsp;
-</ul>
-<!-- END WIDGET LIST -->
-
-<div class="clear"></div>
+<div class="row">
+    <div class="col-sm-12 col-md-12">
+        <div class="btn-group sepH_b">
+            <button class="btn dropdown-toggle btn-default btn-sm" data-toggle="dropdown">操作 <span
+                    class="caret"></span></button>
+            <ul class="dropdown-menu">
+                <li><a data-tableid="smpl_tbl" class="delete_rows_simple" href="#"><i class="icon-trash"></i> 增加</a>
+                </li>
+                <li><a href="javascript:void(0)">修改</a></li>
+                <li><a href="javascript:void(0)">删除</a></li>
+            </ul>
+        </div>
 <table:table items="pageOption">
     <table:header>
         <table:td style="width: 245px;">用户编号</table:td>
@@ -41,7 +44,8 @@
     </table:body>
 </table:table>
 
-<br>
+    </div>
+    </div>
 <script>
     function addAdminUser(){
         location.href = "toAdd.do";
