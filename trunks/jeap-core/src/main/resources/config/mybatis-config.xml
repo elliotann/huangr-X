@@ -7,6 +7,7 @@
         <typeAlias type="com.easysoft.jeap.core.member.entity.AdminUser" alias="AdminUser"/>
         <typeAlias type="com.easysoft.jeap.core.member.entity.Member" alias="Member"/>
         <typeAlias type="com.easysoft.jeap.core.member.entity.Menu" alias="Menu"/>
+        <typeAlias type="com.easysoft.jeap.core.member.entity.Role" alias="Role"/>
     </typeAliases>
     <plugins>
         <plugin interceptor="com.easysoft.jeap.framework.db.PageInterceptor">
