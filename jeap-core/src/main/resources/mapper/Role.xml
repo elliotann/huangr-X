@@ -10,17 +10,16 @@
         select * from t_menu
     </select>
     <select id="queryById" resultMap="roleMap">
-        select * from t_menu where id=#{id}
+        select * from t_role where role_id=#{id}
     </select>
     <insert id="save" parameterType="Role">
-        insert t_menu (name,pid,url) values (#{name},#{pid},#{url})
+        insert t_role (name,desc) values (#{name},#{desc})
     </insert>
     <update id="update" parameterType="Role">
-        UPDATE t_menu
+        UPDATE t_role
         SET name = #{name},
-        pid = #{pid},
-        url = #{url}
-        WHERE id = #{id}
+        desc = #{desc}
+        WHERE role_id = #{id}
     </update>
     <select id="queryMenusByPid" resultMap="roleMap">
         select * from t_menu where pid=#{pid}
