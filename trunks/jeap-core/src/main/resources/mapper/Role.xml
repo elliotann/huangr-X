@@ -7,7 +7,7 @@
         <id property="desc" column="desc"/>
     </resultMap>
     <select id="queryForAll" resultMap="roleMap">
-        select * from t_menu
+        select * from t_role
     </select>
     <select id="queryById" resultMap="roleMap">
         select * from t_role where role_id=#{id}
@@ -21,11 +21,9 @@
         desc = #{desc}
         WHERE role_id = #{id}
     </update>
-    <select id="queryMenusByPid" resultMap="roleMap">
-        select * from t_menu where pid=#{pid}
-    </select>
+
     <delete id="deleteById">
-        delete from t_menu where id=#{id}
+        delete from t_role where id=#{id}
     </delete>
     <select id="queryForPage" parameterType="Role" resultMap="roleMap">
         select * from t_role
