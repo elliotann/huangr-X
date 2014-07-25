@@ -32,35 +32,12 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-lg-2 control-label" for="password">密码 <span class="f_req">*</span></label>
+                <label class="col-lg-2 control-label" for="reg_your_message">描述 </label>
                 <div class="col-lg-10">
-                    <input type="password" class="form-control" name="password" id="password"  style="width:200px" value="${adminUser.password}">
+                    <textarea name="reg_your_message" id="reg_your_message" cols="10" rows="3" class="form-control"></textarea>
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-lg-2 control-label" for="realName">真实姓名 </label>
-                <div class="col-lg-10">
-                    <input type="text" class="form-control" id="realName" name="realName" value="${adminUser.realName}"  style="width:200px">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-lg-2 control-label" for="email">邮箱 <span class="f_req">*</span> </label>
-                <div class="col-lg-10">
-                    <input type="text" class="form-control" id="email" name="email" value="${adminUser.email}"  style="width:200px">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-lg-offset-2 col-lg-10">
-                        <label>
-                            <input type="radio" name="status" value="INACTIVE" <c:if test="${adminUser.status eq 'INACTIVE'}">CHECKED</c:if>>
-                            禁用
-                        </label>
-                    <label>
-                        <input type="radio" name="status" value="ACTIVE" <c:if test="${adminUser.status ne 'INACTIVE'}">CHECKED</c:if>>
-                        激活
-                    </label>
-                </div>
-            </div>
+
             <div class="form-group">
                 <div class="col-lg-offset-2 col-lg-10">
                     <button type="button" class="btn btn-default" onclick="submitForm()">提交</button>
@@ -88,46 +65,18 @@
                 $(element).closest('div').append(error);
             },
              rules: {
-                 username: {
+                 name: {
                      required:true,
                      minlength:3,
-                     maxlength:18,
-                     remote:{
-                         type:"post",
-                         url:"validateUsername.do",
-                         dataType:'json',
-                         data:{
-                             username:function(){return $("#username").val();},
-                             id:function(){return $("#userId").val();}
-                         }
-                     }
+                     maxlength:50
                  },
-                 password: {
-                     required: true
-                 },
-                 email: {
-                     required: true,
-                     email:true,
-                     remote:{
-                         type:"post",
-                         url:"validateEmail.do",
-                         dataType:'json',
-                         data:{
-                             username:function(){return $("#email").val();},
-                             id:function(){return $("#userId").val();}
-                         }
-                     }
-                 }
-             },
+
              messages: {
-                 username: {
-                     required:"用户名不能为空!",
-                     remote:"此用户名已经存在!",
-                     minlength:"用户名最少3位!",
-                     maxlength:"用户名最长18位!"
-                 },
-                 password: "请输入1~18位密码",
-                 email:"请输入正确格式的邮箱"
+                 name: {
+                     required:"角色名称不能为空!",
+                     minlength:"角色名称最少3位!",
+                     maxlength:"用户名最长50位!"
+                 }
              },
              submitHandler:function(){
                  $("#form").ajaxSubmit({
