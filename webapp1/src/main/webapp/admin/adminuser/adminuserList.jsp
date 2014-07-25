@@ -7,10 +7,12 @@
     <link rel="stylesheet" href="../../adminthemes/default/css/style1.css"/>
     <link rel="stylesheet" href="../../adminthemes/default/css/blue.css"/>
     <link rel="stylesheet" href="../../adminthemes/default/css/table.css"/>
+    <link rel="stylesheet" href="../../adminthemes/blue/lib/smoke/smoke.css"/>
     <script src="/jeap/js/common/jquery-1.8.3.js"></script>
     <script src="/jeap/adminthemes/default/js/mylib/jeap.js"></script>
     <script src="/jeap/adminthemes/default/js/mylib/table.js"></script>
     <script src="/jeap/adminthemes/default/js/mylib/bootstrap.min.js"></script>
+    <script src="/jeap/adminthemes/blue/lib/smoke/smoke.js"></script>
 </head>
 <body style="background-color: #EEEEEE;">
 
@@ -51,9 +53,9 @@
         location.href = "toAdd.do";
     }
     function delAdminUser(userid){
-        $.ligerDialog.confirm('确定删除', function (yes)
-        {
-            if(yes){
+        smoke.confirm("确定删除?", function(yes){
+
+            if (yes){
                 $.ajax({
                     type:'post',
                     url:'delAdminUser.do',
@@ -76,7 +78,13 @@
                     }
                 });
             }
+        }, {
+            ok: "确定",
+            cancel: "取消",
+            classname: "custom-class",
+            reverseButtons: true
         });
+
     }
 </script>
 </body>

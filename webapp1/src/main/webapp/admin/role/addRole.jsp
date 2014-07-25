@@ -22,13 +22,13 @@
 <body style="background-color: #EEEEEE;">
 <div class="row">
     <div class="col-sm-6 col-md-6">
-        <p class="sepH_c">增加管理员</p>
+        <p class="sepH_c">增加角色</p>
         <form role="form" class="form-horizontal"  id="form">
-            <input type="hidden" name="id" id="userId" value="${adminUser.id}">
+            <input type="hidden" name="id" id="userId" value="${role.id}">
             <div class="form-group">
-                <label class="col-lg-2 control-label" for="username">用户名 <span class="f_req">*</span></label>
+                <label class="col-lg-2 control-label" for="name">角色名称 <span class="f_req">*</span></label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" name="username" id="username" style="width:200px" value="${adminUser.username}">
+                    <input type="text" class="form-control" name="name" id="name" style="width:200px" value="${role.name}">
                 </div>
             </div>
             <div class="form-group">

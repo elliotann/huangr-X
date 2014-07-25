@@ -31,12 +31,34 @@
                 <li><a href="javascript:void(0)">删除</a></li>
             </ul>
         </div>
-
+        <table:table items="pageOption">
+            <table:header>
+                <table:td clazz="table_checkbox"><input type="checkbox"
+                                                        data-tableid="smpl_tbl"
+                                                        class="select_rows" name="select_rows"></table:td>
+                <table:td>id</table:td>
+                <table:td>名称</table:td>
+                <table:td>状态</table:td>
+                <table:td>创建日期</table:td>
+                <table:td>操作</table:td>
+            </table:header>
+            <table:body item="role">
+                <table:td><input type="checkbox" class="select_row" name="row_sel"></table:td>
+                <td>${role.id}</td>
+                <td>${role.name}</td>
+                <td>Pending</td>
+                <td>24/04/2012</td>
+                <td>$120.23</td>
+            </table:body>
+        </table:table>
         <table id="smpl_tbl" class="table table-bordered table-striped">
             <thead>
             <tr>
-                <th class="table_checkbox"><input type="checkbox" data-tableid="smpl_tbl" class="select_rows"
-                                                  name="select_rows"></th>
+                <th class="table_checkbox">
+                    <input type="checkbox"
+                           data-tableid="smpl_tbl"
+                           class="select_rows" name="select_rows">
+                </th>
                 <th>id</th>
                 <th class="sorting_asc">名称</th>
                 <th>状态</th>
