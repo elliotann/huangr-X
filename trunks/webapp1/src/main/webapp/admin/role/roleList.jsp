@@ -25,7 +25,7 @@
             <button class="btn dropdown-toggle btn-default btn-sm" data-toggle="dropdown">操作 <span
                     class="caret"></span></button>
             <ul class="dropdown-menu">
-                <li><a data-tableid="smpl_tbl" class="delete_rows_simple" href="#"><i class="icon-trash"></i> 增加</a>
+                <li><a data-tableid="smpl_tbl" class="delete_rows_simple" href="#" onclick="addRole()"><i class="icon-trash"></i> 增加</a>
                 </li>
                 <li><a href="javascript:void(0)">修改</a></li>
                 <li><a href="javascript:void(0)">删除</a></li>
@@ -128,5 +128,10 @@
         </div>
     </div>
 </div>
+<script>
+    function addRole(){
+        location.href = "toAdd.do";
+    }
+</script>
 </body>
 </html>
