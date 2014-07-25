@@ -47,7 +47,7 @@ public class AdminUserController extends BaseController {
     @RequestMapping("/save")
     @ResponseBody
     public AjaxJson save(AdminUser adminUser){
-        if(adminUser!=null&&adminUser.getId()!=0){
+        if(adminUser.getId()!=null&&adminUser.getId()!=0){
             adminUserManager.update(adminUser);
         }else{
             adminUserManager.save(adminUser);
