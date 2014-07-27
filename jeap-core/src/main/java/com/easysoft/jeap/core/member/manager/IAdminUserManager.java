@@ -19,4 +19,12 @@ public interface IAdminUserManager {
     public boolean isExistUsernameOrEmail(Integer id,String username,String email);
 
     public void deleteById(Integer id);
+
+    /**
+     * 用户登录
+     * @param username
+     * @param password
+     * @return
+     */
+    public AdminUser login(String username,String password);
 }
