@@ -25,7 +25,7 @@
     </update>
     <select id="queryByUserNameOrEmail" resultMap="adminUserMap" parameterType="hashMap">
        select * from t_adminuser where 1=1
-       <if test="id!=0">
+       <if test="id!=null and id!=0">
           and user_id!=#{id}
        </if>
         <if test="username!=null">
