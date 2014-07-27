@@ -12,9 +12,9 @@
     <link rel="stylesheet" href="../../adminthemes/default/css/style1.css"/>
     <link rel="stylesheet" href="../../adminthemes/default/css/blue.css"/>
     <link rel="stylesheet" href="../../adminthemes/default/css/form.css"/>
-    <link rel="stylesheet" href="/jeap/adminthemes/blue/lib/sticky/sticky.css"/>
-    <script src="/jeap/adminthemes/default/js/mylib/jeap.js"></script>
 
+    <script src="/jeap/adminthemes/default/js/mylib/jeap.js"></script>
+    <link rel="stylesheet" href="/jeap/adminthemes/blue/lib/sticky/sticky.css"/>
     <script src="/jeap/adminthemes/blue/lib/sticky/sticky.js"></script>
    <%-- <script src="/jeap/adminthemes/blue/js/gebo_validation.js"></script>--%>
 

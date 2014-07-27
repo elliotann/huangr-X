@@ -1,43 +1,41 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: huangxa
-  Date: 2014/7/22
-  Time: 10:03
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html>
+<html class="login_page">
 <head>
     <title></title>
+    <link rel="stylesheet" href="../../adminthemes/default/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../adminthemes/default/css/style1.css"/>
+    <link rel="stylesheet" href="../../adminthemes/default/css/blue.css"/>
+    <link rel="stylesheet" href="../../adminthemes/default/css/form.css"/>
 </head>
 <body>
 <div class="login_box" style="margin-top: -187.5px;">
 
-    <form id="login_form" method="post" action="index.php?uid=1&amp;page=dashboard" novalidate="novalidate">
-        <div class="top_b">Sign in to Gebo Admin</div>
+    <form id="login_form" method="post" action="/jeap/admin/login.do" novalidate="novalidate">
+        <div class="top_b">管理员登录</div>
         <div class="alert alert-info alert-login">
-            Clear username and password field to see validation.
+            用户名或者密码错误
         </div>
         <div class="cnt_b">
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon input-sm"><i class="glyphicon glyphicon-user"></i></span>
-                    <input type="text" value="John Smith" placeholder="Username" name="username" id="username" class="form-control input-sm">
+                    <input type="text" value="" placeholder="请输入用户名" name="username" id="username" class="form-control input-sm">
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon input-sm"><i class="glyphicon glyphicon-lock"></i></span>
-                    <input type="password" value="password" placeholder="Password" name="password" id="password" class="form-control input-sm">
+                    <input type="password" value="" placeholder="请输入密码" name="password" id="password" class="form-control input-sm">
                 </div>
             </div>
             <div class="form-group">
-                <label class="checkbox-inline"><input type="checkbox"> Remember me</label>
+                <label class="checkbox-inline"><input type="checkbox"> 记住我</label>
             </div>
         </div>
         <div class="btm_b clearfix">
-            <button type="submit" class="btn btn-default btn-sm pull-right">Sign In</button>
-            <span class="link_reg"><a href="#reg_form">Not registered? Sign up here</a></span>
+            <button type="submit" class="btn btn-default btn-sm pull-right">登录</button>
+            <span class="link_reg"><a href="#reg_form"></a></span>
         </div>
     </form>
 
@@ -106,14 +104,11 @@
             </div>
         </div>
         <div class="btm_b tac">
-            <button type="submit" class="btn btn-default">Sign Up</button>
+            <button type="submit" class="btn btn-default">登录</button>
         </div>
     </form>
 
-    <div class="links_b links_btm clearfix">
-        <span class="linkform"><a href="#pass_form">Forgot password?</a></span>
-        <span style="display:none" class="linkform">Never mind, <a href="#login_form">send me back to the sign-in screen</a></span>
-    </div>
+
 
 </div>
 </body>
