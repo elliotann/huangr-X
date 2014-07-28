@@ -1,4 +1,5 @@
 package com.easysoft.jeap.controller.admin.filter;
+import com.easysoft.jeap.core.member.entity.AdminUser;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.*;
@@ -22,12 +23,17 @@ public class LoginFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest)servletRequest;
         HttpServletResponse response = (HttpServletResponse)servletResponse;
         String uri = request.getServletPath();
+        HttpSession session = request.getSession();
+        AdminUser adminUser = (AdminUser)session.getAttribute("admin_user_key");
+        if(adminUser!=null){
+            filterChain.doFilter(servletRequest,servletResponse);
+        }
+
         //如果访问后台,验证是否已经登录
-        if(uri.startsWith("/admin")&&!uri.equals("/adminthtmes/default/login.jsp")){
-            HttpSession session = request.getSession();
-            String username = (String)session.getAttribute("admin_username");
-            if(StringUtils.isEmpty(username)){
-                response.sendRedirect("../login.jsp");
+        if(uri.startsWith("/admin")&&!uri.equals("/admin/toLogin.do")&&!uri.equals("/admin/login.do")&&isContain(uri)){
+
+            if(adminUser==null){
+                response.sendRedirect("/jeap/admin/toLogin.do");
             }else{
                 filterChain.doFilter(servletRequest,servletResponse);
             }
@@ -39,5 +45,12 @@ public class LoginFilter implements Filter {
     @Override
     public void destroy() {
 
+    }
+
+    private boolean isContain(String uri){
+        if(uri.endsWith(".css")||uri.endsWith(".js")){
+            return false;
+        }
+        return true;
     }
 }
