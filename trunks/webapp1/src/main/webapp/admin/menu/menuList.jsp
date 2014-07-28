@@ -161,9 +161,9 @@
 </head>
 <body style="background-color: #EEEEEE;">
 
-<TABLE border=0 height=200px align=left>
+<TABLE border=0 height="100%" align=left>
     <TR>
-        <TD width="200px" align=left valign=top style="BORDER-RIGHT: #999999 1px dashed">
+        <TD width="200px" align=left valign=top style="BORDER-RIGHT: #999999 1px dashed;background-color: #EEEEEE;">
             <ul id="tree" class="ztree" style="width:200px; overflow:auto;"></ul>
         </TD>
         <TD width="100%" align=left valign=top><IFRAME ID="testIframe" Name="testIframe" FRAMEBORDER=0 SCROLLING=AUTO width=100%  height=600px SRC="core/standardData.html"></IFRAME></TD>
