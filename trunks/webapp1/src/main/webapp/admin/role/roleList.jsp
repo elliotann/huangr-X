@@ -17,7 +17,7 @@
         })
     </script>
 </head>
-<body style="background-color: #FFFFFF;">
+<body style="background-color: #EEEEEE;">
 
 <div class="row">
     <div class="col-sm-12 col-md-12">
@@ -27,8 +27,8 @@
             <ul class="dropdown-menu">
                 <li><a data-tableid="smpl_tbl" class="delete_rows_simple" href="#" onclick="addRole()"><i class="icon-trash"></i> 增加</a>
                 </li>
-                <li><a href="javascript:void(0)">修改</a></li>
-                <li><a href="javascript:void(0)">删除</a></li>
+                <li><a href="javascript:void(0)" onclick="updateRole()">修改</a></li>
+                <li><a href="javascript:void(0)" onclick="delRoles()">删除</a></li>
             </ul>
         </div>
         <table:table items="pageOption">
@@ -38,99 +38,62 @@
                                                         class="select_rows" name="select_rows"></table:td>
                 <table:td>id</table:td>
                 <table:td>名称</table:td>
-                <table:td>状态</table:td>
                 <table:td>创建日期</table:td>
                 <table:td>操作</table:td>
             </table:header>
             <table:body item="role">
-                <table:td><input type="checkbox" class="select_row" name="row_sel"></table:td>
+                <table:td><input type="checkbox" class="select_row" name="row_sel" value="${role.id}"></table:td>
                 <td>${role.id}</td>
                 <td>${role.name}</td>
-                <td>Pending</td>
-                <td>24/04/2012</td>
-                <td>$120.23</td>
+                <td>${role.createTime}</td>
+                <td>查看</td>
             </table:body>
         </table:table>
-        <table id="smpl_tbl" class="table table-bordered table-striped">
-            <thead>
-            <tr>
-                <th class="table_checkbox">
-                    <input type="checkbox"
-                           data-tableid="smpl_tbl"
-                           class="select_rows" name="select_rows">
-                </th>
-                <th>id</th>
-                <th class="sorting_asc">名称</th>
-                <th>状态</th>
-                <th>创建日期</th>
-                <th>操作</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td><input type="checkbox" class="select_row" name="row_sel"></td>
-                <td>134</td>
-                <td>Summer Throssell</td>
-                <td>Pending</td>
-                <td>24/04/2012</td>
-                <td>$120.23</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" name="row_sel"></td>
-                <td>133</td>
-                <td>Declan Pamphlett</td>
-                <td>Pending</td>
-                <td>23/04/2012</td>
-                <td>$320.00</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" name="row_sel"></td>
-                <td>132</td>
-                <td>Erin Church</td>
-                <td>Pending</td>
-                <td>23/04/2012</td>
-                <td>$44.00</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" name="row_sel"></td>
-                <td>131</td>
-                <td>Koby Auld</td>
-                <td>Pending</td>
-                <td>22/04/2012</td>
-                <td>$180.20</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" name="row_sel"></td>
-                <td>130</td>
-                <td>Anthony Pound</td>
-                <td>Pending</td>
-                <td>20/04/2012</td>
-                <td>$610.42</td>
-            </tr>
-            </tbody>
-        </table>
 
-        <div>
-            <div class="pagedetail">
-                显示 1 至5总共 5 条
-            </div>
-            <div class="dataTables_paginate paging_bootstrap pagenumber">
-                <ul class="pagination pagination-sm">
-                    <li class="prev disabled"><a href="#">上一页</a></li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li class="xt"><a href="#">下一页</a></li>
-                </ul>
-            </div>
-        </div>
     </div>
 </div>
 <script>
     function addRole(){
         location.href = "toAdd.do";
+    }
+    function updateRole(){
+        if($("input[name='row_sel']:checked").length!=1){
+            alert("请选择一条记录进行操作！");
+            return ;
+        }
+        var id=0;
+        $("input[name='row_sel']:checked").each(function(i,v){
+            id = $(this).val();
+        });
+        location.href = "toAdd.do?id="+id;
+    }
+    function delRoles(){
+        if($("input[name='row_sel']:checked").length<1){
+            alert("请至少选择一条记录进行操作！");
+            return ;
+        }
+        var ids = [];
+
+        $("input[name='row_sel']:checked").each(function(i,v){
+            ids.push($(this).val());
+        });
+        var params = {ids:ids};
+        $.ajax({
+            type:'post',
+            url:'delRoles.do',
+            dataType:'json',
+            data:params,
+            success:function(result){
+                if(result.success){
+                    alert("操作成功！");
+                    location.href="list.do";
+                }
+            },
+            error:function(e){
+                alert(e);
+            }
+        });
+
     }
 </script>
 </body>

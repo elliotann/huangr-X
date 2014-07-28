@@ -5,9 +5,12 @@ import com.easysoft.jeap.core.member.entity.AdminUser;
 import com.easysoft.jeap.core.member.entity.Role;
 import com.easysoft.jeap.core.member.manager.IRoleManager;
 import com.easysoft.jeap.framework.db.PageOption;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,6 +24,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/admin/role")
 public class RoleController {
+    private static final Log logger = LogFactory.getLog(RoleController.class);
     @Autowired
     private IRoleManager roleManager;
     @RequestMapping("/list")
@@ -37,7 +41,7 @@ public class RoleController {
             Role role = roleManager.queryById(id);
             params.put("role",role);
         }
-        return new ModelAndView("/admin/role/addRole");
+        return new ModelAndView("/admin/role/addRole",params);
     }
     @RequestMapping("/save")
     @ResponseBody
@@ -49,5 +53,18 @@ public class RoleController {
         }
 
         return new AjaxJson();
+    }
+    @RequestMapping("/delRoles")
+    @ResponseBody
+    public AjaxJson delRoles(@RequestParam(value="ids[]")Integer[] ids){
+        AjaxJson ajaxJson = new AjaxJson();
+        try{
+            roleManager.batchDelRole(ids);
+        }catch (Exception e){
+            logger.error("删除失败!",e);
+            ajaxJson.setMsg(e.getMessage());
+            ajaxJson.setSuccess(false);
+        }
+        return ajaxJson;
     }
 }
