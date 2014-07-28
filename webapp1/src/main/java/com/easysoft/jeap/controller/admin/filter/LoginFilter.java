@@ -27,6 +27,7 @@ public class LoginFilter implements Filter {
         AdminUser adminUser = (AdminUser)session.getAttribute("admin_user_key");
         if(adminUser!=null){
             filterChain.doFilter(servletRequest,servletResponse);
+            return;
         }
 
         //如果访问后台,验证是否已经登录
@@ -35,10 +36,12 @@ public class LoginFilter implements Filter {
             if(adminUser==null){
                 response.sendRedirect("/jeap/admin/toLogin.do");
             }else{
-                filterChain.doFilter(servletRequest,servletResponse);
+                filterChain.doFilter(request,response);
+                return;
             }
         }else{
-            filterChain.doFilter(servletRequest,servletResponse);
+            filterChain.doFilter(request,response);
+            return;
         }
     }
 

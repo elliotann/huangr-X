@@ -61,8 +61,8 @@
         <img alt="Avatar" src="images/avatar.png">
 
         <div class="info">
-            <h3>Admin</h3>
-            <small>360042212@qq.com</small>
+            <h3>${sessionScope.admin_user_key.username}</h3>
+            <small>${sessionScope.admin_user_key.email}</small>
             <p>
                 <a href="">账号设置</a> <a href="index.html">退出</a>
 
