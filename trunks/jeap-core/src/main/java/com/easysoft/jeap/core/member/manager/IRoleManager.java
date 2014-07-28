@@ -23,5 +23,7 @@ public interface IRoleManager {
     public void update(Role role);
 
 
-    public void delMenu(Integer id) throws PermissionException;
+    public void delRole(Integer id) throws PermissionException;
+
+    public void batchDelRole(Integer[] ids);
 }

@@ -1,6 +1,9 @@
 package com.easysoft.jeap.core.common.entity;
 
+import com.easysoft.jeap.framework.utils.DateUtil;
+
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 实体公用部分
@@ -10,7 +13,7 @@ public abstract class IdEntity implements Serializable{
     /**主键**/
     protected Integer id;
     /**创建时间**/
-    protected String createTime;
+    protected String createTime = DateUtil.formatDate2String(new Date());
 
     public Integer getId() {
         return id;
