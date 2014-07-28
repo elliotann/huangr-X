@@ -4,7 +4,7 @@
     <resultMap id="roleMap" type="Role">
         <id property="id" column="role_id"/>
         <id property="name" column="name"/>
-        <id property="desc" column="desc"/>
+        <id property="desc" column="descript"/>
     </resultMap>
     <select id="queryForAll" resultMap="roleMap">
         select * from t_role
@@ -13,7 +13,7 @@
         select * from t_role where role_id=#{id}
     </select>
     <insert id="save" parameterType="Role">
-        insert t_role (name,desc) values (#{name},#{desc})
+        insert t_role (name,desc) values (#{name},#{descript})
     </insert>
     <update id="update" parameterType="Role">
         UPDATE t_role
