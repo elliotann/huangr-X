@@ -60,12 +60,16 @@ public class RoleManager implements IRoleManager {
         roleDao.update(role);
     }
 
-
-
-
     @Override
-    public void delMenu(Integer id) throws PermissionException{
-
+    public void delRole(Integer id) throws PermissionException {
         roleDao.deleteById(id);
     }
+
+    @Override
+    public void batchDelRole(Integer[] ids) {
+        for(Integer id : ids){
+            delRole(id);
+        }
+    }
+
 }
