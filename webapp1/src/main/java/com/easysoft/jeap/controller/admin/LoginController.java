@@ -57,11 +57,15 @@ public class LoginController {
         }catch (Exception e){
             logger.error("登录失败!",e);
             try {
-                response.sendRedirect("../adminthemes/default/login.jsp");
+                response.sendRedirect("toLogin.do");
             } catch (IOException e1) {
                 logger.error("跳转登录界面失败!",e1);
             }
         }
         return null;
+    }
+    @RequestMapping("/toLogin")
+    public String toLogin(){
+        return "/adminthemes/default/login";
     }
 }

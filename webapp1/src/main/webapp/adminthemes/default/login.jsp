@@ -3,10 +3,10 @@
 <html class="login_page">
 <head>
     <title></title>
-    <link rel="stylesheet" href="../../adminthemes/default/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="../../adminthemes/default/css/style1.css"/>
-    <link rel="stylesheet" href="../../adminthemes/default/css/blue.css"/>
-    <link rel="stylesheet" href="../../adminthemes/default/css/form.css"/>
+    <link rel="stylesheet" href="../adminthemes/default/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../adminthemes/default/css/style1.css"/>
+    <link rel="stylesheet" href="../adminthemes/default/css/blue.css"/>
+    <link rel="stylesheet" href="../adminthemes/default/css/form.css"/>
 </head>
 <body>
 <div class="login_box" style="margin-top: -187.5px;">

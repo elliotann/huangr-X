@@ -51,7 +51,7 @@
 
 <script>
     $(function(){
-         $('#form').validate({
+        $('#form').validate({
             onkeyup: false,
             errorClass: 'error',
             validClass: 'valid',
@@ -64,47 +64,47 @@
             errorPlacement: function(error, element) {
                 $(element).closest('div').append(error);
             },
-             rules: {
-                 name: {
-                     required:true,
-                     minlength:3,
-                     maxlength:50
-                 },
+            rules: {
+                name: {
+                    required:true,
+                    minlength:3,
+                    maxlength:18
+                }
+            },
+            messages: {
+                name: {
+                    required:"角色名称不能为空!",
+                    minlength:"角色名称最少3位!",
+                    maxlength:"角色名称最长18位!"
+                }
+            },
+            submitHandler:function(){
+                $("#form").ajaxSubmit({
+                    url :"save.do",
+                    type : "POST",
+                    dataType:"json",
+                    success : function(result) {
 
-             messages: {
-                 name: {
-                     required:"角色名称不能为空!",
-                     minlength:"角色名称最少3位!",
-                     maxlength:"用户名最长50位!"
-                 }
-             },
-             submitHandler:function(){
-                 $("#form").ajaxSubmit({
-                     url :"save.do",
-                     type : "POST",
-                     dataType:"json",
-                     success : function(result) {
+                        if(result.success){
+                            $.sticky("操作成功!.", {autoclose : 500, position: "top-right", type: "st-success" });
 
-                         if(result.success){
-                             $.sticky("操作成功!.", {autoclose : 500, position: "top-right", type: "st-success" });
+                            setTimeout(function ()
+                            {
 
-                             setTimeout(function ()
-                             {
+                                location = "list.do";
+                            }, 1000);
 
-                                 location = "list.do";
-                             }, 1000);
-
-                         }else{
-                             alert(result.msg)
-                         }
-                     },
-                     error : function(e) {
-                         alert("出错啦:(");
-                     }
-                 });
-             },
+                        }else{
+                            alert(result.msg)
+                        }
+                    },
+                    error : function(e) {
+                        alert("出错啦:(");
+                    }
+                });
+            },
             invalidHandler: function(form, validator) {
-               $.sticky("验证失败!", {autoclose : 5000, position: "top-right", type: "st-error" });
+                $.sticky("验证失败!", {autoclose : 5000, position: "top-right", type: "st-error" });
             }
         });
 
