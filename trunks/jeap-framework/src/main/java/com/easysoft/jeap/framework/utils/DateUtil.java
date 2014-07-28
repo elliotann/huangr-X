@@ -26,7 +26,4 @@ public class DateUtil {
         DateFormat df = new SimpleDateFormat(pattern);
         return df.format(date);
     }
-    public static String formatDate2String(Date date){
-        return formatDate2String(date,null);
-    }
 }

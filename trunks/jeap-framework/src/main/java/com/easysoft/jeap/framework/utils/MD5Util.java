@@ -41,8 +41,4 @@ public class MD5Util {
 
         return keyword;
     }
-
-    public static void main(String[] args) {
-        System.out.println(MD5Util.md5("1"));
-    }
 }
