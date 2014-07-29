@@ -8,6 +8,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,7 +28,22 @@ public class MenuManager implements IMenuManager {
     private IMenuDao menuDao;
     @Override
     public List<Menu> queryForAll() {
-        return menuDao.queryForAll();
+        return getChildren(0);
+    }
+
+    private List<Menu> getChildren(Integer pid){
+        List<Menu> menus = menuDao.queryMenusByPid(pid);
+        List<Menu> results = new ArrayList<Menu>();
+        for(Menu menu:menus){
+            results.add(menu);
+            results.addAll(getChildren(menu.getId()));
+
+            menu.setChildren(queryMenusByPid(menu.getId()));
+        }
+
+
+
+        return results;
     }
 
     public Menu  queryById(Integer id){
