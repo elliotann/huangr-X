@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -66,6 +67,22 @@ public class LoginController {
     }
     @RequestMapping("/toLogin")
     public String toLogin(){
+        return "/adminthemes/default/login";
+    }
+
+    /**
+     * 注销
+     * @param request
+     * @return
+     */
+    @RequestMapping("/logout")
+    public String logout(HttpServletRequest request){
+        HttpSession session = request.getSession(false);
+        if(session == null){
+            return "/adminthemes/default/login";
+        }
+        session.removeAttribute("admin_user_key");
+
         return "/adminthemes/default/login";
     }
 }

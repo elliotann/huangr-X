@@ -64,7 +64,7 @@
             <h3>${sessionScope.admin_user_key.username}</h3>
             <small>${sessionScope.admin_user_key.email}</small>
             <p>
-                <a href="">账号设置</a> <a href="index.html">退出</a>
+                <a href="">账号设置</a> <a href="logout.do">退出</a>
 
             </p>
         </div>
