@@ -1,36 +1,410 @@
 <!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>无标题文档</title>
-<link rel="stylesheet" href="css/full_screen_preview-cd084db678a82d4084197309ff315d94.css"/>
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <title>312312</title>
+    <link href="css/style.css" media="screen" rel="stylesheet">
+    <script src="js/plugins/jquery-1.7.min.js" type="text/javascript"></script>
+    <script src="js/plugins/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script>
 
-<script src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/webtrends.hm.min.js"></script>
-<script async="" src="js/vendor_webtrends-b4fcbcc02524cc097ffbc457710190aa.js"></script>
-<script async="" src="js/analytics.js"></script>
-<script src="js/goal.js"></script>
-<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"beacon-5.newrelic.com","errorBeacon":"bam.nr-data.net","licenseKey":"fcf8d519de","applicationID":"13909,2324476,716468","transactionName":"NTU0DRQNDwshOmIZBRM3dR8TDg84Nys/FRQYBSoLAxQKAjM=","queueTime":6,"applicationTime":28,"ttGuid":"","agentToken":null,"agent":"js-agent.newrelic.com/nr-411.min.js"}</script>
-<script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={xpid:"VQcGQldQAQMJ"};window.NREUM||(NREUM={}),__nr_require=function(t,e,n){function r(n){if(!e[n]){var o=e[n]={exports:{}};t[n][0].call(o.exports,function(e){var o=t[n][1][e];return r(o?o:e)},o,o.exports)}return e[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o&lt;n.length;o++)r(n[o]);return r}({1:[function(t,e){function n(t,e,n){n||(n={});for(var r=o[t],a=r&amp;&amp;r.length||0,s=n[i]||(n[i]={}),u=0;a&gt;u;u++)r[u].apply(s,e);return s}function r(t,e){var n=o[t]||(o[t]=[]);n.push(e)}var o={},i="nr@context";e.exports={on:r,emit:n}},{}],2:[function(t){function e(t,e,n,i,s){return u?u-=1:r("err",[s||new UncaughtException(t,e,n)]),"function"==typeof a?a.apply(this,o(arguments)):!1}function UncaughtException(t,e,n){this.message=t||"Uncaught error with no additional information",this.sourceURL=e,this.line=n}function n(t){r("err",[t,(new Date).getTime()])}var r=t("handle"),o=t(6),i=t(5),a=window.onerror,s=!1,u=0;t("loader").features.push("err"),window.onerror=e,NREUM.noticeError=n;try{throw new Error}catch(d){"stack"in d&amp;&amp;(t(1),t(2),"addEventListener"in window&amp;&amp;t(3),window.XMLHttpRequest&amp;&amp;XMLHttpRequest.prototype&amp;&amp;XMLHttpRequest.prototype.addEventListener&amp;&amp;t(4),s=!0)}i.on("fn-start",function(){s&amp;&amp;(u+=1)}),i.on("fn-err",function(t,e,r){s&amp;&amp;(this.thrown=!0,n(r))}),i.on("fn-end",function(){s&amp;&amp;!this.thrown&amp;&amp;u&gt;0&amp;&amp;(u-=1)}),i.on("internal-error",function(t){r("ierr",[t,(new Date).getTime(),!0])})},{1:5,2:4,3:3,4:6,5:1,6:14,handle:"D5DuLP",loader:"G9z0Bl"}],3:[function(t){function e(t){r.inPlace(t,["addEventListener","removeEventListener"],"-",n)}function n(t){return t[1]}var r=t(1),o=(t(3),t(2));if(e(window),"getPrototypeOf"in Object){for(var i=document;i&amp;&amp;!i.hasOwnProperty("addEventListener");)i=Object.getPrototypeOf(i);i&amp;&amp;e(i);for(var a=XMLHttpRequest.prototype;a&amp;&amp;!a.hasOwnProperty("addEventListener");)a=Object.getPrototypeOf(a);a&amp;&amp;e(a)}else XMLHttpRequest.prototype.hasOwnProperty("addEventListener")&amp;&amp;e(XMLHttpRequest.prototype);o.on("addEventListener-start",function(t){if(t[1]){var e=t[1];"function"==typeof e?this.wrapped=e["nr@wrapped"]?t[1]=e["nr@wrapped"]:e["nr@wrapped"]=t[1]=r(e,"fn-"):"function"==typeof e.handleEvent&amp;&amp;r.inPlace(e,["handleEvent"],"fn-")}}),o.on("removeEventListener-start",function(t){var e=this.wrapped;e&amp;&amp;(t[1]=e)})},{1:15,2:1,3:14}],4:[function(t){var e=(t(3),t(1)),n=t(2);e.inPlace(window,["requestAnimationFrame","mozRequestAnimationFrame","webkitRequestAnimationFrame","msRequestAnimationFrame"],"raf-"),n.on("raf-start",function(t){t[0]=e(t[0],"fn-")})},{1:15,2:1,3:14}],5:[function(t){function e(t){var e=t[0];"string"==typeof e&amp;&amp;(e=new Function(e)),t[0]=n(e,"fn-")}var n=(t(3),t(1)),r=t(2);n.inPlace(window,["setTimeout","setInterval","setImmediate"],"setTimer-"),r.on("setTimer-start",e)},{1:15,2:1,3:14}],6:[function(t){function e(){o.inPlace(this,s,"fn-")}function n(t,e){o.inPlace(e,["onreadystatechange"],"fn-")}function r(t,e){return e}var o=t(1),i=t(2),a=window.XMLHttpRequest,s=["onload","onerror","onabort","onloadstart","onloadend","onprogress","ontimeout"];window.XMLHttpRequest=function(t){var n=new a(t);try{i.emit("new-xhr",[],n),o.inPlace(n,["addEventListener","removeEventListener"],"-",function(t,e){return e}),n.addEventListener("readystatechange",e,!1)}catch(r){try{i.emit("internal-error",r)}catch(s){}}return n},window.XMLHttpRequest.prototype=a.prototype,o.inPlace(XMLHttpRequest.prototype,["open","send"],"-xhr-",r),i.on("send-xhr-start",n),i.on("open-xhr-start",n)},{1:15,2:1}],7:[function(t){function e(){function e(t){if("string"==typeof t&amp;&amp;t.length)return t.length;if("object"!=typeof t)return void 0;if("undefined"!=typeof ArrayBuffer&amp;&amp;t instanceof ArrayBuffer&amp;&amp;t.byteLength)return t.byteLength;if("undefined"!=typeof Blob&amp;&amp;t instanceof Blob&amp;&amp;t.size)return t.size;if("undefined"!=typeof FormData&amp;&amp;t instanceof FormData)return void 0;try{return JSON.stringify(t).length}catch(e){return void 0}}function n(t){var n=this.params,r=this.metrics;if(!this.ended){this.ended=!0;for(var i=0;u&gt;i;i++)t.removeEventListener(s[i],this.listener,!1);if(!n.aborted){if(r.duration=(new Date).getTime()-this.startTime,4===t.readyState){n.status=t.status;var a=t.responseType,d="arraybuffer"===a||"blob"===a||"json"===a?t.response:t.responseText,f=e(d);if(f&amp;&amp;(r.rxSize=f),this.sameOrigin){var c=t.getResponseHeader("X-NewRelic-App-Data");c&amp;&amp;(n.cat=c.split(", ").pop())}}else n.status=0;r.cbTime=this.cbTime,o("xhr",[n,r])}}}function r(t,e){var n=i(e),r=t.params;r.host=n.hostname+":"+n.port,r.pathname=n.pathname,t.sameOrigin=n.sameOrigin}t("loader").features.push("xhr");var o=t("handle"),i=t(1),a=t(5),s=["load","error","abort","timeout"],u=s.length,d=t(2);t(3),t(4),a.on("new-xhr",function(){this.totalCbs=0,this.called=0,this.cbTime=0,this.end=n,this.ended=!1,this.xhrGuids={}}),a.on("open-xhr-start",function(t){this.params={method:t[0]},r(this,t[1]),this.metrics={}}),a.on("open-xhr-end",function(t,e){"loader_config"in NREUM&amp;&amp;"xpid"in NREUM.loader_config&amp;&amp;this.sameOrigin&amp;&amp;e.setRequestHeader("X-NewRelic-ID",NREUM.loader_config.xpid)}),a.on("send-xhr-start",function(t,n){var r=this.metrics,o=t[0],i=this;if(r&amp;&amp;o){var d=e(o);d&amp;&amp;(r.txSize=d)}this.startTime=(new Date).getTime(),this.listener=function(t){try{"abort"===t.type&amp;&amp;(i.params.aborted=!0),("load"!==t.type||i.called===i.totalCbs&amp;&amp;(i.onloadCalled||"function"!=typeof n.onload))&amp;&amp;i.end(n)}catch(e){try{a.emit("internal-error",e)}catch(r){}}};for(var f=0;u&gt;f;f++)n.addEventListener(s[f],this.listener,!1)}),a.on("xhr-cb-time",function(t,e,n){this.cbTime+=t,e?this.onloadCalled=!0:this.called+=1,this.called!==this.totalCbs||!this.onloadCalled&amp;&amp;"function"==typeof n.onload||this.end(n)}),a.on("xhr-load-added",function(t,e){var n=""+d(t)+!!e;this.xhrGuids&amp;&amp;!this.xhrGuids[n]&amp;&amp;(this.xhrGuids[n]=!0,this.totalCbs+=1)}),a.on("xhr-load-removed",function(t,e){var n=""+d(t)+!!e;this.xhrGuids&amp;&amp;this.xhrGuids[n]&amp;&amp;(delete this.xhrGuids[n],this.totalCbs-=1)}),a.on("addEventListener-end",function(t,e){e instanceof XMLHttpRequest&amp;&amp;"load"===t[0]&amp;&amp;a.emit("xhr-load-added",[t[1],t[2]],e)}),a.on("removeEventListener-end",function(t,e){e instanceof XMLHttpRequest&amp;&amp;"load"===t[0]&amp;&amp;a.emit("xhr-load-removed",[t[1],t[2]],e)}),a.on("fn-start",function(t,e,n){e instanceof XMLHttpRequest&amp;&amp;("onload"===n&amp;&amp;(this.onload=!0),("load"===(t[0]&amp;&amp;t[0].type)||this.onload)&amp;&amp;(this.xhrCbStart=(new Date).getTime()))}),a.on("fn-end",function(t,e){this.xhrCbStart&amp;&amp;a.emit("xhr-cb-time",[(new Date).getTime()-this.xhrCbStart,this.onload,e],e)})}window.XMLHttpRequest&amp;&amp;XMLHttpRequest.prototype&amp;&amp;XMLHttpRequest.prototype.addEventListener&amp;&amp;!/CriOS/.test(navigator.userAgent)&amp;&amp;e()},{1:8,2:11,3:3,4:6,5:1,handle:"D5DuLP",loader:"G9z0Bl"}],8:[function(t,e){e.exports=function(t){var e=document.createElement("a"),n=window.location,r={};e.href=t,r.port=e.port;var o=e.href.split("://");return!r.port&amp;&amp;o[1]&amp;&amp;(r.port=o[1].split("/")[0].split(":")[1]),r.port&amp;&amp;"0"!==r.port||(r.port="https"===o[0]?"443":"80"),r.hostname=e.hostname||n.hostname,r.pathname=e.pathname,"/"!==r.pathname.charAt(0)&amp;&amp;(r.pathname="/"+r.pathname),r.sameOrigin=!e.hostname||e.hostname===document.domain&amp;&amp;e.port===n.port&amp;&amp;e.protocol===n.protocol,r}},{}],handle:[function(t,e){e.exports=t("D5DuLP")},{}],D5DuLP:[function(t,e){function n(t,e){var n=r[t];return n?n.apply(this,e):(o[t]||(o[t]=[]),void o[t].push(e))}var r={},o={};e.exports=n,n.queues=o,n.handlers=r},{}],11:[function(t,e){function n(t){if(!t||"object"!=typeof t&amp;&amp;"function"!=typeof t)return-1;if(t===window)return 0;if(o.call(t,"__nr"))return t.__nr;try{return Object.defineProperty(t,"__nr",{value:r,writable:!0,enumerable:!1}),r}catch(e){return t.__nr=r,r}finally{r+=1}}var r=1,o=Object.prototype.hasOwnProperty;e.exports=n},{}],loader:[function(t,e){e.exports=t("G9z0Bl")},{}],G9z0Bl:[function(t,e){function n(){var t=p.info=NREUM.info;if(t&amp;&amp;t.agent&amp;&amp;t.licenseKey&amp;&amp;t.applicationID&amp;&amp;u&amp;&amp;u.body){p.proto="https"===c.split(":")[0]||t.sslForHttp?"https://":"http://",a("mark",["onload",i()]);var e=u.createElement("script");e.src=p.proto+t.agent,u.body.appendChild(e)}}function r(){"complete"===u.readyState&amp;&amp;o()}function o(){a("mark",["domContent",i()])}function i(){return(new Date).getTime()}var a=t("handle"),s=window,u=s.document,d="addEventListener",f="attachEvent",c=(""+location).split("?")[0],p=e.exports={offset:i(),origin:c,features:[]};u[d]?(u[d]("DOMContentLoaded",o,!1),s[d]("load",n,!1)):(u[f]("onreadystatechange",r),s[f]("onload",n)),a("mark",["firstbyte",i()])},{handle:"D5DuLP"}],14:[function(t,e){function n(t,e,n){e||(e=0),"undefined"==typeof n&amp;&amp;(n=t?t.length:0);for(var r=-1,o=n-e||0,i=Array(0&gt;o?0:o);++r&lt;o;)i[r]=t[e+r];return i}e.exports=n},{}],15:[function(t,e){function n(t,e,r,s){function nrWrapper(){try{var n,a=u(arguments),d=this,f=r&amp;&amp;r(a,d)||{}}catch(c){i([c,"",[a,d,s],f])}o(e+"start",[a,d,s],f);try{return n=t.apply(d,a)}catch(p){throw o(e+"err",[a,d,p],f),p}finally{o(e+"end",[a,d,n],f)}}return a(t)?t:(e||(e=""),nrWrapper[n.flag]=!0,nrWrapper)}function r(t,e,r,o){r||(r="");var i,s,u,d="-"===r.charAt(0);for(u=0;u&lt;e.length;u++)s=e[u],i=t[s],a(i)||(t[s]=n(i,d?s+r:r,o,s,t))}function o(t,e,n){try{s.emit(t,e,n)}catch(r){i([r,t,e,n])}}function i(t){try{s.emit("internal-error",t)}catch(e){}}function a(t){return!(t&amp;&amp;"function"==typeof t&amp;&amp;t.apply&amp;&amp;!t[n.flag])}var s=t(1),u=t(2);e.exports=n,n.inPlace=r,n.flag="nr@wrapper"},{1:1,2:14}]},{},["G9z0Bl",2,7]);</script>
-<script type="text/javascript" src="js/full_screen_preview-1e80ae9b22ddf0835cbfef5f969e5ccf.js"></script>
+    <script src="js/plugins/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="js/plugins/jquery.colorbox-min.js" type="text/javascript"></script>
+    <script src="js/plugins/jquery.flot.min.js" type="text/javascript"></script>
+    <script src="js/custom/general.js" type="text/javascript"></script>
+    <script src="js/custom/dashboard.js" type="text/javascript"></script>
 </head>
 
-<body>
-	<div id="header-bar">
-  		<div class="close-header">
-    		<a href="http://demo.themepixels.com/webpage/mandylane/" class="close" title="Close ThemeForest Bar" id="close-button">X</a>
-  		</div>
+<body class="bodygrey"><div id="cboxOverlay" style="display: none;"></div><div id="colorbox" class="" style="padding-bottom: 20px; padding-right: 0px; display: none;"><div id="cboxWrapper"><div><div id="cboxTopLeft" style="float: left;"></div><div id="cboxTopCenter" style="float: left;"></div><div id="cboxTopRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxMiddleLeft" style="float: left;"></div><div id="cboxContent" style="float: left;"><div id="cboxLoadedContent" style="width: 0px; height: 0px; overflow: hidden; float: left;"></div><div id="cboxLoadingOverlay" style="float: left;"></div><div id="cboxLoadingGraphic" style="float: left;"></div><div id="cboxTitle" style="float: left;"></div><div id="cboxCurrent" style="float: left;"></div><div id="cboxNext" style="float: left;"></div><div id="cboxPrevious" style="float: left;"></div><div id="cboxSlideshow" style="float: left;"></div><div id="cboxClose" style="float: left;"></div></div><div id="cboxMiddleRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxBottomLeft" style="float: left;"></div><div id="cboxBottomCenter" style="float: left;"></div><div id="cboxBottomRight" style="float: left;"></div></div></div><div style="position: absolute; width: 9999px; visibility: hidden; display: none;"></div></div>
 
-  		<p class="meta-data">
-    		<a href="http://demo.themepixels.com/webpage/mandylane/" class="close">Remove Frame</a> <a href="/item/mandy-lane-premium-admin-template/1028955" 
-            class="purchase">Purchase this Item!</a>
-  		</p>
+<div class="headerspace"></div>
 
-  		<a href="/item/mandy-lane-premium-admin-template/1028955" class="athemeforest-preview-logo site-loopback">themeforest</a>
-        <span class="preview">item preview</span>
-	</div>
-    <iframe id="preview-frame" frameborder="0" noresize="noresize" name="preview-frame" src="index.html" style="height: 420px;">
-    	
-    </iframe>
-</body>
-</html>
+<div class="header">
+
+
+    <form method="post" action="" id="search">
+        <input type="text" name="keyword"> <button class="searchbutton"></button>
+    </form>
+
+    <div class="topheader">
+        <ul class="notebutton">
+            <li class="note">
+                <a class="messagenotify" href="pages/message.html">
+                    <span class="wrap">
+
+                        <span class="thicon msgicon"></span>
+                        <span class="count">1</span>
+                    </span>
+                </a>
+            </li>
+            <li class="note">
+                <a class="alertnotify" href="pages/info.html">
+                	<span class="wrap">
+
+                    	<span class="thicon infoicon"></span>
+                        <span class="count">5</span>
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </div><!-- topheader -->
+
+
+    <!-- logo -->
+    <a href=""><img alt="Logo" src="images/logo2.png"></a>
+
+    <div class="tabmenu">
+        <ul>
+            <li class="current"><a class="dashboard" href="dashboard.html"><span>Dashboard</span></a></li>
+            <li><a class="elements" href="elements.html"><span>Elements</span></a>
+                <ul class="subnav" style="visibility: hidden; display: block;">
+                    <li><a href=""><span>Sub Menu One</span></a></li>
+
+                    <li><a href=""><span>Sub Menu Two</span></a></li>
+                    <li><a href=""><span>Sub Menu Three</span></a></li>
+                </ul>
+            </li>
+            <li><a class="reports" href="reports.html"><span>Reports</span></a></li>
+            <li><a class="users" href="users.html"><span>Users</span></a></li>
+        </ul>
+
+    </div><!-- tabmenu -->
+
+    <div class="accountinfo">
+        <img alt="Avatar" src="images/avatar.png">
+        <div class="info">
+            <h3>John Doe</h3>
+            <small>youremail@domain.com</small>
+            <p>
+                <a href="">Account Settings</a> <a href="index.html">Logout</a>
+
+            </p>
+        </div><!-- info -->
+    </div><!-- accountinfo -->
+</div><!-- header -->
+
+
+<div class="sidebar">
+    <div id="accordion">
+        <h3 class="open">Main Navigation</h3>
+        <div style="display: block;" class="content">
+
+            <ul class="leftmenu">
+                <li class="current"><a class="home" href="dashboard.html">General</a></li>
+                <li><a class="form" href="forms.html">Form Styling</a></li>
+                <li><a class="table" href="tables.html">Table Styling</a></li>
+                <li><a class="gallery" href="gallery.html">Image Gallery</a></li>
+                <li><a class="grid" href="grid.html">Grid Styling</a></li>
+
+                <li><a class="calendar" href="calendar.html">Calendar</a></li>
+                <li><a class="buttons" href="buttons.html">Buttons &amp; Icons</a></li>
+                <li><a class="editor" href="editor.html">WYSIWYG Editor</a></li>
+                <li><a class="file" href="filemanager.html">File Manager</a></li>
+                <li><a class="form" href="invoice.html">Invoice</a></li>
+
+                <li><a class="error" href="404.html">404 Page</a></li>
+            </ul>
+        </div>
+        <h3 class="open">Custom Text</h3>
+        <div style="display: block;" class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </div>
+    </div>
+
+</div><!-- leftmenu -->
+
+
+<div class="maincontent">
+<div class="two_third maincontent_inner ">
+    <div class="left">
+
+        <div class="notification msginfo">
+            <a class="close"></a>
+            There are 3 submitted items from users. <a href="">Click to approve</a>
+        </div><!-- notification info -->
+
+
+        <!-- START WIDGET LIST -->
+        <ul class="widgetlist">
+            <li><a href=""><img alt="Document Icon" src="images/icons/document.png"><span>Add New Article</span></a></li>
+            <li><a href=""><img alt="Report Icon" src="images/icons/createreport.png"><span>Create Report</span></a></li>
+            <li><a href=""><img alt="Mail Icon" src="images/icons/mail.png"><span>Compose Mail</span></a></li>
+            <li><a href=""><img alt="Events Icon" src="images/icons/calendar.png"><span>Manage Events</span></a></li>
+            <li><a href=""><img alt="Media Icon" src="images/icons/media.png"><span>Media Library</span></a></li>
+
+        </ul>
+        <!-- END WIDGET LIST -->
+
+        <div class="clear"></div>
+
+        <div class="widgetbox">
+            <h3 class=""><span>Sample Chart</span></h3>
+            <div class="content nopadding ohidden">
+                <table width="100%" cellspacing="0" cellpadding="0" class="sTable3">
+                    <thead>
+
+                    <tr>
+                        <td>Column 1</td>
+                        <td>Column 2</td>
+                        <td>Column 3</td>
+                        <td align="right">Impressions</td>
+                        <td align="right">Percentage</td>
+
+                        <td>Column 6</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Row Text 1</td>
+                        <td>Row Text 2</td>
+
+                        <td>Row Text 3</td>
+                        <td align="right">2 100.00</td>
+                        <td align="right">20%</td>
+                        <td>Row Text 6</td>
+                    </tr>
+                    <tr class="even">
+                        <td>Row Text 1</td>
+
+                        <td>Row Text 2</td>
+                        <td>Row Text 3</td>
+                        <td align="right">2 100.00</td>
+                        <td align="right">20%</td>
+                        <td>Row Text 6</td>
+                    </tr>
+
+                    <tr>
+                        <td>Row Text 1</td>
+                        <td>Row Text 2</td>
+                        <td>Row Text 3</td>
+                        <td align="right">2 100.00</td>
+                        <td align="right">20%</td>
+
+                        <td>Row Text 6</td>
+                    </tr>
+                    <tr class="even">
+                        <td>Row Text 1</td>
+                        <td>Row Text 2</td>
+                        <td>Row Text 3</td>
+                        <td align="right">2 100.00</td>
+
+                        <td align="right">20%</td>
+                        <td>Row Text 6</td>
+                    </tr>
+                    <tr>
+                        <td>Row Text 1</td>
+                        <td>Row Text 2</td>
+                        <td>Row Text 3</td>
+
+                        <td align="right">2 100.00</td>
+                        <td align="right">20%</td>
+                        <td>Row Text 6</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div><!-- content -->
+
+        </div><!-- widgetbox2 -->
+
+        <div class="widgetbox">
+            <h3 class=""><span>Sample Chart</span></h3>
+            <div class="content">
+                <div style="height: 300px; padding: 0px; position: relative;" id="chartplace"><canvas class="base" width="924" height="300"></canvas><canvas class="overlay" width="924" height="300" style="position: absolute; left: 0px; top: 0px;"></canvas><div style="font-size:smaller" class="tickLabels"><div style="color:#545454" class="xAxis x1Axis"><div style="position:absolute;text-align:center;left:-7px;top:279px;width:61px" class="tickLabel">0</div><div style="position:absolute;text-align:center;left:59px;top:279px;width:61px" class="tickLabel">1</div><div style="position:absolute;text-align:center;left:125px;top:279px;width:61px" class="tickLabel">2</div><div style="position:absolute;text-align:center;left:192px;top:279px;width:61px" class="tickLabel">3</div><div style="position:absolute;text-align:center;left:258px;top:279px;width:61px" class="tickLabel">4</div><div style="position:absolute;text-align:center;left:325px;top:279px;width:61px" class="tickLabel">5</div><div style="position:absolute;text-align:center;left:391px;top:279px;width:61px" class="tickLabel">6</div><div style="position:absolute;text-align:center;left:458px;top:279px;width:61px" class="tickLabel">7</div><div style="position:absolute;text-align:center;left:524px;top:279px;width:61px" class="tickLabel">8</div><div style="position:absolute;text-align:center;left:591px;top:279px;width:61px" class="tickLabel">9</div><div style="position:absolute;text-align:center;left:657px;top:279px;width:61px" class="tickLabel">10</div><div style="position:absolute;text-align:center;left:723px;top:279px;width:61px" class="tickLabel">11</div><div style="position:absolute;text-align:center;left:790px;top:279px;width:61px" class="tickLabel">12</div><div style="position:absolute;text-align:center;left:856px;top:279px;width:61px" class="tickLabel">13</div></div><div style="color:#545454" class="yAxis y1Axis"><div style="position:absolute;text-align:right;top:239px;right:908px;width:16px" class="tickLabel">-1.0</div><div style="position:absolute;text-align:right;top:183px;right:908px;width:16px" class="tickLabel">-0.5</div><div style="position:absolute;text-align:right;top:128px;right:908px;width:16px" class="tickLabel">0.0</div><div style="position:absolute;text-align:right;top:72px;right:908px;width:16px" class="tickLabel">0.5</div><div style="position:absolute;text-align:right;top:16px;right:908px;width:16px" class="tickLabel">1.0</div></div></div><div class="legend"><div style="position: absolute; width: 65px; height: 48px; top: 9px; right: 9px; background-color: rgb(252, 252, 252); opacity: 0.85;"> </div><table style="position:absolute;top:9px;right:9px;;font-size:smaller;color:#545454"><tbody><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid #069;overflow:hidden"></div></div></td><td class="legendLabel">Flash(x)</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid #ff0000;overflow:hidden"></div></div></td><td class="legendLabel">HTML5(x)</td></tr></tbody></table></div></div>
+            </div><!-- content -->
+        </div><!-- widgetbox2 -->
+
+        <div class="widgetbox">
+
+            <h3><span>Buttons</span></h3>
+            <div class="content">
+                <button class="button button_white">Button</button> &nbsp;
+                <button class="button button_blue">Button</button> &nbsp;
+                <button class="button button_black">Button</button> &nbsp;
+
+                <button class="button button_red">Button</button> &nbsp;
+                <button class="button button_yellow">Button</button> &nbsp;
+                <button class="button button_green">Button</button> &nbsp;
+                <button class="button button_brown">Button</button> &nbsp;
+                <button class="button button_lblue">Button</button> <br>
+
+            </div><!-- conten t-->
+        </div><!-- widgetbox -->
+
+        <div class="widgetbox">
+            <h3><span>Form with validation</span></h3>
+            <div class="content">
+                <form method="post" action="" id="form" novalidate="novalidate">
+
+                    <div class="form_default">
+
+                        <p>
+
+                            <label for="name">Name</label>
+                            <input type="text" class="sf" id="name" name="name">
+                        </p>
+
+                        <p>
+                            <label for="email">Email</label>
+                            <input type="text" class="sf" id="email" name="email">
+                        </p>
+
+                        <p>
+
+                            <label for="location">Location</label>
+                            <textarea cols="" rows="" class="mf" name="location"></textarea>
+                        </p>
+
+                        <p>
+                            <label class="nopadding" for="gender">Gender</label>
+                            <input type="radio" value="0" name="gender"> Male &nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" value="1" name="gender"> Female
+                        </p>
+
+
+                        <p>
+                            <label class="nopadding" for="language">Language</label>
+                            <input type="checkbox" value="0" name="language[]"> English &nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="checkbox" value="1" name="language[]"> Mandarin &nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="checkbox" value="1" name="language[]"> German
+                        </p>
+
+                        <p>
+
+                            <label for="occupation">Occupation</label>
+                            <select id="occupation" name="occupation">
+                                <option value="">Choose One</option>
+                                <option value="0">Web Designer</option>
+                                <option value="1">Web Developer</option>
+                                <option value="2">Software Engineer</option>
+
+                                <option value="3">Application Engineer</option>
+                                <option value="4">Programmer</option>
+                                <option value="5">Analyst</option>
+
+                            </select>
+                        </p>
+
+                        <p>
+                            <button>Submit</button>
+
+                        </p>
+
+                    </div><!--form-->
+                </form>
+
+            </div><!-- content -->
+        </div><!-- widgetbox -->
+
+        <br>
+
+    </div><!-- left -->
+</div><!-- two_third -->
+
+<div class="one_third last">
+
+    <div class="right">
+
+        <div class="widgetbox">
+            <h3><span>EARNINGS</span></h3>
+            <div class="content">
+
+                <h1 class="prize">$232.45</h1>
+                <p>Estimate earnings by the end of the day: <strong>$300.00</strong></p>
+
+                <br>
+
+
+                <div class="one_half bright">
+                    <h2 class="prize">$412.30</h2>
+                    <small>Yesterday's earnings</small>
+                </div><!--one_half-->
+
+                <div class="one_half last">
+                    <h2 class="prize">$2,796.98</h2>
+                    <small>This month's earnings</small>
+
+                </div><!--one_half-->
+
+
+            </div><!-- content -->
+        </div><!-- widgetbox -->
+
+        <div class="widgetbox">
+            <h3><span>PROGRESS BAR</span></h3>
+            <div class="content">
+
+                <div class="progress">
+                    Storage (60%)
+                    <div class="bar"><div style="width: 60%;" class="value bluebar"></div></div>
+
+                </div><!-- progress -->
+
+                <div class="progress">
+                    Bandwidth (86%)
+                    <div class="bar"><div style="width: 86%;" class="value orangebar"></div></div>
+                </div><!-- progress -->
+
+                <div class="progress">
+                    Impression (34%)
+                    <div class="bar"><div style="width: 34%;" class="value redbar"></div></div>
+                </div><!-- progres s-->
+
+            </div><!-- content -->
+
+        </div><!-- widgetbox -->
+
+        <div class="widgetbox2">
+            <h3><span>Widget Box 2</span></h3>
+            <div class="content">
+
+                <p><img class="imgleft" alt="" src="images/assets/image1.png">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium.</p>
+
+
+            </div><!--content-->
+        </div><!--widgetbox2 -->
+
+        <div class="tabs2 ui-tabs ui-widget ui-widget-content ui-corner-all" id="tabs">
+
+            <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+                <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-1">Tab A</a></li>
+                <li class="ui-state-default ui-corner-top"><a href="#tabs-2">Tab B</a></li>
+                <li class="ui-state-default ui-corner-top"><a href="#tabs-3">Tab C</a></li>
+            </ul>
+            <div id="tabs-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+                <p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus. Curabitur nec arcu. Donec sollicitudin mi sit amet mauris. Nam elementum quam ullamcorper ante. Etiam aliquet massa et lorem. Mauris dapibus lacus auctor risus. Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula eleifend adipiscing. Duis orci. Aliquam sodales tortor vitae ipsum. Aliquam nulla. Duis aliquam molestie erat. Ut et mauris vel pede varius sollicitudin. Sed ut dolor nec orci tincidunt interdum. Phasellus ipsum. Nunc tristique tempus lectus.</p>
+
+            </div>
+            <div id="tabs-2" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+                <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
+            </div>
+            <div id="tabs-3" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+                <p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
+            </div>
+
+        </div><!-- tabs -->
+
+
+        <br>
+
+        <div class="accordion ui-accordion ui-widget ui-helper-reset ui-accordion-icons" role="tablist">
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-state-active ui-corner-top" role="tab" aria-expanded="true" aria-selected="true" tabindex="0"><span class="ui-icon ui-icon-triangle-1-s"></span><a href="#" tabindex="-1">First header</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom ui-accordion-content-active" style="height: 126px;" role="tabpanel">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</div>
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-triangle-1-e"></span><a href="#" tabindex="-1">Second header</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" style="height: 126px; display: none;" role="tabpanel">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</div>
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-triangle-1-e"></span><a href="#" tabindex="-1">Third header</a></h3>
+
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" style="height: 126px; display: none;" role="tabpanel">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</div>
+        </div><!-- accordion -->
+
+    </div><!--right-->
+</div><!--one_third last-->
+
+<br clear="all">
+
+</div><!--maincontent-->
+
+<br>
+<div class="footer">
+    <div class="footerinner">
+
+        &copy; 2011. Mandy Lane Premium Template. All Rights Reserved.
+    </div><!-- footerinner -->
+</div><!-- footer -->
+
+
+</body></html>

@@ -23,6 +23,10 @@ public class LoginFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest)servletRequest;
         HttpServletResponse response = (HttpServletResponse)servletResponse;
         String uri = request.getServletPath();
+        if(!isContain(uri)){
+            filterChain.doFilter(request,response);
+            return;
+        }
         HttpSession session = request.getSession();
         AdminUser adminUser = (AdminUser)session.getAttribute("admin_user_key");
         if(adminUser!=null){
@@ -51,7 +55,7 @@ public class LoginFilter implements Filter {
     }
 
     private boolean isContain(String uri){
-        if(uri.endsWith(".css")||uri.endsWith(".js")){
+        if(uri.endsWith(".css")||uri.endsWith(".js")||uri.endsWith(".html")){
             return false;
         }
         return true;

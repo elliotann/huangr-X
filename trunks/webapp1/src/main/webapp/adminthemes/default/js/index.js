@@ -42,7 +42,7 @@ var AdminUI = {
                 var leftMenuItems = $("#leftMenuItems");
                 var i=0;
                 $.each(this.children,function(k,v){
-                    var link = self.createLink(v);
+                    var link = $("<a class='home' target='iframepage' href='"+ v.url +"' >" + v.name + "</a>");
                     leftMenuItems.append($("<li></li>").append(link));
                     link.click(function(){
                         $("#accordion li").removeClass("current");
@@ -57,10 +57,6 @@ var AdminUI = {
             }
             leftMenu.append($("<h3 class=\"open\"></h3>"));
         });
-    },
-    createLink:function(v){
-        var link = $("<a class='home' target='iframepage' href='"+ v.url +"' >" + v.name + "</a>");
-        return link;
     }
 }
 

@@ -15,7 +15,7 @@
 <body class="bodygrey">
 <div style="display: none;" id="cboxOverlay"></div>
 
-<div class="headerspace"></div>
+
 <div class="header">
     <form method="post" action="" id="search">
         <input type="text" name="keyword">
@@ -74,7 +74,7 @@
 </div>
 
 <!--左侧菜单开始-->
-<div class="sidebar">
+<div class="sidebar" style="height: 740px">
     <div id="accordion">
 
     </div>
