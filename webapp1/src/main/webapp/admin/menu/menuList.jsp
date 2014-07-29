@@ -1,173 +1,128 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Administrator
-  Date: 2014/7/8
-  Time: 21:59
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="/admin/commons/taglibs.jsp"%>
 <html>
 <head>
     <title></title>
+    <link rel="stylesheet" href="../../adminthemes/default/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../adminthemes/default/css/style1.css"/>
+    <link rel="stylesheet" href="../../adminthemes/default/css/blue.css"/>
+    <link rel="stylesheet" href="../../adminthemes/default/css/table.css"/>
+    <link rel="stylesheet" href="../../adminthemes/blue/lib/smoke/smoke.css"/>
 
+    <link rel="stylesheet" href="/jeap/js/ludo-jquery-treetable-73690a9/css/jquery.treetable.css"/>
+    <%--<link rel="stylesheet" href="/jeap/js/ludo-jquery-treetable-73690a9/css/jquery.treetable.theme.default.css"/>--%>
     <script src="/jeap/js/common/jquery-1.8.3.js"></script>
-    <script src="/jeap/js/common/zTree_v3/js/jquery.ztree.core-3.5.js"></script>
-    <script type="text/javascript" src="/jeap/js/common/zTree_v3/js/jquery.ztree.excheck-3.5.js"></script>
-    <script type="text/javascript" src="/jeap/js/common/zTree_v3/js/jquery.ztree.exedit-3.5.js"></script>
-    <link rel="stylesheet" href="/jeap/js/common/zTree_v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
-    <link rel="stylesheet" href="/jeap/adminthemes/default/js/ligerui/skins/Aqua/css/ligerui-all.css" />
-    <link rel="stylesheet" href="/jeap/adminthemes/default/js/ligerui/skins/Gray/css/all.css" />
-    <script src="../../adminthemes/default/js/base.js"></script>
-    <script src="../../adminthemes/default/js/ligerui/js/plugins/ligerDialog.js"></script>
-    <SCRIPT type="text/javascript" >
-        <!--
-        var zTree;
-        var demoIframe;
-
-        var setting = {
-            view: {
-                dblClickExpand: false,
-                showLine: true,
-                selectedMulti: false,
-                addHoverDom:addHoverDom,
-                removeHoverDom: removeHoverDom
-            },
-            data: {
-                simpleData: {
-                    enable:true,
-                    idKey: "id",
-                    pIdKey: "pid",
-                    rootPId: ""
-                }
-            },
-            edit:{
-                enable: true,
-                showRemoveBtn: showRemoveBtn
-            },
-            callback: {
-                beforeClick: function(treeId, treeNode) {
-                    var zTree = $.fn.zTree.getZTreeObj("tree");
-                    if (treeNode.isParent) {
-                        zTree.expandNode(treeNode);
-                        demoIframe.attr("src","toAdd.do?id="+treeNode.id);
-                        return false;
-                    } else {
-                        demoIframe.attr("src","toAdd.do?id="+treeNode.id);
-                        return false;
-                    }
-                },
-                beforeRemove: beforeRemove
-            }
-
-        };
+    <script src="/jeap/adminthemes/default/js/mylib/jeap.js"></script>
+    <script src="/jeap/adminthemes/default/js/mylib/table.js"></script>
+    <script src="/jeap/adminthemes/default/js/mylib/bootstrap.min.js"></script>
+    <script src="/jeap/adminthemes/blue/lib/smoke/smoke.js"></script>
 
 
-        var menus =${menus};
-        $(document).ready(function(){
-            var t = $("#tree");
-            t = $.fn.zTree.init(t, setting, menus);
-            demoIframe = $("#testIframe");
-            demoIframe.bind("load", loadReady);
-            var zTree = $.fn.zTree.getZTreeObj("tree");
-            zTree.selectNode(zTree.getNodeByParam("id", 101));
 
-        });
+    <script src="/jeap/js/ludo-jquery-treetable-73690a9/jquery.treetable.js"></script>
+</head>
+<body style="background-color: #EEEEEE;">
 
-        function loadReady() {
-            var bodyH = demoIframe.contents().find("body").get(0).scrollHeight,
-                    htmlH = demoIframe.contents().find("html").get(0).scrollHeight,
-                    maxH = Math.max(bodyH, htmlH), minH = Math.min(bodyH, htmlH),
-                    h = demoIframe.height() >= maxH ? minH:maxH ;
-            if (h < 530) h = 530;
-            demoIframe.height(h);
-        }
-        var newCount = 1;
-        var log, className = "dark";
-        function addHoverDom(treeId, treeNode){
-            var sObj = $("#" + treeNode.tId + "_span");
-            if (treeNode.editNameFlag || $("#addBtn_"+treeNode.tId).length>0) return;
-            var addStr = "<span class='button add' id='addBtn_" + treeNode.tId
-                    + "' title='增加子菜单' onfocus='this.blur();'></span>";
-            sObj.after(addStr);
-            var btn = $("#addBtn_"+treeNode.tId);
-            if (btn) btn.bind("click", function(){
-                var zTree = $.fn.zTree.getZTreeObj("tree");
-                //zTree.addNodes(treeNode, {id:(100 + newCount), pId:treeNode.id, name:"new node" + (newCount++)});
-                demoIframe.attr("src","toAdd.do?pid="+treeNode.id);
-                return false;
-            });
-        }
-        function removeHoverDom(treeId, treeNode) {
-            $("#addBtn_"+treeNode.tId).unbind().remove();
-        };
-        function showRemoveBtn(treeId, treeNode) {
-            return !treeNode.isFirstNode;
-        }
 
-        function showLog(str) {
-            if (!log) log = $("#log");
-            log.append("<li class='"+className+"'>"+str+"</li>");
-            if(log.children("li").length > 8) {
-                log.get(0).removeChild(log.children("li")[0]);
-            }
-        }
-        function beforeRemove(treeId, treeNode){
-            className = (className === "dark" ? "":"dark");
+<div class="row">
+    <div class="col-sm-12 col-md-12">
+        <div class="btn-group sepH_b">
+            <button class="btn dropdown-toggle btn-default btn-sm" data-toggle="dropdown">操作 <span
+                    class="caret"></span></button>
+            <ul class="dropdown-menu">
+                <li><a data-tableid="smpl_tbl" class="delete_rows_simple" href="#" onclick="addAdminUser()"><i class="icon-trash"></i> 增加</a>
+                </li>
+                <li><a href="javascript:void(0)">修改</a></li>
+                <li><a href="javascript:void(0)">删除</a></li>
+            </ul>
+        </div>
+        <table id="example-advanced" class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>名称</th>
+            <th>URL</th>
+            <th>图标</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${menuList}" var="menu">
+            <c:if test="${fn:length(menu.children)<1 }">
+                <tr data-tt-id='${menu.id}' data-tt-parent-id='${menu.pid}'>
+                    <td><span class='file'>${menu.name}</span></td>
+                    <td>File</td>
+                    <td>480.95 KB</td>
+                </tr>
+            </c:if>
+            <c:if test="${fn:length(menu.children)>0 }">
+                <tr data-tt-id='${menu.id}' data-tt-parent-id='${menu.pid}'>
+                    <td><span class='folder'>${menu.name}</span></td>
+                    <td>File</td>
+                    <td>480.95 KB</td>
+                </tr>
+            </c:if>
+        </c:forEach>
+        </tbody>
+        </table>
 
-            var zTree = $.fn.zTree.getZTreeObj("tree");
-            zTree.selectNode(treeNode);
-            if(confirm("确认删除菜单" + treeNode.name + " 吗？")){
+    </div>
+</div>
+<script>
+    function addAdminUser(){
+        location.href = "toAdd.do";
+    }
+    function delAdminUser(userid){
+        smoke.confirm("确定删除?", function(yes){
+
+            if (yes){
                 $.ajax({
                     type:'post',
-                    url:'delMenu.do',
-                    data:'id='+treeNode.id,
+                    url:'delAdminUser.do',
+                    dataType:'json',
+                    data:'id='+userid,
                     success:function(result){
                         if(result.success){
                             $.ligerDialog.waitting('操作成功');
                             setTimeout(function ()
                             {
                                 $.ligerDialog.closeWaitting();
+                                location = "list.do";
                             }, 1000);
-                            return true;
                         }else{
-                            $.ligerDialog.waitting('操作失败,有子菜单存在！');
-                            setTimeout(function ()
-                            {
-                                $.ligerDialog.closeWaitting();
-                            }, 1000);
-                            return false;
+                            alert("删除出错!");
                         }
                     },
                     error:function(e){
-                        $.ligerDialog.waitting(e);
-                        setTimeout(function ()
-                        {
-                            $.ligerDialog.closeWaitting();
-                        }, 1000);
-                        return false;
+                        alert("删除出错!"+e);
                     }
                 });
-
             }
-            return false;
+        }, {
+            ok: "确定",
+            cancel: "取消",
+            classname: "custom-class",
+            reverseButtons: true
+        });
 
+    }
+    $("#example-advanced").treetable({ expandable: true });
+
+    // Highlight selected row
+    $("#example-advanced tbody").on("mousedown", "tr", function () {
+        $(".selected").not(this).removeClass("selected");
+        $(this).toggleClass("selected");
+    });
+    $("form#reveal").submit(function () {
+        var nodeId = $("#revealNodeId").val()
+
+        try {
+            $("#example-advanced").treetable("reveal", nodeId);
         }
-        //-->
-    </SCRIPT>
-    <style type="text/css">
-        .ztree li span.button.add {margin-left:2px; margin-right: -1px; background-position:-144px 0; vertical-align:top; *vertical-align:middle}
-    </style>
-</head>
-<body style="background-color: #EEEEEE;">
+        catch (error) {
+            alert(error.message);
+        }
 
-<TABLE border=0 height="100%" align=left>
-    <TR>
-        <TD width="200px" align=left valign=top style="BORDER-RIGHT: #999999 1px dashed;background-color: #EEEEEE;">
-            <ul id="tree" class="ztree" style="width:200px; overflow:auto;"></ul>
-        </TD>
-        <TD width="100%" align=left valign=top><IFRAME ID="testIframe" Name="testIframe" FRAMEBORDER=0 SCROLLING=AUTO width=100%  height=600px SRC="core/standardData.html"></IFRAME></TD>
-    </TR>
-</TABLE>
+        return false;
+    });
+</script>
 </body>
 </html>

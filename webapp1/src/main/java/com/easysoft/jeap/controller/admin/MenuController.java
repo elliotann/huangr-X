@@ -30,6 +30,7 @@ public class MenuController {
         String menuStr = JsonUtil.beanToJsonArray(menuList);
         Map<String,Object> params = new HashMap<String, Object>();
         params.put("menus",menuStr);
+        params.put("menuList",menuList);
         return new ModelAndView("/admin/menu/menuList",params);
     }
     @RequestMapping("/toAdd")
