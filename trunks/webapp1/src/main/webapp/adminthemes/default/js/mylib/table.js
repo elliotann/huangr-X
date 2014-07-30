@@ -7,6 +7,22 @@
                 var tableid = $(this).data('tableid');
                 $('#'+tableid).find('input[name=row_sel]').attr('checked', this.checked);
             });
+        },
+        changeColor:function(){
+
+
+            $("#smpl_tbl tr td").hover(function(){
+                $(this).parent().find("td").css("background","#DCF0F8");
+            },function(){
+                $(this).parent().find("td").css("background","#fff")
+            });
+            $("#smpl_tbl tr td").each(function(i,v){
+                $(this).click(function(){
+
+                        $(this).parent().find("td").css("background","#f0f");
+
+                });
+            });
         }
     }
 })(jQuery);
