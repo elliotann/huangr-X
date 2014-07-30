@@ -49,6 +49,11 @@
     </div>
     </div>
 <script>
+
+    $(function(){
+        $.jeapDefaults.table.changeColor();
+    })
+
     function addAdminUser(){
         location.href = "toAdd.do";
     }
