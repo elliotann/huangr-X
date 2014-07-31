@@ -5,20 +5,22 @@
         init:function(){
 
         },
-        confirm:function(title){
+        confirm:function(title,message){
             $.confirm({
                 'title'		: title,
-                'message'	: '确定删除?',
+                'message'	: message,
                 'buttons'	: {
                     '确定'	: {
                         'class'	: 'blue',
                         'action': function(){
-
+                             return true;
                         }
                     },
                     '取消'	: {
                         'class'	: 'gray',
-                        'action': function(){}	// Nothing to do in this case. You can as well omit the action property.
+                        'action': function(){
+                            return false;
+                        }	// Nothing to do in this case. You can as well omit the action property.
                     }
                 }
             });

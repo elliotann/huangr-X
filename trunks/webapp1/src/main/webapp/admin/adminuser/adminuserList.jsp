@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../../adminthemes/default/css/blue.css"/>
     <link rel="stylesheet" href="../../adminthemes/default/css/table.css"/>
     <link rel="stylesheet" href="../../adminthemes/blue/lib/smoke/smoke.css"/>
-    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+
     <link rel="stylesheet" type="text/css" href="/jeap/adminthemes/blue/dialog/jquery.confirm/jquery.confirm.css" />
     <script src="/jeap/js/common/jquery-1.8.3.js"></script>
     <script src="/jeap/adminthemes/default/js/mylib/jeap.js"></script>
@@ -18,7 +18,7 @@
     <script src="/jeap/adminthemes/blue/lib/smoke/smoke.js"></script>
     <script src="/jeap/adminthemes/blue/dialog/jquery.confirm/jquery.confirm.js"></script>
 
-    <script src="/jeap/adminthemes/blue/dialog/js/script.js"></script>
+
 
     <style>
         .tableactive{
@@ -71,8 +71,8 @@
         location.href = "toAdd.do";
     }
     function delAdminUser(userid){
-        $.jeapDefaults.dialog.confirm("确认删除");
-        /*smoke.confirm("确定删除?", function(yes){
+        alert($.jeapDefaults.dialog.confirm("确认删除","确认删除?"));
+        smoke.confirm("确定删除?", function(yes){
 
             if (yes){
                 $.ajax({
@@ -102,7 +102,7 @@
             cancel: "取消",
             classname: "custom-class",
             reverseButtons: true
-        });*/
+        });
 
     }
 </script>
