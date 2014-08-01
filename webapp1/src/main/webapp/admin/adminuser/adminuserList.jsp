@@ -68,42 +68,32 @@
     })
 
     function addAdminUser(){
+        window.showModalDialog("addSave.asp?",'',"dialogHeight:250px;dialogWidth:250px;status:no;");
         location.href = "toAdd.do";
     }
     function delAdminUser(userid){
-        alert($.jeapDefaults.dialog.confirm("确认删除","确认删除?"));
-        smoke.confirm("确定删除?", function(yes){
-
-            if (yes){
-                $.ajax({
-                    type:'post',
-                    url:'delAdminUser.do',
-                    dataType:'json',
-                    data:'id='+userid,
-                    success:function(result){
-                        if(result.success){
-                            $.ligerDialog.waitting('操作成功');
-                            setTimeout(function ()
-                            {
-                                $.ligerDialog.closeWaitting();
-                                location = "list.do";
-                            }, 1000);
-                        }else{
-                            alert("删除出错!");
-                        }
-                    },
-                    error:function(e){
-                        alert("删除出错!"+e);
+        $.jeapDefaults.dialog.confirm("确认删除","确认删除?",function(){
+            $.ajax({
+                type:'post',
+                url:'delAdminUser.do',
+                dataType:'json',
+                data:'id='+userid,
+                success:function(result){
+                    if(result.success){
+                        $.jeapDefaults.dialog.waiting('操作成功');
+                        setTimeout(function ()
+                        {
+                            location = "list.do";
+                        }, 1000);
+                    }else{
+                        alert("删除出错!");
                     }
-                });
-            }
-        }, {
-            ok: "确定",
-            cancel: "取消",
-            classname: "custom-class",
-            reverseButtons: true
+                },
+                error:function(e){
+                    alert("删除出错!"+e);
+                }
+            });
         });
-
     }
 </script>
 </body>

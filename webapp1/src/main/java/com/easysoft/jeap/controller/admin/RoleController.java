@@ -67,4 +67,12 @@ public class RoleController {
         }
         return ajaxJson;
     }
+
+    @RequestMapping("/funPerssion")
+    public ModelAndView funPerssion(PageOption pageOption){
+        roleManager.queryByPage(pageOption);
+        Map<String,Object> params = new HashMap<String,Object>();
+        params.put("pageOption",pageOption);
+        return new ModelAndView("/admin/role/funPerssion",params);
+    }
 }

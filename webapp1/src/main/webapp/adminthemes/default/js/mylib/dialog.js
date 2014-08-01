@@ -5,27 +5,29 @@
         init:function(){
 
         },
-        confirm:function(title,message){
+        confirm:function(title,message,f){
             $.confirm({
                 'title'		: title,
                 'message'	: message,
                 'buttons'	: {
                     '确定'	: {
                         'class'	: 'blue',
-                        'action': function(){
-                             return true;
-                        }
+                        'action': f
                     },
                     '取消'	: {
                         'class'	: 'gray',
                         'action': function(){
                             return false;
-                        }	// Nothing to do in this case. You can as well omit the action property.
+                        }
                     }
                 }
             });
-
-
+        },
+        waiting:function(message){
+            $.confirm({
+                'title'		: "提示",
+                'message'	: message
+            });
         }
     }
 })(jQuery);

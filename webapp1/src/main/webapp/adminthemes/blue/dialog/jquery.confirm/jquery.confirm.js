@@ -36,10 +36,6 @@
 
 		$.each(params.buttons,function(name,obj){
 			buttons.eq(i++).click(function(){
-				
-				// Calling the action attribute when a
-				// click occurs, and hiding the confirm.
-				
 				obj.action();
 				$.confirm.hide();
 				return false;

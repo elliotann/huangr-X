@@ -29,7 +29,7 @@
                 </li>
                 <li><a href="javascript:void(0)" onclick="updateRole()">修改</a></li>
                 <li><a href="javascript:void(0)" onclick="delRoles()">删除</a></li>
-                <li><a href="javascript:void(0)" onclick="delRoles()">功能权限</a></li>
+                <li><a href="javascript:void(0)" onclick="funPerssion()">功能权限</a></li>
                 <li><a href="javascript:void(0)" onclick="delRoles()">数据权限</a></li>
             </ul>
         </div>
@@ -55,6 +55,9 @@
     </div>
 </div>
 <script>
+    function funPerssion(){
+        location.href = "funPerssion.do";
+    }
     function addRole(){
         location.href = "toAdd.do";
     }
