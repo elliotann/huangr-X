@@ -75,9 +75,6 @@
 <script>
     $(function(){
          $('#form').validate({
-            onkeyup: false,
-            errorClass: 'error',
-            validClass: 'valid',
             highlight: function(element) {
                 $(element).closest('div').addClass("f_error");
             },
@@ -155,7 +152,7 @@
                  });
              },
             invalidHandler: function(form, validator) {
-               $.sticky("验证失败!", {autoclose : 5000, position: "top-right", type: "st-error" });
+
             }
         });
 
