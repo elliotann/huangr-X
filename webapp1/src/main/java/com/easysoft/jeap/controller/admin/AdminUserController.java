@@ -5,9 +5,11 @@ import com.alibaba.druid.support.logging.LogFactory;
 import com.easysoft.jeap.core.common.controller.BaseController;
 
 import com.easysoft.jeap.core.common.vo.AjaxJson;
+import com.easysoft.jeap.core.common.vo.DataGridReturn;
 import com.easysoft.jeap.core.member.entity.AdminUser;
 import com.easysoft.jeap.core.member.manager.IAdminUserManager;
 import com.easysoft.jeap.framework.db.PageOption;
+import com.easysoft.jeap.framework.utils.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,11 +31,19 @@ public class AdminUserController extends BaseController {
     @Autowired
     private IAdminUserManager adminUserManager;
     @RequestMapping("/list")
-    public ModelAndView list(PageOption pageOption){
+    public ModelAndView list(){
+        return new ModelAndView("/admin/adminuser/adminuserList");
+    }
+    @RequestMapping("/dataGrid")
+    @ResponseBody
+    public String dataGrid(PageOption pageOption){
+
         adminUserManager.queryByPage(pageOption);
-        Map<String,Object> params = new HashMap<String,Object>();
-        params.put("pageOption",pageOption);
-        return new ModelAndView("/admin/adminuser/adminuserList",params);
+        DataGridReturn dataGridReturn = new DataGridReturn(pageOption.getTotalCount(),(List<AdminUser>)pageOption.getData());
+        String json = JsonUtil.beanToJson(dataGridReturn);
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("json",json);
+        return json;
     }
     @RequestMapping("/toAdd")
     public ModelAndView toAdd(Integer id){

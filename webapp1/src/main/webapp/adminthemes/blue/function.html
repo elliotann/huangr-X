@@ -7,12 +7,33 @@
     <meta name="Keywords" content="">
     <meta name="Description" content="">
     <script>
-        function testArguments(x,y){
+        /*function testArguments(x,y){
             alert(testArguments.length);//打出形参个数
             alert(arguments.length);//打出实参个数
         }
         testArguments(10);//输出为2,1;
-        testArguments(1,2,3);//输出为2,3;
+        testArguments(1,2,3);//输出为2,3;*/
+
+        /*function add(a,b){
+            alert(a+b);
+        }
+        function sub(a,b){
+            alert(a-b);
+        }
+        add.call(sub,3,1);*/
+
+        function class1 (){
+            this.name="class1";
+            this.showName = function(){
+                alert(this.name);
+            }
+        }
+        function class2 (){
+            this.name="class2";
+        }
+        var c1 = new class1();
+        var c2 = new class2();
+        c1.showName.call(c2);
     </script>
 </head>
 

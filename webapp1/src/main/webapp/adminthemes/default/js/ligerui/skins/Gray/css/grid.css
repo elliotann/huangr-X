@@ -5,7 +5,7 @@ scrollbar-shadow-color: #D6D6D6;
 scrollbar-3dlight-color: white;
 scrollbar-arrow-color: #D6D6D6;
 scrollbar-track-color: white;
-scrollbar-darkshadow-color: white; 
+scrollbar-darkshadow-color: white;
 SCROLLBAR-BASE-COLOR:#F1F1F1;
 }
 
@@ -23,7 +23,7 @@ SCROLLBAR-BASE-COLOR:#F1F1F1;
     border: 1px solid #D6D6D6;
 }
 .l-panel-header {
-background-image:none; background-color:#F0F0F0; border-bottom:1px solid #D6D6D6;  
+background-image:none; background-color:#F0F0F0; border-bottom:1px solid #D6D6D6;
 color: #333333;
 font-size: 12px;
 font-weight: bold;
@@ -36,14 +36,14 @@ padding-left: 15px;
  .l-grid{ background-color:White;}
 .l-grid-header
 {
-    border-bottom:1px solid #D6D6D6;  
+    border-bottom:1px solid #D6D6D6;
    height:24px; line-height:22px; background:#F1F1F1 url('../images/ui/gridalt.gif') top repeat-x;
-} 
+}
 .l-grid-hd-cell-mul
 {
     border-bottom: 1px solid #DFDFDF;
 }
- 
+
 .l-grid-hd-cell-btn
 {
     position:absolute; right:0px; top:0px;  overflow:hidden; border-left:1px solid #C1D6F0; cursor:pointer;
@@ -51,17 +51,17 @@ padding-left: 15px;
 .l-grid-hd-cell-text
 {
     text-align:center; cursor:pointer; font-weight:bold;
-}  
+}
 .l-grid-hd-cell
-{   
-     padding:0; margin:0;overflow:hidden; 
-    border-right:1px solid #DFDFDF;   
+{
+     padding:0; margin:0;overflow:hidden;
+    border-right:1px solid #DFDFDF;
     text-align:center;
-} 
+}
 .l-grid-totalsummary
 {
     border-bottom:1px solid #DFDFDF; background:#EEF3FF; padding-top:5px; padding-bottom:5px;
-} 
+}
 .l-grid-totalsummary td
 {
     border-right:1px solid #EEF3FF; text-align:center;line-height: 23px;
@@ -89,7 +89,7 @@ padding-left: 15px;
 
 .l-grid-detailpanel
 {
-    border-right:1px solid #DFDFDF;border-bottom:1px solid #DFDFDF; 
+    border-right:1px solid #DFDFDF;border-bottom:1px solid #DFDFDF;
 }
 .l-grid-detailpanel-inner
 {
@@ -113,8 +113,8 @@ padding-left: 15px;
  }
 .l-grid-row-cell
 {
-      overflow:hidden; 
-     border-right:1px solid #DFDFDF;border-bottom:1px solid #DFDFDF;  
+      overflow:hidden;
+     border-right:1px solid #DFDFDF;border-bottom:1px solid #DFDFDF;
       text-align:center;overflow:hidden;
 }
 .l-grid-row-last .l-grid-row-cell
@@ -122,7 +122,7 @@ padding-left: 15px;
 }
 .l-grid-row-cell-last
 {
-      
+
 }
 .l-grid-row-cell-inner
 {
@@ -131,7 +131,7 @@ padding-left: 15px;
 }
 .l-grid-row-cell-inner-fixedheight
 {
-     height:22px;  
+     height:22px;
 }
 .l-panel-bar
 {
@@ -151,7 +151,7 @@ padding-left: 15px;
 .l-bar-group {
 float: left;
 background: none;
-height: 31px; 
+height: 31px;
 }
 .l-bar-right
 {
@@ -173,40 +173,40 @@ border: 0px;
 cursor: pointer;
 overflow: hidden;
 }
-  
+
 /*
     grouping
 */
 .l-grid .l-grid-grouprow{ border-right:1px solid #DFDFDF}
-.l-grid .l-grid-grouprow-cell{ padding:6px; border-bottom:1px solid #DFDFDF; background:#EAF3FF;} 
+.l-grid .l-grid-grouprow-cell{ padding:6px; border-bottom:1px solid #DFDFDF; background:#EAF3FF;}
 .l-grid .l-grid-totalsummary-group td{ background-color:#F5EEFB; border-color:#F5EEFB;}
 /*
     foot total
 */
  .l-panel-bar-total{ background:#F5F9FF; padding:8px; border-top:1px solid #84A0C4;}
 /*
-    tree grid 
+    tree grid
 */
-.l-grid-tree-space  
+.l-grid-tree-space
 {
     width:18px; height:20px; line-height:20px; overflow:hidden; float:left;
-}  
+}
 /*
     frozen grid
 */
-.l-grid1{  display:none;} 
+.l-grid1{  display:none;}
 .l-grid1 .l-grid-body{overflow:hidden;}
 .l-grid1 .l-grid-detailpanel{border-right:1px solid white;}
 .l-frozen .l-grid2{position:absolute; top:0px; left:0px; width:100%; }
 .l-frozen .l-grid2 .l-grid-body{overflow-x:auto;}
 .l-frozen .l-grid1{position:absolute; top:0px; left:0px;display:block;}
- 
+
 
 /*
     搜索栏
 */
 .l-panel-search
-{height:28px; padding-top:3px; padding-left:3px; 
+{height:28px; padding-top:3px; padding-left:3px;
  border-left:1px solid #99BBE8; border-right:1px solid #99BBE8;
 }
 .l-panel-search-item
@@ -221,18 +221,18 @@ overflow: hidden;
 .l-grid-row-cell-editing-leftcell {border-right-color:#B6B6B6;}
 .l-panel td.l-grid-row-cell-editing{ border-color:#B6B6B6; background:#EBF2FB url('../images/ui/grideditor.gif') top repeat-x;}
 .l-panel td.l-grid-row-cell-editing .l-text,.l-panel td.l-grid-row-cell-editing .l-text-wrapper{ margin-left:2px;}
-.l-grid-row-cell .l-text,.l-grid-editor .l-text{  
+.l-grid-row-cell .l-text,.l-grid-editor .l-text{
 	border:1px solid #D3D3D3;
 	border-left:none;
 	border-right:none;
-} 
+}
 .l-grid-row-cell .l-text-invalid, .l-grid-editor .l-text-invalid {border: 1px solid #F77;}
 .l-grid-detailpanel-edit{ padding-top:7px;padding-bottom:3px; background-color:#FAFAFF;}
 .l-grid-detailpanel .l-editbox{ float:left; margin:2px;margin-left:6px; margin-right:10px;}
 .l-grid-detailpanel .l-button{float:left;margin:2px;margin-left:4px; margin-right:6px;}
 .l-grid-detailpanel .l-clear{ clear:both;}
 
- 
+
 .l-grid-row-alt .l-grid-row-cell-rownumbers,.l-selected .l-grid-row-cell-rownumbers,.l-grid-row-over .l-grid-row-cell-rownumbers,.l-grid-row-cell-rownumbers{ background:#F1F1F1; }
 
 
@@ -241,7 +241,7 @@ overflow: hidden;
 */
 
 .l-panel-topbar{background:white url('../images/ui/gridbar.jpg') top repeat-x; height:31px;line-height:31px;border-bottom:1px solid #D6D6D6;  }
- 
+
 .l-panel-btn {
 color: #000;
 cursor: pointer;
@@ -262,9 +262,9 @@ margin: 2px; margin-top:9px;
     工具条
 */
 .l-panel .l-toolbar
-{    
+{
     background:white  url('../images/ui/gridbar.jpg') repeat-x; height:28px;  line-height:28px;
-    border:none; 
+    border:none;
 }
 .l-toolbar-item
 {

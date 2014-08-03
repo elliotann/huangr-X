@@ -220,11 +220,7 @@ h2.prize {
 .header, .topheader {
     min-width: 980px;
 }
-.headerspace {
-    background: none repeat scroll 0 0 #333333;
-    border-bottom: 1px solid #222222;
-    height: 10px;
-}
+
 .topheader .msgicon {
     background-image: url("../images/icons/message.png");
     height: 15px;
@@ -363,13 +359,13 @@ h2.prize {
     width: 27px;
 }
 .header {
-    background: url("../images/texturebg.png") repeat scroll 0 0 #333333;
+    background: #3EC0F1;
     padding: 20px 10px 11px;
     position: relative;
 }
 .header {
-    border-bottom: 3px solid #272727;
-    border-top: 1px solid #444444;
+    border-bottom: 3px solid #3EC0F1;
+    border-top: 1px solid #3EC0F1;
 }
 .accountinfo {
     background: url("../images/blacktrans.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
