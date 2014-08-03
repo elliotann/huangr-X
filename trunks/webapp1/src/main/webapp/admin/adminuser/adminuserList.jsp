@@ -3,73 +3,44 @@
 <html>
 <head>
     <title></title>
-    <link rel="stylesheet" href="../../adminthemes/default/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="../../adminthemes/default/css/style1.css"/>
-    <link rel="stylesheet" href="../../adminthemes/default/css/blue.css"/>
-    <link rel="stylesheet" href="../../adminthemes/default/css/table.css"/>
-    <link rel="stylesheet" href="../../adminthemes/blue/lib/smoke/smoke.css"/>
-
-    <link rel="stylesheet" type="text/css" href="/jeap/adminthemes/blue/dialog/jquery.confirm/jquery.confirm.css" />
+    <link href="/jeap/adminthemes/default/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
+    <link href="/jeap/adminthemes/default/js/ligerui/skins/ligerui-icons.css" rel="stylesheet" type="text/css" />
+    <link href="/jeap/adminthemes/default/js/ligerui/skins/Gray/css/all.css" rel="stylesheet" type="text/css" />
     <script src="/jeap/js/common/jquery-1.8.3.js"></script>
-    <script src="/jeap/adminthemes/default/js/mylib/jeap.js"></script>
-    <script src="/jeap/adminthemes/default/js/mylib/table.js"></script>
-    <script src="/jeap/adminthemes/default/js/mylib/dialog.js"></script>
-    <script src="/jeap/adminthemes/default/js/mylib/bootstrap.min.js"></script>
-    <script src="/jeap/adminthemes/blue/lib/smoke/smoke.js"></script>
-    <script src="/jeap/adminthemes/blue/dialog/jquery.confirm/jquery.confirm.js"></script>
-
-
-
-    <style>
-        .tableactive{
-            background-color: #000000;
-        }
-    </style>
+    <script src="/jeap/adminthemes/default/js/ligerui/js/core/base.js" type="text/javascript"></script>
+    <script src="/jeap/adminthemes/default/js/ligerui/js/plugins/ligerGrid.js" type="text/javascript"></script>
+    <script src="/jeap/adminthemes/default/js/ligerui/js/plugins/ligerToolBar.js" type="text/javascript"></script>
+    <script src="/jeap/adminthemes/default/js/ligerui/js/plugins/ligerDialog.js" type="text/javascript"></script>
+    <script src="/jeap/adminthemes/default/js/mylib/crud.js" type="text/javascript"></script>
 </head>
-<body style="background-color: #EEEEEE;">
+<body >
 
 
-<div class="row">
-    <div class="col-sm-12 col-md-12">
-        <div class="btn-group sepH_b">
-            <button class="btn dropdown-toggle btn-default btn-sm" data-toggle="dropdown">操作 <span
-                    class="caret"></span></button>
-            <ul class="dropdown-menu">
-                <li><a data-tableid="smpl_tbl" class="delete_rows_simple" href="#" onclick="addAdminUser()"><i class="icon-trash"></i> 增加</a>
-                </li>
-                <li><a href="javascript:void(0)">修改</a></li>
-                <li><a href="javascript:void(0)">删除</a></li>
-            </ul>
-        </div>
-<table:table items="pageOption">
-    <table:header>
-        <table:td style="width: 245px;">用户编号</table:td>
-        <table:td style="width: 368px;">用户名</table:td>
-        <table:td style="width: 339px;">真实姓名</table:td>
-        <table:td style="width: 209px;">状态</table:td>
-        <table:td style="width: 150px;">操作</table:td>
-    </table:header>
-    <table:body item="adminUser">
-        <table:td>${adminUser.id}</table:td>
-        <table:td>${adminUser.username}</table:td>
-        <table:td>${adminUser.realName}</table:td>
-        <table:td><span class="label label-success"> ${adminUser.status}</span></table:td>
-        <table:td><a href="toAdd.do?id=${adminUser.id}">修改</a> <a href="javascript:void(0)" onclick="delAdminUser('${adminUser.id}')">删除</a></table:td>
-    </table:body>
-</table:table>
-
-    </div>
-    </div>
+<div id="tableTest" style="background-color: #EEEEEE;"></div>
 <script>
 
     $(function(){
-        $.jeapDefaults.table.changeColor();
+        $("#tableTest").ligerGrid({ columns: [
+            { display: '主键', name: 'id', align: 'center', width: 100, minWidth: 60 },
+            { display: '用户名', name: 'username', minWidth: 120 },
+            { display: '真实姓名', name: 'realName', minWidth: 140 },
+            { display: '状态', name: 'status' }
+        ],
+        url:'dataGrid.do',
+            toolbar: { items: [
+                { text: '增加', click: addAdminUser, icon: 'add' },
+                { line: true },
+                { text: '修改', click: addAdminUser, icon: 'modify' },
+                { line: true },
+                { text: '删除', click: delAdminUser, icon: 'delete' }
+            ]
+            }
+        })
 
     })
 
-    function addAdminUser(){
-        window.showModalDialog("addSave.asp?",'',"dialogHeight:250px;dialogWidth:250px;status:no;");
-        location.href = "toAdd.do";
+    function addAdminUser(item){
+        addOrUpdateDialog(item,'增加管理员','toAdd.do',500,700);
     }
     function delAdminUser(userid){
         $.jeapDefaults.dialog.confirm("确认删除","确认删除?",function(){
