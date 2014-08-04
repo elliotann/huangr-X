@@ -1,0 +1,19 @@
+.error {
+    color: #C62626;
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+}
+.error input, .error select, .error textarea {
+    border-color: #B94A48;
+    color: #B94A48;
+}
+.error input:focus, .f_error select:focus, .error textarea:focus {
+    border-color: #953B39;
+    box-shadow: 0 0 6px #D59392;
+}
+.error .input-prepend .add-on, .error .input-append .add-on {
+    background-color: #F2DEDE;
+    border-color: #B94A48;
+    color: #B94A48;
+}

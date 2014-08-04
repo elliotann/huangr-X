@@ -6,7 +6,7 @@
     <link href="/jeap/adminthemes/default/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
     <link href="/jeap/adminthemes/default/js/ligerui/skins/ligerui-icons.css" rel="stylesheet" type="text/css" />
     <link href="/jeap/adminthemes/default/js/ligerui/skins/Gray/css/all.css" rel="stylesheet" type="text/css" />
-    <script src="/jeap/js/common/jquery-1.8.3.js"></script>
+    <script src="/jeap/js/common/jquery-1.9.0.min.js"></script>
     <script src="/jeap/adminthemes/default/js/ligerui/js/core/base.js" type="text/javascript"></script>
     <script src="/jeap/adminthemes/default/js/ligerui/js/plugins/ligerGrid.js" type="text/javascript"></script>
     <script src="/jeap/adminthemes/default/js/ligerui/js/plugins/ligerToolBar.js" type="text/javascript"></script>
@@ -16,7 +16,7 @@
 <body >
 
 
-<div id="tableTest" style="background-color: #EEEEEE;"></div>
+<div id="tableTest"></div>
 <script>
 
     $(function(){

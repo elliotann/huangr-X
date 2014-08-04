@@ -9,10 +9,10 @@
 <html>
 <head>
     <title></title>
-    <link rel="stylesheet" href="../default/css/style.css"/>
+
 
 </head>
-<body style="background-color: #EEEEEE;">
+<body>
     欢迎
 </body>
 </html>

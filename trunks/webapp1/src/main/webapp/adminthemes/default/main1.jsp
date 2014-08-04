@@ -6,17 +6,21 @@
     <meta charset="utf-8">
     <title>jeap企业级开发平台</title>
     <script type="text/javascript" src="menu/getMenuJson.do" charset="UTF-8"></script>
-    <link rel="stylesheet" href="../adminthemes/default/css/main.css"/>
+    <link rel="stylesheet" href="../adminthemes/default/css/style.css"/>
     <script src="../js/common/jquery-1.8.3.js"></script>
     <script src="../adminthemes/default/js/index.js" type="text/javascript"></script>
 
 </head>
 
 <body class="bodygrey">
+<div style="display: none;" id="cboxOverlay"></div>
+
 
 <div class="header">
-    <!-- logo -->
-    <a href=""><img alt="Logo" src="images/logo2.png"></a>
+    <form method="post" action="" id="search">
+        <input type="text" name="keyword">
+        <button class="searchbutton"></button>
+    </form>
     <div class="topheader">
         <ul class="notebutton">
             <li class="note">
@@ -42,7 +46,8 @@
     <!-- topheader -->
 
 
-
+    <!-- logo -->
+    <a href=""><img alt="Logo" src="images/logo2.png"></a>
     <!-- tabmenu start-->
     <div class="tabmenu">
         <ul>
@@ -69,7 +74,7 @@
 </div>
 
 <!--左侧菜单开始-->
-<div class="sidebar" style="height: 100%">
+<div class="sidebar" style="height: 740px">
     <div id="accordion">
 
     </div>
@@ -83,9 +88,9 @@
         <span>管理员管理</span>
     </div>
     <!-- breadcrumbs -->
-    <div class="left" style="height: 800px">
+    <div class="left">
         <iframe src="../adminthemes/default/welcome.jsp" scrolling="no" id="iframepage" onload="iFrameHeight()"
-                name="iframepage" style="width: 100%;height: 100%"></iframe>
+                name="iframepage"></iframe>
     </div>
     <!-- left -->
 
