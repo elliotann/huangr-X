@@ -138,5 +138,15 @@
             <version>2.4</version>
             <scope>provided </scope>
         </dependency>
+        <dependency>
+            <groupId>apache-httpcommons</groupId>
+            <artifactId>httpmime</artifactId>
+            <version>4.3.3</version>
+        </dependency>
+        <dependency>
+            <groupId>javazoom</groupId>
+            <artifactId>uploadbean</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 </project>
