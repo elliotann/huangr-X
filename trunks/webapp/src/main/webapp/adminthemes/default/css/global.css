@@ -109,56 +109,47 @@ ul.tab li.active a{
 
 /*=====后台模板中工具栏按钮样式======*/
 /*定义列表容器中工具栏的样式，使用div元素*/
- 
-.toolbar{
-    border: solid #ccc 1px;
-	overflow:hidden;
-	height:25px;
-	padding:5px 5px;
-	text-align:left;
-    background-color: #F3F3F3;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#FCFCFC), to(#F3F3F3));
-    background-image: -webkit-linear-gradient(top, #FCFCFC, #F3F3F3);
-    background-image: -moz-linear-gradient(top, #FCFCFC, #F3F3F3);
-    background-image: -ms-linear-gradient(top, #FCFCFC, #F3F3F3);
-    background-image: -o-linear-gradient(top, #FCFCFC, #F3F3F3);
-    background-image: linear-gradient(top, #FCFCFC, #F3F3F3);
-    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#FCFCFC, endColorstr=#F3F3F3);
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient (GradientType=0, startColorstr=#ebf3fc, endColorstr=#dce9f9)";
-    -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
-    -moz-box-shadow:0 1px 0 rgba(255,255,255,.8) inset;
-    box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
-    border-top: none;
-    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+
+
+
+
+.toolbar {
+    padding: 7px 14px;
+    margin: 0 0 1px;
+    list-style: none;
+    background-color: #fbfbfb;
+    background-image: -moz-linear-gradient(top, #ffffff, #f5f5f5);
+    background-image: -ms-linear-gradient(top, #ffffff, #f5f5f5);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#f5f5f5));
+    background-image: -webkit-linear-gradient(top, #ffffff, #f5f5f5);
+    background-image: -o-linear-gradient(top, #ffffff, #f5f5f5);
+    background-image: linear-gradient(top, #ffffff, #f5f5f5);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f5f5f5', GradientType=0);
+    border: 1px solid #ddd;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: inset 0 1px 0 #ffffff;
+    -moz-box-shadow: inset 0 1px 0 #ffffff;
+    box-shadow: inset 0 1px 0 #ffffff;
+    height:20px;
 }
+.toolbar li {
+    display: inline-block;
+    *display: inline;
+    /* IE7 inline-block hack */
 
-/*定义列表容器中工具栏列表的样式，使用ul元素*/
-.toolbar ul{
-	padding:0px;
-	margin:0px;
+    *zoom: 1;
+    text-shadow: 0 1px 0 #ffffff;
 }
-
-/*定义列表容器中工具栏列表的样式，使用li元素*/
-.toolbar ul li{
-	margin-left:5px;
-	padding-top:2px;
+.toolbar .divider {
+    padding: 0 5px;
+    color: #999999;
 }
-
-/*定义列表容器中工具栏按钮链接的样式，使用a元素*/
-.toolbar li a{
-	line-height: 21px;
-	color: #234f8d;
-	background: url("../images/buttons.png") repeat scroll -10px -108px transparent;
-	text-align: center;
-	display: block;
-	height: 21px;
-	width: 80px;
-	float: left;
-	text-decoration: none;
+.toolbar .active a {
+    color: #333333;
 }
-
-
-
 
 .modify{
 cursor:pointer;
