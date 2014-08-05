@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ include file="/commons/taglibs.jsp"%>
+<link href="${context}/css/button.css" rel="stylesheet"/>
 <style>
 <!--
 .pluginList,.widgetList{
@@ -11,14 +12,16 @@
 -->
 </style>
 <div class="grid">
-	
-	<div class="toolbar" >
-		<div style="width: 100%; float: left; height: 25px;">
-		  组件管理
-		</div>
-		<div style="clear: both"></div>
-	</div>
+    <div>
+        <ul class="toolbar">
+            <li>
+                <button class="btn btn-primary noty" data-noty-options='{"text":"This is a success notification","layout":"topLeft","type":"success"}'><i class="icon-bell icon-white"></i> 增加</button>
+            </li>
+            <li>
 
+            </li>
+        </ul>
+    </div>
 	<form method="POST">
 		<grid:grid from="componentList">
 

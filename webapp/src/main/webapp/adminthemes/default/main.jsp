@@ -15,7 +15,7 @@
     <link href="${context}/css/input.css" rel="stylesheet" type="text/css" />
     <link href="${context}/css/validate.css" rel="stylesheet" type="text/css" />
     <link href="${context}/css/dialog.css" rel="stylesheet" type="text/css" />
-    <link href="${context}/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="${context}/css/main1.css" rel="stylesheet" type="text/css" />
     <link href="${context}/css/menu.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="${staticserver }/js/common/jquery-1.6.4.js"></script>
     <script src="${context}/js/ligerui/js/core/base.js" type="text/javascript"></script>
@@ -47,41 +47,66 @@
 </head>
 <body>
 <input id="context" value="${context}" type="hidden"/>
-<div class="navbar">
+<div class="header">
+    <!-- logo -->
+    <a href=""><img alt="Logo" src="images/logo2.png"></a>
+    <div class="topheader">
+        <ul class="notebutton">
+            <li class="note">
+                <a class="messagenotify" href="pages/message.html">
+                    <span class="wrap">
 
-</div>
-<div id="navbar" class="navbar">
-    <div class="navbar-inner">
-        <div class="logo"><a href="#"><img src="${bklogo}" style="width:100px"/></a><span class="version">v${version}</span></div>
-        <div id="short_msg"  >
-            您好${user.username }, <span>您没有新短消息</span>
-            <div class="msglist">
-                <ul></ul>
-            </div>
-        </div>
-        <!-- user dropdown starts -->
-        <div class="btn-group pull-right" >
+                        <span class="thicon msgicon"></span>
+                        <span class="count">1</span>
+                    </span>
+                </a>
+            </li>
+            <li class="note">
+                <a class="alertnotify" href="pages/info.html">
+                	<span class="wrap">
 
-        </div>
-        <div class="top">
-
-            <%--<div class="sysmenu">
-
-                <ul>
-                    <li><a href='javascript:;' id='cache_btn'></a></li>
-                </ul>
-            </div>--%>
-        </div>
+                    	<span class="thicon infoicon"></span>
+                        <span class="count">5</span>
+                    </span>
+                </a>
+            </li>
+        </ul>
     </div>
+    <!-- topheader -->
 
-    <div class="navbar-menu">
-        <div class="navMenu">
-            <ul>
 
-            </ul>
+
+    <!-- tabmenu start-->
+    <div class="tabmenu">
+        <ul>
+
+        </ul>
+
+    </div>
+    <!-- tabmenu end-->
+
+    <div class="accountinfo">
+        <img alt="Avatar" src="images/avatar.png">
+
+        <div class="info">
+            <h3>${sessionScope.admin_user_key.username}</h3>
+            <small>${sessionScope.admin_user_key.email}</small>
+            <p>
+                <a href="">账号设置</a> <a href="logout.do">退出</a>
+
+            </p>
         </div>
+        <!-- info -->
+    </div>
+    <!-- accountinfo -->
+</div>
+<!--左侧菜单开始-->
+<div class="sidebar" style="height: 100%">
+    <div id="accordion">
+
     </div>
 </div>
+<%--
 <div id="layout1">
     <div position="left" id="leftMenus">
 
@@ -95,6 +120,7 @@
         </div>
     </div>
 </div>
+--%>
 </body>
 </html>
 
