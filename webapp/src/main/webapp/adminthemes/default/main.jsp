@@ -100,27 +100,45 @@
     </div>
     <!-- accountinfo -->
 </div>
-<!--左侧菜单开始-->
 <div class="sidebar" style="height: 100%">
     <div id="accordion">
 
     </div>
 </div>
-<%--
-<div id="layout1">
-    <div position="left" id="leftMenus">
-
+<!--左侧菜单结束-->
+<div class="maincontent">
+    <div class="breadcrumbs">
+        <a href="dashboard.html">系统管理</a>
+        <a href="dashboard.html">权限管理</a>
+        <span>管理员管理</span>
     </div>
-    <div position="center" id="right_content">
-        <div id="navtab1" style="width: 100%;height:100%;overflow:hidden; border:1px solid #A3C0E8; ">
-            <div tabid="home" title="桌面" lselected="true"  style="height: 100%">
-                <iframe frameborder="0" name="showmessage" src="../core/admin/index.do?list"></iframe>
+    <!-- breadcrumbs -->
+    <div class="left" style="height: 800px">
+        <iframe src="../adminthemes/default/welcome.jsp" scrolling="no" id="iframepage" onload="iFrameHeight()"
+                name="iframepage" style="width: 100%;height: 100%"></iframe>
+    </div>
+    <!-- left -->
+    <%--<div id="layout1">
+        &lt;%&ndash;<div position="left" id="leftMenus">
+
+        </div>&ndash;%&gt;
+        <!--左侧菜单开始-->
+
+        &lt;%&ndash;<div position="center" id="right_content">
+            <div id="navtab1" style="width: 100%;height:100%;overflow:hidden; border:1px solid #A3C0E8; ">
+                <div tabid="home" title="桌面" lselected="true"  style="height: 100%">
+                    <iframe frameborder="0" name="showmessage" src="../core/admin/index.do?list"></iframe>
+                </div>
+
             </div>
+        </div>&ndash;%&gt;
+    </div>--%>
 
-        </div>
-    </div>
+    <br clear="all">
+
 </div>
---%>
+
+
 </body>
 </html>
 
