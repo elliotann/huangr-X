@@ -486,8 +486,8 @@ public class FileUploader
             dif.setSizeThreshold(factorySizeThreshold);
         if(factoryRepository != null)
             dif.setRepository(new File(factoryRepository));
-        if(factoryCleaningTracker != null)
-            dif.setFileCleaningTracker(factoryCleaningTracker);
+        /*if(factoryCleaningTracker != null)
+            dif.setFileCleaningTracker(factoryCleaningTracker);*/
 
         ServletFileUpload sfu	= new ServletFileUpload(dif);
 

@@ -79,7 +79,7 @@ public class GenericDAO<T> implements IGenericDAO<T> {
         Query querys = getSession().createSQLQuery(sql);
         return querys.list();
     }
-    /**
+    /*
      * 根据属性名和属性值查询. 有排序
      *
      * @param <T>
@@ -144,7 +144,8 @@ public class GenericDAO<T> implements IGenericDAO<T> {
                 allCounts);
     }
     public Integer executeSql(String sql, List<Object> param) {
-        return this.jdbcTemplate.update(sql, param);
+
+        return null;
     }
 
     public Integer executeSql(String sql, Object... param) {

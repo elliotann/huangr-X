@@ -76,7 +76,7 @@ public class WorkflowUtils {
         logger.debug("export diagram to : {}", diagramPath);
 
         // wirte bytes to file
-        FileUtils.writeByteArrayToFile(file, b, true);
+        FileUtils.writeByteArrayToFile(file, b);
         return diagramPath;
     }
 
