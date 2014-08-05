@@ -16,11 +16,11 @@ import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
-import org.activiti.bpmn.model.BpmnModel;
+
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
-import org.activiti.engine.impl.bpmn.diagram.ProcessDiagramGenerator;
+
 import org.activiti.engine.impl.context.Context;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
@@ -90,6 +90,7 @@ public class WorkFlowController {
     }
     @RequestMapping(params = {"dataGrid"})
     public ModelAndView dataGrid(){
+
         List dataList= new ArrayList();
         ProcessDefinitionQuery processDefinitionQuery = repositoryService.createProcessDefinitionQuery().orderByDeploymentId().desc();
         List<ProcessDefinition> processDefinitionList = processDefinitionQuery.listPage(0,100);
@@ -217,7 +218,7 @@ public class WorkFlowController {
     @RequestMapping(params = {"taskTodoList"})
 
     public ModelAndView todoList() throws Exception {
-        AdminUser user = UserServiceFactory.getUserService().getCurrentUser();
+      /*  AdminUser user = UserServiceFactory.getUserService().getCurrentUser();
         List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
 
@@ -241,9 +242,9 @@ public class WorkFlowController {
             Map<String, Object> singleTask = packageTaskInfo(sdf, task, processDefinition);
             singleTask.put("status", "claim");
             result.add(singleTask);
-        }
+        }*/
         Map<String,Object> params = new HashMap<String,Object>();
-        params.put("result",result);
+        //params.put("result",result);
         return new ModelAndView("workflow/task/tasklist",params);
     }
 
@@ -273,7 +274,7 @@ public class WorkFlowController {
     public void readResource(@PathVariable("executionId") String executionId, HttpServletResponse response)
             throws Exception {
         ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceId(executionId).singleResult();
-        BpmnModel bpmnModel = repositoryService.getBpmnModel(processInstance.getProcessDefinitionId());
+        //BpmnModel bpmnModel = repositoryService.getBpmnModel(processInstance.getProcessDefinitionId());
         List<String> activeActivityIds = runtimeService.getActiveActivityIds(executionId);
         // 不使用spring请使用下面的两行代码
 //    ProcessEngineImpl defaultProcessEngine = (ProcessEngineImpl) ProcessEngines.getDefaultProcessEngine();
@@ -282,14 +283,14 @@ public class WorkFlowController {
         // 使用spring注入引擎请使用下面的这行代码
         Context.setProcessEngineConfiguration(processEngine.getProcessEngineConfiguration());
 
-        InputStream imageStream = ProcessDiagramGenerator.generateDiagram(bpmnModel, "png", activeActivityIds);
+       // InputStream imageStream = ProcessDiagramGenerator.generateDiagram(bpmnModel, "png", activeActivityIds);
 
         // 输出资源内容到相应对象
         byte[] b = new byte[1024];
         int len;
-        while ((len = imageStream.read(b, 0, 1024)) != -1) {
+        /*while ((len = imageStream.read(b, 0, 1024)) != -1) {
             response.getOutputStream().write(b, 0, len);
-        }
+        }*/
     }
     /**
      * 输出跟踪流程信息

@@ -6,7 +6,7 @@
     <bean id="serviceContext" class="org.mangocube.corenut.scm.support.ServiceContext">
         <constructor-arg>
             <list>
-                <value>com/elliot/manager/core-manager-config.xml</value>
+
 
             </list>
         </constructor-arg>
