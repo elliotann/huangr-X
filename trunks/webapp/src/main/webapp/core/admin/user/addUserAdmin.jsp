@@ -132,7 +132,7 @@
     .l-button-submit,.l-button-test{width:80px; float:left; margin-left:10px; padding-bottom:2px;}
     .l-verify-tip{ left:230px; top:120px;}
 </style>
-<form name="objForm" method="post"   id="objForm">
+<form name="objForm" method="post"   id="objForm" class="">
     <div>
     </div>
     <table cellpadding="0" cellspacing="0" class="l-table-edit" >
@@ -175,7 +175,7 @@
         <tr>
             <td align="right" class="l-table-edit-td">密码:</td>
             <td align="left" class="l-table-edit-td">
-                <input name="password" type="password" id="password" ltype="text" validate="{required:true,minlength:1,maxlength:18}" />
+                <input name="password" type="password" id="password" ltype="text" validate="{required:true,minlength:1,maxlength:18}" class="form-control"/>
             </td>
             <td align="left"></td>
         </tr>
@@ -206,23 +206,23 @@
         </tr>
         <tr>
             <td align="right" class="l-table-edit-td">姓名:</td>
-            <td align="left" class="l-table-edit-td"><input name="realname" type="text" id="realname" ltype="text" /></td>
+            <td align="left" class="l-table-edit-td"><input name="realname" type="text" id="realname" ltype="text" class="form-control"/></td>
             <td align="left"></td>
         </tr>
         <tr>
             <td align="right" class="l-table-edit-td">编号:</td>
-            <td align="left" class="l-table-edit-td"><input name="userno" type="text" id="userno" ltype="text"  /></td>
+            <td align="left" class="l-table-edit-td"><input name="userno" type="text" id="userno" ltype="text" class="form-control" /></td>
             <td align="left"></td>
         </tr>
         <tr>
             <td align="right" class="l-table-edit-td">部门:</td>
-            <td align="left" class="l-table-edit-td"><input name="userdept" type="text" id="userdept" ltype="text" /></td>
+            <td align="left" class="l-table-edit-td"><input name="userdept" type="text" id="userdept" ltype="text" class="form-control"/></td>
             <td align="left"></td>
         </tr>
         <tr>
             <td align="right" class="l-table-edit-td">备注:</td>
             <td align="left" class="l-table-edit-td">
-                <textarea name="remark" cols="100" rows="4" class="l-textarea" id="remark" style="width:400px"></textarea>
+                <textarea name="remark" cols="100" rows="4" class="l-textarea" id="remark" style="width:400px" class="form-control"></textarea>
             </td>
             <td align="left"></td>
         </tr>
