@@ -45,7 +45,7 @@
 
     </style>
 </head>
-<body>
+<body class="bodygrey">
 <input id="context" value="${context}" type="hidden"/>
 <div class="header">
     <!-- logo -->
@@ -89,10 +89,10 @@
         <img alt="Avatar" src="images/avatar.png">
 
         <div class="info">
-            <h3>${sessionScope.admin_user_key.username}</h3>
-            <small>${sessionScope.admin_user_key.email}</small>
+            <h3>${user.username }</h3>
+            <small>360042212@qq.com</small>
             <p>
-                <a href="">账号设置</a> <a href="logout.do">退出</a>
+                <a href="">账号设置</a> <a href="../admin/logout.do" target="_self">退出</a>
 
             </p>
         </div>
@@ -113,8 +113,8 @@
         <span>管理员管理</span>
     </div>
     <!-- breadcrumbs -->
-    <div class="left" style="height: 800px">
-        <iframe src="../adminthemes/default/welcome.jsp" scrolling="no" id="iframepage" onload="iFrameHeight()"
+    <div class="left" style="height: 800px" id="right_content">
+        <iframe src="../adminthemes/default/welcome.jsp" scrolling="no" id="iframe" name="iframe" onload="iFrameHeight()"
                 name="iframepage" style="width: 100%;height: 100%"></iframe>
     </div>
     <!-- left -->
@@ -138,7 +138,17 @@
 
 </div>
 
+<script type="text/javascript">
+    function iFrameHeight() {
+        var ifm = document.getElementById("iframe");
+        var subWeb = document.frames ? document.frames["iframe"].document : ifm.contentDocument;
 
+        if (ifm != null && subWeb != null) {
+            ifm.height = 0;
+            ifm.height = subWeb.body.scrollHeight+100;
+        }
+    }
+</script>
 </body>
 </html>
 

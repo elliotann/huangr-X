@@ -6,7 +6,7 @@ var BackendUi = {
     menu: undefined,
     accordion: undefined,
     init: function (menu, accordion) {
-        //Jeap.AdminUI.init({wrapper:$("#right_content")});
+        Jeap.AdminUI.init({wrapper:$("#right_content")});
 
         $(".desktop a").click(function () {
             //Jeap.AdminUI.load($(this));
@@ -138,6 +138,8 @@ var BackendUi = {
 
                     link.click(function(){
                         Jeap.AdminUI.load($(this));
+                        $("#accordion li").removeClass("current");
+                        $(this).parent().addClass("current");
                         return false;
                     });
                 });
