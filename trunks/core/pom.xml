@@ -164,6 +164,11 @@
             <version>1.0</version>
         </dependency>
         <dependency>
+            <groupId>com.easysoft.jeap</groupId>
+            <artifactId>corenut-scm</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpmime</artifactId>
             <version>4.0.1</version>
