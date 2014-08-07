@@ -69,7 +69,7 @@ public class GridTaglib extends HtmlTaglib {
 		
 		IPageHtmlBuilder pageHtmlBuilder =null;
 		if("yes".equals(ajax) ){
-			//采用异步分页构建器
+			//采用异步分页构建器//采用异步分页构建器
 			pageHtmlBuilder =new GridAjaxPageHtmlBuilder( pageNo, totalCount,  pageSize,gridid);
 		}
 		else{
