@@ -1,16 +1,32 @@
-/*表单元素校验失败样式*/
-form.validate .fail{border:1px dotted #D37575}
-/*上述样式根据情况也可为：
-form.validate input.fail{}
-form.validate select.fail{}
-form.validate textarea.fail{}
-*/
+.errorLabel {
+    color: #C62626;
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+}
+/*.error:focus {
+    border-color: #B94A48;
+    color: #B94A48;
+}*/
+.error {
+    background-color: #FFFFFF;
+    border: 1px solid #CCCCCC;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    color: #C62626;
+    display: inline-block;
+    font-size: 14px;
+    height: 14px;
+    line-height: 0;
+    padding: 6px 12px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    vertical-align: middle;
+    width: 150px;
+}
+.error:focus {
+    border-color: #B94A48;
 
-/*提示框样式*/
-form.validate  span.tip.note{border:1px solid #99CCFF;padding:3px 5px 3px 25px;background:#EEF7FD url(../images/form_img.gif) no-repeat scroll 5px -3px;margin-left:5px;}
-
-/*校验成功样式*/
-form.validate span.tip.ok{display:inline-block;width:15px;height:15px;margin-left:3px;background:url(../images/form_img.gif) no-repeat scroll 0 -57px;vertical-align:middle;}
-
-/*校验失败样式*/
-form.validate span.tip.error{background:#FEEBEB url(../images/form_img.gif) no-repeat scroll 5px -29px;padding:3px 5px 3px 25px;margin-left:5px;border:1px solid #D37575}
+    box-shadow: 0 1px 1px rgba(216, 148, 147, 1) inset, 0 0 8px rgba(216, 148, 147, 1);
+    outline: 0 none;
+    color:#B94A48;
+}
