@@ -65,10 +65,10 @@ public class DispatcherFilter implements Filter {
                 EsfContextIniter.init(httpRequest, httpResponse);
             }
 
-            Processor loginprocessor = (Processor) SpringContextHolder.getBean("autoLoginProcessor");
+            /*Processor loginprocessor = (Processor) SpringContextHolder.getBean("autoLoginProcessor");
             if (loginprocessor != null) {
                 loginprocessor.process(1, httpResponse, httpRequest);
-            }
+            }*/
 
             Processor processor = ProcessorFactory.newProcessorInstance(uri, httpRequest);
 

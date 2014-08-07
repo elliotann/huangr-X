@@ -8,8 +8,10 @@
      <!--dao beans -->
     <!--instance the purchase order dao-->
 
+<!--
     <bean id="leaveDao" factory-bean="daoFactory" factory-method="getDAO" singleton="true">
         <constructor-arg value="com.easysoft.component.oa.dao.LeaveDao"/>
     </bean>
+-->
 
 </beans>
