@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ include file="/commons/taglibs.jsp"%>
-<script type="text/javascript" src="${staticserver }/js/common/jquery-1.6.4.js"></script>
-<script src="${context }/js/plug-in/jquery-validation/jquery.validate.min.js"></script>
-<script src="${context }/js/plug-in/jquery-validation/jquery.metadata.js" type="text/javascript"></script>
-<script src="${context }/js/plug-in/jquery-validation/messages_cn.js" type="text/javascript"></script>
-<script type="text/javascript" src="${staticserver }/js/admin/jeap.js"></script>
+<script type="text/javascript" src="${staticserver }/js/common/jquery-1.9.0.min.js"></script>
+<script src="${context }/js/plug-in/jquery-validation/jquery-validate.js"></script>
+<%--<script src="${context }/js/plug-in/jquery-validation/jquery.metadata.js" type="text/javascript"></script>
+<script src="${context }/js/plug-in/jquery-validation/messages_cn.js" type="text/javascript"></script>--%>
+<%--<script type="text/javascript" src="${staticserver }/js/admin/jeap.js"></script>--%>
 <link href="${context }/css/form.css" rel="stylesheet"/>
+<link href="${context }/css/validate.css" rel="stylesheet"/>
 
 <script type="text/javascript">
 
@@ -16,7 +17,26 @@
     var dialog = frameElement.dialog;
     $(function ()
     {
-        $.validator.addMethod(
+        $('form').validate({
+            eachValidField : function() {
+                if($(this).hasClass('form-control')){
+                    $(this).removeClass('error').addClass('form-control');
+                }
+
+            },
+            eachInvalidField : function() {
+                $(this).removeClass('form-control').addClass('error');
+            },
+            description : {
+                username : {
+                    required : '用户名不能为空!',
+                    pattern : '<div class="error">Pattern</div>',
+                    conditional : '<div class="error">Conditional</div>'
+                }
+            }
+        });
+
+        /*$.validator.addMethod(
                 "notnull",
                 function (value, element, regexp)
                 {
@@ -25,8 +45,8 @@
                 },
                 "不能为空"
         );
-        $.metadata.setType("attr", "validate");
-        var v = $("form").validate({
+        $.metadata.setType("attr", "validate");*/
+        /*var v = $("form").validate({
             debug: true,
             rules:{
                 username:{
@@ -48,6 +68,8 @@
             },
             errorPlacement: function (lable, element)
             {
+
+                element.addClass('error');
                 if (element.hasClass("l-textarea"))
                 {
                     element.addClass("l-textarea-invalid");
@@ -69,7 +91,7 @@
                 {
                     element.parent().removeClass("l-text-invalid");
                 }
-                $(element).removeAttr("title").ligerHideTip();
+
             },
             submitHandler: function ()
             {
@@ -99,15 +121,12 @@
                 });
 
             }
-        });
+        });*/
 
         $(".l-button-test").click(function ()
         {
             dialog.close();//关闭dialog
         });
-
-
-
         $("#notSuperChk").click(function(){
 
             if(!this.checked)
@@ -131,6 +150,7 @@
     .l-table-edit-td{ padding:4px;}
     .l-button-submit,.l-button-test{width:80px; float:left; margin-left:10px; padding-bottom:2px;}
     .l-verify-tip{ left:230px; top:120px;}
+
 </style>
 <form name="objForm" method="post"   id="objForm" class="">
     <div>
@@ -168,14 +188,15 @@
         <tr>
             <td align="right" class="l-table-edit-td">用户名:</td>
             <td align="left" class="l-table-edit-td">
-                <input name="username" type="text" id="username" ltype="text" class="form-control" />
+                <input name="username" type="text" id="username" class="form-control"  data-describedby="messages" data-description="username" data-required/>
+                <span id="messages" class="errorLabel"></span>
             </td>
             <td align="left"></td>
         </tr>
         <tr>
             <td align="right" class="l-table-edit-td">密码:</td>
             <td align="left" class="l-table-edit-td">
-                <input name="password" type="password" id="password" ltype="text" validate="{required:true,minlength:1,maxlength:18}" class="form-control"/>
+                <input name="password" type="password" id="password" validate="{required:true,minlength:1,maxlength:18}" class="form-control"/>
             </td>
             <td align="left"></td>
         </tr>
