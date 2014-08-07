@@ -199,6 +199,11 @@
             <artifactId>commons-betwixt</artifactId>
             <version>0.8</version>
         </dependency>
+        <dependency>
+            <groupId>javazoom</groupId>
+            <artifactId>uploadbean</artifactId>
+            <version>1.9</version>
+        </dependency>
     </dependencies>
 
 </project>
