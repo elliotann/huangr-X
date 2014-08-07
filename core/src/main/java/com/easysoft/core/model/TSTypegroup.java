@@ -18,8 +18,7 @@ import com.easysoft.core.common.entity.IdEntity;
 /**
  * TTypegroup entity.
  */
-@Entity
-@Table(name = "t_s_typegroup")
+
 public class TSTypegroup extends IdEntity implements java.io.Serializable {
 	public static Map<String, TSTypegroup> allTypeGroups = new HashMap<String,TSTypegroup>();
 	public static Map<String, List<TSType>> allTypes = new HashMap<String,List<TSType>>();

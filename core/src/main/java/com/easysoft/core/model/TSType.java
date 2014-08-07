@@ -19,8 +19,7 @@ import com.easysoft.core.common.entity.IdEntity;
  * 通用类型字典表
  *  @author  andy
  */
-@Entity
-@Table(name = "t_s_type")
+
 public class TSType extends IdEntity implements java.io.Serializable {
 
 	private TSTypegroup TSTypegroup;//类型分组
