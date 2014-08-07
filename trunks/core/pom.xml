@@ -163,7 +163,11 @@
             <artifactId>corenut-commons</artifactId>
             <version>1.0</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+            <version>4.0.1</version>
+        </dependency>
     </dependencies>
 
 </project>
