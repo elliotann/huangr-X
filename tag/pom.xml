@@ -7,12 +7,12 @@
     <groupId>com.easysoft.jeap</groupId>
     <artifactId>jeap-tag</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <parent>
+    <!--<parent>
         <groupId>com.easysoft.jeap</groupId>
         <artifactId>build</artifactId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../build</relativePath>
-    </parent>
+    </parent>-->
     <dependencies>
         <dependency>
             <groupId>com.easysoft.jeap</groupId>
