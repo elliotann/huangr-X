@@ -7,7 +7,7 @@
     <script src="/jeap/statics/js/common/jquery-1.6.4.js" type="text/javascript"></script>
     <script src="/jeap/statics/js/common/jquery.validate.js" type="text/javascript"></script>
     <link href="${context }/css/form.css" rel="stylesheet"/>
-    <link href="${context }/css/validate.css" rel="stylesheet"/>
+
     <script type="text/javascript">
         $.validator.setDefaults({
             submitHandler: function() { alert("submitted!"); }
@@ -20,7 +20,6 @@
                         required:true,
                         minlength:3,
                         maxlength:10,
-                        notnull:true,
                         remote:{
                             url:'userAdmin.do?checkNameExist&ajax=true',
                             type:'post',
@@ -32,77 +31,44 @@
 
                         }
                     }
-                }
-            });
-
-            // validate signup form on keyup and submit
-            /*$("#signupForm").validate({
-                rules: {
-                    firstname: "required",
-                    lastname: "required",
-                    username: {
-                        required: true,
-                        minlength: 2
-                    },
-                    password: {
-                        required: true,
-                        minlength: 5
-                    },
-                    confirm_password: {
-                        required: true,
-                        minlength: 5,
-                        equalTo: "#password"
-                    },
-                    email: {
-                        required: true,
-                        email: true
-                    },
-                    topic: {
-                        required: "#newsletter:checked",
-                        minlength: 2
-                    },
-                    agree: "required"
                 },
-                messages: {
-                    firstname: "Please enter your firstname",
-                    lastname: "Please enter your lastname",
+
+                submitHandler: function ()
+                {
+
+                    $("#objForm").ajaxSubmit({
+                        url :"userAdmin.do?addSave&ajax=true",
+                        type : "POST",
+                        dataType:"json",
+                        success : function(result) {
+
+                            if(result.success){
+                                $.ligerDialog.waitting('增加成功');
+                                setTimeout(function ()
+                                {
+                                    $.ligerDialog.closeWaitting();
+
+                                }, 1000);
+                                window.parent.listgrid.loadData();
+                                dialog.close();
+                            }else{
+                                alert(result.msg)
+                            }
+                        },
+                        error : function(e) {
+                            alert("出错啦:(");
+                        }
+                    });
+
+                },
+                messages:{
                     username: {
-                        required: "Please enter a username",
-                        minlength: "Your username must consist of at least 2 characters"
-                    },
-                    password: {
-                        required: "Please provide a password",
-                        minlength: "Your password must be at least 5 characters long"
-                    },
-                    confirm_password: {
-                        required: "Please provide a password",
-                        minlength: "Your password must be at least 5 characters long",
-                        equalTo: "Please enter the same password as above"
-                    },
-                    email: "Please enter a valid email address",
-                    agree: "Please accept our policy"
+                        required: "用户名不能为空",
+                        minlength: "用户名最少3个字符",
+                        maxlength:"用户名最大18个字符",
+                        remote:"用户名已经存在"
+                    }
                 }
-            });*/
-
-            // propose username by combining first- and lastname
-            $("#username").focus(function() {
-                var firstname = $("#firstname").val();
-                var lastname = $("#lastname").val();
-                if(firstname && lastname && !this.value) {
-                    this.value = firstname + "." + lastname;
-                }
-            });
-
-            //code to hide topic selection, disable for demo
-            var newsletter = $("#newsletter");
-            // newsletter topics are optional, hide at first
-            var inital = newsletter.is(":checked");
-            var topics = $("#newsletter_topics")[inital ? "removeClass" : "addClass"]("gray");
-            var topicInputs = topics.find("input").attr("disabled", !inital);
-            // show when newsletter is checked
-            newsletter.click(function() {
-                topics[this.checked ? "removeClass" : "addClass"]("gray");
-                topicInputs.attr("disabled", !this.checked);
             });
         });
         function submitForm(){
@@ -231,63 +197,4 @@
 </form>
 
 
-<div id="main">
 
-
-
-    <form class="cmxform" id="signupForm" method="get" action="">
-        <fieldset>
-            <legend>Validating a complete form</legend>
-            <p>
-                <label for="firstname">Firstname</label>
-                <input id="firstname" name="firstname" />
-            </p>
-            <p>
-                <label for="lastname">Lastname</label>
-                <input id="lastname" name="lastname" />
-            </p>
-            <p>
-                <label for="username">Username</label>
-                <input id="username" name="username" />
-            </p>
-            <p>
-                <label for="password">Password</label>
-                <input id="password" name="password" type="password" />
-            </p>
-            <p>
-                <label for="confirm_password">Confirm password</label>
-                <input id="confirm_password" name="confirm_password" type="password" />
-            </p>
-            <p>
-                <label for="email">Email</label>
-                <input id="email" name="email" />
-            </p>
-            <p>
-                <label for="agree">Please agree to our policy</label>
-                <input type="checkbox" class="checkbox" id="agree" name="agree" />
-            </p>
-            <p>
-                <label for="newsletter">I'd like to receive the newsletter</label>
-                <input type="checkbox" class="checkbox" id="newsletter" name="newsletter" />
-            </p>
-            <fieldset id="newsletter_topics">
-                <legend>Topics (select at least two) - note: would be hidden when newsletter isn't selected, but is visible here for the demo</legend>
-                <label for="topic_marketflash">
-                    <input type="checkbox" id="topic_marketflash" value="marketflash" name="topic" />
-                    Marketflash
-                </label>
-                <label for="topic_fuzz">
-                    <input type="checkbox" id="topic_fuzz" value="fuzz" name="topic" />
-                    Latest fuzz
-                </label>
-                <label for="topic_digester">
-                    <input type="checkbox" id="topic_digester" value="digester" name="topic" />
-                    Mailing list digester
-                </label>
-                <label for="topic" class="error">Please select at least two topics you'd like to receive.</label>
-            </fieldset>
-            <p>
-                <input class="submit" type="submit" value="Submit"/>
-            </p>
-        </fieldset>
-    </form>
