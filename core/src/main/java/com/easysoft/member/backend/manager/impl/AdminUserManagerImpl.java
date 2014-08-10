@@ -260,7 +260,7 @@ public class AdminUserManagerImpl extends GenericService<AdminUser> implements I
         if(userId!=null&&userId!=0){
             hql += " and a.userid!="+userId;
         }
-        List<AdminUser> results = this.findHql(hql,userId);
+        List<AdminUser> results  = this.findHql(hql,name);
         if(results.isEmpty()) return null;
         return results.get(0);
     }
