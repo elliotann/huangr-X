@@ -9,11 +9,11 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>../framework</module>
+       <!-- <module>../framework</module>
         <module>../core</module>
         <module>../tag</module>
         <module>../shop</module>
         <module>../component</module>
         <module>../webapp</module>
-    </modules>
+    </modules>-->
 </project>
