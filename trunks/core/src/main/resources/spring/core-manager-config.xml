@@ -3,7 +3,7 @@
         "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
      <!--the factory of commons dao-->
-    <bean id="daoFactory" class="org.mangocube.corenut.pf.core.DaoProxyFactory"/>
+    <!--<bean id="daoFactory" class="org.mangocube.corenut.pf.core.DaoProxyFactory"/>-->
 
      <!--dao beans -->
     <!--instance the purchase order dao-->
