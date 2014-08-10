@@ -47,7 +47,7 @@
 </head>
 <body class="bodygrey">
 <input id="context" value="${context}" type="hidden"/>
-<div class="header">
+<div class="header" id="top">
     <!-- logo -->
     <a href=""><img alt="Logo" src="images/logo2.png"></a>
     <div class="topheader">
@@ -107,46 +107,24 @@
 </div>
 <!--左侧菜单结束-->
 <div class="maincontent">
-    <div class="breadcrumbs">
+    <div class="breadcrumbs" id="nav">
         <a href="dashboard.html">系统管理</a>
         <a href="dashboard.html">权限管理</a>
         <span>管理员管理</span>
     </div>
     <!-- breadcrumbs -->
-    <div class="left" style="height: 800px" id="right_content">
-        <iframe src="../adminthemes/default/welcome.jsp" scrolling="no" id="iframe" name="iframe" onload="iFrameHeight()"
-                name="iframepage" style="width: 100%;height: 100%"></iframe>
+    <div class="left" id="right_content" style="height: 460px">
+        <iframe src="../adminthemes/default/welcome.jsp" scrolling="no" id="iframe" name="iframe" onload="iFrameHeight()"></iframe>
     </div>
-    <!-- left -->
-    <%--<div id="layout1">
-        &lt;%&ndash;<div position="left" id="leftMenus">
-
-        </div>&ndash;%&gt;
-        <!--左侧菜单开始-->
-
-        &lt;%&ndash;<div position="center" id="right_content">
-            <div id="navtab1" style="width: 100%;height:100%;overflow:hidden; border:1px solid #A3C0E8; ">
-                <div tabid="home" title="桌面" lselected="true"  style="height: 100%">
-                    <iframe frameborder="0" name="showmessage" src="../core/admin/index.do?list"></iframe>
-                </div>
-
-            </div>
-        </div>&ndash;%&gt;
-    </div>--%>
-
-    <br clear="all">
-
 </div>
 
 <script type="text/javascript">
-    function iFrameHeight() {
-        var ifm = document.getElementById("iframe");
-        var subWeb = document.frames ? document.frames["iframe"].document : ifm.contentDocument;
 
-        if (ifm != null && subWeb != null) {
-            ifm.height = 0;
-            ifm.height = subWeb.body.scrollHeight+100;
-        }
+    document.getElementById("right_content").style.height = 600;
+    function iFrameHeight() {
+
+        document.getElementById("right_content").style.height = document.documentElement.clientHeight-document.getElementById("top").offsetHeight-document.getElementById("nav").offsetHeight-100;
+
     }
 </script>
 </body>
