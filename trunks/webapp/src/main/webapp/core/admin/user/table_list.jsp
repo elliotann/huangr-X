@@ -6,7 +6,7 @@
 <link rel="stylesheet" type="text/css" href="/esf/adminthemes/default/css/easyui.css">
 <link rel="stylesheet" type="text/css" href="/esf/adminthemes/default/css/demo.css">
 <link rel="stylesheet" type="text/css" href="/esf/adminthemes/default/css/icon.css">
-<script type="text/javascript" src="${staticserver }/js/common/jquery-1.10.js"></script>
+
 <script type="text/javascript" src="/esf/adminthemes/default/js/jquery.easyui.min.js"></script>
 <div class="grid">
     <div class="toolbar">

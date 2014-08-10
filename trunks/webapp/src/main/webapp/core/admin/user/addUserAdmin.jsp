@@ -13,7 +13,7 @@
             submitHandler: function() { alert("submitted!"); }
         });
 
-        $().ready(function() {
+        $(function() {
             $("#objForm").validate({
                 rules:{
                     username:{
@@ -30,6 +30,11 @@
                             }
 
                         }
+                    },
+                    password:{
+                        required:true,
+                        minlength:6,
+                        maxlength:18
                     }
                 },
 
@@ -67,8 +72,24 @@
                         minlength: "用户名最少3个字符",
                         maxlength:"用户名最大18个字符",
                         remote:"用户名已经存在"
+                    },
+                    password:{
+                        required:"密码不能为空",
+                        minlength:"密码最少6位",
+                        maxlength:"密码最长18位"
                     }
                 }
+            });
+
+            $("#notSuperChk").click(function(){
+
+                if(this.checked)
+                    $("#roletr").show();
+            });
+            $("#superChk").click(function(){
+
+                if(this.checked)
+                    $("#roletr").hide();
             });
         });
         function submitForm(){
