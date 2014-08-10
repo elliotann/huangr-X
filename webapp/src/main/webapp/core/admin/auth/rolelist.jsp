@@ -6,7 +6,7 @@
 
 
 
-<script type="text/javascript" src="${staticserver }/js/common/jquery-1.10.js"></script>
+
 <link href="${context }/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
 <link href="${context }/js/ligerui/skins/ligerui-icons.css" rel="stylesheet" type="text/css" />
 <link href="${context }/js/ligerui/skins/Gray/css/all.css" rel="stylesheet" type="text/css" />
@@ -88,17 +88,7 @@
 
 
 
-<div class="searchBar">
-    <form action="#">
-        <table>
-            <tr>
-                <td>用户名:</td>
-                <td><input type="text" name="username"/></td>
-                <td><input type="button" value="搜索"/></td>
-            </tr>
-        </table>
-    </form>
-</div>
+
 <div class="grid">
     <div id="maingrid"></div>
 </div>

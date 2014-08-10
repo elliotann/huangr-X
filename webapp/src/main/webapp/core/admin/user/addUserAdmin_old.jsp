@@ -120,7 +120,7 @@
 
 
         $("#notSuperChk").click(function(){
-
+            $("#roletr").css('display','none');
             if(!this.checked)
                 $("#roletr").show();
         });

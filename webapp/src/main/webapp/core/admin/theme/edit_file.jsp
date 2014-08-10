@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ include file="/commons/taglibs.jsp" %>
-<script type="text/javascript" src="${staticserver }/js/common/jquery-1.10.js"></script>
+
 <script type="text/javascript" charset="utf-8" src="/esf/adminthemes/default/js/designer/ueditor.config.js"></script>
 <script type="text/javascript" charset="utf-8" src="/esf/adminthemes/default/js/designer/editor_api.js"> </script>
 
