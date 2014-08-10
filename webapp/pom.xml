@@ -33,12 +33,12 @@
             <version>1.0-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>com.easysoft.shop</groupId>
             <artifactId>es-shop</artifactId>
             <version>1.0-SNAPSHOT</version>
             <type>jar</type>
-        </dependency>
+        </dependency>-->
 
         <!-- 此处的类库根据自己的需要进行添加 -->
 
