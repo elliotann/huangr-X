@@ -5,7 +5,7 @@
     <title></title>
     <link rel="shortcut icon" href="resources/fc/images/icon/favicon.ico">
     <!--[if lt IE 9]>
-    <script src="plug-in/login/js/html5.js"></script>
+
     <![endif]-->
     <!--[if lt IE 7]>
     <script src="plug-in/login/js/iepng.js" type="text/javascript"></script>
