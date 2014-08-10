@@ -28,3 +28,11 @@
     padding-left: 20px;
     vertical-align: middle;
 }
+
+textarea.form-control {
+    height: auto;
+}
+textarea {
+    overflow: auto;
+    vertical-align: top;
+}
