@@ -57,7 +57,7 @@
                         { display: 'id', name: 'roleid', align: 'left', width: 100, minWidth: 60 },
                         { display: '角色名称', name: 'rolename', minWidth: 120 },
                         { display: '描述', name: 'rolememo', minWidth: 140 }
-                    ], url:'role.do?dataGrid&ajax=yes',  pageSize:30 ,rownumbers:true,
+                    ], url:'role.do?dataGrid&ajax=yes',  pageSize:30 ,rownumbers:true/*,
                     toolbar: { items: [
                         { text: '增加', click: addRole, icon: 'add' },
                         { line: true },
@@ -67,7 +67,7 @@
                         { line: true },
                         { text: '设置权限', click: setAuth, icon: 'modify' }
                     ]
-                    }
+                    }*/
                 });
 
 
