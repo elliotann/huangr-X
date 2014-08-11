@@ -152,9 +152,9 @@ var BackendUi = {
         return link;
     },
     autoHeight: function () {
-        var height = $(window).height() - 100;
-        $("#leftMenus").height(height);
-        //$("#right_content").height(height);
+        var height = $(window).height() - 140;
+
+        $("#right_content").height(height);
 
     }
 
