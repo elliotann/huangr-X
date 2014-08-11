@@ -8,7 +8,7 @@
     <script>
         var founder= ${user.founder};
     </script>
-    <link href="${context }/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
+
     <link href="${context}/css/style.css" rel="stylesheet" type="text/css" />
     <link href="${context}/css/global.css" rel="stylesheet" type="text/css" />
     <link href="${context}/css/grid.css" rel="stylesheet" type="text/css" />
@@ -18,10 +18,10 @@
     <link href="${context}/css/main.css" rel="stylesheet" type="text/css" />
     <link href="${context}/css/menu.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="${staticserver }/js/common/jquery-1.6.4.js"></script>
-    <script src="${context}/js/ligerui/js/core/base.js" type="text/javascript"></script>
-    <script src="${context}/js/ligerui/js/plugins/ligerLayout.js" type="text/javascript"></script>
-    <script src="${context}/js/ligerui/js/plugins/ligerTab.js" type="text/javascript"></script>
-    <script src="${context}/js/ligerui/js/plugins/ligerAccordion.js" type="text/javascript"></script>
+
+
+
+
     <script type="text/javascript" src="${staticserver }/js/admin/jeap.js"></script>
     <script type="text/javascript" src="${context}/js/index.js"></script>
 
@@ -107,11 +107,11 @@
 </div>
 <!--左侧菜单结束-->
 <div class="maincontent">
-    <div class="breadcrumbs" id="nav">
+    <%--<div class="breadcrumbs" id="nav">
         <a href="dashboard.html">系统管理</a>
         <a href="dashboard.html">权限管理</a>
         <span>管理员管理</span>
-    </div>
+    </div>--%>
     <!-- breadcrumbs -->
     <div class="left" id="right_content" style="height: 730px">
         <iframe src="../adminthemes/default/welcome.jsp" scrolling="no" id="iframe" name="iframe" onload="iFrameHeight()"></iframe>
