@@ -34,7 +34,7 @@ public class RoleController extends BaseController {
         List roleList = roleManager.list();
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("roleList",roleList);
-        return new ModelAndView("core/admin/auth/rolelist",map);
+        return new ModelAndView("admin/core/auth/rolelist",map);
     }
     @RequestMapping(params = {"dataGrid"})
     public ModelAndView dataGrid(){

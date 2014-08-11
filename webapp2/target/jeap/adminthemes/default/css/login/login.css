@@ -1,0 +1,17 @@
+.code_img{
+    height:22px;
+    width:60px;
+    vertical-align:middle;
+}
+.txtCode
+{
+    line-height: 30px;
+    width: 200px;
+    height: 30px;
+    overflow: hidden;
+    border: 0px;
+    padding-left: 3px;
+    color: #999999;
+
+}
+
