@@ -113,7 +113,7 @@
         <span>管理员管理</span>
     </div>
     <!-- breadcrumbs -->
-    <div class="left" id="right_content" style="height: 460px">
+    <div class="left" id="right_content" style="height: 730px">
         <iframe src="../adminthemes/default/welcome.jsp" scrolling="no" id="iframe" name="iframe" onload="iFrameHeight()"></iframe>
     </div>
 </div>
