@@ -13,11 +13,11 @@
         EvPNG.fix('div, ul, img, li, input'); //EvPNG.fix('包含透明PNG图片的标签'); 多个标签之间用英文逗号隔开。
     </script>
     <![endif]-->
-    <link href="plug-in/login/css/zice.style.css" rel="stylesheet" type="text/css" />
-    <link href="plug-in/login/css/buttons.css" rel="stylesheet" type="text/css" />
-    <link href="plug-in/login/css/icon.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="plug-in/login/css/tipsy.css" media="all" />
-    <link href="${context}/css/login.css" rel="stylesheet" type="text/css" />
+    <link href="${context}/css/login/zice.style.css" rel="stylesheet" type="text/css" />
+    <link href="${context}/css/login/buttons.css" rel="stylesheet" type="text/css" />
+    <link href="${context}/css/login/icon.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="${context}/css/login/tipsy.css" media="all" />
+    <link href="${context}/css/login/login.css" rel="stylesheet" type="text/css" />
     <style type="text/css">
         html {
             background-image: none;
@@ -102,12 +102,12 @@
 </div>
 <!-- Link JScript-->
 <script type="text/javascript" src="${staticserver }/js/common/jquery-1.6.4.js"></script>
-<script type="text/javascript" src="plug-in/jquery/jquery.cookie.js"></script>
-<script type="text/javascript" src="plug-in/login/js/jquery-jrumble.js"></script>
-<script type="text/javascript" src="plug-in/login/js/jquery.tipsy.js"></script>
-<script type="text/javascript" src="plug-in/login/js/iphone.check.js"></script>
-<script type="text/javascript" src="plug-in/login/js/login.js"></script>
-<script type="text/javascript" src="plug-in/lhgDialog/lhgdialog.min.js"></script>
+<script type="text/javascript" src="${staticserver }/js/common/jquery.cookie.js"></script>
+<script type="text/javascript" src="${context}/js/login/jquery-jrumble.js"></script>
+<script type="text/javascript" src="${context}/js/login/jquery.tipsy.js"></script>
+<script type="text/javascript" src="${context}/js/login/login.js"></script>
+<script type="text/javascript" src="${context}/js/login/lhgdialog.min.js"></script>
+<script type="text/javascript" src="${context}/js/login/iphone.check.js"></script>
 <script type="text/javascript" src="${staticserver }/js/admin/sso.js"></script>
 <SCRIPT  src="${staticserver }/js/common/jquery-form-2.33.js" type="text/javascript"></SCRIPT>
 </body>
