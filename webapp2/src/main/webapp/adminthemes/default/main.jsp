@@ -113,14 +113,14 @@
         <span>管理员管理</span>
     </div>--%>
     <!-- breadcrumbs -->
-    <div class="left" id="right_content" style="height: 730px">
+    <div class="left" id="right_content">
         <iframe src="../adminthemes/default/welcome.jsp" scrolling="no" id="iframe" name="iframe" onload="iFrameHeight()"></iframe>
     </div>
 </div>
 
 <script type="text/javascript">
 
-    document.getElementById("right_content").style.height = 600;
+
     function iFrameHeight() {
 
         document.getElementById("right_content").style.height = document.documentElement.clientHeight-document.getElementById("top").offsetHeight-document.getElementById("nav").offsetHeight-100;
