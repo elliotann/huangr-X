@@ -50,7 +50,7 @@ public class RoleController extends BaseController {
         List authList = authActionManager.list();
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("authList",authList);
-        return new ModelAndView("core/admin/auth/addrole",map);
+        return new ModelAndView("admin/core/auth/addrole",map);
     }
 
     @RequestMapping(params = {"edit"})
