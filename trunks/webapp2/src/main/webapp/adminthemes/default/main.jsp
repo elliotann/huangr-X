@@ -114,19 +114,11 @@
     </div>--%>
     <!-- breadcrumbs -->
     <div class="left" id="right_content">
-        <iframe src="../adminthemes/default/welcome.jsp" scrolling="no" id="iframe" name="iframe" onload="iFrameHeight()"></iframe>
+        <iframe src="../adminthemes/default/welcome.jsp" scrolling="no" id="iframe" name="iframe"></iframe>
     </div>
 </div>
 
-<script type="text/javascript">
 
-
-    function iFrameHeight() {
-
-        document.getElementById("right_content").style.height = document.documentElement.clientHeight-document.getElementById("top").offsetHeight-document.getElementById("nav").offsetHeight-100;
-
-    }
-</script>
 </body>
 </html>
 

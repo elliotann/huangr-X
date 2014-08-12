@@ -36,7 +36,7 @@ padding-left: 15px;
  .l-grid{ background-color:White;}
 .l-grid-header
 {
-    border-bottom:1px solid #D6D6D6;  
+    border-bottom:1px solid #D6D6D6;
    height:24px; line-height:22px; background:#F1F1F1 url('../images/ui/gridalt.gif') top repeat-x;
 } 
 .l-grid-hd-cell-mul
