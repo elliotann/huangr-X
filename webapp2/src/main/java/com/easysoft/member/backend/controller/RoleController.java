@@ -60,7 +60,7 @@ public class RoleController extends BaseController {
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("authList",authList);
         map.put("role",role);
-        return new ModelAndView("core/admin/auth/addrole",map);
+        return new ModelAndView("admin/core/auth/addrole",map);
     }
 
     //保存修改
