@@ -9,7 +9,7 @@
 
 <link href="${context }/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
 <link href="${context }/js/ligerui/skins/ligerui-icons.css" rel="stylesheet" type="text/css" />
-<link href="${context }/js/ligerui/skins/Gray/css/all.css" rel="stylesheet" type="text/css" />
+<link href="${context }/js/ligerui/skins/Gray2014/css/all.css" rel="stylesheet" type="text/css" />
 <link href="${context }/css/form.css" rel="stylesheet" type="text/css" />
 <link href="${context }/css/button.css" rel="stylesheet" type="text/css" />
 <script src="${context }/js/ligerui/js/core/base.js" type="text/javascript"></script>

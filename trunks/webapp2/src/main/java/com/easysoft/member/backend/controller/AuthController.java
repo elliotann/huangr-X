@@ -65,7 +65,7 @@ public class AuthController extends BaseController {
         }
 
         map.put("roleId",roleId);
-        return new ModelAndView("core/admin/auth/auth_input",map);
+        return new ModelAndView("admin/core/auth/auth_input",map);
     }
     @RequestMapping(params = {"dataGrid"})
     public ModelAndView dataGrid(){
