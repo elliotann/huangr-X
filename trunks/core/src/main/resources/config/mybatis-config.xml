@@ -4,9 +4,16 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
-        <typeAlias type="com.easysoft.jeap.bean.UserTable" alias="UserTable"/>
+        <typeAlias type="com.easysoft.member.backend.model.AdminUser" alias="AdminUser"/>
+
     </typeAliases>
+    <!--<plugins>
+        <plugin interceptor="com.easysoft.jeap.framework.db.PageInterceptor">
+            <property name="databaseType" value="mysql" />
+        </plugin>
+    </plugins>-->
     <mappers>
 
     </mappers>
+
 </configuration>
