@@ -5,15 +5,13 @@
     <title></title>
     <script type="text/javascript" src="${staticserver }/js/common/jquery-1.6.4.js"></script>
     <link href="${context }/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css">
-    <link href="${context }/js/ligerui/skins/Gray/css/all.css" rel="stylesheet" type="text/css" />
+    <link href="${context }/js/ligerui/skins/Gray2014/css/all.css" rel="stylesheet" type="text/css" />
     <script src="${context }/js/ligerui/js/core/base.js" type="text/javascript"></script>
     <script src="${context }/js/ligerui/js/plugins/ligerGrid.js" type="text/javascript"></script>
     <script src="${context }/js/ligerui/js/plugins/ligerSpinner.js" type="text/javascript"></script>
     <script src="${context }/js/ligerui/js/plugins/ligerResizable.js" type="text/javascript"></script>
     <script src="${context }/js/ligerui/js/plugins/ligerResizable.js" type="text/javascript"></script>
     <script src="${context }/js/ligerui/js/plugins/ligerDialog.js" type="text/javascript"></script>
-
-    <script src="../TreeData.js" type="text/javascript"></script>
     <script type="text/javascript">
         var dialog = frameElement.dialog;
         var manager;
