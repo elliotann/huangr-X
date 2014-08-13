@@ -49,12 +49,7 @@
     </bean>
 
 
-    <!-- JDBC配置 -->
-    <bean id="jdbcTemplate" class="com.easysoft.framework.db.impl.LowerCaseJdbcTemplate">
-        <property name="dataSource">
-            <ref bean="dataSource"/>
-        </property>
-    </bean>
+
 
     <!-- JDBC配置 -->
     <bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
