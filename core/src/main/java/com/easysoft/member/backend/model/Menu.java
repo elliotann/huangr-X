@@ -19,7 +19,21 @@ public class Menu {
     private Integer deleteflag = 0;
 
     private String productId;
+    private Integer pid;
+    private String title;
+    private String url;
+    private String target;
+    private Integer sorder;
+    private Integer menutype;
+    private String datatype;
+    private String appid;
 
+
+    private List<Menu> children;
+    private boolean hasChildren ;
+    private String ico;
+
+    private boolean hasAuth;//角色是否权限此菜单权限，非数据库字段
 
     public Integer getDeleteflag() {
         return deleteflag;
@@ -48,19 +62,7 @@ public class Menu {
     public void setProductId(String productId) {
         this.productId = productId;
     }
-	private Integer pid;
-	private String title;
-	private String url;
-	private String target;
-	private Integer sorder;
-	private Integer menutype;
-	private String datatype;
-	private String appid;
-	
 
-	private List<Menu> children;
-	private boolean hasChildren ;
-    private String ico;
 
 	@NotDbField
     @Transient
@@ -144,5 +146,13 @@ public class Menu {
 
     public void setIco(String ico) {
         this.ico = ico;
+    }
+    @Transient
+    public boolean isHasAuth() {
+        return hasAuth;
+    }
+
+    public void setHasAuth(boolean hasAuth) {
+        this.hasAuth = hasAuth;
     }
 }

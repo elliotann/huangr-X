@@ -27,6 +27,8 @@ public class MenuManagerImpl extends BaseSupport<Menu> implements IMenuManager {
 
     @Autowired
     private IFunAndOperManager funAndOperManager;
+    @Autowired
+    private IRoleAuthManager roleAuthManager;
 	public void clean() {
 		this.baseDaoSupport.execute("truncate table menu");
 	}
@@ -132,9 +134,10 @@ public class MenuManagerImpl extends BaseSupport<Menu> implements IMenuManager {
     @Override
     public List<Menu> getMenuTreeByRoleId(Integer roleId) {
         List<Menu> results = new ArrayList<Menu>();
-        List<FunAndOper> funAndOpers = funAndOperManager.queryFunAndOpersByRoleId(roleId);
-        for(FunAndOper funAndOper : funAndOpers){
-            results.add(this.get(funAndOper.getMenu().getId()));
+        List<RoleAuth> roleAuths = roleAuthManager.queryRoleAuthListByRoleId(roleId);
+       // List<FunAndOper> funAndOpers = funAndOperManager.queryFunAndOpersByRoleId(roleId);
+        for(RoleAuth roleAuth : roleAuths){
+            results.add(this.get(roleAuth.getFunId()));
         }
 
         return results;

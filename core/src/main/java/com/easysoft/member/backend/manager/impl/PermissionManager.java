@@ -104,12 +104,12 @@ public class PermissionManager extends GenericService implements IPermissionMana
         List<UserRole> userRoles = this.findHql("from UserRole ur where ur.adminUser.userid=?",userid);
         List<RoleAuth> results = new ArrayList<RoleAuth>();
         for(UserRole userRole : userRoles){
-            List<RoleAuth> roleAuths = this.findHql("from RoleAuth ra where ra.role.id=? and ra.authType=?",userRole.getRole().getRoleid(),RoleAuth.AuthType.FUNCTION);
+            List<RoleAuth> roleAuths = null;//this.findHql("from RoleAuth ra where ra.role.id=? and ra.authType=?",userRole.getRole().getRoleid(),RoleAuth.AuthType.FUNCTION);
             results.addAll(roleAuths);
         }
         List<FunAndOper> funAndOpers = new ArrayList<FunAndOper>();
         for(RoleAuth roleAuth : results){
-            funAndOpers.addAll(this.findHql("from FunAndOper fo where fo.id=?",roleAuth.getFunOrDataId()));
+            funAndOpers.addAll(this.findHql("from FunAndOper fo where fo.id=?",roleAuth.getFunId()));
 
         }
 

@@ -53,19 +53,19 @@ public class AuthActionManager extends GenericService<AuthAction> implements IAu
         Role role = new Role();
         role.setRoleid(roleId);
 
-        List<RoleAuth> roleAuths = roleAuthManager.findByProperty(RoleAuth.class,"role.id",roleId);
+        List<RoleAuth> roleAuths = null;//roleAuthManager.findByProperty(RoleAuth.class,"role.id",roleId);
         for(RoleAuth roleAuthTemp : roleAuths){
-            funAndOperManager.deleteEntityById(FunAndOper.class,roleAuthTemp.getFunOrDataId());
+            //funAndOperManager.deleteEntityById(FunAndOper.class,roleAuthTemp.getFunOrDataId());
         }
         //删除角色权限表中对应的数据
         this.baseDaoSupport.execute("delete from role_auth where role_id=?", roleId);
         for(FunAndOper funAndOper : funAndOpers){
-            funAndOperManager.save(funAndOper);
+           /* funAndOperManager.save(funAndOper);
             roleAuth = new RoleAuth();
             roleAuth.setRole(role);
             roleAuth.setAuthType(RoleAuth.AuthType.FUNCTION);
             roleAuth.setFunOrDataId(funAndOper.getId());
-            roleAuthManager.save(roleAuth);
+            roleAuthManager.save(roleAuth);*/
         }
 
         return 0;
@@ -178,11 +178,11 @@ public class AuthActionManager extends GenericService<AuthAction> implements IAu
     public void saveAuth(Integer roleId,Integer operId,boolean isCheck,String[] menuIds) {
         for(String menuStr : menuIds){
             Integer menuId = Integer.parseInt(menuStr);
-            List<RoleAuth> roleAuths = this.findHql("from RoleAuth ra where ra.role.id=? and ra.authType=?",roleId,RoleAuth.AuthType.FUNCTION);
+            List<RoleAuth> roleAuths = this.findHql("from RoleAuth ra where ra.role.id=? and ra.authType=?",roleId,null);
             FunAndOper haveFun = null;
             //检验角色是否有此功能
             for(RoleAuth roleAuth : roleAuths){
-                List<FunAndOper> funAndOpers = this.findHql("from FunAndOper f where f.menu.id=? and f.id=?",menuId,roleAuth.getFunOrDataId());
+                List<FunAndOper> funAndOpers = null;//this.findHql("from FunAndOper f where f.menu.id=? and f.id=?",menuId,roleAuth.getFunOrDataId());
                 if(funAndOpers.size()>0){
                     haveFun = funAndOpers.get(0);
                     break;
@@ -200,10 +200,10 @@ public class AuthActionManager extends GenericService<AuthAction> implements IAu
                 RoleAuth roleAuth = new RoleAuth();
                 Role role = new Role();
                 role.setRoleid(roleId);
-                roleAuth.setRole(role);
+                /*roleAuth.setRole(role);
                 roleAuth.setAuthType(RoleAuth.AuthType.FUNCTION);
                 roleAuth.setFunOrDataId(funAndOper.getId());
-                roleAuthManager.save(roleAuth);
+                roleAuthManager.save(roleAuth);*/
             }else{
                 if(isCheck){
                     haveFun.setOperation(haveFun.getOperation()+","+operId);
