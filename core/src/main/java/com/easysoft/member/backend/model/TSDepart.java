@@ -9,8 +9,7 @@ import java.util.List;
 /**
  * 部门机构表
  */
-@Entity
-@Table(name = "t_s_depart")
+
 public class TSDepart extends IdEntity implements java.io.Serializable {
 	private TSDepart TSPDepart;//上级部门
 	private String departname;//部门名称
