@@ -12,13 +12,13 @@
     <select id="queryAuthByRoleId" resultMap="roleAuthMap">
         select * from t_role_auth where role_id=#{id}
     </select>
-    <select id="getRoleByName" resultMap="roleMap">
+    <select id="getRoleByName" resultMap="roleAuthMap">
         select * from t_role where rolename=#{rolename}
         <if test="roleid!=0">
             and roleid!=#{roleid}
         </if>
     </select>
-    <select id="queryById" resultMap="roleMap">
+    <select id="queryById" resultMap="roleAuthMap">
         select * from t_role where roleid=#{id}
     </select>
     <update id="update" parameterType="Role">
