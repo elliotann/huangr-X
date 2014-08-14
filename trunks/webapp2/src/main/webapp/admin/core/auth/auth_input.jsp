@@ -24,45 +24,53 @@
                         columns: [
                             { display: 'id', name: 'id', id: 'menuId',  align: 'center',width:60 },
                             { display: '名称', name: 'title', id: 'menuName',  align: 'left',width:250 },
-                            { display: '操作', name: 'ico',  align: 'left',width:300,render:function(item){
-                                $(${selectMenus}).each(function(i,data){
-                                    if(item.id==data.id){
-                                        manager.select(item);
-                                    }
-
-                                });
-
-                                var  html="";
-                                if(item.hasChildren){
-                                    return html;
-                                }
-                                $.ajax({
-                                    url:'auth.do?getBtnByMenuId&ajax=yes&id='+item.id+'&roleId='+${roleId},
-                                    type:'post',
-                                    dataType:'json',
-                                    async:false,
-                                    success:function(result){
-                                        html = result;
-                                    }
-
-                                });
-                                html += "<input type='hidden' id='menu"+item.id+"' value='"+item.__id+"'/>";
-                                return html;
-                            } }
-                        ], width: '100%', usePager:false, checkbox: true,
-                        url: 'auth.do?dataGrid&ajax=yes', alternatingRow: false,selectRowButtonOnly:true, tree: {
+                            { display: '操作', name: 'ico',  align: 'left',width:300,render:authSelect}], width: '100%', usePager:false, checkbox: true,
+                        url: 'auth.do?dataGrid&ajax=yes', alternatingRow: true,selectRowButtonOnly:true, tree: {
                             columnId: 'menuName',
                             idField: 'id',
                             parentIDField: 'pid'
-                        },onCheckRow:onCheckRow
+                        },onCheckRow:onCheckRow, onAfterShowData: onAfterShowData
 
                     }
             );
             manager = $("#maingrid").ligerGetGridManager();
 
         });
+        function onAfterShowData(currentData){
+
+            $(${selectMenus}).each(function(i,data){
+                $(currentData.rows).each(function(i,item){
+                    if(item.id==data.id){
+                        manager.select(item);
+                    }
+                });
 
 
+            });
+
+        }
+        function authSelect(item){
+
+
+
+                var  html="";
+                if(item.hasChildren){
+                    return html;
+                }
+                $.ajax({
+                    url:'auth.do?getBtnByMenuId&ajax=yes&id='+item.id+'&roleId='+${roleId},
+                    type:'post',
+                    dataType:'json',
+                    async:false,
+                    success:function(result){
+                        html = result;
+                    }
+
+                });
+                html += "<input type='hidden' id='menu"+item.id+"' value='"+item.__id+"'/>";
+                return html;
+
+        }
         function onCheckRow(checked,data,rowid,rowdata){
 
             var parent = manager.getParent(data);
