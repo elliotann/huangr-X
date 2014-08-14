@@ -18,8 +18,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * User: andy
- * Date: 14-2-21
+ * @author : andy
+ * @since :1.0
  */
 @Controller
 @RequestMapping({"/core/admin/role"})
@@ -53,10 +53,28 @@ public class RoleController extends BaseController {
         return new ModelAndView("admin/core/auth/addrole",map);
     }
 
+    //保存添加
+    @RequestMapping(params = {"saveAdd"})
+    @ResponseBody
+    public AjaxJson saveAdd(Role role){
+        AjaxJson result = new AjaxJson();
+        this.roleManager.add(role);
+        result.setMsg("角色添加成功");
+        return result;
+    }
+    @RequestMapping(params = {"checkNameExist"})
+    @ResponseBody
+    public boolean checkNameExist(String rolename,int roleid){
+        Role role = roleManager.getRoleByName(rolename,roleid);
+        if(role!=null){
+            return false;
+        }
+        return true;
+    }
     @RequestMapping(params = {"edit"})
     public ModelAndView edit(int roleid){
         List authList = authActionManager.list();
-        Role role = this.roleManager.get(roleid);
+        Role role = this.roleManager.queryById(roleid);
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("authList",authList);
         map.put("role",role);
@@ -68,18 +86,8 @@ public class RoleController extends BaseController {
     @ResponseBody
     public AjaxJson saveEdit(Role role,int[] acts){
         AjaxJson result = new AjaxJson();
-        this.roleManager.edit(role, acts);
+        this.roleManager.update(role, acts);
         result.setMsg("角色修改成功");
-        return result;
-    }
-
-    //保存添加
-    @RequestMapping(params = {"saveAdd"})
-    @ResponseBody
-    public AjaxJson saveAdd(Role role,int[] acts){
-        AjaxJson result = new AjaxJson();
-        this.roleManager.add(role, acts);
-        result.setMsg("角色添加成功");
         return result;
     }
 
@@ -89,7 +97,7 @@ public class RoleController extends BaseController {
     public AjaxJson delete(int id){
         AjaxJson result = new AjaxJson();
         try{
-            this.roleManager.delete(id);
+            this.roleManager.deleteById(id);
             result.setMsg("角色删除成功");
         }catch (Exception e){
             e.printStackTrace();
@@ -98,14 +106,5 @@ public class RoleController extends BaseController {
         }
         return result;
     }
-    @RequestMapping(params = {"checkNameExist"})
-    @ResponseBody
-    public boolean checkNameExist(String rolename,int roleid){
-        Role role = roleManager.getRoleByName(rolename,roleid);
-        if(role!=null){
-            return false;
-        }
 
-        return true;
-    }
 }
