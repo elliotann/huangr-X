@@ -132,5 +132,10 @@
             <artifactId>jms-api</artifactId>
             <version>1.1-rev-1</version>
         </dependency>
+        <dependency>
+            <groupId>net.sf.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>1.8</version>
+        </dependency>
     </dependencies>
 </project>
