@@ -1,5 +1,7 @@
 package com.easysoft.member.backend.model;
 
+import com.easysoft.core.common.entity.IdEntity;
+
 import javax.persistence.*;
 
 /**
@@ -8,53 +10,35 @@ import javax.persistence.*;
  * Date: 14-5-12
  * Time: 上午11:58
  *
- * @since:
+ * @since: 1.0
  */
-@Entity
-@Table(name="t_role_auth")
-public class RoleAuth {
-    public enum AuthType{
-        FUNCTION,
-        DATA
-    }
-    private Integer id;
-    private AuthType authType;
-    private Role role;
-    private Integer funOrDataId;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="id")
-    public Integer getId() {
-        return id;
+
+public class RoleAuth extends IdEntity {
+    private Integer roleId;
+    private Integer funId;
+    private String operids;//操作IDS
+
+    public Integer getFunId() {
+        return funId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-    @Column(name = "auth_type", length = 10)
-    @Enumerated(EnumType.STRING)
-    public AuthType getAuthType() {
-        return authType;
+    public void setFunId(Integer funId) {
+        this.funId = funId;
     }
 
-    public void setAuthType(AuthType authType) {
-        this.authType = authType;
+    public String getOperids() {
+        return operids;
     }
 
-    public Integer getFunOrDataId() {
-        return funOrDataId;
+    public void setOperids(String operids) {
+        this.operids = operids;
     }
 
-    public void setFunOrDataId(Integer funOrDataId) {
-        this.funOrDataId = funOrDataId;
-    }
-    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.REFRESH }, optional = false)
-    @JoinColumn(name = "role_id")
-    public Role getRole() {
-        return role;
+    public Integer getRoleId() {
+        return roleId;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 }

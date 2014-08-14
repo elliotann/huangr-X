@@ -1,19 +1,33 @@
 package com.easysoft.core.common.entity;
 
-import org.hibernate.annotations.GenericGenerator;
+import java.io.Serializable;
 
-import javax.persistence.*;
+public abstract class IdEntity implements Serializable{
+    protected Integer id;
+    protected String createTime;
+    protected String createBy;
 
-@MappedSuperclass
-public abstract class IdEntity {
-    protected Long id;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
     }
 }

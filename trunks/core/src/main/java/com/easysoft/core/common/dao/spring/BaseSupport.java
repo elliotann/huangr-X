@@ -3,7 +3,7 @@ package com.easysoft.core.common.dao.spring;
 import com.easysoft.core.context.EsfContext;
 import com.easysoft.framework.db.IDBRouter;
 import com.easysoft.framework.db.IDaoSupport;
-import com.easysoft.framework.db.PermssionRuntimeException;
+import com.easysoft.member.backend.manager.PermssionRuntimeException;
 import org.apache.log4j.Logger;
 
 

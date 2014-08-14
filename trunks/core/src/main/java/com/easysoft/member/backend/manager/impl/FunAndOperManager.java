@@ -24,12 +24,13 @@ public class FunAndOperManager extends GenericService<FunAndOper> implements IFu
     private IRoleAuthManager roleAuthManager;
     @Override
     public List<FunAndOper> queryFunAndOpersByRoleId(Integer roleId) {
-        List<RoleAuth> roleAuths = roleAuthManager.findByProperty(RoleAuth.class,"role.id",roleId);
+        /*List<RoleAuth> roleAuths = roleAuthManager.findByProperty(RoleAuth.class,"role.id",roleId);
         List<FunAndOper> funAndOpers = new ArrayList<FunAndOper>();
         for(RoleAuth roleAuth : roleAuths){
             FunAndOper funAndOper = this.get(FunAndOper.class,roleAuth.getFunOrDataId());
             funAndOpers.add(funAndOper);
         }
-        return funAndOpers;
+        return funAndOpers;*/
+        return null;
     }
 }

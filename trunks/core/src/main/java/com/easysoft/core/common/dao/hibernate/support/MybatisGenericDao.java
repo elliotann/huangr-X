@@ -5,6 +5,7 @@ import com.easysoft.core.common.dao.IGenericDao;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author : andy.huang
@@ -25,6 +26,26 @@ public class MybatisGenericDao<T,PK extends Serializable> extends SqlMapClientDa
     @Override
     public void save(T entity) {
         this.getSqlMapClientTemplate().insert(sqlMapNamespace + "."+ SQL_INSERT,entity);
+    }
+
+    @Override
+    public List<T> queryForList() {
+        return null;
+    }
+
+    @Override
+    public T queryById(PK id) {
+        return null;
+    }
+
+    @Override
+    public void update(T entity) {
+
+    }
+
+    @Override
+    public void deleteById(PK id) {
+
     }
 }
 
