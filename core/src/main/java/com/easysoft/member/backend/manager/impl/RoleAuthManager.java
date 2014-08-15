@@ -7,9 +7,7 @@ import com.easysoft.member.backend.model.RoleAuth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * User: andy
@@ -29,5 +27,23 @@ public class RoleAuthManager implements IRoleAuthManager {
             return EMPTY_LIST;
         }
         return roleAuthDao.queryAuthByRoleId(roleId);
+    }
+
+    @Override
+    public RoleAuth queryRoleAuthByRoleIdAndFunId(Integer roleId, Integer funId) {
+        Map<String,Object> params = new HashMap<String,Object>();
+        params.put("roleId",roleId);
+        params.put("funId",funId);
+        return roleAuthDao.queryAuthByRoleIdAndFun(params);
+    }
+
+    @Override
+    public void update(RoleAuth roleAuth) {
+        roleAuthDao.update(roleAuth);
+    }
+
+    @Override
+    public void save(RoleAuth roleAuth) {
+        roleAuthDao.save(roleAuth);
     }
 }

@@ -5,31 +5,24 @@
         <id property="id" column="id"/>
         <id property="roleId" column="role_id"/>
         <id property="operids" column="operids"/>
+        <id property="funId" column="fun_id"/>
     </resultMap>
-    <insert id="save" parameterType="Role">
-        insert t_role (rolename,rolememo) values (#{rolename},#{rolememo})
+    <insert id="save" parameterType="RoleAuth" useGeneratedKeys="true" keyProperty="id">
+        insert t_role_auth (role_id,operids,fun_id) values (#{roleId},#{operids},#{funId})
     </insert>
     <select id="queryAuthByRoleId" resultMap="roleAuthMap">
         select * from t_role_auth where role_id=#{id}
     </select>
-    <select id="getRoleByName" resultMap="roleAuthMap">
-        select * from t_role where rolename=#{rolename}
-        <if test="roleid!=0">
-            and roleid!=#{roleid}
-        </if>
+    <select id="queryAuthByRoleIdAndFun" resultMap="roleAuthMap">
+        select * from t_role_auth where role_id=#{roleId} and fun_id=#{funId}
     </select>
     <select id="queryById" resultMap="roleAuthMap">
         select * from t_role where roleid=#{id}
     </select>
-    <update id="update" parameterType="Role">
-        UPDATE t_role
-        SET rolename = #{rolename}
-        <if test="rolememo!=null">
-            ,rolememo = #{rolememo}
-        </if>
-
-        WHERE roleid = #{roleid}
-
+    <update id="update" parameterType="RoleAuth">
+        UPDATE t_role_auth
+        SET operids = #{operids}
+        WHERE id = #{id}
     </update>
     <delete id="deleteById">
         delete from t_role where roleid=#{id}

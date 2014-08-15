@@ -31,6 +31,7 @@ public class FunAndOperManager extends GenericService<FunAndOper> implements IFu
             funAndOpers.add(funAndOper);
         }
         return funAndOpers;*/
+        List<RoleAuth> roleAuths = roleAuthManager.queryRoleAuthListByRoleId(roleId);
         return null;
     }
 }

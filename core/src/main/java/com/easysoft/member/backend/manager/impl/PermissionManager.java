@@ -5,6 +5,7 @@ import com.easysoft.framework.context.webcontext.ThreadContextHolder;
 import com.easysoft.framework.context.webcontext.WebSessionContext;
 import com.easysoft.member.backend.manager.IOperationBtnManager;
 import com.easysoft.member.backend.manager.IPermissionManager;
+import com.easysoft.member.backend.manager.IRoleAuthManager;
 import com.easysoft.member.backend.model.*;
 import com.easysoft.member.backend.vo.FunAndOperationVO;
 
@@ -27,6 +28,8 @@ import java.util.List;
 public class PermissionManager extends GenericService implements IPermissionManager {
     @Autowired
     private IOperationBtnManager operationBtnManager;
+    @Autowired
+    private IRoleAuthManager roleAuthManager;
     public boolean checkHaveAuth(int actid) {
         WebSessionContext sessonContext = ThreadContextHolder.getSessionContext();
 
@@ -176,16 +179,10 @@ public class PermissionManager extends GenericService implements IPermissionMana
 
     @Override
     public boolean hasOperationByRoleAndMenu(Integer roleId, Integer menuId,String operId) {
-        List<FunAndOper> funAndOpers = this.baseDaoSupport.queryForList("select * from t_fun_operation where  fun_oper_id in (select funOrDataId FROM t_role_auth t where t.role_id=?) and menu_id=?",new RowMapper(){
-            @Override
-            public Object mapRow(ResultSet rs, int i) throws SQLException {
-                FunAndOper funAndOper = new FunAndOper();
-                funAndOper.setOperation(rs.getString("operation"));
-                return funAndOper;
-            }
-        },roleId,menuId);
-        if(funAndOpers.size()>0){
-            String operation = funAndOpers.get(0).getOperation();
+        RoleAuth roleAuth = roleAuthManager.queryRoleAuthByRoleIdAndFunId(roleId,menuId);
+
+        if(roleAuth!=null&&roleAuth.getOperids()!=null){
+            String operation = roleAuth.getOperids();
             String[] operations = operation.split(",");
             for(String operStr:operations){
                 if(operStr.equals(operId)){
