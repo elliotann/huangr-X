@@ -88,6 +88,8 @@
             }else{
                 $("#pwdtr").hide();
                 $("#repwdtr").hide();
+                $( "#password" ).rules( "remove");
+                $( "#repassword" ).rules( "remove");
             }
 
         });
