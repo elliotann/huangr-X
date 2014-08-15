@@ -49,20 +49,52 @@ public class MenuManagerImpl extends BaseSupport<Menu> implements IMenuManager {
 
 
 	public List<Menu> getMenuTree(Integer menuid) {
-		if(menuid==null)throw new IllegalArgumentException("menuid argument is null");
-		List<Menu> menuList  = this.getMenuList();
-		List<Menu> topMenuList  = new ArrayList<Menu>();
-		for(Menu menu :menuList){
-			if(menu.getPid().compareTo(menuid)==0){
-				List<Menu> children = this.getChildren(menuList, menu.getId());
-				menu.setChildren(children);
-				topMenuList.add(menu);
-			}
-		}
-		return topMenuList;
+        return getMenuTree(menuid,null);
 	}
 
-	/**
+    @Override
+    public List<Menu> getMenuTree(Integer menuid, Integer roleId) {
+        if(roleId==null||0==roleId.intValue()){
+            if(menuid==null)throw new IllegalArgumentException("menuid argument is null");
+            List<Menu> menuList  = this.getMenuList();
+            List<Menu> topMenuList  = new ArrayList<Menu>();
+            for(Menu menu :menuList){
+                if(menu.getPid().compareTo(menuid)==0){
+                    List<Menu> children = this.getChildren(menuList, menu.getId());
+                    menu.setChildren(children);
+                    topMenuList.add(menu);
+                }
+            }
+            return topMenuList;
+        }else{
+            if(menuid==null)throw new IllegalArgumentException("menuid argument is null");
+            List<Menu> menuList  = this.getMenuList();
+            List<Menu> topMenuList  = new ArrayList<Menu>();
+            //猎取权限菜单
+            List<Menu> selectMenus = this.getMenuTreeByRoleId(roleId);
+            if(!selectMenus.isEmpty()){
+                for(Menu menu : menuList){
+                    for(Menu selectMenu : selectMenus){
+                        if(menu.getId().intValue()==selectMenu.getId().intValue()){
+                            System.out.println("here");
+                            menu.setHasAuth(true);
+                        }
+                    }
+                }
+            }
+            for(Menu menu :menuList){
+                if(menu.getPid().compareTo(menuid)==0){
+                    List<Menu> children = this.getChildren(menuList, menu.getId());
+                    menu.setChildren(children);
+                    topMenuList.add(menu);
+                }
+            }
+            return topMenuList;
+        }
+
+    }
+
+    /**
 	 * 在一个集合中查找子
 	 * @param menuList 所有菜单集合
 	 * @param parentid 父id
@@ -135,7 +167,6 @@ public class MenuManagerImpl extends BaseSupport<Menu> implements IMenuManager {
     public List<Menu> getMenuTreeByRoleId(Integer roleId) {
         List<Menu> results = new ArrayList<Menu>();
         List<RoleAuth> roleAuths = roleAuthManager.queryRoleAuthListByRoleId(roleId);
-       // List<FunAndOper> funAndOpers = funAndOperManager.queryFunAndOpersByRoleId(roleId);
         for(RoleAuth roleAuth : roleAuths){
             results.add(this.get(roleAuth.getFunId()));
         }

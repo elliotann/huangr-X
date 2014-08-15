@@ -14,4 +14,10 @@ import java.util.List;
  */
 public interface IRoleAuthManager {
     public List<RoleAuth> queryRoleAuthListByRoleId(Integer roleId);
+
+    public RoleAuth queryRoleAuthByRoleIdAndFunId(Integer roleId,Integer funId);
+
+    public void save(RoleAuth roleAuth);
+
+    public void update(RoleAuth roleAuth);
 }

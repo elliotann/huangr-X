@@ -55,6 +55,14 @@ public interface IMenuManager {
 	 * @author andy
 	 */
 	public List<Menu> getMenuTree(Integer menuid);
+
+    /**
+     * 用于设置权限时用
+     * @param menuid 父菜单ID
+     * @param roleId 角色
+     * @return
+     */
+    public List<Menu> getMenuTree(Integer menuid,Integer roleId);
 	
 	
 	/**
