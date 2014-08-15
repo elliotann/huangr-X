@@ -102,7 +102,9 @@
 
              $("#roletr").hide();
         });
-
+        <c:forEach var="userRole" items="${userRoles }">
+        $("#roleids${userRole.roleid}").attr("checked",true);
+        </c:forEach>
         <c:if test="${adminUser.founder==1}" >
             $("#superChk").click();
         </c:if>
@@ -210,7 +212,7 @@
             <td align="right" class="l-table-edit-td" valign="top">角色:</td>
             <td colspan="3" class="value">
                 <c:forEach var="role" items="${roleList }">
-                    &nbsp;<input id="roleids" type="checkbox" name="roleids"  value="${role.roleid }"/><label for="roleids">${role.rolename }&nbsp;</label><br />
+                    &nbsp;<input id="roleids${role.roleid }" type="checkbox" name="roleids"  value="${role.roleid }"/><label for="roleids">${role.rolename }&nbsp;</label><br />
                 </c:forEach>
 
             </td>

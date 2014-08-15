@@ -105,7 +105,7 @@
 </div>
 
 <grid:dataGrid action="userAdmin.do?dataGrid&ajax=yes" height="99%" width="100%" rownumbers="true" hasSearchBar="false">
-    <grid:column title="ID" field="id" align="left" width="100" minWidth="60"/>
+    <grid:column title="ID" field="userid" align="center" width="100" minWidth="60"/>
     <grid:column title="用户名" field="username"  minWidth="100"/>
     <grid:column title="姓名" field="realname"  minWidth="140"/>
     <grid:column title="状态" field="state" renderFun="getStatusName"/>
