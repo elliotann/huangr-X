@@ -25,7 +25,7 @@
                             { display: 'id', name: 'id', id: 'menuId',  align: 'center',width:60 },
                             { display: '名称', name: 'title', id: 'menuName',  align: 'left',width:250 },
                             { display: '操作', name: 'ico',  align: 'left',width:300,render:authSelect}], width: '100%', usePager:false, checkbox: true,
-                        url: 'auth.do?dataGrid&ajax=yes', alternatingRow: true,selectRowButtonOnly:true, tree: {
+                        url: 'auth.do?dataGrid&ajax=yes&roleId=${roleId}', alternatingRow: true,selectRowButtonOnly:true, tree: {
                             columnId: 'menuName',
                             idField: 'id',
                             parentIDField: 'pid'
@@ -38,16 +38,26 @@
         });
         function onAfterShowData(currentData){
 
-            $(${selectMenus}).each(function(i,data){
+
                 $(currentData.rows).each(function(i,item){
-                    if(item.id==data.id){
-                        manager.select(item);
-                    }
+
+                        selectChildren(item);
+
+
                 });
 
 
-            });
 
+        }
+        function selectChildren(item){
+            if(item.hasAuth) {
+                manager.select(item);
+                if (item.hasChildren){
+                    $(item.children).each(function(i,data){
+                        selectChildren(data);
+                    });
+                }
+            }
         }
         function authSelect(item){
 
