@@ -44,39 +44,7 @@ var BackendUi = {
             }
         });
     },
-    /**
-     * 显示应用菜单
-     */
-    /* disAppMenu:function(){
-     var self=this;
-     var menu = this.menu;
-     var i=0;
-     $.each(menu.app,function(k,v){
-     if(founder ==1 && (v.id==237 || v.id==244 ||v.id==266)){}else{
-     var link = $("<a  target='"+v.target+"' href='"+ v.url +"' >" + v.text + "</a>");
-     $("<li><span></span></li>").appendTo($(".appmenu>ul")).children("span").append(link);
-     var children = v.children;
 
-     link.click(function(){
-     if(children)
-     $(".appmenu li").removeClass("current");
-     $(this).parent().parent().addClass("current");
-     return false;
-     });
-
-     if(i==0){
-     var href= link.attr("href");
-     var target=link.attr("target");
-     link.attr("href",app_path+"/core/admin/index.do");
-     link.removeAttr("target");
-     link.click();
-     link.attr("href",href);
-     link.attr("target",target);
-     }
-     i++;
-     }
-     });
-     },*/
     /**
      * 显示应用菜单
      */
@@ -144,6 +112,7 @@ var BackendUi = {
                     });
                 });
             }
+
             leftMenu.append($("<h3 class=\"open\"></h3>"));
         });
     },
