@@ -54,6 +54,7 @@
 
             }
         });
+
         $("#updatePwd").change(function () {
 
             if(this.checked){
@@ -95,14 +96,19 @@
         });
         $("#notSuperChk").click(function(){
 
-            if(this.checked)
-                $("#roletr").show();
+             $("#roletr").show();
         });
         $("#superChk").click(function(){
 
-            if(this.checked)
-                $("#roletr").hide();
+             $("#roletr").hide();
         });
+
+        <c:if test="${adminUser.founder==1}" >
+            $("#superChk").click();
+        </c:if>
+        <c:if test="${adminUser.founder==0}" >
+            $("#notSuperChk").click();
+        </c:if>
     });
     function submitForm(){
         $("#objForm").submit();
