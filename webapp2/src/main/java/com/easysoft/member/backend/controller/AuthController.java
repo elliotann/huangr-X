@@ -48,15 +48,12 @@ public class AuthController extends BaseController {
     @RequestMapping(params = {"add"})
     public ModelAndView add(int roleId){
         Map<String,Object> map = new HashMap<String,Object>();
-        List<AuthAction> authActions = authActionManager.getAuthActionByRoleId(roleId);
+
         List<OperationBtn> operationBtns = operationBtnManager.queryForAll(OperationBtn.class);
         map.put("operationBtns",operationBtns);
         List<FunAndOper> funAndOpers = funAndOperManager.queryFunAndOpersByRoleId(roleId);
-        //猎取权限菜单
-        List<Menu> selectMenus = menuManager.getMenuTreeByRoleId(roleId);
 
-        map.put("selectMenus",JsonUtils.beanToJsonArray(selectMenus));
-        if(!funAndOpers.isEmpty()){
+        if(funAndOpers!=null&&!funAndOpers.isEmpty()){
             map.put("isEdit",1);
             //map.put("actid",authActions.get(0).getActid());
             map.put("funAndOpers",funAndOpers);
@@ -68,8 +65,8 @@ public class AuthController extends BaseController {
         return new ModelAndView("admin/core/auth/auth_input",map);
     }
     @RequestMapping(params = {"dataGrid"})
-    public ModelAndView dataGrid(){
-        List<Menu> menuList  = menuManager.getMenuTree(0);
+    public ModelAndView dataGrid(int roleId){
+        List<Menu> menuList  = menuManager.getMenuTree(0,roleId);
         DataGridReturn dataGridReturn = new DataGridReturn(menuList.size(),menuList);
         String json = JsonUtils.beanToJson(dataGridReturn);
         Map<String,Object> map = new HashMap<String, Object>();

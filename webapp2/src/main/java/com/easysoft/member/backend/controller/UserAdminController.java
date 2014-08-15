@@ -46,7 +46,7 @@ public class UserAdminController extends BaseController{
         List<OperationBtn> operationBtns = permissionManager.queryBtnByUsernameAndMenuId(UserServiceFactory.getUserService().getCurrentUser().getUserid(), null,menuId);
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("operationBtns",operationBtns);
-        return new ModelAndView("core/admin/user/useradmin",map);
+        return new ModelAndView("admin/core/auth/useradminlist",map);
     }
     @RequestMapping(params = {"dataGrid"})
     public ModelAndView dataGrid(Page page){
@@ -65,7 +65,7 @@ public class UserAdminController extends BaseController{
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("roleList",roleList);
         map.put("multiSite",multiSite);
-        return new ModelAndView("core/admin/user/addUserAdmin",map);
+        return new ModelAndView("admin/core/auth/addUserAdmin",map);
     }
 
     @RequestMapping(params = {"edit"})
@@ -79,7 +79,7 @@ public class UserAdminController extends BaseController{
         map.put("multiSite",multiSite);
         map.put("userRoles",userRoles);
         map.put("adminUser",adminUser);
-        return new ModelAndView("core/admin/user/editUserAdmin",map);
+        return new ModelAndView("admin/core/auth/editUserAdmin",map);
     }
     @RequestMapping(params = {"addSave"})
     @ResponseBody
