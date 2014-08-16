@@ -6,6 +6,7 @@ import com.easysoft.core.common.vo.json.DataGridReturn;
 import com.easysoft.core.manager.IMenuManager;
 import com.easysoft.framework.utils.JsonUtils;
 import com.easysoft.framework.utils.StringUtil;
+import com.easysoft.member.backend.dao.IOperationBtnDao;
 import com.easysoft.member.backend.manager.IAuthActionManager;
 import com.easysoft.member.backend.manager.IFunAndOperManager;
 import com.easysoft.member.backend.manager.IOperationBtnManager;
@@ -44,12 +45,12 @@ public class AuthController extends BaseController {
     @Autowired
     private IPermissionManager permissionManager;
     @Autowired
-    private IOperationBtnManager operationBtnManager;
+    private IOperationBtnDao operationBtnDao;
     @RequestMapping(params = {"add"})
     public ModelAndView add(int roleId){
         Map<String,Object> map = new HashMap<String,Object>();
 
-        List<OperationBtn> operationBtns = operationBtnManager.queryForAll(OperationBtn.class);
+        List<OperationBtn> operationBtns = operationBtnDao.queryForList();
         map.put("operationBtns",operationBtns);
         List<FunAndOper> funAndOpers = funAndOperManager.queryFunAndOpersByRoleId(roleId);
 

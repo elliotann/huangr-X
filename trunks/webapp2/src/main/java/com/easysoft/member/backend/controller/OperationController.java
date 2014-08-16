@@ -2,6 +2,7 @@ package com.easysoft.member.backend.controller;
 
 import com.easysoft.core.common.controller.BaseController;
 import com.easysoft.core.common.vo.json.AjaxJson;
+import com.easysoft.member.backend.dao.IOperationBtnDao;
 import com.easysoft.member.backend.manager.IOperationBtnManager;
 import com.easysoft.member.backend.model.OperationBtn;
 import org.apache.commons.lang.StringUtils;
@@ -28,7 +29,7 @@ import java.util.Map;
 @RequestMapping({"/core/admin/oper"})
 public class OperationController extends BaseController {
     @Autowired
-    private IOperationBtnManager operationBtnManager;
+    private IOperationBtnDao operationBtnDao;
     @RequestMapping(params = {"add"})
     public ModelAndView add(Integer menuId){
         Map<String,Object> map = new HashMap<String, Object>();
@@ -43,7 +44,7 @@ public class OperationController extends BaseController {
             if(StringUtils.isNotEmpty(icoFile.getOriginalFilename())){
                 operationBtn.setIco(updateFile(icoFile));
             }
-            this.operationBtnManager.save(operationBtn);
+            operationBtnDao.save(operationBtn);
             json.setMsg("新增菜单成功");
 
         }catch(RuntimeException e){
