@@ -4,6 +4,7 @@ import com.easysoft.core.common.dao.spring.BaseSupport;
 import com.easysoft.core.common.service.impl.GenericService;
 import com.easysoft.framework.context.webcontext.ThreadContextHolder;
 import com.easysoft.framework.context.webcontext.WebSessionContext;
+import com.easysoft.member.backend.dao.IUserRoleDao;
 import com.easysoft.member.backend.manager.IOperationBtnManager;
 import com.easysoft.member.backend.manager.IPermissionManager;
 import com.easysoft.member.backend.manager.IRoleAuthManager;
@@ -31,6 +32,8 @@ public class PermissionManager extends BaseSupport implements IPermissionManager
     private IOperationBtnManager operationBtnManager;
     @Autowired
     private IRoleAuthManager roleAuthManager;
+    @Autowired
+    private IUserRoleDao userRoleDao;
     public boolean checkHaveAuth(int actid) {
         WebSessionContext sessonContext = ThreadContextHolder.getSessionContext();
 
@@ -90,16 +93,12 @@ public class PermissionManager extends BaseSupport implements IPermissionManager
 	 * @return
 	 */
 	public List<RoleAuth> getUesrAct(int userid, String acttype) {
-		
-		//查询权限表acttype符合条记录
-		String sql ="select * from "+ this.getTableName("auth_action")+" where type=? ";
-		//并且 权限id在用户的角色权限范围内
-		sql+=" and actid in(select authid from  "+this.getTableName("role_auth")+" where roleid in ";
-        //查询用户的角色列表
-		sql+=" (select roleid from "+this.getTableName("user_role")+" where userid=?)";
-		sql+=" )";
-        roleAuthManager.queryRoleAuthListByRoleId();
-		return this.daoSupport.queryForList(sql,AuthAction.class,acttype,userid);
+        List<RoleAuth> results = new ArrayList<RoleAuth>();
+        List<UserRole> userRoles = userRoleDao.queryRolesByUserId(userid);
+        for(UserRole userRole : userRoles){
+            results.addAll(roleAuthManager.queryRoleAuthListByRoleId(userRole.getRole().getRoleid()));
+        }
+		return results;
 	}
 
 

@@ -10,9 +10,6 @@ import java.util.List;
  * 
  * @author andy
  */
-@Entity
-@Table(name = "es_adminuser")
-@PrimaryKeyJoinColumn(name = "userid")
 public class AdminUser implements  Serializable{
 	
 	private Integer userid;
