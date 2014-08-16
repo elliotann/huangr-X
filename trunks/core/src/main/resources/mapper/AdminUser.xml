@@ -6,12 +6,24 @@
         <id property="username" column="username"/>
         <id property="password" column="password"/>
         <id property="state" column="state"/>
+        <id property="realname" column="realname"/>
+        <id property="email" column="email"/>
+        <id property="userno" column="userno"/>
+        <id property="userdept" column="userdept"/>
+        <id property="remark" column="remark"/>
+        <id property="dateline" column="dateline"/>
+        <id property="founder" column="founder"/>
+        <id property="siteid" column="siteid"/>
     </resultMap>
     <insert id="save" parameterType="AdminUser">
-        insert t_adminuser (username,password,status,realname) values (#{username},#{password},#{status},#{realName})
+        insert t_adminuser (username,password,status,realname,email,userno,userdept,remark,dateline,founder,siteid)
+         values (#{username},#{password},#{status},#{realName},#{email},#{userno},#{userdept},#{remark},#{dateline},#{founder},#{siteid})
     </insert>
     <select id="queryForPage" parameterType="AdminUser" resultMap="adminUserMap">
         select * from t_adminuser
+    </select>
+    <select id="queryUserByName" resultMap="adminUserMap">
+        select * from t_adminuser where username=#{username}
     </select>
     <select id="queryById" resultMap="adminUserMap">
         select * from t_adminuser where userid=#{id}
@@ -22,10 +34,15 @@
     <update id="update" parameterType="AdminUser">
         UPDATE t_adminuser
         SET username = #{username},
-        realname = #{realName},
-        status = #{status},
-        email = #{email}
-        WHERE user_id = #{id}
+        realname = #{realname},
+        state = #{state},
+        userno = #{userno},
+        userdept = #{userdept},
+        remark = #{remark},
+        dateline = #{dateline},
+        founder = #{founder},
+        siteid = #{siteid}
+        WHERE userid = #{userid}
     </update>
     <select id="queryByUserNameOrEmail" resultMap="adminUserMap" parameterType="hashMap">
        select * from t_adminuser where 1=1

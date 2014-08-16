@@ -11,4 +11,5 @@ import com.easysoft.member.backend.model.AdminUser;
  */
 public interface IAdminUserDao extends IGenericDao<AdminUser,Integer> {
     public void deleteTable();
+    public AdminUser queryUserByName(String username);
 }

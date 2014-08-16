@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.easysoft.member.backend.dao.IOperationBtnDao">
+    <resultMap id="operationBtnMap" type="OperationBtn">
+        <id property="code" column="code"/>
+        <id property="name" column="name"/>
+        <id property="ico" column="ico"/>
+        <id property="status" column="status"/>
+        <id property="operType" column="operType"/>
+        <id property="menuId" column="menuId"/>
+    </resultMap>
+
+    <select id="queryOperationsByMenuId" resultMap="adminUserMap">
+        select * from t_operation_btn where menuId=#{menuId}
+    </select>
+    <select id="queryById" resultMap="adminUserMap">
+        select * from t_operation_btn where id=#{id}
+    </select>
+
+</mapper>

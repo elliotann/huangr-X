@@ -4,6 +4,7 @@ import com.easysoft.core.common.dao.spring.BaseSupport;
 import com.easysoft.core.common.service.impl.GenericService;
 import com.easysoft.framework.context.webcontext.ThreadContextHolder;
 import com.easysoft.framework.context.webcontext.WebSessionContext;
+import com.easysoft.member.backend.dao.IOperationBtnDao;
 import com.easysoft.member.backend.dao.IUserRoleDao;
 import com.easysoft.member.backend.manager.IOperationBtnManager;
 import com.easysoft.member.backend.manager.IPermissionManager;
@@ -29,7 +30,7 @@ import java.util.List;
 @Service("permissionManager")
 public class PermissionManager extends BaseSupport implements IPermissionManager {
     @Autowired
-    private IOperationBtnManager operationBtnManager;
+    private IOperationBtnDao operationBtnDao;
     @Autowired
     private IRoleAuthManager roleAuthManager;
     @Autowired
@@ -54,8 +55,9 @@ public class PermissionManager extends BaseSupport implements IPermissionManager
         AdminUser adminUser = UserServiceFactory.getUserService().getCurrentUser();
         List<OperationBtn> results = new ArrayList<OperationBtn>();
         if(adminUser.getFounder()==1){
-            return operationBtnManager.findByQueryString("from OperationBtn ob where ob.menuId="+menuId);
+            return operationBtnDao.queryOperationsByMenuId(menuId);
         }
+
         List<FunAndOper> funAndOpers = null;//getUesrAct4New(userid,acttype);
 
         for(FunAndOper funAndOper : funAndOpers){

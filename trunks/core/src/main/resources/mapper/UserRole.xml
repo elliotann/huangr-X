@@ -4,7 +4,7 @@
     <resultMap id="userRoleMap" type="UserRole">
         <id property="id" column="user_id"/>
         <association property="role" column="roleid" select="com.easysoft.member.backend.dao.IRoleDao.queryById"></association>
-        <association property="adminUser" column="userid" select="com.easysoft.jeap.core.member.dao.IAdminUserDao.queryById"></association>
+        <association property="adminUser" column="userid" select="com.easysoft.member.backend.dao.IAdminUserDao.queryById"></association>
     </resultMap>
     <insert id="save" parameterType="UserRole">
         insert t_user_role (roleid,userid) values (#{role.id},#{adminUser.userid})

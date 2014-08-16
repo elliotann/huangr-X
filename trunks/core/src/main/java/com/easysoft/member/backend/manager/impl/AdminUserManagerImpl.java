@@ -175,13 +175,12 @@ public class AdminUserManagerImpl extends GenericService<AdminUser> implements I
 	 * @throws RuntimeException 登录失败抛出此异常，登录失败原因可通过getMessage()方法获取
 	 */
 	public int loginBySys(String username, String password) {
-		String hql ="from AdminUser a where a.username=?";
-        String[] params = {username};
-		List<AdminUser> userList =adminUserDao.queryForList();
-		if(userList == null || userList.size()==0){
+
+        AdminUser user =adminUserDao.queryUserByName(username);
+		if(user == null){
             throw new RuntimeException("此用户不存在");
         }
-		AdminUser user = userList.get(0);
+
 		
 		
 		if(! password.equals(  user.getPassword() )){
