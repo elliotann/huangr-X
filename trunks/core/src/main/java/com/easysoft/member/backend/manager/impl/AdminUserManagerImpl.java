@@ -39,7 +39,7 @@ public class AdminUserManagerImpl extends GenericService<AdminUser> implements I
     private IdentityService identityService;
 	
 	public void clean() {
-        adminUserDao.executeSQL("truncate table es_adminuser");
+        adminUserDao.deleteTable();
 	}
 	@Transactional(propagation = Propagation.REQUIRED)
 	public Integer add(AdminUser adminUser) {
@@ -125,7 +125,7 @@ public class AdminUserManagerImpl extends GenericService<AdminUser> implements I
 		permissionManager.cleanUserRoles(id);
 		
 		//删除用户基本信息
-        adminUserDao.deleteEntityById(AdminUser.class,id);
+        adminUserDao.deleteById(id);
 
 	}
 	@Transactional(propagation = Propagation.REQUIRED)
@@ -137,16 +137,15 @@ public class AdminUserManagerImpl extends GenericService<AdminUser> implements I
 		//修改用户基本信息
 		if( !StringUtil.isEmpty( adminUser.getPassword() ))
 		adminUser.setPassword( StringUtil.md5(adminUser.getPassword()) );
-        adminUserDao.saveOrUpdate(adminUser);
+        adminUserDao.update(adminUser);
 	}
 
 	public AdminUser get(Integer id) {
-		return adminUserDao.get(id);
+		return adminUserDao.queryById(id);
 	}
 
 	public List list() {
-        String hql = "from AdminUser a order by a.dateline";
-		return adminUserDao.queryForList(hql,null);
+		return adminUserDao.queryForList();
 	}
 	
 	
@@ -178,7 +177,7 @@ public class AdminUserManagerImpl extends GenericService<AdminUser> implements I
 	public int loginBySys(String username, String password) {
 		String hql ="from AdminUser a where a.username=?";
         String[] params = {username};
-		List<AdminUser> userList =adminUserDao.queryForList(hql,params);
+		List<AdminUser> userList =adminUserDao.queryForList();
 		if(userList == null || userList.size()==0){
             throw new RuntimeException("此用户不存在");
         }

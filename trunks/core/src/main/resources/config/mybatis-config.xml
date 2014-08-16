@@ -7,6 +7,7 @@
         <typeAlias type="com.easysoft.member.backend.model.AdminUser" alias="AdminUser"/>
         <typeAlias type="com.easysoft.member.backend.model.Role" alias="Role"/>
         <typeAlias type="com.easysoft.member.backend.model.RoleAuth" alias="RoleAuth"/>
+        <typeAlias type="com.easysoft.member.backend.model.UserRole" alias="UserRole"/>
     </typeAliases>
     <!--<plugins>
         <plugin interceptor="com.easysoft.jeap.framework.db.PageInterceptor">

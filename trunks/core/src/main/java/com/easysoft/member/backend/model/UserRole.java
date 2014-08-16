@@ -9,8 +9,7 @@ import javax.persistence.*;
  *
  * @since:
  */
-@Entity
-@Table(name = "t_user_role")
+
 public class UserRole {
     private Integer id;
     private AdminUser adminUser;

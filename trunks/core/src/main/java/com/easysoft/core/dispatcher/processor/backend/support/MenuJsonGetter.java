@@ -5,15 +5,12 @@ import com.easysoft.core.dispatcher.core.Response;
 import com.easysoft.core.dispatcher.core.StringResponse;
 import com.easysoft.core.dispatcher.processor.facade.AbstractFacadeProcessor;
 import com.easysoft.core.manager.IMenuManager;
-import com.easysoft.member.backend.model.FunAndOper;
-import com.easysoft.member.backend.model.Menu;
+import com.easysoft.member.backend.model.*;
 import com.easysoft.framework.ParamSetting;
 import com.easysoft.framework.context.webcontext.ThreadContextHolder;
 import com.easysoft.framework.spring.SpringContextHolder;
 import com.easysoft.member.backend.manager.IAdminUserManager;
 import com.easysoft.member.backend.manager.IPermissionManager;
-import com.easysoft.member.backend.model.AdminUser;
-import com.easysoft.member.backend.model.AuthAction;
 import org.apache.commons.lang.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -196,13 +193,13 @@ public class MenuJsonGetter extends AbstractFacadeProcessor {
         IAdminUserManager adminUserManager =  SpringContextHolder.getBean("adminUserManager");
         AdminUser user  =adminUserManager.getCurrentUser();
         user = adminUserManager.get(user.getUserid());
-        List<FunAndOper> authList = permissionManager.getUesrAct4New(user.getUserid(), "FUNCTION");
+        List<RoleAuth> authList = permissionManager.getUesrAct(user.getUserid(), "FUNCTION");
 
         for(Menu menu:tempMenuList){
             if(menu.getMenutype().intValue() == Menu.MENU_TYPE_APP){
 
                 if(user.getFounder()!=1){
-                    if( !checkPermssion4New(menu, authList) ){
+                    if( !checkPermssion(menu, authList) ){
                         continue;
                     }
                 }
@@ -287,16 +284,10 @@ public class MenuJsonGetter extends AbstractFacadeProcessor {
     }
 
 
-    private boolean checkPermssion(Menu menu,List<AuthAction> authList){
-        for(AuthAction auth:authList){
-            String values =  auth.getObjvalue();
-            if(values!=null){
-                String[] value_ar = values.split(",");
-                for(String v:value_ar){
-                    if(v.equals(""+menu.getId().intValue())){
-                        return true;
-                    }
-                }
+    private boolean checkPermssion(Menu menu,List<RoleAuth> authList){
+        for(RoleAuth auth:authList){
+            if(auth.getFunId().intValue()==menu.getId()){
+                return true;
             }
         }
         return false;
