@@ -58,15 +58,15 @@ public class PermissionManager extends BaseSupport implements IPermissionManager
             return operationBtnDao.queryOperationsByMenuId(menuId);
         }
 
-        List<FunAndOper> funAndOpers = null;//getUesrAct4New(userid,acttype);
+        List<RoleAuth> roleAuths = getUesrAct(userid,acttype);
 
-        for(FunAndOper funAndOper : funAndOpers){
-            if(funAndOper.getMenu().getId().intValue()==menuId.intValue()){
-                String operation = funAndOper.getOperation();
+        for(RoleAuth roleAuth : roleAuths){
+            if(roleAuth.getFunId().intValue()==menuId.intValue()){
+                String operation = roleAuth.getOperids();
                 if(StringUtils.isNotEmpty(operation)){
                     String [] btns = operation.split(",");
                     for(String btnId : btns){
-                        //results.add((OperationBtn)this.get(OperationBtn.class,Integer.parseInt(btnId)));
+                        results.add(operationBtnDao.queryById(Integer.parseInt(btnId)));
                     }
                 }
             }
