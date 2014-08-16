@@ -1,5 +1,7 @@
 package com.easysoft.member.backend.model;
 
+import com.easysoft.core.common.entity.IdEntity;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -11,26 +13,16 @@ import java.io.Serializable;
  *
  * @since:
  */
-@Entity
-@Table(name="t_operation_btn")
-public class OperationBtn implements Serializable {
-    private Integer id;
+
+public class OperationBtn extends IdEntity {
+
     private String code;
     private String name;
     private String ico;
     private int status;
     private String operType;
     private String menuId;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="ope_id")
-    public Integer getId() {
-        return id;
-    }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getCode() {
         return code;

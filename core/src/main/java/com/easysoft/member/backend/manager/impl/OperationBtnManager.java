@@ -13,5 +13,5 @@ import org.springframework.stereotype.Service;
  * To change this template use File | Settings | File Templates.
  */
 @Service("operationBtnManager")
-public class OperationBtnManager extends GenericService<OperationBtn> implements IOperationBtnManager {
+public class OperationBtnManager implements IOperationBtnManager {
 }
