@@ -1,5 +1,6 @@
 package com.easysoft.member.backend.manager.impl;
 
+import com.easysoft.core.common.dao.spring.BaseSupport;
 import com.easysoft.core.common.service.impl.GenericService;
 import com.easysoft.framework.context.webcontext.ThreadContextHolder;
 import com.easysoft.framework.context.webcontext.WebSessionContext;
@@ -25,7 +26,7 @@ import java.util.List;
  * @since : 1.0
  */
 @Service("permissionManager")
-public class PermissionManager extends GenericService implements IPermissionManager {
+public class PermissionManager extends BaseSupport implements IPermissionManager {
     @Autowired
     private IOperationBtnManager operationBtnManager;
     @Autowired
@@ -52,7 +53,7 @@ public class PermissionManager extends GenericService implements IPermissionMana
         if(adminUser.getFounder()==1){
             return operationBtnManager.findByQueryString("from OperationBtn ob where ob.menuId="+menuId);
         }
-        List<FunAndOper> funAndOpers = getUesrAct4New(userid,acttype);
+        List<FunAndOper> funAndOpers = null;//getUesrAct4New(userid,acttype);
 
         for(FunAndOper funAndOper : funAndOpers){
             if(funAndOper.getMenu().getId().intValue()==menuId.intValue()){
@@ -60,7 +61,7 @@ public class PermissionManager extends GenericService implements IPermissionMana
                 if(StringUtils.isNotEmpty(operation)){
                     String [] btns = operation.split(",");
                     for(String btnId : btns){
-                        results.add((OperationBtn)this.get(OperationBtn.class,Integer.parseInt(btnId)));
+                        //results.add((OperationBtn)this.get(OperationBtn.class,Integer.parseInt(btnId)));
                     }
                 }
             }
@@ -88,7 +89,7 @@ public class PermissionManager extends GenericService implements IPermissionMana
 	 * @param acttype 权限类型
 	 * @return
 	 */
-	public List<AuthAction> getUesrAct(int userid, String acttype) {
+	public List<RoleAuth> getUesrAct(int userid, String acttype) {
 		
 		//查询权限表acttype符合条记录
 		String sql ="select * from "+ this.getTableName("auth_action")+" where type=? ";
@@ -97,27 +98,11 @@ public class PermissionManager extends GenericService implements IPermissionMana
         //查询用户的角色列表
 		sql+=" (select roleid from "+this.getTableName("user_role")+" where userid=?)";
 		sql+=" )";
-	 
+        roleAuthManager.queryRoleAuthListByRoleId();
 		return this.daoSupport.queryForList(sql,AuthAction.class,acttype,userid);
 	}
 
-    @Override
-    public List<FunAndOper> getUesrAct4New(int userid, String acttype) {
-        //String sql = "select f.* from t_role_auth a where role_id in (SELECT roleid FROM t_user_role t where userid=?) and auth_type=? and f.fun_oper_id=a.funOrDataId";
-        List<UserRole> userRoles = this.findHql("from UserRole ur where ur.adminUser.userid=?",userid);
-        List<RoleAuth> results = new ArrayList<RoleAuth>();
-        for(UserRole userRole : userRoles){
-            List<RoleAuth> roleAuths = null;//this.findHql("from RoleAuth ra where ra.role.id=? and ra.authType=?",userRole.getRole().getRoleid(),RoleAuth.AuthType.FUNCTION);
-            results.addAll(roleAuths);
-        }
-        List<FunAndOper> funAndOpers = new ArrayList<FunAndOper>();
-        for(RoleAuth roleAuth : results){
-            funAndOpers.addAll(this.findHql("from FunAndOper fo where fo.id=?",roleAuth.getFunId()));
 
-        }
-
-        return funAndOpers;
-    }
 
     /**
 	 * 读取某用户的角色集合
@@ -173,7 +158,7 @@ public class PermissionManager extends GenericService implements IPermissionMana
 
     @Override
     public List<OperationBtn> getOperationBtnsByMenuId(Integer menuId) {
-        List<OperationBtn> operationBtns = this.findHql("from OperationBtn ob where ob.menuId=?",menuId+"");
+        List<OperationBtn> operationBtns = null;//this.findHql("from OperationBtn ob where ob.menuId=?",menuId+"");
         return operationBtns;
     }
 
