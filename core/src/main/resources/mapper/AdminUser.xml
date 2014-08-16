@@ -29,7 +29,7 @@
         select * from t_adminuser where userid=#{id}
     </select>
     <select id="queryForList" resultMap="adminUserMap">
-        select * from t_adminuser
+        select * from t_adminuser where username!='admin'
     </select>
     <update id="update" parameterType="AdminUser">
         UPDATE t_adminuser
