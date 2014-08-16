@@ -117,7 +117,7 @@ var BackendUi = {
         });
     },
     createLink: function (v) {
-        var link = $("<a class='home' target='" + v.target + "' href='" + v.url + "' >" + v.text + "</a>");
+        var link = $("<a class='home' target='" + v.target + "' href='" + v.url+"&menuId=1" + "' >" + v.text + "</a>");
         return link;
     },
     autoHeight: function () {
