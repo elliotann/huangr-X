@@ -1,10 +1,7 @@
 package com.easysoft.member.backend.manager;
 
 import com.easysoft.core.common.service.IGenericService;
-import com.easysoft.member.backend.model.AuthAction;
-import com.easysoft.member.backend.model.FunAndOper;
-import com.easysoft.member.backend.model.OperationBtn;
-import com.easysoft.member.backend.model.Role;
+import com.easysoft.member.backend.model.*;
 import com.easysoft.member.backend.vo.FunAndOperationVO;
 
 import java.util.List;
@@ -15,7 +12,7 @@ import java.util.List;
  * @author andy
  * @since : 1.0
  */
-public interface IPermissionManager extends IGenericService {
+public interface IPermissionManager{
 
     public boolean checkHaveAuth(int actid);
 	
@@ -52,15 +49,9 @@ public interface IPermissionManager extends IGenericService {
 	 * @param acttype 权限类型
 	 * @return
 	 */
-	public List<AuthAction> getUesrAct(int userid,String acttype);
+	public List<RoleAuth> getUesrAct(int userid,String acttype);
 
-    /**
-     * 读取某用户的权限点
-     * @param userid 用户id
-     * @param acttype 权限类型
-     * @return
-     */
-    public List<FunAndOper> getUesrAct4New(int userid,String acttype);
+
 	
 	
 	/**
