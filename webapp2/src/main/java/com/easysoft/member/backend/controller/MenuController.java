@@ -48,7 +48,7 @@ public class MenuController extends BaseController {
 
     @RequestMapping(params = {"list"})
     public ModelAndView list(){
-        return new ModelAndView("core/admin/menu/list");
+        return new ModelAndView("admin/core/auth/menulist");
     }
 
     @RequestMapping(params = {"dataGrid"})
