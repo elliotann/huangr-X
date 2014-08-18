@@ -6,14 +6,16 @@ $(document).ready(function() {
     gebo_wizard.validation();
     //* add step numbers to titles
     gebo_wizard.steps_nb();
+
+
 });
 
 gebo_wizard = {
 
     validation: function(){
         $('#validate_wizard').stepy({
-            nextLabel:      'Forward <i class="glyphicon glyphicon-chevron-right"></i>',
-            backLabel:      '<i class="glyphicon glyphicon-chevron-left"></i> Backward',
+            nextLabel:      '下一步',
+            backLabel:      '返回',
             block		: true,
             errorImage	: true,
             titleClick	: true,
@@ -36,20 +38,19 @@ gebo_wizard = {
                     thisStep.removeClass('error-image');
                 };
             },
+
             rules: {
                  'readed':'required',
-
-                'v_newsletter'	: 'required',
-                'v_password'	: 'required',
-                'v_city'		: 'required',
-                'v_country'		: 'required'
+                'dbHost'	: 'required',
+                'db_uname'	: 'required',
+                'db_passwd'		: 'required',
+                'dbName'		: 'required'
             }, messages: {
                 'v_username'	: { required:  'Username field is required!' },
-
-                'v_newsletter'	: { required:  'Newsletter field is required!' },
-                'v_password'	: { required:  'Password field is requerid!' },
-                'v_city'		: { required:  'City field is requerid!' },
-                'v_country'		: { required:  'Country field is requerid!' }
+                'dbHost'	: { required:  '请输入数据库主机!' },
+                'db_uname'	: { required:  '请输入数据库用户名!' },
+                'db_passwd'		: { required:  '请输入数据库密码!' },
+                'dbName'		: { required:  '请输入数据库名!' }
             }
         });
     },
