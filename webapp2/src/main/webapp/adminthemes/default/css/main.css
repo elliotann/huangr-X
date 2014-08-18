@@ -18,12 +18,12 @@ a:hover {
 }
 .header{
     min-width: 980px;
-    border: solid #F06D65 1px;
+    border: solid #2B8DB7 1px;
 }
 .header {
-    background: #2B8DB7;
     padding: 20px 10px 11px;
     position: relative;
+    background: -moz-linear-gradient(center top , #3993BA 0%, #067EAD 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
 }
 .header {
     border-bottom: 3px solid #2B8DB7;
