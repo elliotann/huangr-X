@@ -42,14 +42,14 @@ gebo_wizard = {
             rules: {
                 'readed':'required',
                 'dbHost': 'required',
-                'db_uname':'required',
-                'db_passwd':'required',
+                'dbUsername':'required',
+                'dbPassword':'required',
                 'dbName':'required'
             }, messages: {
                 'v_username'	: { required:  'Username field is required!' },
                 'dbHost'	: { required:  '请输入数据库主机!' },
-                'db_uname'	: { required:  '请输入数据库用户名!' },
-                'db_passwd'		: { required:  '请输入数据库密码!' },
+                'dbUsername'	: { required:  '请输入数据库用户名!' },
+                'dbPassword'		: { required:  '请输入数据库密码!' },
                 'dbName'		: { required:  '请输入数据库名!' }
             }
         });

@@ -26,7 +26,7 @@
 <body>
 <script>
     function install(){
-        alert($(dbName).val());
+        $("#validate_wizard").submit();
     }
 </script>
 
@@ -48,7 +48,7 @@
             <div class="row">
                 <div class="col-sm-12 col-md-12">
 
-                    <form class="stepy-wizzard form-horizontal" id="validate_wizard" novalidate="novalidate">
+                    <form class="stepy-wizzard form-horizontal" id="validate_wizard" novalidate="novalidate" action="install.do?doInstall" method="post">
                         <fieldset title="第一步" class="step" id="validate_wizard-step-0">
                             <legend class="hide">[jeap]最终协议…</legend>
                             <div class="formSep form-group">
@@ -91,19 +91,19 @@
                                 </div>
                             </div>
                             <div class="formSep form-group">
-                                <label class="col-md-2 control-label" for="db_uname">数据库用户名:</label>
+                                <label class="col-md-2 control-label" for="dbUsername">数据库用户名:</label>
 
                                 <div class="col-md-10">
-                                    <input type="text" class="input-sm form-control" id="db_uname"
-                                           name="db_uname">警告！如果您指定的数据库名称已存在，此安装有可能会破坏原有库中的数据！
+                                    <input type="text" class="input-sm form-control" id="dbUsername"
+                                           name="dbUsername">警告！如果您指定的数据库名称已存在，此安装有可能会破坏原有库中的数据！
                                 </div>
                             </div>
                             <div class="formSep form-group">
-                                <label class="col-md-2 control-label" for="db_passwd">数据库密码:</label>
+                                <label class="col-md-2 control-label" for="dbPassword">数据库密码:</label>
 
                                 <div class="col-md-10">
-                                    <input type="password" class="input-sm form-control" id="db_passwd"
-                                           name="db_passwd">
+                                    <input type="password" class="input-sm form-control" id="dbPassword"
+                                           name="dbPassword">
                                 </div>
                             </div>
                             <div class="formSep form-group">

@@ -107,8 +107,8 @@ public class InstallController extends BaseController{
         Properties props = new Properties();
         props.setProperty("jdbc.driverClassName", "oracle.jdbc.driver.OracleDriver");
         props.setProperty("jdbc.url", "jdbc:oracle:thin:@" + dbConfig.getDbHost()+ ":" + dbConfig.getDbName());
-        props.setProperty("jdbc.username", dbConfig.getUserName());
-        props.setProperty("jdbc.password", dbConfig.getPassword());
+        props.setProperty("jdbc.username", dbConfig.getDbUsername());
+        props.setProperty("jdbc.password", dbConfig.getDbPassword());
         props.setProperty("validationQuery.sqlserver", "SELECT 1");
         props.setProperty("hibernate.hbm2ddl.auto", "update");
         saveProperties(props);
@@ -121,8 +121,8 @@ public class InstallController extends BaseController{
         Properties props = new Properties();
         props.setProperty("jdbc.driverClassName", "com.microsoft.sqlserver.jdbc.SQLServerDriver");
         props.setProperty("jdbc.url", "jdbc:sqlserver://" + dbConfig.getDbHost()+ ";databaseName=" + dbConfig.getDbName());
-        props.setProperty("jdbc.username", dbConfig.getUserName());
-        props.setProperty("jdbc.password", dbConfig.getPassword());
+        props.setProperty("jdbc.username", dbConfig.getDbUsername());
+        props.setProperty("jdbc.password", dbConfig.getDbPassword());
         saveProperties(props);
     }
     /**
@@ -132,8 +132,8 @@ public class InstallController extends BaseController{
         Properties props = new Properties();
         props.setProperty("jdbc.driverClassName", "com.mysql.jdbc.Driver");
         props.setProperty("jdbc.url", "jdbc:mysql://"+dbConfig.getDbHost()+"/"+dbConfig.getDbName()+"?useUnicode=true&characterEncoding=utf8");
-        props.setProperty("jdbc.username", dbConfig.getUserName());
-        props.setProperty("jdbc.password", dbConfig.getPassword());
+        props.setProperty("jdbc.username", dbConfig.getDbUsername());
+        props.setProperty("jdbc.password", dbConfig.getDbPassword());
         props.setProperty("validationQuery.sqlserver", "SELECT 1");
         props.setProperty("hibernate.hbm2ddl.auto", "update");
         props.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
@@ -231,7 +231,7 @@ public class InstallController extends BaseController{
      */
 
     private boolean mysqlTestConnection(DBConfig dbConfig){
-        return createAndTest("com.mysql.jdbc.Driver", "jdbc:mysql://"+dbConfig.getDbHost()+"/test?useUnicode=true&characterEncoding=utf8",dbConfig.getDbType(),dbConfig.getDbHost(),dbConfig.getDbName(),dbConfig.getUserName(),dbConfig.getPassword());
+        return createAndTest("com.mysql.jdbc.Driver", "jdbc:mysql://"+dbConfig.getDbHost()+"/test?useUnicode=true&characterEncoding=utf8",dbConfig.getDbType(),dbConfig.getDbHost(),dbConfig.getDbName(),dbConfig.getDbUsername(),dbConfig.getDbPassword());
     }
     /**
      * 测试Oracle连接
@@ -239,11 +239,11 @@ public class InstallController extends BaseController{
      */
 
     private boolean oracleTestConnection(DBConfig dbConfig){
-        return createAndTest("oracle.jdbc.driver.OracleDriver", "jdbc:oracle:thin:@" + dbConfig.getDbHost() + ":" + dbConfig.getDbName(),dbConfig.getDbType(),dbConfig.getDbHost(),dbConfig.getDbName(),dbConfig.getUserName(),dbConfig.getPassword());
+        return createAndTest("oracle.jdbc.driver.OracleDriver", "jdbc:oracle:thin:@" + dbConfig.getDbHost() + ":" + dbConfig.getDbName(),dbConfig.getDbType(),dbConfig.getDbHost(),dbConfig.getDbName(),dbConfig.getDbUsername(),dbConfig.getDbPassword());
     }
 
     private boolean sqlserverTestConnection(DBConfig dbConfig){
-        return createAndTest("com.microsoft.sqlserver.jdbc.SQLServerDriver", "jdbc:sqlserver://" + dbConfig.getDbHost() + ";databaseName=" + dbConfig.getDbName(),dbConfig.getDbType(),dbConfig.getDbHost(),dbConfig.getDbName(),dbConfig.getUserName(),dbConfig.getPassword());
+        return createAndTest("com.microsoft.sqlserver.jdbc.SQLServerDriver", "jdbc:sqlserver://" + dbConfig.getDbHost() + ";databaseName=" + dbConfig.getDbName(),dbConfig.getDbType(),dbConfig.getDbHost(),dbConfig.getDbName(),dbConfig.getDbUsername(),dbConfig.getDbPassword());
     }
     /**
      * 测试数据库连接
@@ -294,10 +294,22 @@ public class InstallController extends BaseController{
     }
     @RequestMapping(params = {"doInstall"})
     @ResponseBody
-    public AjaxJson doInstall(AdminUser adminUser,String productid,String domain){
+    public AjaxJson doInstall(AdminUser adminUser,String productid,String domain,DBConfig dbConfig){
         AjaxJson json = new AjaxJson();
+        boolean result = false;
         //1、连接数据库信息
+        if("mysql".equals(dbConfig.getDbType()))
+            result = this.mysqlTestConnection(dbConfig);
+        else if("oracle".equals(dbConfig.getDbType()))
+            result = this.oracleTestConnection(dbConfig);
+        else if("sqlserver".equals(dbConfig.getDbType()))
+            result = this.sqlserverTestConnection(dbConfig);
 
+        if(result){
+            json.setSuccess(true);
+        }else{
+            json.setSuccess(false);
+        }
         try{
             //saas模式可以自定义域名
             if("2".equals(ParamSetting.RUNMODE)){
