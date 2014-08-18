@@ -6,16 +6,16 @@
     float: right;
 }
 .step {
-    background: none repeat scroll 0 0 #f9f9f9;
-    border: 1px solid #ccc;
+    background: none repeat scroll 0 0 #F9F9F9;
+    border: 1px solid #CCCCCC;
     border-radius: 4px;
     clear: left;
     padding: 10px 20px 14px;
 }
 .step legend {
-    background: none repeat scroll 0 0 #f9f9f9;
+    background: none repeat scroll 0 0 #F9F9F9;
     border-radius: 4px;
-    color: #4080bf;
+    color: #4080BF;
     font: bold 14px verdana;
     padding: 0 2px 3px;
 }
@@ -26,7 +26,7 @@
     width: 100%;
 }
 .stepy-titles li {
-    background: none repeat scroll 0 0 #fff;
+    background: none repeat scroll 0 0 #FFFFFF;
     color: #818181;
     cursor: pointer;
     display: inline-block;
@@ -59,7 +59,7 @@
     font-size: 11px;
 }
 .stepy-titles .stepNb {
-    background: none repeat scroll 0 0 #efefef;
+    background: none repeat scroll 0 0 #EFEFEF;
     border-radius: 17px;
     color: #818181;
     display: block;
@@ -72,12 +72,12 @@
     width: 34px;
 }
 .stepy-titles .current-step {
-    color: #067ead;
+    color: #067EAD;
     cursor: auto;
 }
 .stepy-titles .current-step .stepNb {
-    background: none repeat scroll 0 0 #067ead;
-    color: #fff;
+    background: none repeat scroll 0 0 #067EAD;
+    color: #FFFFFF;
 }
 .step .control-group + P {
     line-height: inherit;
@@ -86,11 +86,11 @@
     padding: 20px 0 0;
 }
 .error-image .stepNb {
-    background: none repeat scroll 0 0 #c62626 !important;
+    background: none repeat scroll 0 0 #C62626 !important;
 }
 .error-image {
-    color: #c62626 !important;
+    color: #C62626 !important;
 }
 .error-image .stepNb {
-    color: #fff !important;
+    color: #FFFFFF !important;
 }
