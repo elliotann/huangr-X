@@ -25,7 +25,7 @@
 </head>
 <body>
 <script>
-    function finnish(){
+    function install(){
         alert($(dbName).val());
     }
 </script>
@@ -178,27 +178,51 @@
                                   style="display: none;">
                             <legend class="hide">完成安装…</legend>
                             <div class="formSep form-group">
-                                <label class="col-md-2 control-label" for="v_message">Your Message:</label>
+                                <label class="col-md-2 control-label">操作系统:</label>
 
                                 <div class="col-md-10">
-                                    <textarea class="form-control" rows="3" id="v_message"
-                                              name="v_message"></textarea>
+                                    ${osVersion }
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">Newsletter:</label>
+                            <div class="formSep form-group">
+                                <label class="col-md-2 control-label">Java的运行环境:</label>
 
                                 <div class="col-md-10">
-                                    <label for="newsletter_yes" class="radio-inline">
-                                        <input type="radio" name="v_newsletter" id="newsletter_yes" value="yes"> Yes
-                                    </label>
-                                    <label for="newsletter_no" class="radio-inline">
-                                        <input type="radio" name="v_newsletter" id="newsletter_no" value="no"> No
-                                    </label>
+                                    ${javaVersion }
+                                </div>
+                            </div>
+                            <div class="formSep form-group">
+                                <label class="col-md-2 control-label" for="productid">解决方案:</label>
+
+                                <div class="col-md-10">
+                                    <select class="form-control" name="productid" id="productid">
+                                        <option value="core">基础核心</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="formSep form-group">
+                                <label class="col-md-2 control-label" for="username">管理员用户名:</label>
+
+                                <div class="col-md-10">
+                                    <input type="text" class="input-sm form-control" id="username" name="username">
+                                </div>
+                            </div>
+                            <div class="formSep form-group">
+                                <label class="col-md-2 control-label" for="password">管理员密码:</label>
+
+                                <div class="col-md-10">
+                                    <input type="password" class="input-sm form-control" id="password" name="password">
+                                </div>
+                            </div>
+                            <div class="formSep form-group">
+                                <label class="col-md-2 control-label" for="password">再输入一次密码:</label>
+
+                                <div class="col-md-10">
+                                    <input type="password" class="input-sm form-control" id="re_passwd" name="re_passwd">
                                 </div>
                             </div>
                             <p class="validate_wizard-buttons" id="validate_wizard-buttons-2">
-                                <button class="finish btn btn-primary" type="button" onclick="finnish()">Send registration</button>
+                                <button class="finish btn btn-primary" type="button" onclick="install()">安装</button>
                             </p>
 
                         </fieldset>
