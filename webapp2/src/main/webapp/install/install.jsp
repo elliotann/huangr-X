@@ -24,7 +24,11 @@
 
 </head>
 <body>
-
+<script>
+    function finnish(){
+        alert($(dbName).val());
+    }
+</script>
 
 <div class="clearfix" id="maincontainer">
     <header>
@@ -82,8 +86,8 @@
                                 <label class="col-md-2 control-label" for="dbHost">数据库主机:</label>
 
                                 <div class="col-md-10">
-                                    <input type="text" class="input-sm form-control" id="dbHost" name="dbHost">
-                                    如果数据库服务器与WEB服务器不在同一台主机上,请设置为数据库服务器的地址。
+                                    <input type="text" class="input-sm form-control" id="dbHost" name="dbHost" value="localhost:3306">
+
                                 </div>
                             </div>
                             <div class="formSep form-group">
@@ -194,7 +198,7 @@
                                 </div>
                             </div>
                             <p class="validate_wizard-buttons" id="validate_wizard-buttons-2">
-                                <button class="finish btn btn-primary" type="button">Send registration</button>
+                                <button class="finish btn btn-primary" type="button" onclick="finnish()">Send registration</button>
                             </p>
 
                         </fieldset>
