@@ -40,11 +40,11 @@ gebo_wizard = {
             },
 
             rules: {
-                 'readed':'required',
-                'dbHost'	: 'required',
-                'db_uname'	: 'required',
-                'db_passwd'		: 'required',
-                'dbName'		: 'required'
+                'readed':'required',
+                'dbHost': 'required',
+                'db_uname':'required',
+                'db_passwd':'required',
+                'dbName':'required'
             }, messages: {
                 'v_username'	: { required:  'Username field is required!' },
                 'dbHost'	: { required:  '请输入数据库主机!' },
