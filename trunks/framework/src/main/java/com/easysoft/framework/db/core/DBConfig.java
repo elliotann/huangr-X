@@ -13,9 +13,9 @@ public class DBConfig {
     /**数据库名**/
     private String dbName;
     /**数据库用户名**/
-    private String userName;
+    private String dbUsername;
     /**数据库密码**/
-    private String password;
+    private String dbPassword;
     /**数据库类型**/
     private String dbType;
 
@@ -35,20 +35,20 @@ public class DBConfig {
         this.dbName = dbName;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getDbUsername() {
+        return dbUsername;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setDbUsername(String dbUsername) {
+        this.dbUsername = dbUsername;
     }
 
-    public String getPassword() {
-        return password;
+    public String getDbPassword() {
+        return dbPassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setDbPassword(String dbPassword) {
+        this.dbPassword = dbPassword;
     }
 
     public String getDbType() {
