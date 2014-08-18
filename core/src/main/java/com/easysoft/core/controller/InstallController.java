@@ -48,7 +48,7 @@ public class InstallController extends BaseController{
      */
     @RequestMapping(params = {"step1"})
     public ModelAndView step1(){
-        return new ModelAndView("install/step1");
+        return new ModelAndView("install/install");
     }
 
     /**
