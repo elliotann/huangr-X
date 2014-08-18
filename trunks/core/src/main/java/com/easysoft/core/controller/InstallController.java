@@ -296,6 +296,8 @@ public class InstallController extends BaseController{
     @ResponseBody
     public AjaxJson doInstall(AdminUser adminUser,String productid,String domain){
         AjaxJson json = new AjaxJson();
+        //1、连接数据库信息
+
         try{
             //saas模式可以自定义域名
             if("2".equals(ParamSetting.RUNMODE)){
