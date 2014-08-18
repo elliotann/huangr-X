@@ -51,34 +51,7 @@ public class InstallController extends BaseController{
         return new ModelAndView("install/install");
     }
 
-    /**
-     * 数据库配置
-     * @return
-     */
-    @RequestMapping(params = {"step2"})
-    public ModelAndView step2(){
-        return new ModelAndView("install/step2");
-    }
-    @RequestMapping(params={"testConnection"})
-    @ResponseBody
-    public AjaxJson testConnection(DBConfig dbConfig){
-        boolean result = false;
-        AjaxJson json = new AjaxJson();
-        if("mysql".equals(dbConfig.getDbType()))
-            result = this.mysqlTestConnection(dbConfig);
-        else if("oracle".equals(dbConfig.getDbType()))
-            result = this.oracleTestConnection(dbConfig);
-        else if("sqlserver".equals(dbConfig.getDbType()))
-            result = this.sqlserverTestConnection(dbConfig);
 
-        if(result){
-            json.setSuccess(true);
-        }else{
-            json.setSuccess(false);
-        }
-
-        return json;
-    }
 
     /**
      * 保存存数据库设置
