@@ -19,4 +19,8 @@
         select * from t_operation_btn where id=#{id}
     </select>
 
+    <select id="queryForList" resultMap="operationBtnMap">
+        select * from t_operation_btn
+    </select>
+
 </mapper>
