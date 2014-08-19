@@ -121,7 +121,7 @@ $(function(){
 	
 	
 	$(".start").click(function(){
-		request("component!start.do?componentid="+$(this).attr("componentid") );
+		request("component.do?start.do&componentid="+$(this).attr("componentid") );
 	});
 	$(".stop").click(function(){
 		if(confirm( "确认停用此组件吗?" )){
