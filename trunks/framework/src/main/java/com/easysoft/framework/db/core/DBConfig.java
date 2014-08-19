@@ -18,6 +18,10 @@ public class DBConfig {
     private String dbPassword;
     /**数据库类型**/
     private String dbType;
+    private int resourcemode;
+    private String staticpath;
+    private String solutionpath;
+    private String staticdomain;
 
     public String getDbHost() {
         return dbHost;
@@ -57,5 +61,37 @@ public class DBConfig {
 
     public void setDbType(String dbType) {
         this.dbType = dbType;
+    }
+
+    public int getResourcemode() {
+        return resourcemode;
+    }
+
+    public void setResourcemode(int resourcemode) {
+        this.resourcemode = resourcemode;
+    }
+
+    public String getStaticpath() {
+        return staticpath;
+    }
+
+    public void setStaticpath(String staticpath) {
+        this.staticpath = staticpath;
+    }
+
+    public String getSolutionpath() {
+        return solutionpath;
+    }
+
+    public void setSolutionpath(String solutionpath) {
+        this.solutionpath = solutionpath;
+    }
+
+    public String getStaticdomain() {
+        return staticdomain;
+    }
+
+    public void setStaticdomain(String staticdomain) {
+        this.staticdomain = staticdomain;
     }
 }

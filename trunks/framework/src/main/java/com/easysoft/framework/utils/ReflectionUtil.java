@@ -117,7 +117,7 @@ public class ReflectionUtil {
 		for(Method m:ms){
 			String name = m.getName();
 			
-			if(name.startsWith("get")){
+			if(name.startsWith("get")||name.startsWith("is")){
 				if(m.getAnnotation(NotDbField.class)!=null){
 					poMap.remove(getFieldName(name)); 
 				} 
@@ -128,8 +128,12 @@ public class ReflectionUtil {
 	}
 
 	private static String getFieldName(String methodName){
-		 
-		methodName = methodName.substring(3);
+		if(methodName.startsWith("get")){
+            methodName = methodName.substring(3);
+        }else if(methodName.startsWith("is")){
+            methodName = methodName.substring(2);
+        }
+
 		methodName = methodName.substring(0, 1).toLowerCase() + methodName.substring(1);
 		return methodName;
 	}
