@@ -197,7 +197,10 @@ public class ComponentManager extends BaseSupport
         }
 
         String sql = "update t_component set enable_state=1 where componentid=?";
-        //componentDao.executeSql(sql, new Object[]{componentid});
+        Map<String,Object> params = new HashMap<String, Object>();
+        params.put("enable_state",1);
+        params.put("componentId",componentView.getComponentid());
+        componentDao.updateByCondition(params);
 
 
         if (this.logger.isDebugEnabled())
