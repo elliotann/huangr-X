@@ -9,8 +9,7 @@ import javax.persistence.*;
  * Time: 下午9:02
  * To change this template use File | Settings | File Templates.
  */
-@Entity
-@Table(name="t_fun_operation")
+
 public class FunAndOper {
     private int id;
     private String name;

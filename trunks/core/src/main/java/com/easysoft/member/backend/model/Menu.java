@@ -11,8 +11,7 @@ import java.util.List;
  * @author andy
  * @version 1.0
  */
-@Entity
-@Table(name="t_menu")
+
 public class Menu {
     private Integer id;
 
@@ -147,7 +146,7 @@ public class Menu {
     public void setIco(String ico) {
         this.ico = ico;
     }
-    @Transient
+    @NotDbField
     public boolean isHasAuth() {
         return hasAuth;
     }

@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +31,7 @@ import java.util.Map;
  * @author andy
  */
 @Service("adminUserManager")
-public class AdminUserManagerImpl extends GenericService<AdminUser> implements IAdminUserManager {
+public class AdminUserManagerImpl  implements IAdminUserManager {
     @Autowired
     private IAdminUserDao adminUserDao;
     @Autowired
@@ -175,8 +176,10 @@ public class AdminUserManagerImpl extends GenericService<AdminUser> implements I
 	 * @throws RuntimeException 登录失败抛出此异常，登录失败原因可通过getMessage()方法获取
 	 */
 	public int loginBySys(String username, String password) {
-
-        AdminUser user =adminUserDao.queryUserByName(username);
+        Map<String,Object> params = new HashMap<String, Object>();
+        params.put("username",username);
+        params.put("userId",0);
+        AdminUser user =adminUserDao.queryUserByName(params);
 		if(user == null){
             throw new RuntimeException("此用户不存在");
         }
@@ -254,12 +257,11 @@ public class AdminUserManagerImpl extends GenericService<AdminUser> implements I
 
     @Override
     public AdminUser getAdminUserByName(String name, Integer userId) {
-        String hql = "from AdminUser a where a.username=?";
-        if(userId!=null&&userId!=0){
-            hql += " and a.userid!="+userId;
-        }
-        List<AdminUser> results  = this.findHql(hql,name);
-        if(results.isEmpty()) return null;
-        return results.get(0);
+        if(userId==null) userId=0;
+        Map<String,Object> params = new HashMap<String, Object>();
+        params.put("username",name);
+        params.put("userId",userId);
+        return adminUserDao.queryUserByName(params);
+
     }
 }

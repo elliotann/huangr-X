@@ -9,6 +9,7 @@ import com.easysoft.framework.db.IDaoSupport;
 import com.easysoft.framework.db.dbsolution.IInstaller;
 import com.easysoft.member.backend.manager.IAdminUserManager;
 import com.easysoft.member.backend.model.AdminUser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Node;
@@ -17,11 +18,12 @@ import org.w3c.dom.Node;
 public class AdminUserInstaller implements IInstaller {
 
 	private IUserManager userManager;
+    @Autowired
 	private IAdminUserManager adminUserManager;
 	private IDaoSupport daoSupport;
 
 	public void install(String productId, Node fragment) {
-		if ("base".equals(productId)) {
+		if ("core".equals(productId)) {
 			JEAPUser user = this.userManager.getCurrentUser();
 			Site site = EsfContext.getContext().getCurrentSite();
 			int userid = site.getUserid();
@@ -37,18 +39,18 @@ public class AdminUserInstaller implements IInstaller {
 						siteid, adminUser);
 				// 创建管理员时的密码为双md5了，更新为md5码
 				if (ParamSetting.RUNMODE.equals("2")) {
-					this.daoSupport.execute("update es_adminuser_" + userid
+					this.daoSupport.execute("update t_adminuser_" + userid
 							+ "_" + siteid + " set password=? where userid=?",
 							user.getPassword(), adminUserId);
 				} else {
 					this.daoSupport
 							.execute(
-									"update es_adminuser  set password=? where userid=?",
+									"update t_adminuser  set password=? where userid=?",
 									user.getPassword(), adminUserId);
 				}
 			} else { // 如果是本地导入，adminuser表已经清空，重新插入当前用户
 				AdminUser adminUser = this.adminUserManager.getCurrentUser();
-				String tablename = "es_adminuser";
+				String tablename = "t_adminuser";
 				if (ParamSetting.RUNMODE.equals("2")) { // saas式时表名变更
 					tablename = tablename + "_" + userid + "_" + siteid;
 				}
@@ -57,13 +59,13 @@ public class AdminUserInstaller implements IInstaller {
 
 				// 创建管理员时的密码为双md5了，更新为md5码
 				if (ParamSetting.RUNMODE.equals("2")) {
-					this.daoSupport.execute("update es_adminuser_" + userid
+					this.daoSupport.execute("update t_adminuser_" + userid
 							+ "_" + siteid + " set password=? where userid=?",
 							adminUser.getPassword(), adminuserid);
 				} else {
 					this.daoSupport
 							.execute(
-									"update es_adminuser  set password=? where userid=?",
+									"update t_adminuser  set password=? where userid=?",
 									adminUser.getPassword(), userid);
 				}
 			}

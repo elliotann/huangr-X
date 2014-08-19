@@ -9,8 +9,7 @@ import javax.persistence.*;
  * 角色实体
  * @author andy
  */
-@Entity
-@Table(name="t_role")
+
 public class Role {
 	private int roleid;
 	private String rolename;

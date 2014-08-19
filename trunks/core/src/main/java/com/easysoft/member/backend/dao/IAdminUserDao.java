@@ -2,6 +2,8 @@ package com.easysoft.member.backend.dao;
 import com.easysoft.core.common.dao.IGenericDao;
 import com.easysoft.member.backend.model.AdminUser;
 
+import java.util.Map;
+
 /**
  * User: andy
  * Date: 14-1-23
@@ -11,5 +13,12 @@ import com.easysoft.member.backend.model.AdminUser;
  */
 public interface IAdminUserDao extends IGenericDao<AdminUser,Integer> {
     public void deleteTable();
-    public AdminUser queryUserByName(String username);
+
+    /**
+     * 根据用户名查询用户
+     * @param username
+     * @param userId 修改时用
+     * @return
+     */
+    public AdminUser queryUserByName(Map<String,Object> conditions);
 }

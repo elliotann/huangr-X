@@ -84,6 +84,7 @@
 		<field><name>dateline</name><type>int</type><size>11</size><option>00</option></field>
 		<field><name>founder</name><type>int</type><size>1</size><option>00</option></field>
 		<field><name>siteid</name><type>int</type><size>11</size><option>00</option></field>
+        <field><name>email</name><type>varchar</type><size>50</size><option>00</option></field>
 	</action>	
 	<action>
 		<command>create</command>
@@ -110,6 +111,17 @@
 		<field><name>userid</name><type>int</type><size>11</size><option>00</option></field>
 		<field><name>roleid</name><type>int</type><size>11</size><option>00</option></field>
 	</action>
+    <action>
+        <command>create</command>
+        <table>t_operation_btn</table>
+        <field><name>ope_id</name><type>int</type><size>11</size><option>11</option></field>
+        <field><name>code</name><type>varchar</type><size>255</size><option>00</option></field>
+        <field><name>ico</name><type>varchar</type><size>255</size><option>00</option></field>
+        <field><name>menuId</name><type>int</type><size>11</size><option>00</option></field>
+        <field><name>name</name><type>varchar</type><size>50</size><option>00</option></field>
+        <field><name>operType</name><type>varchar</type><size>50</size><option>00</option></field>
+        <field><name>status</name><type>int</type><size>11</size><option>00</option></field>
+    </action>
 	<action>
 		<command>create</command>
 		<table>t_auth_action</table>

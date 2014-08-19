@@ -24,6 +24,7 @@ public class AdminUser implements  Serializable{
 	private int[] roleids;
 	private int founder;
 	private Integer siteid; //子站点id
+    private String email;
     private List<AuthAction> authList;
     @Transient
     public List<AuthAction> getAuthList() { return this.authList; }
@@ -117,4 +118,12 @@ public class AdminUser implements  Serializable{
 	public void setSiteid(Integer siteid) {
 		this.siteid = siteid;
 	}
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
