@@ -86,7 +86,7 @@
                                 <li><a class="uibutton normal" href="#" id="forgetpass">重置</a></li>
                             </ul>
                         </div>
-                        <div style="float: left; margin-left: 30px;"><a href="init.jsp"><span class="f_help">是否初始化数据</span></a></div>
+
                     </div>
                     <div class="clear"></div>
                 </div>

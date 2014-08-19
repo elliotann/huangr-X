@@ -151,7 +151,7 @@
 
 </script>
 
-<grid:dataGrid action="menu.do?dataGrid&ajax=yes" height="99%" usePager="false"  width="100%">
+<grid:dataGrid action="menu.do?dataGrid&ajax=yes" height="99%" usePager="false"  width="100%" tree="true">
     <grid:column title="名称" field="title" align="left" width="250" id="title"/>
     <grid:column title="url" field="url"  width="400" align="left" id="url"/>
     <grid:column title="类型" field="menutype"  width="100" align="center" sortType="int" renderFun="getMenuType" id="menutype"/>

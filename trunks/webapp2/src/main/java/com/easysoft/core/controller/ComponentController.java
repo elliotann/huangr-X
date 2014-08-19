@@ -31,7 +31,7 @@ public class ComponentController extends BaseController {
         List<ComponentView> componentList = this.componentManager.list();
         Map<String,Object> params = new HashMap<String,Object>();
         params.put("componentList",componentList);
-        return new ModelAndView("/core/admin/component/list",params);
+        return new ModelAndView("/admin/core/component/componentList",params);
     }
     @RequestMapping(params = {"start"})
     @ResponseBody
