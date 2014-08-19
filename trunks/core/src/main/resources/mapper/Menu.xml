@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.easysoft.core.dao.IMenuDao">
+    <resultMap id="menuMap" type="Menu">
+        <id property="id" column="id"/>
+        <id property="deleteflag" column="deleteflag"/>
+        <id property="pid" column="pid"/>
+        <id property="title" column="title"/>
+        <id property="url" column="url"/>
+        <id property="target" column="target"/>
+        <id property="sorder" column="sorder"/>
+        <id property="menutype" column="menutype"/>
+        <id property="datatype" column="datatype"/>
+        <id property="appid" column="appid"/>
+        <id property="ico" column="ico"/>
+
+    </resultMap>
+    <insert id="save" parameterType="Menu" useGeneratedKeys="true" keyProperty="id">
+        insert t_menu (deleteflag,pid,title,url,target,sorder,menutype,datatype,appid,ico)
+        values (#{deleteflag},#{pid},#{title},#{url},#{target},#{sorder},#{menutype},#{datatype},#{appid},#{ico})
+    </insert>
+    <select id="queryMenuByCondition" resultMap="menuMap">
+        select * from t_menu where 1=1
+        <if test="title!=null">
+            and title=#{title}
+        </if>
+        <if test="url!=null">
+            and url = #{url}
+        </if>
+    </select>
+    <delete id="deleteMenuByCondition" >
+        delete from t_menu where 1=1
+        <if test="title!=null">
+            and title=#{title}
+        </if>
+        <if test="url!=null">
+            and url = #{url}
+        </if>
+    </delete>
+</mapper>

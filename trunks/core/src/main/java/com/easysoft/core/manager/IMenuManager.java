@@ -86,9 +86,10 @@ public interface IMenuManager {
 	 */
 	public void clean();
 
-    public Menu get(String title);
+    public Menu getMenuByNameAndUrl(String title,String url);
+    public void deleteMenuByNameAndUrl(String title,String url);
 
-    public void delete(String title);
+
 
     public List<Menu> getMenuTreeByRoleId(Integer roleId);
 	

@@ -1,7 +1,9 @@
 package com.easysoft.core.dao;
 
-import com.easysoft.core.common.dao.hibernate.IGenericDAO;
+import com.easysoft.core.common.dao.IGenericDao;
 import com.easysoft.member.backend.model.Menu;
+
+import java.util.Map;
 
 /**
  * User: andy
@@ -10,5 +12,7 @@ import com.easysoft.member.backend.model.Menu;
  *
  * @since:
  */
-public interface IMenuDao extends IGenericDAO<Menu> {
+public interface IMenuDao extends IGenericDao<Menu,Integer> {
+    public Menu queryMenuByCondition(Map<String, Object> conditions);
+    public void deleteMenuByCondition(Map<String, Object> conditions);
 }

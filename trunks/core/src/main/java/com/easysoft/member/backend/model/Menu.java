@@ -1,5 +1,6 @@
 package com.easysoft.member.backend.model;
 
+import com.easysoft.core.common.entity.IdEntity;
 import com.easysoft.core.model.Resource;
 import com.easysoft.framework.db.NotDbField;
 
@@ -12,8 +13,8 @@ import java.util.List;
  * @version 1.0
  */
 
-public class Menu {
-    private Integer id;
+public class Menu extends IdEntity{
+
 
     private Integer deleteflag = 0;
 
@@ -41,16 +42,6 @@ public class Menu {
     public void setDeleteflag(Integer deleteflag) {
         this.deleteflag = deleteflag;
     }
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="id")
-    public Integer getId() {
-        return id;
-    }
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
 
     @NotDbField
     @Transient
