@@ -14,7 +14,9 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 菜单管理
@@ -43,8 +45,8 @@ public class MenuManagerImpl extends BaseSupport<Menu> implements IMenuManager {
 		if(menu.getUrl() ==null) throw new IllegalArgumentException("url argument is null");
 		if(menu.getSorder() ==null) throw new IllegalArgumentException("sorder argument is null");
 		menu.setDeleteflag(0);
-		this.baseDaoSupport.insert("menu", menu);
-		return this.baseDaoSupport.getLastId("menu");
+        menuDao.save(menu);
+		return menu.getId();
 	}
 
 
@@ -158,6 +160,14 @@ public class MenuManagerImpl extends BaseSupport<Menu> implements IMenuManager {
         return (Menu) menuList.get(0);
     }
 
+    @Override
+    public Menu getMenuByNameAndUrl(String title, String url) {
+        Map<String,Object> params = new HashMap<String,Object>();
+        params.put("title",title);
+        params.put("url",url);
+        return menuDao.queryMenuByCondition(params);
+    }
+
     public void delete(String title) {
         String sql = "delete from menu where title=?";
         this.baseDaoSupport.execute(sql, new Object[]{title});
@@ -172,5 +182,13 @@ public class MenuManagerImpl extends BaseSupport<Menu> implements IMenuManager {
         }
 
         return results;
+    }
+
+    @Override
+    public void deleteMenuByNameAndUrl(String title, String url) {
+        Map<String,Object> params = new HashMap<String,Object>();
+        params.put("title",title);
+        params.put("url",url);
+        menuDao.deleteMenuByCondition(params);
     }
 }
