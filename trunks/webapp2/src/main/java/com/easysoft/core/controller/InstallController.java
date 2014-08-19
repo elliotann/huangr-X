@@ -21,6 +21,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -48,31 +50,18 @@ public class InstallController extends BaseController{
      */
     @RequestMapping(params = {"step1"})
     public ModelAndView step1(){
+        Properties props=System.getProperties();
+        String osVersion = props.getProperty("os.name")+"("+props.getProperty("os.version")+")";
+        String javaVersion = props.getProperty("java.version");
+        Map<String,Object> params = new HashMap<String,Object>();
+        params.put("osVersion",osVersion);
+        params.put("javaVersion",javaVersion);
         return new ModelAndView("install/install");
     }
 
 
 
-    /**
-     * 保存存数据库设置
-     * 切换至新的数据源
-     * @return
-     */
-    @RequestMapping(params = {"step3"})
-    public ModelAndView step3(DBConfig dbConfig,int resourcemode,String staticpath,String solutionpath,String staticdomain,HttpServletRequest request){
-        saveParams(dbConfig.getDbType(),resourcemode,staticpath,solutionpath,staticdomain,request);
-        if("mysql".equals(dbConfig.getDbType()))
-            this.saveMysqlDBParams(dbConfig);
-        else if("oracle".equals(dbConfig.getDbType()))
-            this.saveOracleDBParams(dbConfig);
-        else if("sqlserver".equals(dbConfig.getDbType()))
-            this.saveSQLServerDBParams(dbConfig);
 
-        Properties props=System.getProperties();
-        String osVersion = props.getProperty("os.name")+"("+props.getProperty("os.version")+")";
-        String javaVersion = props.getProperty("java.version");
-        return new ModelAndView("install/step3");
-    }
     /**
      * 保存Oracle数据设置
      */
@@ -267,7 +256,7 @@ public class InstallController extends BaseController{
     }
     @RequestMapping(params = {"doInstall"})
     @ResponseBody
-    public AjaxJson doInstall(AdminUser adminUser,String productid,String domain,DBConfig dbConfig){
+    public AjaxJson doInstall(AdminUser adminUser,String productid,String domain,DBConfig dbConfig,HttpServletRequest request){
         AjaxJson json = new AjaxJson();
         boolean result = false;
         //1、连接数据库信息
@@ -278,11 +267,20 @@ public class InstallController extends BaseController{
         else if("sqlserver".equals(dbConfig.getDbType()))
             result = this.sqlserverTestConnection(dbConfig);
 
-        if(result){
-            json.setSuccess(true);
-        }else{
-            json.setSuccess(false);
+        if(!result){
+            throw new RuntimeException("数据连接出错！");
         }
+        //保存存数据库设置
+        //切换至新的数据源
+        saveParams(dbConfig.getDbType(),dbConfig.getResourcemode(),dbConfig.getStaticpath(),dbConfig.getSolutionpath(),dbConfig.getStaticdomain(),request);
+        if("mysql".equals(dbConfig.getDbType()))
+            this.saveMysqlDBParams(dbConfig);
+        else if("oracle".equals(dbConfig.getDbType()))
+            this.saveOracleDBParams(dbConfig);
+        else if("sqlserver".equals(dbConfig.getDbType()))
+            this.saveSQLServerDBParams(dbConfig);
+
+
         try{
             //saas模式可以自定义域名
             if("2".equals(ParamSetting.RUNMODE)){

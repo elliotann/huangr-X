@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Gebo Admin Panel</title>
+    <title>jeap安装向导</title>
 
     <!-- Bootstrap framework -->
     <link href="/jeap/install/css/bootstrap.min.css" rel="stylesheet">
@@ -26,7 +26,24 @@
 <body>
 <script>
     function install(){
-        $("#validate_wizard").submit();
+        $("#validate_wizard").ajaxSubmit({
+            url :"install.do?doInstall&ajax=true",
+            type : "POST",
+            dataType:"json",
+            success : function(result) {
+
+                if(result.success){
+                    alert("安装成功");
+                    location.href="install.do?installSuccess";
+                }else{
+                    alert(result.msg)
+                }
+            },
+            error : function(e) {
+                alert("出错啦:(");
+            }
+        });
+
     }
 </script>
 
@@ -48,7 +65,7 @@
             <div class="row">
                 <div class="col-sm-12 col-md-12">
 
-                    <form class="stepy-wizzard form-horizontal" id="validate_wizard" novalidate="novalidate" action="install.do?doInstall" method="post">
+                    <form class="stepy-wizzard form-horizontal" id="validate_wizard" novalidate="novalidate">
                         <fieldset title="第一步" class="step" id="validate_wizard-step-0">
                             <legend class="hide">[jeap]最终协议…</legend>
                             <div class="formSep form-group">
@@ -238,6 +255,7 @@
 
 
     <script src="/jeap/install/css/jquery.min.js"></script>
+    <script src="/jeap/statics/js/common/jquery-form-2.33.js"></script>
     <!-- validation -->
     <script src="/jeap/install/css/jquery.validate.min.js"></script>
     <!-- wizard -->
