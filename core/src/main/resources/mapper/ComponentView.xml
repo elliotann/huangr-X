@@ -39,6 +39,9 @@
     <update id="updateByCondition">
         UPDATE t_component
         SET install_state = #{install_state}
+        <if test="enable_state!=null">
+
+        </if>
         WHERE componentid = #{componentId}
 
     </update>
