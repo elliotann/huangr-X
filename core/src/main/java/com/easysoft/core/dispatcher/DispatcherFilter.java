@@ -50,7 +50,7 @@ public class DispatcherFilter implements Filter {
                 chain.doFilter(httpRequest, httpResponse);
                 return;
             }
-            if (!uri.startsWith("/install") && "NO".equals(ParamSetting.INSTALL_LOCK.toUpperCase())) {
+            /*if (!uri.startsWith("/install") && "NO".equals(ParamSetting.INSTALL_LOCK.toUpperCase())) {
                 httpResponse.sendRedirect(httpRequest.getContextPath() + "/install");
                 return;
             }
@@ -58,7 +58,7 @@ public class DispatcherFilter implements Filter {
                     (!uri.startsWith("/install/images")) && (ParamSetting.INSTALL_LOCK.toUpperCase().equals("YES"))){
                 httpResponse.getWriter().write("如要重新安装，请先删除/install/install.lock文件，并重起web容器");
                 return;
-            }
+            }*/
             if ("2".equals(ParamSetting.RUNMODE))
                 SaasEsfContextIniter.init(httpRequest, httpResponse);
             else {

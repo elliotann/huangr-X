@@ -39,11 +39,11 @@
         <!-- 注解方式配置 -->
         <property name="packagesToScan">
             <list>
-                <value>com.easysoft.component.oa.entity</value>
+                <!--<value>com.easysoft.component.oa.entity</value>
                 <value>com.easysoft.framework.component</value>
                 <value>com.easysoft.member.model</value>
                 <value>com.easysoft.core.model</value>
-                <value>com.easysoft.member.backend.model</value>
+                <value>com.easysoft.member.backend.model</value>-->
             </list>
         </property>
     </bean>

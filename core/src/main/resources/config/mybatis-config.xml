@@ -9,6 +9,8 @@
         <typeAlias type="com.easysoft.member.backend.model.RoleAuth" alias="RoleAuth"/>
         <typeAlias type="com.easysoft.member.backend.model.UserRole" alias="UserRole"/>
         <typeAlias type="com.easysoft.member.backend.model.OperationBtn" alias="OperationBtn"/>
+        <typeAlias type="com.easysoft.framework.component.ComponentView" alias="Component"/>
+        <typeAlias type="com.easysoft.member.backend.model.Menu" alias="Menu"/>
     </typeAliases>
     <!--<plugins>
         <plugin interceptor="com.easysoft.jeap.framework.db.PageInterceptor">

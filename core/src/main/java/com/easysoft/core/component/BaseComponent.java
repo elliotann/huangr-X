@@ -9,6 +9,7 @@ public class BaseComponent
 {
   public void install()
   {
+
   }
 
   public void unInstall()

@@ -1,7 +1,9 @@
 package com.easysoft.core.dao;
 
-import com.easysoft.core.common.dao.hibernate.IGenericDAO;
+import com.easysoft.core.common.dao.IGenericDao;
 import com.easysoft.framework.component.ComponentView;
+
+import java.util.Map;
 
 /**
  * User: andy
@@ -10,5 +12,7 @@ import com.easysoft.framework.component.ComponentView;
  *
  * @since:
  */
-public interface IComponentDao extends IGenericDAO<ComponentView> {
+public interface IComponentDao extends IGenericDao<ComponentView,Integer> {
+    public ComponentView queryComponentByCompId(String componentId);
+    public void updateByCondition(Map<String,Object> params);
 }
