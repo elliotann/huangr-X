@@ -44,8 +44,8 @@ public class SolutionInstaller implements ISolutionInstaller {
     @Transactional(propagation = Propagation.REQUIRED)
     public void install(Integer userid, Integer siteid, String productId) {
 
-        // 将对应的productid写入到eop_site表的productid字段中
-        if (!productId.toUpperCase().equals("BASE")
+        // 将对应的productid写入到jeap_site表的productid字段中
+        if (!productId.toUpperCase().equals("core")
                 && !productId.startsWith("temp_")) {
             siteManager.setSiteProduct(userid, siteid, productId);
         }

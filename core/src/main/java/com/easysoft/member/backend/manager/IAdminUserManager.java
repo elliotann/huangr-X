@@ -10,7 +10,7 @@ import java.util.Map;
  * 管理员管理接口
  * @author andy
  */
-public interface IAdminUserManager extends IGenericService<AdminUser>{
+public interface IAdminUserManager {
 	
 
 

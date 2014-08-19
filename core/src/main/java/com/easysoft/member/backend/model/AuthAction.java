@@ -7,8 +7,7 @@ import javax.persistence.*;
  * @author andy
  * @since : 1.0
  */
-@Entity
-@Table(name="t_auth_action")
+
 public class AuthAction {
 	private int actid;
 	private String name;

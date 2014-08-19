@@ -59,7 +59,7 @@ public class InstallManager {
 		userManager.login(username, password);
 		  
 		Site site = new Site();
-		site.setSitename("eshop");
+		site.setSitename("jeap");
 		site.setThemeid(1);
 		site.setAdminthemeid(1);
 		site.setSitename(productid + "新建站点");
@@ -72,7 +72,7 @@ public class InstallManager {
 		Integer siteid = siteManager.add(site,domain);
 		
 		solutionInstaller.install(userid,siteid, productid);
-		solutionInstaller.install(userid, siteid, "base");
+		//solutionInstaller.install(userid, siteid, "base");
 	}
 	
 

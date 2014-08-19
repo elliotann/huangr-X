@@ -15,15 +15,18 @@
         <id property="founder" column="founder"/>
         <id property="siteid" column="siteid"/>
     </resultMap>
-    <insert id="save" parameterType="AdminUser">
-        insert t_adminuser (username,password,status,realname,email,userno,userdept,remark,dateline,founder,siteid)
-         values (#{username},#{password},#{status},#{realName},#{email},#{userno},#{userdept},#{remark},#{dateline},#{founder},#{siteid})
+    <insert id="save" parameterType="AdminUser" useGeneratedKeys="true" keyProperty="userid">
+        insert t_adminuser (username,password,state,realname,email,userno,userdept,remark,dateline,founder,siteid)
+         values (#{username},#{password},#{state},#{realname},#{email},#{userno},#{userdept},#{remark},#{dateline},#{founder},#{siteid})
     </insert>
     <select id="queryForPage" parameterType="AdminUser" resultMap="adminUserMap">
         select * from t_adminuser
     </select>
     <select id="queryUserByName" resultMap="adminUserMap">
         select * from t_adminuser where username=#{username}
+        <if test="userId!=0">
+            ,and userid!=#{userId}
+        </if>
     </select>
     <select id="queryById" resultMap="adminUserMap">
         select * from t_adminuser where userid=#{id}
