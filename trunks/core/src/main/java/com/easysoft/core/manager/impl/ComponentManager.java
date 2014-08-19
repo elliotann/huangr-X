@@ -15,7 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Component("componentManager")
 public class ComponentManager extends BaseSupport
@@ -124,7 +126,10 @@ public class ComponentManager extends BaseSupport
                     componentDao.save(temp);
                 }
                 else {
-                    componentDao.updateBySqlString("update t_component set install_state=1 where componentid='"+componentView.getComponentid()+"'");
+                    Map<String,Object> params = new HashMap<String,Object>();
+                    params.put("install_state",1);
+                    params.put("componentId",componentView.getComponentid());
+                    componentDao.updateByCondition(params);
 
                 }
             }
@@ -134,8 +139,7 @@ public class ComponentManager extends BaseSupport
     }
 
     private boolean isInDb(String componentid){
-        String hql = "from ComponentView where componentid=?";
-        return componentDao.queryForList(hql,new Object[] { componentid }).size()>0;
+        return componentDao.queryComponentByCompId(componentid)!=null;
     }
 
     public void unInstall(String componentid){
@@ -152,7 +156,10 @@ public class ComponentManager extends BaseSupport
                 temp.setInstall_state(0);
                 componentDao.save( temp);
             } else {
-                componentDao.executeSql("update t_component set install_state=0 where componentid=?", new Object[] { componentView.getComponentid() });
+                Map<String,Object> params = new HashMap<String,Object>();
+                params.put("install_state",0);
+                params.put("componentId",componentView.getComponentid());
+                componentDao.updateByCondition(params);
 
             }
         }
@@ -190,7 +197,7 @@ public class ComponentManager extends BaseSupport
         }
 
         String sql = "update t_component set enable_state=1 where componentid=?";
-        componentDao.executeSql(sql, new Object[]{componentid});
+        //componentDao.executeSql(sql, new Object[]{componentid});
 
 
         if (this.logger.isDebugEnabled())
@@ -248,7 +255,6 @@ public class ComponentManager extends BaseSupport
 
     private List<ComponentView> getDbList()
     {
-        String hql = "from ComponentView ";
-        return componentDao.queryForList(hql,null);
+        return componentDao.queryForList();
     }
 }
