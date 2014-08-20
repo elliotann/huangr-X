@@ -1,5 +1,5 @@
 package ${bussiPackage}.${entityPackage}.service.impl;
-
+import  ${bussiPackage}.${entityPackage}.dao.I${entityName}Dao;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +16,13 @@ public class ${entityName}ServiceImpl implements ${entityName}ServiceI {
     private I${entityName}Dao ${entityName?uncap_first}Dao;
 
  	
- 	public void save(${entityName} ${entityName?uncap_first}) {
+ 	public void save(${entityName}Entity ${entityName?uncap_first}) {
         ${entityName?uncap_first}Dao.save(${entityName?uncap_first});
  	}
-    public void update(${entityName} ${entityName?uncap_first}){
+    public void update(${entityName}Entity ${entityName?uncap_first}){
         ${entityName?uncap_first}Dao.update(${entityName?uncap_first});
     }
-    public List<${entityName}> queryForList(){
+    public List<${entityName}Entity> queryForList(){
         return ${entityName?uncap_first}Dao.queryForList();
     }
 }
