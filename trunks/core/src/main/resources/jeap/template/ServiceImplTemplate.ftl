@@ -17,8 +17,12 @@ public class ${entityName}ServiceImpl implements ${entityName}ServiceI {
 
  	
  	public void save(${entityName} ${entityName?uncap_first}) {
-
+        ${entityName?uncap_first}Dao.save(${entityName?uncap_first});
  	}
- 	
-
+    public void update(${entityName} ${entityName?uncap_first}){
+        ${entityName?uncap_first}Dao.update(${entityName?uncap_first});
+    }
+    public List<${entityName}> queryForList(){
+        return ${entityName?uncap_first}Dao.queryForList();
+    }
 }
