@@ -7,15 +7,8 @@
     </#list>
     </resultMap>
     <insert id="save" parameterType="${entityName}" useGeneratedKeys="true" keyProperty="id">
-        insert ${tableName} (
-            <#list fieldMeta?keys as columnKey>
-                ${fieldMeta[columnKey]},
-            </#list>
-        )
-        values (
-            <#list columns as po>
-                ${r"#{"+po.fieldName+"}"}<#if po_has_next>,</#if>
-            </#list>
+        insert ${tableName} (<#list fieldMeta?keys as columnKey>${fieldMeta[columnKey]}<#if columnKey_has_next>,</#if></#list>)
+        values (<#list columns as po>${r"#{"+po.fieldName+"}"}<#if po_has_next>,</#if></#list>
         )
     </insert>
     <select id="queryForList" resultMap="${entityName?uncap_first}Map">
