@@ -1,21 +1,17 @@
-package com.easysoft.core.manager.impl;
+package com.easysoft.component.form.manager.impl;
 
 import com.easysoft.core.common.service.impl.GenericService;
-import com.easysoft.core.dao.IFormDao;
-import com.easysoft.core.dao.IFormFieldDao;
+import com.easysoft.component.form.dao.IFormDao;
+import com.easysoft.component.form.dao.IFormFieldDao;
 import com.easysoft.core.dispatcher.core.freemarker.FreeMarkerParser;
-import com.easysoft.core.manager.IFormManager;
-import com.easysoft.core.model.FormEntity;
-import com.easysoft.core.model.FormField;
+import com.easysoft.component.form.manager.IFormManager;
+import com.easysoft.component.form.model.FormEntity;
+import com.easysoft.component.form.model.FormField;
 import com.easysoft.core.solution.factory.DBSolutionFactory;
 import com.easysoft.framework.db.dbsolution.IDBSolution;
-import com.easysoft.framework.utils.StringUtil;
-import freemarker.template.Template;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.StringWriter;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,38 +32,50 @@ public class FormManagerImpl extends GenericService<FormEntity> implements IForm
     private IFormFieldDao formFieldDao;
     @Override
     public List list() {
-        return formDao.queryForList("from FormEntity e",null);
+        return formDao.queryForList();
     }
 
     @Override
     public void addForm(FormEntity entity) {
-        formDao.saveOrUpdate(entity);
+        if(entity.getId()!=null&&entity.getId()!=0){
+            formDao.update(entity);
+        }
+
+        else{
+            formDao.save(entity);
+        }
         if(entity.getId()!=null)
             formFieldDao.delByFormId(entity.getId());
         for(FormField field : entity.getFields()){
             field.setForm(entity);
-            formFieldDao.saveOrUpdate(field);
+            if(field.getId()!=null&&field.getId()!=0){
+                formFieldDao.update(field);
+            }else{
+                formFieldDao.save(field);
+            }
+
         }
     }
 
     @Override
     public FormEntity getFormById(Integer id) {
-        FormEntity result = formDao.get(id);
+        FormEntity result = formDao.queryById(id);
         if(result==null) return null;
-        String hql = "from FormField f where f.form.id=?";
-        Object[] params = new Object[]{id};
-        List<FormField> fields = formFieldDao.queryForList(hql,params);
+        Map<String,Object> params = new HashMap<String, Object>();
+        params.put("formId",id);
+        List<FormField> fields = formFieldDao.queryForList(params);
         result.setFields(fields);
         return result;
     }
 
     @Override
     public FormEntity getFormById(Integer id,String type) {
-        FormEntity result = formDao.get(id);
+        FormEntity result = formDao.queryById(id);
         if(result==null) return null;
-        String hql = "from FormField f where f.form.id=?";
-        Object[] params = new Object[]{id};
-        List<FormField> fields = formFieldDao.queryForList(hql,params);
+
+        Map<String,Object> params = new HashMap<String, Object>();
+        params.put("formId",id);
+        List<FormField> fields = formFieldDao.queryForList(params);
         List<FormField> fieldsResult = new ArrayList<FormField>();
         if("form".equals(type)){
             for(FormField field : fields){
@@ -87,9 +95,9 @@ public class FormManagerImpl extends GenericService<FormEntity> implements IForm
     public void delFormById(Integer id) {
         FormEntity result = getFormById(id);
         for(FormField field : result.getFields()){
-            formFieldDao.delete(field);
+            formFieldDao.deleteById(field.getId());
         }
-        formDao.delete(result);
+        formDao.deleteById(id);
     }
 
     @Override
@@ -107,6 +115,6 @@ public class FormManagerImpl extends GenericService<FormEntity> implements IForm
         IDBSolution dbsolution = DBSolutionFactory.getDBSolution();
         dbsolution.dbImport(xml);
         formEntity.setIsSynDB("1");
-        this.updateEntitie(formEntity);
+        formDao.update(formEntity);
     }
 }

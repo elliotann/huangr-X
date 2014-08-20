@@ -1,6 +1,6 @@
 package com.easysoft.core.dao;
 
-import com.easysoft.core.common.dao.hibernate.IGenericDAO;
+import com.easysoft.core.common.dao.IGenericDao;
 import com.easysoft.core.model.JEAPUser;
 
 /**
@@ -10,5 +10,5 @@ import com.easysoft.core.model.JEAPUser;
  * Time: 下午10:31
  * To change this template use File | Settings | File Templates.
  */
-public interface IUserDao extends IGenericDAO<JEAPUser> {
+public interface IUserDao extends IGenericDao<JEAPUser,Integer> {
 }

@@ -211,11 +211,9 @@ public final class FreeMarkerParser {
 			pathPrefix = pathPrefix== null?"":pathPrefix;
 			
 			if(pageFolder==null) {//默认使用挂件所在文件夹
-				//System.out.println(" folder null use "+ this.clazz.getName() );
 				cfg.setClassForTemplateLoading(this.clazz, pathPrefix);
 				}
 			else{
-				//System.out.println(" folder not null use "+ pageFolder);
 			  cfg.setServletContextForTemplateLoading(ThreadContextHolder.getHttpRequest().getSession().getServletContext(), pageFolder);
 			}
 			cfg.setObjectWrapper(new DefaultObjectWrapper());			

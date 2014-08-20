@@ -16,59 +16,31 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.SequenceGenerator;
+import com.easysoft.core.common.entity.IdEntity;
 
-/**   
- * @Title: Entity
+/**
  * @Description: ${ftl_description}
- * @author onlineGenerator
+ * @author andy
  * @date ${ftl_create_time}
- * @version V1.0   
+ * @since : 1.0
  *
  */
-@Entity
-@Table(name = "${tableName}", schema = "")
-<#if cgformConfig.formEntity.pkGeneratorPolicy?if_exists?html == "SEQUENCE">
-@SequenceGenerator(name="SEQ_GEN", sequenceName="${cgformConfig.formEntity.jformPkSequence}")
-</#if>
-@SuppressWarnings("serial")
-public class ${entityName}Entity implements java.io.Serializable {
+public class ${entityName}Entity extends IdEntity {
 	<#list columns as po>
+    <#if po.fieldName!="id">
 	/**${po.display}*/
 	private ${po.type} ${po.fieldName};
+    </#if>
 	</#list>
-	
 	<#list columns as po>
-	/**
-	 *方法: 取得${po.type}
-	 *@return: ${po.type}  ${po.display}
-	 */
-	<#if po.fieldName == jeap_table_id>
-	<#if cgformConfig.formEntity.pkGeneratorPolicy?if_exists?html == "UUID">
-	@Id
-	@GeneratedValue(generator = "paymentableGenerator")
-	@GenericGenerator(name = "paymentableGenerator", strategy = "uuid")
-	<#elseif cgformConfig.formEntity.jformPkType?if_exists?html == "NATIVE">
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	<#elseif cgformConfig.formEntity.pkGeneratorPolicy?if_exists?html == "SEQUENCE">
-	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="SEQ_GEN")  
-	<#else>
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
+	<#if po.fieldName != jeap_table_id>
+    public ${po.type} get${po.fieldName?cap_first}(){
+        return this.${po.fieldName};
+    }
+    public void set${po.fieldName?cap_first}(${po.type} ${po.fieldName}){
+        this.${po.fieldName} = ${po.fieldName};
+    }
 	</#if>
-	</#if>
-	@Column(name ="${fieldMeta[po.fieldName]}",nullable=<#if po.nullable>true<#else>false</#if>)
-	public ${po.type} get${po.fieldName?cap_first}(){
-		return this.${po.fieldName};
-	}
 
-	/**
-	 *方法: 设置${po.type}
-	 *@param: ${po.type}  ${po.display}
-	 */
-	public void set${po.fieldName?cap_first}(${po.type} ${po.fieldName}){
-		this.${po.fieldName} = ${po.fieldName};
-	}
 	</#list>
 }

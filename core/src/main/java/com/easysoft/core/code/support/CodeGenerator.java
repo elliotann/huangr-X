@@ -5,7 +5,7 @@ import com.easysoft.core.code.ICallBack;
 import com.easysoft.core.code.pojo.CreateFileProperty;
 import com.easysoft.core.code.pojo.GenerateEntity;
 import com.easysoft.core.code.support.factory.CodeFactory;
-import com.easysoft.core.model.FormField;
+import com.easysoft.component.form.model.FormField;
 import com.easysoft.core.utils.CodeResourceUtil;
 import com.easysoft.core.utils.FtlDef;
 import com.easysoft.framework.utils.DateUtil;
@@ -82,6 +82,8 @@ public class CodeGenerator implements ICallBack {
         }
 
         if (createFileProperty.isServiceFlag()) {
+            codeFactory.invoke("MybatisMappingTemplate.ftl", "mapper");
+            codeFactory.invoke("IDaoTemplate.ftl", "dao");
             codeFactory.invoke("ServiceITemplate.ftl", "service");
             codeFactory.invoke("ServiceImplTemplate.ftl", "serviceImpl");
         }
@@ -98,6 +100,7 @@ public class CodeGenerator implements ICallBack {
     public Map<String, Object> execute(){
         Map data = new HashMap();
         Map fieldMeta = new HashMap();
+
 
         data.put("bussiPackage", CodeResourceUtil.bussiPackage);
 
@@ -147,6 +150,7 @@ public class CodeGenerator implements ICallBack {
                 String fieldNameV = StringUtil.formatDBFieldName(fieldName);
                 cf.setFieldName(fieldNameV);
                 fieldMeta.put(fieldNameV, fieldName.toUpperCase());
+
             }
             List pageColumns = new ArrayList();
             for (FormField cf : columns) {

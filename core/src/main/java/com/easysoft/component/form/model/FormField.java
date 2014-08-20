@@ -1,6 +1,7 @@
-package com.easysoft.core.model;
+package com.easysoft.component.form.model;
 
 import com.easysoft.core.annotation.JsonInvisible;
+import com.easysoft.core.common.entity.IdEntity;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,10 +13,9 @@ import java.io.Serializable;
  *
  * @since:
  */
-@Entity
-@Table(name = "t_form_field")
-public class FormField implements Serializable {
-    private Integer id;
+
+public class FormField extends IdEntity {
+
     /*================数据库字段===================*/
     private String fieldName;
     private String labelName;
@@ -48,18 +48,8 @@ public class FormField implements Serializable {
     private String group;
 
     private FormEntity form;
+    private Integer formId;
 
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="id")
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
     @JsonInvisible("List")
     @ManyToOne
     @JoinColumn(name = "form_id")
@@ -228,5 +218,13 @@ public class FormField implements Serializable {
     @Transient
     public String getDisplay() {
         return labelName;
+    }
+
+    public Integer getFormId() {
+        return formId;
+    }
+
+    public void setFormId(Integer formId) {
+        this.formId = formId;
     }
 }

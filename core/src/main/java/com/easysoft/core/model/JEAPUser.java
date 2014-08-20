@@ -1,5 +1,7 @@
 package com.easysoft.core.model;
 
+import com.easysoft.core.common.entity.IdEntity;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -8,11 +10,10 @@ import java.io.Serializable;
  * @author andy
  * @since : 1.0
  */
-@Entity
-@Table(name = "JEAP_USER")
-public class JEAPUser implements Serializable{
 
-	private Integer id;
+public class JEAPUser extends IdEntity{
+
+
 	private String username;
 	private String companyname;
 	private String password;
@@ -37,16 +38,7 @@ public class JEAPUser implements Serializable{
 	public void setDefaultsiteid(Integer defaultsiteid) {
 		this.defaultsiteid = defaultsiteid;
 	}
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="id")
-	public Integer getId() {
-		return id;
-	}
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	public String getUsername() {
 		return username;

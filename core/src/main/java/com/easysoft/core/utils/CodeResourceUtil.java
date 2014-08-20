@@ -24,7 +24,7 @@ public class CodeResourceUtil {
     static{
         String bussiPackageUrl = bussiPackage.replace(".", "/");
         CODEPATH = source_root_package + "/" + bussiPackageUrl + "/";
-        JEAP_GENERATE_TABLE_ID = "sid";
+        JEAP_GENERATE_TABLE_ID = "id";
         web_root_package = "src/main/webapp";
         web_root_package = web_root_package.replace(".", "/");
         JSPPATH = web_root_package  + "/" + webPackage + "/";

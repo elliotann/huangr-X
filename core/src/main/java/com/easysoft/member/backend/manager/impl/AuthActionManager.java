@@ -205,54 +205,7 @@ public class AuthActionManager extends GenericService<AuthAction> implements IAu
                 roleAuthResult.setOperids(operation);
                 roleAuthManager.update(roleAuthResult);
             }
-            /*List<RoleAuth> roleAuths = this.findHql("from RoleAuth ra where ra.role.id=? and ra.authType=?",roleId,null);
-            FunAndOper haveFun = null;
-            //检验角色是否有此功能
-            for(RoleAuth roleAuth : roleAuths){
-                List<FunAndOper> funAndOpers = null;//this.findHql("from FunAndOper f where f.menu.id=? and f.id=?",menuId,roleAuth.getFunOrDataId());
-                if(funAndOpers.size()>0){
-                    haveFun = funAndOpers.get(0);
-                    break;
-                }
-            }*/
-            FunAndOper haveFun = null;
-            if(haveFun==null){
-                if(!isCheck&&(operId!=null&&operId!=0)) return;
-                FunAndOper funAndOper = new FunAndOper();
-                Menu menu = new Menu();
-                menu.setId(menuId);
-                funAndOper.setMenu(menu);
-                funAndOper.setOperation(operId+"");
-                funAndOperManager.save(funAndOper);
 
-                RoleAuth roleAuth = new RoleAuth();
-                Role role = new Role();
-                role.setRoleid(roleId);
-                /*roleAuth.setRole(role);
-                roleAuth.setAuthType(RoleAuth.AuthType.FUNCTION);
-                roleAuth.setFunOrDataId(funAndOper.getId());
-                roleAuthManager.save(roleAuth);*/
-            }else{
-                if(isCheck){
-                    haveFun.setOperation(haveFun.getOperation()+","+operId);
-                }else{
-                    String operation = "";
-                    String[] operations = haveFun.getOperation().split(",");
-                    for(String opt:operations){
-
-                        if(!opt.equals(operId+"")){
-
-                            operation += opt +",";
-
-
-                        }
-                    }
-                    if(operation.endsWith(",")) operation = operation.substring(0,operation.length()-1);
-                    haveFun.setOperation(operation);
-                }
-
-                funAndOperManager.updateEntitie(haveFun);
-            }
         }
 
     }
