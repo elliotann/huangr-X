@@ -37,6 +37,7 @@ public class FormDesignerController extends BaseController {
     public ModelAndView toDesigner(){
         return new ModelAndView("admin/component/form/addForm");
     }
+
     @RequestMapping(params = {"delete"})
     @ResponseBody
     public AjaxJson delete(Integer id) throws Exception {
