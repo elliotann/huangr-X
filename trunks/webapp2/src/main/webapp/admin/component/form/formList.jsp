@@ -56,8 +56,8 @@
         }
         $.ligerDialog.open({
             name:'openDia',
-            height:600,
-            width: 900,
+            height:400,
+            width: 600,
             title : '修改表单',
             url: 'designer.do?modify&id='+row.id,
             showMax: false,
