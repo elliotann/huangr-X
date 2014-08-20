@@ -152,6 +152,9 @@ public class AuthController extends BaseController {
         AjaxJson result = new AjaxJson();
         List<OperationBtn> operationBtns = permissionManager.getOperationBtnsByMenuId(id);
         String json = "";
+        if(operationBtns==null){
+            return json;
+        }
         for(OperationBtn btn : operationBtns){
             boolean isChecked = permissionManager.hasOperationByRoleAndMenu(roleId,id,btn.getId()+"");
             if(isChecked){

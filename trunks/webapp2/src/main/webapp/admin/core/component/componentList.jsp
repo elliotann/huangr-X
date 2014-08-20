@@ -90,7 +90,7 @@ function request(requrl){
 		url:requrl+"&ajax=yes",
 		dataType:"json",
 		success:function(result){
-			if(result.result==1){
+			if(result.success){
 				alert("操作成功"); 
 				location.reload();
 			}else{
@@ -121,11 +121,11 @@ $(function(){
 	
 	
 	$(".start").click(function(){
-		request("component.do?start.do&componentid="+$(this).attr("componentid") );
+		request("component.do?start&componentid="+$(this).attr("componentid") );
 	});
 	$(".stop").click(function(){
 		if(confirm( "确认停用此组件吗?" )){
-			request("component!stop.do?componentid="+$(this).attr("componentid") );
+			request("component.do?stop&componentid="+$(this).attr("componentid") );
 		}
 		
 	});
