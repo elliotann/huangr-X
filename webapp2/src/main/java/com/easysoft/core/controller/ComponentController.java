@@ -49,6 +49,22 @@ public class ComponentController extends BaseController {
         }
         return result;
     }
+    @RequestMapping(params = {"stop"})
+    @ResponseBody
+    public AjaxJson stop(String componentid){
+        AjaxJson result = new AjaxJson();
+        try{
+
+            this.componentManager.stop(componentid);
+            result.setMsg("停用成功");
+
+        } catch (RuntimeException e) {
+            this.logger.error("停用组件[" + componentid + "]", e);
+            result.setMsg(e.getMessage());
+            result.setSuccess(false);
+        }
+        return result;
+    }
     @RequestMapping(params = {"install"})
     @ResponseBody
     public AjaxJson install(String componentid)

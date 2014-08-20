@@ -19,6 +19,7 @@ a:hover {
 .header{
     min-width: 980px;
     border: solid #2B8DB7 1px;
+    min-height: 10px;
 }
 .header {
     padding: 20px 10px 11px;
