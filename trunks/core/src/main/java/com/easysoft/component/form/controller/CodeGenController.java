@@ -1,12 +1,12 @@
-package com.easysoft.core.controller;
+package com.easysoft.component.form.controller;
 
 import com.easysoft.core.code.pojo.CreateFileProperty;
 import com.easysoft.core.code.pojo.GenerateEntity;
 import com.easysoft.core.code.support.CodeGenerator;
 import com.easysoft.core.common.controller.BaseController;
 import com.easysoft.core.common.vo.json.AjaxJson;
-import com.easysoft.core.manager.IFormManager;
-import com.easysoft.core.model.FormEntity;
+import com.easysoft.component.form.manager.IFormManager;
+import com.easysoft.component.form.model.FormEntity;
 import com.easysoft.framework.utils.StringUtil;
 import freemarker.template.TemplateException;
 import org.apache.commons.logging.Log;
@@ -43,7 +43,7 @@ public class CodeGenController extends BaseController {
         Map<String,Object> params = new HashMap<String,Object>();
         params.put("formEntity",formEntity);
         params.put("entityName", StringUtil.formatDBName(formEntity.getTableName()));
-        return new ModelAndView("core/admin/code/add",params);
+        return new ModelAndView("admin/component/form/toGenCode",params);
     }
 
     @RequestMapping(params = {"generate"})
@@ -60,10 +60,10 @@ public class CodeGenController extends BaseController {
             generator.generateToFile();
         } catch (TemplateException e) {
             result.setSuccess(false);
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         } catch (IOException e) {
             result.setSuccess(false);
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
 
         return result;

@@ -6,6 +6,7 @@ import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author : andy.huang
@@ -30,6 +31,11 @@ public class MybatisGenericDao<T,PK extends Serializable> extends SqlMapClientDa
 
     @Override
     public List<T> queryForList() {
+        return null;
+    }
+
+    @Override
+    public List<T> queryForList(Map<String, Object> params) {
         return null;
     }
 

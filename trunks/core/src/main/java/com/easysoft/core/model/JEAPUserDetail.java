@@ -1,30 +1,22 @@
 package com.easysoft.core.model;
 
+import com.easysoft.core.common.entity.IdEntity;
+
 import javax.persistence.*;
 
 /**
  * @author andy
  * @since : 1.0
  */
-@Entity
-@Table(name="jeap_userdetail")
-@PrimaryKeyJoinColumn(name = "id")
-public class JEAPUserDetail {
-	private Integer id;
+
+public class JEAPUserDetail extends IdEntity{
+
     private JEAPUser jeapUser;
 	private String bussinessscope;
 	private String regaddress;
 	private Long regdate;
 	private Integer corpscope;
 	private String corpdescript;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	public String getBussinessscope() {
 		return bussinessscope;

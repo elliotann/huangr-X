@@ -1,5 +1,6 @@
-package com.easysoft.core.model;
+package com.easysoft.component.form.model;
 
+import com.easysoft.core.common.entity.IdEntity;
 import com.easysoft.framework.utils.DateUtil;
 
 import javax.persistence.*;
@@ -14,10 +15,8 @@ import java.util.List;
  *
  * @since:
  */
-@Entity
-@Table(name = "t_form")
-public class FormEntity implements Serializable {
-    private Integer id;
+public class FormEntity extends IdEntity {
+
     public String tableName;
     public String tableTitle;
     private String isSynDB="0";//是否同步数据库
@@ -31,18 +30,6 @@ public class FormEntity implements Serializable {
      */
     private String pkGeneratorPolicy;
 
-
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="id")
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
     @Column(name="tablename")
     public String getTableName() {
         return tableName;

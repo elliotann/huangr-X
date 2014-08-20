@@ -91,8 +91,9 @@
 		<command>create</command>
 		<table>t_role_auth</table>
 		<field><name>id</name><type>int</type><size>11</size><option>11</option></field>
-		<field><name>roleid</name><type>int</type><size>11</size><option>00</option></field>
-		<field><name>authid</name><type>int</type><size>11</size><option>00</option></field>
+		<field><name>fun_id</name><type>int</type><size>11</size><option>00</option></field>
+        <field><name>role_id</name><type>int</type><size>11</size><option>00</option></field>
+        <field><name>operids</name><type>varchar</type><size>255</size><option>00</option></field>
 	</action>
 	<action>
 		<command>create</command>

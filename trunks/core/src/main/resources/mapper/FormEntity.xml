@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.easysoft.component.form.dao.IFormDao">
+    <resultMap id="formMap" type="FormEntity">
+        <id property="id" column="id"/>
+        <id property="tableName" column="tableName"/>
+        <id property="tableTitle" column="tableTitle"/>
+        <id property="isSynDB" column="is_syndb"/>
+        <id property="version" column="version"/>
+        <id property="formType" column="form_type"/>
+        <id property="createBy" column="create_by"/>
+        <id property="pkGeneratorPolicy" column="pk_generator_policy"/>
+    </resultMap>
+    <insert id="save" parameterType="FormEntity" useGeneratedKeys="true" keyProperty="id">
+        insert t_form (tableName,tableTitle,is_syndb,version,form_type,pk_generator_policy)
+        values (#{tableName},#{tableTitle},#{isSynDB},#{version},#{formType},#{pkGeneratorPolicy})
+    </insert>
+    <update id="update" parameterType="AdminUser">
+        UPDATE t_form
+        SET tableName = #{tableName},
+        tableTitle = #{tableTitle},
+        is_syndb = #{isSynDB},
+        version = #{version},
+        form_type = #{formType},
+        pk_generator_policy = #{pkGeneratorPolicy}
+        WHERE id = #{id}
+    </update>
+    <select id="queryForList" resultMap="formMap">
+        select * from t_form
+    </select>
+    <select id="queryById" resultMap="formMap">
+        select * from t_form where id=#{id}
+    </select>
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from t_form where id=#{id}
+    </delete>
+</mapper>

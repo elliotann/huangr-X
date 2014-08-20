@@ -1,11 +1,11 @@
-package com.easysoft.core.controller;
+package com.easysoft.component.form.controller;
 
 import com.easysoft.core.common.controller.BaseController;
 import com.easysoft.core.common.vo.json.AjaxJson;
 import com.easysoft.core.common.vo.json.DataGridReturn;
-import com.easysoft.core.manager.IFormManager;
-import com.easysoft.core.model.FormEntity;
-import com.easysoft.core.model.FormField;
+import com.easysoft.component.form.manager.IFormManager;
+import com.easysoft.component.form.model.FormEntity;
+import com.easysoft.component.form.model.FormField;
 import com.easysoft.framework.utils.JsonUtils;
 import com.easysoft.framework.utils.StringUtil;
 import com.easysoft.member.backend.manager.impl.UserServiceFactory;
@@ -31,11 +31,11 @@ public class FormDesignerController extends BaseController {
     private IFormManager formManager;
     @RequestMapping(params = {"list"})
     public ModelAndView list(){
-        return new ModelAndView("form/config/list");
+        return new ModelAndView("admin/component/form/formList");
     }
     @RequestMapping(params = {"toDesigner"})
     public ModelAndView toDesigner(){
-        return new ModelAndView("form/config/addForm");
+        return new ModelAndView("admin/component/form/addForm");
     }
     @RequestMapping(params = {"delete"})
     @ResponseBody
@@ -134,6 +134,6 @@ public class FormDesignerController extends BaseController {
         Map<String,Object> map = new HashMap<String, Object>();
         FormEntity form = formManager.getFormById(id);
         map.put("form",form);
-        return new ModelAndView("form/config/editForm",map);
+        return new ModelAndView("admin/component/form/editForm",map);
     }
 }

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.easysoft.core.dao.IUserDao">
+    <resultMap id="jeapUserMap" type="JEAPUser">
+        <id property="id" column="id"/>
+        <id property="username" column="username"/>
+        <id property="companyname" column="companyname"/>
+        <id property="password" column="password"/>
+        <id property="address" column="address"/>
+        <id property="legalrepresentative" column="legalrepresentative"/>
+        <id property="linkman" column="linkman"/>
+        <id property="tel" column="tel"/>
+        <id property="mobile" column="mobile"/>
+        <id property="email" column="email"/>
+        <id property="logofile" column="logofile"/>
+        <id property="licensefile" column="licensefile"/>
+        <id property="defaultsiteid" column="defaultsiteid"/>
+        <id property="usertype" column="usertype"/>
+    </resultMap>
+    <insert id="save" parameterType="JEAPUser" useGeneratedKeys="true" keyProperty="id">
+        insert jeap_user (username,companyname,password,address,legalrepresentative,linkman,tel,mobile,email,logofile,licensefile,defaultsiteid,usertype)
+         values (#{username},#{companyname},#{password},#{address},#{legalrepresentative},#{linkman},#{tel},#{mobile},#{email},#{logofile},#{licensefile},#{defaultsiteid},#{usertype})
+    </insert>
+    <select id="queryById" resultMap="jeapUserMap">
+        select * from jeap_user where id=#{id}
+    </select>
+   <!-- <select id="queryAuthByRoleId" resultMap="roleAuthMap">
+        select * from t_role_auth where role_id=#{id}
+    </select>
+    <select id="queryAuthByRoleIdAndFun" resultMap="roleAuthMap">
+        select * from t_role_auth where role_id=#{roleId} and fun_id=#{funId}
+    </select>
+
+    <update id="update" parameterType="RoleAuth">
+        UPDATE t_role_auth
+        SET operids = #{operids}
+        WHERE id = #{id}
+    </update>
+    <delete id="deleteById">
+        delete from t_role where roleid=#{id}
+    </delete>-->
+
+</mapper>

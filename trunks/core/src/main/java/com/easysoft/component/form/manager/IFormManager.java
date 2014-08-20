@@ -1,7 +1,7 @@
-package com.easysoft.core.manager;
+package com.easysoft.component.form.manager;
 
 import com.easysoft.core.common.service.IGenericService;
-import com.easysoft.core.model.FormEntity;
+import com.easysoft.component.form.model.FormEntity;
 
 import java.util.List;
 

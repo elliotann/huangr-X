@@ -196,9 +196,10 @@ public class ComponentManager extends BaseSupport
             WidgetContext.putWidgetState(widgetid, Boolean.valueOf(true));
         }
 
-        String sql = "update t_component set enable_state=1 where componentid=?";
+
         Map<String,Object> params = new HashMap<String, Object>();
         params.put("enable_state",1);
+        params.put("install_state",null);
         params.put("componentId",componentView.getComponentid());
         componentDao.updateByCondition(params);
 
@@ -232,9 +233,12 @@ public class ComponentManager extends BaseSupport
             String widgetid = widgetView.getId();
             WidgetContext.putWidgetState(widgetid, Boolean.valueOf(false));
         }
+        Map<String,Object> params = new HashMap<String, Object>();
+        params.put("enable_state",0);
+        params.put("install_state",null);
+        params.put("componentId",componentView.getComponentid());
+        componentDao.updateByCondition(params);
 
-        String sql = "update component set enable_state=0 where componentid=?";
-        this.baseDaoSupport.execute(sql, new Object[]{componentid});
 
         if (this.logger.isDebugEnabled())
             this.logger.debug("stop component[" + componentid + "] complete");

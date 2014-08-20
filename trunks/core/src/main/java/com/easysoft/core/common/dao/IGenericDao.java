@@ -2,6 +2,7 @@ package com.easysoft.core.common.dao;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 新通用DAO接口
@@ -20,7 +21,11 @@ public interface IGenericDao<T,PK extends Serializable> {
      * @return
      */
     public List<T> queryForList();
-
+    /**
+     * 查询列表
+     * @return
+     */
+    public List<T> queryForList(Map<String,Object> params);
     public T queryById(PK id);
 
     public void update(T entity);

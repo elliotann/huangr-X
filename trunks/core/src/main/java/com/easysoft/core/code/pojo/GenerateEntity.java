@@ -1,6 +1,6 @@
 package com.easysoft.core.code.pojo;
 
-import com.easysoft.core.model.FormEntity;
+import com.easysoft.component.form.model.FormEntity;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
