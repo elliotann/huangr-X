@@ -25,7 +25,7 @@ public class CodeFactory extends BaseCodeFactory{
         serviceImpl("ServiceImpl"),
         service("ServiceI"),
         dao("Dao"),
-        mapper(""),
+        mapper("mapper"),
         controller("Controller"),
         entity("Entity"),
         jsp(""),
@@ -95,11 +95,17 @@ public class CodeFactory extends BaseCodeFactory{
             if (("jsp".equals(type)) || ("jspList".equals(type)) || ("js".equals(type)) || ("jsList".equals(type)) ||
                     ("jsp_add".equals(type)) || ("jsp_update".equals(type)))
                 str.append(CodeResourceUtil.JSPPATH);
+            else if("mapper".equals(type)){
+                str.append(CodeResourceUtil.RESOURCEPATH);//mybatis映射文件路径
+            }
             else {
                 str.append(CodeResourceUtil.CODEPATH);
 
             }
-            str.append(StringUtils.lowerCase(entityPackage));
+            if(!"mapper".equals(type)){
+                str.append(StringUtils.lowerCase(entityPackage));
+            }
+
             str.append("/");
             if ("Action".equalsIgnoreCase(codeType))
                 str.append(StringUtils.lowerCase("action"));
@@ -139,7 +145,17 @@ public class CodeFactory extends BaseCodeFactory{
                 str.append(StringUtil.firstLowCase(jsName));
                 str.append(codeType);
                 str.append(".js");
-            } else {
+            } else if("mapper".equals(type)){
+                str.append(StringUtils.capitalize(entityName));
+                str.append(codeType);
+                str.append(".xml");
+            }else if("dao".equals(type)){
+                str.append("I");
+                str.append(StringUtils.capitalize(entityName));
+
+                str.append(codeType);
+                str.append(".java");
+            }else {
                 str.append(StringUtils.capitalize(entityName));
 
                 str.append(codeType);

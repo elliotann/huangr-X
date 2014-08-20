@@ -6,6 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ${bussiPackage}.${entityPackage}.entity.${entityName}Entity;
 import java.util.List;
 
-public interface I${entityName}Dao extends IGenericDao<${entityName},Integer> {
+public interface I${entityName}Dao extends IGenericDao<${entityName}Entity,Integer> {
 
 }
