@@ -58,7 +58,7 @@ public class ${entityName}Controller extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(params = "${entityName?uncap_first}")
-	public ModelAndView ${entityName?uncap_first}(HttpServletRequest request) {
+	public ModelAndView ${entityName?uncap_first}() {
 		return new ModelAndView("admin/component/${entityPackage}/${entityName?uncap_first}List");
 	}
 
@@ -73,7 +73,7 @@ public class ${entityName}Controller extends BaseController {
 
 	@RequestMapping(params = "dataGrid")
 	public ModelAndView datagrid(${entityName}Entity ${entityName?uncap_first},HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid) {
-        List entityist= this.${entityName?uncap_first}Service.loadAll(${entityName}Entity.class);
+        List entityist= this.${entityName?uncap_first}Service.queryForList();
         DataGridReturn dataGridReturn = new DataGridReturn(entityist.size(),entityist);
         String json = JsonUtils.beanToJson(dataGridReturn);
         Map<String,Object> map = new HashMap<String, Object>();
@@ -81,139 +81,100 @@ public class ${entityName}Controller extends BaseController {
         return new ModelAndView("admin/json_message",map);
 	}
 
-	/**
-	 * 删除${ftl_description}
-	 * 
-	 * @return
-	 */
-	@RequestMapping(params = "delete")
-	@ResponseBody
-	public AjaxJson doDel(${entityName}Entity ${entityName?uncap_first}, HttpServletRequest request) {
-		AjaxJson j = new AjaxJson();
-		${entityName?uncap_first} = ${entityName?uncap_first}Service.get(${entityName}Entity.class, ${entityName?uncap_first}.getSid());
-		message = "${ftl_description}删除成功";
-		try{
-			${entityName?uncap_first}Service.delete(${entityName?uncap_first});
+    /**
+    * ${ftl_description}新增页面跳转
+    *
+    * @return
+    */
+    @RequestMapping(params = "goAdd")
+    public ModelAndView goAdd(${entityName}Entity ${entityName?uncap_first}, HttpServletRequest req) {
+        if (StringUtil.isNotEmpty(${entityName?uncap_first}.getId())) {
+            ${entityName?uncap_first} = ${entityName?uncap_first}Service.queryById(${entityName?uncap_first}.getId());
+            req.setAttribute("${entityName?uncap_first}Page", ${entityName?uncap_first});
+        }
+        return new ModelAndView("admin/component/${entityPackage}/${entityName?uncap_first}-add");
+    }
+    /**
+    * 添加${ftl_description}
+    *
+    * @param ids
+    * @return
+    */
+    @RequestMapping(params = "doAdd")
+    @ResponseBody
+    public AjaxJson doAdd(${entityName}Entity ${entityName?uncap_first}, HttpServletRequest request) {
+        AjaxJson j = new AjaxJson();
+        message = "${ftl_description}添加成功";
+        try{
+            ${entityName?uncap_first}Service.save(${entityName?uncap_first});
 
-		}catch(Exception e){
-			e.printStackTrace();
-			message = "${ftl_description}删除失败";
+        }catch(Exception e){
+            e.printStackTrace();
+            message = "${ftl_description}添加失败";
+        }
+        j.setMsg(message);
+        return j;
+    }
 
-		}
-		j.setMsg(message);
-		return j;
-	}
-	
-	/**
-	 * 批量删除${ftl_description}
-	 * 
-	 * @return
-	 */
-	 @RequestMapping(params = "doBatchDel")
-	@ResponseBody
-	public AjaxJson doBatchDel(String ids,HttpServletRequest request){
-		AjaxJson j = new AjaxJson();
-		<#--message = "${ftl_description}删除成功";
-		try{
-			for(String id:ids.split(",")){
-				${entityName}Entity ${entityName?uncap_first} = systemService.getEntity(${entityName}Entity.class, 
-				<#if cgformConfig.cgFormHead.jformPkType?if_exists?html == "UUID">
-				id
-				<#elseif cgformConfig.cgFormHead.jformPkType?if_exists?html == "NATIVE">
-				Integer.parseInt(id)
-				<#elseif cgformConfig.cgFormHead.jformPkType?if_exists?html == "SEQUENCE">
-				Integer.parseInt(id)
-				<#else>
-				id
-				</#if>
-				);
-				${entityName?uncap_first}Service.delete(${entityName?uncap_first});
-				systemService.addLog(message, Globals.Log_Type_DEL, Globals.Log_Leavel_INFO);
-			}
-		}catch(Exception e){
-			e.printStackTrace();
-			message = "${ftl_description}删除失败";
-			throw new BusinessException(e.getMessage());
-		}
-		j.setMsg(message);-->
-		return j;
-	}
-
-
-	/**
-	 * 添加${ftl_description}
-	 * 
-	 * @param ids
-	 * @return
-	 */
-	@RequestMapping(params = "doAdd")
-	@ResponseBody
-	public AjaxJson doAdd(${entityName}Entity ${entityName?uncap_first}, HttpServletRequest request) {
-		AjaxJson j = new AjaxJson();
-		message = "${ftl_description}添加成功";
-		try{
-			${entityName?uncap_first}Service.save(${entityName?uncap_first});
-
-		}catch(Exception e){
-			e.printStackTrace();
-			message = "${ftl_description}添加失败";
-
-		}
-		j.setMsg(message);
-		return j;
-	}
-	
-	/**
-	 * 更新${ftl_description}
-	 * 
-	 * @param ids
-	 * @return
-	 */
-	@RequestMapping(params = "doUpdate")
-	@ResponseBody
-	public AjaxJson doUpdate(${entityName}Entity ${entityName?uncap_first}, HttpServletRequest request) {
-		AjaxJson j = new AjaxJson();
-		message = "${ftl_description}更新成功";
-		${entityName}Entity t = ${entityName?uncap_first}Service.get(${entityName}Entity.class, ${entityName?uncap_first}.getSid());
-		try {
+    /**
+    * ${ftl_description}编辑页面跳转
+    *
+    * @return
+    */
+    @RequestMapping(params = "goUpdate")
+    public ModelAndView goUpdate(${entityName}Entity ${entityName?uncap_first}, HttpServletRequest req) {
+        if (StringUtil.isNotEmpty(${entityName?uncap_first}.getId())) {
+             ${entityName?uncap_first} = ${entityName?uncap_first}Service.queryById(${entityName?uncap_first}.getId());
+            req.setAttribute("${entityName?uncap_first}Page", ${entityName?uncap_first});
+        }
+        return new ModelAndView("admin/component/${entityPackage}/${entityName?uncap_first}-add");
+    }
+    /**
+    * 更新${ftl_description}
+    *
+    * @param ids
+    * @return
+    */
+    @RequestMapping(params = "doUpdate")
+    @ResponseBody
+    public AjaxJson doUpdate(${entityName}Entity ${entityName?uncap_first}, HttpServletRequest request) {
+        AjaxJson j = new AjaxJson();
+        message = "${ftl_description}更新成功";
+        ${entityName}Entity t = ${entityName?uncap_first}Service.queryById(${entityName?uncap_first}.getId());
+        try {
             BeanUtils.copyBeanNotNull2Bean(${entityName?uncap_first}, t);
-			${entityName?uncap_first}Service.saveOrUpdate(t);
+            ${entityName?uncap_first}Service.update(t);
 
-		} catch (Exception e) {
-			e.printStackTrace();
-			message = "${ftl_description}更新失败";
+        } catch (Exception e) {
+            e.printStackTrace();
+            message = "${ftl_description}更新失败";
 
-		}
-		j.setMsg(message);
-		return j;
-	}
-	
+        }
+        j.setMsg(message);
+        return j;
+    }
 
+    /**
+    * 删除${ftl_description}
+    *
+    * @return
+    */
+    @RequestMapping(params = "delete")
+    @ResponseBody
+    public AjaxJson doDel(${entityName}Entity ${entityName?uncap_first}, HttpServletRequest request) {
+        AjaxJson j = new AjaxJson();
+        ${entityName?uncap_first} = ${entityName?uncap_first}Service.queryById(${entityName?uncap_first}.getId());
+        message = "${ftl_description}删除成功";
+        try{
+            ${entityName?uncap_first}Service.delete(${entityName?uncap_first});
 
-	/**
-	 * ${ftl_description}新增页面跳转
-	 * 
-	 * @return
-	 */
-	@RequestMapping(params = "goAdd")
-	public ModelAndView goAdd(${entityName}Entity ${entityName?uncap_first}, HttpServletRequest req) {
-		if (StringUtil.isNotEmpty(${entityName?uncap_first}.getSid())) {
-			${entityName?uncap_first} = ${entityName?uncap_first}Service.getEntity(${entityName}Entity.class, ${entityName?uncap_first}.getSid());
-			req.setAttribute("${entityName?uncap_first}Page", ${entityName?uncap_first});
-		}
-		return new ModelAndView("admin/component/${entityPackage}/${entityName?uncap_first}-add");
-	}
-	/**
-	 * ${ftl_description}编辑页面跳转
-	 * 
-	 * @return
-	 */
-	@RequestMapping(params = "goUpdate")
-	public ModelAndView goUpdate(${entityName}Entity ${entityName?uncap_first}, HttpServletRequest req) {
-		if (StringUtil.isNotEmpty(${entityName?uncap_first}.getSid())) {
-			${entityName?uncap_first} = ${entityName?uncap_first}Service.getEntity(${entityName}Entity.class, ${entityName?uncap_first}.getSid());
-			req.setAttribute("${entityName?uncap_first}Page", ${entityName?uncap_first});
-		}
-		return new ModelAndView("admin/component/${entityPackage}/${entityName?uncap_first}-update");
-	}
+        }catch(Exception e){
+            e.printStackTrace();
+            message = "${ftl_description}删除失败";
+
+        }
+        j.setMsg(message);
+        return j;
+    }
+
 }

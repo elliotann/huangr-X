@@ -7,12 +7,31 @@
     </#list>
     </resultMap>
     <insert id="save" parameterType="${entityName}" useGeneratedKeys="true" keyProperty="id">
-        insert ${tableName} (<#list fieldMeta?keys as columnKey>${fieldMeta[columnKey]}<#if columnKey_has_next>,</#if></#list>)
-        values (<#list columns as po>${r"#{"+po.fieldName+"}"}<#if po_has_next>,</#if></#list>
+        insert ${tableName} (<#list fieldMeta?keys as columnKey><#if fieldMeta[columnKey]!="ID">${fieldMeta[columnKey]}<#if columnKey_has_next>,</#if></#if></#list>)
+        values (<#list columns as po><#if !po.ispk>${r"#{"+po.fieldName+"}"}<#if po_has_next>,</#if></#if></#list>
         )
     </insert>
     <select id="queryForList" resultMap="${entityName?uncap_first}Map">
         select * from ${tableName}
     </select>
+    <select id="queryById" resultMap="${entityName?uncap_first}Map">
+        select * from ${tableName} where id=${r"#{id}"}
+    </select>
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from ${tableName} where id=${r"#{id}"}
+    </delete>
+    <update id="update" parameterType="${entityName}">
+        UPDATE  ${tableName}
+        SET
+    <#list columns as po>
+        <#if !po.ispk>
+    ${fieldMeta[po.fieldName]}=${r"#{"+po.fieldName+"}"}
+            <#if po_has_next>,</#if>
+        </#if>
 
+    </#list>
+
+        WHERE id = ${r"#{id}"}
+
+    </update>
 </mapper>

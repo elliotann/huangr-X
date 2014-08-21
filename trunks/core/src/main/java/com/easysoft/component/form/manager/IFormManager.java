@@ -33,4 +33,11 @@ public interface IFormManager extends IGenericService<FormEntity> {
      */
     public void synDb(Integer formId);
 
+    /**
+     * 根据编码查询表单
+     * @param code
+     * @return
+     */
+    public FormEntity queryFormByCode(String code);
+
 }

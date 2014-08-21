@@ -25,4 +25,10 @@ public class ${entityName}ServiceImpl implements ${entityName}ServiceI {
     public List<${entityName}Entity> queryForList(){
         return ${entityName?uncap_first}Dao.queryForList();
     }
+    public ${entityName}Entity queryById(Integer id){
+        return ${entityName?uncap_first}Dao.queryById(id);
+    }
+    public void deleteById(Integer id){
+        ${entityName?uncap_first}Dao.deleteById(id);
+    }
 }

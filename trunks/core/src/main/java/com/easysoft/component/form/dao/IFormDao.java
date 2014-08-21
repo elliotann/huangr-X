@@ -11,4 +11,5 @@ import com.easysoft.component.form.model.FormEntity;
  * @since:
  */
 public interface IFormDao extends IGenericDao<FormEntity,Integer> {
+    public FormEntity queryFormByCode(String code);
 }

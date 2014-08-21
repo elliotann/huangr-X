@@ -25,6 +25,7 @@ public class FormEntity extends IdEntity {
     private String createTime = DateUtil.toString(new Date(),"yyyy-MM-dd HH:mm:ss");
     private List<FormField> fields;
     private int formType= 1;
+    private String code;
     /**
      * 主键生成策略
      */
@@ -103,5 +104,13 @@ public class FormEntity extends IdEntity {
 
     public void setPkGeneratorPolicy(String pkGeneratorPolicy) {
         this.pkGeneratorPolicy = pkGeneratorPolicy;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

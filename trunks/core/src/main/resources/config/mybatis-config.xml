@@ -15,6 +15,7 @@
         <typeAlias type="com.easysoft.core.model.JEAPUserDetail" alias="JEAPUserDetail"/>
         <typeAlias type="com.easysoft.component.form.model.FormEntity" alias="FormEntity"/>
         <typeAlias type="com.easysoft.component.form.model.FormField" alias="FormField"/>
+        <typeAlias type="com.easysoft.component.oa.entity.OaLeaveEntity" alias="OaLeave"/>
     </typeAliases>
     <!--<plugins>
         <plugin interceptor="com.easysoft.jeap.framework.db.PageInterceptor">
