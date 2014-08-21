@@ -235,8 +235,15 @@ public class FormField extends IdEntity {
      * @return
      */
     public String renderHtmlControl(Object obj){
-        ReflectionUtil reflectionUtil = new ReflectionUtil(obj);
-        Object value= reflectionUtil.getMethodValue(StringUtil.formatDBFieldName(this.getFieldName()));
+        Object value=null;
+        if(obj!=null){
+            ReflectionUtil reflectionUtil = new ReflectionUtil(obj);
+            value= reflectionUtil.getMethodValue(StringUtil.formatDBFieldName(this.getFieldName()));
+        }
+        if(value==null){
+            value="";
+        }
+
         return "<input name=\""+StringUtil.formatDBFieldName(this.getFieldName())+"\" type=\"text\" id=\""+StringUtil.formatDBFieldName(this.getFieldName())+"\" value=\""+value+"\" class=\"form-control\"/>";
 
     }
