@@ -72,13 +72,7 @@ public class FormTaglib extends HtmlTaglib{
             sb.append("<tr>");
             sb.append("<td align=\"right\" class=\"l-table-edit-td\">"+field.getLabelName()+":</td>");
             sb.append("<td align=\"left\" class=\"l-table-edit-td\">");
-            if(obj==null){
-                sb.append("<input name=\""+StringUtil.formatDBFieldName(field.getFieldName())+"\" type=\"text\" id=\""+StringUtil.formatDBFieldName(field.getFieldName())+"\" value=\"\" class=\"form-control\"/>");
-            }else{
-
-                Object value= reflectionUtil.getMethodValue(StringUtil.formatDBFieldName(field.getFieldName()));
-                sb.append("<input name=\""+StringUtil.formatDBFieldName(field.getFieldName())+"\" type=\"text\" id=\""+StringUtil.formatDBFieldName(field.getFieldName())+"\" value=\""+value+"\" class=\"form-control\"/>");
-            }
+            sb.append(field.renderHtmlControl(obj));
 
             sb.append("</td><td align=\"left\"></td>");
 
