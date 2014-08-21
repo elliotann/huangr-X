@@ -11,6 +11,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 import com.easysoft.core.common.dao.hibernate.DataGrid;
+import com.easysoft.framework.utils.ReflectionUtil;
 import net.sf.json.JSONObject;
 
 import org.codehaus.jackson.JsonGenerationException;
@@ -21,7 +22,6 @@ import org.codehaus.jackson.map.ObjectMapper;
 import com.easysoft.core.common.dao.hibernate.PageList;
 import com.easysoft.core.common.vo.DataTableReturn;
 import com.easysoft.core.model.json.ComboBox;
-import com.easysoft.framework.utils.ReflectHelper;
 import com.easysoft.framework.utils.StringUtil;
 import com.easysoft.framework.utils.oConvertUtils;
 import com.easysoft.member.backend.model.Role;
@@ -63,7 +63,7 @@ public class TagUtil {
 		Object value = "";
 		String fieldName = "";
 		String childFieldName = null;
-		ReflectHelper reflectHelper=new ReflectHelper(o);
+        ReflectionUtil reflectHelper=new ReflectionUtil(o);
 		if (FiledName.indexOf("_") == -1) {
 			if(FiledName.indexOf(".") == -1){
 				fieldName = FiledName;
@@ -453,7 +453,7 @@ public class TagUtil {
 		Object[] values = new Object[fields.length];
 		for (Object node : all) {
 			ComboBox box = new ComboBox();
-			ReflectHelper reflectHelper=new ReflectHelper(node);
+            ReflectionUtil reflectHelper=new ReflectionUtil(node);
 			for (int i = 0; i < fields.length; i++) {
 				String fieldName = fields[i].toString();
 				values[i] = reflectHelper.getMethodValue(fieldName);
@@ -462,7 +462,7 @@ public class TagUtil {
 			box.setText(values[1].toString());
 			if (in != null) {
 				for (Object node1 : in) {
-					ReflectHelper reflectHelper2=new ReflectHelper(node);
+                    ReflectionUtil reflectHelper2=new ReflectionUtil(node);
 					if (node1 != null) {
 						String fieldName = fields[0].toString();
 						String	test = reflectHelper2.getMethodValue(fieldName).toString();
