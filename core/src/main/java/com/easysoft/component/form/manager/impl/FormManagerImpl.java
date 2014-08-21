@@ -117,4 +117,15 @@ public class FormManagerImpl extends GenericService<FormEntity> implements IForm
         formEntity.setIsSynDB("1");
         formDao.update(formEntity);
     }
+
+    @Override
+    public FormEntity queryFormByCode(String code) {
+        FormEntity result = formDao.queryFormByCode(code);
+        if(result==null) return null;
+        Map<String,Object> params = new HashMap<String, Object>();
+        params.put("formId",result.getId());
+        List<FormField> fields = formFieldDao.queryForList(params);
+        result.setFields(fields);
+        return result;
+    }
 }

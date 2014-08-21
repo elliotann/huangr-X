@@ -9,6 +9,7 @@
         <id property="version" column="version"/>
         <id property="formType" column="form_type"/>
         <id property="createBy" column="create_by"/>
+        <id property="code" column="code"/>
         <id property="pkGeneratorPolicy" column="pk_generator_policy"/>
     </resultMap>
     <insert id="save" parameterType="FormEntity" useGeneratedKeys="true" keyProperty="id">
@@ -27,6 +28,9 @@
     </update>
     <select id="queryForList" resultMap="formMap">
         select * from t_form
+    </select>
+    <select id="queryFormByCode" resultMap="formMap">
+        select * from t_form where code=#{code}
     </select>
     <select id="queryById" resultMap="formMap">
         select * from t_form where id=#{id}

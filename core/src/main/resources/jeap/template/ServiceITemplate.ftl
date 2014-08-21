@@ -7,4 +7,6 @@ public interface ${entityName}ServiceI{
  	public void save(${entityName}Entity ${entityName?uncap_first});
     public void update(${entityName}Entity ${entityName?uncap_first});
     public List<${entityName}Entity> queryForList();
+    public ${entityName}Entity queryById(Integer id);
+    public void deleteById(Integer id);
 }
