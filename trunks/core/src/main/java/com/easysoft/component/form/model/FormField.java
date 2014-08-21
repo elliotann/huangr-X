@@ -2,6 +2,8 @@ package com.easysoft.component.form.model;
 
 import com.easysoft.core.annotation.JsonInvisible;
 import com.easysoft.core.common.entity.IdEntity;
+import com.easysoft.framework.utils.ReflectionUtil;
+import com.easysoft.framework.utils.StringUtil;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -226,5 +228,16 @@ public class FormField extends IdEntity {
 
     public void setFormId(Integer formId) {
         this.formId = formId;
+    }
+
+    /**
+     * 生成相应的html控件
+     * @return
+     */
+    public String renderHtmlControl(Object obj){
+        ReflectionUtil reflectionUtil = new ReflectionUtil(obj);
+        Object value= reflectionUtil.getMethodValue(StringUtil.formatDBFieldName(this.getFieldName()));
+        return "<input name=\""+StringUtil.formatDBFieldName(this.getFieldName())+"\" type=\"text\" id=\""+StringUtil.formatDBFieldName(this.getFieldName())+"\" value=\""+value+"\" class=\"form-control\"/>";
+
     }
 }
