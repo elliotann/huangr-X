@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+
+	<description>jeap 1.0 XML library</description>
+	<display-name>jeap Server Components tld</display-name>
+	<tlib-version>1.0</tlib-version>
+	<short-name>tree</short-name>
+	<uri>http://www.jeap.cn/form</uri>
+    
+    <tag>
+        <description>form tag</description>
+        <name>list</name>
+        <tag-class>com.easysoft.tag.webapp.taglib.html.ListTaglib</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>formCode</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    <tag>
+        <description>form tag</description>
+        <name>form</name>
+        <tag-class>com.easysoft.tag.webapp.taglib.html.FormTaglib</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>formCode</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>entityName</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+</taglib>

@@ -51,8 +51,7 @@
     }
     $(function ()
     {
-        listgrid =
-                $("#maingrid").ligerGrid({
+        listgrid =$("#maingrid").ligerGrid({
                     height:'99%',
                     columns: [
                         { display: 'id', name: 'roleid', align: 'center', width: 100, minWidth: 60 },
