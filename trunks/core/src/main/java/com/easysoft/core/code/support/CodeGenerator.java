@@ -147,6 +147,7 @@ public class CodeGenerator implements ICallBack {
                     cf.setType("java.sql.Blob");
                 }
                 String fieldName = cf.getFieldName();
+                cf.setName(fieldName);
                 String fieldNameV = StringUtil.formatDBFieldName(fieldName);
                 cf.setFieldName(fieldNameV);
                 fieldMeta.put(fieldNameV, fieldName.toUpperCase());

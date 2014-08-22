@@ -2,6 +2,7 @@ package com.easysoft.core.common.dao.hibernate.support;
 
 import com.easysoft.core.common.dao.IGenericDao;
 
+import com.easysoft.framework.db.PageOption;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
 import java.io.Serializable;
@@ -52,6 +53,11 @@ public class MybatisGenericDao<T,PK extends Serializable> extends SqlMapClientDa
     @Override
     public void deleteById(PK id) {
 
+    }
+
+    @Override
+    public List<T> queryByPage(PageOption pageOption) {
+        return null;
     }
 }
 

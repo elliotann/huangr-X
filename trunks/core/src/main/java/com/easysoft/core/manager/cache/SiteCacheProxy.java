@@ -6,7 +6,7 @@ import com.easysoft.core.manager.ISiteManager;
 import com.easysoft.core.model.*;
 import com.easysoft.framework.cache.AbstractCacheProxy;
 import com.easysoft.framework.cache.CacheFactory;
-import com.easysoft.framework.db.Page;
+import com.easysoft.framework.db.PageOption;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -154,9 +154,9 @@ public class SiteCacheProxy extends AbstractCacheProxy<Site> implements ISiteMan
 	}
  
 
-	public Page list(String keyword,int pageNo,int pageSize){
-		Page page = this.siteManager.list(keyword,pageNo, pageSize);
-		List<Map> listsite = (List<Map>) (page.getResult());
+	public PageOption list(String keyword,int pageNo,int pageSize){
+		PageOption pageOption = this.siteManager.list(keyword,pageNo, pageSize);
+		List<Map> listsite = (List<Map>) (pageOption.getResult());
 		
 		List<Dns>  dnsList = this.getDnsList();
 		for (Map site : listsite) {
@@ -172,10 +172,10 @@ public class SiteCacheProxy extends AbstractCacheProxy<Site> implements ISiteMan
 			}
 			site.put("eopSiteDomainList", domainList);
 		}
-		return page;
+		return pageOption;
 	}
 	
-	public Page list(int pageNo, int pageSize, String order,
+	public PageOption list(int pageNo, int pageSize, String order,
 			String search) {
 		return siteManager.list(pageNo, pageSize, order, search);
 	}

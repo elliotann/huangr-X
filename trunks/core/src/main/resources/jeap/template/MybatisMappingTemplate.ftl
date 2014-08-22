@@ -7,7 +7,7 @@
     </#list>
     </resultMap>
     <insert id="save" parameterType="${entityName}" useGeneratedKeys="true" keyProperty="id">
-        insert ${tableName} (<#list fieldMeta?keys as columnKey><#if fieldMeta[columnKey]!="ID">${fieldMeta[columnKey]}<#if columnKey_has_next>,</#if></#if></#list>)
+        insert ${tableName} (<#list columns as dbColumn><#if dbColumn.name!="id">${dbColumn.name}<#if dbColumn_has_next>,</#if></#if></#list>)
         values (<#list columns as po><#if !po.ispk>${r"#{"+po.fieldName+"}"}<#if po_has_next>,</#if></#if></#list>
         )
     </insert>

@@ -1,5 +1,7 @@
 package com.easysoft.core.common.dao;
 
+import com.easysoft.framework.db.PageOption;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +28,14 @@ public interface IGenericDao<T,PK extends Serializable> {
      * @return
      */
     public List<T> queryForList(Map<String,Object> params);
+
+    /**
+     * 要页查询记录
+     * @param pageOption
+     * @return
+     */
+    public List<T> queryByPage(PageOption pageOption);
+
     public T queryById(PK id);
 
     public void update(T entity);

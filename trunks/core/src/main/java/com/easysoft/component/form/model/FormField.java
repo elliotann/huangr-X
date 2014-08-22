@@ -194,11 +194,11 @@ public class FormField extends IdEntity {
     }
     @Transient
     public String getName() {
-        return fieldName;
+        return name;
     }
 
     public void setName(String name) {
-        this.name = fieldName;
+        this.name = name;
     }
 
     @Column(name="display_type")
@@ -244,7 +244,7 @@ public class FormField extends IdEntity {
             value="";
         }
 
-        return "<input name=\""+StringUtil.formatDBFieldName(this.getFieldName())+"\" type=\"text\" id=\""+StringUtil.formatDBFieldName(this.getFieldName())+"\" value=\""+value+"\" class=\"form-control\"/>";
+        return "<input name=\""+StringUtil.formatDBFieldName(this.getFieldName())+"\" type=\"text\" id=\""+StringUtil.formatDBFieldName(this.getFieldName())+"\" value=\""+value+"\" class=\"form-control\" onFocus=\"WdatePicker({isShowClear:false,readOnly:true})\"/>";
 
     }
 }

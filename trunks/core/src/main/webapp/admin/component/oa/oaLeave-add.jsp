@@ -1,15 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <%@ include file="/commons/taglibs.jsp"%>
-<link href="${r" ${context}"}/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
-<link href="${r" ${context}"}/js/ligerui/skins/Gray2014/css/all.css" rel="stylesheet" type="text/css" />
+<link href=" ${context}/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
+<link href=" ${context}/js/ligerui/skins/Gray2014/css/all.css" rel="stylesheet" type="text/css" />
 <script src="/jeap/statics/js/common/jquery-1.6.4.js" type="text/javascript"></script>
-<script src="${r" ${context}"}/js/ligerui/js/core/base.js" type="text/javascript"></script>
-<script src="${r" ${context}"}/js/ligerui/js/plugins/ligerDialog.js" type="text/javascript"></script>
-<script src="/jeap/admin/js/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
+<script src=" ${context}/js/ligerui/js/core/base.js" type="text/javascript"></script>
+<script src=" ${context}/js/ligerui/js/plugins/ligerDialog.js" type="text/javascript"></script>
 <script src="/jeap/statics/js/common/jquery.validate.js" type="text/javascript"></script>
-<script src="${r" ${staticserver}"}/js/admin/jeap.js" type="text/javascript"></script>
-<link href="${r" ${context}"}/css/form.css" rel="stylesheet"/>
+<script src=" ${staticserver}/js/admin/jeap.js" type="text/javascript"></script>
+<link href=" ${context}/css/form.css" rel="stylesheet"/>
 
 <script type="text/javascript">
     var dialog = frameElement.dialog;
@@ -22,9 +21,9 @@ pageEncoding="UTF-8"%>
             {
 
                 var entityid = $("#id").val();
-                var url = "${entityName?uncap_first}.do?doAdd";
+                var url = "oaLeave.do?doAdd";
                 if(entityid!=0){
-                    url = "${entityName?uncap_first}.do?doUpdate";
+                    url = "oaLeave.do?doUpdate";
                 }
 
                 $("#objForm").ajaxSubmit({
@@ -78,4 +77,4 @@ pageEncoding="UTF-8"%>
     .l-button-submit,.l-button-test{width:80px; float:left; margin-left:10px; padding-bottom:2px;}
     .l-verify-tip{ left:230px; top:120px;}
 </style>
-<form:form formCode="leaveForm" entityName="${entityName?uncap_first}"></form:form>
+<form:form formCode="leaveForm" entityName="oaLeave"></form:form>
