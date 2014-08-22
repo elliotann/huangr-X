@@ -1,6 +1,6 @@
 package com.easysoft.tag.webapp.taglib.html;
 
-import com.easysoft.framework.db.Page;
+import com.easysoft.framework.db.PageOption;
 import com.easysoft.framework.pager.IPageHtmlBuilder;
 import com.easysoft.framework.pager.impl.SimplePageHtmlBuilder;
 import com.easysoft.tag.webapp.bean.Grid;
@@ -56,16 +56,16 @@ public class GridTaglib extends HtmlTaglib {
 		}
 		
 		//分析分页数据对象的类型
-		Page page = null;
-		if(obj instanceof Page)
-			page = (Page)obj;
+		PageOption pageOption = null;
+		if(obj instanceof PageOption)
+			pageOption = (PageOption)obj;
 		else if(obj instanceof Grid)
-			page = ((Grid)obj).getWebpage();
+			pageOption = ((Grid)obj).getWebpage();
 		else
 			return "";
 
-		int pageSize = page.getPageSize();
-		long totalCount = page.getTotalCount();
+		int pageSize = pageOption.getPageSize();
+		long totalCount = pageOption.getTotalCount();
 		
 		IPageHtmlBuilder pageHtmlBuilder =null;
 		if("yes".equals(ajax) ){

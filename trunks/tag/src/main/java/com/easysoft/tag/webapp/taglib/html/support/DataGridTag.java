@@ -99,6 +99,10 @@ public class DataGridTag extends BodyTagSupport{
         sb.append("height:'"+height+"',");
         sb.append("width:'"+width+"',");
         sb.append("usePager:"+usePager+",");
+        if(usePager){
+            sb.append("pageParmName:'currentPageNo',");
+            sb.append("pagesizeParmName:'pageSize',");
+        }
         if(StringUtils.isNotEmpty(tree)){
             sb.append("tree:{columnId: 'title',idField: 'id',parentIDField: 'pid'},");
         }
