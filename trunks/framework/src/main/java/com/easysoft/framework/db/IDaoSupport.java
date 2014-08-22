@@ -121,7 +121,7 @@ public interface IDaoSupport<T> {
 	 * @param args  对应sql语句中的参数值
 	 * @return 分页结果集对象
 	 */
-	public Page queryForPage(String sql, int pageNo, int pageSize, Object... args) ;
+	public PageOption queryForPage(String sql, int pageNo, int pageSize, Object... args) ;
 	
 	/**
 	 *  分页查询
@@ -132,7 +132,7 @@ public interface IDaoSupport<T> {
 	 * @param args 对应sql语句中的参数值
 	 * @return 分页结果集对象
 	 */
-	public Page queryForPage(String sql, int pageNo, int pageSize, RowMapper rowMapper, Object... args);
+	public PageOption queryForPage(String sql, int pageNo, int pageSize, RowMapper rowMapper, Object... args);
 	
 	/**
 	 * 分页查询
@@ -143,7 +143,7 @@ public interface IDaoSupport<T> {
 	 * @param args 对应sql语句中的参数值
 	 * @return
 	 */
-	public Page queryForPage(String sql, int pageNo, int pageSize, Class<T> clazz, Object... args);
+	public PageOption queryForPage(String sql, int pageNo, int pageSize, Class<T> clazz, Object... args);
 	
 	/**
 	 * 更新数据

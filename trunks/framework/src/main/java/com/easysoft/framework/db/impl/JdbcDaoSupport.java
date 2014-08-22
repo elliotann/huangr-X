@@ -4,7 +4,7 @@ import com.easysoft.framework.ParamSetting;
 import com.easysoft.framework.db.DBRuntimeException;
 import com.easysoft.framework.db.IDaoSupport;
 import com.easysoft.framework.db.ObjectNotFoundException;
-import com.easysoft.framework.db.Page;
+import com.easysoft.framework.db.PageOption;
 import com.easysoft.framework.utils.ReflectionUtil;
 import com.easysoft.framework.utils.StringUtil;
 import org.apache.log4j.Logger;
@@ -224,7 +224,7 @@ public class JdbcDaoSupport<T> implements IDaoSupport<T> {
 		}
 	}
 
-	public Page queryForPage(String sql, int pageNo, int pageSize,
+	public PageOption queryForPage(String sql, int pageNo, int pageSize,
 			Object... args) {
 		try {
 			Assert.hasText(sql, "SQL语句不能为空");
@@ -234,13 +234,13 @@ public class JdbcDaoSupport<T> implements IDaoSupport<T> {
 					+ removeSelect(removeOrders(sql));
 			List list = queryForList(listSql, args);
 			int totalCount = queryForInt(countSql, args);
-			return new Page(0, totalCount, pageSize, list);
+			return new PageOption(0, totalCount, pageSize, list);
 		} catch (Exception ex) {
 			throw new DBRuntimeException(ex, sql);
 		}
 	}
 
-	public Page queryForPage(String sql, int pageNo, int pageSize,
+	public PageOption queryForPage(String sql, int pageNo, int pageSize,
 			RowMapper rowMapper, Object... args) {
 		try {
 			Assert.hasText(sql, "SQL语句不能为空");
@@ -250,13 +250,13 @@ public class JdbcDaoSupport<T> implements IDaoSupport<T> {
 					+ removeSelect(removeOrders(sql));
 			List<T> list = this.queryForList(listSql, rowMapper, args);
 			int totalCount = queryForInt(countSql, args);
-			return new Page(0, totalCount, pageSize, list);
+			return new PageOption(0, totalCount, pageSize, list);
 		} catch (Exception ex) {
 			throw new DBRuntimeException(ex, sql);
 		}
 	}
 
-	public Page queryForPage(String sql, int pageNo, int pageSize,
+	public PageOption queryForPage(String sql, int pageNo, int pageSize,
 			Class<T> clazz, Object... args) {
 		try {
 			Assert.hasText(sql, "SQL语句不能为空");
@@ -266,7 +266,7 @@ public class JdbcDaoSupport<T> implements IDaoSupport<T> {
 					+ removeSelect(removeOrders(sql));
 			List<T> list = this.queryForList(listSql, clazz, args);
 			int totalCount = queryForInt(countSql, args);
-			return new Page(0, totalCount, pageSize, list);
+			return new PageOption(0, totalCount, pageSize, list);
 		} catch (Exception ex) {
 			throw new DBRuntimeException(ex, sql);
 		}

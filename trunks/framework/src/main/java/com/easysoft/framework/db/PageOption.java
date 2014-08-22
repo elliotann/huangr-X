@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * @author andy
  */
 @SuppressWarnings("serial")
-public class Page implements Serializable {
+public class PageOption implements Serializable {
 
 	private static int DEFAULT_PAGE_SIZE = 20;
 
@@ -20,10 +20,12 @@ public class Page implements Serializable {
 
 	private long totalCount; // 总记录数
 
+    private int currentPageNo;//当前页
+
 	/**
 	 * 构造方法，只构造空页.
 	 */
-	public Page() {
+	public PageOption() {
 		this(0, 0, DEFAULT_PAGE_SIZE, new ArrayList());
 	}
 
@@ -39,7 +41,7 @@ public class Page implements Serializable {
 	 * @param data
 	 *            本页包含的数据
 	 */
-	public Page(long start, long totalSize, int pageSize, Object data) {
+	public PageOption(long start, long totalSize, int pageSize, Object data) {
 		setParam(start, totalSize, pageSize, data);
 	}
     public void setPageSize(int pageSize){
@@ -52,7 +54,11 @@ public class Page implements Serializable {
 		this.data = data;
 	}
 
-	/**
+    public void setTotalCount(long totalCount) {
+        this.totalCount = totalCount;
+    }
+
+    /**
 	 * 取总记录数.
 	 */
 	public long getTotalCount() {
@@ -126,4 +132,7 @@ public class Page implements Serializable {
 		return (pageNo - 1) * pageSize;
 	}
 
+    public void setCurrentPageNo(int currentPageNo) {
+        this.currentPageNo = currentPageNo;
+    }
 }
