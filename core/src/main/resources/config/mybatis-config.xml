@@ -17,11 +17,11 @@
         <typeAlias type="com.easysoft.component.form.model.FormField" alias="FormField"/>
         <typeAlias type="com.easysoft.component.oa.entity.OaLeaveEntity" alias="OaLeave"/>
     </typeAliases>
-    <!--<plugins>
-        <plugin interceptor="com.easysoft.jeap.framework.db.PageInterceptor">
+    <plugins>
+        <plugin interceptor="com.easysoft.framework.db.PageInterceptor">
             <property name="databaseType" value="mysql" />
         </plugin>
-    </plugins>-->
+    </plugins>
     <mappers>
 
     </mappers>

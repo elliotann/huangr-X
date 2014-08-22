@@ -3,6 +3,7 @@ package com.easysoft.core.manager.impl;
 import java.util.List;
 import java.util.Map;
 
+import com.easysoft.framework.db.PageOption;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,7 +17,6 @@ import com.easysoft.core.model.JEAPUser;
 import com.easysoft.framework.context.webcontext.ThreadContextHolder;
 import com.easysoft.framework.context.webcontext.WebSessionContext;
 import com.easysoft.framework.db.IDaoSupport;
-import com.easysoft.framework.db.Page;
 import com.easysoft.framework.utils.StringUtil;
 import com.easysoft.member.backend.manager.IAdminUserManager;
 import com.easysoft.member.backend.manager.UserContext;
@@ -188,7 +188,7 @@ public class UserManagerImpl implements IUserManager {
 	}
 
 
-	public Page list(String keyword, int pageNo, int pageSize) {
+	public PageOption list(String keyword, int pageNo, int pageSize) {
 		String sql ="select u.*,d.regdate  regdate from eop_user u left join eop_userdetail d on  u.id= d.userid";
 		if(!StringUtil.isEmpty(keyword)){
 			sql+=" where  u.username like '%" + keyword +"%'";

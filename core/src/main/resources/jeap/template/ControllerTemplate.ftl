@@ -125,7 +125,7 @@ public class ${entityName}Controller extends BaseController {
     public ModelAndView goUpdate(${entityName}Entity ${entityName?uncap_first}, HttpServletRequest req) {
         if (StringUtil.isNotEmpty(${entityName?uncap_first}.getId())) {
              ${entityName?uncap_first} = ${entityName?uncap_first}Service.queryById(${entityName?uncap_first}.getId());
-            req.setAttribute("${entityName?uncap_first}Page", ${entityName?uncap_first});
+            req.setAttribute("${entityName?uncap_first}", ${entityName?uncap_first});
         }
         return new ModelAndView("admin/component/${entityPackage}/${entityName?uncap_first}-add");
     }
@@ -163,10 +163,10 @@ public class ${entityName}Controller extends BaseController {
     @ResponseBody
     public AjaxJson doDel(${entityName}Entity ${entityName?uncap_first}, HttpServletRequest request) {
         AjaxJson j = new AjaxJson();
-        ${entityName?uncap_first} = ${entityName?uncap_first}Service.queryById(${entityName?uncap_first}.getId());
+
         message = "${ftl_description}删除成功";
         try{
-            ${entityName?uncap_first}Service.delete(${entityName?uncap_first});
+            ${entityName?uncap_first}Service.deleteById(${entityName?uncap_first}.getId());
 
         }catch(Exception e){
             e.printStackTrace();

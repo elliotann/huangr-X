@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import com.easysoft.framework.db.PageOption;
 import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -38,7 +39,6 @@ import com.easysoft.framework.context.webcontext.ThreadContextHolder;
 import com.easysoft.framework.context.webcontext.WebSessionContext;
 import com.easysoft.framework.db.IDaoSupport;
 import com.easysoft.framework.db.ISqlFileExecutor;
-import com.easysoft.framework.db.Page;
 import com.easysoft.framework.db.StringMapper;
 import com.easysoft.framework.utils.DateUtil;
 import com.easysoft.framework.utils.FileUtil;
@@ -383,7 +383,7 @@ public class SiteManagerImpl implements ISiteManager {
 	 *            关键字:模糊匹配域名站点名，用户名
 	 * @return
 	 */
-	public Page list(String keyword, int pageNo, int pageSize) {
+	public PageOption list(String keyword, int pageNo, int pageSize) {
 		String sql = "select s.*,u.username from jeap_site  s,jeap_user u where s.userid=u.id";
 
 		if (!StringUtil.isEmpty(keyword)) {
@@ -397,7 +397,7 @@ public class SiteManagerImpl implements ISiteManager {
 		return this.daoSupport.queryForPage(sql, pageNo, pageSize);
 	}
 
-	public Page list(int pageNo, int pageSize, String order, String search) {
+	public PageOption list(int pageNo, int pageSize, String order, String search) {
 		Integer userid = EsfContext.getContext().getCurrentSite().getUserid();
 		List<JEAPSiteDomain> listdomain = this.domainManager.listUserDomain();
 		if (search == null)
@@ -409,11 +409,11 @@ public class SiteManagerImpl implements ISiteManager {
 		else
 			order = " order by " + order.replace(":", " ");
 
-		Page page = daoSupport.queryForPage(
+		PageOption pageOption = daoSupport.queryForPage(
 				"select * from jeap_site where deleteflag = 0 and userid = "
 						+ userid + search + order, pageNo, pageSize);
 
-		List<Map> listsite = (List<Map>) (page.getResult());
+		List<Map> listsite = (List<Map>) (pageOption.getResult());
 
 		for (Map site : listsite) {
 			List<JEAPSiteDomain> domainList = new ArrayList<JEAPSiteDomain>();
@@ -433,7 +433,7 @@ public class SiteManagerImpl implements ISiteManager {
 			site.put("eopSiteDomainList", domainList);
 		}
 
-		return page;
+		return pageOption;
 	}
 
 	public void edit(Site site) {

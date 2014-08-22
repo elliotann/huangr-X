@@ -2,7 +2,7 @@ package com.easysoft.core.common.dao.spring;
 
 import com.easysoft.core.context.EsfContext;
 import com.easysoft.framework.db.IDBRouter;
-import com.easysoft.framework.db.Page;
+import com.easysoft.framework.db.PageOption;
 import com.easysoft.framework.db.impl.JdbcDaoSupport;
 import com.easysoft.framework.utils.ReflectionUtil;
 import org.springframework.jdbc.core.RowMapper;
@@ -107,19 +107,19 @@ public class BaseJdbcDaoSupport<T> extends JdbcDaoSupport<T> {
 		return super.queryForObject(sql, mapper, args);
 	}
 
-	public Page queryForPage(String sql, int pageNo, int pageSize,
+	public PageOption queryForPage(String sql, int pageNo, int pageSize,
 			Object... args) {
 		sql = wrapSelSql(sql);
 		return super.queryForPage(sql, pageNo, pageSize, args);
 	}
 
-	public Page queryForPage(String sql, int pageNo, int pageSize,
+	public PageOption queryForPage(String sql, int pageNo, int pageSize,
 			RowMapper rowMapper, Object... args) {
 		sql = wrapSelSql(sql);
 		return super.queryForPage(sql, pageNo, pageSize, rowMapper, args);
 	}
 
-	public Page queryForPage(String sql, int pageNo, int pageSize,
+	public PageOption queryForPage(String sql, int pageNo, int pageSize,
 			Class<T> clazz, Object... args) {
 		sql = wrapSelSql(sql);
 		return super.queryForPage(sql, pageNo, pageSize, clazz, args);

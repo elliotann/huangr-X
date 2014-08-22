@@ -10,7 +10,7 @@ import com.easysoft.core.common.dao.jdbc.JdbcDao;
 import com.easysoft.core.common.exception.BusinessException;
 import com.easysoft.core.common.vo.DataTableReturn;
 import com.easysoft.core.common.vo.json.DataGridReturn;
-import com.easysoft.framework.db.Page;
+import com.easysoft.framework.db.PageOption;
 import com.easysoft.framework.db.core.DBTable;
 import com.easysoft.framework.db.core.common.hibernate.qbc.PagerUtil;
 import com.easysoft.framework.utils.MyBeanUtils;
@@ -549,14 +549,14 @@ public class GenericDAO<T> implements IGenericDAO<T> {
     }
 
     @Override
-    public Page queryForPage(DetachedCriteria dc, int pageNo, int pageSize) {
+    public PageOption queryForPage(DetachedCriteria dc, int pageNo, int pageSize) {
         Criteria criteria = dc.getExecutableCriteria(getSession());
         criteria.setResultTransformer(CriteriaSpecification.ROOT_ENTITY);
         int totalCount = ((Long)criteria.setProjection(Projections.rowCount()).uniqueResult()).intValue();
         criteria.setProjection(null);
         criteria.setFirstResult((pageNo-1)*pageSize);
         criteria.setMaxResults(pageNo*pageSize);
-        return new Page(0, totalCount, pageSize, criteria.list());
+        return new PageOption(0, totalCount, pageSize, criteria.list());
 
     }
 

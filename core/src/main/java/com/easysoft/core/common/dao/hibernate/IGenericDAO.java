@@ -4,7 +4,7 @@ import com.easysoft.core.common.dao.hibernate.qbc.CriteriaQuery;
 import com.easysoft.core.common.dao.hibernate.qbc.HqlQuery;
 import com.easysoft.core.common.vo.DataTableReturn;
 import com.easysoft.core.common.vo.json.DataGridReturn;
-import com.easysoft.framework.db.Page;
+import com.easysoft.framework.db.PageOption;
 import com.easysoft.framework.db.core.DBTable;
 import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
@@ -246,7 +246,7 @@ public interface IGenericDAO<T> {
      * @param pageSize
      * @return
      */
-    public Page queryForPage(DetachedCriteria dc, int pageNo,
+    public PageOption queryForPage(DetachedCriteria dc, int pageNo,
                                 int pageSize);
 
     public List<T> pageList(DetachedCriteria dc,int firstResult,int maxResult);

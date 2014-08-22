@@ -2,7 +2,7 @@ package com.easysoft.core.manager;
 
 
 import com.easysoft.core.model.*;
-import com.easysoft.framework.db.Page;
+import com.easysoft.framework.db.PageOption;
 
 import java.util.List;
 import java.util.Map;
@@ -43,7 +43,7 @@ public interface ISiteManager {
 	 * @param search
 	 * @return
 	 */
-	public Page list(int pageNo, int pageSize, String order,
+	public PageOption list(int pageNo, int pageSize, String order,
 			String search);
 	
 	
@@ -64,7 +64,7 @@ public interface ISiteManager {
 	 * @param keyword  关键字:模糊匹配域名站点名，用户名
 	 * @return
 	 */
-	public Page list(String keyword,int pageNo,int pageSize);
+	public PageOption list(String keyword,int pageNo,int pageSize);
 	
 	
 	/**

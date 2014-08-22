@@ -1,7 +1,7 @@
 package com.easysoft.core.manager;
 
 import com.easysoft.core.model.JEAPUser;
-import com.easysoft.framework.db.Page;
+import com.easysoft.framework.db.PageOption;
 
 /**
  * @author andy
@@ -78,7 +78,7 @@ public interface IUserManager {
 	 * @param pageSize
 	 * @return
 	 */
-	public Page list(String keyword,int pageNo,int pageSize);
+	public PageOption list(String keyword,int pageNo,int pageSize);
 
 	
 	/**
