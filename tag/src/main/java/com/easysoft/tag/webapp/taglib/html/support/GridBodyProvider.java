@@ -1,6 +1,6 @@
 package com.easysoft.tag.webapp.taglib.html.support;
 
-import com.easysoft.framework.db.Page;
+import com.easysoft.framework.db.PageOption;
 import com.easysoft.tag.webapp.bean.Grid;
 import com.easysoft.tag.webapp.taglib.IListTaglibParam;
 import com.easysoft.tag.webapp.taglib.IListTaglibProvider;
@@ -23,15 +23,15 @@ public class GridBodyProvider implements IListTaglibProvider {
 			}
 		}
 		//	from	即可以是Page对象，也可以是Grid对象。
-		Page page = null;
+		PageOption pageOption = null;
 		List list = null;
-		if(obj instanceof Page){
-			page = (Page)obj;
-			list  = (List) page.getResult();
+		if(obj instanceof PageOption){
+			pageOption = (PageOption)obj;
+			list  = (List) pageOption.getResult();
 		}
 		else if(obj instanceof Grid){
-			page = ((Grid)obj).getWebpage();
-			list  = (List) page.getResult();
+			pageOption = ((Grid)obj).getWebpage();
+			list  = (List) pageOption.getResult();
 		}else if(obj instanceof List){
 			list = (List)obj;
 		}

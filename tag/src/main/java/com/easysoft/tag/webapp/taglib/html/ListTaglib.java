@@ -50,7 +50,7 @@ public class ListTaglib extends HtmlTaglib{
                 sb.append("display:'"+field.getLabelName()+"'");
                 sb.append(",name:'"+ StringUtil.formatDBFieldName(field.getFieldName())+"'");
                 sb.append(",align:'center'");
-                sb.append(",width:100");
+                sb.append(",width:'auto'");
                 sb.append(",minWidth:60");
                 sb.append("}");
                 if(i!=formEntity.getFields().size()-1){
