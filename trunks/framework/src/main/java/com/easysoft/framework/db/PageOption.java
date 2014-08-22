@@ -18,6 +18,7 @@ public class PageOption implements Serializable {
 
 	private Object data; // 当前页中存放的记录,类型一般为List
 
+
 	private long totalCount; // 总记录数
 
     private int currentPageNo;//当前页
@@ -89,11 +90,15 @@ public class PageOption implements Serializable {
 		return data;
 	}
 
-	/**
+    public void setData(Object data) {
+        this.data = data;
+    }
+
+    /**
 	 * 取该页当前页码,页码从1开始.
 	 */
 	public long getCurrentPageNo() {
-		return start / pageSize + 1;
+		return currentPageNo;
 	}
 
 	/**
