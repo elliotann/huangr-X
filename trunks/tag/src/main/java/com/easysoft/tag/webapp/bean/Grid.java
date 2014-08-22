@@ -1,6 +1,6 @@
 package com.easysoft.tag.webapp.bean;
 
-import com.easysoft.framework.db.Page;
+import com.easysoft.framework.db.PageOption;
 
 /*
 * 数据列表对象基类，派生类支持如下特性
@@ -24,14 +24,14 @@ public abstract class Grid {
 		this.json = json;
 	}
 
-	private Page webpage;
+	private PageOption webpage;
 	
-	public Page getWebpage() {
+	public PageOption getWebpage() {
 		if(webpage==null)
 			webpage = execute(getPageNo(),getPageSize(),getOrder()); 
 		return webpage;
 	}
-	public void setWebpage(Page webpage) {
+	public void setWebpage(PageOption webpage) {
 		this.webpage = webpage;
 	}
 
@@ -91,5 +91,5 @@ public abstract class Grid {
 		return "";
 	}
 	
-	public abstract Page execute(int pageNo,int pageSize,String order);
+	public abstract PageOption execute(int pageNo,int pageSize,String order);
 }
