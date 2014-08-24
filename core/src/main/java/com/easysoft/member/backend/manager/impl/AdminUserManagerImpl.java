@@ -6,6 +6,7 @@ import com.easysoft.core.model.MultiSite;
 import com.easysoft.core.model.Site;
 import com.easysoft.framework.context.webcontext.ThreadContextHolder;
 import com.easysoft.framework.context.webcontext.WebSessionContext;
+import com.easysoft.framework.db.PageOption;
 import com.easysoft.framework.utils.DateUtil;
 import com.easysoft.framework.utils.StringUtil;
 import com.easysoft.member.backend.dao.IAdminUserDao;
@@ -263,5 +264,15 @@ public class AdminUserManagerImpl  implements IAdminUserManager {
         params.put("userId",userId);
         return adminUserDao.queryUserByName(params);
 
+    }
+
+    @Override
+    public PageOption queryForPage(PageOption pageOption) {
+        List<AdminUser> adminUsers = adminUserDao.queryForPage(pageOption);
+
+        if(!adminUsers.isEmpty()){
+            pageOption.setData(adminUsers);
+        }
+        return pageOption;
     }
 }

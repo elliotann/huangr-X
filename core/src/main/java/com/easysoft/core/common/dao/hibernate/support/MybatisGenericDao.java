@@ -56,7 +56,7 @@ public class MybatisGenericDao<T,PK extends Serializable> extends SqlMapClientDa
     }
 
     @Override
-    public List<T> queryByPage(PageOption pageOption) {
+    public List<T> queryForPage(PageOption pageOption) {
         return null;
     }
 }
