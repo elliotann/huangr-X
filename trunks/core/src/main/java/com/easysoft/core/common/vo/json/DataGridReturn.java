@@ -10,20 +10,20 @@ import java.util.List;
  */
 public class DataGridReturn {
 
-	public DataGridReturn(Integer total, List rows) {
+	public DataGridReturn(long total, List rows) {
 		this.total = total;
 		this.rows = rows;
 	}
 
-	private Integer total;// 总记录数
+	private long total;// 总记录数
 	private List rows;// 每行记录
 	private List footer;
 
-	public Integer getTotal() {
+	public long getTotal() {
 		return total;
 	}
 
-	public void setTotal(Integer total) {
+	public void setTotal(long total) {
 		this.total = total;
 	}
 

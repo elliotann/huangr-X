@@ -1,6 +1,7 @@
 package com.easysoft.member.backend.manager;
 
 import com.easysoft.core.common.service.IGenericService;
+import com.easysoft.framework.db.PageOption;
 import com.easysoft.member.backend.model.AdminUser;
 
 import java.util.List;
@@ -99,6 +100,13 @@ public interface IAdminUserManager {
 	 * @return
 	 */
 	public List list( ) ;
+
+    /**
+     * 分页查询
+     * @param pageOption
+     * @return
+     */
+    public PageOption queryForPage(PageOption pageOption);
 	
 	
 	/**

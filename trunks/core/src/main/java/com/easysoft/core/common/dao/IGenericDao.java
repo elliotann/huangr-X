@@ -34,7 +34,7 @@ public interface IGenericDao<T,PK extends Serializable> {
      * @param pageOption
      * @return
      */
-    public List<T> queryByPage(PageOption pageOption);
+    public List<T> queryForPage(PageOption pageOption);
 
     public T queryById(PK id);
 
