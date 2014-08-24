@@ -211,8 +211,11 @@
         <tr id="roletr">
             <td align="right" class="l-table-edit-td" valign="top">角色:</td>
             <td colspan="3" class="value">
-                <c:forEach var="role" items="${roleList }">
-                    &nbsp;<input id="roleids${role.roleid }" type="checkbox" name="roleids"  value="${role.roleid }"/><label for="roleids">${role.rolename }&nbsp;</label><br />
+                <c:forEach var="role" items="${roleList }" varStatus="roleSta">
+                    &nbsp;&nbsp;<input id="roleids${role.roleid }" type="checkbox" name="roleids"  value="${role.roleid }"/><label for="roleids${role.roleid }">${role.rolename }&nbsp;</label>
+                    <c:if test="${(roleSta.index+1)%4==0}">
+                        <br/>
+                    </c:if>
                 </c:forEach>
 
             </td>
