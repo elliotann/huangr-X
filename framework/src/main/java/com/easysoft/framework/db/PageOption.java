@@ -21,7 +21,7 @@ public class PageOption implements Serializable {
 
 	private long totalCount; // 总记录数
 
-    private int currentPageNo;//当前页
+    private int currentPageNo=1;//当前页
 
 	/**
 	 * 构造方法，只构造空页.
