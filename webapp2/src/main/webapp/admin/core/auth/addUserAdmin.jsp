@@ -117,8 +117,7 @@
     body{ font-size:12px;}
     .l-table-edit {}
     .l-table-edit-td{ padding:4px;}
-    .l-button-submit,.l-button-test{width:80px; float:left; margin-left:10px; padding-bottom:2px;}
-    .l-verify-tip{ left:230px; top:120px;}
+
 
 </style>
 <form name="objForm" method="post"   id="objForm">
@@ -156,7 +155,7 @@
         <tr>
             <td align="right" class="l-table-edit-td">用户名:</td>
             <td align="left" class="l-table-edit-td">
-                <input name="username" type="text" id="username" class="form-control"/>
+                <input name="username" type="text" id="username" class="form-control" />
             </td>
             <td align="left"></td>
         </tr>
@@ -177,8 +176,12 @@
         <tr id="roletr">
             <td align="right" class="l-table-edit-td" valign="top">角色:</td>
             <td colspan="3" class="value">
-                <c:forEach var="role" items="${roleList }">
-                    &nbsp;<input id="roleids" type="checkbox" name="roleids"  value="${role.roleid }"/><label for="roleids">${role.rolename }&nbsp;</label><br />
+
+                <c:forEach var="role" items="${roleList }" varStatus="roleSta">
+                    &nbsp;&nbsp;<input  type="checkbox" name="roleids"  value="${role.roleid }"/><label>${role.rolename }&nbsp;</label>
+                    <c:if test="${(roleSta.index+1)%4==0}">
+                        <br/>
+                    </c:if>
                 </c:forEach>
 
             </td>
