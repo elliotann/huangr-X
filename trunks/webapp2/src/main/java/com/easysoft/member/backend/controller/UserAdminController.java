@@ -4,7 +4,7 @@ import com.easysoft.core.common.controller.BaseController;
 import com.easysoft.core.common.vo.json.AjaxJson;
 import com.easysoft.core.common.vo.json.DataGridReturn;
 import com.easysoft.core.context.EsfContext;
-import com.easysoft.framework.db.Page;
+import com.easysoft.framework.db.PageOption;
 import com.easysoft.framework.utils.JsonUtils;
 import com.easysoft.member.backend.manager.IAdminUserManager;
 import com.easysoft.member.backend.manager.IPermissionManager;
@@ -12,7 +12,6 @@ import com.easysoft.member.backend.manager.IRoleManager;
 import com.easysoft.member.backend.manager.impl.UserServiceFactory;
 import com.easysoft.member.backend.model.AdminUser;
 import com.easysoft.member.backend.model.OperationBtn;
-import com.easysoft.member.backend.model.RoleAuth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,10 +48,10 @@ public class UserAdminController extends BaseController{
         return new ModelAndView("admin/core/auth/useradminlist",map);
     }
     @RequestMapping(params = {"dataGrid"})
-    public ModelAndView dataGrid(Page page){
+    public ModelAndView dataGrid(PageOption pageOption){
 
-        List userList= this.adminUserManager.list();
-        DataGridReturn dataGridReturn = new DataGridReturn(userList.size(),userList);
+        this.adminUserManager.queryForPage(pageOption);
+        DataGridReturn dataGridReturn = new DataGridReturn(pageOption.getTotalCount(),(List<AdminUser>)pageOption.getResult());
         String json = JsonUtils.beanToJson(dataGridReturn);
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("json",json);
