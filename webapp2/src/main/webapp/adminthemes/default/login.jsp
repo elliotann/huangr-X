@@ -98,7 +98,7 @@
 <!--Login div-->
 <div class="clear"></div>
 <div id="versionBar">
-    <div class="copyright">&copy; 版权所有 <span class="tip"><a href="#" title="jeap开发平台">jeap</a> (推荐使用IE8+,谷歌浏览器可以获得更快,更安全的页面响应速度)技术支持:<a href="#" title="JEAP开发平台">jeap</a></span></div>
+    <div class="copyright">&copy; 版权所有 <span class="tip"><a href="#" title="jeap开发平台">jeap</a> (推荐使用IE9+,谷歌浏览器可以获得更快,更安全的页面响应速度)技术支持:<a href="#" title="JEAP开发平台">jeap</a></span></div>
 </div>
 <!-- Link JScript-->
 <script type="text/javascript" src="${staticserver }/js/common/jquery-1.6.4.js"></script>
