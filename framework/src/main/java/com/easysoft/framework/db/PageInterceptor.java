@@ -1,5 +1,7 @@
 package com.easysoft.framework.db;
 
+import org.apache.ibatis.reflection.MetaObject;
+import org.apache.ibatis.reflection.SystemMetaObject;
 import org.apache.ibatis.scripting.defaults.DefaultParameterHandler;
 import org.apache.ibatis.executor.parameter.ParameterHandler;
 import org.apache.ibatis.executor.statement.RoutingStatementHandler;
@@ -22,6 +24,7 @@ import java.util.Properties;
  */
 @Intercepts({ @Signature(method = "prepare", type = StatementHandler.class, args = { Connection.class }) })
 public class PageInterceptor implements Interceptor {
+    public static final ThreadLocal<PageOption> localPage = new ThreadLocal<PageOption>();
     private String databaseType;// 数据库类型，不同的数据库有不同的分页方法
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
@@ -29,10 +32,11 @@ public class PageInterceptor implements Interceptor {
         final StatementHandler delegate = (StatementHandler) ReflectUtil.getFieldValue(handler, "delegate");
         final BoundSql boundSql = delegate.getBoundSql();
         final Object obj = boundSql.getParameterObject();
+        MetaObject metaStatementHandler = SystemMetaObject.forObject(delegate);
         if (obj instanceof PageOption) {
             final PageOption page = (PageOption) obj;
             final String sql = boundSql.getSql();
-            MappedStatement mappedStatement = (MappedStatement) ReflectUtil.getFieldValue(delegate, "mappedStatement");
+            MappedStatement mappedStatement = (MappedStatement) metaStatementHandler.getValue("mappedStatement");
             Connection connection = (Connection) invocation.getArgs()[0];
             this.setTotalRecord(page, mappedStatement, connection);
             final String pageSql = this.getPageSql(page, sql);
