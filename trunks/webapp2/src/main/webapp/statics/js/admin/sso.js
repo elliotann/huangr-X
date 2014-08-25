@@ -52,6 +52,21 @@ jeap.SSO={
      * 进行登录操作
      */
     login:function(){
+        if($("#username").val()==""){
+            alert("用户名不能为空!");
+            $("#username").focus();
+            return false;
+        }
+        if($("#password").val()==""){
+            alert("密码不能为空!");
+            $("#password").focus();
+            return false;
+        }
+        if($("#valid_code").val()==""){
+            alert("验证码不能为空!");
+            $("#valid_code").focus();
+            return false;
+        }
         this.login_btn.attr("disabled",true).val("正在登陆...");
         var that =this;
         var options = {
@@ -60,6 +75,7 @@ jeap.SSO={
             dataType : 'json',
             success : function(result) {
                 if(result.result==0){
+
                     /*						that.domains = result.domains;
                      that.userid =result.userid;
                      that.siteid = result.siteid;
@@ -71,7 +87,9 @@ jeap.SSO={
                 }
             },
             error : function(e) {
+                $("#login_btn").attr("disabled",false).val("确定");
                 alert("出现错误 ，请重试");
+
 
             }
         };
