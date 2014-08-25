@@ -48,7 +48,7 @@ public class UserAdminController extends BaseController{
         return new ModelAndView("admin/core/auth/useradminlist",map);
     }
     @RequestMapping(params = {"dataGrid"})
-    public ModelAndView dataGrid(PageOption pageOption,int currentPageNo){
+    public ModelAndView dataGrid(PageOption pageOption,Integer currentPageNo,String username){
         pageOption.setCurrentPageNo(currentPageNo);
         this.adminUserManager.queryForPage(pageOption);
         DataGridReturn dataGridReturn = new DataGridReturn(pageOption.getTotalCount(),(List<AdminUser>)pageOption.getResult());
