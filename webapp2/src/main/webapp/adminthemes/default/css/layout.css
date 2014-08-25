@@ -1,0 +1,161 @@
+@media print {
+    * {
+        background: none repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
+        box-shadow: none !important;
+        color: #000000 !important;
+        text-shadow: none !important;
+    }
+    a, a:visited {
+        text-decoration: underline;
+    }
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
+    .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after {
+        content: "";
+    }
+    pre, blockquote {
+        border: 1px solid #999999;
+        page-break-inside: avoid;
+    }
+    thead {
+        display: table-header-group;
+    }
+    tr, img {
+        page-break-inside: avoid;
+    }
+    img {
+        max-width: 100% !important;
+    }
+    @page {
+        margin: 2cm 0.5cm;
+    }
+    p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+    }
+    h2, h3 {
+        page-break-after: avoid;
+    }
+    .navbar {
+        display: none;
+    }
+    .table td, .table th {
+        background-color: #FFFFFF !important;
+    }
+    .btn > .caret, .dropup > .btn > .caret {
+        border-top-color: #000000 !important;
+    }
+    .label {
+        border: 1px solid #000000;
+    }
+    .table {
+        border-collapse: collapse !important;
+    }
+    .table-bordered th, .table-bordered td {
+        border: 1px solid #DDDDDD !important;
+    }
+}
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+
+.tac {
+    text-align: center;
+}
+
+.row + .row {
+    margin-top: 20px;
+}
+.ov_boxes {
+    display: inline-block;
+    list-style: none outside none;
+    margin: 0 0 -20px;
+    padding: 0;
+    text-align: center;
+}
+.ov_boxes li {
+    background: -moz-linear-gradient(center top , #F9F9F9 0%, #EDEDED 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 1px solid #E2E2E2;
+    border-radius: 4px;
+    box-shadow: 0 1px 0 0 #FFFFFF inset;
+    display: inline-block;
+    line-height: 18px;
+    margin: 0 10px 10px;
+    padding: 0 10px;
+}
+.ov_boxes .p_canvas {
+    border-right: 1px solid #DCDCDC;
+    box-shadow: 1px 0 0 0 #FFFFFF;
+    float: left;
+    margin-right: 12px;
+    padding: 10px 14px 6px 4px;
+}
+.ov_boxes .ov_text {
+    float: left;
+    font-size: 12px;
+    padding: 9px 10px 7px 0;
+    text-align: left;
+    width: 180px;
+}
+.ov_boxes .ov_text strong {
+    display: block;
+    font-size: 16px;
+}
+
+
+.dshb_icoNav {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+.dshb_icoNav li {
+    background: -moz-linear-gradient(center top , #F9F9F9 0%, #EFEFEF 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 1px solid #E2E2E2;
+    border-radius: 6px;
+    box-shadow: 0 1px 0 0 #FFFFFF inset;
+    display: inline-block;
+    list-style: none outside none;
+    margin: 0 5px 10px;
+    text-align: center;
+}
+.dshb_icoNav li:hover {
+    border-color: #D2D2D2;
+    box-shadow: 0 0 6px #CCCCCC;
+}
+.dshb_icoNav li a {
+    background-position: center 10px;
+    background-repeat: no-repeat;
+    color: #222222;
+    display: block;
+    font-size: 12px;
+    height: 72px;
+    padding: 42px 8px 8px;
+    position: relative;
+    width: 110px;
+}
+.dshb_icoNav li a:hover {
+    text-decoration: none;
+}
+.dshb_icoNav .label {
+    position: absolute;
+    right: -5px;
+    text-shadow: none;
+    top: -5px;
+}
+
+.clearfix:before, .clearfix:after {
+    content: " ";
+    display: table;
+}
+.clearfix:after {
+    clear: both;
+}
+
+
+
+
