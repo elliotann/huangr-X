@@ -61,6 +61,30 @@
             return "禁用";
         }
     }
+
+    function query(){
+
+
+        $.ajax({
+            type:'post',
+            url:'userAdmin.do?dataGrid&ajax=yes&currentPageNo=1',
+            dataType:'json',
+            success:function(result){
+                if(result.total>0){
+                    griddata = JSON.stringify(result);
+                    listgrid.options.data = $.extend(true, {}, griddata);
+                    listgrid.reload();
+                }
+            },
+            error:function(e){
+
+            }
+        });
+
+
+        return false;
+    }
+
 </script>
 <style>
 
@@ -95,7 +119,7 @@
         <div class="navline" style="margin-bottom:10px; margin-top:4px;"></div>
         <div class="searchbox">
             <form>
-                用户名:<input type="text" class="form-control" style="height: 13px">   <button class="btn btn-info" style="height: 25px">查询</button>
+                用户名:<input type="text" class="form-control" style="height: 13px" >   <button class="btn btn-info" style="height: 25px" onclick="return query();">查询</button>
             </form>
             <div class="l-clear"></div>
         </div>
