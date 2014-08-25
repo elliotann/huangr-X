@@ -132,18 +132,17 @@ var tab;
 $(function () {
     BackendUi.init(menu, null);
     BackendUi.disMenu();
-    //tabid计数器，保证tabid不会重复
-    var tabidcounter = 0;
+    $('#accordion h3').click(function() {
+        if($(this).hasClass('open')) {
+            $(this).removeClass('open');
+            $(this).next().slideUp('fast');
+        } else {
+            $(this).addClass('open');
+            $(this).next().slideDown('fast');
+        } return false;
+    });
 
 
 })
-
-function f_addTab(tabid, text, url) {
-
-    var tabHeight = document.getElementById("layout1").offsetHeight - 30;
-
-    tab.addTabItem({ tabid: tabid, text: text, url: url, height: tabHeight });
-
-}
 
 

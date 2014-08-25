@@ -14,9 +14,7 @@
     <link href="${context}/css/grid.css" rel="stylesheet" type="text/css" />
     <link href="${context}/css/input.css" rel="stylesheet" type="text/css" />
     <link href="${context}/css/validate.css" rel="stylesheet" type="text/css" />
-    <link href="${context}/css/dialog.css" rel="stylesheet" type="text/css" />
     <link href="${context}/css/main.css" rel="stylesheet" type="text/css" />
-    <link href="${context}/css/menu.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="${staticserver }/js/common/jquery-1.6.4.js"></script>
 
 
@@ -113,8 +111,8 @@
         <span>管理员管理</span>
     </div>--%>
     <!-- breadcrumbs -->
-    <div class="left" id="right_content">
-        <iframe src="../adminthemes/default/welcome.jsp" scrolling="no" id="iframe" name="iframe"></iframe>
+    <div class="left" id="right_content" >
+        <iframe src="../core/admin/index.do?list" scrolling="no" id="iframe" name="iframe" style="width: 100%;height: 800px"></iframe>
     </div>
 </div>
 
