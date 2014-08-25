@@ -50,7 +50,7 @@ public class UserAdminController extends BaseController{
     @RequestMapping(params = {"dataGrid"})
     public ModelAndView dataGrid(PageOption pageOption,Integer currentPageNo,String username){
         pageOption.setCurrentPageNo(currentPageNo);
-        this.adminUserManager.queryForPage(pageOption);
+        this.adminUserManager.queryForPage(pageOption,username);
         DataGridReturn dataGridReturn = new DataGridReturn(pageOption.getTotalCount(),(List<AdminUser>)pageOption.getResult());
         String json = JsonUtils.beanToJson(dataGridReturn);
         Map<String,Object> map = new HashMap<String, Object>();
