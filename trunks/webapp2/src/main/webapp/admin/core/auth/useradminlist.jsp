@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ include file="/commons/taglibs.jsp"%>
+
+
+
+
+
+
 <link href="${context }/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
 <link href="${context }/js/ligerui/skins/ligerui-icons.css" rel="stylesheet" type="text/css" />
 <link href="${context }/js/ligerui/skins/Gray2014/css/all.css" rel="stylesheet" type="text/css" />
@@ -55,10 +61,6 @@
             return "禁用";
         }
     }
-    function query(){
-        listgrid.reload();
-        return false;
-    }
 </script>
 <style>
 
@@ -93,7 +95,7 @@
         <div class="navline" style="margin-bottom:10px; margin-top:4px;"></div>
         <div class="searchbox">
             <form>
-                用户名:<input type="text" class="form-control" style="height: 13px" name="username">   <button class="btn btn-info" style="height: 25px" onclick="return query()">查询</button>
+                用户名:<input type="text" class="form-control" style="height: 13px">   <button class="btn btn-info" style="height: 25px">查询</button>
             </form>
             <div class="l-clear"></div>
         </div>
