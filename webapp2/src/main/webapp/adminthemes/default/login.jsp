@@ -16,6 +16,7 @@
     <!--[if IE]>
     <style type="text/css"> img, #testdiv, .testbox{behavior: url(http://yourdomain.com/js/ie-css3.htc);} </style>
     <![endif]-->
+
 </head>
 
 <body>
@@ -49,9 +50,14 @@
         </form>
     </div>
 </div>
+<div class="clear"></div>
+<div id="versionBar">
+    <div class="copyright">&copy; 版权所有 <span class="tip"><a href="#" title="jeap开发平台">jeap</a> (推荐使用IE9+,谷歌浏览器可以获得更快,更安全的页面响应速度)技术支持:<a href="#" title="JEAP开发平台">jeap</a></span></div>
+</div>
 <script type="text/javascript" src="${staticserver }/js/common/jquery-1.6.4.js"></script>
 <script type="text/javascript" src="${staticserver }/js/admin/sso.js"></script>
-<script type="text/javascript" src="js/placeholder.js"></script>
+<script type="text/javascript" src="/jeap/adminthemes/default/js/login/placeholder.js"></script>
+<SCRIPT  src="${staticserver }/js/common/jquery-form-2.33.js" type="text/javascript"></SCRIPT>
 <!--[if IE 6]>
 <script type="text/javascript" src="js/belatedpng.js" ></script>
 <script type="text/javascript">

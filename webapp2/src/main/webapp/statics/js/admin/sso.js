@@ -180,7 +180,9 @@ $(function(){
             location.href ="main.jsp";
         },
         fail:function(e){
-            alert(e);
+            $("#tipMsg").removeClass("alert-info");
+            $("#tipMsg").addClass("alert-danger");
+            $("#tipMsg").html(e);
         }
 
     });
