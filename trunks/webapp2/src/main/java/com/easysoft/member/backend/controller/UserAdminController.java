@@ -12,6 +12,7 @@ import com.easysoft.member.backend.manager.IRoleManager;
 import com.easysoft.member.backend.manager.impl.UserServiceFactory;
 import com.easysoft.member.backend.model.AdminUser;
 import com.easysoft.member.backend.model.OperationBtn;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,7 +50,15 @@ public class UserAdminController extends BaseController{
     }
     @RequestMapping(params = {"dataGrid"})
     public ModelAndView dataGrid(PageOption pageOption,Integer currentPageNo,String username){
-        pageOption.setCurrentPageNo(currentPageNo);
+        if(currentPageNo==null){
+            pageOption.setCurrentPageNo(1);
+        }else{
+            pageOption.setCurrentPageNo(currentPageNo);
+        }
+        if(StringUtils.isEmpty(username)){
+            username=null;
+        }
+
         this.adminUserManager.queryForPage(pageOption,username);
         DataGridReturn dataGridReturn = new DataGridReturn(pageOption.getTotalCount(),(List<AdminUser>)pageOption.getResult());
         String json = JsonUtils.beanToJson(dataGridReturn);

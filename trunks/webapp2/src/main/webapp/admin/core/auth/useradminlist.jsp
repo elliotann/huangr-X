@@ -64,24 +64,7 @@
 
     function query(){
 
-
-        $.ajax({
-            type:'post',
-            url:'userAdmin.do?dataGrid&ajax=yes&currentPageNo=1',
-            dataType:'json',
-            success:function(result){
-                if(result.total>0){
-                    griddata = JSON.stringify(result);
-                    listgrid.options.data = $.extend(true, {}, griddata);
-                    listgrid.reload();
-                }
-            },
-            error:function(e){
-
-            }
-        });
-
-
+        listgrid.loadServerData("username="+$("#usernameQry").val());
         return false;
     }
 
@@ -110,25 +93,10 @@
     }
 </style>
 
-<div id="searchbar">
-    <div style=" width:100%">
-        <div class="searchtitle">
-            <span>搜索</span><img src="/jeap/admin/images/icons/searchtool.gif" />
-            <div class="togglebtn"></div>
-        </div>
-        <div class="navline" style="margin-bottom:10px; margin-top:4px;"></div>
-        <div class="searchbox">
-            <form>
-                用户名:<input type="text" class="form-control" style="height: 13px" >   <button class="btn btn-info" style="height: 25px" onclick="return query();">查询</button>
-            </form>
-            <div class="l-clear"></div>
-        </div>
 
-    </div>
 
-</div>
-
-<grid:dataGrid action="userAdmin.do?dataGrid&ajax=yes" height="99%"  rownumbers="true" hasSearchBar="false">
+<grid:dataGrid action="userAdmin.do?dataGrid&ajax=yes" height="99%"  rownumbers="true" hasSearchBar="true">
+    <grid:search label="用户名:" name="username"/>
     <grid:column title="ID" field="userid" align="center" width="100" minWidth="60"/>
     <grid:column title="用户名" field="username"  minWidth="100"/>
     <grid:column title="姓名" field="realname"  minWidth="140"/>
@@ -136,9 +104,5 @@
     <grid:toolbar title="增加" clickFun="addUser" icon="add"/>
     <grid:toolbar title="修改" clickFun="modifyUser" icon="modify"/>
     <grid:toolbar title="删除" clickFun="delUser" icon="delete"/>
-    <grid:toolbar title="自定义搜索" clickFun="customSearch" icon="delete"/>
+
 </grid:dataGrid>
-
-<div style="display:none;">
-
-</div>
