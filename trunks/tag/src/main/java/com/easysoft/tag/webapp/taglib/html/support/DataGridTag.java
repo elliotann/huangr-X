@@ -1,6 +1,7 @@
 package com.easysoft.tag.webapp.taglib.html.support;
 
 import com.easysoft.tag.webapp.taglib.vo.DataGridColumn;
+import com.easysoft.tag.webapp.taglib.vo.SearchControl;
 import com.easysoft.tag.webapp.taglib.vo.ToolBar;
 import org.apache.commons.lang3.StringUtils;
 
@@ -29,7 +30,7 @@ public class DataGridTag extends BodyTagSupport{
 
     private List<DataGridColumn> columns = new ArrayList<DataGridColumn>();
     private List<ToolBar> toolBars = new ArrayList<ToolBar>();
-
+    private List<SearchControl> searchControls = new ArrayList<SearchControl>();//搜索栏
     public void setAction(String action) {
         this.action = action;
     }
@@ -62,10 +63,13 @@ public class DataGridTag extends BodyTagSupport{
         this.hasSearchBar = hasSearchBar;
     }
 
+
+
     @Override
     public int doStartTag() throws JspException {
         columns.clear();
         toolBars.clear();
+        searchControls.clear();
         return EVAL_PAGE;
     }
 
@@ -75,7 +79,10 @@ public class DataGridTag extends BodyTagSupport{
         try {
             if("ligerui".equals(style)){
                 out.write(end());
-            }else{
+            }else if("html".equals(style)){
+                out.write(endHtml());
+            }
+            else{
                 out.write("other");
             }
         } catch (IOException e) {
@@ -86,6 +93,9 @@ public class DataGridTag extends BodyTagSupport{
     }
 
 
+    public String endHtml(){
+
+    }
 
 
 
@@ -141,7 +151,7 @@ public class DataGridTag extends BodyTagSupport{
         }
 
         sb.append("],");
-        sb.append("url:'"+action+"',  pageSize:30 ,");
+        sb.append("url:'"+action+"',  pageSize:20 ,");
         sb.append("toolbar: { items: [");
         int j=0;
         for(ToolBar toolBar : toolBars){
@@ -161,30 +171,41 @@ public class DataGridTag extends BodyTagSupport{
         sb.append("});");
         sb.append("});");
         sb.append("</script>");
-        sb.append("<div class=\"grid\">");
         if(this.hasSearchBar){
             sb.append(buildSearchBar());
         }
+        sb.append("<div class=\"grid\">");
+
         sb.append("<div id=\"maingrid\"></div>");
-        sb.append("</div>");
+        sb.append("</div><div style=\"display:none;\"></div>");
         return sb.toString();
     }
 
     private String buildSearchBar(){
-        StringBuilder sb = new StringBuilder("<div>");
+        StringBuilder sb = new StringBuilder();
+        sb.append("<div id=\"searchbar\">");
         sb.append("<div style=\" width:100%\">");
         sb.append("<div class=\"searchtitle\">");
-        sb.append("<span>搜索</span><img src=\"/jeap/statics/images/default/searchtool.gif\" />");
-        sb.append(" <div class=\"togglebtn\"></div>");
-        sb.append("  </div>");
-        sb.append("<div class=\"navline\" style=\"margin-bottom:4px; margin-top:4px;\"></div>");
+        sb.append(" <span>搜索</span><img src=\"/jeap/admin/images/icons/searchtool.gif\" />");
+        sb.append("  <div class=\"togglebtn\"></div>");
+        sb.append("</div>");
+        sb.append(" <div class=\"navline\" style=\"margin-bottom:10px; margin-top:4px;\"></div>");
         sb.append(" <div class=\"searchbox\">");
-        sb.append("<form id=\"searchForm\">");
+        sb.append("<form>");
+        if(!searchControls.isEmpty()){
+            for(SearchControl control : searchControls){
+                sb.append(control.getLabel());
+                sb.append("<input type=\"text\" class=\"form-control\" style=\"height: 10px\"");
+                sb.append(" id='"+control.getName()+"Qry'/>");
+
+            }
+
+        }
+
+        sb.append(" <button class=\"btn btn-info\" style=\"height: 25px\" onclick=\"return query();\">查询</button>");
         sb.append("</form>");
         sb.append("<div class=\"l-clear\"></div>");
-        sb.append("</div>");
-        sb.append("</div>");
-        sb.append("</div>");
+        sb.append("</div></div></div>");
         return sb.toString();
     }
 
@@ -193,5 +214,9 @@ public class DataGridTag extends BodyTagSupport{
     }
     public void setToolBars(ToolBar toolBar){
         toolBars.add(toolBar);
+    }
+
+    public void setSearchControls(SearchControl searchControl){
+        searchControls.add(searchControl);
     }
 }
