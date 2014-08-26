@@ -2,6 +2,8 @@ package com.easysoft.framework.db;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 分页对象. 包含当前页数据及分页信息如总记录数.
@@ -18,7 +20,7 @@ public class PageOption implements Serializable {
 
 	private Object data; // 当前页中存放的记录,类型一般为List
 
-
+    private Map<String,Object> searchConditions = new HashMap<String,Object>();//条件集合
 	private long totalCount; // 总记录数
 
     private int currentPageNo=1;//当前页
@@ -139,5 +141,17 @@ public class PageOption implements Serializable {
 
     public void setCurrentPageNo(int currentPageNo) {
         this.currentPageNo = currentPageNo;
+    }
+
+    public void addSearch(String key,Object value){
+        searchConditions.put(key,value);
+    }
+
+    public Map<String, Object> getSearchConditions() {
+        return searchConditions;
+    }
+
+    public void setSearchConditions(Map<String, Object> searchConditions) {
+        this.searchConditions = searchConditions;
     }
 }
