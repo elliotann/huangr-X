@@ -1667,9 +1667,7 @@ input.btn-block[type="submit"], input.btn-block[type="reset"], input.btn-block[t
 .glyphicon-star-empty:before {
     content: "";
 }
-.glyphicon-user:before {
-    content: "";
-}
+
 .glyphicon-film:before {
     content: "";
 }
@@ -2213,9 +2211,7 @@ input.btn-block[type="submit"], input.btn-block[type="reset"], input.btn-block[t
 .glyphicon-camera:before {
     content: "📷";
 }
-.glyphicon-lock:before {
-    content: "🔒";
-}
+
 .glyphicon-bell:before {
     content: "🔔";
 }

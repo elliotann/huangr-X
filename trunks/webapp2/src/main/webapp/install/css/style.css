@@ -626,16 +626,7 @@ a.rowlink {
     margin: 0 20px;
     max-width: inherit;
 }
-.login_page .login_box {
-    background: none repeat scroll 0 0 #FFFFFF;
-    border: 1px solid #CCCCCC;
-    border-radius: 6px;
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
-    margin: 0 auto 24px;
-    position: relative;
-    top: 50%;
-    width: 380px;
-}
+
 .login_page .top_b {
     background: none repeat scroll 0 0 #E0E0E0;
     border-bottom: 1px solid #CCCCCC;
