@@ -51,7 +51,7 @@
     }
     $(function ()
     {
-        listgrid =$("#maingrid").ligerGrid({
+        /*listgrid =$("#maingrid").ligerGrid({
                     height:'99%',
                     columns: [
                         { display: 'id', name: 'roleid', align: 'center', width: 100, minWidth: 60 },
@@ -68,7 +68,7 @@
                         { text: '设置权限', click: setAuth, icon: 'modify' }
                     ]
                     }
-                });
+                });*/
 
 
         $("#pageloading").hide();
@@ -82,7 +82,11 @@
         }
         addOrUpdateDialog(null,'权限点','auth.do?add&ajax=yes&roleId='+row.roleid,500,700);
     }
+    function query(){
 
+        listgrid.loadServerData("username="+$("#usernameQry").val());
+        return false;
+    }
 
 </script>
 <style>
@@ -109,29 +113,13 @@
     }
 </style>
 
-<div id="searchbar">
-    <div style=" width:100%">
-        <div class="searchtitle">
-            <span>搜索</span><img src="/jeap/admin/images/icons/searchtool.gif" />
-            <div class="togglebtn"></div>
-        </div>
-        <div class="navline" style="margin-bottom:10px; margin-top:4px;"></div>
-        <div class="searchbox">
-            <form>
-                角色名称:<input type="text" class="form-control" style="height: 10px">   <button class="btn btn-info" style="height: 25px">查询</button>
-            </form>
-            <div class="l-clear"></div>
-        </div>
-
-    </div>
-
-</div>
-
-<div class="grid">
-
-    <div id="maingrid"></div>
-</div>
-
-<div style="display:none;">
-
-</div>
+<grid:dataGrid action="role.do?dataGrid&ajax=yes" height="99%"  rownumbers="true" hasSearchBar="true">
+    <grid:search label="角色名称:" name="rolename"/>
+    <grid:column title="ID" field="roleid" align="center" width="100" minWidth="60"/>
+    <grid:column title="角色名称" field="rolename"  minWidth="120"/>
+    <grid:column title="描述" field="rolememo"  minWidth="140"/>
+    <grid:toolbar title="增加" clickFun="addRole" icon="add"/>
+    <grid:toolbar title="修改" clickFun="modifyUser" icon="modify"/>
+    <grid:toolbar title="删除" clickFun="delUser" icon="delete"/>
+    <grid:toolbar title="设置权限" clickFun="setAuth" icon="modify"/>
+</grid:dataGrid>

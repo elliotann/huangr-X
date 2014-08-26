@@ -81,17 +81,6 @@
                     }
                 }
             });
-
-            $("#notSuperChk").click(function(){
-
-                if(this.checked)
-                    $("#roletr").show();
-            });
-            $("#superChk").click(function(){
-
-                if(this.checked)
-                    $("#roletr").hide();
-            });
         });
         function submitForm(){
             $("#objForm").submit();
@@ -170,7 +159,6 @@
             <td align="right" class="l-table-edit-td" valign="top">类型:</td>
             <td align="left" class="l-table-edit-td">
                 <input id="notSuperChk" type="radio" name="founder" value="0" checked="checked" /><label for="notSuperChk">普通管理员</label>
-                <input id="superChk" type="radio" name="founder" value="1" /><label for="superChk">超级管理员</label>
             </td><td align="left"></td>
         </tr>
         <tr id="roletr">

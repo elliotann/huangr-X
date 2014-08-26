@@ -94,14 +94,7 @@
             }
 
         });
-        $("#notSuperChk").click(function(){
 
-             $("#roletr").show();
-        });
-        $("#superChk").click(function(){
-
-             $("#roletr").hide();
-        });
         <c:forEach var="userRole" items="${userRoles }">
         $("#roleids${userRole.roleid}").attr("checked",true);
         </c:forEach>
@@ -205,7 +198,6 @@
             <td align="right" class="l-table-edit-td" valign="top">类型:</td>
             <td align="left" class="l-table-edit-td">
                 <input id="notSuperChk" type="radio" name="founder" value="0" checked="checked" /><label for="notSuperChk">普通管理员</label>
-                <input id="superChk" type="radio" name="founder" value="1" /><label for="superChk">超级管理员</label>
             </td><td align="left"></td>
         </tr>
         <tr id="roletr">
