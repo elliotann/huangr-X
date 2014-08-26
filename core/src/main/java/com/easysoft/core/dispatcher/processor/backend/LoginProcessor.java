@@ -147,7 +147,7 @@ public class LoginProcessor implements Processor {
 			exception.printStackTrace();
 			this.logger.error(exception.getMessage(),exception.fillInStackTrace());
 			Response response = new StringResponse();
-			response.setContent("{'result':1,'message':'"+exception.getMessage()+"'}");
+			response.setContent("{\"result\":1,\"message\":\""+exception.getMessage()+"\"}");
 			return response;
 		}	 
 	}

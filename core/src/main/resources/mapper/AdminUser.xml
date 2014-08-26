@@ -19,13 +19,16 @@
         insert t_adminuser (username,password,state,realname,email,userno,userdept,remark,dateline,founder,siteid)
          values (#{username},#{password},#{state},#{realname},#{email},#{userno},#{userdept},#{remark},#{dateline},#{founder},#{siteid})
     </insert>
-    <select id="queryForPage" parameterType="AdminUser" resultMap="adminUserMap">
-        select * from t_adminuser
+    <select id="queryForPage"  resultMap="adminUserMap">
+        select * from t_adminuser where username!='admin'
+        <if test=" searchConditions.username!=null ">
+            and username=#{searchConditions.username}
+        </if>
     </select>
     <select id="queryUserByName" resultMap="adminUserMap">
         select * from t_adminuser where username=#{username}
         <if test="userId!=0">
-            ,and userid!=#{userId}
+            and userid!=#{userId}
         </if>
     </select>
     <select id="queryById" resultMap="adminUserMap">

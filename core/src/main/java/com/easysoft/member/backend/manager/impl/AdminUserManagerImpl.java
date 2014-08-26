@@ -267,7 +267,8 @@ public class AdminUserManagerImpl  implements IAdminUserManager {
     }
 
     @Override
-    public PageOption queryForPage(PageOption pageOption) {
+    public PageOption queryForPage(PageOption pageOption,String username) {
+        pageOption.addSearch("username",username);
         List<AdminUser> adminUsers = adminUserDao.queryForPage(pageOption);
 
         if(!adminUsers.isEmpty()){
