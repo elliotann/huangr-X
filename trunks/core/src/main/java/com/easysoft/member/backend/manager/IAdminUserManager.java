@@ -106,7 +106,7 @@ public interface IAdminUserManager {
      * @param pageOption
      * @return
      */
-    public PageOption queryForPage(PageOption pageOption);
+    public PageOption queryForPage(PageOption pageOption,String username);
 	
 	
 	/**
