@@ -53,17 +53,23 @@ jeap.SSO={
      */
     login:function(){
         if($("#username").val()==""){
-            alert("用户名不能为空!");
+            $("#tipMsg").removeClass("alert-info");
+            $("#tipMsg").addClass("alert-danger");
+            $("#tipMsg").html("用户名不能为空!");
             $("#username").focus();
             return false;
         }
         if($("#password").val()==""){
-            alert("密码不能为空!");
+            $("#tipMsg").removeClass("alert-info");
+            $("#tipMsg").addClass("alert-danger");
+            $("#tipMsg").html("密码不能为空!");
             $("#password").focus();
             return false;
         }
         if($("#valid_code").val()==""){
-            alert("验证码不能为空!");
+            $("#tipMsg").removeClass("alert-info");
+            $("#tipMsg").addClass("alert-danger");
+            $("#tipMsg").html("验证码不能为空!");
             $("#valid_code").focus();
             return false;
         }
