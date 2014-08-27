@@ -94,7 +94,7 @@ public class DataGridTag extends BodyTagSupport{
 
 
     public String endHtml(){
-
+        return "";
     }
 
 
