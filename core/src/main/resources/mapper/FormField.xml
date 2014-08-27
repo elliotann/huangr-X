@@ -13,11 +13,12 @@
         <id property="inform" column="is_inform"/>
         <id property="formId" column="form_id"/>
         <id property="dataType" column="data_type"/>
+        <id property="displayType" column="display_type"/>
         <id property="dataTypeLength" column="data_type_length"/>
     </resultMap>
     <insert id="save" parameterType="FormField" useGeneratedKeys="true" keyProperty="id">
-        insert t_form_field (field_name,label_name,is_PK,is_nullable,is_inlist,listwidth,is_insearch,form_id,is_inform,data_type,data_type_length)
-        values (#{fieldName},#{labelName},#{ispk},#{isNullable},#{inlist},#{listwidth},#{insearch},#{form.id},#{inform},#{dataType},#{dataTypeLength})
+        insert t_form_field (field_name,label_name,is_PK,is_nullable,is_inlist,listwidth,is_insearch,form_id,is_inform,data_type,data_type_length,display_type)
+        values (#{fieldName},#{labelName},#{ispk},#{isNullable},#{inlist},#{listwidth},#{insearch},#{form.id},#{inform},#{dataType},#{dataTypeLength},#{displayType})
     </insert>
     <select id="queryForList" resultMap="formFieldMap">
         select * from t_form_field where 1=1

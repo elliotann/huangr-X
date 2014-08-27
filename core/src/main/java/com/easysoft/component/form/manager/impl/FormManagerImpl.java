@@ -40,7 +40,6 @@ public class FormManagerImpl extends GenericService<FormEntity> implements IForm
         if(entity.getId()!=null&&entity.getId()!=0){
             formDao.update(entity);
         }
-
         else{
             formDao.save(entity);
         }

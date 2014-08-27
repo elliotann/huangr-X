@@ -13,8 +13,8 @@
         <id property="pkGeneratorPolicy" column="pk_generator_policy"/>
     </resultMap>
     <insert id="save" parameterType="FormEntity" useGeneratedKeys="true" keyProperty="id">
-        insert t_form (tableName,tableTitle,is_syndb,version,form_type,pk_generator_policy)
-        values (#{tableName},#{tableTitle},#{isSynDB},#{version},#{formType},#{pkGeneratorPolicy})
+        insert t_form (tableName,tableTitle,is_syndb,version,form_type,pk_generator_policy,code)
+        values (#{tableName},#{tableTitle},#{isSynDB},#{version},#{formType},#{pkGeneratorPolicy},#{code})
     </insert>
     <update id="update" parameterType="AdminUser">
         UPDATE t_form
@@ -23,7 +23,8 @@
         is_syndb = #{isSynDB},
         version = #{version},
         form_type = #{formType},
-        pk_generator_policy = #{pkGeneratorPolicy}
+        pk_generator_policy = #{pkGeneratorPolicy},
+        code=#{code}
         WHERE id = #{id}
     </update>
     <select id="queryForList" resultMap="formMap">
