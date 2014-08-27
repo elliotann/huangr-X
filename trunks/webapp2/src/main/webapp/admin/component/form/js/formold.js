@@ -212,7 +212,7 @@ function bulidMainGrid(){
             { display: '控件宽度', name: 'width', width: 75, editor: { type: 'numberbox'}  },
             { display: '间隔宽度', name: 'space',width:75, editor: { type: 'numberbox'}  },
             { display: '是否新行', name: 'newline',width:75,render:checkboxRender },
-            { display: '分组', name: 'group', width: 100, editor: { type: 'text'}}
+            { display: '关联表单', name: 'group', width: 100, editor: { type: 'text'}}
         ], data: { rows: rows }, usePager: false,
         enabledEdit: true, clickToEdit: true, fixedCellHeight: false, inWindow: true, rownumbers: true,
         width: '98%', height: '100%',heightDiff:-14, rowHeight: 24
