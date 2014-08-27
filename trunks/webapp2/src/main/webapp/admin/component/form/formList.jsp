@@ -27,8 +27,8 @@
     {
 
         $.ligerDialog.open({
-            height:500,
-            width: 900,
+            height:400,
+            width: 600,
             name:'openDia',
             title : '表单设计',
             url: 'designer.do?toDesigner',

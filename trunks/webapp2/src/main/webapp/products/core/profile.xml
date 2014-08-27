@@ -47,7 +47,7 @@
                 <menu text="角色管理" url="/core/admin/role.do?list" />
             </menu>
             <menu text="动态表单">
-                <menu text="表单配置" url="/form/config/dFormController.do?formList" />
+                <menu text="表单配置" url="/core/admin/designer.do?list" />
             </menu>
             
 		</menu>

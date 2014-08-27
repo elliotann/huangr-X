@@ -75,17 +75,6 @@
             }
         });
 
-        $("#notSuperChk").click(function(){
-
-            if(!this.checked)
-                $("#roletr").show();
-        });
-        $("#superChk").click(function(){
-
-            if(!this.checked)
-                $("#roletr").hide();
-        });
-
         $("#navtab1").ligerTab({ onAfterSelectTabItem: function (tabid){
             if(tabid!="dbColumn"){
                 var manager = $("#dbColumnGrid").ligerGetGridManager();
@@ -118,7 +107,6 @@
         if(document.getElementById("formId")!=null) {
             formId = document.getElementById("formId").value
         }
-        alert(formId);
         var jsonData = "{\"tableName\":\""+tableName+"\",\"tableTitle\":\""+tableTitle+"\",\"fields\":"+jsonData+"}";
         $.ajax({
             type: "post",
@@ -150,6 +138,15 @@
     <div>
     </div>
     <table cellpadding="0" cellspacing="0" class="l-table-edit" >
+        <tr>
+            <td align="right" class="l-table-edit-td">表单编码:</td>
+            <td align="left" class="l-table-edit-td">
+                <input name="code" type="text" id="code"   validate="{required:true,maxlength:30}" class="form-control" value="${form.code}"/>
+            </td>
+            <td align="right" class="l-table-edit-td"></td>
+            <td align="left" class="l-table-edit-td">
+            </td>
+        </tr>
         <tr>
             <td align="right" class="l-table-edit-td">表名:</td>
             <td align="left" class="l-table-edit-td">
