@@ -31,16 +31,16 @@ public class OrganizatiOnServiceImpl implements OrganizatiOnServiceI {
 
     @Override
     public List<OrganizatiOnEntity> queryForTree(int orgid) {
-        List<OrganizatiOnEntity> menuList  = this.queryForList();
-        List<OrganizatiOnEntity> topMenuList  = new ArrayList<OrganizatiOnEntity>();
-        for(OrganizatiOnEntity menu :menuList){
-            if(menu.getPid().compareTo(orgid)==0){
-                List<OrganizatiOnEntity> children = this.getChildren(menuList, menu.getId());
-                menu.setChildren(children);
-                topMenuList.add(menu);
+        List<OrganizatiOnEntity> orgList  = this.queryForList();
+        List<OrganizatiOnEntity> topOrgList  = new ArrayList<OrganizatiOnEntity>();
+        for(OrganizatiOnEntity org :orgList){
+            if(org.getPid().compareTo(orgid)==0){
+                List<OrganizatiOnEntity> children = this.getChildren(orgList, org.getId());
+                org.setChildren(children);
+                topOrgList.add(org);
             }
         }
-        return topMenuList;
+        return topOrgList;
     }
 
     /**
