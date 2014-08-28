@@ -34,9 +34,7 @@
                                 $.ligerDialog.closeWaitting();
 
                             }, 1000);
-                            alert(window.parent.treeManager);
-                            var note = window.parent.treeManager.getSelected();
-                            alert('选择的是:' + note.data.text);
+
                             dialog.close();
                         }else{
                             alert(result.msg)
@@ -97,7 +95,7 @@
         <tr>
             <td align="right" class="l-table-edit-td">机构名称:</td>
             <td align="left" class="l-table-edit-td">
-                <input name="username" type="text" id="username" class="form-control" />
+                <input name="name" type="text" id="name" class="form-control" />
             </td>
             <td align="left"></td>
         </tr>
@@ -105,7 +103,9 @@
         <tr>
             <td align="right" class="l-table-edit-td">上级机构:</td>
             <td align="left" class="l-table-edit-td">
-                <input name="realname" type="text" id="realname" value="${organizatiOnEntity.name}"  class="form-control" disabled="disabled"/></td>
+                <input name="realname" type="text" id="realname" value="${organizatiOnEntity.name}"  class="form-control" disabled="disabled"/>
+                <input name="pid" type="hidden" id="pid" value="${organizatiOnEntity.id}"/>
+            </td>
             <td align="left"></td>
         </tr>
 

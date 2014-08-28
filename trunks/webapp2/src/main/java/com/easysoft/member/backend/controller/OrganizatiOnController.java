@@ -74,7 +74,7 @@ public class OrganizatiOnController extends BaseController {
 
 	@RequestMapping(params = "dataGrid")
 	public ModelAndView datagrid(OrganizatiOnEntity organizatiOn,HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid) {
-        List entityist= this.organizatiOnService.queryForTree();
+        List entityist= this.organizatiOnService.queryForTree(0);
         DataGridReturn dataGridReturn = new DataGridReturn(entityist.size(),entityist);
         String json = JsonUtils.beanToJsonArray(entityist);
         Map<String,Object> map = new HashMap<String, Object>();
