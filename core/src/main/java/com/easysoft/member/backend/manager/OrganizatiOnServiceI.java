@@ -11,7 +11,7 @@ public interface OrganizatiOnServiceI {
  	public void save(OrganizatiOnEntity organizatiOn);
     public void update(OrganizatiOnEntity organizatiOn);
     public List<OrganizatiOnEntity> queryForList();
-    public List<OrganizatiOnEntity> queryForTree();
+    public List<OrganizatiOnEntity> queryForTree(int orgid);
     public OrganizatiOnEntity queryById(Integer id);
     public void deleteById(Integer id);
 ;
