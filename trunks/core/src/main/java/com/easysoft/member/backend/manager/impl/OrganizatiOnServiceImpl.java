@@ -3,11 +3,13 @@ package com.easysoft.member.backend.manager.impl;
 
 import com.easysoft.member.backend.dao.IOrganizatiOnDao;
 import com.easysoft.member.backend.manager.OrganizatiOnServiceI;
+import com.easysoft.member.backend.model.Menu;
 import com.easysoft.member.backend.model.OrganizatiOnEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service("organizatiOnService")
@@ -28,13 +30,37 @@ public class OrganizatiOnServiceImpl implements OrganizatiOnServiceI {
     }
 
     @Override
-    public List<OrganizatiOnEntity> queryForTree() {
-        List<OrganizatiOnEntity> roots = organizatiOnDao.queryByPid(0);
-        for(OrganizatiOnEntity organizatiOnEntity : roots){
-            organizatiOnEntity.setChildren(organizatiOnDao.queryByPid(organizatiOnEntity.getId()));
+    public List<OrganizatiOnEntity> queryForTree(int orgid) {
+        List<OrganizatiOnEntity> menuList  = this.queryForList();
+        List<OrganizatiOnEntity> topMenuList  = new ArrayList<OrganizatiOnEntity>();
+        for(OrganizatiOnEntity menu :menuList){
+            if(menu.getPid().compareTo(orgid)==0){
+                List<OrganizatiOnEntity> children = this.getChildren(menuList, menu.getId());
+                menu.setChildren(children);
+                topMenuList.add(menu);
+            }
         }
-        return roots;
+        return topMenuList;
     }
+
+    /**
+     * 在一个集合中查找子
+     * @param menuList 所有菜单集合
+     * @param parentid 父id
+     * @return 找到的子集合
+     */
+    private List<OrganizatiOnEntity> getChildren(List<OrganizatiOnEntity> menuList ,Integer parentid){
+        List<OrganizatiOnEntity> children =new ArrayList<OrganizatiOnEntity>();
+        for(OrganizatiOnEntity menu :menuList){
+            if(menu.getPid().compareTo(parentid)==0){
+                menu.setChildren(this.getChildren(menuList, menu.getId()));
+                children.add(menu);
+            }
+        }
+        return children;
+    }
+
+
 
     public OrganizatiOnEntity queryById(Integer id){
         return organizatiOnDao.queryById(id);
