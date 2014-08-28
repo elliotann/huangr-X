@@ -248,3 +248,18 @@ border-collapse:collapse;
     -webkit-border-radius: 0 0 6px 6px
     border-radius: 0 0 6px 6px
 }
+
+
+.table-grid {
+    border: 1px solid #c0c0c0;
+    border-spacing: 0;
+    font-size: 12px;
+    margin-top: 10px;
+    width: 100%;
+}/*z0902 border: 3px solid #dddddd;*/
+
+
+
+.table-grid thead {
+    height: 32px;
+}

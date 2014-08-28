@@ -3,19 +3,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" />
     <title>小黄人企业管理微平台系统登陆</title>
     <link rel="stylesheet" type="text/css" href="/jeap/adminthemes/default/css/login/login.css" />
     <link rel="stylesheet" type="text/css" href="/jeap/adminthemes/default/css/form.css" />
     <link rel="stylesheet" type="text/css" href="/jeap/adminthemes/default/css/login/tip.css" />
-    <style type="text/css">
-        .download{margin:20px 33px 10px;*margin-bottom:30px;padding:5px;border-radius:3px;-webkit-border-radius:3px;-moz-border-radius:3px;background:#e6e6e6;border:1px dashed #df0031;font-size:14px;font-family:Comic Sans MS;font-weight:bolder;color:#555}
-        .download a{padding-left:5px;font-size:14px;font-weight:normal;color:#555;text-decoration:none;letter-spacing:1px}
-        .download a:hover{text-decoration:underline;color:#36F}
-        .download span{float:right}
-    </style>
-    <!--[if IE]>
-    <style type="text/css"> img, #testdiv, .testbox{behavior: url(http://yourdomain.com/js/ie-css3.htc);} </style>
-    <![endif]-->
+
 
 </head>
 

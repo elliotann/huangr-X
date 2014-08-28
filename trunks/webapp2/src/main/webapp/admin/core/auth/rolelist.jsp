@@ -49,30 +49,6 @@
         delObj(item,'role.do?delete&id=',row.roleid);
 
     }
-    $(function ()
-    {
-        /*listgrid =$("#maingrid").ligerGrid({
-                    height:'99%',
-                    columns: [
-                        { display: 'id', name: 'roleid', align: 'center', width: 100, minWidth: 60 },
-                        { display: '角色名称', name: 'rolename', minWidth: 120 },
-                        { display: '描述', name: 'rolememo', minWidth: 140 }
-                    ], url:'role.do?dataGrid&ajax=yes',  pageSize:30 ,rownumbers:true,
-                    toolbar: { items: [
-                        { text: '增加', click: addRole, icon: 'add' },
-                        { line: true },
-                        { text: '修改', click: modifyUser, icon: 'modify' },
-                        { line: true },
-                        { text: '删除', click: delUser, img: '${context }/js/ligerui/skins/icons/delete.gif' },
-                        { line: true },
-                        { text: '设置权限', click: setAuth, icon: 'modify' }
-                    ]
-                    }
-                });*/
-
-
-        $("#pageloading").hide();
-    });
 
     function setAuth(item){
         var row = listgrid.getSelectedRow();
