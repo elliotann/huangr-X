@@ -108,6 +108,7 @@ public class DataGridTag extends BodyTagSupport{
         sb.append("listgrid = $(\"#maingrid\").ligerGrid({");
         sb.append("height:'"+height+"',");
         sb.append("width:'"+width+"',");
+        sb.append("cssClass:'table-grid',");
         sb.append("usePager:"+usePager+",");
         if(usePager){
             sb.append("pageParmName:'currentPageNo',");
