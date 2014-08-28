@@ -4,6 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>${title }</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <script type="text/javascript" src="menu.do"></script>
     <script>
         var founder= ${user.founder};
@@ -49,26 +50,7 @@
     <!-- logo -->
     <a href=""><img alt="Logo" src="images/logo2.png"></a>
     <div class="topheader">
-        <ul class="notebutton">
-            <li class="note">
-                <a class="messagenotify" href="pages/message.html">
-                    <span class="wrap">
 
-                        <span class="thicon msgicon"></span>
-                        <span class="count">1</span>
-                    </span>
-                </a>
-            </li>
-            <li class="note">
-                <a class="alertnotify" href="pages/info.html">
-                	<span class="wrap">
-
-                    	<span class="thicon infoicon"></span>
-                        <span class="count">5</span>
-                    </span>
-                </a>
-            </li>
-        </ul>
     </div>
     <!-- topheader -->
 
