@@ -18,7 +18,8 @@ public class AdminUser implements  Serializable{
 	private int state;
 	private String realname;
 	private String userno;
-	private String userdept;
+	private int userdept;
+    private int userCorp;//所属公司
 	private String remark;
 	private Long dateline;
 	private int[] roleids;
@@ -77,10 +78,10 @@ public class AdminUser implements  Serializable{
 		this.userno = userno;
 	}
     @Column(name ="userdept")
-	public String getUserdept() {
+	public int getUserdept() {
 		return userdept;
 	}
-	public void setUserdept(String userdept) {
+	public void setUserdept(int userdept) {
 		this.userdept = userdept;
 	}
     @Column(name ="remark")
@@ -125,5 +126,13 @@ public class AdminUser implements  Serializable{
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getUserCorp() {
+        return userCorp;
+    }
+
+    public void setUserCorp(int userCorp) {
+        this.userCorp = userCorp;
     }
 }

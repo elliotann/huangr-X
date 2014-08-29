@@ -45,7 +45,7 @@ public class BaseController {
      */
     public List<?> pageBaseMethod(HttpServletRequest request,
                                   DetachedCriteria dc, IGenericService commonService, int pageRow) {
-        // 当前页
+     /*   // 当前页
         // 总条数
         // 总页数
 
@@ -81,7 +81,8 @@ public class BaseController {
         request.setAttribute("pageRow", pageRow);
         request.setAttribute("totalRow", totalRow);
         request.setAttribute("totalPage", totalPage);
-        return list;
+        return list;*/
+        return null;
     }
 
     public int getPageSize() {

@@ -2,9 +2,9 @@ package com.easysoft.member.backend.manager.impl;
 
 
 import com.easysoft.member.backend.dao.IOrganizatiOnDao;
-import com.easysoft.member.backend.manager.OrganizatiOnServiceI;
-import com.easysoft.member.backend.model.Menu;
-import com.easysoft.member.backend.model.OrganizatiOnEntity;
+import com.easysoft.member.backend.manager.IOrganizationManager;
+
+import com.easysoft.member.backend.model.Organization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,28 +14,28 @@ import java.util.List;
 
 @Service("organizatiOnService")
 @Transactional
-public class OrganizatiOnServiceImpl implements OrganizatiOnServiceI {
+public class OrganizationManager implements IOrganizationManager {
     @Autowired
     private IOrganizatiOnDao organizatiOnDao;
 
  	
- 	public void save(OrganizatiOnEntity organizatiOn) {
+ 	public void save(Organization organizatiOn) {
         organizatiOnDao.save(organizatiOn);
  	}
-    public void update(OrganizatiOnEntity organizatiOn){
+    public void update(Organization organizatiOn){
         organizatiOnDao.update(organizatiOn);
     }
-    public List<OrganizatiOnEntity> queryForList(){
+    public List<Organization> queryForList(){
         return organizatiOnDao.queryForList();
     }
 
     @Override
-    public List<OrganizatiOnEntity> queryForTree(int orgid) {
-        List<OrganizatiOnEntity> orgList  = this.queryForList();
-        List<OrganizatiOnEntity> topOrgList  = new ArrayList<OrganizatiOnEntity>();
-        for(OrganizatiOnEntity org :orgList){
+    public List<Organization> queryForTree(int orgid) {
+        List<Organization> orgList  = this.queryForList();
+        List<Organization> topOrgList  = new ArrayList<Organization>();
+        for(Organization org :orgList){
             if(org.getPid().compareTo(orgid)==0){
-                List<OrganizatiOnEntity> children = this.getChildren(orgList, org.getId());
+                List<Organization> children = this.getChildren(orgList, org.getId());
                 org.setChildren(children);
                 topOrgList.add(org);
             }
@@ -49,9 +49,9 @@ public class OrganizatiOnServiceImpl implements OrganizatiOnServiceI {
      * @param parentid 父id
      * @return 找到的子集合
      */
-    private List<OrganizatiOnEntity> getChildren(List<OrganizatiOnEntity> menuList ,Integer parentid){
-        List<OrganizatiOnEntity> children =new ArrayList<OrganizatiOnEntity>();
-        for(OrganizatiOnEntity menu :menuList){
+    private List<Organization> getChildren(List<Organization> menuList ,Integer parentid){
+        List<Organization> children =new ArrayList<Organization>();
+        for(Organization menu :menuList){
             if(menu.getPid().compareTo(parentid)==0){
                 menu.setChildren(this.getChildren(menuList, menu.getId()));
                 children.add(menu);
@@ -62,7 +62,7 @@ public class OrganizatiOnServiceImpl implements OrganizatiOnServiceI {
 
 
 
-    public OrganizatiOnEntity queryById(Integer id){
+    public Organization queryById(Integer id){
         return organizatiOnDao.queryById(id);
     }
     public void deleteById(Integer id){

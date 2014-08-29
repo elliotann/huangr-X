@@ -107,17 +107,6 @@ public class LoginProcessor implements Processor {
 		try {
 			
 			/*
-			 * 校验验证码
-			 */
-			if(valid_code==null) throw new EopException("验证码输入错误");			
-			WebSessionContext sessonContext = ThreadContextHolder.getSessionContext();
-			Object realCode = sessonContext.getAttribute(ValidCodeServlet.SESSION_VALID_CODE+"admin");
-			
-			if(!valid_code.equals(realCode)){
-				throw new EopException("验证码输入错误");
-			}
-
-			/*
 			 * 登录校验
 			 */
 			IAdminUserManager userManager =SpringContextHolder.getBean("adminUserManager");
