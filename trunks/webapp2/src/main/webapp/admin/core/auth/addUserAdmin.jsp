@@ -85,6 +85,18 @@
         function submitForm(){
             $("#objForm").submit();
         }
+
+        function queryDeparts(corpId){
+            $.ajax({
+                type:'post',
+                url:'../depart.do?queryDepartsByOrgId&ajax=true&orgId='+corpId,
+                dataType:'html',
+                success:function(result){
+                    $("#userdept").html(result);
+
+                }
+            });
+        }
     </script>
 
     <style type="text/css">
@@ -194,8 +206,20 @@
             <td align="left"></td>
         </tr>
         <tr>
+            <td align="right" class="l-table-edit-td">所属公司:</td>
+            <td align="left" class="l-table-edit-td">
+                <select class="form-control" name="userCorp" id="userCorp" onchange="queryDeparts(this.value)">
+                    <c:forEach items="${organizations}" var="org">
+                        <option value="${org.id}">${org.name}</option>
+                    </c:forEach>
+                </select>
+
+            </td>
+            <td align="left"></td>
+        </tr>
+        <tr>
             <td align="right" class="l-table-edit-td">部门:</td>
-            <td align="left" class="l-table-edit-td"><input name="userdept" type="text" id="userdept" ltype="text" class="form-control"/></td>
+            <td align="left" class="l-table-edit-td"><select id="userdept" name="userdept" class="form-control"></select></td>
             <td align="left"></td>
         </tr>
         <tr>
