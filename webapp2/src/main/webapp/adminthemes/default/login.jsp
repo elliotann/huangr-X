@@ -30,9 +30,9 @@
                 <div class="input">
                     密&nbsp;&nbsp;码：<input class="form-control" name="password" id="password" type="password" placeholder="密码"  maxLength="24" />
                 </div>
-                <div class="input">
+               <%-- <div class="input">
                     验证码：<input class="form-control" style="width: 50px;" name="valid_code" id="valid_code" type="text" placeholder="验证码"  maxLength="24" /><img id="code_img" class="code_img" />
-                </div>
+                </div>--%>
                 <div class="checkbox">
                     <input type="checkbox" name="remember" id="remember" /><label for="remember"><span>记住我</span></label>
                 </div>

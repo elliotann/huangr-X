@@ -18,11 +18,14 @@ pageEncoding="UTF-8"%>
     $(function (){
         $("#toolbar").ligerToolBar({ items: [
             { text: '增加机构', click: add , icon:'add'},
-          { text: '增加部门', click: add , icon:'add'}
+          { text: '增加部门', click: addDepart , icon:'add'}
                 ]});
     });
     function add(item){
         addOrUpdateDialog(item,'增加机构','organization.do?goAdd&pid='+$("#pid").val(),500,700);
+    }
+    function addDepart(item){
+        addOrUpdateDialog(item,'增加部门','depart.do?toAdd&orgId='+$("#pid").val(),500,700);
     }
 
 

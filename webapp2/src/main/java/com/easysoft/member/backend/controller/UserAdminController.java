@@ -7,11 +7,13 @@ import com.easysoft.core.context.EsfContext;
 import com.easysoft.framework.db.PageOption;
 import com.easysoft.framework.utils.JsonUtils;
 import com.easysoft.member.backend.manager.IAdminUserManager;
+import com.easysoft.member.backend.manager.IOrganizationManager;
 import com.easysoft.member.backend.manager.IPermissionManager;
 import com.easysoft.member.backend.manager.IRoleManager;
 import com.easysoft.member.backend.manager.impl.UserServiceFactory;
 import com.easysoft.member.backend.model.AdminUser;
 import com.easysoft.member.backend.model.OperationBtn;
+import com.easysoft.member.backend.model.Organization;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,7 +42,8 @@ public class UserAdminController extends BaseController{
     private IRoleManager roleManager;
     @Autowired
     private IPermissionManager permissionManager;
-
+    @Autowired
+    private IOrganizationManager organizationManager;
     @RequestMapping(params = {"list"})
     public ModelAndView list(Integer menuId) throws Exception{
         List<OperationBtn> operationBtns = permissionManager.queryBtnByUsernameAndMenuId(UserServiceFactory.getUserService().getCurrentUser().getUserid(), null,menuId);
@@ -70,9 +73,11 @@ public class UserAdminController extends BaseController{
     public ModelAndView add() throws Exception{
         int multiSite = EsfContext.getContext().getCurrentSite().getMulti_site();
         List roleList = roleManager.list();
+        List<Organization> organizations = organizationManager.queryForList();
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("roleList",roleList);
         map.put("multiSite",multiSite);
+        map.put("organizations",organizations);
         return new ModelAndView("admin/core/auth/addUserAdmin",map);
     }
 

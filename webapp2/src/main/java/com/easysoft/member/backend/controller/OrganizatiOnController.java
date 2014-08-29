@@ -8,8 +8,9 @@ import com.easysoft.core.common.vo.json.DataGridReturn;
 import com.easysoft.framework.utils.BeanUtils;
 import com.easysoft.framework.utils.JsonUtils;
 import com.easysoft.framework.utils.StringUtil;
-import com.easysoft.member.backend.manager.OrganizatiOnServiceI;
-import com.easysoft.member.backend.model.OrganizatiOnEntity;
+import com.easysoft.member.backend.manager.IOrganizationManager;
+
+import com.easysoft.member.backend.model.Organization;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,7 +41,7 @@ public class OrganizatiOnController extends BaseController {
 	private static final Logger logger = Logger.getLogger(OrganizatiOnController.class);
 
 	@Autowired
-	private OrganizatiOnServiceI organizatiOnService;
+	private IOrganizationManager organizatiOnService;
 
 	private String message;
 	
@@ -73,7 +74,7 @@ public class OrganizatiOnController extends BaseController {
 	 */
 
 	@RequestMapping(params = "dataGrid")
-	public ModelAndView datagrid(OrganizatiOnEntity organizatiOn,HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid) {
+	public ModelAndView datagrid(Organization organizatiOn,HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid) {
         List entityist= this.organizatiOnService.queryForTree(0);
         DataGridReturn dataGridReturn = new DataGridReturn(entityist.size(),entityist);
         String json = JsonUtils.beanToJsonArray(entityist);
@@ -89,7 +90,7 @@ public class OrganizatiOnController extends BaseController {
     */
     @RequestMapping(params = "goAdd")
     public ModelAndView goAdd(Integer pid, HttpServletRequest req) {
-        OrganizatiOnEntity organizatiOnEntity = this.organizatiOnService.queryById(pid);
+        Organization organizatiOnEntity = this.organizatiOnService.queryById(pid);
         req.setAttribute("organizatiOnEntity", organizatiOnEntity);
         return new ModelAndView("admin/component/oa/organization-add");
     }
@@ -101,7 +102,7 @@ public class OrganizatiOnController extends BaseController {
      */
     @RequestMapping(params = "view")
     public ModelAndView view(Integer id, HttpServletRequest req) {
-        OrganizatiOnEntity organizatiOn = organizatiOnService.queryById(id);
+        Organization organizatiOn = organizatiOnService.queryById(id);
         req.setAttribute("organizatiOn",organizatiOn);
         req.setAttribute("pid",id);
         return new ModelAndView("admin/component/oa/organization-view");
@@ -114,7 +115,7 @@ public class OrganizatiOnController extends BaseController {
     */
     @RequestMapping(params = "doAdd")
     @ResponseBody
-    public AjaxJson doAdd(OrganizatiOnEntity organizatiOn, HttpServletRequest request) {
+    public AjaxJson doAdd(Organization organizatiOn, HttpServletRequest request) {
         AjaxJson j = new AjaxJson();
         message = "组织机构添加成功";
         try{
@@ -134,7 +135,7 @@ public class OrganizatiOnController extends BaseController {
     * @return
     */
     @RequestMapping(params = "goUpdate")
-    public ModelAndView goUpdate(OrganizatiOnEntity organizatiOn, HttpServletRequest req) {
+    public ModelAndView goUpdate(Organization organizatiOn, HttpServletRequest req) {
         if (StringUtil.isNotEmpty(organizatiOn.getId())) {
              organizatiOn = organizatiOnService.queryById(organizatiOn.getId());
             req.setAttribute("organizatiOn", organizatiOn);
@@ -149,10 +150,10 @@ public class OrganizatiOnController extends BaseController {
     */
     @RequestMapping(params = "doUpdate")
     @ResponseBody
-    public AjaxJson doUpdate(OrganizatiOnEntity organizatiOn, HttpServletRequest request) {
+    public AjaxJson doUpdate(Organization organizatiOn, HttpServletRequest request) {
         AjaxJson j = new AjaxJson();
         message = "组织机构更新成功";
-        OrganizatiOnEntity t = organizatiOnService.queryById(organizatiOn.getId());
+        Organization t = organizatiOnService.queryById(organizatiOn.getId());
         try {
             BeanUtils.copyBeanNotNull2Bean(organizatiOn, t);
             organizatiOnService.update(t);
@@ -173,7 +174,7 @@ public class OrganizatiOnController extends BaseController {
     */
     @RequestMapping(params = "delete")
     @ResponseBody
-    public AjaxJson doDel(OrganizatiOnEntity organizatiOn, HttpServletRequest request) {
+    public AjaxJson doDel(Organization organizatiOn, HttpServletRequest request) {
         AjaxJson j = new AjaxJson();
 
         message = "组织机构删除成功";
