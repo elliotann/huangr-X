@@ -35,7 +35,7 @@ public class AuthActionManager extends GenericService<AuthAction> implements IAu
     public int add(AuthAction auth, int roleId) {
         int actId = add(auth);
         //增加角色权限关系表
-        this.executeSql("insert into t_role_auth(roleid,authid)values(?,?)",roleId,actId);
+       // this.executeSql("insert into t_role_auth(roleid,authid)values(?,?)",roleId,actId);
         return actId;
     }
 
@@ -72,7 +72,7 @@ public class AuthActionManager extends GenericService<AuthAction> implements IAu
     }
 
     public void edit(AuthAction act) {
-        this.updateEntitie(act);
+       // this.updateEntitie(act);
 	}
 
 	

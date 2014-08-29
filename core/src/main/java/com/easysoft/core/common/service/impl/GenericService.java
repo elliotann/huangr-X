@@ -28,27 +28,26 @@ import java.util.Map;
  *
  * @since:
  */
-@Service("genericService")
-@Transactional
+
 public class GenericService<T> extends BaseSupport<T> implements IGenericService<T> {
-    private Class<T> entityClass;
+    /*private Class<T> entityClass;
     @Autowired
     private IGenericDAO genericDAO;
 
-    /**
+    *//**
      * 加载全部实体
      * @param entityClass
      * @return
-     */
+     *//*
     public List<T> queryForAll(final Class<T> entityClass) {
         return genericDAO.queryForAll(entityClass);
     }
 
-    /**
+    *//**
      * 获取所有数据库表
      *
      * @return
-     */
+     *//*
     public List<DBTable> getAllDbTableName() {
         return genericDAO.getAllDbTableName();
     }
@@ -80,32 +79,32 @@ public class GenericService<T> extends BaseSupport<T> implements IGenericService
 
     }
 
-    /**
+    *//**
      * 删除实体集合
      *
      * @param <T>
      * @param entities
-     */
+     *//*
     public <T> void deleteAllEntitie(Collection<T> entities) {
         genericDAO.deleteAllEntitie(entities);
     }
 
-    /**
+    *//**
      * 根据实体名获取对象
-     */
+     *//*
     public <T> T get(Class<T> class1, Serializable id) {
         return (T)genericDAO.get(class1, id);
     }
 
 
-    /**
+    *//**
      * 根据实体名获取对象
-     */
+     *//*
     public <T> T getEntity(Class entityName, Serializable id) {
         return (T)genericDAO.getEntity(entityName, id);
     }
 
-    /**
+    *//**
      * 根据实体名称和字段名称和字段值获取唯一记录
      *
      * @param <T>
@@ -113,15 +112,15 @@ public class GenericService<T> extends BaseSupport<T> implements IGenericService
      * @param propertyName
      * @param value
      * @return
-     */
+     *//*
     public <T> T findUniqueByProperty(Class<T> entityClass,
                                       String propertyName, Object value) {
         return (T)genericDAO.findUniqueByProperty(entityClass, propertyName, value);
     }
 
-    /**
+    *//**
      * 按属性查找对象列表.
-     */
+     *//*
     public <T> List<T> findByProperty(Class<T> entityClass,
                                       String propertyName, Object value) {
 
@@ -134,103 +133,103 @@ public class GenericService<T> extends BaseSupport<T> implements IGenericService
         return (T)genericDAO.singleResult(hql);
     }
 
-    /**
+    *//**
      * 删除实体主键ID删除对象
      *
      * @param <T>
      * @param entityName
-     */
+     *//*
     public <T> void deleteEntityById(Class entityName, Serializable id) {
         genericDAO.deleteEntityById(entityName, id);
     }
 
-    /**
+    *//**
      * 更新指定的实体
      *
      * @param <T>
      * @param pojo
-     */
+     *//*
     public <T> void updateEntitie(T pojo) {
         genericDAO.updateEntitie(pojo);
 
     }
 
-    /**
+    *//**
      * 通过hql 查询语句查找对象
      *
      * @param <T>
      * @param hql
      * @return
-     */
+     *//*
     public <T> List<T> findByQueryString(String hql) {
         return genericDAO.findByQueryString(hql);
     }
 
-    /**
+    *//**
      * 根据sql更新
      *
      * @param sql
      * @return
-     */
+     *//*
     public int updateBySqlString(String sql) {
         return genericDAO.updateBySqlString(sql);
     }
 
-    /**
+    *//**
      * 根据sql查找List
      *
      * @param <T>
      * @param query
      * @return
-     */
+     *//*
     public <T> List<T> findListbySql(String query) {
         return genericDAO.findListbySql(query);
     }
 
-    /**
+    *//**
      * 通过属性称获取实体带排序
      *
      * @param <T>
      * @param entityClass
      * @return
-     */
+     *//*
     public <T> List<T> findByPropertyisOrder(Class<T> entityClass,
                                              String propertyName, Object value, boolean isAsc) {
         return genericDAO.findByPropertyisOrder(entityClass, propertyName,
                 value, isAsc);
     }
 
-    /**
+    *//**
      *
      * cq方式分页
      *
      * @param cq
      * @param isOffset
      * @return
-     */
+     *//*
     public PageList getPageList(final CriteriaQuery cq, final boolean isOffset) {
         return genericDAO.getPageList(cq, isOffset);
     }
 
-    /**
+    *//**
      * 返回DataTableReturn模型
      *
      * @param cq
      * @param isOffset
      * @return
-     */
+     *//*
     public DataTableReturn getDataTableReturn(final CriteriaQuery cq,
                                               final boolean isOffset) {
         return genericDAO.getDataTableReturn(cq, isOffset);
     }
 
-    /**
+    *//**
      * 返回easyui datagrid模型
      *
      * @param cq
      * @param isOffset
      * @return
-     */
+     *//*
     public DataGridReturn getDataGridReturn(final CriteriaQuery cq,
                                             final boolean isOffset) {
         return genericDAO.getDataGridReturn(cq, isOffset);
@@ -242,14 +241,14 @@ public class GenericService<T> extends BaseSupport<T> implements IGenericService
     }
 
 
-    /**
+    *//**
      *
      * sqlQuery方式分页
      *
      * @param hqlQuery
      * @param isToEntity
      * @return
-     */
+     *//*
     public PageList getPageListBySql(final HqlQuery hqlQuery,
                                      final boolean isToEntity) {
         return genericDAO.getPageListBySql(hqlQuery, isToEntity);
@@ -266,13 +265,13 @@ public class GenericService<T> extends BaseSupport<T> implements IGenericService
         return genericDAO.findByExample(entityName, exampleEntity);
     }
 
-    /**
+    *//**
      * 通过cq获取全部实体
      *
      * @param <T>
      * @param cq
      * @return
-     */
+     *//*
     public <T> List<T> getListByCriteriaQuery(final CriteriaQuery cq,
                                               Boolean ispage) {
         return genericDAO.getListByCriteriaQuery(cq, ispage);
@@ -347,13 +346,13 @@ public class GenericService<T> extends BaseSupport<T> implements IGenericService
         this.genericDAO.batchSave(entitys);
     }
 
-    /**
+    *//**
      * 通过hql 查询语句查找对象
      *
      * @param <T>
      * @param hql
      * @return
-     */
+     *//*
     public <T> List<T> findHql(String hql, Object... param) {
         return this.genericDAO.queryForList(hql, param);
     }
@@ -370,5 +369,5 @@ public class GenericService<T> extends BaseSupport<T> implements IGenericService
 
     public <T> List<T> findByDetached(DetachedCriteria dc) {
         return this.genericDAO.findByDetached(dc);
-    }
+    }*/
 }
