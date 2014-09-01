@@ -14,4 +14,7 @@
     <select id="queryByOrgId" parameterType="java.lang.Integer" resultMap="departMap">
         select * from t_depart where comp_id=#{compId}
     </select>
+    <select id="queryById" parameterType="java.lang.Integer" resultMap="departMap">
+        select * from t_depart where id=#{id}
+    </select>
 </mapper>
