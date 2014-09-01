@@ -10,6 +10,8 @@
     <link rel="stylesheet" type="text/css" href="${context}/js/easyui/themes/gray/easyui.css">
     <script type="text/javascript" src="${context}/js/easyui/jquery.easyui.min.js"></script>
     <script>
+        var count=1;
+
         $(function(){
             $('#tt').tree({
                 url:'organization.do?dataGrid&ajax=true',
@@ -17,12 +19,13 @@
             });
         });
         function onClick(node){
+
             orgframe.location.href="organization.do?view&id="+node.id;
         }
     </script>
 </head>
 <body class="easyui-layout">
-
+<input type="text" name="username" id="username" value="143"/>
 <div data-options="region:'west',split:true,title:'组织结构'" style="width:200px;padding:10px;">
     <ul id="tt"></ul>
 </div>

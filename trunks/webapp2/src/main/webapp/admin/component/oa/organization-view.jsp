@@ -12,10 +12,16 @@ pageEncoding="UTF-8"%>
 <link href=" ${context}/css/form.css" rel="stylesheet"/>
 <script src="/jeap/admin/js/crud.js" type="text/javascript"></script>
 <script src="${context }/js/ligerui/js/plugins/ligerDialog.js" type="text/javascript"></script>
+<script type="text/javascript" src="${context}/js/easyui/jquery.easyui.min.js"></script>
+<link rel="stylesheet" type="text/css" href="${context}/js/easyui/themes/gray/easyui.css">
 
 <script type="text/javascript">
+
+
     var dialog = frameElement.dialog;
     $(function (){
+
+        $("#tt", window.parent.document).tree('reload');
         $("#toolbar").ligerToolBar({ items: [
             { text: '增加机构', click: add , icon:'add'},
           { text: '增加部门', click: addDepart , icon:'add'}
