@@ -53,4 +53,9 @@ public class DepartManager implements IDepartManager {
         }
         return sb.toString();
     }
+
+    @Override
+    public Depart queryById(int id) {
+        return departDao.queryById(id);
+    }
 }

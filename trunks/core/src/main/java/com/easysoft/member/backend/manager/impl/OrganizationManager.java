@@ -90,4 +90,15 @@ public class OrganizationManager implements IOrganizationManager {
         }
         return topOrgList;
     }
+
+    @Override
+    public Organization queryByTypeAndId(String type, int id) {
+        Organization organization = null;
+        if(type.equals(Organization.OrgType.COMPANY)){
+            organization = companyManager.queryById(id);
+        }else if(type.equals(Organization.OrgType.DEPT)){
+            organization = departManager.queryById(id);
+        }
+        return organization;
+    }
 }
