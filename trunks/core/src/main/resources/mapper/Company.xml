@@ -16,4 +16,7 @@
     <select id="queryForList" resultMap="companyMap">
         select * from t_company
     </select>
+    <select id="queryById" parameterType="java.lang.Integer" resultMap="companyMap">
+        select * from t_company where id=#{id}
+    </select>
 </mapper>
