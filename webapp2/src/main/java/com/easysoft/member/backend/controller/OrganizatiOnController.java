@@ -102,7 +102,7 @@ public class OrganizatiOnController extends BaseController {
      */
     @RequestMapping(params = "view")
     public ModelAndView view(Integer id, HttpServletRequest req) {
-        Organization organizatiOn = organizatiOnService.queryById(id);
+        Organization organizatiOn = organizatiOnService.queryByTypeAndId("COMPANY",id.intValue());
         req.setAttribute("organizatiOn",organizatiOn);
         req.setAttribute("pid",id);
         return new ModelAndView("admin/component/oa/organization-view");

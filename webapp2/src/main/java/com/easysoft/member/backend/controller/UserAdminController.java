@@ -20,8 +20,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,8 +28,7 @@ import java.util.Map;
  * User: andy
  * Date: 14-1-16
  * Time: 下午1:26
- *
- * @since:
+ * @since :1.0
  */
 @Controller
 @RequestMapping({"/core/admin/user/userAdmin"})
@@ -61,7 +58,6 @@ public class UserAdminController extends BaseController{
         if(StringUtils.isEmpty(username)){
             username=null;
         }
-
         this.adminUserManager.queryForPage(pageOption,username);
         DataGridReturn dataGridReturn = new DataGridReturn(pageOption.getTotalCount(),(List<AdminUser>)pageOption.getResult());
         String json = JsonUtils.beanToJson(dataGridReturn);
@@ -96,7 +92,7 @@ public class UserAdminController extends BaseController{
     }
     @RequestMapping(params = {"addSave"})
     @ResponseBody
-    public AjaxJson  addSave(AdminUser adminUser,int[] roleids,HttpServletResponse response) throws Exception {
+    public AjaxJson  addSave(AdminUser adminUser,int[] roleids) throws Exception {
         AjaxJson json = new AjaxJson();
         try{
 
@@ -113,13 +109,10 @@ public class UserAdminController extends BaseController{
     }
     @RequestMapping(params = {"chkUserExist"})
     @ResponseBody
-    public AjaxJson  chkUserExist(AdminUser adminUser,int[] roleids,HttpServletResponse response) throws Exception {
+    public AjaxJson  chkUserExist() throws Exception {
         AjaxJson json = new AjaxJson();
         try{
-
-           System.out.println("heere");
             json.setMsg("新增管理员成功");
-
         } catch (RuntimeException e) {
             json.setMsg(e.getMessage());
             json.setSuccess(false);
@@ -163,17 +156,10 @@ public class UserAdminController extends BaseController{
         return json;
     }
 
-    public String editPassword() throws Exception {
-        return "editPassword";
-    }
     @RequestMapping(params = {"checkNameExist"})
     @ResponseBody
     public boolean checkNameExist(String username,Integer userid){
         AdminUser adminUser = adminUserManager.getAdminUserByName(username,userid);
-        if(adminUser!=null){
-            return false;
-        }
-
-        return true;
+        return adminUser == null;
     }
 }
