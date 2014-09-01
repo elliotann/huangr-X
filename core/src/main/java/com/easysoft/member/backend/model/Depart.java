@@ -8,36 +8,23 @@ import org.apache.commons.lang3.StringUtils;
  * @author : andy.huang
  * @since :
  */
-public class Depart extends IdEntity {
-    private String name;
-    private int pid;
-    private int orgId;
+public class Depart extends Organization {
+    private String deptNo;//部門編碼
+    private int compId;//所屬公司
 
-    public String getName() {
-        return name;
+    public int getCompId() {
+        return compId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCompId(int compId) {
+        this.compId = compId;
     }
 
-    public int getPid() {
-        return pid;
+    public String getDeptNo() {
+        return deptNo;
     }
 
-    public void setPid(int pid) {
-        this.pid = pid;
-    }
-
-    public int getOrgId() {
-        return orgId;
-    }
-
-    public void setOrgId(int orgId) {
-        this.orgId = orgId;
-    }
-
-    public boolean validate(){
-        return StringUtils.isNotEmpty(name);
+    public void setDeptNo(String deptNo) {
+        this.deptNo = deptNo;
     }
 }

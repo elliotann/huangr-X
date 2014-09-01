@@ -3,15 +3,15 @@ package com.easysoft.core.common.entity;
 import java.io.Serializable;
 
 public abstract class IdEntity implements Serializable{
-    protected Integer id;
+    protected int id;
     protected String createTime;
     protected String createBy;
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 

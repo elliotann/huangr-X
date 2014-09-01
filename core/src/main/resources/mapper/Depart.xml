@@ -5,13 +5,13 @@
         <id property="id" column="id"/>
         <id property="name" column="name"/>
         <id property="pid" column="pid"/>
-        <id property="orgId" column="orgid"/>
+        <id property="compId" column="comp_id"/>
     </resultMap>
     <insert id="save" parameterType="Depart" useGeneratedKeys="true" keyProperty="id">
-        insert t_depart (name,pid,orgid)
-         values (#{name},#{pid},#{orgId})
+        insert t_depart (name,pid,comp_id)
+         values (#{name},#{pid},#{compId})
     </insert>
     <select id="queryByOrgId" parameterType="java.lang.Integer" resultMap="departMap">
-        select * from t_depart where orgid=#{orgId}
+        select * from t_depart where comp_id=#{compId}
     </select>
 </mapper>

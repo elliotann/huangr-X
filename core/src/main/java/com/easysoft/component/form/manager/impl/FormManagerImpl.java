@@ -37,17 +37,17 @@ public class FormManagerImpl extends GenericService<FormEntity> implements IForm
 
     @Override
     public void addForm(FormEntity entity) {
-        if(entity.getId()!=null&&entity.getId()!=0){
+        if(entity.getId()!=0){
             formDao.update(entity);
         }
         else{
             formDao.save(entity);
         }
-        if(entity.getId()!=null)
+        if(entity.getId()!=0)
             formFieldDao.delByFormId(entity.getId());
         for(FormField field : entity.getFields()){
             field.setForm(entity);
-            if(field.getId()!=null&&field.getId()!=0){
+            if(field.getId()!=0){
                 formFieldDao.update(field);
             }else{
                 formFieldDao.save(field);

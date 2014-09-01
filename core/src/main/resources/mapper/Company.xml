@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.easysoft.member.backend.dao.ICompanyDao">
+    <resultMap id="companyMap" type="Company">
+        <id property="id" column="id"/>
+        <id property="name" column="name"/>
+        <id property="pid" column="pid"/>
+        <id property="legalPerson" column="legal_person"/>
+        <id property="tel" column="tel"/>
+        <id property="address" column="address"/>
+        <id property="compNo" column="comp_no"/>
+        <id property="enShortName" column="en_short_name"/>
+        <id property="createBy" column="create_by"/>
+        <id property="createTime" column="create_time"/>
+    </resultMap>
+    <select id="queryForList" resultMap="companyMap">
+        select * from t_company
+    </select>
+</mapper>
