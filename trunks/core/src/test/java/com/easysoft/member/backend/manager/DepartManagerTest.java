@@ -22,7 +22,7 @@ public class DepartManagerTest {
         Depart depart = new Depart();
         depart.setName("中国");
         depart.setPid(0);
-        depart.setOrgId(1);
+        depart.setCompId(1);
         departManager.saveDepart(depart);
     }
 }

@@ -1,11 +1,13 @@
 package com.easysoft.member.backend.model;
 
 import com.easysoft.core.common.entity.IdEntity;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 機構
  * @author : andy.huang
  * @since :
  */
@@ -14,14 +16,11 @@ public class Organization extends IdEntity{
     private String name;
     /**地址*/
     private String address;
-    /**手机*/
-    private String phone;
-    /**电话*/
-    private String tel;
-    /**法人*/
-    private String legalPerson;
+
     /**父机构*/
     private Integer pid;
+
+    private String text;
 
     private List<Organization> children = new ArrayList<Organization>();
 
@@ -39,26 +38,7 @@ public class Organization extends IdEntity{
         this.address = address;
     }
 
-    public String getPhone(){
-        return this.phone;
-    }
-    public void setPhone(String phone){
-        this.phone = phone;
-    }
 
-    public String getTel(){
-        return this.tel;
-    }
-    public void setTel(String tel){
-        this.tel = tel;
-    }
-
-    public String getLegalPerson(){
-        return this.legalPerson;
-    }
-    public void setLegalPerson(String legalPerson){
-        this.legalPerson = legalPerson;
-    }
 
     public Integer getPid(){
         return this.pid;
@@ -73,5 +53,17 @@ public class Organization extends IdEntity{
 
     public void setChildren(List<Organization> children) {
         this.children = children;
+    }
+
+    public boolean validate(){
+        return StringUtils.isNotEmpty(name);
+    }
+
+    public String getText() {
+        return name;
+    }
+
+    public void setText(String text) {
+        this.name = text;
     }
 }

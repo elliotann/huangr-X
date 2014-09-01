@@ -77,7 +77,7 @@ public class MenuManagerImpl extends BaseSupport<Menu> implements IMenuManager {
             if(!selectMenus.isEmpty()){
                 for(Menu menu : menuList){
                     for(Menu selectMenu : selectMenus){
-                        if(menu.getId().intValue()==selectMenu.getId().intValue()){
+                        if(menu.getId()==selectMenu.getId()){
                             System.out.println("here");
                             menu.setHasAuth(true);
                         }
@@ -122,7 +122,7 @@ public class MenuManagerImpl extends BaseSupport<Menu> implements IMenuManager {
 
 
 	public void edit(Menu menu) {
-		if(menu.getId()==null) throw new IllegalArgumentException("id argument is null");
+		if(menu.getId()==0) throw new IllegalArgumentException("id argument is null");
 		if(menu.getTitle()==null) throw new IllegalArgumentException("title argument is null");
 		if(menu.getPid()==null) throw new IllegalArgumentException("pid argument is null");
 		if(menu.getUrl() ==null) throw new IllegalArgumentException("url argument is null");

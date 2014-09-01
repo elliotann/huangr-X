@@ -297,7 +297,7 @@ public class MenuJsonGetter extends AbstractFacadeProcessor {
         for (FunAndOper auth : authList) {
             Integer menuId = auth.getMenu().getId();
             if (menuId != null) {
-                if (menuId == menu.getId().intValue()) {
+                if (menuId == menu.getId()) {
                     return true;
                 }
             }

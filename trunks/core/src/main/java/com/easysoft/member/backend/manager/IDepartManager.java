@@ -14,4 +14,5 @@ public interface IDepartManager {
     public List<Depart> queryByOrgId(Integer orgId);
 
     public String queryDeparts4Select(Integer orgId);
+
 }

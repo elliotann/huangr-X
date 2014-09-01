@@ -18,6 +18,7 @@
        <typeAlias type="com.easysoft.component.oa.entity.OaLeaveEntity" alias="OaLeave"/>
         <typeAlias type="com.easysoft.member.backend.model.Organization" alias="OrganizatiOn"/>
         <typeAlias type="com.easysoft.member.backend.model.Depart" alias="Depart"/>
+        <typeAlias type="com.easysoft.member.backend.model.Company" alias="Company"/>
     </typeAliases>
     <plugins>
         <plugin interceptor="com.easysoft.framework.db.PageInterceptor">
