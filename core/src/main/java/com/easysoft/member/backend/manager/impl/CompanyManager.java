@@ -20,4 +20,9 @@ public class CompanyManager implements ICompanyManager {
     public List<Company> queryForList() {
         return companyDao.queryForList();
     }
+
+    @Override
+    public Company queryById(int id) {
+        return companyDao.queryById(id);
+    }
 }

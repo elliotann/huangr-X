@@ -12,6 +12,10 @@ import java.util.List;
  * @since :
  */
 public class Organization extends IdEntity{
+    public enum OrgType{
+        COMPANY,
+        DEPT
+    }
     /**名称*/
     private String name;
     /**地址*/
@@ -21,6 +25,8 @@ public class Organization extends IdEntity{
     private Integer pid;
 
     private String text;
+
+    private OrgType orgType;
 
     private List<Organization> children = new ArrayList<Organization>();
 
@@ -65,5 +71,13 @@ public class Organization extends IdEntity{
 
     public void setText(String text) {
         this.name = text;
+    }
+
+    public OrgType getOrgType() {
+        return orgType;
+    }
+
+    public void setOrgType(OrgType orgType) {
+        this.orgType = orgType;
     }
 }

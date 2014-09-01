@@ -10,4 +10,6 @@ import java.util.List;
  */
 public interface ICompanyManager {
     public List<Company> queryForList();
+
+    public Company queryById(int id);
 }

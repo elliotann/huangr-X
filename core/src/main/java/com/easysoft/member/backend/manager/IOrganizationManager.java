@@ -16,4 +16,6 @@ public interface IOrganizationManager {
     public void deleteById(Integer id);
 
     public List<Organization> queryOrganizationByTree(int pid);
+
+    public Organization queryByTypeAndId(String type,int id);
 }
