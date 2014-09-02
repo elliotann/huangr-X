@@ -12,4 +12,8 @@ public interface ICompanyManager {
     public List<Company> queryForList();
 
     public Company queryById(int id);
+
+    public void saveCompany(Company company);
+    public void updateCompany(Company company);
+    public Company queryByNoAndId(String compNo,int id);
 }
