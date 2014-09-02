@@ -227,14 +227,16 @@ public class OrganizationAction extends BaseController {
      */
     @RequestMapping(params = "goAdd")
     public ModelAndView goAdd(Integer pid,String orgType, HttpServletRequest req) {
-        Organization organization = this.organizatiOnService.queryByTypeAndId("COMPANY", pid.intValue());
+        Organization organization = this.organizatiOnService.queryByTypeAndId(orgType, pid.intValue());
         if(orgType.equals(Organization.OrgType.COMPANY.name())){
             Company company = (Company)organization;
             req.setAttribute("organization", company);
             return new ModelAndView("admin/core/org/organization-add");
         }else if(orgType.equals(Organization.OrgType.DEPT.name())){
-
-            req.setAttribute("organization", organization);
+            Depart dept = (Depart)organization;
+            Company company = companyManager.queryById(dept.getCompId());
+            req.setAttribute("organization", dept);
+            req.setAttribute("company", company);
             return new ModelAndView("admin/core/org/dept-add");
         }
         return null;
@@ -245,6 +247,14 @@ public class OrganizationAction extends BaseController {
     public boolean checkCompNoExist(String compNo,Integer id){
         Company company = companyManager.queryByNoAndId(compNo,id);
         return company==null;
+
+    }
+
+    @RequestMapping(params = {"checkDeptNoExist"})
+    @ResponseBody
+    public boolean checkDeptNoExist(String deptNo,Integer id){
+        Depart depart = departManager.queryByNoAndId(deptNo,id);
+        return depart==null;
 
     }
 

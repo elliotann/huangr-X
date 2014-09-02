@@ -27,11 +27,11 @@
                     minlength:4,
                     maxlength:4,
                     remote:{
-                        url:'organization.do?checkCompNoExist&ajax=true',
+                        url:'organization.do?checkDeptNoExist&ajax=true',
                         type:'post',
                         dataType:'json',
                         data:{
-                            compNo:function(){return $("#compNo").val();},
+                            deptNo:function(){return $("#deptNo").val();},
                             id:0
                         }
 
