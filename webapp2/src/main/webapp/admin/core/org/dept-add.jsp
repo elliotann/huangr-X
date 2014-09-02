@@ -19,7 +19,27 @@
     $(function() {
 
         $("#objForm").validate({
+            rules:{
+                deptNo:{
+                    required:true,
+                    minlength:4,
+                    maxlength:4,
+                    remote:{
+                        url:'organization.do?checkCompNoExist&ajax=true',
+                        type:'post',
+                        dataType:'json',
+                        data:{
+                            compNo:function(){return $("#compNo").val();},
+                            id:0
+                        }
 
+                    }
+                },
+                name:{
+                    required:true,
+                    maxlength:50
+                }
+            },
             submitHandler: function ()
             {
 
@@ -36,7 +56,7 @@
                                 $.ligerDialog.closeWaitting();
 
                             }, 1000);
-
+                            window.parent.parent.location.reload();
                             dialog.close();
                         }else{
                             alert(result.msg)
@@ -49,16 +69,15 @@
 
             },
             messages:{
-                username: {
-                    required: "用户名不能为空",
-                    minlength: "用户名最少3个字符",
-                    maxlength:"用户名最大18个字符",
-                    remote:"用户名已经存在"
+                deptNo: {
+                    required: "编码不能为空",
+                    minlength: "编码只能是4位字符",
+                    maxlength:"编码只能是4位字符",
+                    remote:"编码已经存在"
                 },
-                password:{
-                    required:"密码不能为空",
-                    minlength:"密码最少6位",
-                    maxlength:"密码最长18位"
+                name:{
+                    required:"部门名称不能为空",
+                    maxlength:"部门名称最长50位"
                 }
             }
         });
@@ -109,11 +128,19 @@
             <td align="left"></td>
         </tr>
         <tr>
+            <td align="right" class="l-table-edit-td">上级部门:</td>
+            <td align="left" class="l-table-edit-td">
+                <input name="" type="text" id="" class="form-control" value="${organization.name}" disabled/>
+                <input name="pid" type="hidden" id="pid" value="${organization.id}"/>
+            </td>
+            <td align="left"></td>
+        </tr>
+        <tr>
             <td align="right" class="l-table-edit-td">所属公司:</td>
             <td align="left" class="l-table-edit-td">
-                <input name="realname" type="text"  value="${organization.name}"  class="form-control" disabled="disabled"/>
-                <input name="compId" type="hidden" id="compId" value="${organization.id}"/>
-                <input name="pid" type="hidden" id="pid" value="0"/>
+                <input name="realname" type="text"  value="${company.name}"  class="form-control" disabled="disabled"/>
+                <input name="compId" type="hidden" id="compId" value="${company.id}"/>
+
             </td>
             <td align="left"></td>
         </tr>
