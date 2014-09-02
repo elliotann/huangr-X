@@ -21,4 +21,10 @@
     <select id="queryById" parameterType="java.lang.Integer" resultMap="departMap">
         select * from t_depart where id=#{id}
     </select>
+    <select id="queryByQry" parameterType="hashMap" resultMap="departMap">
+        select * from t_depart where dept_no=#{deptNo}
+        <if test="id!=0">
+            and id!=${id}
+        </if>
+    </select>
 </mapper>

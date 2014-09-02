@@ -8,7 +8,9 @@ import com.easysoft.member.backend.model.Depart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author : andy.huang
@@ -57,5 +59,13 @@ public class DepartManager implements IDepartManager {
     @Override
     public Depart queryById(int id) {
         return departDao.queryById(id);
+    }
+
+    @Override
+    public Depart queryByNoAndId(String deptNo, int id) {
+        Map<String,Object> params = new HashMap<String, Object>();
+        params.put("deptNo",deptNo);
+        params.put("id",id);
+        return departDao.queryByQry(params);
     }
 }
