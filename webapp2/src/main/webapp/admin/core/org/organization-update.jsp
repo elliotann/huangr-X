@@ -15,26 +15,34 @@
 <script type="text/javascript">
 
     var dialog = frameElement.dialog;
-    $(function() {
-        $("#objForm").validate({
 
+    $(function() {
+
+        $("#objForm").validate({
+            rules:{
+
+                name:{
+                    required:true,
+                    maxlength:50
+                }
+            },
             submitHandler: function ()
             {
 
                 $("#objForm").ajaxSubmit({
-                    url :"organization.do?doAdd&ajax=true",
+                    url :"organization.do?updateCompany&ajax=true",
                     type : "POST",
                     dataType:"json",
                     success : function(result) {
 
                         if(result.success){
-                            $.ligerDialog.waitting('增加成功');
+                            $.ligerDialog.waitting('操作成功');
                             setTimeout(function ()
                             {
                                 $.ligerDialog.closeWaitting();
 
                             }, 1000);
-
+                            window.parent.parent.location.reload();
                             dialog.close();
                         }else{
                             alert(result.msg)
@@ -47,16 +55,9 @@
 
             },
             messages:{
-                username: {
-                    required: "用户名不能为空",
-                    minlength: "用户名最少3个字符",
-                    maxlength:"用户名最大18个字符",
-                    remote:"用户名已经存在"
-                },
-                password:{
-                    required:"密码不能为空",
-                    minlength:"密码最少6位",
-                    maxlength:"密码最长18位"
+                name:{
+                    required:"公司名称不能为空",
+                    maxlength:"公司名称最长50位"
                 }
             }
         });
@@ -89,22 +90,50 @@
 
 </style>
 <form name="objForm" method="post"   id="objForm">
-
+    <input type="hidden" name="id" value="${organization.id}"/>
     <table cellpadding="0" cellspacing="0" class="l-table-edit" >
-
         <tr>
-            <td align="right" class="l-table-edit-td">机构名称:</td>
+            <td align="right" class="l-table-edit-td">公司编码:</td>
             <td align="left" class="l-table-edit-td">
-                <input name="name" type="text" id="name" class="form-control" />
+                <input name="compNo" type="text" id="compNo" class="form-control" value="${organization.compNo}" disabled/>
+            </td>
+            <td align="left"></td>
+        </tr>
+        <tr>
+            <td align="right" class="l-table-edit-td">公司英文简写:</td>
+            <td align="left" class="l-table-edit-td">
+                <input name="enShortName" type="text" id="enShortName" class="form-control" value="${organization.enShortName}"/>
+            </td>
+            <td align="left"></td>
+        </tr>
+        <tr>
+            <td align="right" class="l-table-edit-td">公司名称:</td>
+            <td align="left" class="l-table-edit-td">
+                <input name="name" type="text" id="name" class="form-control"  value="${organization.name}"/>
             </td>
             <td align="left"></td>
         </tr>
 
+
         <tr>
-            <td align="right" class="l-table-edit-td">上级机构:</td>
+            <td align="right" class="l-table-edit-td">公司地址:</td>
             <td align="left" class="l-table-edit-td">
-                <input name="realname" type="text" id="realname" value="${organizatiOnEntity.name}"  class="form-control" disabled="disabled"/>
-                <input name="pid" type="hidden" id="pid" value="${organizatiOnEntity.id}"/>
+                <input name="address" type="text" id="address" class="form-control" value="${organization.address}"/>
+            </td>
+            <td align="left"></td>
+        </tr>
+        <tr>
+            <td align="right" class="l-table-edit-td">法人:</td>
+            <td align="left" class="l-table-edit-td">
+                <input name="legalPerson" type="text" id="legalPerson" class="form-control" value="${organization.legalPerson}"/>
+            </td>
+            <td align="left"></td>
+        </tr>
+        <tr>
+            <td align="right" class="l-table-edit-td">上级公司:</td>
+            <td align="left" class="l-table-edit-td">
+                <input name="realname" type="text" id="realname" value="${parent.name}"  class="form-control" disabled="disabled"/>
+                <input name="pid" type="hidden" id="pid" value="${parent.id}"/>
             </td>
             <td align="left"></td>
         </tr>

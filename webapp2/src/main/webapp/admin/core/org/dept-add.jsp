@@ -15,14 +15,16 @@
 <script type="text/javascript">
 
     var dialog = frameElement.dialog;
+
     $(function() {
+
         $("#objForm").validate({
 
             submitHandler: function ()
             {
 
                 $("#objForm").ajaxSubmit({
-                    url :"depart.do?addSave&ajax=true",
+                    url :"organization.do?addDept&ajax=true",
                     type : "POST",
                     dataType:"json",
                     success : function(result) {
@@ -100,23 +102,18 @@
             <td align="left"></td>
         </tr>
         <tr>
-            <td align="right" class="l-table-edit-td">上级部门:</td>
+            <td align="right" class="l-table-edit-td">部门编号:</td>
             <td align="left" class="l-table-edit-td">
-                <select id="pid" name="pid" class="form-control">
-                    <option value="0">顶级部门</option>
-                    <c:forEach items="${departs}" var="depart">
-                        <option value="${depart.id}">${depart.name}</option>
-                    </c:forEach>
-                </select>
-
+                <input name="deptNo" type="text" id="deptNo" class="form-control" />
             </td>
             <td align="left"></td>
         </tr>
         <tr>
-            <td align="right" class="l-table-edit-td">所属机构:</td>
+            <td align="right" class="l-table-edit-td">所属公司:</td>
             <td align="left" class="l-table-edit-td">
-                <input type="text"  value="${organization.name}"  class="form-control" disabled="disabled"/>
-                <input name="orgId" type="hidden" id="orgId" value="${organization.id}"/>
+                <input name="realname" type="text"  value="${organization.name}"  class="form-control" disabled="disabled"/>
+                <input name="compId" type="hidden" id="compId" value="${organization.id}"/>
+                <input name="pid" type="hidden" id="pid" value="0"/>
             </td>
             <td align="left"></td>
         </tr>
