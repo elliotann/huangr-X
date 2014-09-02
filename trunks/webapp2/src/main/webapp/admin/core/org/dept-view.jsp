@@ -19,19 +19,20 @@ pageEncoding="UTF-8"%>
 
 
     var dialog = frameElement.dialog;
-    $(function (){
 
-        $("#tt", window.parent.document).tree('reload');
+    $(function (){
         $("#toolbar").ligerToolBar({ items: [
-            { text: '增加机构', click: add , icon:'add'},
-          { text: '增加部门', click: addDepart , icon:'add'}
-                ]});
+            { text: '增加部门', click: addDepart , icon:'add'},
+            { text: '修改部门', click: updateDepart , icon:'modify'}
+        ]});
     });
-    function add(item){
-        addOrUpdateDialog(item,'增加机构','organization.do?goAdd&pid='+$("#pid").val(),500,700);
-    }
+
     function addDepart(item){
-        addOrUpdateDialog(item,'增加部门','depart.do?toAdd&orgId='+$("#pid").val(),500,700);
+        addOrUpdateDialog(item,'增加部门','organization.do?goAdd&pid='+$("#pid").val()+"&orgType=DEPT",500,700);
+    }
+
+    function updateDepart(item){
+        addOrUpdateDialog(item,'修改部门','organization.do?goAdd&pid='+$("#pid").val()+"&orgType=DEPT",500,700);
     }
 
 
@@ -49,9 +50,16 @@ pageEncoding="UTF-8"%>
     <table cellpadding="0" cellspacing="0" class="l-table-edit" >
 
         <tr>
-            <td align="right" class="l-table-edit-td">机构名称:</td>
+            <td align="right" class="l-table-edit-td">部门名称:</td>
             <td align="left" class="l-table-edit-td">
-                ${organizatiOn.name}
+                ${organization.name}
+            </td>
+            <td align="left"></td>
+        </tr>
+        <tr>
+            <td align="right" class="l-table-edit-td">部门编码:</td>
+            <td align="left" class="l-table-edit-td">
+                ${organization.deptNo}
             </td>
             <td align="left"></td>
         </tr>
