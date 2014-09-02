@@ -61,6 +61,7 @@ public class OrganizationManager implements IOrganizationManager {
         for(Organization org :compList){
             if(org.getPid()==pid){
                 org.setChildren(this.getChildren(compList, org.getId()));
+                org.getChildren().addAll(departManager.queryByOrgId(org.getId()));
                 children.add(org);
             }
         }
@@ -85,6 +86,7 @@ public class OrganizationManager implements IOrganizationManager {
             if(org.getPid()==pid){
                 List<Organization> children = this.getChildren(orgList, org.getId());
                 org.setChildren(children);
+                org.getChildren().addAll(departManager.queryByOrgId(org.getId()));
                 topOrgList.add(org);
             }
         }
@@ -94,9 +96,9 @@ public class OrganizationManager implements IOrganizationManager {
     @Override
     public Organization queryByTypeAndId(String type, int id) {
         Organization organization = null;
-        if(type.equals(Organization.OrgType.COMPANY)){
+        if(type.equals(Organization.OrgType.COMPANY.name())){
             organization = companyManager.queryById(id);
-        }else if(type.equals(Organization.OrgType.DEPT)){
+        }else if(type.equals(Organization.OrgType.DEPT.name())){
             organization = departManager.queryById(id);
         }
         return organization;
