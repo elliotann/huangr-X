@@ -34,8 +34,8 @@
     <select id="queryById" parameterType="java.lang.Integer" resultMap="employMap">
         select * from t_depart where id=#{id}
     </select>
-    <select id="queryByQry" parameterType="hashMap" resultMap="employMap">
-        select * from t_depart where dept_no=#{deptNo}
+    <select id="queryEmployByCondition" parameterType="hashMap" resultMap="employMap">
+        select * from t_emp where emp_no=#{empNo}
         <if test="id!=0">
             and id!=${id}
         </if>
