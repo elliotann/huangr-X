@@ -74,11 +74,13 @@ public class EmployAction extends BaseController {
     }
 
     @RequestMapping(params = "addSave")
+    @ResponseBody
     public AjaxJson addSave(Employ employ){
         AjaxJson result = new AjaxJson();
         try{
             employManager.saveEmploy(employ);
         }catch(Exception e){
+            e.printStackTrace();
             result.setSuccess(false);
         }
         return result;

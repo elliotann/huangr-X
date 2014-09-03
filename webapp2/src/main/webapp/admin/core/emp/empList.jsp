@@ -57,7 +57,7 @@
         <div class="shadowBoxWhite tableDiv">
             <table class="easyui-datagrid"
                    data-options="url:'emp.do?dataGrid&ajax=true',pageList: [5,10,15,20],fitColumns:'true'"
-                   pagination="true" id="memberdata" sortName="member_id" sortOrder="desc" id="useradmindata">
+                   pagination="true"  sortName="member_id" sortOrder="desc" id="useradmindata">
                 <thead>
                 <tr>
                     <th data-options="field:'id',width:80,align:'center'">ID</th>
@@ -115,6 +115,7 @@
     }
 
     function append() {
+        $('#useradmindata').datagrid('reload');
         $("#useradmininfo").show();
         $('#useradmininfo').dialog({
             title: '添加员工',
@@ -148,9 +149,12 @@
                 type : "POST",
                 dataType : "json",
                 success : function(result) {
-                    $("#useradmininfo").dialog('close');
-                    $('#useradmindata').datagrid('reload');
-                    savebtn.linkbutton("enable");
+                    if(result.success){
+                        $("#useradmininfo").dialog('close');
+                        $('#useradmindata').datagrid('reload');
+                        savebtn.linkbutton("enable");
+                    }
+
                 },
                 error : function(e) {
                     $.Loading.error("出现错误 ，请重试");
