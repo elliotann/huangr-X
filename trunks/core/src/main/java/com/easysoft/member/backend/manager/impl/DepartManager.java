@@ -68,4 +68,17 @@ public class DepartManager implements IDepartManager {
         params.put("id",id);
         return departDao.queryByQry(params);
     }
+
+    @Override
+    public List<Depart> queryByCompIdAndPid(int compId, int pid) {
+        Map<String,Object> params = new HashMap<String, Object>();
+        params.put("compId",compId);
+        params.put("pid",pid);
+        return departDao.queryByCompIdAndPid(params);
+    }
+
+    @Override
+    public void updateDept(Depart dept) {
+        departDao.update(dept);
+    }
 }

@@ -15,6 +15,12 @@
         insert t_depart (name,pid,comp_id,dept_no,create_by,create_time)
          values (#{name},#{pid},#{compId},#{deptNo},#{createBy},#{createTime})
     </insert>
+    <update id="update" parameterType="Depart">
+        update t_depart
+         set name=#{name},
+         dept_no=#{deptNo}
+        where id=#{id}
+    </update>
     <select id="queryByOrgId" parameterType="java.lang.Integer" resultMap="departMap">
         select * from t_depart where comp_id=#{compId}
     </select>
@@ -26,5 +32,9 @@
         <if test="id!=0">
             and id!=${id}
         </if>
+    </select>
+    <select id="queryByCompIdAndPid" parameterType="hashMap" resultMap="departMap">
+        select * from t_depart where comp_id=#{compId} and pid=#{pid}
+
     </select>
 </mapper>

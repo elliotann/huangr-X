@@ -20,4 +20,8 @@ public interface IDepartManager {
 
     public Depart queryByNoAndId(String deptNo,int id);
 
+    public List<Depart> queryByCompIdAndPid(int compId,int pid);
+
+    public void updateDept(Depart dept);
+
 }
