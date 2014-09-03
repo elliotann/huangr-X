@@ -86,4 +86,9 @@ public class EmployAction extends BaseController {
         return result;
 
     }
+    @RequestMapping(params = "checkEmpNoExist")
+    @ResponseBody
+    public boolean checkEmpNoExist(String empNo,Integer id){
+        return employManager.queryByNoAndId(empNo,id)==null;
+    }
 }
