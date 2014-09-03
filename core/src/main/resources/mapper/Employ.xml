@@ -20,7 +20,7 @@
     </resultMap>
     <insert id="save" parameterType="Employ" useGeneratedKeys="true" keyProperty="id">
         insert t_emp (name,sex,birthday,mobile,address,tel,id_card,emp_no,entry_date,status,dept_id,comp_id,create_by,create_time)
-         values (#{name},#{sex},#{birthday},#{mobile},#{address},#{tel},#{idCard},#{empNo},#{entryDate},#{status},#{deptId},#{compId},#{createBy},#{createTime})
+         values (#{name},#{sex},#{birthDay},#{mobile},#{address},#{tel},#{idCard},#{empNo},#{entryDate},#{status},#{deptId},#{compId},#{createBy},#{createTime})
     </insert>
     <update id="update" parameterType="Depart">
         update t_emp
