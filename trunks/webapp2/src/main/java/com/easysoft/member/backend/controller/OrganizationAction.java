@@ -172,6 +172,19 @@ public class OrganizationAction extends BaseController {
         return result;
     }
 
+    @RequestMapping(params={"updateDept"})
+    @ResponseBody
+    public AjaxJson updateDept(Depart depart){
+        AjaxJson result = new AjaxJson();
+        try{
+            departManager.updateDept(depart);
+        }catch(Exception e){
+            result.setSuccess(false);
+            result.setMsg(e.getMessage());
+        }
+        return result;
+    }
+
     /**
      * 组织机构编辑页面跳转
      *
@@ -188,9 +201,18 @@ public class OrganizationAction extends BaseController {
                 req.setAttribute("parent", parent);
                 return new ModelAndView("admin/core/org/organization-update");
             }else if(orgType.equals(Organization.OrgType.DEPT.name())){
-
-                req.setAttribute("organization", (Depart)organization);
-                return new ModelAndView("admin/core/org/dept-add");
+                Depart depart = departManager.queryById(pid);
+                Depart parent = departManager.queryById(depart.getPid());
+                if(parent==null){
+                    parent = new Depart();
+                    parent.setId(0);
+                    parent.setName("顶级部门");
+                }
+                Company company = companyManager.queryById(depart.getCompId());
+                req.setAttribute("organization", depart);
+                req.setAttribute("parent", parent);
+                req.setAttribute("company", company);
+                return new ModelAndView("admin/core/org/dept-update");
             }
         }
         return null;
@@ -226,15 +248,26 @@ public class OrganizationAction extends BaseController {
      * @return
      */
     @RequestMapping(params = "goAdd")
-    public ModelAndView goAdd(Integer pid,String orgType, HttpServletRequest req) {
+    public ModelAndView goAdd(Integer pid,String orgType,String from, HttpServletRequest req) {
         Organization organization = this.organizatiOnService.queryByTypeAndId(orgType, pid.intValue());
         if(orgType.equals(Organization.OrgType.COMPANY.name())){
             Company company = (Company)organization;
             req.setAttribute("organization", company);
             return new ModelAndView("admin/core/org/organization-add");
         }else if(orgType.equals(Organization.OrgType.DEPT.name())){
-            Depart dept = (Depart)organization;
-            Company company = companyManager.queryById(dept.getCompId());
+            Depart dept = null;
+            Company company = null;
+            if("COMPANY".equals(from)){
+                dept = new Depart();
+                dept.setName("顶级部门");
+                dept.setId(0);
+                company = companyManager.queryById(pid);
+            }else{
+                dept = (Depart)organization;
+                company = companyManager.queryById(dept.getCompId());
+            }
+
+
             req.setAttribute("organization", dept);
             req.setAttribute("company", company);
             return new ModelAndView("admin/core/org/dept-add");

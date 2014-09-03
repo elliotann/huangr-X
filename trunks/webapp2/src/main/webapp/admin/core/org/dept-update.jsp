@@ -30,7 +30,7 @@
                         dataType:'json',
                         data:{
                             compNo:function(){return $("#compNo").val();},
-                            id:0
+                            id:function(){return $("#deptId").val();}
                         }
 
                     }
@@ -44,7 +44,7 @@
             {
 
                 $("#objForm").ajaxSubmit({
-                    url :"organization.do?addDept&ajax=true",
+                    url :"organization.do?updateDept&ajax=true",
                     type : "POST",
                     dataType:"json",
                     success : function(result) {
@@ -110,28 +110,28 @@
 
 </style>
 <form name="objForm" method="post"   id="objForm">
-
+    <input type="hidden" name="id" id="deptId" value="${organization.id}"/>
     <table cellpadding="0" cellspacing="0" class="l-table-edit" >
 
         <tr>
             <td align="right" class="l-table-edit-td">部门名称:</td>
             <td align="left" class="l-table-edit-td">
-                <input name="name" type="text" id="name" class="form-control" />
+                <input name="name" type="text" id="name" class="form-control" value="${organization.name}" />
             </td>
             <td align="left"></td>
         </tr>
         <tr>
             <td align="right" class="l-table-edit-td">部门编号:</td>
             <td align="left" class="l-table-edit-td">
-                <input name="deptNo" type="text" id="deptNo" class="form-control" />
+                <input name="deptNo" type="text" id="deptNo" class="form-control" value="${organization.deptNo}"/>
             </td>
             <td align="left"></td>
         </tr>
         <tr>
             <td align="right" class="l-table-edit-td">上级部门:</td>
             <td align="left" class="l-table-edit-td">
-                <input name="" type="text" id="" class="form-control" value="${organization.name}" disabled/>
-                <input name="pid" type="hidden" id="pid" value="${organization.id}"/>
+                <input name="" type="text" id="" class="form-control" value="${parent.name}" disabled/>
+                <input name="pid" type="hidden" id="pid" value="${parent.id}"/>
             </td>
             <td align="left"></td>
         </tr>

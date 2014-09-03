@@ -32,7 +32,7 @@ pageEncoding="UTF-8"%>
     }
 
     function updateDepart(item){
-        addOrUpdateDialog(item,'修改部门','organization.do?goAdd&pid='+$("#pid").val()+"&orgType=DEPT",500,700);
+        addOrUpdateDialog(item,'修改部门','organization.do?goUpdate&pid='+$("#pid").val()+"&orgType=DEPT",500,700);
     }
 
 
