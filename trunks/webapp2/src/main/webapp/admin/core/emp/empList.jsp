@@ -20,7 +20,7 @@
 				<span id="simpleSearch">
 
 					<input id="searchKeyword" class="input_text" type="text" value="" size="30" style="width: 300px;"
-                           placeholder="请输入姓名，手机号" name="searchKeyWord" onFocus="WdatePicker({isShowClear:false,readOnly:true})">
+                           placeholder="请输入姓名，手机号" name="searchKeyWord">
 					<a href="javascript:void(0)" class="easyui-linkbutton"
                        data-options="plain:true" onclick="searchMember()">搜索</a>
 				</span>
@@ -121,7 +121,7 @@
             title: '添加员工',
             top: 60,
             width: 600,
-            height: 550,
+            height: 350,
             closed: false,
             cache: false,
             href: 'emp.do?goAdd',
@@ -144,24 +144,7 @@
             ]});
     }
     function addadminForm(savebtn){
-            var options = {
-                url : "emp.do?addSave&ajax=true",
-                type : "POST",
-                dataType : "json",
-                success : function(result) {
-                    if(result.success){
-                        $("#useradmininfo").dialog('close');
-                        $('#useradmindata').datagrid('reload');
-                        savebtn.linkbutton("enable");
-                    }
-
-                },
-                error : function(e) {
-                    $.Loading.error("出现错误 ，请重试");
-                    savebtn.linkbutton("enable");
-                }
-            };
-            $('#objForm').ajaxSubmit(options);
+        $("#objForm").submit();
 
     }
 </script>
