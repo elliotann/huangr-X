@@ -6,8 +6,6 @@
 
 
     <script src="${staticserver}/js/common/jquery.validate.js" type="text/javascript"></script>
-
-
     <link href="${context }/css/form.css" rel="stylesheet"/>
 
 
@@ -17,74 +15,72 @@
         $(function() {
             $("#objForm").validate({
                 rules:{
-                    username:{
+                    empNo:{
                         required:true,
-                        minlength:3,
-                        maxlength:10,
+                        minlength:1,
+                        maxlength:4,
                         remote:{
-                            url:'userAdmin.do?checkNameExist&ajax=true',
+                            url:'emp.do?checkEmpNoExist&ajax=true',
                             type:'post',
                             dataType:'json',
                             data:{
-                                rolename:function(){return $("#rolename").val();},
-                                roleid:function(){return $("#roleid").val();}
+                                empNo:function(){return $("#empNo").val();},
+                                id:0
                             }
 
                         }
                     },
-                    password:{
+                    name:{
                         required:true,
-                        minlength:6,
-                        maxlength:18
+                        minlength:2,
+                        maxlength:5
+                    },
+                    entryDate:{
+                        required:true
                     }
                 },
 
                 submitHandler: function ()
                 {
 
-                    $("#objForm").ajaxSubmit({
-                        url :"userAdmin.do?addSave&ajax=true",
+                    var options = {
+                        url : "emp.do?addSave&ajax=true",
                         type : "POST",
-                        dataType:"json",
+                        dataType : "json",
                         success : function(result) {
-
                             if(result.success){
-                                $.ligerDialog.waitting('增加成功');
-                                setTimeout(function ()
-                                {
-                                    $.ligerDialog.closeWaitting();
-
-                                }, 1000);
-                                window.parent.listgrid.loadData();
-                                dialog.close();
-                            }else{
-                                alert(result.msg)
+                                $("#useradmininfo").dialog('close');
+                                $('#useradmindata').datagrid('reload');
+                                savebtn.linkbutton("enable");
                             }
+
                         },
                         error : function(e) {
-                            alert("出错啦:(");
+                            $.Loading.error("出现错误 ，请重试");
+                            savebtn.linkbutton("enable");
                         }
-                    });
+                    };
+                    $('#objForm').ajaxSubmit(options);
 
                 },
                 messages:{
-                    username: {
-                        required: "用户名不能为空",
-                        minlength: "用户名最少3个字符",
-                        maxlength:"用户名最大18个字符",
-                        remote:"用户名已经存在"
+                    empNo: {
+                        required: "员工号不能为空",
+                        maxlength:"员工号最大4个字符",
+                        remote:"编号已经存在"
                     },
-                    password:{
-                        required:"密码不能为空",
-                        minlength:"密码最少6位",
-                        maxlength:"密码最长18位"
+                    name:{
+                        required:"姓名不能为空",
+                        minlength:"姓名最少2位",
+                        maxlength:"姓名最长5位"
+                    },
+                    entryDate:{
+                        required:"入职日期不能为空"
                     }
                 }
             });
         });
-        function submitForm(){
-            $("#objForm").submit();
-        }
+
 
         function queryDeparts(corpId){
             $.ajax({
@@ -124,35 +120,6 @@
 <form name="objForm" method="post"   id="objForm">
 
     <table cellpadding="0" cellspacing="0" class="l-table-edit" >
-        <c:if test="${multiSite==1}">
-            <tr>
-                <td align="right"><label class="Validform_label">站点：</label></td>
-                <td >
-                    <select name="adminUser.siteid" id="adminUserSite"/>
-                </td>
-            </tr>
-            <script>
-                $(function(){
-
-                    $.ajax({
-                        type: "GET",
-                        url: "../multiSite!listJson.do",
-                        data:   "ajax=yes",
-                        dataType:'json',
-                        success: function(result){
-                            if(result.result==0){
-                                $("#adminUserSite").selectTree(result.data);
-                            }else{
-                                alert("站点列表获取失败，请重试");
-                            }
-                        },
-                        error:function(){
-                            alert("站点列表获取失败");
-                        }
-                    });
-                });
-            </script>
-        </c:if>
         <tr>
             <td align="right" class="l-table-edit-td">员工号:</td>
             <td align="left" class="l-table-edit-td">
