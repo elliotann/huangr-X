@@ -7,6 +7,7 @@ import com.easysoft.member.backend.manager.IDepartManager;
 import com.easysoft.member.backend.manager.IOrganizationManager;
 
 import com.easysoft.member.backend.model.Company;
+import com.easysoft.member.backend.model.Depart;
 import com.easysoft.member.backend.model.Organization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -61,14 +62,22 @@ public class OrganizationManager implements IOrganizationManager {
         for(Organization org :compList){
             if(org.getPid()==pid){
                 org.setChildren(this.getChildren(compList, org.getId()));
-                org.getChildren().addAll(departManager.queryByOrgId(org.getId()));
+                org.getChildren().addAll(this.getChildren4Depart(org.getId(),0));
                 children.add(org);
             }
         }
         return children;
     }
 
-
+    public List<Organization> getChildren4Depart(int compId,int pid){
+        List<Depart> departs = departManager.queryByCompIdAndPid(compId,pid);
+        List<Organization> result = new ArrayList<Organization>();
+        for(Organization depart : departs){
+            depart.setChildren(getChildren4Depart(compId,depart.getId()));
+            result.add(depart);
+        }
+        return result;
+    }
 
     public Organization queryById(Integer id){
         return organizatiOnDao.queryById(id);
@@ -86,7 +95,7 @@ public class OrganizationManager implements IOrganizationManager {
             if(org.getPid()==pid){
                 List<Organization> children = this.getChildren(orgList, org.getId());
                 org.setChildren(children);
-                org.getChildren().addAll(departManager.queryByOrgId(org.getId()));
+                org.getChildren().addAll(this.getChildren4Depart(org.getId(),0));
                 topOrgList.add(org);
             }
         }

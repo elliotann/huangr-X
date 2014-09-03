@@ -16,4 +16,6 @@ public interface IDepartDao extends IGenericDao<Depart,Integer> {
     public List<Depart> queryByOrgId(Integer orgId);
 
     public Depart queryByQry(Map<String,Object> condition);
+
+    public List<Depart> queryByCompIdAndPid(Map<String,Object> condition);
 }
