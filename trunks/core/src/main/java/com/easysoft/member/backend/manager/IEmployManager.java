@@ -11,4 +11,5 @@ import java.util.List;
 public interface IEmployManager {
     public List<Employ> queryForList();
     public void saveEmploy(Employ employ);
+    public Employ queryByNoAndId(String empNo,int id);
 }
