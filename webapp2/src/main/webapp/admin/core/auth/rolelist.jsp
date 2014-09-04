@@ -15,47 +15,150 @@
 
 <script type="text/javascript">
     var listgrid;
-    function addRole(item)
-    {
-        addOrUpdateDialog(item,'增加角色','role.do?add',400,600);
-    }
-    function modifyUser(item)
-    {
 
-        var row = listgrid.getSelectedRow();
-        if(row==null){
-            $.ligerDialog.error('请选择数据修改!');
+    function modifyUser()
+    {
+        if($('#dataGrid').datagrid('getSelections').length<1||$('#dataGrid').datagrid('getSelections').length>1){
+            alert("必须选择一条数据进行修改!");
             return;
         }
-        addOrUpdateDialog(item,'修改角色','role.do?edit&roleid='+row.roleid,400,600);
+        var row = $('#dataGrid').datagrid('getSelections')[0];
 
+        $("#dialogInfo").show();
+        $('#dialogInfo').dialog({
+            title: '修改角色',
+            top: 60,
+            width: 600,
+            height: 350,
+            closed: false,
+            cache: false,
+            href:'role.do?edit&roleid='+row.roleid,
+            modal: true,
+            buttons: [
+                {
+                    text: '保存',
+                    iconCls: 'icon-ok',
+                    handler: function () {
+                        var savebtn = $(this);
+                        var disabled = savebtn.hasClass("l-btn-disabled");
+                        if (!disabled) {
+                            addForm(savebtn);
+                        }
+                    }
+                },
+                {text: '取消', handler: function () {
+                    $('#dialogInfo').dialog('close');
+                }}
+            ]});
 
     }
-    function delUser(item)
+    function delUser()
     {
-        var row = listgrid.getSelectedRow();
-        if(row==null){
-            $.ligerDialog.error('请选择数据删除!');
+        var rows = $('#dataGrid').datagrid("getSelections");
+        if (rows.length < 1||rows.length>1) {
+            alert("请选择要删除的会员");
             return;
         }
-        delObj(item,'role.do?delete&id=',row.roleid);
+        if (!confirm("确认要将删除会员吗？")) {
+            return;
+        }
+        var row = rows[0];
+        var options = {
+            url : "role.do?delete&id="+row.roleid,
+            type : "POST",
+            dataType : 'json',
+            data:"ajax=true&rmd="+ new Date().getTime(),
+            success : function(result) {
+                if(result.success){
+                    alert("删除成功");
+                    $('#useradmindata').datagrid('reload');
+                }
+
+            },
+            error : function(e) {
+                $.Loading.error("出现错误 ，请重试");
+            }
+        };
+        $('#dataGridform').ajaxSubmit(options);
+
+
 
     }
 
-    function setAuth(item){
-        var row = listgrid.getSelectedRow();
-        if(row==null){
-            $.ligerDialog.error('请选择数据修改!');
+    function setAuth(){
+        if($('#dataGrid').datagrid('getSelections').length<1||$('#dataGrid').datagrid('getSelections').length>1){
+            alert("必须选择一条数据进行修改!");
             return;
         }
-        addOrUpdateDialog(null,'权限点','auth.do?add&ajax=yes&roleId='+row.roleid,500,700);
+        var row = $('#dataGrid').datagrid('getSelections')[0];
+
+        $("#dialogInfo").show();
+        $('#dialogInfo').dialog({
+            title: '设置权限',
+            top: 60,
+            width: 600,
+            height: 350,
+            closed: false,
+            cache: false,
+            href:'auth.do?add&ajax=yes&roleId='+row.roleid,
+            modal: true,
+            buttons: [
+                {
+                    text: '保存',
+                    iconCls: 'icon-ok',
+                    handler: function () {
+                        var savebtn = $(this);
+                        var disabled = savebtn.hasClass("l-btn-disabled");
+                        if (!disabled) {
+                            addForm(savebtn);
+                        }
+                    }
+                },
+                {text: '取消', handler: function () {
+                    $('#dialogInfo').dialog('close');
+                }}
+            ]});
+
     }
     function query(){
 
         listgrid.loadServerData("username="+$("#usernameQry").val());
         return false;
     }
+    function addRole() {
 
+        $("#dialogInfo").show();
+        $('#dialogInfo').dialog({
+            title: '增加角色',
+            top: 60,
+            width: 600,
+            height: 350,
+            closed: false,
+            cache: false,
+            href: 'role.do?add',
+            modal: true,
+            buttons: [
+                {
+                    text: '保存',
+                    iconCls: 'icon-ok',
+                    handler: function () {
+                        var savebtn = $(this);
+                        var disabled = savebtn.hasClass("l-btn-disabled");
+                        if (!disabled) {
+                            addForm(savebtn);
+                        }
+                    }
+                },
+                {text: '取消', handler: function () {
+                    $('#dialogInfo').dialog('close');
+                }}
+            ]});
+    }
+
+        function addForm(savebtn){
+            $("#objForm").submit();
+
+        }
 </script>
 
 
