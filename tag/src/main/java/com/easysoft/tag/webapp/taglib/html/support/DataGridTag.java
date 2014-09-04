@@ -100,7 +100,9 @@ public class DataGridTag extends BodyTagSupport{
         StringBuilder sb = new StringBuilder();
         sb.append("<div class=\"main\">");
         sb.append("<div id=\"dialogInfo\" style=\"display: none;\"></div>");
-        sb.append("<form id=\"dataGridform\">");
+        sb.append("<form id=\"/*dataGridform*/\">");
+        sb.append(buildToolBars4EasyUI());
+
         sb.append("<div class=\"shadowBoxWhite tableDiv\">");
         sb.append("<div class=\"clear height10\"></div>");
         sb.append("<table class=\"easyui-datagrid\" id=\"dataGrid\" ");
@@ -252,23 +254,11 @@ public class DataGridTag extends BodyTagSupport{
     public String buildToolBars4EasyUI(){
         StringBuffer sb = new StringBuffer();
         sb.append(" <div id=\"tb\" style=\"height: auto\">");
-        sb.append("</div>");
-        sb.append("toolbar: { items: [");
-        int j=0;
         for(ToolBar toolBar : toolBars){
-            sb.append("{");
-            sb.append("text:'"+toolBar.getTitle()+"',");
-            sb.append("click:"+toolBar.getClickFun()+",");
-            sb.append("icon:'"+toolBar.getIcon()+"'");
-            if(j==toolBars.size()-1){
-                sb.append("}");
-            }else{
-                sb.append("},");
-                sb.append("{ line: true },");
-            }
-            j++;
+            sb.append(" <a href=\"javascript:void(0)\" class=\"button blueButton\" data-options=\"iconCls:'icon-add',plain:true\" onclick=\""+toolBar.getClickFun()+"()\">"+toolBar.getTitle()+"</a>");
         }
-        sb.append("]}");
+        sb.append("</div>");
+
         return sb.toString();
     }
 }
