@@ -3,15 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
-    <script type="text/javascript" src="${staticserver }/js/common/jquery-1.6.4.js"></script>
-    <link href="${context }/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css">
-    <link href="${context }/js/ligerui/skins/Gray2014/css/all.css" rel="stylesheet" type="text/css" />
-    <script src="${context }/js/ligerui/js/core/base.js" type="text/javascript"></script>
-    <script src="${context }/js/ligerui/js/plugins/ligerGrid.js" type="text/javascript"></script>
-    <script src="${context }/js/ligerui/js/plugins/ligerSpinner.js" type="text/javascript"></script>
-    <script src="${context }/js/ligerui/js/plugins/ligerResizable.js" type="text/javascript"></script>
-    <script src="${context }/js/ligerui/js/plugins/ligerResizable.js" type="text/javascript"></script>
-    <script src="${context }/js/ligerui/js/plugins/ligerDialog.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="${context}/js/easyui/themes/gray/easyui.css">
+    <script type="text/javascript" src="${context}/js/easyui/jquery.easyui.min.js"></script>
+    <link href="${context}/css/stylenew.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript">
         var dialog = frameElement.dialog;
         var manager;
@@ -19,7 +13,7 @@
         {
 
 
-            listgrid = $("#maingrid").ligerGrid({
+           /* listgrid = $("#maingrid").ligerGrid({
                         height:400,
                         columns: [
                             { display: 'id', name: 'id', id: 'menuId',  align: 'center',width:60 },
@@ -33,7 +27,7 @@
 
                     }
             );
-            manager = $("#maingrid").ligerGetGridManager();
+            manager = $("#maingrid").ligerGetGridManager();*/
 
         });
         function onAfterShowData(currentData){
@@ -59,28 +53,7 @@
                 }
             }
         }
-        function authSelect(item){
 
-
-
-                var  html="";
-                if(item.hasChildren){
-                    return html;
-                }
-                $.ajax({
-                    url:'auth.do?getBtnByMenuId&ajax=yes&id='+item.id+'&roleId='+${roleId},
-                    type:'post',
-                    dataType:'json',
-                    async:false,
-                    success:function(result){
-                        html = result;
-                    }
-
-                });
-                html += "<input type='hidden' id='menu"+item.id+"' value='"+item.__id+"'/>";
-                return html;
-
-        }
         function onCheckRow(checked,data,rowid,rowdata){
 
             var parent = manager.getParent(data);
@@ -146,15 +119,55 @@
                 });
             }
         }
+
+        function authSelect(value,item,index){
+            var  html="";
+            if(item.hasChildren){
+                return html;
+            }
+            $.ajax({
+                url:'auth.do?getBtnByMenuId&ajax=yes&id='+item.id+'&roleId='+${roleId},
+                type:'post',
+                dataType:'json',
+                async:false,
+                success:function(result){
+                    html = result;
+                }
+
+            });
+            html += "<input type='hidden' id='menu"+item.id+"' value='"+item.__id+"'/>";
+            return html;
+
+        }
     </script>
 </head>
 
 <body style="padding: 4px">
-<div position="center" title="功能权限">
+<%--<div position="center" title="功能权限">
     <div id="maingrid">
 
     </div>
+</div>--%>
+<div class="main">
+
+    <form action="" id="catform">
+        <table class="easyui-treegrid" id="useradmindata"
+               data-options="url:'auth.do?dataGrid&ajax=yes&roleId=${roleId}',fitColumns:'true',idField: 'id',treeField: 'title'">
+            <thead>
+            <tr>
+                <th data-options="field:'id',width:50">ID</th>
+                <th data-options="field:'title',width:100">名称</th>
+                <th data-options="field:'add',width:100,align:'center'" formatter="authSelect">操作</th>
+
+
+            </tr>
+            </thead>
+        </table>
+    </form>
+
+    <div id="divdia" style="display: none;"></div>
 </div>
+
 </body>
 </html>
 
