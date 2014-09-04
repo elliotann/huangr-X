@@ -82,8 +82,8 @@ public class DataGridTag extends BodyTagSupport{
             }else if("html".equals(style)){
                 out.write(endHtml());
             }
-            else{
-                out.write("other");
+            else if("easyui".equals(style)){
+                out.write(endEasyUI());
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -95,6 +95,29 @@ public class DataGridTag extends BodyTagSupport{
 
     public String endHtml(){
         return "";
+    }
+    public String endEasyUI(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("<div class=\"main\">");
+        sb.append("<div id=\"dialogInfo\" style=\"display: none;\"></div>");
+        sb.append("<form id=\"dataGridform\">");
+        sb.append("<div class=\"shadowBoxWhite tableDiv\">");
+        sb.append("<div class=\"clear height10\"></div>");
+        sb.append("<table class=\"easyui-datagrid\" id=\"dataGrid\" ");
+        if(usePager){
+            sb.append("pagination=\"true\"");
+        }
+        sb.append("data-options=\"url:'"+action+"',pageList: [5,10,15,20],fitColumns:'true'\">");
+        sb.append("<thead><tr>");
+        for(DataGridColumn column : columns){
+            sb.append("<th data-options=\"field:'"+column.getField()+"',width:80,align:'"+column.getAlign()+"'\">"+column.getTitle()+"</th>");
+        }
+        sb.append("</thead></tr>");
+        sb.append("</table>");
+        sb.append("</div>");
+        sb.append("</form>");
+        sb.append("</div>");
+        return sb.toString();
     }
 
 
@@ -153,22 +176,7 @@ public class DataGridTag extends BodyTagSupport{
 
         sb.append("],");
         sb.append("url:'"+action+"',  pageSize:20 ,");
-        sb.append("toolbar: { items: [");
-        int j=0;
-        for(ToolBar toolBar : toolBars){
-            sb.append("{");
-            sb.append("text:'"+toolBar.getTitle()+"',");
-            sb.append("click:"+toolBar.getClickFun()+",");
-            sb.append("icon:'"+toolBar.getIcon()+"'");
-            if(j==toolBars.size()-1){
-                sb.append("}");
-            }else{
-                sb.append("},");
-                sb.append("{ line: true },");
-            }
-            j++;
-        }
-        sb.append("]}");
+        sb.append(buildToolBars());
         sb.append("});");
         sb.append("});");
         sb.append("</script>");
@@ -219,5 +227,48 @@ public class DataGridTag extends BodyTagSupport{
 
     public void setSearchControls(SearchControl searchControl){
         searchControls.add(searchControl);
+    }
+
+    public String buildToolBars(){
+        StringBuffer sb = new StringBuffer();
+        sb.append("toolbar: { items: [");
+        int j=0;
+        for(ToolBar toolBar : toolBars){
+            sb.append("{");
+            sb.append("text:'"+toolBar.getTitle()+"',");
+            sb.append("click:"+toolBar.getClickFun()+",");
+            sb.append("icon:'"+toolBar.getIcon()+"'");
+            if(j==toolBars.size()-1){
+                sb.append("}");
+            }else{
+                sb.append("},");
+                sb.append("{ line: true },");
+            }
+            j++;
+        }
+        sb.append("]}");
+        return sb.toString();
+    }
+    public String buildToolBars4EasyUI(){
+        StringBuffer sb = new StringBuffer();
+        sb.append(" <div id=\"tb\" style=\"height: auto\">");
+        sb.append("</div>");
+        sb.append("toolbar: { items: [");
+        int j=0;
+        for(ToolBar toolBar : toolBars){
+            sb.append("{");
+            sb.append("text:'"+toolBar.getTitle()+"',");
+            sb.append("click:"+toolBar.getClickFun()+",");
+            sb.append("icon:'"+toolBar.getIcon()+"'");
+            if(j==toolBars.size()-1){
+                sb.append("}");
+            }else{
+                sb.append("},");
+                sb.append("{ line: true },");
+            }
+            j++;
+        }
+        sb.append("]}");
+        return sb.toString();
     }
 }
