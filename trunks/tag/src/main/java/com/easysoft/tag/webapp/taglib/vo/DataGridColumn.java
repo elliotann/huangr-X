@@ -8,7 +8,7 @@ public class DataGridColumn {
     private String field;
     private String width;
     private String minWidth;
-    private String align;
+    private String align="center";
     private String renderFun;
     private String sortType;//排序类型
     private String id;//主要用于树模式下
