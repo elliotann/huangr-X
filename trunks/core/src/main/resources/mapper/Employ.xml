@@ -25,14 +25,22 @@
     <update id="update" parameterType="Depart">
         update t_emp
          set name=#{name},
-         dept_no=#{deptNo}
+         sex=#{sex},
+         birthday=#{birthDay},
+         mobile=#{mobile},
+         address=#{address},
+         tel=#{tel},
+         id_card=#{idCard},
+         emp_no=#{empNo},
+         entry_date=#{entryDate},
+         status=#{status},
+         dept_id=#{deptId},
+         comp_id=#{compId}
         where id=#{id}
     </update>
-    <select id="queryByOrgId" parameterType="java.lang.Integer" resultMap="employMap">
-        select * from t_depart where comp_id=#{compId}
-    </select>
+
     <select id="queryById" parameterType="java.lang.Integer" resultMap="employMap">
-        select * from t_depart where id=#{id}
+        select * from t_emp where id=#{id}
     </select>
     <select id="queryEmployByCondition" parameterType="hashMap" resultMap="employMap">
         select * from t_emp where emp_no=#{empNo}
@@ -40,11 +48,14 @@
             and id!=${id}
         </if>
     </select>
-    <select id="queryByCompIdAndPid" parameterType="hashMap" resultMap="employMap">
-        select * from t_depart where comp_id=#{compId} and pid=#{pid}
+    <delete id="deleteById" parameterType="java.lang.Integer">
+      delete from t_emp where id=#{id}
+    </delete>
+    <select id="queryForList" resultMap="employMap">
+        select * from t_emp
 
     </select>
-    <select id="queryForList" resultMap="employMap">
+    <select id="queryForPage" resultMap="employMap">
         select * from t_emp
 
     </select>
