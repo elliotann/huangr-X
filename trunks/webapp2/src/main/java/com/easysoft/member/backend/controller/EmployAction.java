@@ -4,6 +4,7 @@ package com.easysoft.member.backend.controller;
 import com.easysoft.core.common.controller.BaseController;
 import com.easysoft.core.common.vo.json.AjaxJson;
 import com.easysoft.core.common.vo.json.DataGridReturn;
+import com.easysoft.framework.db.PageOption;
 import com.easysoft.framework.utils.JsonUtils;
 import com.easysoft.member.backend.manager.ICompanyManager;
 import com.easysoft.member.backend.manager.IDepartManager;
@@ -60,9 +61,12 @@ public class EmployAction extends BaseController {
      */
 
     @RequestMapping(params = "dataGrid")
-    public ModelAndView datagrid() {
-        List<Employ> employs= employManager.queryForList();
-        DataGridReturn dataGrid = new DataGridReturn(employs.size(),employs);
+    public ModelAndView datagrid(Integer rows,Integer page) {
+        PageOption pageOption = new PageOption();
+        pageOption.setPageSize(rows);
+        pageOption.setCurrentPageNo(page);
+        employManager.queryForPage(pageOption);
+        DataGridReturn dataGrid = new DataGridReturn(pageOption.getTotalCount(),(List<Employ>)pageOption.getResult());
         String json = JsonUtils.beanToJson(dataGrid);
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("json",json);
@@ -72,6 +76,13 @@ public class EmployAction extends BaseController {
     public String goAdd(){
         return "admin/core/emp/emp-add";
     }
+    @RequestMapping(params = "goUpdate")
+    public ModelAndView goUpdate(Integer id){
+        Employ employ = employManager.queryById(id);
+        Map<String,Object> params = new HashMap<String, Object>();
+        params.put("employ",employ);
+        return new ModelAndView("admin/core/emp/emp-update",params);
+    }
 
     @RequestMapping(params = "addSave")
     @ResponseBody
@@ -79,6 +90,32 @@ public class EmployAction extends BaseController {
         AjaxJson result = new AjaxJson();
         try{
             employManager.saveEmploy(employ);
+        }catch(Exception e){
+            e.printStackTrace();
+            result.setSuccess(false);
+        }
+        return result;
+
+    }
+    @RequestMapping(params = "addUpdate")
+    @ResponseBody
+    public AjaxJson addUpdate(Employ employ){
+        AjaxJson result = new AjaxJson();
+        try{
+            employManager.updateEmploy(employ);
+        }catch(Exception e){
+            e.printStackTrace();
+            result.setSuccess(false);
+        }
+        return result;
+
+    }
+    @RequestMapping(params = "batchDel")
+    @ResponseBody
+    public AjaxJson batchDel(Integer[] ids){
+        AjaxJson result = new AjaxJson();
+        try{
+            employManager.batchDel(ids);
         }catch(Exception e){
             e.printStackTrace();
             result.setSuccess(false);

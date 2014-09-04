@@ -2,9 +2,9 @@
          pageEncoding="UTF-8" %>
 <%@ include file="/commons/taglibs.jsp" %>
 <link rel="stylesheet" type="text/css" href="${context}/js/easyui/themes/gray/easyui.css">
-<link rel="stylesheet" type="text/css" href="${context}/js/easyui/themes/gray/easyui.css">
 <link href="${context}/css/stylenew.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="${context}/js/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="${context}/js/easyui/locale/easyui-lang-zh_CN.js"></script>
 <script src="/jeap/admin/js/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
 
 <div class="main">
@@ -12,7 +12,9 @@
     <form id="memberform">
         <div id="tb" style="height: auto">
             <a href="javascript:void(0)" class="button blueButton" data-options="iconCls:'icon-add',plain:true"
-               onclick="append()">添加</a>
+               onclick="add()">添加</a>
+            <a href="javascript:void(0)" class="button blueButton" data-options="iconCls:'icon-add',plain:true"
+               onclick="modify()">修改</a>
             <a href="javascript:void(0)" class="easyui-linkbutton"
                data-options="plain:true" onclick="del()">删除</a>
 
@@ -114,8 +116,8 @@
         }
     }
 
-    function append() {
-        $('#useradmindata').datagrid('reload');
+    function add() {
+
         $("#useradmininfo").show();
         $('#useradmininfo').dialog({
             title: '添加员工',
@@ -143,8 +145,78 @@
                 }}
             ]});
     }
+    function modify() {
+
+        if($('#useradmindata').datagrid('getSelections').length<1||$('#useradmindata').datagrid('getSelections').length>1){
+            alert("必须选择一条数据进行修改!");
+            return;
+        }
+        var data = $('#useradmindata').datagrid('getSelections')[0];
+
+        $("#useradmininfo").show();
+        $('#useradmininfo').dialog({
+            title: '修改员工',
+            top: 60,
+            width: 600,
+            height: 350,
+            closed: false,
+            cache: false,
+            href: 'emp.do?goUpdate&id='+data.id,
+            modal: true,
+            buttons: [
+                {
+                    text: '保存',
+                    iconCls: 'icon-ok',
+                    handler: function () {
+                        var savebtn = $(this);
+                        var disabled = savebtn.hasClass("l-btn-disabled");
+                        if (!disabled) {
+                            addadminForm(savebtn);
+                        }
+                    }
+                },
+                {text: '取消', handler: function () {
+                    $('#useradmininfo').dialog('close');
+                }}
+            ]});
+    }
     function addadminForm(savebtn){
         $("#objForm").submit();
 
+    }
+
+    function del() {
+        var rows = $('#useradmindata').datagrid("getSelections");
+        if (rows.length < 1) {
+            alert("请选择要删除的会员");
+            return;
+        }
+        if (!confirm("确认要将删除会员吗？")) {
+            return;
+        }
+        var empIds=[];
+        for(var i=0;i<rows.length;i++){
+            empIds.push(rows[i].id);
+        }
+
+        var params = {ids:empIds};
+
+        var options = {
+            url : "emp.do?batchDel&ajax=true",
+            type : "POST",
+            dataType : 'json',
+            data:params,
+            success : function(result) {
+                if(result.success){
+                    alert("删除成功");
+                    $('#useradmindata').datagrid('reload');
+                }
+
+            },
+            error : function(e) {
+                $.Loading.error("出现错误 ，请重试");
+            }
+        };
+        $('#memberform').ajaxSubmit(options);
     }
 </script>

@@ -4,12 +4,9 @@
 
 
 
-<script src="${staticserver}/js/common/jquery-1.6.4.js" type="text/javascript"></script>
+
 <script src="${staticserver}/js/common/jquery.validate.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/core/base.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerDialog.js" type="text/javascript"></script>
-<script src="${staticserver}/js/admin/jeap.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerTree.js" type="text/javascript"></script>
+
 <link href="${context }/css/form.css" rel="stylesheet"/>
 
 <script type="text/javascript">
@@ -50,14 +47,10 @@
                     success : function(result) {
 
                         if(result.success){
-                            $.ligerDialog.waitting('增加成功');
-                            setTimeout(function ()
-                            {
-                                $.ligerDialog.closeWaitting();
 
-                            }, 1000);
-                            window.parent.parent.location.reload();
-                            dialog.close();
+                            $("#useradmininfo").dialog('close');
+                            $('#useradmindata').treegrid('reload');
+
                         }else{
                             alert(result.msg)
                         }
