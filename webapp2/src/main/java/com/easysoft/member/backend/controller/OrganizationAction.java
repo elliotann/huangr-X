@@ -251,7 +251,15 @@ public class OrganizationAction extends BaseController {
     public ModelAndView goAdd(Integer pid,String orgType,String from, HttpServletRequest req) {
         Organization organization = this.organizatiOnService.queryByTypeAndId(orgType, pid.intValue());
         if(orgType.equals(Organization.OrgType.COMPANY.name())){
-            Company company = (Company)organization;
+            Company company = new Company();
+            if(organization==null){
+
+                company.setId(0);
+                company.setName("顶级公司");
+            }else{
+                company = (Company)organization;
+            }
+
             req.setAttribute("organization", company);
             return new ModelAndView("admin/core/org/organization-add");
         }else if(orgType.equals(Organization.OrgType.DEPT.name())){

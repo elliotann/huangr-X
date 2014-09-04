@@ -1,0 +1,212 @@
+[
+    {
+        "address": "",
+        "children": [
+            {
+                "address": "312",
+                "children": [
+                    {
+                        "address": "",
+
+                        "compNo": "3123",
+                        "createBy": "",
+                        "createTime": "",
+                        "enShortName": "3123",
+                        "id": 99,
+                        "legalPerson": "312",
+                        "name": "小黄人深圳分公司",
+                        "orgType": "COMPANY",
+                        "phone": "",
+                        "pid": 3,
+                        "tel": "",
+                        "text": "小黄人深圳分公司"
+                    }
+                ],
+                "compNo": "3123",
+                "createBy": "",
+                "createTime": "",
+                "enShortName": "3123",
+                "id": 2,
+                "legalPerson": "312",
+                "name": "小黄人深圳分公司",
+                "orgType": "COMPANY",
+                "phone": "",
+                "pid": 1,
+                "tel": "",
+                "text": "小黄人深圳分公司"
+            },
+            {
+                "address": "22112",
+
+                "compNo": "1001",
+                "createBy": "",
+                "createTime": "",
+                "enShortName": "12",
+                "id": 3,
+                "legalPerson": "212121",
+                "name": "小黄人长沙分公司",
+                "orgType": "COMPANY",
+                "phone": "",
+                "pid": 1,
+                "tel": "",
+                "text": "小黄人长沙分公司"
+            },
+            {
+                "address": "",
+
+                "compNo": "1002",
+                "createBy": "",
+                "createTime": "",
+                "enShortName": "syxhr",
+                "id": 4,
+                "legalPerson": "",
+                "name": "小黄人邵阳分公司",
+                "orgType": "COMPANY",
+                "phone": "",
+                "pid": 1,
+                "tel": "",
+                "text": "小黄人邵阳分公司"
+            },
+            {
+                "address": "312",
+
+                "compNo": "1434",
+                "createBy": "",
+                "createTime": "",
+                "enShortName": "321",
+                "id": 8,
+                "legalPerson": "",
+                "name": "小黄人北京分公司",
+                "orgType": "COMPANY",
+                "phone": "",
+                "pid": 1,
+                "tel": "",
+                "text": "小黄人北京分公司"
+            },
+            {
+                "address": "3123",
+
+                "compNo": "2222",
+                "createBy": "",
+                "createTime": "",
+                "enShortName": "321",
+                "id": 9,
+                "legalPerson": "1321",
+                "name": "小黄人上海分公司",
+                "orgType": "COMPANY",
+                "phone": "",
+                "pid": 1,
+                "tel": "",
+                "text": "小黄人上海分公司"
+            },
+            {
+                "address": "32131",
+
+                "compNo": "4444",
+                "createBy": "",
+                "createTime": "",
+                "enShortName": "312312",
+                "id": 10,
+                "legalPerson": "312",
+                "name": "小黄人广州分公司",
+                "orgType": "COMPANY",
+                "phone": "",
+                "pid": 1,
+                "tel": "",
+                "text": "小黄人广州分公司"
+            },
+            {
+                "address": "31231",
+
+                "compNo": "7777",
+                "createBy": "",
+                "createTime": "",
+                "enShortName": "3123",
+                "id": 11,
+                "legalPerson": "312",
+                "name": "32131312",
+                "orgType": "COMPANY",
+                "phone": "",
+                "pid": 1,
+                "tel": "",
+                "text": "32131312"
+            },
+            {
+                "address": "31231",
+
+                "compNo": "3129",
+                "createBy": "",
+                "createTime": "",
+                "enShortName": "312",
+                "id": 12,
+                "legalPerson": "321",
+                "name": "31231",
+                "orgType": "COMPANY",
+                "phone": "",
+                "pid": 1,
+                "tel": "",
+                "text": "31231"
+            },
+            {
+                "address": "31",
+
+                "compNo": "3213",
+                "createBy": "",
+                "createTime": "",
+                "enShortName": "3123",
+                "id": 14,
+                "legalPerson": "",
+                "name": "3121",
+                "orgType": "COMPANY",
+                "phone": "",
+                "pid": 1,
+                "tel": "",
+                "text": "3121"
+            },
+            {
+                "address": "312",
+
+                "compNo": "9999",
+                "createBy": "",
+                "createTime": "",
+                "enShortName": "312",
+                "id": 15,
+                "legalPerson": "312",
+                "name": "312",
+                "orgType": "COMPANY",
+                "phone": "",
+                "pid": 1,
+                "tel": "",
+                "text": "312"
+            },
+            {
+                "address": "",
+                "children": [],
+                "compNo": "1009",
+                "createBy": "",
+                "createTime": "",
+                "enShortName": "312",
+                "id": 17,
+                "legalPerson": "",
+                "name": "小黄人新邵办事处",
+                "orgType": "COMPANY",
+                "phone": "",
+                "pid": 1,
+                "tel": "",
+                "text": "小黄人新邵办事处"
+            }
+        ],
+        "compNo": "1000",
+        "createBy": "",
+        "createTime": "",
+        "enShortName": "jeap",
+        "id": 1,
+        "legalPerson": "andyhuang",
+        "name": "小黄人集团",
+        "orgType": "COMPANY",
+        "phone": "",
+        "pid": 0,
+        "tel": "",
+        "text": "小黄人集团"
+    }
+]
