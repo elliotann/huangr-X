@@ -5,15 +5,16 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href="${context}/js/easyui/themes/gray/easyui.css">
     <script type="text/javascript" src="${context}/js/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="${context}/js/easyui/extend/treegrid-extend.js"></script>
     <link href="${context}/css/stylenew.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript">
-        var dialog = frameElement.dialog;
-        var manager;
+
+        /*var manager;
         $(function ()
         {
 
 
-           /* listgrid = $("#maingrid").ligerGrid({
+           *//* listgrid = $("#maingrid").ligerGrid({
                         height:400,
                         columns: [
                             { display: 'id', name: 'id', id: 'menuId',  align: 'center',width:60 },
@@ -27,7 +28,7 @@
 
                     }
             );
-            manager = $("#maingrid").ligerGetGridManager();*/
+            manager = $("#maingrid").ligerGetGridManager();*//*
 
         });
         function onAfterShowData(currentData){
@@ -118,27 +119,8 @@
                     }
                 });
             }
-        }
+        }*/
 
-        function authSelect(value,item,index){
-            var  html="";
-            if(item.hasChildren){
-                return html;
-            }
-            $.ajax({
-                url:'auth.do?getBtnByMenuId&ajax=yes&id='+item.id+'&roleId='+${roleId},
-                type:'post',
-                dataType:'json',
-                async:false,
-                success:function(result){
-                    html = result;
-                }
-
-            });
-            html += "<input type='hidden' id='menu"+item.id+"' value='"+item.__id+"'/>";
-            return html;
-
-        }
     </script>
 </head>
 
@@ -151,13 +133,14 @@
 <div class="main">
 
     <form action="" id="catform">
-        <table class="easyui-treegrid" id="useradmindata"
-               data-options="url:'auth.do?dataGrid&ajax=yes&roleId=${roleId}',fitColumns:'true',idField: 'id',treeField: 'title'">
+        <table class="easyui-treegrid" id="authDataGrid"
+               data-options="url:'auth.do?dataGrid&ajax=yes&roleId=${roleId}',fitColumns:'true',idField: 'id',treeField: 'title',singleSelect:false,onSelect:onCheck">
             <thead>
             <tr>
-                <th data-options="field:'id',width:50">ID</th>
+                <th data-options="field:'checked',width:50,checkbox:'true'">ID</th>
+                <th data-options="field:'id',width:100">ID</th>
                 <th data-options="field:'title',width:100">名称</th>
-                <th data-options="field:'add',width:100,align:'center'" formatter="authSelect">操作</th>
+                <th data-options="field:'add',width:100,align:'center'" formatter="formatAuth">操作</th>
 
 
             </tr>
@@ -167,7 +150,33 @@
 
     <div id="divdia" style="display: none;"></div>
 </div>
+<script type="text/javascript">
+    function formatAuth(value, row, index) {
+        var  html="";
+        if(row.hasChildren){
+            return html;
+        }
+        $.ajax({
+            url:'auth.do?getBtnByMenuId&ajax=yes&id='+row.id+'&roleId='+${roleId},
+            type:'post',
+            dataType:'json',
+            async:false,
+            success:function(result){
+                html = result;
+            }
 
+        });
+        html += "<input type='hidden' id='menu"+row.id+"' value='"+row.__id+"'/>";
+        return html;
+    }
+    function onCheck(row){
+        $("#authDataGrid").treegrid('cascadeCheck',{
+            id:row.id, //节点ID
+            deepCascade:true //深度级联
+        });
+
+    }
+</script>
 </body>
 </html>
 

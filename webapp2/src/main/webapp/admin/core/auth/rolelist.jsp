@@ -96,8 +96,8 @@
         $('#dialogInfo').dialog({
             title: '设置权限',
             top: 60,
-            width: 600,
-            height: 350,
+            width: 700,
+            height: 550,
             closed: false,
             cache: false,
             href:'auth.do?add&ajax=yes&roleId='+row.roleid,
