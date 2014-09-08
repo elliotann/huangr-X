@@ -1,10 +1,12 @@
+(function ($)
+{
 /**
  * 扩展树表格级联勾选方法：
  * @param {Object} container
  * @param {Object} options
  * @return {TypeName}
  */
-$.extend($.fn.treegrid.methods,{
+$.extend($.fn.treegrid.methods, {
     /**
      * 级联选择
      * @param {Object} target
@@ -25,6 +27,7 @@ $.extend($.fn.treegrid.methods,{
             if(selectNodes[i][idField]==param.id)
                 status = true;
         }
+
         //级联选择父节点
         selectParent(target[0],param.id,idField,status);
         selectChildren(target[0],param.id,idField,param.deepCascade,status);
@@ -71,3 +74,4 @@ $.extend($.fn.treegrid.methods,{
         }
     }
 });
+})(jQuery);

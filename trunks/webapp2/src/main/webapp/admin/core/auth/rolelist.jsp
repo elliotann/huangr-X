@@ -1,23 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<%@ include file="/commons/taglibs.jsp"%>
-
-
-
-
-
-
+         pageEncoding="UTF-8" %>
+<%@ include file="/commons/taglibs.jsp" %>
 <link rel="stylesheet" type="text/css" href="${context}/js/easyui/themes/gray/easyui.css">
 <link href="${context}/css/stylenew.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="${context}/js/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${context}/js/easyui/locale/easyui-lang-zh_CN.js"></script>
-<script src="/jeap/admin/js/crud.js" type="text/javascript"></script>
-
+<script src="/jeap/admin/js/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
+<link href="${context }/css/form.css" rel="stylesheet"/>
 <script type="text/javascript">
-    var listgrid;
+
+    $(function () {
+        $(".searchAdvanced").hide();
+        //高级查询按钮
+        $("#aAdvanced").click(function () {
+            if ($("#Advanced").val() == "0") {
+                $("#Advanced").val(1);
+                $("#simpleSearch").hide();
+                //$("#aAdvanced").text("简单搜索")
+                $("#aAdvanced").addClass("searchAdvancedS");
+            } else {
+                $("#Advanced").val(0);
+                $("#simpleSearch").show();
+                //$("#aAdvanced").text("高级搜索");
+                $("#aAdvanced").removeClass("searchAdvancedS");
+            }
+            $(".searchAdvanced").slideToggle("slow");
+        });
+    });
 
     function modifyUser()
     {
+
         if($('#dataGrid').datagrid('getSelections').length<1||$('#dataGrid').datagrid('getSelections').length>1){
             alert("必须选择一条数据进行修改!");
             return;
@@ -155,14 +168,50 @@
             ]});
     }
 
-        function addForm(savebtn){
-            $("#objForm").submit();
+    function addForm(savebtn){
+        var json="[";
+        $.each($("#authDataGrid").treegrid("getChecked"),function(i,v){
+            json += "{\"roleId\":"+$("#roleId").val()+",\"funId\":"+ v.id+",\"operids\":\"";
+            $.each($("input[name='btn"+ v.id+"']:checked"),function(index,vl){
+                json += $(this).val();
+                if($("input[name='btn"+ v.id+"']:checked").length!=index+1){
+                    json += ",";
+                }
+            });
+            json +="\"}";
 
-        }
+
+            if($("#authDataGrid").treegrid("getChecked").length!=i+1){
+                json += ",";
+            }
+        });
+        json += "]";
+        var row = $('#dataGrid').datagrid('getSelections')[0];
+        var param = {menuIds:json};
+        //保存权限
+        $.ajax({
+            type: 'post',
+            url: "auth.do?saveAuth&ajax=true",
+            dataType:'json',
+            data:param,
+            success:function(result){
+                if(result.success){
+                    $('#dialogInfo').dialog('close');
+                }
+            },
+            error:function(e){
+                alert(e);
+            }
+        });
+        $("#objForm").submit();
+
+    }
 </script>
-
-
 <grid:dataGrid action="role.do?dataGrid&ajax=yes" height="99%"  rownumbers="true" hasSearchBar="true" style="easyui">
+    <grid:search label="请输入角色名称" name="rolename" shortSearch="true"/>
+    <grid:search label="角色名称:" name="rolename"/>
+    <grid:search label="角色名称:" name="rolename"/>
+    <grid:search label="角色名称:" name="rolename"/>
     <grid:search label="角色名称:" name="rolename"/>
     <grid:column title="ID" field="roleid" align="center" width="100" minWidth="60"/>
     <grid:column title="角色名称" field="rolename"  minWidth="120"/>
@@ -172,3 +221,8 @@
     <grid:toolbar title="删除" clickFun="delUser" icon="delete"/>
     <grid:toolbar title="设置权限" clickFun="setAuth" icon="modify"/>
 </grid:dataGrid>
+
+
+
+
+

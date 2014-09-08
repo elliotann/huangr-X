@@ -21,10 +21,8 @@
 			<span style="float: right;">
 				<span id="simpleSearch">
 
-					<input id="searchKeyword" class="input_text" type="text" value="" size="30" style="width: 300px;"
-                           placeholder="请输入姓名，手机号" name="searchKeyWord">
-					<a href="javascript:void(0)" class="easyui-linkbutton"
-                       data-options="plain:true" onclick="searchMember()">搜索</a>
+					<input id="searchKeyword" class="input_text" type="text" value="" size="30" style="width: 300px;" placeholder="请输入姓名，手机号" name="searchKeyWord">
+					<a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true" onclick="searchMember()">搜索</a>
 				</span>
 				<a href="javascript:void(0)" class="button"
                    data-options="plain:true" id="aAdvanced">高级搜索</a>

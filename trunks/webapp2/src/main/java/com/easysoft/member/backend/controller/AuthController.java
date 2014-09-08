@@ -11,10 +11,7 @@ import com.easysoft.member.backend.manager.IAuthActionManager;
 import com.easysoft.member.backend.manager.IFunAndOperManager;
 import com.easysoft.member.backend.manager.IOperationBtnManager;
 import com.easysoft.member.backend.manager.IPermissionManager;
-import com.easysoft.member.backend.model.AuthAction;
-import com.easysoft.member.backend.model.FunAndOper;
-import com.easysoft.member.backend.model.Menu;
-import com.easysoft.member.backend.model.OperationBtn;
+import com.easysoft.member.backend.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -158,9 +155,9 @@ public class AuthController extends BaseController {
         for(OperationBtn btn : operationBtns){
             boolean isChecked = permissionManager.hasOperationByRoleAndMenu(roleId,id,btn.getId()+"");
             if(isChecked){
-                json += "&nbsp;&nbsp;<input type='checkbox' id='"+btn.getCode()+"_"+id+"' onclick='checkOperation(this)' value='"+btn.getId()+"' checked/>"+btn.getName();
+                json += "&nbsp;&nbsp;<input type='checkbox' name='btn"+id+"' id='"+btn.getCode()+"_"+id+"' onclick='checkOperation(this)' value='"+btn.getId()+"' checked/>"+btn.getName();
             }else{
-                json += "&nbsp;&nbsp;<input type='checkbox' id='"+btn.getCode()+"_"+id+"' onclick='checkOperation(this)' value='"+btn.getId()+"'/>"+btn.getName();
+                json += "&nbsp;&nbsp;<input type='checkbox' name='btn"+id+"' id='"+btn.getCode()+"_"+id+"' onclick='checkOperation(this)' value='"+btn.getId()+"'/>"+btn.getName();
             }
 
         }
@@ -171,11 +168,15 @@ public class AuthController extends BaseController {
     }
     @RequestMapping(params = {"saveAuth"})
     @ResponseBody
-    public AjaxJson saveAuth(Integer menuId,Integer roleId,Integer operId,boolean isCheck,@RequestParam(value = "menuIds[]")String[] menuIds){
+    public AjaxJson saveAuth(Integer menuId,Integer roleId,Integer operId,boolean isCheck,@RequestParam(value = "menuIds")String menuIds){
         AjaxJson result = new AjaxJson();
 
-
-        authActionManager.saveAuth(roleId,operId,isCheck,menuIds);
+        Object[] objects = JsonUtils.getDTOArray(menuIds, RoleAuth.class);
+        RoleAuth[] roleAuths=new RoleAuth[objects.length];
+        for(int i=0;i<objects.length;i++){
+            roleAuths[i] = (RoleAuth)objects[i];
+        }
+       authActionManager.saveAuth(roleAuths);
         return result;
 
     }
