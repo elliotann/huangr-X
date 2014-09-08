@@ -1,6 +1,33 @@
 //增加或者修改弹出框
 function addOrUpdateDialog(item,title,url,height,width)
 {
+    $("#dialogInfo").show();
+    $('#dialogInfo').dialog({
+        title:title,
+        top: 60,
+        width: width==undefined?800:width,
+        height: height==undefined?600:height,
+        closed: false,
+        cache: false,
+        href:url,
+        modal: true,
+        buttons: [
+            {
+                text: '保存',
+                iconCls: 'icon-ok',
+                handler: function () {
+                    var savebtn = $(this);
+                    var disabled = savebtn.hasClass("l-btn-disabled");
+                    if (!disabled) {
+                        addForm(savebtn);
+                    }
+                }
+            },
+            {text: '取消', handler: function () {
+                $('#dialogInfo').dialog('close');
+            }}
+        ]});
+
     $.ligerDialog.open({
         name:'openDia',
         height:height==undefined?600:height,

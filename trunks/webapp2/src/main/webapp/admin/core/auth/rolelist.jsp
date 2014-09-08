@@ -140,32 +140,6 @@
     }
     function addRole() {
 
-        $("#dialogInfo").show();
-        $('#dialogInfo').dialog({
-            title: '增加角色',
-            top: 60,
-            width: 600,
-            height: 350,
-            closed: false,
-            cache: false,
-            href: 'role.do?add',
-            modal: true,
-            buttons: [
-                {
-                    text: '保存',
-                    iconCls: 'icon-ok',
-                    handler: function () {
-                        var savebtn = $(this);
-                        var disabled = savebtn.hasClass("l-btn-disabled");
-                        if (!disabled) {
-                            addForm(savebtn);
-                        }
-                    }
-                },
-                {text: '取消', handler: function () {
-                    $('#dialogInfo').dialog('close');
-                }}
-            ]});
     }
 
     function addForm(savebtn){
@@ -209,10 +183,6 @@
 </script>
 <grid:dataGrid action="role.do?dataGrid&ajax=yes" height="99%"  rownumbers="true" hasSearchBar="true" style="easyui">
     <grid:search label="请输入角色名称" name="rolename" shortSearch="true"/>
-    <grid:search label="角色名称:" name="rolename"/>
-    <grid:search label="角色名称:" name="rolename"/>
-    <grid:search label="角色名称:" name="rolename"/>
-    <grid:search label="角色名称:" name="rolename"/>
     <grid:column title="ID" field="roleid" align="center" width="100" minWidth="60"/>
     <grid:column title="角色名称" field="rolename"  minWidth="120"/>
     <grid:column title="描述" field="rolememo"  minWidth="140"/>
