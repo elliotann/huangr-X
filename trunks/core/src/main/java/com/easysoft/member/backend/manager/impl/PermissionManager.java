@@ -159,7 +159,7 @@ public class PermissionManager extends BaseSupport implements IPermissionManager
 
     @Override
     public List<OperationBtn> getOperationBtnsByMenuId(Integer menuId) {
-        List<OperationBtn> operationBtns = operationBtnDao.queryOperationsByMenuId(menuId);//this.findHql("from OperationBtn ob where ob.menuId=?",menuId+"");
+        List<OperationBtn> operationBtns = operationBtnDao.queryOperationsByMenuId(menuId);
         return operationBtns;
     }
 

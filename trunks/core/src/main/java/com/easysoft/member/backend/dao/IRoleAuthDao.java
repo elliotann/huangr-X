@@ -23,4 +23,6 @@ public interface IRoleAuthDao extends IGenericDao<RoleAuth,Integer> {
      * @return
      */
     public RoleAuth queryAuthByRoleIdAndFun(Map<String,Object> conditions);
+
+    public void deleteByRoleId(int roleId);
 }

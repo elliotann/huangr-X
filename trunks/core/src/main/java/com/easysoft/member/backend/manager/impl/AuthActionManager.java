@@ -210,4 +210,15 @@ public class AuthActionManager extends GenericService<AuthAction> implements IAu
 
     }
 
+    @Override
+    public void saveAuth(RoleAuth[] roleAuths) {
+        if(roleAuths.length>0){
+            roleAuthManager.deleteByRoleId(roleAuths[0].getRoleId());
+        }
+        for(RoleAuth roleAuth:roleAuths){
+
+            roleAuthManager.save(roleAuth);
+        }
+
+    }
 }

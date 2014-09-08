@@ -46,4 +46,9 @@ public class RoleAuthManager implements IRoleAuthManager {
     public void save(RoleAuth roleAuth) {
         roleAuthDao.save(roleAuth);
     }
+
+    @Override
+    public void deleteByRoleId(int roleId) {
+        roleAuthDao.deleteByRoleId(roleId);
+    }
 }
