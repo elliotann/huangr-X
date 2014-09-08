@@ -73,6 +73,16 @@ public class JsonUtils {
         JSONArray jsonArray = JSONArray.fromObject(beans,config);
         return jsonArray.toString();
     }
+    public static Object[] getDTOArray(String jsonString, Class clazz){
+        setDataFormat2JAVA();
+        JSONArray array = JSONArray.fromObject(jsonString);
+        Object[] obj = new Object[array.size()];
+        for(int i = 0; i < array.size(); i++){
+            JSONObject jsonObject = array.getJSONObject(i);
+            obj[i] = JSONObject.toBean(jsonObject, clazz);
+        }
+        return obj;
+    }
 
 
 }
