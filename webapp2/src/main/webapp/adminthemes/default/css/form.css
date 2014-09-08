@@ -4,17 +4,18 @@
     border-radius: 4px;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
     color: #555555;
-    display: inline-block;
-    font-size: 11px;
-    line-height: 0.5;
-    padding: 6px 12px;
+    /*height: 14PX;*/
+    padding: 7px 0 7px 5px;
     transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
-    vertical-align: middle;
     margin-left: 7px;
+    line-height: 14PX;
+    font-size: 12px;
+    display: inline-block;
+    width:200px;
 }
 input.form-control{
     height: 15px;
-    width: 150px;
+    width: 200px;
 }
 .form-control:focus {
     border-color: #66AFE9;

@@ -3,9 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
-    <link rel="stylesheet" type="text/css" href="${context}/js/easyui/themes/gray/easyui.css">
-    <script type="text/javascript" src="${context}/js/easyui/jquery.easyui.min.js"></script>
-    <script type="text/javascript" src="${context}/js/easyui/extend/treegrid-extend.js"></script>
+
+
     <link href="${context}/css/stylenew.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript">
 
@@ -131,10 +130,10 @@
     </div>
 </div>--%>
 <div class="main">
-
+    <input type="hidden" id="roleId" value="${roleId}"/>
     <form action="" id="catform">
         <table class="easyui-treegrid" id="authDataGrid"
-               data-options="url:'auth.do?dataGrid&ajax=yes&roleId=${roleId}',fitColumns:'true',idField: 'id',treeField: 'title',singleSelect:false,onSelect:onCheck">
+               data-options="url:'auth.do?dataGrid&ajax=yes&roleId=${roleId}',fitColumns:'true',idField: 'id',treeField: 'title',singleSelect:false,onClickRow:onCheck">
             <thead>
             <tr>
                 <th data-options="field:'checked',width:50,checkbox:'true'">ID</th>
@@ -150,7 +149,9 @@
 
     <div id="divdia" style="display: none;"></div>
 </div>
+
 <script type="text/javascript">
+
     function formatAuth(value, row, index) {
         var  html="";
         if(row.hasChildren){
