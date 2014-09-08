@@ -100,24 +100,76 @@ public class DataGridTag extends BodyTagSupport{
         StringBuilder sb = new StringBuilder();
         sb.append("<div class=\"main\">");
         sb.append("<div id=\"dialogInfo\" style=\"display: none;\"></div>");
-        sb.append("<form id=\"/*dataGridform*/\">");
-        sb.append(buildToolBars4EasyUI());
+        sb.append(" <form id=\"memberform\">");
+        sb.append("<div id=\"tb\" style=\"height: auto\">");
+        for(ToolBar toolBar : toolBars){
+            sb.append(" <a href=\"javascript:void(0)\" class=\"button blueButton\" data-options=\"iconCls:'icon-add',plain:true\" onclick=\""+toolBar.getClickFun()+"()\">"+toolBar.getTitle()+"</a>");
+        }
 
-        sb.append("<div class=\"shadowBoxWhite tableDiv\">");
+        sb.append("<span style=\"float: right;\">");
+        sb.append("<span id=\"simpleSearch\">");
+        List<SearchControl> advances = new ArrayList<SearchControl>();
+        if(!searchControls.isEmpty()){
+            for(SearchControl control : searchControls){
+                if(control.isShortSearch()){
+                    sb.append("<input id=\"searchKeyword\" class=\"form-control\" type=\"text\" value=\"\" size=\"30\" style=\"width: 200px;\" placeholder=\""+control.getLabel()+"\" name=\""+control.getName()+"\">");
+                }else{
+                    advances.add(control);
+                }
+            }
+        }
+
+        sb.append("<a href=\"javascript:void(0)\" class=\"easyui-linkbutton\" data-options=\"plain:true\" onclick=\"searchMember()\">搜索</a>");
+        sb.append("</span>");
+        if(!advances.isEmpty()){
+            sb.append("<a href=\"javascript:void(0)\" class=\"button\" data-options=\"plain:true\" id=\"aAdvanced\">高级搜索</a>");
+        }
+
+        sb.append("</span>");
+        sb.append("</div>");
+
+        sb.append("<div style=\"display: block;\" class=\"searchAdvanced\">");
+        sb.append(" <input id=\"Advanced\" name=\"Advanced\" type=\"hidden\" value=\"0\"/>");
+        sb.append("<table width=\"98%\" border=\"0\" cellspacing=\"0\" cellpadding=\"8\">");
+        for(int i=0;i<advances.size();i++){
+            SearchControl control = advances.get(i);
+            if(i%3==0){
+                sb.append("<tr>");
+            }
+
+            sb.append("<th width=\"70\" align=\"right\">"+control.getLabel()+"</th>");
+            sb.append("<td><input type=\"text\" id=\"name\" name=\""+control.getName()+"\" class=\"form-control\"></td>");
+
+            if((i+1)%3==0){
+                sb.append("</tr>");
+            }
+
+        }
+
+        sb.append("<tr>");
+        sb.append("<td width=\"60\" align=\"right\"></td>");
+        sb.append(" <td colspan=\"7\" align=\"center\"><a id=\"searchAdvance\" class=\"button blueButton\" onclick=\"searchMember()\" href=\"javascript:;\">开始搜索</a></td>");
+        sb.append("</tr>");
+        sb.append("</table>");
+        sb.append("</div>");
         sb.append("<div class=\"clear height10\"></div>");
-        sb.append("<table class=\"easyui-datagrid\" id=\"dataGrid\" ");
-        if(usePager){
-            sb.append("pagination=\"true\"");
-        }
-        sb.append("data-options=\"url:'"+action+"',pageList: [5,10,15,20],fitColumns:'true'\">");
-        sb.append("<thead><tr>");
+        sb.append("<div class=\"shadowBoxWhite tableDiv\">");
+        sb.append("<table class=\"easyui-datagrid\" pagination=\"true\"  sortName=\"member_id\" sortOrder=\"desc\" id=\"dataGrid\"");
+        sb.append(" data-options=\"url:'"+action+"',pageList: [5,10,15,20],fitColumns:'true'\"");
+        sb.append(">");
+        sb.append(" <thead><tr>");
+
         for(DataGridColumn column : columns){
-            sb.append("<th data-options=\"field:'"+column.getField()+"',width:80,align:'"+column.getAlign()+"'\">"+column.getTitle()+"</th>");
+            sb.append("<th data-options=\"field:'"+column.getField()+"',width:"+column.getWidth()+",align:'"+column.getAlign()+"'\">");
+            sb.append(column.getTitle());
+            sb.append("</th>");
         }
-        sb.append("</thead></tr>");
+        sb.append("</tr></thead>");
         sb.append("</table>");
         sb.append("</div>");
         sb.append("</form>");
+        sb.append("<div id=\"divdia\" style=\"display: none;\"></div>");
+
         sb.append("</div>");
         return sb.toString();
     }
@@ -257,6 +309,12 @@ public class DataGridTag extends BodyTagSupport{
         for(ToolBar toolBar : toolBars){
             sb.append(" <a href=\"javascript:void(0)\" class=\"button blueButton\" data-options=\"iconCls:'icon-add',plain:true\" onclick=\""+toolBar.getClickFun()+"()\">"+toolBar.getTitle()+"</a>");
         }
+        sb.append("<span style=\"float: right;\">");
+        sb.append("<span id=\"simpleSearch\">");
+        sb.append("<input id=\"searchKeyword\" class=\"input_text\" type=\"text\" value=\"\" size=\"30\" style=\"width: 300px;\" placeholder=\"请输入姓名，手机号\" name=\"searchKeyWord\">");
+        sb.append("<a href=\"javascript:void(0)\" class=\"easyui-linkbutton\" data-options=\"plain:true\" onclick=\"searchMember()\">搜索</a>");
+        sb.append("</span>");
+        sb.append("</span>");
         sb.append("</div>");
 
         return sb.toString();
