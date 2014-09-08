@@ -20,4 +20,6 @@ public interface IRoleAuthManager {
     public void save(RoleAuth roleAuth);
 
     public void update(RoleAuth roleAuth);
+
+    public void deleteByRoleId(int roleId);
 }

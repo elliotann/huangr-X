@@ -78,8 +78,8 @@ public class MenuManagerImpl extends BaseSupport<Menu> implements IMenuManager {
                 for(Menu menu : menuList){
                     for(Menu selectMenu : selectMenus){
                         if(menu.getId()==selectMenu.getId()){
-                            System.out.println("here");
-                            menu.setHasAuth(true);
+
+                            menu.setChecked(true);
                         }
                     }
                 }

@@ -34,6 +34,8 @@ public class Menu extends IdEntity{
     private String ico;
 
     private boolean hasAuth;//角色是否权限此菜单权限，非数据库字段
+    private int _parentId;
+    private boolean checked;
 
     public Integer getDeleteflag() {
         return deleteflag;
@@ -144,5 +146,21 @@ public class Menu extends IdEntity{
 
     public void setHasAuth(boolean hasAuth) {
         this.hasAuth = hasAuth;
+    }
+
+    public int get_parentId() {
+        return pid;
+    }
+
+    public void set_parentId(int _parentId) {
+        this._parentId = _parentId;
+    }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 }

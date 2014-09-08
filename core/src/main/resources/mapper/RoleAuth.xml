@@ -24,8 +24,8 @@
         SET operids = #{operids}
         WHERE id = #{id}
     </update>
-    <delete id="deleteById">
-        delete from t_role where roleid=#{id}
+    <delete id="deleteByRoleId">
+        delete from t_role_auth where role_id=#{roleId}
     </delete>
 
 </mapper>

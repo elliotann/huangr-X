@@ -3,6 +3,7 @@ package com.easysoft.member.backend.manager;
 
 import com.easysoft.member.backend.model.AuthAction;
 import com.easysoft.member.backend.model.FunAndOper;
+import com.easysoft.member.backend.model.RoleAuth;
 
 import java.util.List;
 
@@ -68,4 +69,6 @@ public interface IAuthActionManager {
      * @param roleId
      */
     public void saveAuth(Integer roleId, Integer operId,boolean isCheck,String[] menuIds);
+
+    public void saveAuth(RoleAuth[] roleAuths);
 }
