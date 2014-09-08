@@ -1,6 +1,7 @@
 package com.easysoft.tag.webapp.taglib.html.support;
 
 import com.easysoft.tag.webapp.taglib.vo.DataGridColumn;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
@@ -49,6 +50,8 @@ public class DataGridColumnTag extends BodyTagSupport {
     public int doEndTag() throws JspException {
         DataGridTag parent = (DataGridTag)findAncestorWithClass(this,DataGridTag.class);
         DataGridColumn column = new DataGridColumn();
+        align = StringUtils.isEmpty(align)?"center":align;
+        width = StringUtils.isEmpty(width)?"80":width;
         column.setAlign(align);
         column.setTitle(title);
         column.setField(field);

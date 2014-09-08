@@ -6,7 +6,7 @@ package com.easysoft.tag.webapp.taglib.vo;
 public class DataGridColumn {
     private String title;
     private String field;
-    private String width;
+    private String width="80";
     private String minWidth;
     private String align="center";
     private String renderFun;

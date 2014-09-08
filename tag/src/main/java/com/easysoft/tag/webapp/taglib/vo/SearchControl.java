@@ -8,6 +8,7 @@ public class SearchControl {
     private String label;//控件名称
     private String name;//控件name和id属性
     private String type;//控件类型
+    private boolean shortSearch;
 
     public String getLabel() {
         return label;
@@ -31,5 +32,13 @@ public class SearchControl {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public boolean isShortSearch() {
+        return shortSearch;
+    }
+
+    public void setShortSearch(boolean shortSearch) {
+        this.shortSearch = shortSearch;
     }
 }

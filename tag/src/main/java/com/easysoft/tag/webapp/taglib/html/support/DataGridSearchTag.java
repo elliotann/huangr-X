@@ -13,6 +13,9 @@ public class DataGridSearchTag extends BodyTagSupport {
     private String label;
     private String name;
     private String type;
+    private boolean shortSearch;//快捷搜索
+
+
 
     public String getLabel() {
         return label;
@@ -38,6 +41,14 @@ public class DataGridSearchTag extends BodyTagSupport {
         this.type = type;
     }
 
+    public boolean isShortSearch() {
+        return shortSearch;
+    }
+
+    public void setShortSearch(boolean shortSearch) {
+        this.shortSearch = shortSearch;
+    }
+
     @Override
     public int doEndTag() throws JspException {
         DataGridTag parent = (DataGridTag)findAncestorWithClass(this,DataGridTag.class);
@@ -45,6 +56,7 @@ public class DataGridSearchTag extends BodyTagSupport {
         searchControl.setLabel(label);
         searchControl.setName(name);
         searchControl.setType(type);
+        searchControl.setShortSearch(shortSearch);
         parent.setSearchControls(searchControl);
         return EVAL_PAGE;
     }
