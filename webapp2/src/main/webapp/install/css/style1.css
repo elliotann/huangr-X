@@ -7,8 +7,7 @@
     overflow-x: hidden;
     overflow-y: hidden;
     position: relative;
-
-    z-index: -999;
+    z-index: 10;
 }
 .sidebar_sep {
     background: none repeat scroll 0 0 #EFEFEF;
@@ -28,7 +27,7 @@
     opacity: 0.5;
     position: fixed;
     text-indent: -10000px;
-    top: 45px;
+    top: 84px;
     width: 16px;
     z-index: 100;
 }
@@ -162,7 +161,7 @@
         left: 0;
         margin-left: 0;
         position: fixed;
-        top: 64px;
+        top: 84px;
     }
     .navbar-fixed-top .nav-collapse {
         height: 40px !important;
