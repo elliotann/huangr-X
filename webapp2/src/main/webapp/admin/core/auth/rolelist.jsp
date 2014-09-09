@@ -6,6 +6,7 @@
 <script type="text/javascript" src="${context}/js/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${context}/js/easyui/locale/easyui-lang-zh_CN.js"></script>
 <script src="/jeap/admin/js/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
+<script src="/jeap/admin/js/crud.js" type="text/javascript"></script>
 <link href="${context }/css/form.css" rel="stylesheet"/>
 <script type="text/javascript">
 
@@ -36,33 +37,8 @@
             return;
         }
         var row = $('#dataGrid').datagrid('getSelections')[0];
+        addOrUpdateDialog("修改角色",'role.do?edit&roleid='+row.roleid,350,600);
 
-        $("#dialogInfo").show();
-        $('#dialogInfo').dialog({
-            title: '修改角色',
-            top: 60,
-            width: 600,
-            height: 350,
-            closed: false,
-            cache: false,
-            href:'role.do?edit&roleid='+row.roleid,
-            modal: true,
-            buttons: [
-                {
-                    text: '保存',
-                    iconCls: 'icon-ok',
-                    handler: function () {
-                        var savebtn = $(this);
-                        var disabled = savebtn.hasClass("l-btn-disabled");
-                        if (!disabled) {
-                            addForm(savebtn);
-                        }
-                    }
-                },
-                {text: '取消', handler: function () {
-                    $('#dialogInfo').dialog('close');
-                }}
-            ]});
 
     }
     function delUser()
@@ -76,23 +52,7 @@
             return;
         }
         var row = rows[0];
-        var options = {
-            url : "role.do?delete&id="+row.roleid,
-            type : "POST",
-            dataType : 'json',
-            data:"ajax=true&rmd="+ new Date().getTime(),
-            success : function(result) {
-                if(result.success){
-                    alert("删除成功");
-                    $('#useradmindata').datagrid('reload');
-                }
-
-            },
-            error : function(e) {
-                $.Loading.error("出现错误 ，请重试");
-            }
-        };
-        $('#dataGridform').ajaxSubmit(options);
+        delObj("role.do?delete&id="+row.roleid);
 
 
 
@@ -123,7 +83,7 @@
                         var savebtn = $(this);
                         var disabled = savebtn.hasClass("l-btn-disabled");
                         if (!disabled) {
-                            addForm(savebtn);
+                            addAuthForm(savebtn);
                         }
                     }
                 },
@@ -133,16 +93,12 @@
             ]});
 
     }
-    function query(){
 
-        listgrid.loadServerData("username="+$("#usernameQry").val());
-        return false;
-    }
     function addRole() {
-
+        addOrUpdateDialog("增加角色","role.do?add",350,600);
     }
 
-    function addForm(savebtn){
+    function addAuthForm(savebtn){
         var json="[";
         $.each($("#authDataGrid").treegrid("getChecked"),function(i,v){
             json += "{\"roleId\":"+$("#roleId").val()+",\"funId\":"+ v.id+",\"operids\":\"";
@@ -179,6 +135,15 @@
         });
         $("#objForm").submit();
 
+    }
+
+    function searchMember(){
+
+        var rolename = $("#rolename").val();
+        $("#dataGrid").datagrid('load', {
+            rolename:rolename,
+            page:1
+        });
     }
 </script>
 <grid:dataGrid action="role.do?dataGrid&ajax=yes" height="99%"  rownumbers="true" hasSearchBar="true" style="easyui">

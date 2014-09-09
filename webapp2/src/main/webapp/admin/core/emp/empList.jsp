@@ -6,6 +6,7 @@
 <script type="text/javascript" src="${context}/js/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${context}/js/easyui/locale/easyui-lang-zh_CN.js"></script>
 <script src="/jeap/admin/js/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
+<link href="${context }/css/form.css" rel="stylesheet"/>
 
 <div class="main">
     <div id="useradmininfo" style="display: none;"></div>
@@ -21,7 +22,7 @@
 			<span style="float: right;">
 				<span id="simpleSearch">
 
-					<input id="searchKeyword" class="input_text" type="text" value="" size="30" style="width: 300px;" placeholder="请输入姓名，手机号" name="searchKeyWord">
+					<input id="searchKeyword" class="form-control" type="text" value="" size="30" style="width: 300px;" placeholder="请输入姓名，手机号" name="searchKeyWord">
 					<a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true" onclick="searchMember()">搜索</a>
 				</span>
 				<a href="javascript:void(0)" class="button"
@@ -35,12 +36,12 @@
                 <tr>
                     <th width="70" align="right">姓名</th>
                     <td>
-                        <input type="text" id="name" class="input_text">
+                        <input type="text" id="name" class="form-control">
                     </td>
 
                     <th width="70" align="right">手机</th>
                     <td>
-                        <input type="text" value="" id="mobile" class="input_text">
+                        <input type="text" value="" id="mobile" class="form-control">
                     </td>
 
                 </tr>

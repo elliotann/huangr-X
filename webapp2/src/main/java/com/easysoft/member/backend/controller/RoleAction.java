@@ -3,9 +3,11 @@ package com.easysoft.member.backend.controller;
 import com.easysoft.core.common.controller.BaseController;
 import com.easysoft.core.common.vo.json.AjaxJson;
 import com.easysoft.core.common.vo.json.DataGridReturn;
+import com.easysoft.framework.db.PageOption;
 import com.easysoft.framework.utils.JsonUtils;
 import com.easysoft.member.backend.manager.IAuthActionManager;
 import com.easysoft.member.backend.manager.IRoleManager;
+import com.easysoft.member.backend.model.Employ;
 import com.easysoft.member.backend.model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,9 +39,12 @@ public class RoleAction extends BaseController {
         return new ModelAndView("admin/core/auth/rolelist",map);
     }
     @RequestMapping(params = {"dataGrid"})
-    public ModelAndView dataGrid(){
-        List roleList = roleManager.list();
-        DataGridReturn dataGridReturn = new DataGridReturn(roleList.size(),roleList);
+    public ModelAndView dataGrid(Integer rows,Integer page,String rolename){
+        PageOption pageOption = new PageOption();
+        pageOption.setPageSize(rows);
+        pageOption.setCurrentPageNo(page);
+        roleManager.queryByPage(pageOption,rolename);
+        DataGridReturn dataGridReturn = new DataGridReturn(pageOption.getTotalCount(),(List<Role>)pageOption.getResult());
         String json = JsonUtils.beanToJson(dataGridReturn);
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("json",json);

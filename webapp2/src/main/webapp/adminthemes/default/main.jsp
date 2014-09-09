@@ -16,6 +16,8 @@
     <link href="${context}/css/input.css" rel="stylesheet" type="text/css" />
     <link href="${context}/css/validate.css" rel="stylesheet" type="text/css" />
     <link href="${context}/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="/jeap/install/css/bootstrap.min1.css" rel="stylesheet" type="text/css" />
+    <link href="/jeap/install/css/style1.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="${staticserver }/js/common/jquery-1.6.4.js"></script>
 
 
@@ -81,9 +83,24 @@
     <!-- accountinfo -->
 </div>
 <div class="sidebar" style="height: 100%">
-    <div id="accordion">
-
-    </div>
+    <div id="side_accordion" class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <a href="#" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
+                    <i class="glyphicon glyphicon-folder-close"></i> Content
+                </a>
+            </div>
+            <div style="height: auto;" class="accordion-body in" id="collapseOne">
+                <div class="panel-body">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li><a href="javascript:void(0)">Articles</a></li>
+                        <li><a href="javascript:void(0)">News</a></li>
+                        <li><a href="javascript:void(0)">Newsletters</a></li>
+                        <li><a href="javascript:void(0)">Comments</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 </div>
 <!--左侧菜单结束-->
 <div class="maincontent">
