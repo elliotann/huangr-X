@@ -132,13 +132,19 @@ var tab;
 $(function () {
     BackendUi.init(menu, null);
     BackendUi.disMenu();
-    $('#accordion h3').click(function() {
-        if($(this).hasClass('open')) {
-            $(this).removeClass('open');
-            $(this).next().slideUp('fast');
+    $('.accordion-toggle').click(function() {
+
+        if($(this).hasClass('collapse')) {
+            $(this).removeClass('collapse');
+            $(this).addClass("in");
+            $("#collapseOne").removeClass('collapse');
+            $("#collapseOne").addClass("in");
+
         } else {
-            $(this).addClass('open');
-            $(this).next().slideDown('fast');
+            $(this).removeClass('in');
+            $(this).addClass('collapse');
+            $("#collapseOne").addClass('collapse');
+
         } return false;
     });
 
