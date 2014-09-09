@@ -1,6 +1,7 @@
 package com.easysoft.member.backend.manager.impl;
 
 import com.easysoft.core.common.service.impl.GenericService;
+import com.easysoft.framework.db.PageOption;
 import com.easysoft.framework.exception.ErrorCode;
 import com.easysoft.framework.utils.StringUtil;
 import com.easysoft.member.backend.dao.IRoleDao;
@@ -144,4 +145,13 @@ public class RoleManager implements IRoleManager {
         return  role;
     }
 
+    @Override
+    public PageOption queryByPage(PageOption pageOption, String rolename) {
+        pageOption.addSearch("rolename",rolename);
+        List<Role> roles = roleDao.queryForPage(pageOption);
+        if(!roles.isEmpty()){
+            pageOption.setData(roles);
+        }
+        return pageOption;
+    }
 }
