@@ -100,7 +100,7 @@ public class DataGridTag extends BodyTagSupport{
         StringBuilder sb = new StringBuilder();
         sb.append("<div class=\"main\">");
         sb.append("<div id=\"dialogInfo\" style=\"display: none;\"></div>");
-        sb.append(" <form id=\"memberform\">");
+        sb.append(" <form id=\"dataGridform\">");
         sb.append("<div id=\"tb\" style=\"height: auto\">");
         for(ToolBar toolBar : toolBars){
             sb.append(" <a href=\"javascript:void(0)\" class=\"button blueButton\" data-options=\"iconCls:'icon-add',plain:true\" onclick=\""+toolBar.getClickFun()+"()\">"+toolBar.getTitle()+"</a>");
@@ -112,7 +112,7 @@ public class DataGridTag extends BodyTagSupport{
         if(!searchControls.isEmpty()){
             for(SearchControl control : searchControls){
                 if(control.isShortSearch()){
-                    sb.append("<input id=\"searchKeyword\" class=\"form-control\" type=\"text\" value=\"\" size=\"30\" style=\"width: 200px;\" placeholder=\""+control.getLabel()+"\" name=\""+control.getName()+"\">");
+                    sb.append("<input id=\""+control.getName()+"\" class=\"form-control\" type=\"text\" value=\"\" size=\"30\" style=\"width: 200px;\" placeholder=\""+control.getLabel()+"\" name=\""+control.getName()+"\">");
                 }else{
                     advances.add(control);
                 }
@@ -155,7 +155,7 @@ public class DataGridTag extends BodyTagSupport{
         sb.append("<div class=\"clear height10\"></div>");
         sb.append("<div class=\"shadowBoxWhite tableDiv\">");
         sb.append("<table class=\"easyui-datagrid\" pagination=\"true\"  sortName=\"member_id\" sortOrder=\"desc\" id=\"dataGrid\"");
-        sb.append(" data-options=\"url:'"+action+"',pageList: [5,10,15,20],fitColumns:'true'\"");
+        sb.append(" data-options=\"url:'"+action+"',pageList: [5,10,15,20],fitColumns:'true',singleSelect:true\"");
         sb.append(">");
         sb.append(" <thead><tr>");
 
