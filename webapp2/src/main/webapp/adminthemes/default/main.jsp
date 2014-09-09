@@ -87,10 +87,10 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <a href="#" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
-                    <i class="glyphicon glyphicon-folder-close"></i> Content
+                    <i class="glyphicon glyphicon-folder-close"></i> 系统设置
                 </a>
             </div>
-            <div style="height: auto;" class="accordion-body in" id="collapseOne">
+            <div style="height: auto;" class="accordion-body collapse" id="collapseOne" >
                 <div class="panel-body">
                     <ul class="nav nav-pills nav-stacked">
                         <li><a href="javascript:void(0)">Articles</a></li>
@@ -104,11 +104,7 @@
 </div>
 <!--左侧菜单结束-->
 <div class="maincontent">
-    <%--<div class="breadcrumbs" id="nav">
-        <a href="dashboard.html">系统管理</a>
-        <a href="dashboard.html">权限管理</a>
-        <span>管理员管理</span>
-    </div>--%>
+
     <!-- breadcrumbs -->
     <div class="left" id="right_content" >
         <iframe src="../core/admin/index.do?list" scrolling="no" id="iframe" name="iframe" style="width: 100%;height: 800px"></iframe>

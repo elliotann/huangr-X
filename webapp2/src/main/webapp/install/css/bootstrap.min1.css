@@ -1338,3 +1338,10 @@ a.list-group-item:hover, a.list-group-item:focus {
     border-radius: 3px;
     padding: 9px;
 }
+
+.collapse {
+    display: none;
+}
+.collapse.in {
+    display: block;
+}
