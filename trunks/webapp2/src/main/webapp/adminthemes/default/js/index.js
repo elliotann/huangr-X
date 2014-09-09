@@ -86,14 +86,11 @@ var BackendUi = {
      * 显示应用的子菜单
      */
     disAppChildren:function(children){
-
         var self= this;
         var leftMenu = $("#accordion");
         leftMenu.empty();
-
         $.each(children,function(k,v){
             leftMenu.append($("<h3 class=\"open\">"+ v.text+"</h3>"));
-
             if(this.children){
 
                 leftMenu.append($("<div style=\"display: block;\" class=\"content\"><ul class='leftmenu' id='leftMenuItems"+ v.id+"'></ul></div>"));
@@ -133,17 +130,18 @@ $(function () {
     BackendUi.init(menu, null);
     BackendUi.disMenu();
     $('.accordion-toggle').click(function() {
-
+        $(".accordion-body").removeClass("in");
+        $(".accordion-body").addClass("collapse");
         if($(this).hasClass('collapse')) {
             $(this).removeClass('collapse');
             $(this).addClass("in");
-            $("#collapseOne").removeClass('collapse');
-            $("#collapseOne").addClass("in");
-
+            $(this).parent().next().removeClass("collapse");
+            $(this).parent().next().addClass("in");
         } else {
             $(this).removeClass('in');
             $(this).addClass('collapse');
-            $("#collapseOne").addClass('collapse');
+            $(this).parent().next().removeClass("in");
+            $(this).parent().next().addClass("collapse");
 
         } return false;
     });
