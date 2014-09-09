@@ -94,7 +94,7 @@
                                 <i class="glyphicon glyphicon-folder-close"></i> Content
                             </a>
                         </div>
-                        <div style="height: auto;" class="accordion-body" id="collapseOne">
+                        <div style="height: auto;" class="accordion-body collapse" id="collapseOne">
                             <div class="panel-body">
                                 <ul class="nav nav-pills nav-stacked">
                                     <li><a href="javascript:void(0)">Articles</a></li>
@@ -107,12 +107,12 @@
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <a href="#collapseTwo" data-parent="#side_accordion" data-toggle="collapse"
-                               class="accordion-toggle collapsed">
+                            <a href="javascript:void(0)" data-parent="#side_accordion" data-toggle="collapse"
+                               class="accordion-toggle">
                                 <i class="glyphicon glyphicon-th"></i> Modules
                             </a>
                         </div>
-                        <div style="height: 0px;" class="accordion-body in" id="collapseTwo">
+                        <div style="" class="accordion-body collapse" id="collapseTwo">
                             <div class="panel-body">
                                 <ul class="nav nav-pills nav-stacked">
                                     <li><a href="javascript:void(0)">Content blocks</a></li>
