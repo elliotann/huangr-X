@@ -23,7 +23,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping({"/core/admin/role"})
-public class RoleController extends BaseController {
+public class RoleAction extends BaseController {
     @Autowired
     private IRoleManager roleManager;
     @Autowired
