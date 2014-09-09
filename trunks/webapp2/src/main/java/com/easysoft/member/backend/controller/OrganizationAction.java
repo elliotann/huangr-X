@@ -87,6 +87,15 @@ public class OrganizationAction extends BaseController {
         map.put("json",json);
         return new ModelAndView("admin/json_message",map);
     }
+    @RequestMapping(params = "queryForTree")
+    public ModelAndView queryForTree() {
+        List entityist= this.organizatiOnService.queryForTree(0);
+        String json = JsonUtils.beanToJsonArray(entityist);
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("json",json);
+        return new ModelAndView("admin/json_message",map);
+    }
+
 
 
 

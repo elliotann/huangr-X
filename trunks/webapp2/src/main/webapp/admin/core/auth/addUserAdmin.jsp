@@ -4,12 +4,11 @@
 
 
 
-    <script src="${staticserver}/js/common/jquery-1.6.4.js" type="text/javascript"></script>
+
     <script src="${staticserver}/js/common/jquery.validate.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/core/base.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerDialog.js" type="text/javascript"></script>
 <script src="${staticserver}/js/admin/jeap.js" type="text/javascript"></script>
     <link href="${context }/css/form.css" rel="stylesheet"/>
+<link href="${context }/js/easyui/themes/icon.css" rel="stylesheet"/>
 
     <script type="text/javascript">
 
@@ -86,17 +85,7 @@
             $("#objForm").submit();
         }
 
-        function queryDeparts(corpId){
-            $.ajax({
-                type:'post',
-                url:'../depart.do?queryDepartsByOrgId&ajax=true&orgId='+corpId,
-                dataType:'html',
-                success:function(result){
-                    $("#userdept").html(result);
 
-                }
-            });
-        }
     </script>
 
     <style type="text/css">
@@ -208,15 +197,12 @@
         <tr>
             <td align="right" class="l-table-edit-td">所属公司:</td>
             <td align="left" class="l-table-edit-td">
-                <select class="form-control" name="userCorp" id="userCorp" onchange="queryDeparts(this.value)">
-                    <c:forEach items="${organizations}" var="org">
-                        <option value="${org.id}">${org.name}</option>
-                    </c:forEach>
-                </select>
 
+                <select id="cc" class="easyui-combotree combo" data-options="url:'../organization.do?queryForTree&ajax=true',method:'get',required:true" style="width:200px;" onChange="queryDeparts(this.value,1)"></select>
             </td>
             <td align="left"></td>
         </tr>
+
         <tr>
             <td align="right" class="l-table-edit-td">部门:</td>
             <td align="left" class="l-table-edit-td"><select id="userdept" name="userdept" class="form-control"></select></td>
@@ -232,6 +218,19 @@
 
     </table>
 </form>
+<script type="text/javascript">
+    function queryDeparts(corpId,fda){
+        alert(corpId);
+        $.ajax({
+            type:'post',
+            url:'../depart.do?queryDepartsByOrgId&ajax=true&orgId='+corpId,
+            dataType:'html',
+            success:function(result){
+                $("#userdept").html(result);
 
+            }
+        });
+    }
+</script>
 
 

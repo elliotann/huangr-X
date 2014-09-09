@@ -6,26 +6,38 @@
 
 
 
-
-<link href="${context }/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
-<link href="${context }/js/ligerui/skins/ligerui-icons.css" rel="stylesheet" type="text/css" />
-<link href="${context }/js/ligerui/skins/Gray2014/css/all.css" rel="stylesheet" type="text/css" />
-<link href="${context }/css/form.css" rel="stylesheet" type="text/css" />
-<link href="${context }/css/button.css" rel="stylesheet" type="text/css" />
-<script src="${context }/js/ligerui/js/core/base.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerGrid.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerToolBar.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerResizable.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerCheckBox.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerDialog.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerDrag.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="${context}/js/easyui/themes/gray/easyui.css">
+<link href="${context}/css/stylenew.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="${context}/js/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="${context}/js/easyui/locale/easyui-lang-zh_CN.js"></script>
+<script src="/jeap/admin/js/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
 <script src="/jeap/admin/js/crud.js" type="text/javascript"></script>
 
+<link href="${context }/css/form.css" rel="stylesheet"/>
+
 <script type="text/javascript">
+    $(function () {
+        $(".searchAdvanced").hide();
+        //高级查询按钮
+        $("#aAdvanced").click(function () {
+            if ($("#Advanced").val() == "0") {
+                $("#Advanced").val(1);
+                $("#simpleSearch").hide();
+                //$("#aAdvanced").text("简单搜索")
+                $("#aAdvanced").addClass("searchAdvancedS");
+            } else {
+                $("#Advanced").val(0);
+                $("#simpleSearch").show();
+                //$("#aAdvanced").text("高级搜索");
+                $("#aAdvanced").removeClass("searchAdvancedS");
+            }
+            $(".searchAdvanced").slideToggle("slow");
+        });
+    });
     var listgrid;
-    function addUser(item)
+    function addUser()
     {
-        addOrUpdateDialog(item,'增加管理员','userAdmin.do?add',500,700);
+        addOrUpdateDialog('增加管理员','userAdmin.do?add',500,700);
     }
     function customSearch()
     {
@@ -40,7 +52,7 @@
             $.ligerDialog.error('请选择数据修改!');
             return;
         }
-        addOrUpdateDialog(item,'修改管理员','userAdmin.do?edit&id='+row.userid,500,700);
+        addOrUpdateDialog('修改管理员','userAdmin.do?edit&id='+row.userid,500,700);
 
     }
 
@@ -95,8 +107,8 @@
 
 
 
-<grid:dataGrid action="userAdmin.do?dataGrid&ajax=yes" height="99%"  rownumbers="true" hasSearchBar="true">
-    <grid:search label="用户名:" name="username"/>
+<grid:dataGrid action="userAdmin.do?dataGrid&ajax=yes" height="100%"  rownumbers="true" hasSearchBar="true" style="easyui">
+    <grid:search label="用户名" name="username" shortSearch="true"/>
     <grid:column title="ID" field="userid" align="center" width="100" minWidth="60"/>
     <grid:column title="用户名" field="username"  minWidth="100"/>
     <grid:column title="姓名" field="realname"  minWidth="140"/>
