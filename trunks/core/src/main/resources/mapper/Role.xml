@@ -38,12 +38,15 @@
     <!--<select id="queryForAll" resultMap="roleMap">
         select * from t_role
     </select>
-
+    -->
 
 
 
 
     <select id="queryForPage" parameterType="Role" resultMap="roleMap">
-        select * from t_role
-    </select>-->
+        select * from t_role where 1=1
+        <if test="searchConditions.rolename!=null">
+            and rolename=#{searchConditions.rolename}
+        </if>
+    </select>
 </mapper>

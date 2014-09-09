@@ -1,6 +1,7 @@
 package com.easysoft.member.backend.manager;
 
 import com.easysoft.core.common.service.IGenericService;
+import com.easysoft.framework.db.PageOption;
 import com.easysoft.member.backend.model.Role;
 
 import java.util.List;
@@ -55,6 +56,8 @@ public interface IRoleManager {
      * @return 权限id存于role.actids数组中
      */
 	public Role queryById(int roleid);
+
+    public PageOption queryByPage(PageOption pageOption,String rolename);
 
 
 
