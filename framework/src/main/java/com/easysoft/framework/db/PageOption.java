@@ -12,7 +12,7 @@ import java.util.Map;
 @SuppressWarnings("serial")
 public class PageOption implements Serializable {
 
-	private static int DEFAULT_PAGE_SIZE = 20;
+	private static int DEFAULT_PAGE_SIZE = 10;
 
 	private int pageSize = DEFAULT_PAGE_SIZE; // 每页的记录数
 
