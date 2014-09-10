@@ -192,8 +192,8 @@ public class MenuJsonGetter extends AbstractFacadeProcessor {
         IPermissionManager permissionManager = SpringContextHolder.getBean("permissionManager");
         IAdminUserManager adminUserManager =  SpringContextHolder.getBean("adminUserManager");
         AdminUser user  =adminUserManager.getCurrentUser();
-        user = adminUserManager.get(user.getUserid());
-        List<RoleAuth> authList = permissionManager.getUesrAct(user.getUserid(), "FUNCTION");
+        user = adminUserManager.get(user.getId());
+        List<RoleAuth> authList = permissionManager.getUesrAct(user.getId(), "FUNCTION");
 
         for(Menu menu:tempMenuList){
             if(menu.getMenutype().intValue() == Menu.MENU_TYPE_APP){

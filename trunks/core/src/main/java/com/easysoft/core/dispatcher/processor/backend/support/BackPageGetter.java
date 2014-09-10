@@ -73,7 +73,7 @@ public class BackPageGetter extends AbstractFacadeProcessor {
 
 		if (uri.startsWith("/admin/main")) { //后台首页
             AdminUser user = this.adminUserManager.getCurrentUser();
-            user = this.adminUserManager.get(user.getUserid());
+            user = this.adminUserManager.get(user.getId());
             httpRequest.setAttribute("user", user);
 			uri = context.toString() + "/main.jsp";
 //			request  = new GetPointJsWrapper(page, request); //包装积分获取js

@@ -51,8 +51,8 @@ public class AdminUserManagerImpl  implements IAdminUserManager {
         //增加审批用户
         saveToApproUser(adminUser,true);
 		//给用户赋予角色
-		permissionManager.giveRolesToUser(adminUser.getUserid(), adminUser.getRoleids());
-		return adminUser.getUserid();
+		permissionManager.giveRolesToUser(adminUser.getId(), adminUser.getRoleids());
+		return adminUser.getId();
 	}
 
     /**
@@ -107,7 +107,7 @@ public class AdminUserManagerImpl  implements IAdminUserManager {
 	public Integer add(int userid, int siteid, AdminUser adminUser) {
 		adminUser.setState(1);
         adminUserDao.save(adminUser);
-		return adminUser.getUserid();
+		return adminUser.getId();
 	}
 	
 	public int checkLast() {
@@ -134,7 +134,7 @@ public class AdminUserManagerImpl  implements IAdminUserManager {
 	public void edit(AdminUser adminUser) {
 		
 		//给用户赋予角色
-		permissionManager.giveRolesToUser(adminUser.getUserid(), adminUser.getRoleids());
+		permissionManager.giveRolesToUser(adminUser.getId(), adminUser.getRoleids());
 		
 		//修改用户基本信息
 		if( !StringUtil.isEmpty( adminUser.getPassword() ))
@@ -225,11 +225,11 @@ public class AdminUserManagerImpl  implements IAdminUserManager {
 		WebSessionContext sessonContext = ThreadContextHolder
 		.getSessionContext();			
 		UserContext userContext = new UserContext(site.getUserid(),
-				site.getId(), user.getUserid());
+				site.getId(), user.getId());
 		sessonContext.setAttribute(UserContext.CONTEXT_KEY, userContext);
 		sessonContext.setAttribute("admin_user_key", user);
 		
-		return user.getUserid();
+		return user.getId();
 	}	
 	
 	
