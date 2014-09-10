@@ -160,7 +160,11 @@ public class DataGridTag extends BodyTagSupport{
         sb.append(" <thead><tr>");
 
         for(DataGridColumn column : columns){
-            sb.append("<th data-options=\"field:'"+column.getField()+"',width:"+column.getWidth()+",align:'"+column.getAlign()+"'\">");
+            sb.append("<th data-options=\"field:'"+column.getField()+"',width:"+column.getWidth()+",align:'"+column.getAlign()+"'\" ");
+            if(StringUtils.isNotEmpty(column.getRenderFun())){
+                sb.append("formatter=\""+column.getRenderFun()+"\"");
+            }
+            sb.append(">");
             sb.append(column.getTitle());
             sb.append("</th>");
         }
