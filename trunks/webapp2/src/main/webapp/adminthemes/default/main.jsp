@@ -89,12 +89,22 @@
                 <div id="side_accordion" class="panel-group">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <a href="#collapseOne" data-parent="#side_accordion" data-toggle="collapse"
-                               class="accordion-toggle">
-                                <i class="glyphicon glyphicon-folder-close"></i> Content
-                            </a>
+                            <a class="accordion-toggle"><i
+                                class="glyphicon glyphicon-folder-close"></i>系统设置</a></div>
+                        <div style="height: auto;" class="accordion-body collapse">
+                            <div class="panel-body">
+                                <ul class="nav nav-pills nav-stacked">
+                                    <li><a target="" href="/jeap/core/admin/component.do?list&amp;menuId=1">组件管理</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                        <div style="height: auto;" class="accordion-body collapse" id="collapseOne">
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <a href="#collapseOne" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle"> <i class="glyphicon glyphicon-folder-close"></i> Content</a>
+                        </div>
+                        <div style="height: auto;" class="accordion-body collapse">
                             <div class="panel-body">
                                 <ul class="nav nav-pills nav-stacked">
                                     <li><a href="javascript:void(0)">Articles</a></li>
@@ -108,7 +118,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <a href="javascript:void(0)" data-parent="#side_accordion" data-toggle="collapse"
-                               class="accordion-toggle">
+                               class="accordion-toggle collapse">
                                 <i class="glyphicon glyphicon-th"></i> Modules
                             </a>
                         </div>
@@ -128,8 +138,29 @@
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
+                            <a href="javascript:void(0)" data-parent="#side_accordion" data-toggle="collapse"
+                               class="accordion-toggle collapse">
+                                <i class="glyphicon glyphicon-th"></i> Modules
+                            </a>
+                        </div>
+                        <div style="" class="accordion-body collapse">
+                            <div class="panel-body">
+                                <ul class="nav nav-pills nav-stacked">
+                                    <li><a href="javascript:void(0)">Content blocks</a></li>
+                                    <li><a href="javascript:void(0)">Tags</a></li>
+                                    <li><a href="javascript:void(0)">Blog</a></li>
+                                    <li><a href="javascript:void(0)">FAQ</a></li>
+                                    <li><a href="javascript:void(0)">Formbuilder</a></li>
+                                    <li><a href="javascript:void(0)">Location</a></li>
+                                    <li><a href="javascript:void(0)">Profiles</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
                             <a href="#collapseThree" data-parent="#side_accordion" data-toggle="collapse"
-                               class="accordion-toggle collapsed">
+                               class="accordion-toggle collapse">
                                 <i class="glyphicon glyphicon-user"></i> Account manager
                             </a>
                         </div>

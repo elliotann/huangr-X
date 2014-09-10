@@ -87,19 +87,59 @@ var BackendUi = {
      */
     disAppChildren:function(children){
         var self= this;
-        var leftMenu = $("#accordion");
+        var leftMenu = $("#side_accordion");
         leftMenu.empty();
         $.each(children,function(k,v){
-            leftMenu.append($("<h3 class=\"open\">"+ v.text+"</h3>"));
+            var mainPanel = $("<div></div>");
+            mainPanel.addClass("panel panel-default")
+
+            var firstChild = $("<div></div>")
+            firstChild.addClass("panel-heading");
+            firstChild.appendTo(mainPanel);
+            var linkNode = $("<a></a>");
+
+            linkNode.addClass("accordion-toggle");
+            linkNode.attr("href","#");
+            linkNode.appendTo(firstChild);
+            linkNode.append($("<i class=\"glyphicon glyphicon-folder-close\"></i>"));
+            linkNode.append(v.text);
+
+            linkNode.click(function(){
+                $(".accordion-toggle").removeClass("collapse");
+                $(".accordion-toggle").addClass("collapse");
+                $(".accordion-body").removeClass("in");
+                $(".accordion-body").addClass("collapse");
+                if($(this).hasClass('collapse')) {
+                    $(this).removeClass('collapse');
+                    $(this).addClass("in");
+                    $(this).parent().next().removeClass("collapse");
+                    $(this).parent().next().addClass("in");
+                } else {
+                    $(this).removeClass('in');
+                    $(this).addClass('collapse');
+                    $(this).parent().next().removeClass("in");
+                    $(this).parent().next().addClass("collapse");
+
+                };
+            });
+
+            var secondChild = $("<div></div>");
+            secondChild.addClass("accordion-body collapse");
+            secondChild.css("height","auto");
+            secondChild.appendTo(mainPanel);
+
+            var panelBody = $("<div></div>");
+            panelBody.addClass("panel-body");
+            panelBody.appendTo(secondChild);
+
+            var ulNode = $("<ul></ul>");
+            ulNode.addClass("nav nav-pills nav-stacked");
+            ulNode.appendTo(panelBody);
             if(this.children){
-
-                leftMenu.append($("<div style=\"display: block;\" class=\"content\"><ul class='leftmenu' id='leftMenuItems"+ v.id+"'></ul></div>"));
-                var leftMenuItems = $("#leftMenuItems"+ v.id);
-
                 $.each(this.children,function(k,v){
 
                     var link = self.createLink(v);
-                    leftMenuItems.append($("<li></li>").append(link));
+                    ulNode.append($("<li></li>").append(link));
 
                     link.click(function(){
                         Jeap.AdminUI.load($(this));
@@ -110,11 +150,12 @@ var BackendUi = {
                 });
             }
 
-            leftMenu.append($("<h3 class=\"open\"></h3>"));
+            leftMenu.append(mainPanel);
+
         });
     },
     createLink: function (v) {
-        var link = $("<a class='home' target='" + v.target + "' href='" + v.url+"&menuId=1" + "' >" + v.text + "</a>");
+        var link = $("<a  target='" + v.target + "' href='" + v.url+"&menuId=1" + "' >" + v.text + "</a>");
         return link;
     },
     autoHeight: function () {
@@ -129,22 +170,7 @@ var tab;
 $(function () {
     BackendUi.init(menu, null);
     BackendUi.disMenu();
-    $('.accordion-toggle').click(function() {
-        $(".accordion-body").removeClass("in");
-        $(".accordion-body").addClass("collapse");
-        if($(this).hasClass('collapse')) {
-            $(this).removeClass('collapse');
-            $(this).addClass("in");
-            $(this).parent().next().removeClass("collapse");
-            $(this).parent().next().addClass("in");
-        } else {
-            $(this).removeClass('in');
-            $(this).addClass('collapse');
-            $(this).parent().next().removeClass("in");
-            $(this).parent().next().addClass("collapse");
 
-        } return false;
-    });
 
 
 })
