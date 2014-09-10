@@ -55,7 +55,7 @@ public class AdminUserInstaller implements IInstaller {
 					tablename = tablename + "_" + userid + "_" + siteid;
 				}
 				this.daoSupport.insert(tablename, adminUser);
-				Integer adminuserid = adminUser.getUserid();
+				Integer adminuserid = adminUser.getId();
 
 				// 创建管理员时的密码为双md5了，更新为md5码
 				if (ParamSetting.RUNMODE.equals("2")) {

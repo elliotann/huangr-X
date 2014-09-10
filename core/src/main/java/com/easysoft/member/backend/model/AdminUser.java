@@ -1,5 +1,7 @@
 package com.easysoft.member.backend.model;
 
+import com.easysoft.core.common.entity.IdEntity;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -10,9 +12,9 @@ import java.util.List;
  * 
  * @author andy
  */
-public class AdminUser implements  Serializable{
+public class AdminUser extends IdEntity{
 	
-	private Integer userid;
+
 	private String username;
 	private String password;
 	private int state;
@@ -33,15 +35,7 @@ public class AdminUser implements  Serializable{
     public void setAuthList(List<AuthAction> authList) {
         this.authList = authList;
     }
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="userid")
-    public Integer getUserid() {
-		return userid;
-	}
-	public void setUserid(Integer userid) {
-		this.userid = userid;
-	}
+
     @Column(name ="username")
 	public String getUsername() {
 		return username;
