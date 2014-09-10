@@ -4,16 +4,15 @@
 
 
 
-<script src="${staticserver}/js/common/jquery-1.6.4.js" type="text/javascript"></script>
+
 <script src="${staticserver}/js/common/jquery.validate.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/core/base.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerDialog.js" type="text/javascript"></script>
+
 <script src="${staticserver}/js/admin/jeap.js" type="text/javascript"></script>
 <link href="${context }/css/form.css" rel="stylesheet"/>
 
 <script type="text/javascript">
 
-    var dialog = frameElement.dialog;
+
     $(function() {
         $("#objForm").validate({
             rules:{
@@ -35,14 +34,15 @@
                     success : function(result) {
 
                         if(result.success){
-                            $.ligerDialog.waitting('更新成功');
+                            $.Loading.show('操作成功!');
                             setTimeout(function ()
                             {
-                                $.ligerDialog.closeWaitting();
+                                $.Loading.hide();
+                                $("#dialogInfo").dialog('close');
+                                $('#dataGrid').datagrid('reload');
 
                             }, 1000);
-                            window.parent.listgrid.loadData();
-                            dialog.close();
+
                         }else{
                             alert(result.msg)
                         }
@@ -104,6 +104,8 @@
         <c:if test="${adminUser.founder==0}" >
             $("#notSuperChk").click();
         </c:if>
+
+
     });
     function submitForm(){
         $("#objForm").submit();
@@ -135,8 +137,9 @@
 
 </style>
 <form name="objForm" method="post"   id="objForm">
-    <input type="hidden" name="userid" value="${adminUser.userid }" />
+    <input type="hidden" name="id" value="${adminUser.id }" />
     <input type="hidden" name="ajax" value="true"/>
+    <input  type="hidden" name="founder" value="${adminUser.founder }"/>
     <table cellpadding="0" cellspacing="0" class="l-table-edit" >
         <c:if test="${multiSite==1}">
             <tr>
@@ -164,6 +167,7 @@
                             alert("站点列表获取失败");
                         }
                     });
+
                 });
             </script>
         </c:if>
@@ -194,12 +198,7 @@
             </td>
             <td align="left"></td>
         </tr>
-        <tr>
-            <td align="right" class="l-table-edit-td" valign="top">类型:</td>
-            <td align="left" class="l-table-edit-td">
-                <input id="notSuperChk" type="radio" name="founder" value="0" checked="checked" /><label for="notSuperChk">普通管理员</label>
-            </td><td align="left"></td>
-        </tr>
+
         <tr id="roletr">
             <td align="right" class="l-table-edit-td" valign="top">角色:</td>
             <td colspan="3" class="value">
@@ -232,8 +231,18 @@
             <td align="left"></td>
         </tr>
         <tr>
+            <td align="right" class="l-table-edit-td">所属公司:</td>
+            <td align="left" class="l-table-edit-td">
+
+                <input id="compId" name="userCorp" class="easyui-combotree combo" data-options="url:'../organization.do?queryForTree&ajax=true',method:'get',required:true" style="width:200px;height:25px;" value="${adminUser.userCorp }"/>
+            </td>
+            <td align="left"></td>
+        </tr>
+        <tr>
             <td align="right" class="l-table-edit-td">部门:</td>
-            <td align="left" class="l-table-edit-td"><input name="userdept" type="text" id="userdept"  value="${adminUser.userdept }" class="form-control"/></td>
+            <td align="left" class="l-table-edit-td"><select id="userdept" name="userdept" class="form-control">
+                <option value="${depart.id}">${depart.name}</option>
+            </select></td>
             <td align="left"></td>
         </tr>
         <tr>
@@ -246,6 +255,22 @@
 
     </table>
 </form>
+<script type="text/javascript">
+    $(function(){
 
+        $('#compId').combotree({onSelect:function(node) {
+
+            $.ajax({
+                type:'post',
+                url:'../depart.do?queryDepartsByOrgId&ajax=true&orgId='+node.id,
+                dataType:'html',
+                success:function(result){
+                    $("#userdept").html(result);
+
+                }
+            });
+        }});
+    });
+</script>
 
 

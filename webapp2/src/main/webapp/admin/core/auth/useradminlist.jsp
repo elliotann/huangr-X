@@ -44,27 +44,32 @@
         listgrid.options.data = $.extend(true,{}, CustomersData);
         listgrid.showFilter();
     }
-    function modifyUser(item)
+    function modifyUser()
     {
 
-        var row = listgrid.getSelectedRow();
-        if(row==null){
-            $.ligerDialog.error('请选择数据修改!');
+        if($('#dataGrid').datagrid('getSelections').length<1||$('#dataGrid').datagrid('getSelections').length>1){
+            alert("必须选择一条数据进行修改!");
             return;
         }
-        addOrUpdateDialog('修改管理员','userAdmin.do?edit&id='+row.userid,500,700);
+        var row = $('#dataGrid').datagrid('getSelections')[0];
+        addOrUpdateDialog('修改管理员','userAdmin.do?edit&id='+row.id,500,700);
 
     }
 
-    function delUser(item)
+    function delUser()
     {
-        var row = listgrid.getSelectedRow();
-        if(row==null){
-            $.ligerDialog.error('请选择数据删除!');
+
+        var rows = $('#dataGrid').datagrid("getSelections");
+        if (rows.length < 1||rows.length>1) {
+            alert("请选择要删除的会员");
             return;
         }
+        if (!confirm("确认要将删除会员吗？")) {
+            return;
+        }
+        var row = rows[0];
+        delObj("userAdmin.do?delete&id="+row.id);
 
-        delObj(item,"userAdmin.do?delete&id=",row.userid);
     }
     function getStatusName(rowdata,index,value){
         if(value==1){
@@ -73,12 +78,15 @@
             return "禁用";
         }
     }
+    function searchMember(){
 
-    function query(){
-
-        listgrid.loadServerData("username="+$("#usernameQry").val());
-        return false;
+        var username = $("#username").val();
+        $("#dataGrid").datagrid('load', {
+            username:username,
+            page:1
+        });
     }
+
 
 </script>
 <style>
@@ -109,7 +117,7 @@
 
 <grid:dataGrid action="userAdmin.do?dataGrid&ajax=yes" height="100%"  rownumbers="true" hasSearchBar="true" style="easyui">
     <grid:search label="用户名" name="username" shortSearch="true"/>
-    <grid:column title="ID" field="userid" align="center" width="100" minWidth="60"/>
+    <grid:column title="ID" field="id" align="center" width="100" minWidth="60"/>
     <grid:column title="用户名" field="username"  minWidth="100"/>
     <grid:column title="姓名" field="realname"  minWidth="140"/>
     <grid:column title="状态" field="state" renderFun="getStatusName"/>

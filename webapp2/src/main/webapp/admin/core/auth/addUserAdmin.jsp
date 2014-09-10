@@ -48,14 +48,17 @@
                         success : function(result) {
 
                             if(result.success){
-                                $.ligerDialog.waitting('增加成功');
+                                $.Loading.show('操作成功!');
+
                                 setTimeout(function ()
                                 {
-                                    $.ligerDialog.closeWaitting();
+                                    $.Loading.hide();
+                                    $("#dialogInfo").dialog('close');
+                                    $('#dataGrid').datagrid('reload');
+
 
                                 }, 1000);
-                                window.parent.listgrid.loadData();
-                                dialog.close();
+
                             }else{
                                 alert(result.msg)
                             }
@@ -80,6 +83,21 @@
                     }
                 }
             });
+
+
+            $('#compId').combotree({onSelect:function(node) {
+
+                $.ajax({
+                    type:'post',
+                    url:'../depart.do?queryDepartsByOrgId&ajax=true&orgId='+node.id,
+                    dataType:'html',
+                    success:function(result){
+                        $("#userdept").html(result);
+
+                    }
+                });
+            }});
+
         });
         function submitForm(){
             $("#objForm").submit();
@@ -111,7 +129,7 @@
 
 </style>
 <form name="objForm" method="post"   id="objForm">
-
+    <input  type="hidden" name="founder" value="0"/>
     <table cellpadding="0" cellspacing="0" class="l-table-edit" >
         <c:if test="${multiSite==1}">
             <tr>
@@ -156,12 +174,7 @@
             </td>
             <td align="left"></td>
         </tr>
-        <tr>
-            <td align="right" class="l-table-edit-td" valign="top">类型:</td>
-            <td align="left" class="l-table-edit-td">
-                <input id="notSuperChk" type="radio" name="founder" value="0" checked="checked" /><label for="notSuperChk">普通管理员</label>
-            </td><td align="left"></td>
-        </tr>
+
         <tr id="roletr">
             <td align="right" class="l-table-edit-td" valign="top">角色:</td>
             <td colspan="3" class="value">
@@ -197,8 +210,7 @@
         <tr>
             <td align="right" class="l-table-edit-td">所属公司:</td>
             <td align="left" class="l-table-edit-td">
-
-                <select id="cc" class="easyui-combotree combo" data-options="url:'../organization.do?queryForTree&ajax=true',method:'get',required:true" style="width:200px;" onChange="queryDeparts(this.value,1)"></select>
+                <select id="compId" name="userCorp" class="easyui-combotree combo" data-options="url:'../organization.do?queryForTree&ajax=true',method:'get'" style="width:200px;height:30px;"></select>
             </td>
             <td align="left"></td>
         </tr>
@@ -218,19 +230,6 @@
 
     </table>
 </form>
-<script type="text/javascript">
-    function queryDeparts(corpId,fda){
-        alert(corpId);
-        $.ajax({
-            type:'post',
-            url:'../depart.do?queryDepartsByOrgId&ajax=true&orgId='+corpId,
-            dataType:'html',
-            success:function(result){
-                $("#userdept").html(result);
 
-            }
-        });
-    }
-</script>
 
 

@@ -1,17 +1,18 @@
 
 .textbox {
-    position: relative;
-    border: 1px solid #D3D3D3;
-    background-color: #fff;
-    vertical-align: middle;
+    background-color: #FFFFFF;
+    border: 1px solid #CCCCCC;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    color: #555555;
+    /*height: 14PX;*/
+    padding: 7px 0 7px 5px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    margin-left: 7px;
+    line-height: 14PX;
+    font-size: 12px;
     display: inline-block;
-    overflow: hidden;
-    white-space: nowrap;
-    margin: 0;
-    padding: 0;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px 5px 5px 5px;
+    width:200px;
 }
 .textbox .textbox-text {
     font-size: 12px;
@@ -485,7 +486,7 @@
 }
 
 .datagrid-header-row {
-    height: 25px;
+    height: 40px;
 }
 
 .datagrid-header td {
@@ -608,7 +609,7 @@
 }
 
 .datagrid-row {
-    height: 25px;
+    height: 35px;
 }
 
 .datagrid-row-collapse {

@@ -9,6 +9,7 @@ import com.easysoft.framework.utils.JsonUtils;
 import com.easysoft.member.backend.manager.*;
 import com.easysoft.member.backend.manager.impl.UserServiceFactory;
 import com.easysoft.member.backend.model.AdminUser;
+import com.easysoft.member.backend.model.Depart;
 import com.easysoft.member.backend.model.OperationBtn;
 import com.easysoft.member.backend.model.Organization;
 import org.apache.commons.lang3.StringUtils;
@@ -29,7 +30,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping({"/core/admin/user/userAdmin"})
-public class UserAdminController extends BaseController{
+public class AdminUserAction extends BaseController{
     @Autowired
     private IAdminUserManager adminUserManager;
     @Autowired
@@ -38,20 +39,20 @@ public class UserAdminController extends BaseController{
     private IPermissionManager permissionManager;
     @Autowired
     private ICompanyManager companyManager;
+    @Autowired
+    private IDepartManager departManager;
     @RequestMapping(params = {"list"})
     public ModelAndView list(Integer menuId) throws Exception{
-        List<OperationBtn> operationBtns = permissionManager.queryBtnByUsernameAndMenuId(UserServiceFactory.getUserService().getCurrentUser().getUserid(), null,menuId);
+        List<OperationBtn> operationBtns = permissionManager.queryBtnByUsernameAndMenuId(UserServiceFactory.getUserService().getCurrentUser().getId(), null,menuId);
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("operationBtns",operationBtns);
         return new ModelAndView("admin/core/auth/useradminlist",map);
     }
     @RequestMapping(params = {"dataGrid"})
-    public ModelAndView dataGrid(PageOption pageOption,Integer currentPageNo,String username){
-        if(currentPageNo==null){
-            pageOption.setCurrentPageNo(1);
-        }else{
-            pageOption.setCurrentPageNo(currentPageNo);
-        }
+    public ModelAndView dataGrid(Integer rows,Integer page,String username){
+        PageOption pageOption = new PageOption();
+        pageOption.setPageSize(rows);
+        pageOption.setCurrentPageNo(page);
         if(StringUtils.isEmpty(username)){
             username=null;
         }
@@ -85,6 +86,8 @@ public class UserAdminController extends BaseController{
         map.put("multiSite",multiSite);
         map.put("userRoles",userRoles);
         map.put("adminUser",adminUser);
+        Depart depart = departManager.queryById(adminUser.getUserdept());
+        map.put("depart",depart);
         return new ModelAndView("admin/core/auth/editUserAdmin",map);
     }
     @RequestMapping(params = {"addSave"})
