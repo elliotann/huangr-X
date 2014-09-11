@@ -7,6 +7,7 @@
 
 
 <link rel="stylesheet" type="text/css" href="${context}/js/easyui/themes/gray/easyui.css">
+
 <link href="${context}/css/stylenew.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="${context}/js/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${context}/js/easyui/locale/easyui-lang-zh_CN.js"></script>
@@ -92,25 +93,7 @@
 <style>
 
 
-    /* 搜索框 */
-    .searchtitle{ padding-left:28px; position:relative;}
-    .searchtitle img{ width:22px; height:22px; position:absolute; left:0; top:0;}
-    .searchtitle span{ font-size:14px; font-weight:bold;}
-    .searchtitle .togglebtn{ position:absolute; top:6px; right:0px; background:url(/jeap/admin/images/icons/toggle.gif) no-repeat 0px 0px; height:10px; width:9px; cursor:pointer;}
-    .searchtitle .togglebtn-down{ background-position:0px -10px;}
 
-    /* 一条线 导航线 */
-    .navline{
-        height:1px;
-        line-height:1px;
-        width:100%;
-        border-bottom:1px solid #f5f5f5;
-
-        background-color:#D9D9D9;width:100%; }
-    #searchbar{
-        margin-bottom: 10px;
-
-    }
 </style>
 
 

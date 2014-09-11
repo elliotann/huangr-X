@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" />
-    <title>小黄人企业管理微平台系统登陆</title>
+    <title>小黄人管理系统 Beta 1.0</title>
     <link rel="stylesheet" type="text/css" href="/jeap/adminthemes/default/css/login/login.css" />
     <link rel="stylesheet" type="text/css" href="/jeap/adminthemes/default/css/form.css" />
     <link rel="stylesheet" type="text/css" href="/jeap/adminthemes/default/css/login/tip.css" />
@@ -14,7 +14,7 @@
 
 <body>
 <div class="main">
-    <div class="header hide"> 大屏管理系统 Beta 1.0 </div>
+    <div class="header hide"> 小黄人管理系统 Beta 1.0 </div>
     <div class="content">
         <div class="title hide">管理登录</div>
 
@@ -22,24 +22,20 @@
             <div class="alert alert-info alert-login" id="tipMsg">
                 请输入正确的用户名和密码!
             </div>
-            <fieldset>
 
                 <div class="input">
                     用户名：<input class="form-control" name="username" id="username" placeholder="用户名" type="text"  maxLength="24" />
                 </div>
                 <div class="input">
-                    密&nbsp;&nbsp;码：<input class="form-control" name="password" id="password" type="password" placeholder="密码"  maxLength="24" />
+                    &nbsp;&nbsp;密码：<input class="form-control" name="password" id="password" type="password" placeholder="密码"  maxLength="24" />
                 </div>
-               <%-- <div class="input">
-                    验证码：<input class="form-control" style="width: 50px;" name="valid_code" id="valid_code" type="text" placeholder="验证码"  maxLength="24" /><img id="code_img" class="code_img" />
-                </div>--%>
                 <div class="checkbox">
                     <input type="checkbox" name="remember" id="remember" /><label for="remember"><span>记住我</span></label>
                 </div>
                 <div class="enter">
                     <button class="button hide" name="submit" type="button" id="login_btn">登录</button>
                 </div>
-            </fieldset>
+
         </form>
     </div>
 </div>

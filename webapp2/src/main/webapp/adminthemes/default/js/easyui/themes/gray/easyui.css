@@ -14,25 +14,13 @@
 }
 .panel-header {
     padding: 5px;
-    line-height: 15px;
-    color: #15428b;
-    font-weight: bold;
-    font-size: 12px;
-    background: url('images/panel_title.png') repeat-x;
     position: relative;
-    border: 1px solid #99BBE8;
 }
 .panel-title {
     background: url('images/blank.gif') no-repeat;
-    height: 30px;
-    line-height: 30px;
-    font-size: 14PX;
-    color: #FFF;
-    text-indent: 5PX;
 }
 .panel-header-noborder {
-    border-width: 0px;
-    border-bottom: 1px solid #99BBE8;
+    border-width: 0 0 1px 0;
 }
 .panel-body {
     overflow: auto;
@@ -99,7 +87,7 @@
     background: url('images/loading.gif') no-repeat 10px 10px;
 }
 .panel-tool-close {
-    background: url('images/panel_tools.gif') no-repeat -16px 0px;
+    background: url('images/panel_tools.png') no-repeat -16px 0px;
 }
 .panel-tool-min {
     background: url('images/panel_tools.png') no-repeat 0px 0px;
@@ -187,12 +175,6 @@
     padding: 5px;
     border-width: 1px;
     border-style: solid;
-    font-size: 12px;
-    position: absolute;
-    overflow: hidden;
-    background-color: #3a93d4;
-    padding: 0px;
-    border: 0px solid #99BBE8;
 }
 .window .window-header {
     background: transparent;
@@ -243,12 +225,9 @@
 .window,
 .window-shadow {
     position: absolute;
-    background: #ddd;
-    -moz-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
-    -webkit-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
-    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
-    filter: progid:DXImageTransform.Microsoft.Blur(pixelRadius=0, MakeShadow=false,
-    ShadowOpacity=0.2);
+    -moz-border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
 }
 .window-shadow {
     background: #ccc;
@@ -1210,7 +1189,7 @@
 .datagrid-body td,
 .datagrid-footer td {
     border-width: 0 1px 1px 0;
-    border-style: solid;
+    border-style: dotted;
     margin: 0;
     padding: 0;
 }
@@ -1223,8 +1202,8 @@
     white-space: nowrap;
     word-wrap: normal;
     overflow: hidden;
-    height: 20px;
-    line-height: 28px;
+    height: 18px;
+    line-height: 18px;
     font-size: 12px;
 }
 .datagrid-header .datagrid-cell {
@@ -1383,12 +1362,9 @@
     color: #000000;
     cursor: default;
 }
-.datagrid-header-over .datagrid-cell{
-    color:#8bbf00;
-}
 .datagrid-row-selected {
-    background: #FBEC88;
-    color: #000000;
+    background: #0092DC;
+    color: #fff;
 }
 .datagrid-row-editing .textbox,
 .datagrid-row-editing .textbox-text {
