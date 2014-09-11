@@ -5369,24 +5369,6 @@ margin: 415px 0 0 224px;
     height:36px;
 }
 .form-table{width:100%;}
-.sysmenu {margin-right:75px;float:right;margin-top:0px;}
-.sysmenu li.message,.sysmenu li.logout,.sysmenu li.website{float:left;position:relative;margin-left:15px;padding-right:13px;background:url(../images/li_bg_01.gif) no-repeat scroll right 7px;line-height:32px;height:40px;}
-.sysmenu li a{display:block;font-size:16px;padding-left:36px;background:url(../images/sys_icon.gif) no-repeat;overflow:hidden;color:#888;}
-.sysmenu li a:hover{color:#09b2ea;}
-.sysmenu .message a{background-position: 0px -132px;}
-.sysmenu .message a:hover{background-position: 0px -161px;}
-.sysmenu .logout a{background-position: 0px 0px;}
-.sysmenu .logout a:hover{background-position: 0px -34px;}
-.sysmenu .website a{background-position:0px -69px;}
-.sysmenu .website a:hover{background-position:0px -101px;}
-.sysmenu .website{background:none;}
-.sysmenu .message a .num{diplay:block;width:18px;height:18px;line-height:18px;position:absolute;color:#fff;background:url(../images/sys_icon.gif) no-repeat scroll -7px -197px;top:20px;left:20px;text-align:center;line-height:16px;font-size:14px;}
-.sysmenu li .msglist{clear:both;width:190px;padding:10px 15px;position:absolute;left:-100px;top:40px;border:1px solid #c0c0c0;background:#fff;z-index:999;}
-.sysmenu li .msglist .triangle{position:absolute;top:-8px;left:110px;background:url(../images/triangle.gif) no-repeat scroll center 0px;width:15px;height:9px;}
-.sysmenu li .msglist li{float:none;background:none;margin:0;padding:0;height:24;line-height:24px;overflow:hidden;}
-.sysmenu li .msglist li a{background:none;font-size:12px;padding-left:0;color:#000;line-height:24px;}
-.sysmenu li .msglist li a:hover{text-decoration:underline;}
-#short_msg{float:right;margin-right:50px;margin-top:10px;height:22px;line-height:22px;}
 
 .layout-split-west{
     z-index:9;
