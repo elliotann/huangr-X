@@ -48,6 +48,7 @@ public class AdminUserManagerImpl  implements IAdminUserManager {
 		adminUser.setPassword( StringUtil.md5(adminUser.getPassword()) );
 		//添加管理员
         adminUserDao.save(adminUser);
+
         //增加审批用户
         saveToApproUser(adminUser,true);
 		//给用户赋予角色
