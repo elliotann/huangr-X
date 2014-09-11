@@ -72,7 +72,7 @@ public class MenuManagerImpl extends BaseSupport<Menu> implements IMenuManager {
             if(menuid==null)throw new IllegalArgumentException("menuid argument is null");
             List<Menu> menuList  = this.getMenuList();
             List<Menu> topMenuList  = new ArrayList<Menu>();
-            //猎取权限菜单
+            //获取权限菜单
             List<Menu> selectMenus = this.getMenuTreeByRoleId(roleId);
             if(!selectMenus.isEmpty()){
                 for(Menu menu : menuList){
