@@ -8,13 +8,14 @@
 
 <link rel="stylesheet" type="text/css" href="${context}/js/easyui/themes/gray/easyui.css">
 
-<link href="${context}/css/stylenew.css" rel="stylesheet" type="text/css"/>
+<link href="${context}/css/style1.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="${context}/js/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${context}/js/easyui/locale/easyui-lang-zh_CN.js"></script>
 <script src="/jeap/admin/js/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
 <script src="/jeap/admin/js/crud.js" type="text/javascript"></script>
 
 <link href="${context }/css/form.css" rel="stylesheet"/>
+<link href="${context }/css/button.css" rel="stylesheet"/>
 
 <script type="text/javascript">
     $(function () {
