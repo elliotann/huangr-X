@@ -234,7 +234,7 @@
             <td align="right" class="l-table-edit-td">所属公司:</td>
             <td align="left" class="l-table-edit-td">
 
-                <input id="compId" name="userCorp" class="easyui-combotree combo" data-options="url:'../organization.do?queryForTree&ajax=true',method:'get',required:true" style="width:200px;height:25px;" value="${adminUser.userCorp }"/>
+                <input id="compId" name="userCorp" class="easyui-combotree combo" data-options="url:'../organization.do?queryForTree&ajax=true',method:'get',required:true" style="width:205px;height:30px;" value="${adminUser.userCorp }"/>
             </td>
             <td align="left"></td>
         </tr>

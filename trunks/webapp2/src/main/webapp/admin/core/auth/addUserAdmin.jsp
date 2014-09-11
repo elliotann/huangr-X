@@ -106,21 +106,7 @@
 
     </script>
 
-    <style type="text/css">
-        #commentForm { width: 500px; }
-        #commentForm label { width: 250px; }
-        #commentForm label.error, #commentForm input.submit { margin-left: 253px; }
-        #signupForm { width: 670px; }
-        #signupForm label.error {
-            margin-left: 10px;
-            width: auto;
-            display: inline;
-        }
-        #newsletter_topics label.error {
-            display: none;
-            margin-left: 103px;
-        }
-    </style>
+
 <style type="text/css">
     body{ font-size:12px;}
     .l-table-edit {}
@@ -202,15 +188,11 @@
             <td align="left" class="l-table-edit-td"><input name="realname" type="text" id="realname" ltype="text" class="form-control"/></td>
             <td align="left"></td>
         </tr>
-        <tr>
-            <td align="right" class="l-table-edit-td">编号:</td>
-            <td align="left" class="l-table-edit-td"><input name="userno" type="text" id="userno" ltype="text" class="form-control" /></td>
-            <td align="left"></td>
-        </tr>
+
         <tr>
             <td align="right" class="l-table-edit-td">所属公司:</td>
             <td align="left" class="l-table-edit-td">
-                <select id="compId" name="userCorp" class="easyui-combotree combo" data-options="url:'../organization.do?queryForTree&ajax=true',method:'get'" style="width:200px;height:30px;"></select>
+                <select id="compId" name="userCorp" class="easyui-combotree combo" data-options="url:'../organization.do?queryForTree&ajax=true',method:'get'" style="width:206px;height:30px;"></select>
             </td>
             <td align="left"></td>
         </tr>
