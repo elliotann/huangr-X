@@ -1,0 +1,44 @@
+@charset "UTF-8";
+/* CSS Document */
+body {
+    font-size: 12px;
+    font-family: '微软雅黑', "宋体";
+    line-height: 180%;
+    color: #333333;
+    width: 100%;
+    background-repeat: repeat-x;
+    text-align: left;
+    /*background: url(../images/footerBg.gif);*/
+}
+
+body,img,form,ul,dl,input,fieldset,.clear,dt,dd,dl {
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+}
+
+
+a {
+    color: #4287cf;
+}
+
+a:link,a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    color: #fd7742;
+    text-decoration: none;
+}
+
+
+.height10 {
+    height: 10px;
+    display: block;
+}
+
+.height15 {
+    height: 15px;
+    display: block;
+}
+
