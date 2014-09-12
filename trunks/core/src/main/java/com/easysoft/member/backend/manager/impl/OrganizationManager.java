@@ -43,12 +43,30 @@ public class OrganizationManager implements IOrganizationManager {
         List<Organization> topOrgList  = new ArrayList<Organization>();
         for(Organization org :orgList){
             if(org.getPid().compareTo(orgid)==0){
-                List<Organization> children = this.getChildren(orgList, org.getId());
+                List<Organization> children = this.getChildrenForCompany(orgList, org.getId());
                 org.setChildren(children);
                 topOrgList.add(org);
             }
         }
         return topOrgList;
+    }
+
+    /**
+     * 在一个集合中查找子
+     * @param compList 所有菜单集合
+     * @param pid 父id
+     * @return 找到的子集合
+     */
+    private List<Organization> getChildrenForCompany(List<Company> compList ,int pid){
+        List<Organization> children =new ArrayList<Organization>();
+        for(Organization org :compList){
+            if(org.getPid()==pid){
+                org.setChildren(this.getChildrenForCompany(compList, org.getId()));
+
+                children.add(org);
+            }
+        }
+        return children;
     }
 
     /**
