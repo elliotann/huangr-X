@@ -2159,17 +2159,7 @@ a.s-btn-plain-active .s-btn-downarrow {
 
 
 
-.l-btn {
-    text-decoration: none;
-    display: inline-block;
-    overflow: hidden;
-    margin: 0;
-    padding: 0;
-    cursor: pointer;
-    outline: none;
-    text-align: center;
-    vertical-align: middle;
-}
+
 .l-btn-plain {
     border: 0;
     padding: 1px;
@@ -2182,15 +2172,7 @@ a.s-btn-plain-active .s-btn-downarrow {
     padding: 0;
     vertical-align: top;
 }
-.l-btn-text {
-    display: inline-block;
-    vertical-align: top;
-    width: auto;
-    line-height: 24px;
-    font-size: 12px;
-    padding: 0;
-    margin: 0 4px;
-}
+
 .l-btn-icon {
     display: inline-block;
     width: 16px;
@@ -2210,26 +2192,14 @@ a.s-btn-plain-active .s-btn-downarrow {
     vertical-align: top;
 }
 
-.l-btn-icon-left .l-btn-text {
-    margin: 0 4px 0 24px;
-}
+
 .l-btn-icon-left .l-btn-icon {
     left: 4px;
 }
 .l-btn-icon-right .l-btn-text {
     margin: 0 24px 0 4px;
 }
-.l-btn-icon-top .l-btn-text {
-    margin: 20px 4px 0 4px;
-}
-.l-btn-icon-top .l-btn-icon {
-    top: 4px;
-    left: 50%;
-    margin: 0 0 0 -8px;
-}
-.l-btn-icon-bottom .l-btn-text {
-    margin: 0 4px 20px 4px;
-}
+
 .l-btn-icon-bottom .l-btn-icon {
     top: auto;
     bottom: 4px;
