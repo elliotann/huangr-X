@@ -225,11 +225,7 @@
             <td align="left" class="l-table-edit-td"><input name="realname" type="text" id="realname" class="form-control" value="${adminUser.realname }"/></td>
             <td align="left"></td>
         </tr>
-        <tr>
-            <td align="right" class="l-table-edit-td">编号:</td>
-            <td align="left" class="l-table-edit-td"><input name="userno" type="text" id="userno" value="${adminUser.userno }" class="form-control" /></td>
-            <td align="left"></td>
-        </tr>
+
         <tr>
             <td align="right" class="l-table-edit-td">所属公司:</td>
             <td align="left" class="l-table-edit-td">
