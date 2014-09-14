@@ -2,6 +2,7 @@ package com.easysoft.member.backend.controller;
 
 import com.easysoft.core.common.controller.BaseController;
 import com.easysoft.core.common.vo.json.AjaxJson;
+import com.easysoft.framework.utils.JsonUtils;
 import com.easysoft.member.backend.manager.IDepartManager;
 import com.easysoft.member.backend.manager.IOrganizationManager;
 import com.easysoft.member.backend.model.Depart;
@@ -52,11 +53,10 @@ public class DepartAction extends BaseController {
         return result;
     }
     @RequestMapping(params={"queryDepartsByOrgId"})
-    @ResponseBody
-    public String queryDepartsByOrgId(Integer orgId){
+    public ModelAndView queryDepartsByOrgId(Integer orgId){
         Map<String,Object> params = new HashMap<String,Object>();
-        params.put("json",departManager.queryDeparts4Select(orgId));
-        return departManager.queryDeparts4Select(orgId);
+        params.put("json", JsonUtils.beanToJsonArray(departManager.queryDeparts4Select(orgId)));
+        return new ModelAndView("admin/json_message",params);
 
     }
 }
