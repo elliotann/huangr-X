@@ -5,14 +5,10 @@
     border-radius: 4px;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
     color: #555555;
-    /*height: 14PX;*/
     padding: 7px 0 7px 5px;
     transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
     margin-left: 7px;
-    line-height: 14PX;
-    font-size: 12px;
-    display: inline-block;
-    width:200px;
+    line-height: 14px;
 }
 .textbox .textbox-text {
     font-size: 12px;
