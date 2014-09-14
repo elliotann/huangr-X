@@ -217,7 +217,7 @@
             <td align="right" class="l-table-edit-td" valign="top">状态:</td>
             <td align="left" class="l-table-edit-td">
                 <input id="active" type="radio" name="state" value="1" checked="checked" /><label for="active">启用</label>
-                <input id="inActive" type="radio" name="state" value="1" /><label for="inActive">禁用</label>
+                <input id="inActive" type="radio" name="state" value="0" /><label for="inActive">禁用</label>
             </td><td align="left"></td>
         </tr>
         <tr>
@@ -236,9 +236,9 @@
         </tr>
         <tr>
             <td align="right" class="l-table-edit-td">部门:</td>
-            <td align="left" class="l-table-edit-td"><select id="userdept" name="userdept" class="form-control">
-                <option value="${depart.id}">${depart.name}</option>
-            </select></td>
+            <td align="left" class="l-table-edit-td">
+                <input id="userdept" name="userdept" class="easyui-combotree combo" style="width:205px;height:30px;" value="${depart.id}"/>
+            </td>
             <td align="left"></td>
         </tr>
         <tr>
@@ -255,18 +255,17 @@
     $(function(){
 
         $('#compId').combotree({onSelect:function(node) {
-
-            $.ajax({
-                type:'post',
-                url:'../depart.do?queryDepartsByOrgId&ajax=true&orgId='+node.id,
-                dataType:'html',
-                success:function(result){
-                    $("#userdept").html(result);
-
-                }
-            });
+            queryDeparts(node.id);
         }});
+        queryDeparts(${adminUser.userCorp});
+
     });
+
+    function queryDeparts(id){
+        $("#userdept").combotree({
+            url:'../depart.do?queryDepartsByOrgId&ajax=true&orgId='+id
+        });
+    }
 </script>
 
 

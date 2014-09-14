@@ -89,16 +89,7 @@
                 $("#userdept").combotree({
                     url:'../depart.do?queryDepartsByOrgId&ajax=true&orgId='+node.id
                 });
-                /*$.ajax({
-                    type:'post',
-                    url:'../depart.do?queryDepartsByOrgId&ajax=true&orgId='+node.id,
-                    dataType:'html',
-                    success:function(result){
 
-                        $("#userdept").html(result);
-
-                    }
-                });*/
             }});
 
         });
@@ -201,11 +192,19 @@
         </tr>
 
         <tr>
-            <td align="right" class="l-table-edit-td">部门:</td>
+            <td align="right" class="l-table-edit-td">所属部门:</td>
             <td align="left" class="l-table-edit-td">
-                <select id="userdept" name="userdept" class="easyui-combotree combo"></select></td>
+                <select id="userdept" name="userdept" class="easyui-combotree combo" style="width:210px;height:30px;"></select>
+            </td>
             <td align="left"></td>
         </tr>
+
+       <%-- <tr>
+            <td align="right" class="l-table-edit-td">部门:</td>
+            <td align="left" class="l-table-edit-td">
+                <select id="userdept" name="userdept" class="easyui-combotree combo" data-options="url:'../organization.do?queryForTree&ajax=true',method:'get'" style="width:206px;height:30px;"></select>
+            <td align="left"></td>
+        </tr>--%>
         <tr>
             <td align="right" class="l-table-edit-td">备注:</td>
             <td align="left" class="l-table-edit-td">
