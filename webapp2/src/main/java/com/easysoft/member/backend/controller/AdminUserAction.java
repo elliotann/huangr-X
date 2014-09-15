@@ -5,6 +5,7 @@ import com.easysoft.core.common.vo.json.AjaxJson;
 import com.easysoft.core.common.vo.json.DataGridReturn;
 import com.easysoft.core.context.EsfContext;
 import com.easysoft.framework.db.PageOption;
+import com.easysoft.framework.spring.SpringContextHolder;
 import com.easysoft.framework.utils.JsonUtils;
 import com.easysoft.member.backend.manager.*;
 import com.easysoft.member.backend.manager.impl.UserServiceFactory;
@@ -43,6 +44,7 @@ public class AdminUserAction extends BaseController{
     private IDepartManager departManager;
     @RequestMapping(params = {"list"})
     public ModelAndView list(Integer menuId) throws Exception{
+
         List<OperationBtn> operationBtns = permissionManager.queryBtnByUsernameAndMenuId(UserServiceFactory.getUserService().getCurrentUser().getId(), null,menuId);
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("operationBtns",operationBtns);
