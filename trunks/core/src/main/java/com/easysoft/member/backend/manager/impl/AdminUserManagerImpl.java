@@ -189,13 +189,9 @@ public class AdminUserManagerImpl  implements IAdminUserManager {
 		if(user == null){
             throw new RuntimeException("此用户不存在");
         }
-
-		
-		
 		if(! password.equals(  user.getPassword() )){
 			throw new RuntimeException("密码错误");
 		}
-		
 		if(user.getState()==0){
 			throw new RuntimeException("此用户已经被禁用");
 		} 

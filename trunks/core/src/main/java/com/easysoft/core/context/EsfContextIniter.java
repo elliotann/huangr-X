@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * ESF上下文初始化
+ * jeap上下文初始化
  * @author andy
  *
  */
@@ -35,8 +35,6 @@ public class EsfContextIniter {
 		httpRequest.setAttribute("staticserver", ParamSetting.IMG_SERVER_DOMAIN);
 		httpRequest.setAttribute("ext", ParamSetting.EXTENSION);
 		String servletPath = httpRequest.getServletPath();
-
-		// System.out.println("uri : "+ RequestUtil.getRequestUrl(httpRequest));
 		if (servletPath.startsWith("/statics"))
 			return;
 
