@@ -8,9 +8,6 @@ import java.io.Serializable;
  *
  */
 public class UserContext implements Serializable{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 752513002L;
 	public static final String CONTEXT_KEY= "usercontext";
 	private Integer userid;
