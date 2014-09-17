@@ -1,22 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ include file="/commons/taglibs.jsp"%>
-
-
-
-
-
 <link rel="stylesheet" type="text/css" href="${context}/js/easyui/themes/gray/easyui.css">
-
 <link href="${context}/css/style1.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="${context}/js/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${context}/js/easyui/locale/easyui-lang-zh_CN.js"></script>
 <script src="/jeap/admin/js/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
 <script src="/jeap/admin/js/crud.js" type="text/javascript"></script>
-
 <link href="${context }/css/form.css" rel="stylesheet"/>
 <link href="${context }/css/button.css" rel="stylesheet"/>
-
 <script type="text/javascript">
     $(function () {
         $(".searchAdvanced").hide();
@@ -91,14 +83,6 @@
 
 
 </script>
-<style>
-
-
-
-</style>
-
-
-
 <grid:dataGrid action="userAdmin.do?dataGrid&ajax=yes" height="100%"  rownumbers="true" hasSearchBar="true" style="easyui">
     <grid:search label="用户名" name="username" shortSearch="true"/>
     <grid:column title="ID" field="id" align="center" width="100" minWidth="60"/>
@@ -108,5 +92,4 @@
     <grid:toolbar title="增加" clickFun="addUser" icon="add"/>
     <grid:toolbar title="修改" clickFun="modifyUser" icon="modify"/>
     <grid:toolbar title="删除" clickFun="delUser" icon="delete"/>
-
 </grid:dataGrid>
