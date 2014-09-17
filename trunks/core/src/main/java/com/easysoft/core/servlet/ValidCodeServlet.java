@@ -66,7 +66,7 @@ public class ValidCodeServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		String vtype= "";
-		
+
 		if(req.getParameter("vtype")!=null){
 			vtype= req.getParameter("vtype");
 		}

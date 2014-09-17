@@ -2,6 +2,8 @@ package com.easysoft.member.backend.manager.impl;
 
 import com.easysoft.core.common.service.impl.GenericService;
 import com.easysoft.core.context.EsfContext;
+import com.easysoft.core.log.annotation.BusinessLog;
+import com.easysoft.core.log.annotation.State;
 import com.easysoft.core.model.MultiSite;
 import com.easysoft.core.model.Site;
 import com.easysoft.framework.context.webcontext.ThreadContextHolder;
@@ -44,6 +46,7 @@ public class AdminUserManagerImpl  implements IAdminUserManager {
         adminUserDao.deleteTable();
 	}
 	@Transactional(propagation = Propagation.REQUIRED)
+    @BusinessLog(state = State.VALID,success = "增加用户")
 	public Integer add(AdminUser adminUser) {
 		adminUser.setPassword( StringUtil.md5(adminUser.getPassword()) );
 		//添加管理员
@@ -61,6 +64,7 @@ public class AdminUserManagerImpl  implements IAdminUserManager {
      * @param adminUser
      * @param toApprove
      */
+
     private void saveToApproUser(AdminUser adminUser,boolean toApprove){
         if(toApprove){
             UserQuery userQuery = identityService.createUserQuery();

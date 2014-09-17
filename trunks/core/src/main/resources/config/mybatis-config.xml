@@ -20,6 +20,7 @@
         <typeAlias type="com.easysoft.member.backend.model.Depart" alias="Depart"/>
         <typeAlias type="com.easysoft.member.backend.model.Company" alias="Company"/>
         <typeAlias type="com.easysoft.member.backend.model.Employ" alias="Employ"/>
+        <typeAlias type="com.easysoft.core.log.annotation.BnLogItem" alias="BnLogItem"/>
     </typeAliases>
     <plugins>
         <plugin interceptor="com.easysoft.framework.db.PageInterceptor">
