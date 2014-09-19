@@ -16,10 +16,13 @@
  *
  */
 
-package com.easysoft.core.log.support;
+package com.easysoft.core.log.query;
 
 import com.easysoft.core.log.annotation.BnLogItem;
+import com.easysoft.core.log.support.Appender;
 import com.easysoft.framework.db.PageOption;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -27,7 +30,20 @@ import java.util.List;
  * @author : andy.huang
  * @since :
  */
-public interface Appender {
-    public void doAppend(BnLogItem bnLogItem);
-    public List<BnLogItem> queryForPage(PageOption pageOption);
+@Component("bnLogQuery")
+public class DefaultBnLogQuery implements IBnLogQuery {
+    @Autowired
+    private Appender appender;
+    @Override
+    public PageOption queryForPage(PageOption pageOption) {
+        List<BnLogItem> bnLogItems = appender.queryForPage(pageOption);
+        if(!bnLogItems.isEmpty()){
+            pageOption.setData(bnLogItems);
+        }
+        return pageOption;
+    }
+
+    public void setAppender(Appender appender) {
+        this.appender = appender;
+    }
 }

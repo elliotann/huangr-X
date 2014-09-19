@@ -16,6 +16,7 @@ import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 
 /**
  * 用户登录处理器
@@ -60,15 +61,15 @@ public class LoginProcessor implements Processor {
 		
 		endata =  EncryptionUtil.authCode(endata, "DECODE");
 		String[] ar = endata.split(",");
-		//if(ar==null||ar.length!=3){ response.setContent("非法数据"); return response;}
+		if(ar==null||ar.length!=3){ response.setContent("非法数据"); return response;}
 		
 		String username = ar [0];
 		String password = ar [1];
 		Long dateline = Long.valueOf(ar[2]);
 		
-//		if(new Date().getTime() - dateline>5000){
-//			 response.setContent("已经过期"); return response;
-//		}
+		if(new Date().getTime() - dateline>5000){
+			 response.setContent("已经过期"); return response;
+		}
 		 
 		try {
 			

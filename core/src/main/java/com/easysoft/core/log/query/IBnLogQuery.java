@@ -16,7 +16,7 @@
  *
  */
 
-package com.easysoft.core.log.support;
+package com.easysoft.core.log.query;
 
 import com.easysoft.core.log.annotation.BnLogItem;
 import com.easysoft.framework.db.PageOption;
@@ -27,7 +27,6 @@ import java.util.List;
  * @author : andy.huang
  * @since :
  */
-public interface Appender {
-    public void doAppend(BnLogItem bnLogItem);
-    public List<BnLogItem> queryForPage(PageOption pageOption);
+public interface IBnLogQuery {
+    public PageOption queryForPage(PageOption pageOption);
 }

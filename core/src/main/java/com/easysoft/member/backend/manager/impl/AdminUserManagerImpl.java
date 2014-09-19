@@ -4,6 +4,7 @@ import com.easysoft.core.common.service.impl.GenericService;
 import com.easysoft.core.context.EsfContext;
 import com.easysoft.core.log.annotation.BusinessLog;
 import com.easysoft.core.log.annotation.State;
+import com.easysoft.core.log.context.BnLogContext;
 import com.easysoft.core.model.MultiSite;
 import com.easysoft.core.model.Site;
 import com.easysoft.framework.context.webcontext.ThreadContextHolder;
@@ -229,8 +230,8 @@ public class AdminUserManagerImpl  implements IAdminUserManager {
 				site.getId(), user.getId());
 		sessonContext.setAttribute(UserContext.CONTEXT_KEY, userContext);
 		sessonContext.setAttribute("admin_user_key", user);
-		
-		return user.getId();
+
+        return user.getId();
 	}	
 	
 	
@@ -277,4 +278,5 @@ public class AdminUserManagerImpl  implements IAdminUserManager {
         }
         return pageOption;
     }
+
 }

@@ -1,25 +1,27 @@
 package com.easysoft.core.log.context;
 
+import com.easysoft.member.backend.manager.impl.UserServiceFactory;
+
 /**
  * Created by Administrator on 2014/9/17.
  */
 public class BnLogContext {
-    private String system;
-    private String operator;
 
-    public String getSystem() {
-        return system;
+
+    public static String getSystem() {
+        return "jeap";
     }
 
-    public void setSystem(String system) {
-        this.system = system;
+    public static void setSystem(String system) {
+        system = system;
     }
 
-    public String getOperator() {
-        return operator;
+    public static String getOperator() {
+        return UserServiceFactory.getUserService().getCurrentUser().getUsername();
+
     }
 
-    public void setOperator(String operator) {
-        this.operator = operator;
+    public static void setOperator(String operator) {
+        operator = operator;
     }
 }

@@ -32,5 +32,12 @@
         insert t_jeap_log (message,operator,state,businessType,eventType,logTime)
          values (#{message},#{operator},#{state},#{businessType},#{eventType},#{logTime})
     </insert>
+    <select id="queryForPage" resultMap="bnLogItemMap">
+        select * from t_jeap_log where 1=1
+        <if test=" searchConditions.operator!=null ">
+            and operator=#{searchConditions.operator}
+        </if>
+    </select>
+
 
 </mapper>
