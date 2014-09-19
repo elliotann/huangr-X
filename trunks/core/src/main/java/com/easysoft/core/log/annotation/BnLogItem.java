@@ -18,13 +18,17 @@
 
 package com.easysoft.core.log.annotation;
 
+import com.easysoft.framework.utils.DateUtil;
+
+import java.util.Date;
+
 /**
  * @author : andy.huang
  * @since :
  */
 public class BnLogItem {
     private int id;
-    private String logTime;
+    private String logTime ;
     private String operator;
     private String system;
     private boolean state;

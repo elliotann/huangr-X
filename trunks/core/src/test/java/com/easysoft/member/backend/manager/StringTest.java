@@ -34,12 +34,23 @@ public class StringTest {
         Integer i1 = 127;
         Integer i2 =127;
         System.out.println(i1==i2);*/
-        List<String> handler = new ArrayList<String>();
+        /*List<String> handler = new ArrayList<String>();
         for(int i=0;i<1000;i++){
            HugeStr h = new HugeStr();
             //ImprovedHugeStr h = new ImprovedHugeStr();
             handler.add(h.subString(1,5));
+        }*/
+
+        long begin = System.currentTimeMillis();
+        StringBuilder sb = new StringBuilder();
+        for(int i=0;i<50000;i++){
+            String str = "string"+"builder"+"string"+"abc";
+            /*sb.append("string");
+            sb.append("builder");
+            sb.append("string");
+            sb.append("abc");*/
         }
+        System.out.println("use time is "+(System.currentTimeMillis()-begin));
     }
 
     static class HugeStr {

@@ -27,7 +27,9 @@ import com.easysoft.core.log.BnLogException;
 import com.easysoft.core.log.annotation.BnLogItem;
 import com.easysoft.core.log.annotation.BusinessLog;
 import com.easysoft.core.log.annotation.State;
+import com.easysoft.core.log.context.BnLogContext;
 import com.easysoft.framework.exception.ErrorCode;
+import com.easysoft.framework.utils.DateUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -35,6 +37,8 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.Date;
 
 /**
  * @author : andy.huang
@@ -101,6 +105,9 @@ public class BnLogAspect {
         }
         bnLogItem.setBusinessType(businessLog.businessType());
         bnLogItem.setEventType(businessLog.eventType());
+        bnLogItem.setSystem(BnLogContext.getSystem());
+        bnLogItem.setOperator(BnLogContext.getOperator());
+        bnLogItem.setLogTime(DateUtil.toString(new Date(), "yyyy-MM-dd HH:mm:ss"));
         bnLog.log(bnLogItem);
 
     }
