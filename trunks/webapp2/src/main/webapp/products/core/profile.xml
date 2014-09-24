@@ -72,14 +72,7 @@
     		<title>站点统计信息</title>
     		<url>/core/admin/indexItem!base.do</url>
     	</item>     
-    	<item>
-    		<title>订单统计信息</title>
-    		<url>/shop/admin/indexItem!order.do</url>
-    	</item> 
-    	<item>
-    		<title>商品统计信息</title>
-    		<url>/shop/admin/indexItem!goods.do</url>
-    	</item><!--
+    	<!--
     	<item>
     		<title>文章统计信息</title>
     		<url>/cms/admin/indexItem!article.do</url>
