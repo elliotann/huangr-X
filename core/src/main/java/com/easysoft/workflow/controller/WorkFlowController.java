@@ -86,7 +86,7 @@ public class WorkFlowController {
      */
     @RequestMapping(params = {"process-list"})
     public ModelAndView processList(HttpServletRequest request) {
-        return new ModelAndView("workflow/process-list");
+        return new ModelAndView("admin/core/workflow/process-list");
     }
     @RequestMapping(params = {"dataGrid"})
     public ModelAndView dataGrid(){
