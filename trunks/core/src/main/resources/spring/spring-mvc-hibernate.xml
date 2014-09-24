@@ -23,10 +23,10 @@
 
 
 
-
+<!--
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <!--<property name="entityInterceptor" ref="hiberAspect"/>-->
+        &lt;!&ndash;<property name="entityInterceptor" ref="hiberAspect"/>&ndash;&gt;
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">${hibernate.dialect}</prop>
@@ -36,17 +36,17 @@
                 <prop key="hibernate.temp.use_jdbc_metadata_defaults">false</prop>
             </props>
         </property>
-        <!-- 注解方式配置 -->
+        &lt;!&ndash; 注解方式配置 &ndash;&gt;
         <property name="packagesToScan">
             <list>
-                <!--<value>com.easysoft.component.oa.entity</value>
+                &lt;!&ndash;<value>com.easysoft.component.oa.entity</value>
                 <value>com.easysoft.framework.component</value>
                 <value>com.easysoft.member.model</value>
                 <value>com.easysoft.core.model</value>
-                <value>com.easysoft.member.backend.model</value>-->
+                <value>com.easysoft.member.backend.model</value>&ndash;&gt;
             </list>
         </property>
-    </bean>
+    </bean>-->
 
 
 
@@ -57,8 +57,8 @@
     </bean>
 
     <!-- 配置事物管理器，在*ServiceImpl里写@Transactional就可以启用事物管理 -->
-    <bean name="hibernateTransactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+   <!-- <bean name="hibernateTransactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
-    <tx:annotation-driven transaction-manager="hibernateTransactionManager"/>
+    <tx:annotation-driven transaction-manager="hibernateTransactionManager"/>-->
 </beans>
