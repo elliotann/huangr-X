@@ -7,7 +7,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This annotaion is used to define various properties of exception code.
+ * This annotation is used to define various properties of exception code.
  * 1. Get corresponding error message which support multi-language.
  * 2. Transaction process indicator.
  *
