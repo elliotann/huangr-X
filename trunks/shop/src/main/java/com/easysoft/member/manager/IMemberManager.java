@@ -1,6 +1,6 @@
 package com.easysoft.member.manager;
 
-import com.easysoft.framework.db.Page;
+import com.easysoft.framework.db.PageOption;
 import com.easysoft.member.model.Member;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -62,9 +62,9 @@ public interface IMemberManager {
 	 * @param pageSize
 	 * @return
 	 */
-	public Page list(String order, int page, int pageSize);
+	public PageOption list(String order, int page, int pageSize);
 	
-	public Page list(String order, String name, String uname, int page, int pageSize);
+	public PageOption list(String order, String name, String uname, int page, int pageSize);
 
 	/**
 	 * 删除会员

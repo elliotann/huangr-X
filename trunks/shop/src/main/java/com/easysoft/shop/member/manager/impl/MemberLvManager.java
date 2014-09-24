@@ -1,7 +1,7 @@
 package com.easysoft.shop.member.manager.impl;
 
 import com.easysoft.core.common.dao.spring.BaseSupport;
-import com.easysoft.framework.db.Page;
+import com.easysoft.framework.db.PageOption;
 import com.easysoft.framework.utils.StringUtil;
 import com.easysoft.member.manager.IMemberLvManager;
 import com.easysoft.member.model.MemberLv;
@@ -49,13 +49,13 @@ public class MemberLvManager extends BaseSupport<MemberLv> implements IMemberLvM
 	}
 
 	
-	public Page list(String order, int page, int pageSize) {
+	public PageOption list(String order, int page, int pageSize) {
         DetachedCriteria dc = DetachedCriteria.forClass(MemberLv.class);
         if (order == null)
             dc.addOrder(Order.asc("lv_id"));
         else
             dc.addOrder(Order.asc(order));
-        Page webpage =memberLvDao.queryForPage(dc,page,pageSize);
+        PageOption webpage =memberLvDao.queryForPage(dc,page,pageSize);
 		return webpage;
 	}
 

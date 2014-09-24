@@ -1,6 +1,7 @@
 package com.easysoft.shop.member.dao;
 
-import com.easysoft.core.common.dao.hibernate.IGenericDAO;
+import com.easysoft.core.common.dao.IGenericDao;
+
 import com.easysoft.member.model.Member;
 
 /**
@@ -10,5 +11,5 @@ import com.easysoft.member.model.Member;
  *
  * @since:
  */
-public interface IMemberDao extends IGenericDAO<Member> {
+public interface IMemberDao extends IGenericDao<Member,Integer> {
 }

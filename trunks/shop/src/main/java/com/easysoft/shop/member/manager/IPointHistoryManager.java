@@ -1,6 +1,6 @@
 package com.easysoft.shop.member.manager;
 
-import com.easysoft.framework.db.Page;
+import com.easysoft.framework.db.PageOption;
 import com.easysoft.shop.model.PointHistory;
 
 import java.util.List;
@@ -21,8 +21,8 @@ public interface IPointHistoryManager {
 	 * @param pageSize
 	 * @return
 	 */
-	public Page pagePointHistory(int pageNo, int pageSize, int pointType);
-    public Page pagePointHistory(int pageNo, int pageSize);
+	public PageOption pagePointHistory(int pageNo, int pageSize, int pointType);
+    public PageOption pagePointHistory(int pageNo, int pageSize);
 	/**
 	 * 列表指定会员 的积分日志
 	 * @param member_id
@@ -51,5 +51,5 @@ public interface IPointHistoryManager {
 	 */
 	public void addPointHistory(PointHistory pointHistory);
     public List<PointHistory> listPointHistory(int member_id, int pointtype);
-    public Page pagePointFreeze(int pageNo, int pageSize);
+    public PageOption pagePointFreeze(int pageNo, int pageSize);
 }

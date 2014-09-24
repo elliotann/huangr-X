@@ -1,6 +1,6 @@
 package com.easysoft.member.manager;
 
-import com.easysoft.framework.db.Page;
+import com.easysoft.framework.db.PageOption;
 import com.easysoft.member.model.MemberLv;
 
 import java.util.List;
@@ -50,7 +50,7 @@ public interface IMemberLvManager{
 	 * @param pageSize
 	 * @return
 	 */
-	public Page list(String order,int page,int pageSize);
+	public PageOption list(String order,int page,int pageSize);
 	
 	
 	

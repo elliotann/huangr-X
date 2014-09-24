@@ -4,13 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.easysoft.framework.db.PageOption;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.easysoft.core.common.controller.BaseController;
-import com.easysoft.framework.db.Page;
 import com.easysoft.member.manager.IMemberLvManager;
 import com.easysoft.member.manager.IMemberManager;
 import com.easysoft.member.manager.IRegionsManager;
@@ -38,7 +38,7 @@ public class MemberController extends BaseController {
     private MemberPluginBundle memberPluginBundle;
     @RequestMapping(params = {"memberlist"})
     public ModelAndView memberlist(String order,String name,String uname) {
-        Page webpage = this.memberManager.list(order, name, uname, this.getPage(),
+        PageOption webpage = this.memberManager.list(order, name, uname, this.getPage(),
                 this.getPageSize());
         Map<String,Object> params = new HashMap<String,Object>();
         params.put("webpage",webpage);
@@ -57,7 +57,7 @@ public class MemberController extends BaseController {
     }
     @RequestMapping(params = {"list_lv"})
     public ModelAndView list_lv(String order) {
-        Page webpage = memberLvManager.list(order, this.getPage(), this
+        PageOption webpage = memberLvManager.list(order, this.getPage(), this
                 .getPageSize());
         Map<String,Object> params = new HashMap<String,Object>();
         params.put("webpage",webpage);

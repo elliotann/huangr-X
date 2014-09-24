@@ -1,6 +1,6 @@
 package com.easysoft.member.manager;
 
-import com.easysoft.framework.db.Page;
+import com.easysoft.framework.db.PageOption;
 import com.easysoft.member.model.MemberComment;
 
 /**
@@ -13,13 +13,13 @@ import com.easysoft.member.model.MemberComment;
 public interface IMemberCommentManager {
     public  void add(MemberComment paramMemberComment);
 
-    public Page getGoodsComments(int paramInt1, int paramInt2, int paramInt3, int paramInt4);
+    public PageOption getGoodsComments(int paramInt1, int paramInt2, int paramInt3, int paramInt4);
 
     public  int getGoodsGrade(int paramInt);
 
-    public  Page getAllComments(int paramInt1, int paramInt2, int paramInt3);
+    public PageOption getAllComments(int paramInt1, int paramInt2, int paramInt3);
 
-    public  Page getCommentsByStatus(int paramInt1, int paramInt2, int paramInt3, int paramInt4);
+    public PageOption getCommentsByStatus(int paramInt1, int paramInt2, int paramInt3, int paramInt4);
 
     public  MemberComment get(int paramInt);
 
@@ -29,7 +29,7 @@ public interface IMemberCommentManager {
 
     public  void delete(int paramInt);
 
-    public  Page getMemberComments(int paramInt1, int paramInt2, int paramInt3, int paramInt4);
+    public PageOption getMemberComments(int paramInt1, int paramInt2, int paramInt3, int paramInt4);
 
     public  int getMemberCommentTotal(int paramInt1, int paramInt2);
 }
