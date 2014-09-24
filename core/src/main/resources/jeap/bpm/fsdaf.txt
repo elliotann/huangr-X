@@ -1,3 +1,0 @@
-save:
-{nodes:[{nodeType:'start',name:'开始1',  x:353, y:118, width:50, height:50, props:{key:'',name:'开始1',desc:'',initiator:''}},{nodeType:'end',name:'结束2',  x:346, y:358, width:50, height:50, props:{key:'',name:'结束',desc:''}}],
-paths:[{id:'flow3',from:'rect1',to:'rect2', dots:[],text:{text:'TO 结束2',textPos:{x:0,y:-10}},sourcePoint{x:377,y:168},targetPoint:{x:368,y:352}, props:{text:{value:''}}}],name:'新建流程',key:'',desc:''}
