@@ -3,6 +3,7 @@ package com.easysoft.shop.member.manager.impl;
 import java.util.Date;
 import java.util.List;
 
+import com.easysoft.framework.db.PageOption;
 import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.easysoft.core.common.dao.spring.BaseSupport;
 import com.easysoft.core.dispatcher.httpcache.HttpCacheManager;
 import com.easysoft.framework.context.webcontext.ThreadContextHolder;
-import com.easysoft.framework.db.Page;
 import com.easysoft.framework.utils.DateUtil;
 import com.easysoft.framework.utils.EncryptionUtil1;
 import com.easysoft.framework.utils.StringUtil;
@@ -122,7 +122,7 @@ public class MemberManager extends BaseSupport<Member> implements IMemberManager
 	}
 
 	public Member get(Integer memberId) {
-        Member m = memberDao.get(memberId);
+        Member m = memberDao.queryById(memberId);
 	    return m;
 	}
 
@@ -174,12 +174,12 @@ public class MemberManager extends BaseSupport<Member> implements IMemberManager
 	}
 
 	
-	public Page list(String order, int page, int pageSize) {
+	public PageOption list(String order, int page, int pageSize) {
 		order = order == null ? " m.member_id desc" : order;
 		String sql = "select m.*,lv.name as lv_name from "+this.getTableName("member")+" m left join " +this.getTableName("member_lv")+" lv on m.lv_id = lv.lv_id ";
 		//sql += "  and lv.userid = "+this.getCurrentUserid()+" and lv.siteid="+this.getCurrentSiteid();
 		sql += " order by  " + order;
-		Page webpage = this.daoSupport.queryForPage(sql, page, pageSize);
+		PageOption webpage = this.daoSupport.queryForPage(sql, page, pageSize);
 		return webpage;
 	}
 	
@@ -339,7 +339,7 @@ public class MemberManager extends BaseSupport<Member> implements IMemberManager
 
 
 	
-	public Page list(String order, String name, String uname, int page, int pageSize) {
+	public PageOption list(String order, String name, String uname, int page, int pageSize) {
 		order = order == null ? " m.member_id desc" : order;
 		String sql = "select m.*,lv.name as lv_name from "+this.getTableName("member")+" m left join " +this.getTableName("member_lv")+" lv on m.lv_id = lv.lv_id where 1=1";
 		if(name!=null && !name.equals("")){
@@ -350,7 +350,7 @@ public class MemberManager extends BaseSupport<Member> implements IMemberManager
 		}
 		sql += " order by  " + order;
         DetachedCriteria dc = DetachedCriteria.forClass(Member.class);
-		Page webpage = this.memberDao.queryForPage(dc, page, pageSize);
+		PageOption webpage = null;//this.memberDao.queryForPage(dc, page, pageSize);
 		return webpage;
 	}
 
