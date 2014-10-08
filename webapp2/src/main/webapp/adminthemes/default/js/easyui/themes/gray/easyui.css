@@ -1,3 +1,71 @@
+.panel {
+    overflow: hidden;
+    text-align: left;
+    margin: 0;
+    border: 0;
+    -moz-border-radius: 0 0 0 0;
+    -webkit-border-radius: 0 0 0 0;
+    border-radius: 0 0 0 0;
+}
+.panel-header,
+.panel-body {
+    border-width: 1px;
+    border-style: solid;
+}
+.panel-header {
+    padding: 5px;
+    position: relative;
+}
+.panel-title {
+    background: url('images/blank.gif') no-repeat;
+    height: 30px;
+    line-height: 30px;
+    font-size: 14PX;
+    color: #FFF;
+    text-indent: 5PX;
+}
+.panel-header-noborder {
+    border-width: 0 0 1px 0;
+    border-bottom: 1px solid #99BBE8;
+}
+.panel-body {
+    overflow: auto;
+    border-top-width: 0;
+    padding: 0;
+    background-color: #ebebeb;
+}
+.panel-body-noheader {
+    border-top-width: 1px;
+}
+.panel-body-noborder {
+    border-width: 0px;
+}
+.panel-with-icon {
+    padding-left: 18px;
+}
+.panel-icon,
+.panel-tool {
+    position: absolute;
+    top: 50%;
+    height: 16px;
+    overflow: hidden;
+}
+.panel-icon {
+    left: 5px;
+    width: 16px;
+    top: 4px;
+}
+.panel-tool {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: auto;
+}
+
+
+
+
+
 
 .textbox {
     background-color: #FFFFFF;
@@ -1172,30 +1240,8 @@ a.m-btn-plain-active {
 
 
 
-.panel {
-    /*overflow:hidden;*/
-    font-size: 12px;
-}
 
-.panel-header {
-    padding: 5px;
-    line-height: 15px;
-    color: #15428b;
-    font-weight: bold;
-    font-size: 12px;
-    background: url('images/panel_title.png') repeat-x;
-    position: relative;
-    border: 1px solid #99BBE8;
-}
 
-.panel-title {
-    background: url('images/blank.gif') no-repeat;
-    height: 30px;
-    line-height: 30px;
-    font-size: 14PX;
-    color: #FFF;
-    text-indent: 5PX;
-}
 
 .panel-header-noborder {
     border-width: 0px;
@@ -1221,19 +1267,9 @@ a.m-btn-plain-active {
     padding-left: 18px;
 }
 
-.panel-icon {
-    position: absolute;
-    left: 5px;
-    top: 4px;
-    width: 16px;
-    height: 16px;
-}
 
-.panel-tool {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-}
+
+
 
 .panel-tool a {
     display: inline-block;
