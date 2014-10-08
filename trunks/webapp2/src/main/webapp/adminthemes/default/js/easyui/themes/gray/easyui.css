@@ -95,7 +95,178 @@
     border: 0;
     overflow: hidden;
 }
+.panel-tool-close {
+    background: url('images/panel_tools.gif') no-repeat -16px 0px;
+}
+.panel-tool-min {
+    background: url('images/panel_tools.gif') no-repeat 0px 0px;
+}
+.panel-tool-max {
+    background: url('images/panel_tools.gif') no-repeat 0px -16px;
+}
 
+.panel-tool-restore {
+    background: url('images/panel_tools.gif') no-repeat -16px -16px;
+}
+.panel-tool-collapse {
+    background: url('images/panel_tool_collapse.gif') no-repeat;
+}
+
+.panel-tool-expand {
+    background: url('images/panel_tool_expand.gif') no-repeat;
+}
+
+.panel-header,
+.panel-body {
+    border-color: #D3D3D3;
+}
+.panel-header {
+    background-color: #f3f3f3;
+    background: -webkit-linear-gradient(top,#F8F8F8 0,#eeeeee 100%);
+    background: -moz-linear-gradient(top,#F8F8F8 0,#eeeeee 100%);
+    background: -o-linear-gradient(top,#F8F8F8 0,#eeeeee 100%);
+    background: linear-gradient(to bottom,#F8F8F8 0,#eeeeee 100%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#F8F8F8,endColorstr=#eeeeee,GradientType=0);
+}
+.panel-body {
+    overflow: auto;
+    border-top-width: 0px;
+    background-color: #ebebeb;
+}
+
+/*============panel end==================*/
+.accordion {
+    overflow: hidden;
+    border-width: 1px;
+    border-style: solid;
+    background: #fff;
+}
+.accordion .accordion-header {
+    border-width: 0 0 1px;
+    cursor: pointer;
+}
+.accordion .accordion-body {
+    border-width: 0 0 1px;
+}
+.accordion-noborder {
+    border-width: 0;
+}
+.accordion-noborder .accordion-header {
+    border-width: 0 0 1px;
+}
+.accordion-noborder .accordion-body {
+    border-width: 0 0 1px;
+}
+.accordion-collapse {
+    background: url('images/accordion_arrows.png') no-repeat 0 0;
+}
+.accordion-expand {
+    background: url('images/accordion_arrows.png') no-repeat -16px 0;
+}
+.accordion {
+    background: #ffffff;
+    border-color: #D3D3D3;
+}
+.accordion .accordion-header {
+    background: #f3f3f3;
+    filter: none;
+}
+.accordion .accordion-header-selected {
+    background: #0092DC;
+}
+.accordion .accordion-header-selected .panel-title {
+    font-weight: bold;
+    color: #fff;
+}
+/*=================accordion end======================*/
+.window {
+    font-size: 12px;
+    overflow: hidden;
+    padding: 0px;
+    border-width: 1px;
+    border-style: solid;
+    position: absolute;
+    background-color: #3a93d4;
+    border: 0px solid #99BBE8;
+}
+.window .window-header {
+    background: transparent;
+    padding: 2px 0px 6px 0px;
+}
+
+.window .window-body-noheader {
+    border-top-width: 1px;
+}
+.window .window-header .panel-icon,
+.window .window-header .panel-tool {
+    top: 50%;
+    margin-top: -11px;
+}
+.window .window-header .panel-icon {
+    left: 1px;
+    top: 5px;
+}
+.window .window-header .panel-tool {
+    right: 10px;
+}
+.window .window-header .panel-with-icon {
+    padding-left: 18px;
+}
+.window-proxy {
+    position: absolute;
+    overflow: hidden;
+    border: 1px dashed #15428b;
+}
+
+.window-proxy-mask {
+    position: absolute;
+    background: #fafafa;
+    filter: alpha(opacity = 10);
+    opacity: 0.10;
+}
+.window-mask {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    filter: alpha(opacity = 40);
+    opacity: 0.40;
+    background: #000;
+    font-size: 1px;
+    *zoom: 1;
+    overflow: hidden;
+}
+.window,
+.window-shadow {
+    position: absolute;
+    -moz-border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+}
+
+.window-shadow {
+    position: absolute;
+    background: #ddd;
+    -moz-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
+    filter: progid:DXImageTransform.Microsoft.Blur(pixelRadius=0, MakeShadow=false,
+    ShadowOpacity=0.2);
+}
+.window,
+.window .window-body {
+    border-color: #D3D3D3;
+}
+.window .window-body {
+    border-width: 1px;
+    border-style: solid ;
+    border-color: #99BBE8;
+    border-top-width: 0px;
+    background: #fff;
+}
+/*==========window end=====*/
 
 
 
@@ -198,40 +369,7 @@
 
 
 
-.accordion {
-    background: #fff;
-    overflow: hidden;
-}
 
-.accordion .accordion-header {
-    background: #E0ECFF;
-    border-top-width: 0;
-    cursor: pointer;
-}
-
-.accordion .accordion-header .panel-title {
-    font-weight: normal;
-}
-
-.accordion .accordion-header-selected .panel-title {
-    font-weight: bold;
-}
-
-.accordion-noborder .accordion-header {
-    border-width: 0 0 1px;
-}
-
-.accordion-noborder .accordion-body {
-    border-width: 0px;
-}
-
-.accordion-collapse {
-    background: url('images/accordion_collapse.png') no-repeat;
-}
-
-.accordion-expand {
-    background: url('images/accordion_expand.png') no-repeat;
-}
 
 .calendar {
     background: #fff;
@@ -1280,11 +1418,6 @@ a.m-btn-plain-active {
     border-bottom: 1px solid #99BBE8;
 }
 
-.panel-body {
-    overflow: auto;
-    border-top-width: 0px;
-    background-color: #ebebeb;
-}
 
 .panel-body-noheader {
     /*border-top-width:1px;*/
@@ -1307,29 +1440,12 @@ a.m-btn-plain-active {
 
 
 
-.panel-tool-close {
-    background: url('images/panel_tools.gif') no-repeat -16px 0px;
-}
 
-.panel-tool-min {
-    background: url('images/panel_tools.gif') no-repeat 0px 0px;
-}
 
-.panel-tool-max {
-    background: url('images/panel_tools.gif') no-repeat 0px -16px;
-}
 
-.panel-tool-restore {
-    background: url('images/panel_tools.gif') no-repeat -16px -16px;
-}
 
-.panel-tool-collapse {
-    background: url('images/panel_tool_collapse.gif') no-repeat;
-}
 
-.panel-tool-expand {
-    background: url('images/panel_tool_expand.gif') no-repeat;
-}
+
 
 
 .progressbar {
@@ -2052,80 +2168,20 @@ a.s-btn-plain-active .s-btn-downarrow {
     z-index: 9900002;
 }
 
-.window {
-    font-size: 12px;
-    position: absolute;
-    overflow: hidden;
-    background-color: #3a93d4;
-    padding: 0px;
-    border: 0px solid #99BBE8;
-}
 
-.window-shadow {
-    position: absolute;
-    background: #ddd;
-    -moz-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
-    -webkit-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
-    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
-    filter: progid:DXImageTransform.Microsoft.Blur(pixelRadius=0, MakeShadow=false,
-    ShadowOpacity=0.2);
-}
 
-.window .window-header {
-    background: transparent;
-    padding: 2px 0px 4px 0px;
-}
 
-.window .window-body {
-    background: #fff;
-    border: 0px solid #99BBE8;
-    border-top-width: 0px;
-}
 
-.window .window-body-noheader {
-    border-top-width: 1px;
-}
 
-.window .window-header .panel-icon {
-    left: 1px;
-    top: 1px;
-}
 
-.window .window-header .panel-with-icon {
-    padding-left: 18px;
-}
 
-.window .window-header .panel-tool {
-    top: 10px;
-    right: 10px;
-}
 
-.window-proxy {
-    position: absolute;
-    overflow: hidden;
-    border: 1px dashed #15428b;
-}
 
-.window-proxy-mask {
-    position: absolute;
-    background: #fafafa;
-    filter: alpha(opacity = 10);
-    opacity: 0.10;
-}
 
-.window-mask {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    filter: alpha(opacity = 40);
-    opacity: 0.40;
-    background: #000;
-    font-size: 1px;
-    *zoom: 1;
-    overflow: hidden;
-}
+
+
+
+
 
 .combo-panel {
     background: #fff;
