@@ -160,7 +160,7 @@
             <td colspan="3" class="value">
 
                 <c:forEach var="role" items="${roleList }" varStatus="roleSta">
-                    &nbsp;&nbsp;<input  type="checkbox" name="roleids"  value="${role.roleid }"/><label>${role.rolename }&nbsp;</label>
+                    <input  type="checkbox" name="roleids"  value="${role.roleid }" style="margin-left:11px"/><label>${role.rolename }&nbsp;</label>
                     <c:if test="${(roleSta.index+1)%4==0}">
                         <br/>
                     </c:if>
@@ -173,7 +173,7 @@
         <tr>
             <td align="right" class="l-table-edit-td" valign="top">状态:</td>
             <td align="left" class="l-table-edit-td">
-                <input id="active" type="radio" name="state" value="1" checked="checked" /><label for="active">启用</label>
+                <input id="active" type="radio" name="state" value="1" checked="checked" style="margin-left: 7px;"/><label for="active">启用</label>
                 <input id="inActive" type="radio" name="state" value="1" /><label for="inActive">禁用</label>
             </td><td align="left"></td>
         </tr>
@@ -194,7 +194,7 @@
         <tr>
             <td align="right" class="l-table-edit-td">所属部门:</td>
             <td align="left" class="l-table-edit-td">
-                <select id="userdept" name="userdept" class="easyui-combotree combo" style="width:210px;height:30px;"></select>
+                <select id="userdept" name="userdept" class="easyui-combotree combo" style="width:206px;height:30px;"></select>
             </td>
             <td align="left"></td>
         </tr>
