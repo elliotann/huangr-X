@@ -65,13 +65,14 @@
         delObj("userAdmin.do?delete&id="+row.id);
 
     }
-    function getStatusName(rowdata,index,value){
+    function getStatusName(value, row, index) {
         if(value==1){
             return "启用";
         } else{
             return "禁用";
         }
     }
+
     function searchMember(){
 
         var username = $("#username").val();
