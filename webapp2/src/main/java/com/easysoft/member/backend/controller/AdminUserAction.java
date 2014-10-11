@@ -88,7 +88,9 @@ public class AdminUserAction extends BaseController{
         map.put("multiSite",multiSite);
         map.put("userRoles",userRoles);
         map.put("adminUser",adminUser);
-        Depart depart = departManager.queryById(adminUser.getUserdept());
+        Depart depart = null;
+        if(adminUser.getUserdept()!=null)
+            depart = departManager.queryById(adminUser.getUserdept());
         map.put("depart",depart);
         return new ModelAndView("admin/core/auth/editUserAdmin",map);
     }
