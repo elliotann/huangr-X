@@ -181,7 +181,7 @@
         <tr>
             <td align="right" class="l-table-edit-td"></td>
             <td align="left" class="l-table-edit-td">
-                <input type="checkbox" name="check_name" id="updatePwd">同时修改密码
+                <input type="checkbox" name="check_name" id="updatePwd"  style="margin-left: 7px">&nbsp;&nbsp;同时修改密码
             </td>
         </tr>
         <tr id="pwdtr">
@@ -203,7 +203,7 @@
             <td align="right" class="l-table-edit-td" valign="top">角色:</td>
             <td colspan="3" class="value">
                 <c:forEach var="role" items="${roleList }" varStatus="roleSta">
-                    &nbsp;&nbsp;<input id="roleids${role.roleid }" type="checkbox" name="roleids"  value="${role.roleid }"/><label for="roleids${role.roleid }">${role.rolename }&nbsp;</label>
+                    <input id="roleids${role.roleid }" type="checkbox" name="roleids"  value="${role.roleid }"  style="margin-left: 11px"/><label for="roleids${role.roleid }">${role.rolename }&nbsp;</label>
                     <c:if test="${(roleSta.index+1)%4==0}">
                         <br/>
                     </c:if>
@@ -216,8 +216,8 @@
         <tr>
             <td align="right" class="l-table-edit-td" valign="top">状态:</td>
             <td align="left" class="l-table-edit-td">
-                <input id="active" type="radio" name="state" value="1" checked="checked" /><label for="active">启用</label>
-                <input id="inActive" type="radio" name="state" value="0" /><label for="inActive">禁用</label>
+                <input id="active" type="radio" name="state" value="1" <c:if test="${adminUser.state==1}">checked="checked"</c:if> style="margin-left: 7px"/><label for="active">启用</label>
+                <input id="inActive" type="radio" name="state" value="0" <c:if test="${adminUser.state==0}">checked="checked"</c:if>/><label for="inActive">禁用</label>
             </td><td align="left"></td>
         </tr>
         <tr>
@@ -230,7 +230,7 @@
             <td align="right" class="l-table-edit-td">所属公司:</td>
             <td align="left" class="l-table-edit-td">
 
-                <input id="compId" name="userCorp" class="easyui-combotree combo" data-options="url:'../organization.do?queryForTree&ajax=true',method:'get',required:true" style="width:205px;height:30px;" value="${adminUser.userCorp }"/>
+                <input id="compId" name="userCorp" class="easyui-combotree combo" data-options="url:'../organization.do?queryForTree&ajax=true',method:'get'" style="width:205px;height:30px;" value="${adminUser.userCorp }"/>
             </td>
             <td align="left"></td>
         </tr>
