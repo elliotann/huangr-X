@@ -20,8 +20,8 @@ public class AdminUser extends IdEntity{
 	private int state;
 	private String realname;
 	private String userno;
-	private int userdept;
-    private int userCorp;//所属公司
+	private Integer userdept;
+    private Integer userCorp;//所属公司
 	private String remark;
 	private Long dateline;
 	private int[] roleids;
@@ -72,10 +72,10 @@ public class AdminUser extends IdEntity{
 		this.userno = userno;
 	}
     @Column(name ="userdept")
-	public int getUserdept() {
+	public Integer getUserdept() {
 		return userdept;
 	}
-	public void setUserdept(int userdept) {
+	public void setUserdept(Integer userdept) {
 		this.userdept = userdept;
 	}
     @Column(name ="remark")
@@ -122,11 +122,11 @@ public class AdminUser extends IdEntity{
         this.email = email;
     }
 
-    public int getUserCorp() {
+    public Integer getUserCorp() {
         return userCorp;
     }
 
-    public void setUserCorp(int userCorp) {
+    public void setUserCorp(Integer userCorp) {
         this.userCorp = userCorp;
     }
 }
