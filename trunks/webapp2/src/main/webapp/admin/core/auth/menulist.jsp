@@ -77,7 +77,8 @@
         if(!confirm("确定删除?")){
             return;
         }
-        delObj("menu.do?delete&id="+row.id,row.id);
+
+        delObj4Tree("menu.do?delete&id="+row.id);
     }
 
 
