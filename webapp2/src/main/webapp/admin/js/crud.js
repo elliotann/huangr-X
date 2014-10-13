@@ -55,3 +55,24 @@ function delObj(url,id)
     };
     $('#dataGridform').ajaxSubmit(options);
 }
+
+function delObj4Tree(url,id)
+{
+    url += "&ajax=true&rmd="+ new Date().getTime();
+    var options = {
+        url : url,
+        type : "POST",
+        dataType : 'json',
+        success : function(result) {
+            if(result.success){
+                alert("删除成功");
+                $('#dataGrid').treegrid('reload');
+            }
+
+        },
+        error : function(e) {
+            $.Loading.error("出现错误 ，请重试");
+        }
+    };
+    $('#dataGridform').ajaxSubmit(options);
+}
