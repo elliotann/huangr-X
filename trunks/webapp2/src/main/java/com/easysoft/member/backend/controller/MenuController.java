@@ -62,10 +62,11 @@ public class MenuController extends BaseController {
     }
     @RequestMapping(params = {"addOrUpdateGrid"})
     public ModelAndView addOrUpdateGrid(){
-        List<Menu> menuList  = this.menuManager.getMenuList();
+        List<Menu> menuList  = this.menuManager.getMenuTree(0);
 
         String json = JsonUtils.beanToJsonArray(menuList);
         Map<String,Object> map = new HashMap<String, Object>();
+        json = json.replaceAll("title","text");
         map.put("json",json);
         return new ModelAndView("admin/json_message",map);
     }
@@ -74,7 +75,7 @@ public class MenuController extends BaseController {
         List<Menu> menuList  = this.menuManager.getMenuList();
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("menuList",menuList);
-        return new ModelAndView("core/admin/menu/addMenu",map);
+        return new ModelAndView("admin/core/menu/addMenu",map);
     }
 
 
@@ -106,7 +107,7 @@ public class MenuController extends BaseController {
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("menuList",menuList);
         map.put("menu",menu);
-        return new ModelAndView("core/admin/menu/editMenu",map);
+        return new ModelAndView("admin/core/menu/editMenu",map);
     }
     @RequestMapping(params = {"saveEdit"})
     @ResponseBody

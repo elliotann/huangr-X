@@ -38,7 +38,6 @@ function addForm(savebtn){
 function delObj(url,id)
 {
    url += "&ajax=true&rmd="+ new Date().getTime();
-   // url = url+id;
     var options = {
         url : url,
         type : "POST",

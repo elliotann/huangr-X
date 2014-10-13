@@ -1,13 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ include file="/commons/taglibs.jsp"%>
-
-
-
-
-    <script src="${staticserver}/js/common/jquery.validate.js" type="text/javascript"></script>
+<script src="${staticserver}/js/common/jquery.validate.js" type="text/javascript"></script>
 <script src="${staticserver}/js/admin/jeap.js" type="text/javascript"></script>
-    <link href="${context }/css/form.css" rel="stylesheet"/>
+<link href="${context }/css/form.css" rel="stylesheet"/>
 <link href="${context }/js/easyui/themes/icon.css" rel="stylesheet"/>
 
     <script type="text/javascript">
