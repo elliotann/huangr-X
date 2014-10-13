@@ -2,6 +2,7 @@ package com.easysoft.core.common.controller;
 
 import com.easysoft.core.common.service.IGenericService;
 import com.easysoft.core.interceptors.DateConvertEditor;
+import com.easysoft.core.interceptors.IntConvertEditor;
 import com.easysoft.framework.ParamSetting;
 import org.apache.log4j.Logger;
 import org.hibernate.criterion.DetachedCriteria;
@@ -35,6 +36,7 @@ public class BaseController {
     @InitBinder
     public void initBinder(ServletRequestDataBinder binder) {
         binder.registerCustomEditor(Date.class, new DateConvertEditor());
+        //binder.registerCustomEditor(Integer.class,new IntConvertEditor());
     }
 
     /**
