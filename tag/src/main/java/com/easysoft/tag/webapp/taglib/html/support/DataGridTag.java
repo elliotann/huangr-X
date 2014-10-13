@@ -124,7 +124,7 @@ public class DataGridTag extends BodyTagSupport{
         return sb.toString();
     }
     private String buildGrid(){
-        StringBuilder sb = new StringBuilder("<form action=\"\" id=\"catform\">");
+        StringBuilder sb = new StringBuilder("<form action=\"\" id=\"dataGridform\">");
         sb.append("<table class=\"easyui-treegrid\" id=\"dataGrid\"");
         sb.append("data-options=\"url:'menu.do?dataGrid&ajax=yes',fitColumns:'true',idField: 'id',treeField: 'title'\">");
         sb.append("<thead>");
