@@ -3,16 +3,14 @@
 <%@ include file="/commons/taglibs.jsp"%>
 
 
-<link href="${context }/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css">
-<link href="${context }/js/ligerui/skins/Gray2014/css/all.css" rel="stylesheet">
-<script type="text/javascript" src="${context}/js/plug-in/jquery/jquery-1.8.3.js"></script>
-<script src="${context }/js/ligerui/js/core/base.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerGrid.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerResizable.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerDrag.js"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerDialog.js"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerToolBar.js" type="text/javascript"></script>
-<script src="${ctx}/admin/js/common/crud.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="${context}/js/easyui/themes/gray/easyui.css">
+<link href="${context}/css/style1.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="${context}/js/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="${context}/js/easyui/locale/easyui-lang-zh_CN.js"></script>
+<script src="/jeap/admin/js/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
+<script src="/jeap/admin/js/crud.js" type="text/javascript"></script>
+<link href="${context }/css/form.css" rel="stylesheet"/>
+<link href="${context }/css/button.css" rel="stylesheet"/>
 <style>
     .message {
         width: 99%;
@@ -24,57 +22,25 @@
     }
 </style>
 <script type="text/javascript">
-
-    $(function ()
-    {
-        window.dialog = $.ligerDialog.open({
-            isResize: true,
-            isHidden: true,
-            target: $("<div id='message' class='message'></div>"),
-            buttons: [
-                { text: '关闭', onclick: function (i, d) { d.hide(); } }
-            ]
+    $(function () {
+        $(".searchAdvanced").hide();
+        //高级查询按钮
+        $("#aAdvanced").click(function () {
+            if ($("#Advanced").val() == "0") {
+                $("#Advanced").val(1);
+                $("#simpleSearch").hide();
+                //$("#aAdvanced").text("简单搜索")
+                $("#aAdvanced").addClass("searchAdvancedS");
+            } else {
+                $("#Advanced").val(0);
+                $("#simpleSearch").show();
+                //$("#aAdvanced").text("高级搜索");
+                $("#aAdvanced").removeClass("searchAdvancedS");
+            }
+            $(".searchAdvanced").slideToggle("slow");
         });
-        dialog.hide();
-        window.alert = function (message) {
-            $("#message").html(message.toString());
-            dialog.show();
-        }
-
-        /*listgrid = $("#maingrid").ligerGrid({
-         height:'99%',
-         width: '100%', usePager:false,
-         url: 'menu.do?dataGrid&ajax=yes', alternatingRow: false, tree: {
-         columnId: 'title',
-         idField: 'id',
-         parentIDField: 'pid'
-         },
-         columns: [
-         { display: '名称', name: 'title', id: 'title',  align: 'left',width:250 },
-         { display: 'url', name: 'url', id: 'url', width: 400, align: 'left' },
-         { display: '类型', name: 'menutype', id:'menutype',width: 100, type: 'int', align: 'center',render:function(rowdata,index,value){
-         if(value==1){
-         return "系统菜单";
-         }else{
-         return "应用菜单";
-         }
-         } },
-         { display: 'target', name: 'target', align: 'left',width: 50 },
-         { display: '排序', name: 'sorder', align: 'center',width:100 },
-         { display: '图标', name: 'sorder', align: 'left',width:400 }
-
-         ], toolbar: { items: [
-         { text: '增加', click: addMenu, icon: 'add' },
-         { line: true },
-         { text: '修改', click: updateMenu, icon: 'modify' },
-         { line: true },
-         { text: '删除', click: delMenu, img: '${context }/js/ligerui/skins/icons/delete.gif' },
-     { text: '增加按钮', click: addBtn, icon: 'add' }
-     ]
-     }
-     }
-     );*/
     });
+
 
     function getParent()
     {
@@ -103,23 +69,25 @@
         alert(listgrid.isLeaf(row));
     }
     function delMenu(item){
-        var row = listgrid.getSelectedRow();
-        if(row==null){
-            $.ligerDialog.error('请选择数据删除!');
+        if($('#dataGrid').treegrid('getSelections').length<1||$('#dataGrid').treegrid('getSelections').length>1){
+            alert("请选择数据删除!");
             return;
         }
-
-        delObj(item,"menu.do?delete&id=",row.id);
+        var row = $('#dataGrid').treegrid('getSelections')[0];
+        if(!confirm("确定删除?")){
+            return;
+        }
+        delObj("menu.do?delete&id="+row.id,row.id);
     }
 
 
 
-    function addMenu(item){
-        addOrUpdateDialog(item,'增加菜单','menu.do?add',400,400);
-
+    function addMenu(){
+        addOrUpdateDialog('增加菜单','menu.do?add',500,700);
     }
 
     function addBtn(item){
+
         var row = listgrid.getSelectedRow();
         if(row==null){
             $.ligerDialog.error('请选择数据操作!');
@@ -129,14 +97,13 @@
 
     }
 
-    function updateMenu(item){
-        var row = listgrid.getSelectedRow();
-        if(row==null){
-            $.ligerDialog.error('请选择数据修改!');
+    function updateMenu(){
+        if($('#dataGrid').treegrid('getSelections').length<1||$('#dataGrid').treegrid('getSelections').length>1){
+            alert("必须选择一条数据进行修改!");
             return;
         }
-        addOrUpdateDialog(item,'修改菜单','menu.do?edit&id='+row.id,500,700);
-
+        var row = $('#dataGrid').treegrid('getSelections')[0];
+        addOrUpdateDialog('修改菜单','menu.do?edit&id='+row.id,500,700);
     }
     function getMenuType(rowdata,index,value){
         if(value==1){
@@ -151,9 +118,9 @@
 
 </script>
 
-<grid:dataGrid action="menu.do?dataGrid&ajax=yes" height="99%" usePager="false"  width="100%" tree="true">
-    <grid:column title="名称" field="title" align="left" width="250" id="title"/>
-    <grid:column title="url" field="url"  width="400" align="left" id="url"/>
+<grid:dataGrid action="menu.do?dataGrid&ajax=yes" height="99%" usePager="false"  width="100%" tree="true" style="easyui">
+    <grid:column title="名称" field="title" align="left" width="100" id="title"/>
+    <grid:column title="url" field="url"  width="100" align="left" id="url"/>
     <grid:column title="类型" field="menutype"  width="100" align="center" sortType="int" renderFun="getMenuType" id="menutype"/>
     <grid:column title="target" field="target" align="left"  width="50" id="target"/>
     <grid:column title="排序" field="sorder" align="center"  width="100"/>
