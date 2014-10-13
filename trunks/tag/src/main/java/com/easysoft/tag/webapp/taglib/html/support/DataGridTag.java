@@ -83,7 +83,12 @@ public class DataGridTag extends BodyTagSupport{
                 out.write(endHtml());
             }
             else if("easyui".equals(style)){
-                out.write(endEasyUI());
+                if(StringUtils.isNotEmpty(tree)&&"true".equals(tree)){
+                    out.write(endEasyUI4Tree());
+                }else{
+                    out.write(endEasyUI());
+                }
+
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -95,6 +100,50 @@ public class DataGridTag extends BodyTagSupport{
 
     public String endHtml(){
         return "";
+    }
+    private String endEasyUI4Tree(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("<div class=\"main\">");
+        sb.append("<div id=\"dialogInfo\" style=\"display: none;\"></div>");
+        sb.append(buildToolBar());
+        sb.append(buildGrid());
+        sb.append("</div>");
+        return sb.toString();
+    }
+
+    /**
+     * 构建工具条
+     * @return
+     */
+    private String buildToolBar(){
+        StringBuilder sb = new StringBuilder("<div class=\"buttonArea\">");
+        for(ToolBar toolBar : toolBars){
+            sb.append(" <a href=\"javascript:void(0)\" class=\"button blueButton\" data-options=\"iconCls:'icon-add',plain:true\" onclick=\""+toolBar.getClickFun()+"()\">"+toolBar.getTitle()+"</a>");
+        }
+        sb.append("</div>");
+        return sb.toString();
+    }
+    private String buildGrid(){
+        StringBuilder sb = new StringBuilder("<form action=\"\" id=\"catform\">");
+        sb.append("<table class=\"easyui-treegrid\" id=\"dataGrid\"");
+        sb.append("data-options=\"url:'menu.do?dataGrid&ajax=yes',fitColumns:'true',idField: 'id',treeField: 'title'\">");
+        sb.append("<thead>");
+        sb.append("<tr>");
+        for(DataGridColumn column : columns){
+            sb.append("<th data-options=\"field:'"+column.getField()+"',width:"+column.getWidth()+",align:'"+column.getAlign()+"'\" ");
+            if(StringUtils.isNotEmpty(column.getRenderFun())){
+                sb.append("formatter=\""+column.getRenderFun()+"\"");
+            }
+            sb.append(">");
+            sb.append(column.getTitle());
+            sb.append("</th>");
+        }
+
+        sb.append("</tr>");
+        sb.append("</thead>");
+        sb.append("</table>");
+        sb.append("</form>");
+        return sb.toString();
     }
     public String endEasyUI(){
         StringBuilder sb = new StringBuilder();
@@ -154,8 +203,14 @@ public class DataGridTag extends BodyTagSupport{
         sb.append("</div>");
         sb.append("<div class=\"clear height10\"></div>");
         sb.append("<div class=\"shadowBoxWhite tableDiv\">");
-        sb.append("<table class=\"easyui-datagrid\" pagination=\"true\"  sortName=\"member_id\" sortOrder=\"desc\" id=\"dataGrid\"");
-        sb.append(" data-options=\"url:'"+action+"',pageList: [5,10,15,20],fitColumns:'true',singleSelect:true\"");
+        sb.append("<table ");
+        if(StringUtils.isNotEmpty(tree)&&"true".equals(tree)){
+            sb.append("class=\"easyui-treegrid\"");
+        }else{
+            sb.append("class=\"easyui-datagrid\"");
+        }
+        sb.append(" pagination=\"true\"  sortName=\"member_id\" sortOrder=\"desc\" id=\"dataGrid\"");
+        sb.append(" data-options=\"url:'"+action+"',pageList: [5,10,15,20],fitColumns:'true',singleSelect:true,idField: 'id',treeField: 'title'\"");
         sb.append(">");
         sb.append(" <thead><tr>");
 
