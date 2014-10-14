@@ -62,9 +62,7 @@
 <script type="text/javascript" src="${contextPath}/js/fn/1.5/fn.js?use=widget"></script>
 <script>
     setCurrentPage("addbuild");
-    <
-    c:if test = "${message != null}" > alert("${message}") </
-    c:if>
+    <c:if test = "${message != null}" > alert("${message}") </c:if>
     function submitForm() {
         var keyword = document.getElementById("keyword");
         if ($.trim(keyword.value) == "") {
