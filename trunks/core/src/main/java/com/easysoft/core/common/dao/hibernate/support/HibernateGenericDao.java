@@ -1,9 +1,11 @@
 package com.easysoft.core.common.dao.hibernate.support;
 
 import com.easysoft.core.common.dao.IGenericDao;
-
 import com.easysoft.framework.db.PageOption;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
+import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
 import java.util.List;
@@ -13,21 +15,14 @@ import java.util.Map;
  * @author : andy.huang
  * @since :
  */
-public class MybatisGenericDao<T,PK extends Serializable> extends SqlMapClientDaoSupport implements IGenericDao<T,PK> {
-    public static final String SQL_INSERT = "insert";
-    private String sqlMapNamespace = "";
-
-    public String getSqlMapNamespace() {
-        return sqlMapNamespace;
-    }
-
-    public void setSqlMapNamespace(String sqlMapNamespace) {
-        this.sqlMapNamespace = sqlMapNamespace;
-    }
-
+@Repository
+public class HibernateGenericDao<T,PK extends Serializable> implements IGenericDao<T,PK> {
+    @Autowired
+    protected SessionFactory sessionFactory;
     @Override
     public void save(T entity) {
-        this.getSqlMapClientTemplate().insert(sqlMapNamespace + "."+ SQL_INSERT,entity);
+        sessionFactory.getCurrentSession().save(entity);
+
     }
 
     @Override
@@ -42,6 +37,11 @@ public class MybatisGenericDao<T,PK extends Serializable> extends SqlMapClientDa
 
     @Override
     public List<T> queryForListByHql(String hql) {
+        return sessionFactory.getCurrentSession().createQuery(hql).list();
+    }
+
+    @Override
+    public List<T> queryForPage(PageOption pageOption) {
         return null;
     }
 
@@ -59,10 +59,4 @@ public class MybatisGenericDao<T,PK extends Serializable> extends SqlMapClientDa
     public void deleteById(PK id) {
 
     }
-
-    @Override
-    public List<T> queryForPage(PageOption pageOption) {
-        return null;
-    }
 }
-

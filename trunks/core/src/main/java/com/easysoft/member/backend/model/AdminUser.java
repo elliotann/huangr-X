@@ -12,6 +12,8 @@ import java.util.List;
  * 
  * @author andy
  */
+@Entity
+@Table(name="t_adminuser")
 public class AdminUser extends IdEntity{
 	
 

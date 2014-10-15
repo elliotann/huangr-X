@@ -63,6 +63,7 @@
         </property>
         <property name="defaultTargetDataSource" ref="dataSourceDruid"/>
     </bean>
+
 	<bean id="simpleJdbcTemplate" class="org.springframework.jdbc.core.simple.SimpleJdbcTemplate">
   		<constructor-arg><ref bean="dataSource"/></constructor-arg>
 	</bean>
