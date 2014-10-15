@@ -18,10 +18,18 @@
 
 package com.easysoft.build.controller;
 
+import com.easysoft.build.manager.BuildDetailiDataService;
+import com.easysoft.build.manager.BuildReposManager;
+import com.easysoft.build.model.RepositoryInfo;
 import com.easysoft.core.common.controller.BaseController;
+import com.easysoft.core.common.vo.json.AjaxJson;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author : andy.huang
@@ -32,6 +40,18 @@ import org.springframework.web.servlet.ModelAndView;
 public class BuildAction extends BaseController {
     @RequestMapping(params = {"add"})
     public ModelAndView toAddBuild(){
-        return new ModelAndView("admin/core/build/addbuild");
+        RepositoryInfo repositoryInfo = BuildReposManager.getByName("jeap1.0");
+        Map<String,Object> params = new HashMap<String,Object>();
+        params.put("repos",repositoryInfo);
+        return new ModelAndView("admin/core/build/addbuild",params);
     }
+    
+    @RequestMapping(params = {"toConfirm"})
+    public ModelAndView toConfirm(){
+
+        Map<String,Object> params = new HashMap<String,Object>();
+
+        return new ModelAndView("admin/core/build/confirmbuild",params);
+    }
+
 }
