@@ -35,7 +35,7 @@ import java.util.Properties;
 @Controller
 @RequestMapping({"/install/install"})
 public class InstallController extends BaseController{
-    @Autowired
+    /*@Autowired
     @Qualifier("dynamicDataSourceCreator")
     private IDataSourceCreator dataSourceCreator;
     @Autowired
@@ -45,9 +45,9 @@ public class InstallController extends BaseController{
     @Autowired
     private InstallManager installManager;
 
-    /**
+    *//**
      * 第一步，显示协议
-     */
+     *//*
     @RequestMapping(params = {"step1"})
     public ModelAndView step1(){
         Properties props=System.getProperties();
@@ -62,9 +62,9 @@ public class InstallController extends BaseController{
 
 
 
-    /**
+    *//**
      * 保存Oracle数据设置
-     */
+     *//*
     private void saveOracleDBParams(DBConfig dbConfig){
         Properties props = new Properties();
         props.setProperty("jdbc.driverClassName", "oracle.jdbc.driver.OracleDriver");
@@ -76,9 +76,9 @@ public class InstallController extends BaseController{
         saveProperties(props);
     }
 
-    /**
+    *//**
      * 保存SQLServer数据设置
-     */
+     *//*
     private void saveSQLServerDBParams(DBConfig dbConfig){
         Properties props = new Properties();
         props.setProperty("jdbc.driverClassName", "com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -87,9 +87,9 @@ public class InstallController extends BaseController{
         props.setProperty("jdbc.password", dbConfig.getDbPassword());
         saveProperties(props);
     }
-    /**
+    *//**
      * 保存mysql数据设置
-     */
+     *//*
     private void saveMysqlDBParams(DBConfig dbConfig){
         Properties props = new Properties();
         props.setProperty("jdbc.driverClassName", "com.mysql.jdbc.Driver");
@@ -102,10 +102,10 @@ public class InstallController extends BaseController{
         saveProperties(props);
     }
 
-    /**
+    *//**
      * 保存到jdbc.properties文件
      * @param props
-     */
+     *//*
     private void saveProperties(Properties props){
         try {
             String path = PathUtil.getRootPath("config/jdbc.properties");
@@ -118,9 +118,9 @@ public class InstallController extends BaseController{
             e.printStackTrace();
         }
     }
-    /**
+    *//**
      * 保存参数配置
-     */
+     *//*
     private void saveParams(String dbType,int resourcemode,String staticpath,String solutionpath,String staticdomain,HttpServletRequest request){
         this.prosessPath(staticpath,solutionpath,staticdomain);
         InputStream in = FileUtil.getResourceAsStream("jeap.properties");
@@ -173,9 +173,9 @@ public class InstallController extends BaseController{
             e.printStackTrace();
         }
     }
-    /**
+    *//**
      * 处理路径最后不要以/结尾
-     */
+     *//*
     private void prosessPath(String staticpath,String solutionpath,String staticdomain){
         if(staticpath!=null)
             staticpath = staticpath.endsWith("/")?staticpath.substring(0,staticpath.length()-1): staticpath;
@@ -187,18 +187,18 @@ public class InstallController extends BaseController{
         if(staticdomain!=null)
             staticdomain = staticdomain.endsWith("/")?staticdomain.substring(0,staticdomain.length()-1): staticdomain;
     }
-    /**
+    *//**
      * 测试MySQL连接
      * @return
-     */
+     *//*
 
     private boolean mysqlTestConnection(DBConfig dbConfig){
         return createAndTest("com.mysql.jdbc.Driver", "jdbc:mysql://"+dbConfig.getDbHost()+"/test?useUnicode=true&characterEncoding=utf8",dbConfig.getDbType(),dbConfig.getDbHost(),dbConfig.getDbName(),dbConfig.getDbUsername(),dbConfig.getDbPassword());
     }
-    /**
+    *//**
      * 测试Oracle连接
      * @return
-     */
+     *//*
 
     private boolean oracleTestConnection(DBConfig dbConfig){
         return createAndTest("oracle.jdbc.driver.OracleDriver", "jdbc:oracle:thin:@" + dbConfig.getDbHost() + ":" + dbConfig.getDbName(),dbConfig.getDbType(),dbConfig.getDbHost(),dbConfig.getDbName(),dbConfig.getDbUsername(),dbConfig.getDbPassword());
@@ -207,13 +207,13 @@ public class InstallController extends BaseController{
     private boolean sqlserverTestConnection(DBConfig dbConfig){
         return createAndTest("com.microsoft.sqlserver.jdbc.SQLServerDriver", "jdbc:sqlserver://" + dbConfig.getDbHost() + ";databaseName=" + dbConfig.getDbName(),dbConfig.getDbType(),dbConfig.getDbHost(),dbConfig.getDbName(),dbConfig.getDbUsername(),dbConfig.getDbPassword());
     }
-    /**
+    *//**
      * 测试数据库连接
      * 和test库建立连接，检测用户试图创建的数据库是否存在，如果不存在则建立相应数据库。
      * 创建后返回相应的数据源给jdbctemplate
      * 然后进行一个数据库操作测试以证明数据库建立并连接成功
      * @return
-     */
+     *//*
     private boolean createAndTest(String driver,String url,String dbtype,String dbhost,String dbname,String uname,String pwd){
         try{
             DataSource newDataSource = this.dataSourceCreator.createDataSource(driver,url,uname,pwd);
@@ -300,5 +300,5 @@ public class InstallController extends BaseController{
         FileUtil.write(ParamSetting.ESF_PATH + "/install/install.lock", "如果要重新安装，请删除此文件，并重新起动web容器");
         ParamSetting.INSTALL_LOCK ="yes";
         return new ModelAndView("install/success");
-    }
+    }*/
 }
