@@ -29,6 +29,8 @@ public interface IGenericDao<T,PK extends Serializable> {
      */
     public List<T> queryForList(Map<String,Object> params);
 
+    public List<T> queryForListByHql(String hql);
+
     /**
      * 要页查询记录
      * @param pageOption

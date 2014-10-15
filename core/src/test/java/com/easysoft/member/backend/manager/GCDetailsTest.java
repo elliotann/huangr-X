@@ -18,7 +18,7 @@
 
 package com.easysoft.member.backend.manager;
 
-import com.taobao.api.internal.util.WebUtils;
+
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -42,11 +42,11 @@ public class GCDetailsTest {
         props.put("redirect_uri","http://ezshop.com");
         props.put("view","web");
         String s="";
-        try{
+       /* try{
             s= WebUtils.doPost(url, props, 30000, 30000);
             System.out.println(s);
         }catch(IOException e){
-            e.printStackTrace();}
+            e.printStackTrace();}*/
     }
 
 

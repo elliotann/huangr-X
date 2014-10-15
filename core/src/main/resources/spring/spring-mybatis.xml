@@ -13,7 +13,7 @@
         <property name="mapperLocations" value="classpath:mapper/*.xml"/>
     </bean>
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.easysoft.member.backend.dao,com.easysoft.core.dao,com.easysoft.component.*.dao,com.easysoft.core.log.support"/>
+        <property name="basePackage" value="com.easysoft.core.dao,com.easysoft.component.*.dao,com.easysoft.core.log.support"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
