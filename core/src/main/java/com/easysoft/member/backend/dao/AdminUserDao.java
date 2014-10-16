@@ -21,9 +21,9 @@ public class AdminUserDao extends HibernateGenericDao<AdminUser,Integer> impleme
 
     @Override
     public AdminUser queryUserByName(Map<String, Object> conditions) {
-        String hql = " from AdminUser a where a.username="+conditions.get("username");
-        if(StringUtils.isNotEmpty(conditions.get("userId").toString())){
-            hql += " and a.id!=? ";
+        String hql = " from AdminUser a where a.username='"+conditions.get("username").toString()+"'";
+        if(StringUtils.isNotEmpty(conditions.get("userId").toString())&&!"0".equals(conditions.get("userId").toString())){
+            hql += " and a.id!='"+conditions.get("userId").toString()+"' ";
         }
         List<AdminUser> adminUserList = this.queryForListByHql(hql);
         if(adminUserList.isEmpty()){

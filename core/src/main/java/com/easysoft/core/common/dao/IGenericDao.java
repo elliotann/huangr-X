@@ -1,6 +1,7 @@
 package com.easysoft.core.common.dao;
 
 import com.easysoft.framework.db.PageOption;
+import org.hibernate.criterion.Criterion;
 
 import java.io.Serializable;
 import java.util.List;
@@ -17,6 +18,12 @@ public interface IGenericDao<T,PK extends Serializable> {
      * @param entity
      */
     public void save(T entity);
+
+    /**
+     * 保存或者更新实体
+     * @param entity
+     */
+    public void saveOrUpdate(T entity);
 
     /**
      * 查询列表
@@ -37,6 +44,8 @@ public interface IGenericDao<T,PK extends Serializable> {
      * @return
      */
     public List<T> queryForPage(PageOption pageOption);
+    public List<T> queryForPage(PageOption pageOption, List<Criterion> criterions);
+    public List<T> queryForHQL(String hql,Map<String,Object> params);
 
     public T queryById(PK id);
 

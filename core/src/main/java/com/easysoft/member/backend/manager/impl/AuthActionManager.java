@@ -51,7 +51,7 @@ public class AuthActionManager extends GenericService<AuthAction> implements IAu
     public int batAddRoleAuth(Integer roleId, List<FunAndOper> funAndOpers) {
         RoleAuth roleAuth;
         Role role = new Role();
-        role.setRoleid(roleId);
+        role.setId(roleId);
 
         List<RoleAuth> roleAuths = null;//roleAuthManager.findByProperty(RoleAuth.class,"role.id",roleId);
         for(RoleAuth roleAuthTemp : roleAuths){

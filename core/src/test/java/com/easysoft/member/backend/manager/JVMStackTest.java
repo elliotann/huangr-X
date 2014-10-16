@@ -32,7 +32,7 @@ public class JVMStackTest {
         long f=0;
         long h=0;
         count++;
-        resursion(a,b,c);
+        //resursion(a,b,c);
     }
     @Test
     public void test(){

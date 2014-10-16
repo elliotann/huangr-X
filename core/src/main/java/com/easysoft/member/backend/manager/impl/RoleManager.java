@@ -59,7 +59,7 @@ public class RoleManager implements IRoleManager {
     */
     private void synRoleToActiviti(Role role,boolean  synRoleToApprove) {
         if(synRoleToApprove){
-            String groupId = role.getRoleid()+"";
+            String groupId = role.getId()+"";
             Group group = identityService.newGroup(groupId);
             group.setName(role.getRolename());
            // group.setType(role.getType());
@@ -70,7 +70,7 @@ public class RoleManager implements IRoleManager {
     @Transactional(propagation = Propagation.REQUIRED)
     public void update(Role role, int[] authids) {
         //校验参数
-        if(role.getRoleid()==0){
+        if(role.getId()==0){
             throw new IllegalArgumentException("编辑角色时id不可为空");
         }
         if(StringUtil.isEmpty( role.getRolename())) throw new IllegalArgumentException("编辑角色时名称不可为空");

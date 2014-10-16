@@ -14,6 +14,7 @@ import java.util.List;
 public class UserRoleDao extends HibernateGenericDao<UserRole,Integer> implements IUserRoleDao {
     @Override
     public List<UserRole> queryRolesByUserId(Integer userid) {
-        return null;
+        String hql = "from UserRole ur where ur.adminUser.id="+userid;
+        return this.queryForListByHql(hql);
     }
 }

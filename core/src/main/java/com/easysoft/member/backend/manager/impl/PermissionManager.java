@@ -98,7 +98,7 @@ public class PermissionManager extends BaseSupport implements IPermissionManager
         List<RoleAuth> results = new ArrayList<RoleAuth>();
         List<UserRole> userRoles = userRoleDao.queryRolesByUserId(userid);
         for(UserRole userRole : userRoles){
-            results.addAll(roleAuthManager.queryRoleAuthListByRoleId(userRole.getRole().getRoleid()));
+            results.addAll(roleAuthManager.queryRoleAuthListByRoleId(userRole.getRole().getId()));
         }
 		return results;
 	}

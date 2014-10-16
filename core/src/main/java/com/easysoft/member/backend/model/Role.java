@@ -1,6 +1,7 @@
 package com.easysoft.member.backend.model;
 
 
+import com.easysoft.core.common.entity.IdEntity;
 import com.easysoft.framework.db.NotDbField;
 
 import javax.persistence.*;
@@ -9,21 +10,14 @@ import javax.persistence.*;
  * 角色实体
  * @author andy
  */
+@Entity
+@Table(name = "t_role")
+public class Role extends IdEntity{
 
-public class Role {
-	private int roleid;
 	private String rolename;
 	private String rolememo;
 	private int[] actids; //此角色权限id数组
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="roleid")
-	public int getRoleid() {
-		return roleid;
-	}
-	public void setRoleid(int roleid) {
-		this.roleid = roleid;
-	}
+
 	public String getRolename() {
 		return rolename;
 	}

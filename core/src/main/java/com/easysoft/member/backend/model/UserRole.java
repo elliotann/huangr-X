@@ -1,5 +1,7 @@
 package com.easysoft.member.backend.model;
 
+import com.easysoft.core.common.entity.IdEntity;
+
 import javax.persistence.*;
 
 /**
@@ -7,23 +9,16 @@ import javax.persistence.*;
  * Date: 14-5-14
  * Time: 下午5:08
  *
- * @since:
+ * @since: 1.0
  */
+@Entity
+@Table(name = "t_user_role")
+public class UserRole extends IdEntity{
 
-public class UserRole {
-    private Integer id;
     private AdminUser adminUser;
     private Role role;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="id")
-    public Integer getId() {
-        return id;
-    }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+
     @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.REFRESH }, optional = false)
     @JoinColumn(name = "userid")
     public AdminUser getAdminUser() {
