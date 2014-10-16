@@ -105,11 +105,11 @@ package com.easysoft.build.web;
          BuildConfigInfoService serv = SpringContextHolder.getBean(BuildConfigInfoService.class);
          serv.saveBcConfigInBuilding(config);
          
-         BuildDetailiDataService bdds = new BuildDetailiDataService();
+        /* BuildDetailiDataService bdds = new BuildDetailiDataService();
          List<BuildDetailData> lb= bdds.getBuildDetailDataListByNo(config.getVps());
          
          BtBuildPackDetailService bbpds = SpringContextHolder.getBean(BtBuildPackDetailService.class);
-         bbpds.saveList(lb,config);
+         bbpds.saveList(lb,config);*/
          
          //ReadProperties pro = new ReadProperties("sysconfig.properties");
         /* RtxSend rs = new RtxSend();

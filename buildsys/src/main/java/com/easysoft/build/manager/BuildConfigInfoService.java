@@ -20,6 +20,8 @@ package com.easysoft.build.manager;
 
 
 import com.easysoft.build.dao.BuildConfigInfoDao;
+import com.easysoft.build.dao.BuildConfigInfoLogDao;
+import com.easysoft.build.dao.RespInfoDao;
 import com.easysoft.build.model.*;
 import com.easysoft.framework.utils.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,12 +38,41 @@ import java.util.List;
 @Service("patch_buildConfigInfoService")
 @Transactional
 public class BuildConfigInfoService{
-	  @Autowired
-	  private BuildConfigInfoDao buildConfigInfoDao;
-	  @Autowired
-	  private RespInfoDao respInfoDao;
-	  @Autowired
-	  private BuildConfigInfoLogDao buildConfigInfoLogDao;	  
+    @Autowired
+    private BuildConfigInfoDao buildConfigInfoDao;
+    @Autowired
+    private BuildConfigInfoLogDao buildConfigInfoLogDao;
+    @Autowired
+    private RespInfoDao respInfoDao;
+    public void saveBcConfigInBuilding(BuildConfig config){
+        BuildConfigInfo bc = new BuildConfigInfo();
+        RepInfo ri = respInfoDao.getRespInfoByName(config.getVersion());
+        bc.setRi(ri);
+        bc.setBuildFileName(config.getId());
+        bc.setStatus("0");
+        bc.setAdder(config.getDevelopers());
+        bc.setAddTime(new Date());
+        bc.setBuildDepends(config.listDepends());
+        bc.setBuildComments(config.getComment());
+        bc.setIncludsFiles(config.getFiles());
+        bc.setHasSql(config.getHas_sql());
+        bc.setSqlFiles(config.getSqlFiles());
+        bc.setVpNames(config.getVps());
+        bc.setIncludsModules(config.getModules());
+        buildConfigInfoDao.saveBuildConfigInfo(bc);
+        //记录日志表
+        BuildConfigInfoLog log = new BuildConfigInfoLog();
+        log.setRi(ri);
+        log.setBc(bc);
+        log.setOperater(config.getDevelopers());
+        log.setOperaterCode("0");
+        log.setOperaterName("提交构建");
+        log.setOperaterTime(new Date());
+        buildConfigInfoLogDao.saveBuildConfigInfoLog(log);
+    }
+	  /*
+
+
 	  @Autowired
 	  private DeployPackInfoDao deployPackInfoDao;
 	  @Autowired
@@ -77,32 +108,7 @@ public class BuildConfigInfoService{
 		  buildConfigInfoDao.saveBuildConfigInfo(bc);
 	  }
 	  
-	  public void saveBcConfigInBuilding(BuildConfig config){
-		  BuildConfigInfo bc = new BuildConfigInfo();		  
-		  RepInfo ri = respInfoDao.getRespInfoByName(config.getVersion());
-		  bc.setRi(ri);
-		  bc.setBuildFileName(config.getId());
-		  bc.setStatus("0");
-		  bc.setAdder(config.getDevelopers());
-		  bc.setAddTime(new Date());
-		  bc.setBuildDepends(config.listDepends());
-		  bc.setBuildComments(config.getComment());
-		  bc.setIncludsFiles(config.getFiles());
-		  bc.setHasSql(config.getHas_sql());
-		  bc.setSqlFiles(config.getSqlFiles());
-		  bc.setVpNames(config.getVps());
-		  bc.setIncludsModules(config.getModules());
-		  buildConfigInfoDao.saveBuildConfigInfo(bc);
-		  //记录日志表
-		  BuildConfigInfoLog log = new BuildConfigInfoLog();
-		  log.setRi(ri);
-		  log.setBc(bc);
-		  log.setOperater(config.getDevelopers());
-		  log.setOperaterCode("0");
-		  log.setOperaterName("提交构建");
-		  log.setOperaterTime(new Date());
-		  buildConfigInfoLogDao.saveBuildConfigInfoLog(log);		  
-	  }	  
+
 	  
 	  public void saveBcConfigInStartesting(BuildConfig config){	
 		  RepInfo ri = respInfoDao.getRespInfoByName(config.getVersion());
@@ -337,5 +343,5 @@ public class BuildConfigInfoService{
 				+ ri.getVersionSuffix();
 
 		return patchName;
-	}
+	}*/
 }
