@@ -22,6 +22,7 @@ package com.easysoft.build.dao;
 import com.easysoft.build.model.BuildConfigInfo;
 import com.easysoft.build.model.DeployPackInfo;
 import com.easysoft.build.model.RepInfo;
+import com.easysoft.core.common.dao.hibernate.support.HibernateGenericDao;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ import java.util.Map;
 
 
 @Repository
-public class BuildConfigInfoDao {
+public class BuildConfigInfoDao extends HibernateGenericDao<BuildConfigInfo,Long>{
 	
 	public List<BuildConfigInfo> getBuildConfigInfoByDeployId(String id,String curBranch){
 		String hql = " from BuildConfigInfo bc  left join fetch bc.ri rInfo left join fetch bc.bd d where rInfo.name=:curBranch " +
@@ -39,7 +40,7 @@ public class BuildConfigInfoDao {
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("id", Long.valueOf(id));
 		params.put("curBranch", curBranch);
-		return this.searchByHql(hql, params);		
+		return this.queryForHQL(hql, params);
 	}
 	
 	public List<BuildConfigInfo> getBuildConfigInfoByDeployListId(List<DeployPackInfo> dplist,String curBranch){
@@ -52,10 +53,10 @@ public class BuildConfigInfoDao {
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("ids", ids);
 		params.put("curBranch", curBranch);
-		return this.searchByHql(hql, params);		
+		return this.queryForHQL(hql, params);
 	}
 	
-	public List<BuildConfigInfo> getBuildConfigInfoList(BuildConfigInfoSearchBean searchBean, PageControlData pgd,String curBranch){
+/*	public List<BuildConfigInfo> getBuildConfigInfoList(BuildConfigInfoSearchBean searchBean, PageControlData pgd,String curBranch){
 		  List<BuildConfigInfo> list = new ArrayList<BuildConfigInfo>();	
 		  String pageHql = " from BuildConfigInfo bc left join bc.ri rInfo where 1=1 and bc.ri.name='"+curBranch+"' "+searchBean.getSerchCondition();
 		  if("1".equals(searchBean.getIo())){
@@ -66,7 +67,7 @@ public class BuildConfigInfoDao {
 			  hql += " and bc.status <> '4' ";
 		  }
 		  hql += " order by " + searchBean.getSort() + " " + searchBean.getOrder();
-		  return searchByHql(pgd, hql, pageHql, searchBean.getSerchParam());
+		  return queryForHQL(pgd, hql, pageHql, searchBean.getSerchParam());
 	}
 	
 	public List<BuildConfigInfo> getBuildConfigInfoExportList(BuildConfigInfoSearchBean searchBean,String curBranch){
@@ -76,15 +77,15 @@ public class BuildConfigInfoDao {
 			  hql += " and bc.status <> '4' ";
 		  }
 		  hql += " order by " + searchBean.getSort() + " " + searchBean.getOrder();
-		  return searchByHql(hql, searchBean.getSerchParam());
+		  return queryForHQL(hql, searchBean.getSerchParam());
 	 }
-	
+	*/
 	
 	public BuildConfigInfo getBuildConfigInfo(long id){
 		String hql = " from BuildConfigInfo bc left join fetch bc.ri rInfo left join fetch bc.bd where bc.id = :id  ";
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("id", id);
-		List list = this.searchByHql(hql, params);
+		List list = this.queryForHQL(hql, params);
 		if(list!=null&&list.size()>0){
 			return (BuildConfigInfo) list.get(0);
 		}else{
@@ -96,14 +97,14 @@ public class BuildConfigInfoDao {
 		String hql = " from BuildConfigInfo bc where bc.buildFileName = :buildName  ";
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("buildName", buildName);
-		return this.searchByHql(hql, params);		
+		return this.queryForHQL(hql, params);
 	}
 	
 	public BuildConfigInfo getBuildConfigInfoByNameNoCancel(String buildName,RepInfo ri){
 		String hql = " from BuildConfigInfo bc left join fetch bc.ri left join fetch bc.bd where bc.buildFileName = :buildName and bc.status<>'4' and bc.ri.id="+ri.getId();
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("buildName", buildName);
-		List list = this.searchByHql(hql, params);
+		List list = this.queryForHQL(hql, params);
 		if(list!=null&&list.size()>0){ 
 			return (BuildConfigInfo) list.get(0);
 		}else{
@@ -117,7 +118,7 @@ public class BuildConfigInfoDao {
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("respInfoId", respInfoId);
 		params.put("buildName", "%"+buildName+"%");
-		return this.searchByHql(hql, params);		
+		return this.queryForHQL(hql, params);
 	}
 	
 	public void saveBuildConfigInfo(BuildConfigInfo bc){
@@ -126,7 +127,7 @@ public class BuildConfigInfoDao {
 	
 	public void delBuildConfigInfo(BuildConfigInfo bc){		
 		if(bc!=null){
-			this.delete(bc);
+			this.deleteById(bc.getId());
 		}
 	}
 

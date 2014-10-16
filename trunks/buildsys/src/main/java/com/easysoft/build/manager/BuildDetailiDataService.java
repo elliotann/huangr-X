@@ -21,11 +21,14 @@ package com.easysoft.build.manager;
 import com.easysoft.build.model.BuildDetailData;
 import org.apache.commons.lang.StringUtils;
 
+import java.util.List;
+
 /**
  * @author : andy.huang
  * @since :
  */
 public class BuildDetailiDataService {
+
     public void validBuildNo(String[] nos){
         String rs = "";
         for(String no:nos){
@@ -40,4 +43,5 @@ public class BuildDetailiDataService {
     public BuildDetailData getBuildDetailDataNoByNo(String no){
         return null;//dao.getBuildDetailDataNoByNo(no);
     }
+
 }
