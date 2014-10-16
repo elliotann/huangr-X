@@ -83,36 +83,42 @@ public class Menu extends IdEntity{
 	public void setSelected(Integer selected) {
 		this.selected = selected;
 	}
+    @Column(name = "pid")
 	public Integer getPid() {
 		return pid;
 	}
 	public void setPid(Integer pid) {
 		this.pid = pid;
 	}
+    @Column(name = "title")
 	public String getTitle() {
 		return title;
 	}
 	public void setTitle(String title) {
 		this.title = title;
 	}
+    @Column(name = "url")
 	public String getUrl() {
 		return url;
 	}
 	public void setUrl(String url) {
 		this.url = url;
 	}
+    @Column(name = "target")
 	public String getTarget() {
 		return target;
 	}
 	public void setTarget(String target) {
 		this.target = target;
 	}
+    @Column(name = "sorder")
 	public Integer getSorder() {
 		return sorder;
 	}
 	public void setSorder(Integer sorder) {
 		this.sorder = sorder;
 	}
+    @Column(name = "menutype")
 	public Integer getMenutype() {
 		return menutype;
 	}
@@ -126,13 +132,14 @@ public class Menu extends IdEntity{
 	public void setChildren(List<Menu> children) {
 		this.children = children;
 	}
+    @Column(name = "appid")
 	public String getAppid() {
 		return appid;
 	}
 	public void setAppid(String appid) {
 		this.appid = appid;
 	}
-
+    @Column(name = "ico")
     public String getIco() {
         return ico;
     }
@@ -141,6 +148,7 @@ public class Menu extends IdEntity{
         this.ico = ico;
     }
     @NotDbField
+    @Transient
     public boolean isHasAuth() {
         return hasAuth;
     }
@@ -148,7 +156,7 @@ public class Menu extends IdEntity{
     public void setHasAuth(boolean hasAuth) {
         this.hasAuth = hasAuth;
     }
-
+    @Transient
     public int get_parentId() {
         return pid;
     }
@@ -156,7 +164,7 @@ public class Menu extends IdEntity{
     public void set_parentId(int _parentId) {
         this._parentId = _parentId;
     }
-
+    @Transient
     public boolean isChecked() {
         return checked;
     }
