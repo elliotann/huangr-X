@@ -1,0 +1,24 @@
+package com.easysoft.core.dao;
+
+import com.easysoft.core.common.dao.hibernate.support.HibernateGenericDao;
+import com.easysoft.member.backend.model.Menu;
+import org.springframework.stereotype.Repository;
+
+import java.util.Map;
+
+/**
+ * @author : andy.huang
+ * @since :
+ */
+@Repository
+public class MenuDao extends HibernateGenericDao<Menu,Integer> implements IMenuDao {
+    @Override
+    public Menu queryMenuByCondition(Map<String, Object> conditions) {
+        return null;
+    }
+
+    @Override
+    public void deleteMenuByCondition(Map<String, Object> conditions) {
+
+    }
+}

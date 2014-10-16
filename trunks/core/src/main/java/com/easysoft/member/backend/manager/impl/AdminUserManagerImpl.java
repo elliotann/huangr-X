@@ -20,15 +20,15 @@ import com.easysoft.member.backend.model.AdminUser;
 import org.activiti.engine.IdentityService;
 import org.activiti.engine.identity.User;
 import org.activiti.engine.identity.UserQuery;
+import org.apache.commons.lang3.StringUtils;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 管理员管理实现
@@ -156,7 +156,7 @@ public class AdminUserManagerImpl  implements IAdminUserManager {
 		return adminUserDao.queryForList();
 	}
 	
-	
+
 	public List<Map> list(Integer userid, Integer siteid) {
 		String sql  ="select * from es_adminuser_"+ userid +"_"+ siteid ;
 		return null;//this.daoSupport.queryForList(sql);
@@ -271,7 +271,10 @@ public class AdminUserManagerImpl  implements IAdminUserManager {
     @Override
     public PageOption queryForPage(PageOption pageOption,String username) {
         pageOption.addSearch("username",username);
-        List<AdminUser> adminUsers = adminUserDao.queryForPage(pageOption);
+        List<Criterion> criterions = new ArrayList<Criterion>();
+        if(StringUtils.isNotEmpty(username))
+            criterions.add(Restrictions.like("username",username));
+        List<AdminUser> adminUsers = adminUserDao.queryForPage(pageOption,criterions);
 
         if(!adminUsers.isEmpty()){
             pageOption.setData(adminUsers);

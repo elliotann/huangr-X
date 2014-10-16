@@ -129,8 +129,6 @@ public class LoginProcessor implements Processor {
 			}else{  //删除用户名
 				HttpUtil.addCookie(httpResponse, "loginname", "", 0);
 			}
-			
-			
 			return response;
 			 
 		} catch (RuntimeException exception) {

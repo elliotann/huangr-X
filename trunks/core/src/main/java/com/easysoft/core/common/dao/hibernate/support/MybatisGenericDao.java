@@ -3,6 +3,7 @@ package com.easysoft.core.common.dao.hibernate.support;
 import com.easysoft.core.common.dao.IGenericDao;
 
 import com.easysoft.framework.db.PageOption;
+import org.hibernate.criterion.Criterion;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
 import java.io.Serializable;
@@ -28,6 +29,11 @@ public class MybatisGenericDao<T,PK extends Serializable> extends SqlMapClientDa
     @Override
     public void save(T entity) {
         this.getSqlMapClientTemplate().insert(sqlMapNamespace + "."+ SQL_INSERT,entity);
+    }
+
+    @Override
+    public void saveOrUpdate(T entity) {
+
     }
 
     @Override
@@ -62,6 +68,16 @@ public class MybatisGenericDao<T,PK extends Serializable> extends SqlMapClientDa
 
     @Override
     public List<T> queryForPage(PageOption pageOption) {
+        return null;
+    }
+
+    @Override
+    public List<T> queryForPage(PageOption pageOption, List<Criterion> criterions) {
+        return null;
+    }
+
+    @Override
+    public List<T> queryForHQL(String hql, Map<String, Object> params) {
         return null;
     }
 }
