@@ -154,4 +154,9 @@ public class PageOption implements Serializable {
     public void setSearchConditions(Map<String, Object> searchConditions) {
         this.searchConditions = searchConditions;
     }
+
+    public int getStartRecord(){
+        return (currentPageNo-1)*pageSize;
+    }
+
 }
