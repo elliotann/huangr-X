@@ -418,15 +418,15 @@ public class TagUtil {
 		buffer.append("[");
 		for (Role node : list) {
 			if (roles.size() > 0) {
-				buffer.append("{\"id\":" + node.getRoleid() + ",\"text\":\"" + node.getRolename() + "\"");
+				buffer.append("{\"id\":" + node.getId() + ",\"text\":\"" + node.getRolename() + "\"");
 				for (Role node1 : roles) {
-					if (node.getRoleid() == node1.getRoleid()) {
+					if (node.getId() == node1.getId()) {
 						buffer.append(",\"selected\":true");
 					}
 				}
 				buffer.append("},");
 			} else {
-				buffer.append("{\"id\":" + node.getRoleid() + ",\"text\":\"" + node.getRolename() + "\"},");
+				buffer.append("{\"id\":" + node.getId() + ",\"text\":\"" + node.getRolename() + "\"},");
 			}
 
 		}
