@@ -12,7 +12,8 @@ import java.util.List;
  * @author andy
  * @version 1.0
  */
-
+@Entity
+@Table(name = "t_menu")
 public class Menu extends IdEntity{
 
 
