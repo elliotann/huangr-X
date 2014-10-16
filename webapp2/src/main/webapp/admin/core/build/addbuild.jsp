@@ -3,10 +3,11 @@
 <html>
 <head>
     <title></title>
+    <script type="text/javascript" src="${context}/js/build/pub.js"></script>
 </head>
 <body>
 <div class="main">
-    <form action="${contextPath}/manage/confirmbuild.jsp" method="post" id="addForm">
+    <form action="build.do?toConfirm" method="post" id="addForm">
         <table style="border:0; width:100%; text-align:left; margin-bottom:10px;">
             <tr>
                 <td class="tl">*VP单列表:</td>
@@ -75,30 +76,7 @@
             return;
         }
 
-        var flag = true;
 
-        $.ajax({
-            url: fn.hostPath + "manage/buildConfigInfo.do?method=validBuildDetailiData&" + Math.round(Math.random() * 1000),
-            type: "post",
-            data: 'nos=' + keyword.value,
-            dataType: "json",
-            async: false,
-            cache: false,
-            success: function (json) {
-                if (!json.msgCode) {
-                    flag = false;
-                    alert(json.msg);
-                }
-            },
-            error: function () {
-                alert(json.msg);
-                flag = false;
-            }
-        });
-
-        if (!flag) {
-            return;
-        }
 
         var project = document.getElementById("selectedProjects");
         var options = project.options;
