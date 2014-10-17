@@ -37,7 +37,7 @@
                             String log = buildLogs[i];
                             int index = log.indexOf(']');
                             if (index != -1) {
-                                log = "<a href='" + request.getContextPath() + "/manage/getFile.do?type=log&filename=" +
+                                log = "<a href='" + request.getContextPath() + "/core/admin/buildLogQuery.do?getFile&type=log&filename=" +
                                         log.substring(1, index) + "'>" + log + "</a>";
                             }
                             out.println("<li>" + log + "</li>");
