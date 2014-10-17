@@ -106,7 +106,7 @@ public abstract class PatchUtil {
 				}
 			}
 			
-			SVNUtil.checkOutModule(repos.getName(), "sql", logger); //检出sql信息
+			//SVNUtil.checkOutModule(repos.getName(), "sql", logger); //检出sql信息
 			String[] modules = config.getModules().split(";");
 			for (String module : modules) {
 				if (module.trim().length() > 0)

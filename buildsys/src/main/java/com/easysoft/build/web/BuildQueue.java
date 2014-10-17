@@ -102,7 +102,7 @@ package com.easysoft.build.web;
        try {
          PatchUtil.buildPackage(config);
          
-         BuildConfigInfoService serv = SpringContextHolder.getBean(BuildConfigInfoService.class);
+         BuildConfigInfoService serv = (BuildConfigInfoService)SpringContextHolder.getBean("buildConfigInfoService");
          serv.saveBcConfigInBuilding(config);
          
         /* BuildDetailiDataService bdds = new BuildDetailiDataService();
@@ -117,6 +117,7 @@ package com.easysoft.build.web;
  		 rs.sendNotify(rtxUsers*//*pro.getPropertyArray("rtxtestuser")*//*,"构建包提交通知", "构建单号"+config.getVps()+"已提交,请测试!");  */
          getLogQueue(config.getId()).logMessage("构建完成,请测试");
        } catch (Exception e) {
+           e.printStackTrace();
          getLogQueue(config.getId()).logMessage("构建出错" + e.getMessage());
        }
        QueueLog que = (QueueLog)this.logQues.remove(config.getId());

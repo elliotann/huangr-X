@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="GB2312"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <repositories xmlns="http://wwww.jeap.com"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://www.jeap.com build_repos.xsd">
@@ -9,21 +9,21 @@
 
         <svn_url>https://svn.java.net/svn/jveap~jeap/trunks/</svn_url>
         <svn_root>/trunks/</svn_root>
-        <branchRoot>/var/patch_build/v106/</branchRoot>
+        <branchRoot>/var/patch_build/v1.0/</branchRoot>
         <svn_user>360042212@qq.com</svn_user>
         <svn_password>hxa104706</svn_password>
-        <version_no>V10.6.</version_no>
+        <version_no>V1.0.</version_no>
         <version_pattern>yyyyMMdd</version_pattern>
         <version_suffix>Beta</version_suffix>
-        <test-users>autobuild;wudd;lixu;huh;liuchp;chenchun;yanhm;chengar=1q;dingsl;xieshzh;pengjq;xul;xudw;zhengw;huy;xieyp;caiyt;huangr;yangxf;yangh;zhangtm;zhangzhx;zhuyy;huanggf;yangh;luowm;wuf;zhengwt;liangxl</test-users>
-        <deploy-users>autobuild;xul;chengar</deploy-users>
-        <ss-users>xul;bt01</ss-users>
+        <test-users>autobuild;huangxa</test-users>
+        <deploy-users>autobuild;huangxa</deploy-users>
+        <ss-users>huangxa;bt01</ss-users>
         <sp_no>00</sp_no>
         <create_date>20131024</create_date>
-        <band>BFS</band>
-        <permit_band>BFS</permit_band>
+        <band>jeap</band>
+        <permit_band>jeap</permit_band>
         <permit_patch/>
-        <main_version>10</main_version>
-        <sub_version>6</sub_version>
+        <main_version>1</main_version>
+        <sub_version>0</sub_version>
     </repository>
 </repositories>

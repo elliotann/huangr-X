@@ -19,12 +19,15 @@
 package com.easysoft.build.manager;
 
 
-import com.easysoft.build.dao.BuildConfigInfoDao;
-import com.easysoft.build.dao.BuildConfigInfoLogDao;
-import com.easysoft.build.dao.RespInfoDao;
+import com.easysoft.build.dao.*;
 import com.easysoft.build.model.*;
+import com.easysoft.build.vo.BuildConfigInfoSearchBean;
+import com.easysoft.framework.db.PageOption;
 import com.easysoft.framework.utils.DateUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,7 +38,8 @@ import java.util.Date;
 import java.util.List;
 
 
-@Service("patch_buildConfigInfoService")
+@Service("buildConfigInfoService")
+@Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
 @Transactional
 public class BuildConfigInfoService{
     @Autowired
@@ -44,6 +48,12 @@ public class BuildConfigInfoService{
     private BuildConfigInfoLogDao buildConfigInfoLogDao;
     @Autowired
     private RespInfoDao respInfoDao;
+    @Autowired
+    private PrivatePackLogDao privatePackLogDao;
+    @Autowired
+    private DeployPackInfoDao deployPackInfoDao;
+    @Autowired
+    private DeployPackInfoLogDao deployPackInfoLogDao;
     public void saveBcConfigInBuilding(BuildConfig config){
         BuildConfigInfo bc = new BuildConfigInfo();
         RepInfo ri = respInfoDao.getRespInfoByName(config.getVersion());
@@ -70,15 +80,81 @@ public class BuildConfigInfoService{
         log.setOperaterTime(new Date());
         buildConfigInfoLogDao.saveBuildConfigInfoLog(log);
     }
+    public List<BuildConfigInfo> getBuildConfigInfoList(BuildConfigInfoSearchBean searchBean, PageOption pageOption,String curBranch){
+        List<BuildConfigInfo> results = buildConfigInfoDao.getBuildConfigInfoList(searchBean, pageOption,curBranch);
+        pageOption.setData(results);
+        return results;
+    }
+    public void saveBcConfigInPrivatePacking(String userName,String branch,String fileName){
+        String buildName = fileName.substring(0,fileName.indexOf(".zip"));
+        RepInfo ri = respInfoDao.getRespInfoByName(branch);
+        BuildConfigInfo bc = buildConfigInfoDao.getBuildConfigInfoByNameNoCancel(buildName,ri);
+        if(bc!=null){
+            PrivatePackLog plog = new PrivatePackLog();
+            plog.setBc(bc);
+            plog.setRi(ri);
+            plog.setDepends(bc.getBuildDepends());
+            plog.setTakePersonName(userName);
+            plog.setTakeTime(new Date());
+            privatePackLogDao.savePrivatePackLog(plog);
+        }
+    }
+    public void saveBcConfigInDeployPacking(BuildConfig config,String deployer) throws Exception{
+        //更新构建包信息为发布
+        RepInfo ri = respInfoDao.getRespInfoByName(config.getVersion());
+        BuildConfigInfo bc = buildConfigInfoDao.getBuildConfigInfoByNameNoCancel(config.getId(),ri);
+        if(bc!=null){
+            bc.setStatus("5");
+            bc.setDeployUsers(deployer);
+            bc.setDeployTime(new Date());
+
+            String patchName = "";
+            //判断是否是周BUG线
+            if("1".equals(ri.getIsWeekbug())){
+                patchName = makeWeekBugDeployPackName(ri);
+            }else{
+                //添加补丁记录  如果存在不用添加
+                Date curDate = Calendar.getInstance().getTime();
+                patchName = ri.getBand() +"."+ ri.getVersionNo() +ri.getSpNo()+"."
+                        + (ri.getVersionPattern() == null ? "":new SimpleDateFormat(ri.getVersionPattern()).format(curDate))
+                        +"01" +"." + ri.getVersionSuffix();
+            }
+
+            DeployPackInfo di = deployPackInfoDao.getDeployPackInfoByName(patchName,ri.getId());
+
+            if(di==null){
+                DeployPackInfo dinew = new DeployPackInfo();
+                dinew.setRi(ri);
+                dinew.setCreateTime(new Date());
+                dinew.setDeployPackName(patchName);
+                deployPackInfoDao.saveDeployPackInfo(dinew);
+                bc.setBd(dinew);
+            }else{
+                di.setCreateTime(new Date());
+                bc.setBd(di);
+            }
+
+            buildConfigInfoDao.saveBuildConfigInfo(bc);
+
+            //更新依赖该包的依赖
+            updateDeploys(config, ri);
+            //记录构建包日志
+            BuildConfigInfoLog log = new BuildConfigInfoLog();
+            log.setRi(ri);
+            log.setBc(bc);
+            log.setOperater(deployer);
+            log.setOperaterCode("5");
+            log.setOperaterName("发布构建包");
+            log.setOperaterTime(new Date());
+            buildConfigInfoLogDao.saveBuildConfigInfoLog(log);
+        }
+    }
 	  /*
 
 
-	  @Autowired
-	  private DeployPackInfoDao deployPackInfoDao;
-	  @Autowired
-	  private DeployPackInfoLogDao deployPackInfoLogDao;
-	  @Autowired
-	  private PrivatePackLogDao privatePackLogDao;
+
+
+
 	  
 	  
 	  
@@ -92,9 +168,7 @@ public class BuildConfigInfoService{
 	  }
 	  
 	  
-	  public List<BuildConfigInfo> getBuildConfigInfoList(BuildConfigInfoSearchBean searchBean, PageControlData pgd,String curBranch){		
-		  return buildConfigInfoDao.getBuildConfigInfoList(searchBean, pgd,curBranch);			
-	  }
+
 	  
 	  public List<BuildConfigInfo> getBuildConfigInfoExportList(BuildConfigInfoSearchBean searchBean,String curBranch){		
 		  return buildConfigInfoDao.getBuildConfigInfoExportList(searchBean,curBranch);			
@@ -170,29 +244,7 @@ public class BuildConfigInfoService{
 		  }
 	  }
 	  
-	  public void updateDeploys(BuildConfig config,RepInfo ri){
-		  List<BuildConfigInfo> list = buildConfigInfoDao.getDependsBuildConfigInfoList(config.getId(),ri.getId());
-		  String depends = "";
-		  String dnew = "";
-		  for(BuildConfigInfo bci :list){
-			  dnew = "";
-			  depends = bci.getBuildDepends();
-			  String[] dArray = StringUtil.StringToArray(depends);
-			  for(String d:dArray){
-				  if(config.getId().equals(d)){
-					  continue;
-				  }else{
-					  if(StringUtil.isBlank_new(dnew)){
-						  dnew = d;
-					  }else{
-						  dnew = dnew + ";" + d;
-					  }
-				  }
-			  }
-			  bci.setBuildDepends(dnew);
-			  buildConfigInfoDao.saveBuildConfigInfo(bci);
-		  }		  
-	  }
+
 	  
 	  public void saveBcConfigInCancelBuilding(BuildConfig config,String tester){
 		  //更新构建包信息为取消构建
@@ -217,101 +269,13 @@ public class BuildConfigInfoService{
 		  }
 	  }
 	  
-	  public void saveBcConfigInDeployPacking(BuildConfig config,String deployer) throws Exception{
-		  //更新构建包信息为发布
-		  RepInfo ri = respInfoDao.getRespInfoByName(config.getVersion());
-		  BuildConfigInfo bc = buildConfigInfoDao.getBuildConfigInfoByNameNoCancel(config.getId(),ri);
-		  if(bc!=null){		  			  
-			  bc.setStatus("5");
-			  bc.setDeployUsers(deployer);
-			  bc.setDeployTime(new Date());
-			  
-			  String patchName = "";
-			  //判断是否是周BUG线
-			  if("1".equals(ri.getIsWeekbug())){
-				  patchName = makeWeekBugDeployPackName(ri);
-			  }else{
-				  //添加补丁记录  如果存在不用添加
-				  Date curDate = Calendar.getInstance().getTime();
-				  patchName = ri.getBand() +"."+ ri.getVersionNo() +ri.getSpNo()+"." 
-						    + (ri.getVersionPattern() == null ? "":new SimpleDateFormat(ri.getVersionPattern()).format(curDate))
-						    +"01" +"." + ri.getVersionSuffix();
-			  }
-			  
-			  DeployPackInfo di = deployPackInfoDao.getDeployPackInfoByName(patchName,ri.getId());
-			  
-			  if(di==null){
-				  DeployPackInfo dinew = new DeployPackInfo();
-				  dinew.setRi(ri);
-				  dinew.setCreateTime(new Date());
-				  dinew.setDeployPackName(patchName);
-				  deployPackInfoDao.saveDeployPackInfo(dinew);
-				  bc.setBd(dinew);
-			  }else{
-				  di.setCreateTime(new Date());
-				  bc.setBd(di);
-			  }
-			  
-			  buildConfigInfoDao.saveBuildConfigInfo(bc);
-			  
-			  //更新依赖该包的依赖
-			  updateDeploys(config, ri);
-			  //记录构建包日志
-			  BuildConfigInfoLog log = new BuildConfigInfoLog();		 
-			  log.setRi(ri);
-			  log.setBc(bc);
-			  log.setOperater(deployer);
-			  log.setOperaterCode("5");
-			  log.setOperaterName("发布构建包");
-			  log.setOperaterTime(new Date());
-			  buildConfigInfoLogDao.saveBuildConfigInfoLog(log);	  
-		  }
-	  }	 
+
 	  
-	  public void saveBcConfigInPrivatePacking(String userName,String branch,String fileName){
-		  String buildName = fileName.substring(0,fileName.indexOf(".zip"));
-		  RepInfo ri = respInfoDao.getRespInfoByName(branch);
-		  BuildConfigInfo bc = buildConfigInfoDao.getBuildConfigInfoByNameNoCancel(buildName,ri);		
-		  if(bc!=null){			 
-			  PrivatePackLog plog = new PrivatePackLog();
-			  plog.setBc(bc);
-			  plog.setRi(ri);
-			  plog.setDepends(bc.getBuildDepends());
-			  plog.setTakePersonName(userName);
-			  plog.setTakeTime(new Date());
-			  privatePackLogDao.savePrivatePackLog(plog);
-		  }
-	  }
+
 	  
-	  public void saveBcConfigInDeployPacking(String userName,String branch,String fileName){
-		  String packName = fileName.substring(0,fileName.indexOf(".zip"));
-		  RepInfo ri = respInfoDao.getRespInfoByName(branch);
-		  DeployPackInfo di = deployPackInfoDao.getDeployPackInfoByName(packName,ri.getId());	
-		  if(di!=null){
-			  DeployPackInfoLog dlog = new DeployPackInfoLog();
-			  dlog.setDp(di);
-			  dlog.setRi(ri);
-			  dlog.setTakePersonName(userName);
-			  dlog.setTakeTime(new Date());
-			  dlog.setTakeType("0");
-			  deployPackInfoLogDao.saveDeployPackInfoLog(dlog);
-		  }
-	  }
+
 	  
-	  public void saveBcConfigInEnDeployPacking(String userName,String branch,String fileName){
-		  String packName = fileName.substring(0,fileName.indexOf(".zip"));
-		  RepInfo ri = respInfoDao.getRespInfoByName(branch);
-		  DeployPackInfo di = deployPackInfoDao.getDeployPackInfoByName(packName,ri.getId());
-		  if(di!=null){
-			  DeployPackInfoLog dlog = new DeployPackInfoLog();
-			  dlog.setDp(di);
-			  dlog.setRi(ri);
-			  dlog.setTakePersonName(userName);
-			  dlog.setTakeTime(new Date());
-			  dlog.setTakeType("1");
-			  deployPackInfoLogDao.saveDeployPackInfoLog(dlog);
-		  }
-	  }
+
 	  
 	  
 	  
@@ -322,26 +286,79 @@ public class BuildConfigInfoService{
 		  }
 	  }
 	  
-	//生成/获取周BUG线补丁包名称
-	//规则2：    周补丁BUG线：BFS.V10.6.00.分支创建日期 + 02/03/04...(每日最多产生一个)
-	private static String makeWeekBugDeployPackName(RepInfo ri)
-			throws Exception {
+	*/
+      public void saveBcConfigInEnDeployPacking(String userName,String branch,String fileName){
+          String packName = fileName.substring(0,fileName.indexOf(".zip"));
+          RepInfo ri = respInfoDao.getRespInfoByName(branch);
+          DeployPackInfo di = deployPackInfoDao.getDeployPackInfoByName(packName,ri.getId());
+          if(di!=null){
+              DeployPackInfoLog dlog = new DeployPackInfoLog();
+              dlog.setDp(di);
+              dlog.setRi(ri);
+              dlog.setTakePersonName(userName);
+              dlog.setTakeTime(new Date());
+              dlog.setTakeType("1");
+              deployPackInfoLogDao.saveDeployPackInfoLog(dlog);
+          }
+      }
+      public void saveBcConfigInDeployPacking(String userName,String branch,String fileName){
+          String packName = fileName.substring(0,fileName.indexOf(".zip"));
+          RepInfo ri = respInfoDao.getRespInfoByName(branch);
+          DeployPackInfo di = deployPackInfoDao.getDeployPackInfoByName(packName,ri.getId());
+          if(di!=null){
+              DeployPackInfoLog dlog = new DeployPackInfoLog();
+              dlog.setDp(di);
+              dlog.setRi(ri);
+              dlog.setTakePersonName(userName);
+              dlog.setTakeTime(new Date());
+              dlog.setTakeType("0");
+              deployPackInfoLogDao.saveDeployPackInfoLog(dlog);
+          }
+      }
+      public void updateDeploys(BuildConfig config,RepInfo ri){
+          List<BuildConfigInfo> list = buildConfigInfoDao.getDependsBuildConfigInfoList(config.getId(),ri.getId());
+          String depends = "";
+          String dnew = "";
+          for(BuildConfigInfo bci :list){
+              dnew = "";
+              depends = bci.getBuildDepends();
 
-		Date curDate = DateUtil.toDate(ri.getCreateDate(), "yyyyMMdd");// 取分支创建日期
-		String dateVersion = (ri.getVersionPattern() == null ? ""
-				: new SimpleDateFormat(ri.getVersionPattern()).format(curDate));// 格式化日期版本号
+              String[] dArray = depends.split(";");
+              for(String d:dArray){
+                  if(config.getId().equals(d)){
+                      continue;
+                  }else{
+                      if(StringUtils.isEmpty(dnew)){
+                          dnew = d;
+                      }else{
+                          dnew = dnew + ";" + d;
+                      }
+                  }
+              }
+              bci.setBuildDepends(dnew);
+              buildConfigInfoDao.saveBuildConfigInfo(bci);
+          }
+      }
+      //生成/获取周BUG线补丁包名称
+      //规则2：    周补丁BUG线：BFS.V10.6.00.分支创建日期 + 02/03/04...(每日最多产生一个)
+      private static String makeWeekBugDeployPackName(RepInfo ri)
+              throws Exception {
 
-		// 取出最新的补丁包名
-		Calendar cal = Calendar.getInstance();
-		int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
-		// 小版本号：02-08
-		String smallVersion = (dayOfWeek == Calendar.SUNDAY) ? "08" // 1
-				: new DecimalFormat("00").format(dayOfWeek);// 2-7
+          Date curDate = DateUtil.toDate(ri.getCreateDate(), "yyyyMMdd");// 取分支创建日期
+          String dateVersion = (ri.getVersionPattern() == null ? ""
+                  : new SimpleDateFormat(ri.getVersionPattern()).format(curDate));// 格式化日期版本号
 
-		String patchName = ri.getBand() + "." + ri.getVersionNo()
-				+ ri.getSpNo() + "." + dateVersion + smallVersion + "."
-				+ ri.getVersionSuffix();
+          // 取出最新的补丁包名
+          Calendar cal = Calendar.getInstance();
+          int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
+          // 小版本号：02-08
+          String smallVersion = (dayOfWeek == Calendar.SUNDAY) ? "08" // 1
+                  : new DecimalFormat("00").format(dayOfWeek);// 2-7
 
-		return patchName;
-	}*/
+          String patchName = ri.getBand() + "." + ri.getVersionNo()
+                  + ri.getSpNo() + "." + dateVersion + smallVersion + "."
+                  + ri.getVersionSuffix();
+
+          return patchName;
+      }
 }

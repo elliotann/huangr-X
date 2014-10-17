@@ -35,9 +35,7 @@ public class BuildConfigInfoLog {
 	private BuildConfigInfo bc;
     
 	@Id
-    @GeneratedValue(strategy = GenerationType.TABLE, generator = "BT_BUILDCONFIG_LOG_GEN")
-    @TableGenerator(name = "BT_BUILDCONFIG_LOG_GEN", table = "TB_GENERATOR", pkColumnName = "GEN_NAME", valueColumnName = "GEN_VALUE",
-    	pkColumnValue = "BT_BUILDCONFIG_LOG_ID", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
 	public Long getId() {
 		return id;

@@ -22,7 +22,12 @@ package com.easysoft.build.dao;
 import com.easysoft.build.model.BuildConfigInfo;
 import com.easysoft.build.model.DeployPackInfo;
 import com.easysoft.build.model.RepInfo;
+import com.easysoft.build.vo.BuildConfigInfoSearchBean;
 import com.easysoft.core.common.dao.hibernate.support.HibernateGenericDao;
+import com.easysoft.framework.db.PageOption;
+import org.apache.commons.lang.StringUtils;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -55,20 +60,27 @@ public class BuildConfigInfoDao extends HibernateGenericDao<BuildConfigInfo,Long
 		params.put("curBranch", curBranch);
 		return this.queryForHQL(hql, params);
 	}
+    public List<BuildConfigInfo> getBuildConfigInfoList(BuildConfigInfoSearchBean searchBean, PageOption pageOption,String curBranch){
+
+        List<Criterion> criterions = new ArrayList<Criterion>();
+        if(StringUtils.isNotEmpty(searchBean.getBuildFileName())){
+            criterions.add(Restrictions.like("buildFileName", searchBean.getBuildFileName()));
+
+        }
+        return this.queryForPage(pageOption,criterions);
+        /*String pageHql = " from BuildConfigInfo bc left join bc.ri rInfo where 1=1 and bc.ri.name='"+curBranch+"' "+searchBean.getSerchCondition();
+        if("1".equals(searchBean.getIo())){
+            pageHql += " and bc.status <> '4' ";
+        }
+        String hql = "from BuildConfigInfo bc  left join fetch bc.ri rInfo left join fetch bc.bd where 1=1 and bc.ri.name='"+curBranch+"' " +searchBean.getSerchCondition();
+        if("1".equals(searchBean.getIo())){
+            hql += " and bc.status <> '4' ";
+        }
+        hql += " order by " + searchBean.getSort() + " " + searchBean.getOrder();
+        return this.queryForHQL(hql,null);*/
+    }
 	
-/*	public List<BuildConfigInfo> getBuildConfigInfoList(BuildConfigInfoSearchBean searchBean, PageControlData pgd,String curBranch){
-		  List<BuildConfigInfo> list = new ArrayList<BuildConfigInfo>();	
-		  String pageHql = " from BuildConfigInfo bc left join bc.ri rInfo where 1=1 and bc.ri.name='"+curBranch+"' "+searchBean.getSerchCondition();
-		  if("1".equals(searchBean.getIo())){
-			  pageHql += " and bc.status <> '4' ";
-		  }		  
-		  String hql = "from BuildConfigInfo bc  left join fetch bc.ri rInfo left join fetch bc.bd where 1=1 and bc.ri.name='"+curBranch+"' " +searchBean.getSerchCondition();
-		  if("1".equals(searchBean.getIo())){
-			  hql += " and bc.status <> '4' ";
-		  }
-		  hql += " order by " + searchBean.getSort() + " " + searchBean.getOrder();
-		  return queryForHQL(pgd, hql, pageHql, searchBean.getSerchParam());
-	}
+/*
 	
 	public List<BuildConfigInfo> getBuildConfigInfoExportList(BuildConfigInfoSearchBean searchBean,String curBranch){
 		  List<BuildConfigInfo> list = new ArrayList<BuildConfigInfo>();		
