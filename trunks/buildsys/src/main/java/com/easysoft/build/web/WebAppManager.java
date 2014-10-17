@@ -35,7 +35,7 @@ public class WebAppManager {
 	/** servletcontext **/
 	private static ServletContext _ctx;
 	/** attribute name of WebAppManger **/
-	private final static String ATTR_WEBAPPMANAGER = "com.byttersoft.patchbuild.web.WebAppManger";
+	private final static String ATTR_WEBAPPMANAGER = "com.easysoft.build.web.WebAppManger";
 	/** web应用绝对路径 **/
 	private final String webAppPath;
 	/** 系统配置信息 **/

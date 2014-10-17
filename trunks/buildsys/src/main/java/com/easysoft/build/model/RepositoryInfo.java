@@ -88,13 +88,13 @@ public RepositoryInfo()
  
      this.sqlReposRoot = "/sql/patch/";
  
-     this.sqlEncoding = "GBK";
+     this.sqlEncoding = "UTF-8";
  
      this.sqlSuffixs = new String[] { "_SQL2005.sql", "_ORCL.sql" };
      
-     this.jdkVersion = "1.5"; //default jdk version
+     this.jdkVersion = "1.6"; //default jdk version
      
-     this.srcEncoding = "GBK";//default
+     this.srcEncoding = "UTF-8";//default
    }
  
    public String[] getProjects()
@@ -479,7 +479,7 @@ public RepositoryInfo()
 	}
 
 	public String getJdkVersion() {
-		return (null == jdkVersion || "".equals(jdkVersion)) ? "1.5" : jdkVersion;
+		return (null == jdkVersion || "".equals(jdkVersion)) ? "1.6" : jdkVersion;
 	}
 
 	public void setJdkVersion(String jdkVersion) {
@@ -487,7 +487,7 @@ public RepositoryInfo()
 	}
 
 	public String getSrcEncoding() {
-		return (null == srcEncoding || "".equals(srcEncoding)) ? "GBK" : srcEncoding;
+		return (null == srcEncoding || "".equals(srcEncoding)) ? "UTF-8" : srcEncoding;
 	}
 
 	public void setSrcEncoding(String srcEncoding) {

@@ -225,9 +225,7 @@ public class BuildConfigInfo {
 
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.TABLE, generator = "BT_BUILDCONFIG_GEN")
-    @TableGenerator(name = "BT_BUILDCONFIG_GEN", table = "TB_GENERATOR", pkColumnName = "GEN_NAME", valueColumnName = "GEN_VALUE",
-    	pkColumnValue = "BT_BUILDCONFIG_ID", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
     public Long getId() {
   		return id;
