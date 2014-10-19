@@ -23,7 +23,7 @@ import java.util.Date;
 
 
 @Entity
-@Table(name = "BT_BUILDCONFIG_LOG")
+@Table(name = "T_BUILDCONFIG_LOG")
 public class BuildConfigInfoLog {
 	
 	private Long id;
