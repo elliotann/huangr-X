@@ -23,7 +23,7 @@ import java.util.Date;
 
 
 @Entity
-@Table(name = "BT_BUILDCONFIG")
+@Table(name = "T_BUILDCONFIG")
 public class BuildConfigInfo {
 	
 	private Long id;
@@ -214,7 +214,7 @@ public class BuildConfigInfo {
 	}
 	
 	@Lob
-    @Column(name = "INCLUDS_FILES",columnDefinition = "CLOB")
+    @Column(name = "INCLUDS_FILES",columnDefinition = "TEXT")
 	public String getIncludsFiles() {
 		return includsFiles;
 	}
@@ -224,9 +224,9 @@ public class BuildConfigInfo {
 	}
 
 
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID")
+    @Column(name = "ID")
     public Long getId() {
   		return id;
   	}

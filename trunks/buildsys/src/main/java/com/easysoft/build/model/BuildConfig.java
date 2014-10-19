@@ -23,6 +23,8 @@ import org.jdom.Element;
 import org.jdom.Namespace;
 import org.jdom.input.SAXBuilder;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -36,6 +38,7 @@ import java.util.Set;
  * @author MickeyMic
  *
  */
+
 public class BuildConfig {
 	
 	public static final String DIR_JAVA = "/src/main/java/";
