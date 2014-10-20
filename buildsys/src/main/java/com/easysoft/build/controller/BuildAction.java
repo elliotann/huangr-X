@@ -18,6 +18,9 @@
 
 package com.easysoft.build.controller;
 
+import com.easysoft.build.command.BuildCommand;
+import com.easysoft.build.command.BuildCommandManager;
+import com.easysoft.build.command.CommandContext;
 import com.easysoft.build.manager.BuildDetailiDataService;
 import com.easysoft.build.manager.BuildReposManager;
 import com.easysoft.build.model.BuildConfig;
@@ -104,5 +107,26 @@ public class BuildAction extends BaseController {
 
         }
         return new ModelAndView("admin/core/build/showbuildlog",params);
+    }
+
+    @RequestMapping(params = {"doCommand"})
+    @ResponseBody
+    public AjaxJson doCommand(HttpServletRequest req){
+        AjaxJson result = new AjaxJson();
+        CommandContext context = new CommandContext();
+        context.init(req);
+        BuildCommand command = BuildCommandManager.getCommand(context);
+        HttpSession session = req.getSession();
+        try {
+            command.execute();
+            session.setAttribute("message", "执行成功\\n" + command.getName() + context.getFileName());
+        } catch (Exception e) {
+            result.setSuccess(false);
+            result.setMsg("执行失败\\n" + e.getMessage());
+            e.printStackTrace();
+            session.setAttribute("message", "执行失败\\n" + e.getMessage());
+        }
+
+        return result;
     }
 }

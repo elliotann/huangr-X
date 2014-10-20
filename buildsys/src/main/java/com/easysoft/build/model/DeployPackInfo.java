@@ -22,7 +22,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "BT_DEPLOYPACK")
+@Table(name = "T_DEPLOYPACK")
 public class DeployPackInfo {
 	private Long id;
 	private String deployPackName;
@@ -30,9 +30,7 @@ public class DeployPackInfo {
 	private RepInfo ri;  
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.TABLE, generator = "BT_DEPLOYPACK_GEN")
-    @TableGenerator(name = "BT_DEPLOYPACK_GEN", table = "TB_GENERATOR", pkColumnName = "GEN_NAME", valueColumnName = "GEN_VALUE",
-    	pkColumnValue = "BT_DEPLOYPACK_ID", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
     public Long getId() {
   		return id;

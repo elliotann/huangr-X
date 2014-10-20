@@ -18,6 +18,8 @@
 
 package com.easysoft.build.model;
 
+import com.easysoft.framework.json.annotation.JsonInvisible;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -252,7 +254,7 @@ public class BuildConfigInfo {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
+    @JsonInvisible("List")
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "RESPINFO_ID")
 	public RepInfo getRi() {
@@ -263,8 +265,9 @@ public class BuildConfigInfo {
 		this.ri = ri;
 	}
   
-	@ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "BD_ID")
+	/*@ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "BD_ID")*/
+    @Transient
 	public DeployPackInfo getBd() {
 		return bd;
 	}

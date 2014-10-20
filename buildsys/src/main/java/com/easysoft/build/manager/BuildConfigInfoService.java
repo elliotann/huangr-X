@@ -246,28 +246,7 @@ public class BuildConfigInfoService{
 	  
 
 	  
-	  public void saveBcConfigInCancelBuilding(BuildConfig config,String tester){
-		  //更新构建包信息为取消构建
-		  RepInfo ri = respInfoDao.getRespInfoByName(config.getVersion());
-		  BuildConfigInfo bc = buildConfigInfoDao.getBuildConfigInfoByNameNoCancel(config.getId(),ri);
-		  if(bc!=null){			 
-			  bc.setStatus("4");
-			  bc.setBuildDeleter(tester);
-			  bc.setBuildDeleteTime(new Date());
-			  buildConfigInfoDao.saveBuildConfigInfo(bc);
-			  //更新依赖该包的依赖
-			  updateDeploys( config, ri);
-			  //记录日志
-			  BuildConfigInfoLog log = new BuildConfigInfoLog();		 
-			  log.setRi(ri);
-			  log.setBc(bc);
-			  log.setOperater(tester);
-			  log.setOperaterCode("4");
-			  log.setOperaterName("取消构建");
-			  log.setOperaterTime(new Date());
-			  buildConfigInfoLogDao.saveBuildConfigInfoLog(log);
-		  }
-	  }
+
 	  
 
 	  
@@ -287,6 +266,28 @@ public class BuildConfigInfoService{
 	  }
 	  
 	*/
+      public void saveBcConfigInCancelBuilding(BuildConfig config,String tester){
+          //更新构建包信息为取消构建
+          RepInfo ri = respInfoDao.getRespInfoByName(config.getVersion());
+          BuildConfigInfo bc = buildConfigInfoDao.getBuildConfigInfoByNameNoCancel(config.getId(),ri);
+          if(bc!=null){
+              bc.setStatus("4");
+              bc.setBuildDeleter(tester);
+              bc.setBuildDeleteTime(new Date());
+              buildConfigInfoDao.saveBuildConfigInfo(bc);
+              //更新依赖该包的依赖
+              updateDeploys( config, ri);
+              //记录日志
+              BuildConfigInfoLog log = new BuildConfigInfoLog();
+              log.setRi(ri);
+              log.setBc(bc);
+              log.setOperater(tester);
+              log.setOperaterCode("4");
+              log.setOperaterName("取消构建");
+              log.setOperaterTime(new Date());
+              buildConfigInfoLogDao.saveBuildConfigInfoLog(log);
+          }
+      }
       public void saveBcConfigInEnDeployPacking(String userName,String branch,String fileName){
           String packName = fileName.substring(0,fileName.indexOf(".zip"));
           RepInfo ri = respInfoDao.getRespInfoByName(branch);
