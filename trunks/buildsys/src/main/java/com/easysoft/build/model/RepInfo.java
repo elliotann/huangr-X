@@ -21,7 +21,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "BT_REPINFO")
+@Table(name = "T_REPINFO")
 public class RepInfo {
 	
 	private Long id;
@@ -54,9 +54,7 @@ public class RepInfo {
     private String isWeekbug;//是否周BUG线
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.TABLE, generator = "BT_REPINFO_GEN")
-    @TableGenerator(name = "BT_REPINFO_GEN", table = "TB_GENERATOR", pkColumnName = "GEN_NAME", valueColumnName = "GEN_VALUE",
-    	pkColumnValue = "BT_REPINFO_ID", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
     public Long getId() {
   		return id;
