@@ -1,7 +1,8 @@
 package com.easysoft.component.form.model;
 
-import com.easysoft.core.annotation.JsonInvisible;
+
 import com.easysoft.core.common.entity.IdEntity;
+import com.easysoft.framework.json.annotation.JsonInvisible;
 import com.easysoft.framework.utils.ReflectionUtil;
 import com.easysoft.framework.utils.StringUtil;
 
