@@ -23,6 +23,7 @@ import java.util.Date;
 
  public class ChangeLog
  {
+
    private String user;
    private String action;
    private long ts;
