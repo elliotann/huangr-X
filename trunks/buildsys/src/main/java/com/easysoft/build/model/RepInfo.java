@@ -17,7 +17,6 @@
  */
 
 package com.easysoft.build.model;
-
 import javax.persistence.*;
 import java.util.Date;
 
