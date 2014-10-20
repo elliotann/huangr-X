@@ -161,7 +161,7 @@ public class DataGridTag extends BodyTagSupport{
         if(!searchControls.isEmpty()){
             for(SearchControl control : searchControls){
                 if(control.isShortSearch()){
-                    sb.append("<input id=\""+control.getName()+"\" class=\"form-control\" type=\"text\" value=\"\" size=\"30\" style=\"width: 200px;\" placeholder=\""+control.getLabel()+"\" name=\""+control.getName()+"\">");
+                    sb.append(control.buildSearchControl());
                 }else{
                     advances.add(control);
                 }
@@ -187,7 +187,9 @@ public class DataGridTag extends BodyTagSupport{
             }
 
             sb.append("<th width=\"70\" align=\"right\">"+control.getLabel()+"</th>");
-            sb.append("<td><input type=\"text\" id=\"name\" name=\""+control.getName()+"\" class=\"form-control\"></td>");
+            sb.append("<td>");
+            sb.append(control.buildSearchControl());
+            sb.append("</td>");
 
             if((i+1)%3==0){
                 sb.append("</tr>");
