@@ -39,7 +39,7 @@ public class JsonUtils {
     public static String beanToJson(Object bean){
 
         JsonConfig config = new JsonConfig();
-
+        config.setJavaPropertyFilter(new InvisibleFilter("List"));
         config.registerJsonValueProcessor(Date.class,new DateJsonValueProcessor(null));
         config.setExcludes(new String[]{"processDefinition","processInstance","task"});
 
