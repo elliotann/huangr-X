@@ -24,8 +24,7 @@ import java.util.Date;
 @Entity
 @Table(name = "BT_DEPLOYPACK")
 public class DeployPackInfo {
-
-	private Long id;	
+	private Long id;
 	private String deployPackName;
 	private Date createTime;
 	private RepInfo ri;  
