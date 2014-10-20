@@ -215,10 +215,25 @@ com.byttersoft.patchbuild.permission.*" %>
 
     }
     function getStatusName(value, row, index) {
+        if(value=='0'){
+            return '已构建';
+        }else if(value=='1'){
+            return '开始测试';
+        }else if(value=='2'){
+            return '取消测试 ';
+        }else if(value=='3'){
+            return '测试通过';
+        }else if(value=='4'){
+            return '取消构建';
+        }else if(value=='5'){
+            return '已发布';
+        }
+    }
+    function formatSql(value, row, index) {
         if(value==1){
-            return "启用";
+            return "有";
         } else{
-            return "禁用";
+            return "无";
         }
     }
 
@@ -231,26 +246,56 @@ com.byttersoft.patchbuild.permission.*" %>
         });
     }
 
+    function canelBuildPack(){
+        var rows = $('#dataGrid').datagrid("getSelections");
+        if (rows.length < 1||rows.length>1) {
+            alert("请选择要取消的构建包");
+            return;
+        }
+        if (!confirm("确认要将删除构建包吗？")) {
+            return;
+        }
+        var row = rows[0];
+        $.ajax({
+            url:"build.do?doCommand",
+            type:"post",
+            dataType:"json",
+            data:"action=cancel&fileName="+row.buildFileName,
+            success:function(result){
+                if(result.success){
+                    alert("操作成功");
+                }else{
+                    alert(result.msg);
+                }
+
+            }
+        });
+
+    }
+
 
 </script>
 <grid:dataGrid action="buildQuery.do?dataGrid&ajax=yes" height="100%"  rownumbers="true" hasSearchBar="true" style="easyui">
     <grid:search label="构建包名称" name="buildFileName" shortSearch="true"/>
     <grid:search label="构建包名称" name="buildFileName"/>
-    <grid:search label="状 态" name="status"/>
+    <grid:search label="状 态" name="status" type="select" url="/jeap/admin/core/build/buildpackStatus.json"/>
     <grid:search label="提交人员" name="adder"/>
-    <grid:search label="开始测试人员" name="testering"/>
-    <grid:search label="构建时间" name="testering"/>
+    <grid:search label="测试人员" name="testering"/>
+    <grid:search label="构建时间" name="testering" type="date"/>
+    <grid:search label="结束时间" name="testering" type="date"/>
 
 
     <grid:column title="构建包名称" field="buildFileName" align="center" width="100" minWidth="60"/>
     <grid:column title="提交人员" field="adder" align="center" width="100" minWidth="60"/>
     <grid:column title="构建时间" field="addTime"  minWidth="100"/>
     <grid:column title="测试员" field="testering"  minWidth="140"/>
-    <grid:column title="SQL" field="hasSql"/>
+    <grid:column title="是否有SQL" field="hasSql" renderFun="formatSql"/>
     <grid:column title="测试通过 " field="passTester" />
     <grid:column title="依赖" field="buildDepends"/>
     <grid:column title="状态" field="status" renderFun="getStatusName"/>
     <grid:column title="所属补丁包" field="ssbdb" />
+
+    <grid:toolbar title="取消构建包" clickFun="canelBuildPack" icon="add"/>
     <grid:toolbar title="导出" clickFun="addUser" icon="add"/>
 
 </grid:dataGrid>
