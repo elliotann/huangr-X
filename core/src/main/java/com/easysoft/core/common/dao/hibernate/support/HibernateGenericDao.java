@@ -41,7 +41,8 @@ public class HibernateGenericDao<T,PK extends Serializable> implements IGenericD
 
     @Override
     public List<T> queryForList() {
-        return null;
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(entityClass);
+        return criteria.list();
     }
 
     @Override

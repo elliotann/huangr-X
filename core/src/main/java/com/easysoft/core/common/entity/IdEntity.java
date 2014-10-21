@@ -1,9 +1,6 @@
 package com.easysoft.core.common.entity;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @MappedSuperclass
@@ -20,7 +17,7 @@ public abstract class IdEntity implements Serializable{
     public void setId(int id) {
         this.id = id;
     }
-
+    @Column(name = "create_time")
     public String getCreateTime() {
         return createTime;
     }
@@ -28,7 +25,7 @@ public abstract class IdEntity implements Serializable{
     public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
-
+    @Column(name = "create_by")
     public String getCreateBy() {
         return createBy;
     }

@@ -4,6 +4,7 @@ import com.easysoft.core.common.dao.hibernate.support.HibernateGenericDao;
 import com.easysoft.member.backend.model.Depart;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +16,10 @@ import java.util.Map;
 public class DepartDao extends HibernateGenericDao<Depart,Integer> implements IDepartDao {
     @Override
     public List<Depart> queryByOrgId(Integer orgId) {
-        return null;
+        String hql = "from Depart d where d.compId=:compId";
+        Map<String,Object> params = new HashMap<String, Object>();
+        params.put("compId",orgId);
+        return this.queryForHQL(hql,params);
     }
 
     @Override
