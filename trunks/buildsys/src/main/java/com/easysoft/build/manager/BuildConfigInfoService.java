@@ -184,65 +184,11 @@ public class BuildConfigInfoService{
 	  
 
 	  
-	  public void saveBcConfigInStartesting(BuildConfig config){	
-		  RepInfo ri = respInfoDao.getRespInfoByName(config.getVersion());
-		  BuildConfigInfo bc = buildConfigInfoDao.getBuildConfigInfoByNameNoCancel(config.getId(),ri);
-		  if(bc!=null){
-			  bc.setStatus("1");
-			  bc.setStartTester(config.getTesters());
-			  bc.setStartTestTime(new Date());
-			  buildConfigInfoDao.saveBuildConfigInfo(bc);
-			  //记录日志
-			  BuildConfigInfoLog log = new BuildConfigInfoLog();
-			  log.setRi(ri);
-			  log.setBc(bc);
-			  log.setOperater(config.getTesters());
-			  log.setOperaterCode("1");
-			  log.setOperaterName("开始测试");
-			  log.setOperaterTime(new Date());
-			  buildConfigInfoLogDao.saveBuildConfigInfoLog(log);		
-		  }
-	  }
+
 	  
-	  public void saveBcConfigInCancelTesting(BuildConfig config,String tester){	
-		  RepInfo ri = respInfoDao.getRespInfoByName(config.getVersion());
-		  BuildConfigInfo bc = buildConfigInfoDao.getBuildConfigInfoByNameNoCancel(config.getId(),ri);
-		  if(bc!=null){
-			  bc.setStatus("2");
-			  bc.setCancelTester(tester);
-			  bc.setCancelTestTime(new Date());
-			  buildConfigInfoDao.saveBuildConfigInfo(bc);
-			  //记录日志
-			  BuildConfigInfoLog log = new BuildConfigInfoLog();			  
-			  log.setRi(ri);
-			  log.setBc(bc);
-			  log.setOperater(tester);
-			  log.setOperaterCode("2");
-			  log.setOperaterName("取消测试"); 
-			  log.setOperaterTime(new Date());
-			  buildConfigInfoLogDao.saveBuildConfigInfoLog(log);	
-		  }
-	  }	
+
 	  
-	  public void saveBcConfigInPasstesting(BuildConfig config){	
-		  RepInfo ri = respInfoDao.getRespInfoByName(config.getVersion());
-		  BuildConfigInfo bc = buildConfigInfoDao.getBuildConfigInfoByNameNoCancel(config.getId(),ri);
-		  if(bc!=null){
-			  bc.setStatus("3");
-			  bc.setPassTester(config.getTesters());
-			  bc.setPassTestTime(new Date());
-			  buildConfigInfoDao.saveBuildConfigInfo(bc);
-			  //记录日志
-			  BuildConfigInfoLog log = new BuildConfigInfoLog();			  
-			  log.setRi(ri);
-			  log.setBc(bc);
-			  log.setOperater(config.getTesters());
-			  log.setOperaterCode("3");
-			  log.setOperaterName("测试通过");
-			  log.setOperaterTime(new Date());
-			  buildConfigInfoLogDao.saveBuildConfigInfoLog(log);	
-		  }
-	  }
+
 	  
 
 	  
@@ -266,6 +212,63 @@ public class BuildConfigInfoService{
 	  }
 	  
 	*/
+      public void saveBcConfigInPasstesting(BuildConfig config){
+          RepInfo ri = respInfoDao.getRespInfoByName(config.getVersion());
+          BuildConfigInfo bc = buildConfigInfoDao.getBuildConfigInfoByNameNoCancel(config.getId(),ri);
+          if(bc!=null){
+              bc.setStatus("3");
+              bc.setPassTester(config.getTesters());
+              bc.setPassTestTime(new Date());
+              buildConfigInfoDao.saveBuildConfigInfo(bc);
+              //记录日志
+              BuildConfigInfoLog log = new BuildConfigInfoLog();
+              log.setRi(ri);
+              log.setBc(bc);
+              log.setOperater(config.getTesters());
+              log.setOperaterCode("3");
+              log.setOperaterName("测试通过");
+              log.setOperaterTime(new Date());
+              buildConfigInfoLogDao.saveBuildConfigInfoLog(log);
+          }
+      }
+      public void saveBcConfigInCancelTesting(BuildConfig config,String tester){
+          RepInfo ri = respInfoDao.getRespInfoByName(config.getVersion());
+          BuildConfigInfo bc = buildConfigInfoDao.getBuildConfigInfoByNameNoCancel(config.getId(),ri);
+          if(bc!=null){
+              bc.setStatus("2");
+              bc.setCancelTester(tester);
+              bc.setCancelTestTime(new Date());
+              buildConfigInfoDao.saveBuildConfigInfo(bc);
+              //记录日志
+              BuildConfigInfoLog log = new BuildConfigInfoLog();
+              log.setRi(ri);
+              log.setBc(bc);
+              log.setOperater(tester);
+              log.setOperaterCode("2");
+              log.setOperaterName("取消测试");
+              log.setOperaterTime(new Date());
+              buildConfigInfoLogDao.saveBuildConfigInfoLog(log);
+          }
+      }
+    public void saveBcConfigInStartesting(BuildConfig config){
+          RepInfo ri = respInfoDao.getRespInfoByName(config.getVersion());
+          BuildConfigInfo bc = buildConfigInfoDao.getBuildConfigInfoByNameNoCancel(config.getId(),ri);
+          if(bc!=null){
+              bc.setStatus("1");
+              bc.setStartTester(config.getTesters());
+              bc.setStartTestTime(new Date());
+              buildConfigInfoDao.saveBuildConfigInfo(bc);
+              //记录日志
+              BuildConfigInfoLog log = new BuildConfigInfoLog();
+              log.setRi(ri);
+              log.setBc(bc);
+              log.setOperater(config.getTesters());
+              log.setOperaterCode("1");
+              log.setOperaterName("开始测试");
+              log.setOperaterTime(new Date());
+              buildConfigInfoLogDao.saveBuildConfigInfoLog(log);
+          }
+      }
       public void saveBcConfigInCancelBuilding(BuildConfig config,String tester){
           //更新构建包信息为取消构建
           RepInfo ri = respInfoDao.getRespInfoByName(config.getVersion());
