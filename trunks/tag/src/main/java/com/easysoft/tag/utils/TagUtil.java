@@ -26,8 +26,6 @@ import com.easysoft.framework.utils.StringUtil;
 import com.easysoft.framework.utils.oConvertUtils;
 import com.easysoft.member.backend.model.Role;
 import com.easysoft.tag.webapp.bean.easyui.Autocomplete;
-
-
 /**
  * 
  * 类描述：标签工具类
