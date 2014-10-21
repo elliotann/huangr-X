@@ -1,18 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ include file="/commons/taglibs.jsp"%>
-
-
-
-
 <script src="${staticserver}/js/common/jquery.validate.js" type="text/javascript"></script>
-
 <script src="${staticserver}/js/admin/jeap.js" type="text/javascript"></script>
 <link href="${context }/css/form.css" rel="stylesheet"/>
-
 <script type="text/javascript">
-
-
     $(function() {
         $("#objForm").validate({
             rules:{
@@ -203,7 +195,7 @@
             <td align="right" class="l-table-edit-td" valign="top">角色:</td>
             <td colspan="3" class="value">
                 <c:forEach var="role" items="${roleList }" varStatus="roleSta">
-                    <input id="roleids${role.roleid }" type="checkbox" name="roleids"  value="${role.roleid }"  style="margin-left: 11px"/><label for="roleids${role.roleid }">${role.rolename }&nbsp;</label>
+                    <input id="roleids${role.id }" type="checkbox" name="roleids"  value="${role.id }"  style="margin-left: 11px"/><label for="roleids${role.id }">${role.rolename }&nbsp;</label>
                     <c:if test="${(roleSta.index+1)%4==0}">
                         <br/>
                     </c:if>

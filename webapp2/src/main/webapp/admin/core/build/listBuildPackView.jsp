@@ -272,7 +272,149 @@ com.byttersoft.patchbuild.permission.*" %>
         });
 
     }
+    function startTestBuildPack(){
+        var rows = $('#dataGrid').datagrid("getSelections");
+        if (rows.length < 1||rows.length>1) {
+            alert("请选择要测试的构建包");
+            return;
+        }
 
+        var row = rows[0];
+        if(row.status=='4'){
+            alert("构建包已经取消，不能测试!");
+            return;
+        }
+        $.ajax({
+            url:"build.do?doCommand",
+            type:"post",
+            dataType:"json",
+            data:"action=test&fileName="+row.buildFileName,
+            success:function(result){
+                if(result.success){
+                    alert("操作成功");
+                }else{
+                    alert(result.msg);
+                }
+
+            }
+        });
+
+    }
+    function cancelTest(){
+        var rows = $('#dataGrid').datagrid("getSelections");
+        if (rows.length < 1||rows.length>1) {
+            alert("请选择要测试的构建包");
+            return;
+        }
+
+        var row = rows[0];
+        if(row.status=='4'){
+            alert("构建包已经取消，不能测试!");
+            return;
+        }
+        if(row.status!='1'){
+            alert("构建包未开始测试，不能取消!");
+            return;
+        }
+        $.ajax({
+            url:"build.do?doCommand",
+            type:"post",
+            dataType:"json",
+            data:"action=canceltest&fileName="+row.buildFileName,
+            success:function(result){
+                if(result.success){
+                    alert("操作成功");
+                }else{
+                    alert(result.msg);
+                }
+
+            }
+        });
+    }
+    function testPass(){
+        var rows = $('#dataGrid').datagrid("getSelections");
+        if (rows.length < 1||rows.length>1) {
+            alert("请选择要测试的构建包");
+            return;
+        }
+
+        var row = rows[0];
+        if(row.status=='4'){
+            alert("构建包已经取消，不能通过!");
+            return;
+        }
+        if(row.status!='1'){
+            alert("构建包未开始测试，不能通过!");
+            return;
+        }
+        $.ajax({
+            url:"build.do?doCommand",
+            type:"post",
+            dataType:"json",
+            data:"action=pass&fileName="+row.buildFileName,
+            success:function(result){
+                if(result.success){
+                    alert("操作成功");
+                }else{
+                    alert(result.msg);
+                }
+
+            }
+        });
+    }
+    function deployBuildPack(){
+        var rows = $('#dataGrid').datagrid("getSelections");
+
+
+        var row = rows[0];
+
+        if(row.status!='3'){
+            alert("构建包测试未通过，不能发布!");
+            return;
+        }
+        $.ajax({
+            url:"build.do?doCommand",
+            type:"post",
+            dataType:"json",
+            data:"action=deploy&fileName="+row.buildFileName,
+            success:function(result){
+                if(result.success){
+                    alert("操作成功");
+                }else{
+                    alert(result.msg);
+                }
+
+            }
+        });
+    }
+
+    function downloadPack(){
+        var rows = $('#dataGrid').datagrid("getSelections");
+        if (rows.length < 1||rows.length>1) {
+            alert("请选择要下载的构建包");
+            return;
+        }
+
+        var row = rows[0];
+        if(row.status=='4'){
+            alert("构建包已经取消，不能下载!");
+            return;
+        }
+        $.ajax({
+            url:"buildLogQuery.do?getFile",
+            type:"post",
+            dataType:"json",
+            data:"type=build&filename="+row.buildFileName,
+            success:function(result){
+                if(result.success){
+                    alert("操作成功");
+                }else{
+                    alert(result.msg);
+                }
+
+            }
+        });
+    }
 
 </script>
 <grid:dataGrid action="buildQuery.do?dataGrid&ajax=yes" height="100%"  rownumbers="true" hasSearchBar="true" style="easyui">
@@ -296,6 +438,11 @@ com.byttersoft.patchbuild.permission.*" %>
     <grid:column title="所属补丁包" field="ssbdb" />
 
     <grid:toolbar title="取消构建包" clickFun="canelBuildPack" icon="add"/>
+    <grid:toolbar title="开始测试" clickFun="startTestBuildPack" icon="add"/>
+    <grid:toolbar title="取消测试" clickFun="cancelTest" icon="add"/>
+    <grid:toolbar title="测试通过" clickFun="testPass" icon="add"/>
+    <grid:toolbar title="发布" clickFun="deployBuildPack" icon="add"/>
+    <grid:toolbar title="下载" clickFun="downloadPack" icon="add"/>
     <grid:toolbar title="导出" clickFun="addUser" icon="add"/>
 
 </grid:dataGrid>

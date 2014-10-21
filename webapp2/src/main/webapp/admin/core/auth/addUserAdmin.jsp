@@ -156,7 +156,7 @@
             <td colspan="3" class="value">
 
                 <c:forEach var="role" items="${roleList }" varStatus="roleSta">
-                    <input  type="checkbox" name="roleids"  value="${role.roleid }" style="margin-left:11px"/><label>${role.rolename }&nbsp;</label>
+                    <input  type="checkbox" name="roleids"  value="${role.id }" style="margin-left:11px"/><label>${role.rolename }&nbsp;</label>
                     <c:if test="${(roleSta.index+1)%4==0}">
                         <br/>
                     </c:if>
@@ -194,13 +194,6 @@
             </td>
             <td align="left"></td>
         </tr>
-
-       <%-- <tr>
-            <td align="right" class="l-table-edit-td">部门:</td>
-            <td align="left" class="l-table-edit-td">
-                <select id="userdept" name="userdept" class="easyui-combotree combo" data-options="url:'../organization.do?queryForTree&ajax=true',method:'get'" style="width:206px;height:30px;"></select>
-            <td align="left"></td>
-        </tr>--%>
         <tr>
             <td align="right" class="l-table-edit-td">备注:</td>
             <td align="left" class="l-table-edit-td">
