@@ -255,7 +255,7 @@ public class BuildConfigInfo {
 		this.status = status;
 	}
     @JsonInvisible("List")
-	@ManyToOne(fetch = FetchType.LAZY, optional = true)
+	@ManyToOne(fetch = FetchType.EAGER, optional = true)
     @JoinColumn(name = "RESPINFO_ID")
 	public RepInfo getRi() {
 		return ri;
@@ -265,9 +265,8 @@ public class BuildConfigInfo {
 		this.ri = ri;
 	}
   
-	/*@ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "BD_ID")*/
-    @Transient
+	@ManyToOne(fetch = FetchType.EAGER, optional = true)
+    @JoinColumn(name = "BD_ID")
 	public DeployPackInfo getBd() {
 		return bd;
 	}
