@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="/commons/taglibs.jsp"%>
+
+<%--
 <html>
 <head>
     <title></title>
@@ -104,3 +106,138 @@
 </script>
 </body>
 </html>
+--%>
+<style>
+    .ms-container{
+        background: transparent url('/jeap/adminthemes/default/images/switch.gif') no-repeat 50% 40%;
+    }
+
+    .ms-container:after{
+        content: "."; display: block; height: 0; line-height: 0; font-size: 0; clear: both; min-height: 0; visibility: hidden;
+    }
+
+    .ms-container .ms-selectable, .ms-container .ms-selection {
+        background: #fff;
+        color: #333;
+        float: left;
+        width: 45%;
+    }
+
+    .ms-container .ms-list{
+        -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+        -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+        -ms-transition: border linear 0.2s, box-shadow linear 0.2s;
+        -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+        transition: border linear 0.2s, box-shadow linear 0.2s;
+        border: 1px solid #ddd;
+    }
+
+    .ms-selected{
+        display:none;
+    }
+    .ms-container .ms-selectable{
+        margin-right: 10%;
+    }
+
+    .ms-container .ms-list.ms-focus{
+        border-color: #5ca9e4;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+        -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+        outline: 0;
+        outline: thin dotted \9;
+    }
+
+    .ms-container ul{
+        margin: 0;
+        padding:0;
+        list-style-type: none;
+    }
+
+    .ms-container .ms-optgroup-container{
+        width: 100%;
+    }
+
+    .ms-container ul.ms-list{
+        height: 200px;
+        padding: 0px;
+        overflow-y: auto;
+    }
+    .ms-container .custom-header {
+        background: #efefef;
+        color: #555;
+        text-align: center;
+        font-size: 11px;
+        line-height: 26px;
+        -webkit-border-radius: 4px 4px 0px 0px;
+        border-radius: 4px 4px 0px 0px;
+        border-width: 1px 1px 0 1px;
+        border-style: solid;
+        border-color: #ddd;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+    .ms-container ul.ms-list{
+        height: 200px;
+        padding: 0px;
+        overflow-y: auto;
+    }
+
+    .ms-container .ms-list{
+        -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+        -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+        -ms-transition: border linear 0.2s, box-shadow linear 0.2s;
+        -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+        transition: border linear 0.2s, box-shadow linear 0.2s;
+        border: 1px solid #ddd;
+    }
+    .ms-container ul{
+        margin: 0;
+        padding:0;
+        list-style-type: none;
+    }
+    .main_content li{line-height:22px}
+    .ms-container .ms-selectable li.ms-elem-selectable,
+    .ms-container .ms-selection li.ms-elem-selection{
+        border-bottom: 1px #f2f2f2 solid;
+        padding: 4px 10px 3px;
+        color: #555;
+        font-size: 12px;
+        line-height: 16px;
+        -webkit-overflow-scrolling: touch;
+    }
+    .ms-container li.ms-elem-selectable:not(.disabled).ms-hover,
+    .ms-container .ms-selection li:not(.disabled).ms-hover{
+        cursor: pointer;
+        color: #ffffff;
+        text-decoration: none;
+        background-color: #48A6D2;
+        border-color: #48A6D2;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        -ms-box-shadow: none;
+        box-shadow: none;
+    }
+
+</style>
+<script type="text/javascript" src="/jeap/adminthemes/default/switch.js"></script>
+<div id="ms-custom-headers" class="ms-container">
+    <div class="ms-selectable">
+        <div class="custom-header">Selectable item</div>
+        <ul class="ms-list">
+            <li id="_f_r_-selectable" class="ms-elem-selectable ms-hover"><span>France</span></li>
+            <li id="_u_k_-selectable" class="ms-elem-selectable"><span>United Kingdom</span></li>
+            <li id="_u_s_-selectable" class="ms-elem-selectable"><span>United States</span></li>
+            <li id="_c_h_-selectable" class="ms-elem-selectable"><span>China</span></li>
+        </ul>
+    </div>
+    <div class="ms-selection">
+        <div class="custom-header">Selected items</div>
+        <ul class="ms-list">
+            <li style="display: none;" id="_f_r_-selection" class="ms-elem-selection"><span>France</span></li>
+            <li style="display: none;" id="_u_k_-selection" class="ms-elem-selection"><span>United Kingdom</span></li>
+            <li style="display: none;" id="_u_s_-selection" class="ms-elem-selection"><span>United States</span></li>
+            <li style="display: none;" id="_c_h_-selection" class="ms-elem-selection"><span>China</span></li>
+        </ul>
+    </div>
+</div>

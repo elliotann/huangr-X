@@ -7,7 +7,7 @@
 }
 
 input.error {
-    background-color: #FFFFFF;
+    /*background-color: #FFFFFF;
     border: 1px solid #CCCCCC;
     border-radius: 4px;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
@@ -19,7 +19,7 @@ input.error {
     padding: 6px 12px;
     transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
     vertical-align: middle;
-    width: 150px;
+    width: 150px;*/
 }
 input.error:focus {
     border-color: #B94A48;
