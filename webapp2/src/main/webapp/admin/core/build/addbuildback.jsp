@@ -66,12 +66,6 @@
 <script>
     setCurrentPage("addbuild");
     <c:if test = "${message != null}" > alert("${message}") </c:if>
-
-</script>
-</body>
-</html>
---%>
-<script>
     function submitForm() {
         var keyword = document.getElementById("keyword");
         if ($.trim(keyword.value) == "") {
@@ -105,7 +99,14 @@
         document.getElementById("projects").value = value;
         document.getElementById("addForm").submit();
     }
+
+    function existChinese(s) {
+        return !!((s || '') + '').match(/[\u4E00-\u9FA5]/);
+    }
 </script>
+</body>
+</html>
+--%>
 <style>
     .ms-container{
         background: transparent url('/jeap/adminthemes/default/images/switch.gif') no-repeat 50% 40%;
@@ -219,33 +220,24 @@
     }
 
 </style>
-
-
-<script type="text/javascript" src="/jeap/statics/js/common/jquery-1.8.3.js"></script>
-<script type="text/javascript" src="/jeap/admin/core/build/js/jquery.multi-select.js"></script>
-<div class="main">
-    <form action="build.do?toConfirm" method="post" id="addForm">
-        <div><input type="text"
-                    name="keyword" id="keyword" value="${keyword}" size="100"/> <button type="button" onclick="submitForm()" rowspan="2">下一步</button></div>
-        <div>
-<select id='custom-headers' multiple='multiple' id="allProjects">
-    <c:forEach var="proj" items="${repos.projects}">
-        <option value="${proj}">${proj}</option>
-    </c:forEach>
-</select>
-            </div>
-</form>
+<script type="text/javascript" src="/jeap/adminthemes/default/switch.js"></script>
+<div id="ms-custom-headers" class="ms-container">
+    <div class="ms-selectable">
+        <div class="custom-header">Selectable item</div>
+        <ul class="ms-list">
+            <li id="_f_r_-selectable" class="ms-elem-selectable ms-hover"><span>France</span></li>
+            <li id="_u_k_-selectable" class="ms-elem-selectable"><span>United Kingdom</span></li>
+            <li id="_u_s_-selectable" class="ms-elem-selectable"><span>United States</span></li>
+            <li id="_c_h_-selectable" class="ms-elem-selectable"><span>China</span></li>
+        </ul>
+    </div>
+    <div class="ms-selection">
+        <div class="custom-header">Selected items</div>
+        <ul class="ms-list">
+            <li style="display: none;" id="_f_r_-selection" class="ms-elem-selection"><span>France</span></li>
+            <li style="display: none;" id="_u_k_-selection" class="ms-elem-selection"><span>United Kingdom</span></li>
+            <li style="display: none;" id="_u_s_-selection" class="ms-elem-selection"><span>United States</span></li>
+            <li style="display: none;" id="_c_h_-selection" class="ms-elem-selection"><span>China</span></li>
+        </ul>
+    </div>
 </div>
-<script>
-    $(function(){
-        $('#custom-headers').multiSelect({
-            selectableHeader: "<div class='custom-header'>所有模块列表</div>",
-            selectionHeader: "<div class='custom-header'>已选择模块</div>"
-        });
-    })
-
-
-    function existChinese(s) {
-        return !!((s || '') + '').match(/[\u4E00-\u9FA5]/);
-    }
-</script>
