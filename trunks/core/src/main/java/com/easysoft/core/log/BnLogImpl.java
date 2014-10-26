@@ -31,7 +31,7 @@ import org.springframework.stereotype.Component;
 public class BnLogImpl implements BnLog {
     @Autowired
     private Appender appender;
-    @Override
+
     public void log(BnLogItem bnLogItem) {
         appender.doAppend(bnLogItem);
     }

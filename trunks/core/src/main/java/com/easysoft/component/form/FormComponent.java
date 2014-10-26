@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 public class FormComponent implements IComponent {
     @Autowired
     private IMenuManager menuManager;
-    @Override
+
     public void install() {
         //安装菜单
         Menu pmenu = new Menu();
@@ -38,7 +38,7 @@ public class FormComponent implements IComponent {
         menuManager.add(menu);
     }
 
-    @Override
+
     public void unInstall() {
         menuManager.deleteMenuByNameAndUrl("表单配置","/core/admin/designer.do?list");
         menuManager.deleteMenuByNameAndUrl("动态表单",null);

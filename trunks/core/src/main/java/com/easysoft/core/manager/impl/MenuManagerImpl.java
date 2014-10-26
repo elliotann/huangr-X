@@ -54,7 +54,7 @@ public class MenuManagerImpl extends BaseSupport<Menu> implements IMenuManager {
         return getMenuTree(menuid,null);
 	}
 
-    @Override
+    
     public List<Menu> getMenuTree(Integer menuid, Integer roleId) {
         if(roleId==null||0==roleId.intValue()){
             if(menuid==null)throw new IllegalArgumentException("menuid argument is null");
@@ -160,7 +160,7 @@ public class MenuManagerImpl extends BaseSupport<Menu> implements IMenuManager {
         return (Menu) menuList.get(0);
     }
 
-    @Override
+    
     public Menu getMenuByNameAndUrl(String title, String url) {
         Map<String,Object> params = new HashMap<String,Object>();
         params.put("title",title);
@@ -173,7 +173,7 @@ public class MenuManagerImpl extends BaseSupport<Menu> implements IMenuManager {
         this.baseDaoSupport.execute(sql, new Object[]{title});
     }
 
-    @Override
+    
     public List<Menu> getMenuTreeByRoleId(Integer roleId) {
         List<Menu> results = new ArrayList<Menu>();
         List<RoleAuth> roleAuths = roleAuthManager.queryRoleAuthListByRoleId(roleId);
@@ -184,7 +184,7 @@ public class MenuManagerImpl extends BaseSupport<Menu> implements IMenuManager {
         return results;
     }
 
-    @Override
+    
     public void deleteMenuByNameAndUrl(String title, String url) {
         Map<String,Object> params = new HashMap<String,Object>();
         params.put("title",title);

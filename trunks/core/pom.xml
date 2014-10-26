@@ -204,11 +204,11 @@
             <artifactId>commons-betwixt</artifactId>
             <version>0.8</version>
         </dependency>
-        <dependency>
-            <groupId>javazoom</groupId>
-            <artifactId>uploadbean</artifactId>
-            <version>1.9</version>
-        </dependency>
+         <dependency>
+		  <groupId>fakepath</groupId>
+		  <artifactId>uploadbean</artifactId>
+		  <version>1.9</version>
+		</dependency>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>

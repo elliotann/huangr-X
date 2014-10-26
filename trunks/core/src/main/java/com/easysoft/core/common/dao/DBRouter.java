@@ -42,7 +42,7 @@ public class DBRouter implements IDBRouter {
 		return result + "_" + userid + "_" + siteid;
 	}
 
-    @Override
+
     public void doSaasInstall(String xmlFile) {
         //开发模式
         if ("1".equals(ParamSetting.RUNMODE)) {

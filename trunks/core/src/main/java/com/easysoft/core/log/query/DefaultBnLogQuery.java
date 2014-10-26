@@ -34,7 +34,7 @@ import java.util.List;
 public class DefaultBnLogQuery implements IBnLogQuery {
     @Autowired
     private Appender appender;
-    @Override
+
     public PageOption queryForPage(PageOption pageOption) {
         List<BnLogItem> bnLogItems = appender.queryForPage(pageOption);
         if(!bnLogItems.isEmpty()){

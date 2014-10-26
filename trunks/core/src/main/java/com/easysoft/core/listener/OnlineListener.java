@@ -19,11 +19,11 @@ public class OnlineListener implements ServletContextListener,HttpSessionListene
 	public OnlineListener() {
 	}
 
-	@Override
+	
 	public void sessionCreated(HttpSessionEvent httpSessionEvent) {
 	}
 
-	@Override
+
 	public void sessionDestroyed(HttpSessionEvent httpSessionEvent) {
 		ClientManager.getInstance().removeClinet(httpSessionEvent.getSession().getId());
 	}
@@ -31,7 +31,7 @@ public class OnlineListener implements ServletContextListener,HttpSessionListene
 	/**
 	 * 服务器初始化
 	 */
-	@Override
+	
 	public void contextInitialized(ServletContextEvent evt) {
 		ctx = WebApplicationContextUtils.getWebApplicationContext(evt.getServletContext());
 	}
@@ -40,7 +40,7 @@ public class OnlineListener implements ServletContextListener,HttpSessionListene
 		return ctx;
 	}
 	
-	@Override
+
 	public void contextDestroyed(ServletContextEvent paramServletContextEvent) {
 		
 	}

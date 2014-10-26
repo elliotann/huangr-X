@@ -30,12 +30,12 @@ public class FormManagerImpl extends GenericService<FormEntity> implements IForm
     private IFormDao formDao;
     @Autowired
     private IFormFieldDao formFieldDao;
-    @Override
+  
     public List list() {
         return formDao.queryForList();
     }
 
-    @Override
+
     public void addForm(FormEntity entity) {
         if(entity.getId()!=0){
             formDao.update(entity);
@@ -56,7 +56,7 @@ public class FormManagerImpl extends GenericService<FormEntity> implements IForm
         }
     }
 
-    @Override
+   
     public FormEntity getFormById(Integer id) {
         FormEntity result = formDao.queryById(id);
         if(result==null) return null;
@@ -67,7 +67,7 @@ public class FormManagerImpl extends GenericService<FormEntity> implements IForm
         return result;
     }
 
-    @Override
+  
     public FormEntity getFormById(Integer id,String type) {
         FormEntity result = formDao.queryById(id);
         if(result==null) return null;
@@ -90,7 +90,7 @@ public class FormManagerImpl extends GenericService<FormEntity> implements IForm
         return result;
     }
 
-    @Override
+   
     public void delFormById(Integer id) {
         FormEntity result = getFormById(id);
         for(FormField field : result.getFields()){
@@ -99,7 +99,7 @@ public class FormManagerImpl extends GenericService<FormEntity> implements IForm
         formDao.deleteById(id);
     }
 
-    @Override
+
     public void synDb(Integer formId) {
         //获取表单
         FormEntity formEntity = this.getFormById(formId);
@@ -117,7 +117,7 @@ public class FormManagerImpl extends GenericService<FormEntity> implements IForm
         formDao.update(formEntity);
     }
 
-    @Override
+
     public FormEntity queryFormByCode(String code) {
         FormEntity result = formDao.queryFormByCode(code);
         if(result==null) return null;

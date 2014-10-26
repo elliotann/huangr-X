@@ -31,7 +31,7 @@ public class AliasToBean implements ResultTransformer {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
+
 	public List transformList(List collection) {
 		return collection;
 	}
@@ -44,7 +44,7 @@ public class AliasToBean implements ResultTransformer {
 	 * @param aliases 属性名集合
 	 * @return 单个POJO实例--查询结果
 	 */
-	@Override
+
 	public Object transformTuple(Object[] tuple, String[] aliases) {
 		try {
 			Object root = resultClass.newInstance();

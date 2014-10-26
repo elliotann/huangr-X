@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class AjaxPluginProcessor implements Processor {
 
-	@Override
+
 	public Response process(int mode, HttpServletResponse httpResponse,
 			HttpServletRequest httpRequest) {
 		
