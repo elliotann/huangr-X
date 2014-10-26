@@ -2,9 +2,7 @@ package com.easysoft.framework.image.impl;
 
 import com.easysoft.framework.image.IThumbnailCreator;
 import com.easysoft.framework.image.ImageRuntimeException;
-import com.sun.image.codec.jpeg.ImageFormatException;
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
+
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -46,13 +44,13 @@ public class JavaImageIOCreator implements IThumbnailCreator {
 	public void resize(int w, int h) {
 		
 
-		int target_w, target_h; // 目标宽高
+		/*int target_w, target_h; // 目标宽高
 		int x = 0, y = 0; // 缩略图在背景的座标
 		x = y = 0;
 		target_w = w;
 		target_h = h;
 
-		/* 计算目标宽高 */
+		 计算目标宽高 
 		if (width / height > w / h) { // 原图长:上下补白
 			target_w = w;
 			target_h = (int) (target_w * height / width);
@@ -93,7 +91,7 @@ public class JavaImageIOCreator implements IThumbnailCreator {
 		} catch (IOException e) {
 			e.printStackTrace();
 			throw new ImageRuntimeException(srcFile, "生成缩略图");
-		}
+		}*/
 
 	}
 

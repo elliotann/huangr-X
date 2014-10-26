@@ -118,10 +118,10 @@
             <version>4.1.2</version>
         </dependency>
         <dependency>
-            <groupId>javazoom</groupId>
-            <artifactId>uploadbean</artifactId>
-            <version>1.9</version>
-        </dependency>
+		  <groupId>fakepath</groupId>
+		  <artifactId>uploadbean</artifactId>
+		  <version>1.9</version>
+		</dependency>
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
@@ -147,5 +147,10 @@
             <artifactId>mybatis</artifactId>
             <version>3.2.5</version>
         </dependency>
+        <dependency>
+		  <groupId>xml-apis</groupId>
+		  <artifactId>xml-apis</artifactId>
+		  <version>2.0.0</version>
+		</dependency>
     </dependencies>
 </project>

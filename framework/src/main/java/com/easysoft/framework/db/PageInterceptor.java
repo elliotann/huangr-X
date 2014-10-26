@@ -26,7 +26,7 @@ import java.util.Properties;
 public class PageInterceptor implements Interceptor {
     public static final ThreadLocal<PageOption> localPage = new ThreadLocal<PageOption>();
     private String databaseType;// 数据库类型，不同的数据库有不同的分页方法
-    @Override
+
     public Object intercept(Invocation invocation) throws Throwable {
         final RoutingStatementHandler handler = (RoutingStatementHandler) invocation.getTarget();
         final StatementHandler delegate = (StatementHandler) ReflectUtil.getFieldValue(handler, "delegate");
@@ -45,12 +45,12 @@ public class PageInterceptor implements Interceptor {
         return invocation.proceed();
     }
 
-    @Override
+   
     public Object plugin(Object target) {
         return Plugin.wrap(target, this);
     }
 
-    @Override
+ 
     public void setProperties(Properties properties) {
         this.databaseType = properties.getProperty("databaseType");
     }

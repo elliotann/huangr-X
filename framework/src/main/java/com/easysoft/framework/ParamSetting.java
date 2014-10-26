@@ -249,7 +249,7 @@ public class ParamSetting {
             safeUrlList = new ArrayList<String>();
             for (int i = 0; i < urlNodeList.getLength(); i++) {
                 Node node = urlNodeList.item(i);
-                safeUrlList.add(node.getTextContent());
+                //safeUrlList.add(node.getTextContent());
             }
 
         } catch (IOException e) {
