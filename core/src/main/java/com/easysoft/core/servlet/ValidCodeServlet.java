@@ -1,8 +1,7 @@
 package com.easysoft.core.servlet;
 
 import com.easysoft.framework.context.webcontext.ThreadContextHolder;
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -64,7 +63,7 @@ public class ValidCodeServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		
+		/*
 		String vtype= "";
 
 		if(req.getParameter("vtype")!=null){
@@ -76,23 +75,22 @@ public class ValidCodeServlet extends HttpServlet {
 		int ImageHeight = 100;
 
 		int car = captchars.length - 1;
-		/**
 		 * 产生随机字符串
-		 */
+		 *//*
 		String test = "";
 		for (int i = 0; i < 4; i++) {
 			test += captchars[generator.nextInt(car) + 1];
 		}
-		/**
+		*//**
 		 * 放放Session
-		 */
+		 *//*
  
 		
 		ThreadContextHolder.getSessionContext().setAttribute(SESSION_VALID_CODE+vtype,test);
 		
-		/**
+		*//**
 		 * 得到输出流
-		 */
+		 *//*
 		JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(resp
 				.getOutputStream());
 
@@ -101,9 +99,9 @@ public class ValidCodeServlet extends HttpServlet {
 
 		Graphics2D graphics = bi.createGraphics();
 
-		/**
+		*//**
 		 * 设置背景色
-		 */
+		 *//*
 		graphics.setColor(Color.white);
 
 		graphics.fillRect(0, 0, bi.getWidth(), bi.getHeight());
@@ -127,7 +125,7 @@ public class ValidCodeServlet extends HttpServlet {
 		resp.setContentType("image/jpg");
 
 		encoder.encode(bi);
-
+*/
 	}
 
 	private void shear(Graphics g, int w1, int h1, Color color) {

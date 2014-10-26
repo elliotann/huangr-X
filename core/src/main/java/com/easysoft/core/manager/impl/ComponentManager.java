@@ -24,7 +24,7 @@ public class ComponentManager extends BaseSupport
         implements IComponentManager{
     @Autowired
     private IComponentDao componentDao;
-    @Override
+
     public void startComponents() {
         if (this.logger.isDebugEnabled()) {
             this.logger.debug("start components start...");
@@ -42,7 +42,7 @@ public class ComponentManager extends BaseSupport
             this.logger.debug("start components end!");
     }
 
-    @Override
+
     public void saasStartComponents() {
 
     }
@@ -165,7 +165,7 @@ public class ComponentManager extends BaseSupport
         }
     }
 
-    @Override
+   
     public void start(String componentid) {
         if (this.logger.isDebugEnabled()) {
             this.logger.debug("start component[" + componentid + "]...");
@@ -208,7 +208,7 @@ public class ComponentManager extends BaseSupport
             this.logger.debug("start component[" + componentid + "] complete");
     }
 
-    @Override
+    
     public void stop(String componentid) {
         if (this.logger.isDebugEnabled()) {
             this.logger.debug("stop component[" + componentid + "]...");

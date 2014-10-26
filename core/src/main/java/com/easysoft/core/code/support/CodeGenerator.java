@@ -96,7 +96,7 @@ public class CodeGenerator implements ICallBack {
         }
         logger.info("----jeecg----Code----Generation-----[单表模型：" + this.tableName + "]------ 生成完成。。。");
     }
-    @Override
+
     public Map<String, Object> execute(){
         Map data = new HashMap();
         Map fieldMeta = new HashMap();

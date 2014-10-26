@@ -566,7 +566,7 @@ public class FileUploader
         }
 
         /** 根据序列值和时间生成 'XXXXXX_YYYYYYYYYYYYY' 格式的唯一文件名 */
-        @Override
+
         public String generate(String suffix)
         {
             int serial		= getNextInteger();

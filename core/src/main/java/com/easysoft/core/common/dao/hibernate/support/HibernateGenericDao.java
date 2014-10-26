@@ -28,40 +28,39 @@ public class HibernateGenericDao<T,PK extends Serializable> implements IGenericD
     public HibernateGenericDao(){
         entityClass = (Class<?>)((ParameterizedType)getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
-    @Override
+
     public void save(T entity) {
         sessionFactory.getCurrentSession().save(entity);
 
     }
 
-    @Override
+
     public void saveOrUpdate(T entity) {
         sessionFactory.getCurrentSession().saveOrUpdate(entity);
     }
 
-    @Override
+
     public List<T> queryForList() {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(entityClass);
         return criteria.list();
     }
 
-    @Override
     public List<T> queryForList(Map<String, Object> params) {
         return null;
     }
 
-    @Override
+
     public List<T> queryForListByHql(String hql) {
         return sessionFactory.getCurrentSession().createQuery(hql).list();
     }
 
-    @Override
+
     public List<T> queryForPage(PageOption pageOption) {
 
         return null;
     }
 
-    @Override
+
     public List<T> queryForPage(PageOption pageOption, List<Criterion> criterions) {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(entityClass);
         for(Criterion criterion : criterions){
@@ -75,7 +74,7 @@ public class HibernateGenericDao<T,PK extends Serializable> implements IGenericD
         return results;
     }
 
-    @Override
+
     public List<T> queryForHQL(String hql, Map<String, Object> params) {
         Query query = sessionFactory.getCurrentSession().createQuery(hql);
         if(params!=null&&params.size()>0){
@@ -84,17 +83,17 @@ public class HibernateGenericDao<T,PK extends Serializable> implements IGenericD
         return query.list();
     }
 
-    @Override
+
     public T queryById(PK id) {
         return (T)sessionFactory.getCurrentSession().get(entityClass,id);
     }
 
-    @Override
+
     public void update(T entity) {
 
     }
 
-    @Override
+
     public void deleteById(PK id) {
 
     }

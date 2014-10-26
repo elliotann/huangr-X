@@ -12,12 +12,12 @@ import java.util.Map;
  */
 @Repository
 public class MenuDao extends HibernateGenericDao<Menu,Integer> implements IMenuDao {
-    @Override
+
     public Menu queryMenuByCondition(Map<String, Object> conditions) {
         return null;
     }
 
-    @Override
+
     public void deleteMenuByCondition(Map<String, Object> conditions) {
 
     }
