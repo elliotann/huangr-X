@@ -20,7 +20,7 @@ public class CarFactoryBean implements FactoryBean {
         this.carInfo = carInfo;
     }
 
-    @Override
+
     public Object getObject() throws Exception {
         System.out.println("返回由FactoryBean创建的Bean实例");
         String[] infos = carInfo.split(",");
@@ -31,12 +31,12 @@ public class CarFactoryBean implements FactoryBean {
         return car;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    @Override
+ 
     public Class<?> getObjectType() {
         return Car.class;
     }
 
-    @Override
+
     public boolean isSingleton() {
         return true;
     }

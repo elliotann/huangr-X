@@ -210,31 +210,31 @@ public abstract class DBSolution implements IDBSolution {
 		return "" + value;
 	}
 
-	@Override
+
 	public boolean dbExport(String[] tables, String xml) {
         DBExporter dbExporter = new DBExporter(this);
         return dbExporter.doExport(this.prefix, tables, xml);
 	}
 
-	@Override
+
 	public String dbExport(String[] tables, boolean dataOnly) {
         DBExporter dbExporter = new DBExporter(this);
         return dbExporter.doExport(this.prefix, tables, dataOnly);
 
 	}
-	@Override
+	
     public boolean dbImport(String xml) {
         initFunctions();
         DBImporter dbImporter = new DBImporter(this);
         return dbImporter.doImport(xml);
     }
 
-	@Override
+
 	public void setPrefix(String prefix) {
 		this.prefix = prefix;
 	}
 
-	@Override
+
     public void setConnection(Connection conn){
         this.conn = conn;
     }
@@ -274,7 +274,7 @@ public abstract class DBSolution implements IDBSolution {
 		return sql;
 	}
 
-	@Override
+
 	public int deleteTable(String table) {
 		if (executeSqls(getDeleteSQL(table)))
 			return 1;
