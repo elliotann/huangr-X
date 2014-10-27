@@ -37,7 +37,7 @@ public class OrganizationManager implements IOrganizationManager {
         return organizatiOnDao.queryForList();
     }
 
-    @Override
+    
     public List<Organization> queryForTree(int orgid) {
         List<Company> orgList  = companyManager.queryForList();
         List<Organization> topOrgList  = new ArrayList<Organization>();
@@ -104,7 +104,7 @@ public class OrganizationManager implements IOrganizationManager {
         organizatiOnDao.deleteById(id);
     }
 
-    @Override
+    
     public List<Organization> queryOrganizationByTree(int pid) {
         //找出所有公司
         List<Company> orgList  = companyManager.queryForList();
@@ -120,7 +120,7 @@ public class OrganizationManager implements IOrganizationManager {
         return topOrgList;
     }
 
-    @Override
+    
     public Organization queryByTypeAndId(String type, int id) {
         Organization organization = null;
         if(type.equals(Organization.OrgType.COMPANY.name())){

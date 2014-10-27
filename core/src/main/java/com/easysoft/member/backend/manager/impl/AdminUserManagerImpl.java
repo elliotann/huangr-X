@@ -258,7 +258,7 @@ public class AdminUserManagerImpl  implements IAdminUserManager {
         this.identityService = identityService;
     }
 
-    @Override
+    
     public AdminUser getAdminUserByName(String name, Integer userId) {
         if(userId==null) userId=0;
         Map<String,Object> params = new HashMap<String, Object>();
@@ -268,7 +268,7 @@ public class AdminUserManagerImpl  implements IAdminUserManager {
 
     }
 
-    @Override
+    
     public PageOption queryForPage(PageOption pageOption,String username) {
         pageOption.addSearch("username",username);
         List<Criterion> criterions = new ArrayList<Criterion>();

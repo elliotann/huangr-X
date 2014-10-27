@@ -12,7 +12,7 @@ import java.util.Map;
  */
 @Repository
 public class EmployDao extends HibernateGenericDao<Employ,Integer> implements IEmployDao {
-    @Override
+    
     public Employ queryEmployByCondition(Map<String, Object> condition) {
         return null;
     }

@@ -60,7 +60,7 @@ public final class UserServiceImpl implements IUserService {
 	}
 
 
-	@Override
+	
 	public AdminUser getCurrentUser() {
 		WebSessionContext<AdminUser>  sessonContext = ThreadContextHolder
 				.getSessionContext();			

@@ -14,7 +14,7 @@ import java.util.Map;
  */
 @Repository
 public class DepartDao extends HibernateGenericDao<Depart,Integer> implements IDepartDao {
-    @Override
+    
     public List<Depart> queryByOrgId(Integer orgId) {
         String hql = "from Depart d where d.compId=:compId";
         Map<String,Object> params = new HashMap<String, Object>();
@@ -22,12 +22,12 @@ public class DepartDao extends HibernateGenericDao<Depart,Integer> implements ID
         return this.queryForHQL(hql,params);
     }
 
-    @Override
+    
     public Depart queryByQry(Map<String, Object> condition) {
         return null;
     }
 
-    @Override
+    
     public List<Depart> queryByCompIdAndPid(Map<String, Object> condition) {
         return null;
     }

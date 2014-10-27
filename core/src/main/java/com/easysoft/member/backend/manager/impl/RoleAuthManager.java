@@ -21,7 +21,7 @@ public class RoleAuthManager implements IRoleAuthManager {
     private static final List EMPTY_LIST = Collections.unmodifiableList(new ArrayList());
     @Autowired
     private IRoleAuthDao roleAuthDao;
-    @Override
+    
     public List<RoleAuth> queryRoleAuthListByRoleId(Integer roleId) {
         if(roleId==null){
             return EMPTY_LIST;
@@ -29,7 +29,7 @@ public class RoleAuthManager implements IRoleAuthManager {
         return roleAuthDao.queryAuthByRoleId(roleId);
     }
 
-    @Override
+    
     public RoleAuth queryRoleAuthByRoleIdAndFunId(Integer roleId, Integer funId) {
         Map<String,Object> params = new HashMap<String,Object>();
         params.put("roleId",roleId);
@@ -37,17 +37,17 @@ public class RoleAuthManager implements IRoleAuthManager {
         return roleAuthDao.queryAuthByRoleIdAndFun(params);
     }
 
-    @Override
+    
     public void update(RoleAuth roleAuth) {
         roleAuthDao.update(roleAuth);
     }
 
-    @Override
+    
     public void save(RoleAuth roleAuth) {
         roleAuthDao.save(roleAuth);
     }
 
-    @Override
+    
     public void deleteByRoleId(int roleId) {
         roleAuthDao.deleteByRoleId(roleId);
     }

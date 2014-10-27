@@ -51,8 +51,8 @@ public class IndexItemInstaller implements IInstaller {
 		 Element urlEl =this.getChild(ele, "url");
 		 
 		 IndexItem item = new IndexItem();
-		 item.setTitle(titleEl.getTextContent());
-		 item.setUrl(urlEl.getTextContent());
+		/* item.setTitle(titleEl.getTextContent());
+		 item.setUrl(urlEl.getTextContent());*/
 		 item.setSort(sort);
 		 
 		 this.indexItemManager.add(item);

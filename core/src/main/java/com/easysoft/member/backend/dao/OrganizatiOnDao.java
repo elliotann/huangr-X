@@ -12,7 +12,7 @@ import java.util.List;
  */
 @Repository
 public class OrganizatiOnDao extends HibernateGenericDao<Organization,Integer> implements IOrganizatiOnDao {
-    @Override
+    
     public List<Organization> queryByPid(int pid) {
         return null;
     }

@@ -66,7 +66,7 @@ public class AdminThemeInstaller implements IInstaller {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		String author = authornode.getTextContent();
+		String author = null;//authornode.getTextContent();
 		
  		Node versionnode = null;
 		try{
@@ -76,7 +76,7 @@ public class AdminThemeInstaller implements IInstaller {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		String version = versionnode.getTextContent();
+		String version =   null;//versionnode.getTextContent();
 		adminTheme.setPath(path);
 		adminTheme.setThemename(themeNode.getAttribute("name"));
 		adminTheme.setThumb("preview.png");

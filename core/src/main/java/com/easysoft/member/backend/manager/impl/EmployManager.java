@@ -20,17 +20,17 @@ import java.util.Map;
 public class EmployManager implements IEmployManager {
     @Autowired
     private IEmployDao employDao;
-    @Override
+    
     public List<Employ> queryForList() {
         return employDao.queryForList();
     }
 
-    @Override
+    
     public void saveEmploy(Employ employ) {
         employDao.save(employ);
     }
 
-    @Override
+    
     public Employ queryByNoAndId(String empNo, int id) {
         Map<String,Object> params = new HashMap<String,Object>();
         params.put("empNo",empNo);
@@ -38,7 +38,7 @@ public class EmployManager implements IEmployManager {
         return employDao.queryEmployByCondition(params);
     }
 
-    @Override
+    
     public PageOption queryForPage(PageOption pageOption) {
         List<Employ> employs = employDao.queryForPage(pageOption);
         if(!employs.isEmpty()){
@@ -47,17 +47,17 @@ public class EmployManager implements IEmployManager {
         return pageOption;
     }
 
-    @Override
+    
     public Employ queryById(int id) {
         return employDao.queryById(id);
     }
 
-    @Override
+    
     public void updateEmploy(Employ employ) {
         employDao.update(employ);
     }
 
-    @Override
+    
     public void batchDel(Integer[] ids) {
         for(Integer id:ids){
             employDao.deleteById(id);

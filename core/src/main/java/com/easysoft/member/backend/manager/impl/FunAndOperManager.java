@@ -22,7 +22,7 @@ import java.util.List;
 public class FunAndOperManager extends GenericService<FunAndOper> implements IFunAndOperManager {
     @Autowired
     private IRoleAuthManager roleAuthManager;
-    @Override
+    
     public List<FunAndOper> queryFunAndOpersByRoleId(Integer roleId) {
         /*List<RoleAuth> roleAuths = roleAuthManager.findByProperty(RoleAuth.class,"role.id",roleId);
         List<FunAndOper> funAndOpers = new ArrayList<FunAndOper>();
