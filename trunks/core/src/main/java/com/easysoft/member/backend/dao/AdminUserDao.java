@@ -14,12 +14,12 @@ import java.util.Map;
  */
 @Repository
 public class AdminUserDao extends HibernateGenericDao<AdminUser,Integer> implements IAdminUserDao {
-    @Override
+    
     public void deleteTable() {
 
     }
 
-    @Override
+    
     public AdminUser queryUserByName(Map<String, Object> conditions) {
         String hql = " from AdminUser a where a.username='"+conditions.get("username").toString()+"'";
         if(StringUtils.isNotEmpty(conditions.get("userId").toString())&&!"0".equals(conditions.get("userId").toString())){

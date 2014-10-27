@@ -18,27 +18,27 @@ import java.util.Map;
 public class CompanyManager implements ICompanyManager {
     @Autowired
     private ICompanyDao companyDao;
-    @Override
+    
     public List<Company> queryForList() {
         return companyDao.queryForList();
     }
 
-    @Override
+    
     public Company queryById(int id) {
         return companyDao.queryById(id);
     }
 
-    @Override
+    
     public void saveCompany(Company company) {
         companyDao.save(company);
     }
 
-    @Override
+    
     public void updateCompany(Company company) {
         companyDao.update(company);
     }
 
-    @Override
+    
     public Company queryByNoAndId(String compNo, int id) {
         Map<String,Object> params = new HashMap<String,Object>();
         params.put("compNo",compNo);

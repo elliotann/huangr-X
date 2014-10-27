@@ -13,17 +13,17 @@ import java.util.Map;
  */
 @Repository
 public class RoleAuthDao extends HibernateGenericDao<RoleAuth,Integer> implements IRoleAuthDao {
-    @Override
+    
     public List<RoleAuth> queryAuthByRoleId(Integer roleId) {
         return null;
     }
 
-    @Override
+    
     public RoleAuth queryAuthByRoleIdAndFun(Map<String, Object> conditions) {
         return null;
     }
 
-    @Override
+    
     public void deleteByRoleId(int roleId) {
 
     }

@@ -12,7 +12,7 @@ import java.util.Map;
  */
 @Repository
 public class CompanyDao extends HibernateGenericDao<Company,Integer> implements ICompanyDao {
-    @Override
+    
     public Company queryByQry(Map<String, Object> condition) {
         return null;
     }

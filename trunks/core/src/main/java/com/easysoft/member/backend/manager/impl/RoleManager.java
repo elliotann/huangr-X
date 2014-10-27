@@ -118,7 +118,7 @@ public class RoleManager implements IRoleManager {
 
 
 
-    @Override
+    
     public Role getRoleByName(String roleName,int roleid) {
         Map<String,Object> params = new HashMap<String,Object>();
         params.put("rolename",roleName);
@@ -145,7 +145,7 @@ public class RoleManager implements IRoleManager {
         return  role;
     }
 
-    @Override
+    
     public PageOption queryByPage(PageOption pageOption, String rolename) {
         pageOption.addSearch("rolename",rolename);
         List<Role> roles = roleDao.queryForPage(pageOption);

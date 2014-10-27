@@ -31,7 +31,7 @@ public class AuthActionManager extends GenericService<AuthAction> implements IAu
 		return this.baseDaoSupport.getLastId("auth_action");
 	}
 
-    @Override
+    
     public int add(AuthAction auth, int roleId) {
         int actId = add(auth);
         //增加角色权限关系表
@@ -47,7 +47,7 @@ public class AuthActionManager extends GenericService<AuthAction> implements IAu
 		this.baseDaoSupport.execute("delete from auth_action where actid=?", actid);
 	}
 
-    @Override
+    
     public int batAddRoleAuth(Integer roleId, List<FunAndOper> funAndOpers) {
         RoleAuth roleAuth;
         Role role = new Role();
@@ -171,7 +171,7 @@ public class AuthActionManager extends GenericService<AuthAction> implements IAu
 
 
 
-    @Override
+    
     public void saveAuth(Integer roleId,Integer operId,boolean isCheck,String[] menuIds) {
         for(String menuStr : menuIds){
             Integer menuId = Integer.parseInt(menuStr);
@@ -210,7 +210,7 @@ public class AuthActionManager extends GenericService<AuthAction> implements IAu
 
     }
 
-    @Override
+    
     public void saveAuth(RoleAuth[] roleAuths) {
         if(roleAuths.length>0){
             roleAuthManager.deleteByRoleId(roleAuths[0].getRoleId());

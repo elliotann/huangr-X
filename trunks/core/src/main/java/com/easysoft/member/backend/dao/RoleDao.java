@@ -12,7 +12,7 @@ import java.util.Map;
  */
 @Repository
 public class RoleDao extends HibernateGenericDao<Role,Integer> implements IRoleDao {
-    @Override
+    
     public Role getRoleByName(Map<String, Object> condition) {
         return null;
     }

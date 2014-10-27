@@ -29,7 +29,7 @@ public class DepartManager implements IDepartManager {
     }
     @Autowired
     private IDepartDao departDao;
-    @Override
+    
     public void saveDepart(Depart depart) {
         if(depart == null){
             throw new PermissionManagerException(DepartMgrError.DEPART_IS_NULL);
@@ -40,12 +40,12 @@ public class DepartManager implements IDepartManager {
         departDao.save(depart);
     }
 
-    @Override
+    
     public List<Depart> queryByOrgId(Integer orgId) {
         return departDao.queryByOrgId(orgId);
     }
 
-    @Override
+    
     public  List<Depart> queryDeparts4Select(Integer orgId) {
         List<Depart> departs = this.queryByOrgId(orgId);
         List<Depart> results  = new ArrayList<Depart>();
@@ -77,12 +77,12 @@ public class DepartManager implements IDepartManager {
         return children;
     }
 
-    @Override
+    
     public Depart queryById(int id) {
         return departDao.queryById(id);
     }
 
-    @Override
+    
     public Depart queryByNoAndId(String deptNo, int id) {
         Map<String,Object> params = new HashMap<String, Object>();
         params.put("deptNo",deptNo);
@@ -90,7 +90,7 @@ public class DepartManager implements IDepartManager {
         return departDao.queryByQry(params);
     }
 
-    @Override
+    
     public List<Depart> queryByCompIdAndPid(int compId, int pid) {
         Map<String,Object> params = new HashMap<String, Object>();
         params.put("compId",compId);
@@ -98,7 +98,7 @@ public class DepartManager implements IDepartManager {
         return departDao.queryByCompIdAndPid(params);
     }
 
-    @Override
+    
     public void updateDept(Depart dept) {
         departDao.update(dept);
     }

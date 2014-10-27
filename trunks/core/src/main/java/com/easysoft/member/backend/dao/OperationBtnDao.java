@@ -12,7 +12,7 @@ import java.util.List;
  */
 @Repository
 public class OperationBtnDao extends HibernateGenericDao<OperationBtn,Integer> implements IOperationBtnDao {
-    @Override
+    
     public List<OperationBtn> queryOperationsByMenuId(Integer menuId) {
         return null;
     }

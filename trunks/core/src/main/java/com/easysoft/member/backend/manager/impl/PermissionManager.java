@@ -50,7 +50,7 @@ public class PermissionManager extends BaseSupport implements IPermissionManager
         return false;
     }
 
-    @Override
+    
     public List<OperationBtn> queryBtnByUsernameAndMenuId(Integer userid, String acttype,Integer menuId) {
         AdminUser adminUser = UserServiceFactory.getUserService().getCurrentUser();
         List<OperationBtn> results = new ArrayList<OperationBtn>();
@@ -123,12 +123,12 @@ public class PermissionManager extends BaseSupport implements IPermissionManager
 		this.baseDaoSupport.execute("delete from user_role where userid=?", userid);
 	}
 
-    @Override
+    
     public List<AuthAction> getAuthActionsByRoleId(int roleId) {
 
         return this.baseDaoSupport.queryForList("select * from t_auth_action where actid in(select authid from t_role_auth where roleid=?)",new RowMapper(){
 
-            @Override
+            
             public Object mapRow(ResultSet rs, int i) throws SQLException {
                 AuthAction authAction = new AuthAction();
                 authAction.setActid(rs.getInt("actid"));
@@ -140,11 +140,11 @@ public class PermissionManager extends BaseSupport implements IPermissionManager
         },roleId);
     }
 
-    @Override
+    
     public List<FunAndOperationVO> getFunAndOperations() {
         List<FunAndOperationVO> funAndOperationVOs = this.baseDaoSupport.queryForList("select * from t_menu m where m.menutype=2",new RowMapper(){
 
-            @Override
+            
             public Object mapRow(ResultSet rs, int i) throws SQLException {
                 FunAndOperationVO funAndOperationVO = new FunAndOperationVO();
                 funAndOperationVO.setMenuId(rs.getInt("id"));
@@ -157,13 +157,13 @@ public class PermissionManager extends BaseSupport implements IPermissionManager
         return funAndOperationVOs;
     }
 
-    @Override
+    
     public List<OperationBtn> getOperationBtnsByMenuId(Integer menuId) {
         List<OperationBtn> operationBtns = operationBtnDao.queryOperationsByMenuId(menuId);
         return operationBtns;
     }
 
-    @Override
+    
     public boolean hasOperationByRoleAndMenu(Integer roleId, Integer menuId,String operId) {
         RoleAuth roleAuth = roleAuthManager.queryRoleAuthByRoleIdAndFunId(roleId,menuId);
 
