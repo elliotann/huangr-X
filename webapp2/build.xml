@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<project>
+	<target name="compile" description="src compile">
+		<javac srcdir="D:\project\idea\jeap1.0\webapp"
+         destdir="D:\project\idea\jeap1.0\webapp\target\jeap\WEB-INF\classes">
+			<classpath>
+				<fileset dir="D:\project\idea\jeap1.0\webapp\target\jeap\WEB-INF\lib" includes="*.jar"/>
+				<fileset dir="E:\soft\tomcat6\lib" includes="*.jar"/>
+			</classpath>
+		</javac>
+	</target>
+</project>
