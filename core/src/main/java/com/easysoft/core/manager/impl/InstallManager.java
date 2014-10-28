@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 @Service("installManager")
+@Transactional
 public class InstallManager {
 	private IAppManager appManager;
 	private ApplicationContext context;
