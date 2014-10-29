@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.Properties;
 
 public class ParamSetting {
-
     //是否为测试模式
     public static boolean TEST_MODE = false;
     //是否为开发模式
