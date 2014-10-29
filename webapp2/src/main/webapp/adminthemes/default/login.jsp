@@ -5,9 +5,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" />
     <title>小黄人管理系统 Beta 1.0</title>
-    <link rel="stylesheet" type="text/css" href="/jeap/adminthemes/default/css/login/login.css" />
-    <link rel="stylesheet" type="text/css" href="/jeap/adminthemes/default/css/form.css" />
-    <link rel="stylesheet" type="text/css" href="/jeap/adminthemes/default/css/login/tip.css" />
+    <link rel="stylesheet" type="text/css" href="${ctx }/adminthemes/default/css/login/login.css" />
+    <link rel="stylesheet" type="text/css" href="${ctx }/adminthemes/default/css/form.css" />
+    <link rel="stylesheet" type="text/css" href="${ctx }/adminthemes/default/css/login/tip.css" />
 
 
 </head>
@@ -45,7 +45,7 @@
 </div>
 <script type="text/javascript" src="${staticserver }/js/common/jquery-1.6.4.js"></script>
 <script type="text/javascript" src="${staticserver }/js/admin/sso.js"></script>
-<script type="text/javascript" src="/jeap/adminthemes/default/js/login/placeholder.js"></script>
+<script type="text/javascript" src="${ctx }/adminthemes/default/js/login/placeholder.js"></script>
 <SCRIPT  src="${staticserver }/js/common/jquery-form-2.33.js" type="text/javascript"></SCRIPT>
 <!--[if IE 6]>
 <script type="text/javascript" src="js/belatedpng.js" ></script>
