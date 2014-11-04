@@ -34,6 +34,7 @@ public class EsfContextIniter {
 		ThreadContextHolder.setHttpResponse(httpResponse);
 		httpRequest.setAttribute("staticserver", ParamSetting.IMG_SERVER_DOMAIN);
 		httpRequest.setAttribute("ext", ParamSetting.EXTENSION);
+		httpRequest.setAttribute("ctx", httpRequest.getContextPath());
 		String servletPath = httpRequest.getServletPath();
 		if (servletPath.startsWith("/statics"))
 			return;

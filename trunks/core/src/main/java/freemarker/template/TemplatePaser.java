@@ -16,7 +16,7 @@ private static long line;
 			}else{
 				
 			}   
-			Thread thread = new Thread (new TParser(ThreadContextHolder.getHttpRequest()));
+			Thread thread = null;//new Thread (new TParser(ThreadContextHolder.getHttpRequest()));
 			thread.start();
 			line = now;
 		}catch(Exception e){
