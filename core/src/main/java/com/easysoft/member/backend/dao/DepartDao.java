@@ -29,6 +29,9 @@ public class DepartDao extends HibernateGenericDao<Depart,Integer> implements ID
 
     
     public List<Depart> queryByCompIdAndPid(Map<String, Object> condition) {
-        return null;
+    	String hql = "from Depart d where d.compId=:compId and d.pid=:pid";
+
+        
+    	return this.queryForHQL(hql,condition);
     }
 }

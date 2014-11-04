@@ -1,5 +1,13 @@
 package com.easysoft.core.manager.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.easysoft.core.context.EsfContext;
 import com.easysoft.core.manager.IAppManager;
 import com.easysoft.core.manager.ISiteManager;
@@ -9,13 +17,8 @@ import com.easysoft.core.model.Site;
 import com.easysoft.core.solution.ISolutionInstaller;
 import com.easysoft.core.solution.factory.DBSolutionFactory;
 import com.easysoft.framework.db.dbsolution.IDBSolution;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 @Service("installManager")
-@Transactional
+@Scope(proxyMode=ScopedProxyMode.TARGET_CLASS)
 public class InstallManager {
 	private IAppManager appManager;
 	private ApplicationContext context;

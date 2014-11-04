@@ -1,6 +1,5 @@
 package com.easysoft.member.backend.manager;
 
-import com.easysoft.member.backend.model.Company;
 import com.easysoft.member.backend.model.Depart;
 
 import java.util.List;
