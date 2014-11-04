@@ -221,8 +221,8 @@
 </style>
 
 
-<script type="text/javascript" src="/jeap/statics/js/common/jquery-1.8.3.js"></script>
-<script type="text/javascript" src="/jeap/admin/core/build/js/jquery.multi-select.js"></script>
+<script type="text/javascript" src="${ctx }/statics/js/common/jquery-1.8.3.js"></script>
+<script type="text/javascript" src="${ctx }/admin/core/build/js/jquery.multi-select.js"></script>
 <div class="main">
     <form action="build.do?toConfirm" method="post" id="addForm">
         <div><input type="text"

@@ -8,11 +8,8 @@ import com.easysoft.framework.db.PageOption;
 import com.easysoft.framework.spring.SpringContextHolder;
 import com.easysoft.framework.utils.JsonUtils;
 import com.easysoft.member.backend.manager.*;
-import com.easysoft.member.backend.manager.impl.UserServiceFactory;
 import com.easysoft.member.backend.model.AdminUser;
 import com.easysoft.member.backend.model.Depart;
-import com.easysoft.member.backend.model.OperationBtn;
-import com.easysoft.member.backend.model.Organization;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,13 +39,21 @@ public class AdminUserAction extends BaseController{
     private ICompanyManager companyManager;
     @Autowired
     private IDepartManager departManager;
+    
+    /**
+     * 查询列表界面
+     * @param menuId
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(params = {"list"})
     public ModelAndView list(Integer menuId) throws Exception{
-
-        List<OperationBtn> operationBtns = permissionManager.queryBtnByUsernameAndMenuId(UserServiceFactory.getUserService().getCurrentUser().getId(), null,menuId);
-        Map<String,Object> map = new HashMap<String, Object>();
-        map.put("operationBtns",operationBtns);
-        return new ModelAndView("admin/core/auth/useradminlist",map);
+    	System.out.println("load bean def is ="+SpringContextHolder.getApplicationContext().getBeanDefinitionCount());
+    	
+    	for(String beanName : SpringContextHolder.getApplicationContext().getBeanDefinitionNames()){
+    		System.out.println("load bean beanName is ="+beanName);
+    	}
+        return new ModelAndView("admin/core/auth/useradminlist");
     }
     @RequestMapping(params = {"dataGrid"})
     public ModelAndView dataGrid(Integer rows,Integer page,String username){

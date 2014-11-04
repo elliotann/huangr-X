@@ -16,8 +16,8 @@
     <link href="${context}/css/input.css" rel="stylesheet" type="text/css" />
     <link href="${context}/css/validate.css" rel="stylesheet" type="text/css" />
     <link href="${context}/css/main.css" rel="stylesheet" type="text/css" />
-    <link href="/jeap/install/css/bootstrap.min1.css" rel="stylesheet" type="text/css" />
-    <link href="/jeap/install/css/style1.css" rel="stylesheet" type="text/css" />
+    <link href="${ctx}/install/css/bootstrap.min1.css" rel="stylesheet" type="text/css" />
+    <link href="${ctx}/install/css/style1.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="${staticserver }/js/common/jquery-1.6.4.js"></script>
 
 
