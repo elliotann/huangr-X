@@ -5,8 +5,8 @@
 <link href="${context}/css/style1.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="${context}/js/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${context}/js/easyui/locale/easyui-lang-zh_CN.js"></script>
-<script src="/jeap/admin/js/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
-<script src="/jeap/admin/js/crud.js" type="text/javascript"></script>
+<script src="${ctx }/admin/js/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
+<script src="${ctx }/admin/js/crud.js" type="text/javascript"></script>
 <link href="${context }/css/form.css" rel="stylesheet"/>
 <link href="${context }/css/button.css" rel="stylesheet"/>
 <script type="text/javascript">
@@ -45,8 +45,8 @@
             alert("必须选择一条数据进行修改!");
             return;
         }
-        var row = $('#dataGrid').datagrid('getSelections')[0];
         addOrUpdateDialog('修改管理员','userAdmin.do?edit&id='+row.id,500,700);
+        var row = $('#dataGrid').datagrid('getSelections')[0];
 
     }
 

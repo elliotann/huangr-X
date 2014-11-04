@@ -47,6 +47,7 @@ public class BusinessLogAction extends BaseController{
     public String list(){
         return "admin/core/log/loglist";
     }
+    
     @RequestMapping(params = {"dataGrid"})
     public ModelAndView dataGrid(Integer rows,Integer page,String operator){
         PageOption pageOption = new PageOption();
