@@ -3,7 +3,6 @@ package com.easysoft.member.backend.model;
 import com.easysoft.core.common.entity.IdEntity;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.List;
 
 
@@ -15,8 +14,6 @@ import java.util.List;
 @Entity
 @Table(name="t_adminuser")
 public class AdminUser extends IdEntity{
-	
-
 	private String username;
 	private String password;
 	private int state;
