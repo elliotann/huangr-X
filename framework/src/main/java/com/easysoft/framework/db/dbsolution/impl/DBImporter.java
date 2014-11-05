@@ -2,7 +2,6 @@ package com.easysoft.framework.db.dbsolution.impl;
 
 import com.easysoft.framework.resource.io.XmlReader;
 import com.easysoft.framework.utils.StringUtil;
-import com.easysoft.framework.ParamSetting;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -236,7 +235,7 @@ public class DBImporter extends DBPorter {
             if ("add".equals(type)) {
                 String datatype = element.elementText("type");
 
-                if (ParamSetting.DBTYPE.equals("2"))
+                if ("1".equals("2"))
                     sql = sql + " add  " + name + " ";
                 else {
                     sql = sql + " add column " + name + " ";

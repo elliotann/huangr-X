@@ -1,6 +1,5 @@
 package com.easysoft.framework.db.impl;
 
-import com.easysoft.framework.ParamSetting;
 import org.springframework.jdbc.core.ColumnMapRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -15,7 +14,7 @@ import org.springframework.jdbc.core.RowMapper;
 public class LowerCaseJdbcTemplate extends JdbcTemplate {
 	@Override
 	protected RowMapper getColumnMapRowMapper() {
-		if("2".equals(ParamSetting.DBTYPE)){
+		if("2".equals("2")){
 			return new LowerCaseColumnMapRowMapper();
 		}else{
 			return new ColumnMapRowMapper();
