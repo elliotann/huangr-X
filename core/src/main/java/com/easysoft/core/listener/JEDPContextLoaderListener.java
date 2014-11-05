@@ -1,9 +1,9 @@
 package com.easysoft.core.listener;
 
-import com.easysoft.framework.ParamSetting;
+import com.easysoft.core.ParamSetting;
 import com.easysoft.core.manager.IComponentManager;
 import com.easysoft.core.manager.ISiteManager;
-import com.easysoft.framework.spring.SpringContextHolder;
+import com.easysoft.framework.utils.SpringContextHolder;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;

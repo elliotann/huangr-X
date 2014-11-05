@@ -1,12 +1,12 @@
 package com.easysoft.core.dispatcher.httpcache;
 
+import com.easysoft.core.ParamSetting;
 import com.easysoft.core.manager.IThemeUriManager;
 import com.easysoft.core.model.ThemeUri;
-import com.easysoft.framework.ParamSetting;
 import com.easysoft.framework.cache.CacheFactory;
 import com.easysoft.framework.cache.ICache;
 import com.easysoft.framework.context.webcontext.ThreadContextHolder;
-import com.easysoft.framework.spring.SpringContextHolder;
+import com.easysoft.framework.utils.SpringContextHolder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

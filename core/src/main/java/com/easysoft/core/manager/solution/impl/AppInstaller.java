@@ -1,13 +1,14 @@
 package com.easysoft.core.manager.solution.impl;
 
+import com.easysoft.core.ParamSetting;
 import com.easysoft.core.context.ConnectType;
 import com.easysoft.core.manager.IAppManager;
 import com.easysoft.core.model.JEAPApp;
 import com.easysoft.core.model.IApp;
-import com.easysoft.framework.ParamSetting;
 import com.easysoft.framework.db.IDaoSupport;
 import com.easysoft.framework.db.dbsolution.IInstaller;
-import com.easysoft.framework.spring.SpringContextHolder;
+import com.easysoft.framework.utils.SpringContextHolder;
+
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;

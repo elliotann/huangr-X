@@ -1,8 +1,8 @@
 package com.easysoft.core.directive;
 
+import com.easysoft.core.ParamSetting;
 import com.easysoft.core.context.EsfContext;
 import com.easysoft.core.model.Site;
-import com.easysoft.framework.ParamSetting;
 import com.easysoft.framework.resource.Resource;
 import com.easysoft.core.resource.impl.ResourceBuilder;
 import com.easysoft.core.utils.UploadUtil;

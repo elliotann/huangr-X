@@ -1,7 +1,7 @@
 package com.easysoft.core.common.controller;
 
+import com.easysoft.core.ParamSetting;
 import com.easysoft.core.interceptors.DateConvertEditor;
-import com.easysoft.framework.ParamSetting;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestDataBinder;

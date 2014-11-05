@@ -1,5 +1,6 @@
 package com.easysoft.core.dispatcher;
 
+import com.easysoft.core.ParamSetting;
 import com.easysoft.core.context.EsfContext;
 import com.easysoft.core.context.EsfContextIniter;
 import com.easysoft.core.context.SaasEsfContextIniter;
@@ -9,10 +10,9 @@ import com.easysoft.core.dispatcher.httpcache.HttpCacheManager;
 import com.easysoft.core.dispatcher.processor.Processor;
 import com.easysoft.core.dispatcher.processor.factory.ProcessorFactory;
 import com.easysoft.core.utils.JspUtil;
-import com.easysoft.framework.ParamSetting;
 import com.easysoft.framework.context.webcontext.ThreadContextHolder;
 import com.easysoft.core.freemarker.utils.FreeMarkerUtil;
-import com.easysoft.framework.spring.SpringContextHolder;
+import com.easysoft.framework.utils.SpringContextHolder;
 import com.sun.xml.messaging.saaj.util.ByteOutputStream;
 import freemarker.template.Configuration;
 import freemarker.template.Template;

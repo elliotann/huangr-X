@@ -3,7 +3,6 @@ package com.easysoft.core;
 import com.easysoft.core.context.EsfContext;
 import com.easysoft.core.manager.solution.impl.SqlExportService;
 import com.easysoft.core.model.Site;
-import com.easysoft.framework.ParamSetting;
 import com.easysoft.framework.cache.CacheFactory;
 import com.easysoft.framework.db.IDBRouter;
 import com.easysoft.framework.db.ISqlFileExecutor;

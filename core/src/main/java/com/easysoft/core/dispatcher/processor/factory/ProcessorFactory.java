@@ -1,12 +1,12 @@
 package com.easysoft.core.dispatcher.processor.factory;
 
+import com.easysoft.core.ParamSetting;
 import com.easysoft.core.dispatcher.processor.Processor;
 import com.easysoft.core.dispatcher.processor.backend.BackgroundProcessor;
 import com.easysoft.core.dispatcher.processor.facade.*;
 import com.easysoft.core.manager.IAppManager;
 import com.easysoft.core.model.JEAPApp;
-import com.easysoft.framework.ParamSetting;
-import com.easysoft.framework.spring.SpringContextHolder;
+import com.easysoft.framework.utils.SpringContextHolder;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;

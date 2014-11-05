@@ -5,8 +5,9 @@ import com.easysoft.core.dispatcher.core.Response;
 import com.easysoft.core.dispatcher.core.StringResponse;
 import com.easysoft.core.dispatcher.processor.Processor;
 import com.easysoft.core.widget.facade.IWidgetCfgHtmlParser;
-import com.easysoft.framework.spring.SpringContextHolder;
 import com.easysoft.framework.utils.RequestUtil;
+import com.easysoft.framework.utils.SpringContextHolder;
+
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;

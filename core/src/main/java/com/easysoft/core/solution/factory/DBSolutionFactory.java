@@ -1,11 +1,12 @@
 package com.easysoft.core.solution.factory;
 
 
+import com.easysoft.core.ParamSetting;
 import com.easysoft.core.context.EsfContext;
 import com.easysoft.core.model.Site;
-import com.easysoft.framework.ParamSetting;
 import com.easysoft.framework.db.dbsolution.IDBSolution;
-import com.easysoft.framework.spring.SpringContextHolder;
+import com.easysoft.framework.utils.SpringContextHolder;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.sql.Connection;

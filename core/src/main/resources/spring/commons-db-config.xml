@@ -67,8 +67,6 @@
 	<bean id="simpleJdbcTemplate" class="org.springframework.jdbc.core.simple.SimpleJdbcTemplate">
   		<constructor-arg><ref bean="dataSource"/></constructor-arg>
 	</bean>
-    <bean class="com.easysoft.framework.component.ComponentLoader"></bean>
-
    	<bean id="sqlFileExecutor" class="com.easysoft.framework.db.impl.DefaultSqlFileExecutor"></bean>
 
 

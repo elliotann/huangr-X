@@ -1,9 +1,9 @@
 package com.easysoft.core.component.context;
 
 
+import com.easysoft.core.ParamSetting;
 import com.easysoft.core.context.EsfContext;
 import com.easysoft.core.model.Site;
-import com.easysoft.framework.ParamSetting;
 
 import java.util.HashMap;
 import java.util.Map;

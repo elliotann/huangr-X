@@ -20,6 +20,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.easysoft.core.ParamSetting;
 import com.easysoft.core.context.EsfContext;
 import com.easysoft.core.manager.IAppManager;
 import com.easysoft.core.manager.IDomainManager;
@@ -34,7 +35,6 @@ import com.easysoft.core.model.Site;
 import com.easysoft.core.model.Theme;
 import com.easysoft.core.solution.ISetupLoader;
 import com.easysoft.core.utils.UploadUtil;
-import com.easysoft.framework.ParamSetting;
 import com.easysoft.framework.context.webcontext.ThreadContextHolder;
 import com.easysoft.framework.context.webcontext.WebSessionContext;
 import com.easysoft.framework.db.IDaoSupport;

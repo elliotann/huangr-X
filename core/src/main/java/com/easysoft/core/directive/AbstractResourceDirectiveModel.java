@@ -1,7 +1,7 @@
 package com.easysoft.core.directive;
 
+import com.easysoft.core.ParamSetting;
 import com.easysoft.framework.resource.Resource;
-import com.easysoft.framework.ParamSetting;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.Map;

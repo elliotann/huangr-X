@@ -1,5 +1,6 @@
 package com.easysoft.core.manager.solution.impl;
 
+import com.easysoft.core.ParamSetting;
 import com.easysoft.core.context.EsfContext;
 import com.easysoft.core.manager.ISiteManager;
 import com.easysoft.core.manager.solution.InstallerFactory;
@@ -9,12 +10,12 @@ import com.easysoft.core.solution.IProfileLoader;
 import com.easysoft.core.solution.ISetupLoader;
 import com.easysoft.core.solution.ISolutionInstaller;
 import com.easysoft.core.solution.factory.DBSolutionFactory;
-import com.easysoft.framework.ParamSetting;
 import com.easysoft.framework.db.IDaoSupport;
 import com.easysoft.framework.db.dbsolution.IDBSolution;
 import com.easysoft.framework.db.dbsolution.IInstaller;
-import com.easysoft.framework.spring.SpringContextHolder;
 import com.easysoft.framework.utils.FileUtil;
+import com.easysoft.framework.utils.SpringContextHolder;
+
 import org.apache.log4j.Logger;
 import org.dom4j.Element;
 import org.springframework.stereotype.Service;

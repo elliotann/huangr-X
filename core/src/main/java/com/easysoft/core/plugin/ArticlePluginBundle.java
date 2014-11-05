@@ -1,10 +1,10 @@
 package com.easysoft.core.plugin;
 
+import com.easysoft.framework.component.plugin.AbstractFieldPlugin;
+import com.easysoft.framework.component.plugin.IDataDeleteEvent;
+import com.easysoft.framework.component.plugin.IDataSaveEvent;
+import com.easysoft.framework.component.plugin.IPlugin;
 import com.easysoft.framework.model.DataField;
-import com.easysoft.framework.plugin.AbstractFieldPlugin;
-import com.easysoft.framework.plugin.IDataDeleteEvent;
-import com.easysoft.framework.plugin.IDataSaveEvent;
-import com.easysoft.framework.plugin.IPlugin;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

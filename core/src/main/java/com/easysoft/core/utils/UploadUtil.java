@@ -1,8 +1,8 @@
 package com.easysoft.core.utils;
 
+import com.easysoft.core.ParamSetting;
 import com.easysoft.core.context.EsfContext;
 import com.easysoft.core.dispatcher.processor.MultipartRequestWrapper;
-import com.easysoft.framework.ParamSetting;
 import com.easysoft.framework.context.webcontext.ThreadContextHolder;
 import com.easysoft.framework.image.IThumbnailCreator;
 import com.easysoft.framework.image.ThumbnailCreatorFactory;
