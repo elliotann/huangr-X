@@ -21,13 +21,13 @@ package com.easysoft.build.web;
 
 
  import com.easysoft.build.manager.BuildConfigInfoService;
- import com.easysoft.build.manager.BuildDetailiDataService;
- import com.easysoft.build.model.BuildConfig;
- import com.easysoft.build.model.BuildDetailData;
- import com.easysoft.build.utils.PatchUtil;
- import com.easysoft.framework.spring.SpringContextHolder;
+import com.easysoft.build.manager.BuildDetailiDataService;
+import com.easysoft.build.model.BuildConfig;
+import com.easysoft.build.model.BuildDetailData;
+import com.easysoft.build.utils.PatchUtil;
+import com.easysoft.framework.utils.SpringContextHolder;
 
- import java.util.*;
+import java.util.*;
 
  public class BuildQueue extends Thread
  {

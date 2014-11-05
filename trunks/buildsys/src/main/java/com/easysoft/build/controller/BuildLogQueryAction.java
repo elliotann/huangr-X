@@ -7,7 +7,8 @@ import com.easysoft.build.model.RepositoryInfo;
 import com.easysoft.build.utils.LogFileUtil;
 import com.easysoft.build.vo.DownloadFileType;
 import com.easysoft.core.common.controller.BaseController;
-import com.easysoft.framework.spring.SpringContextHolder;
+import com.easysoft.framework.utils.SpringContextHolder;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

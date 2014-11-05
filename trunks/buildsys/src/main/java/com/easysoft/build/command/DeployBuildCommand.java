@@ -2,10 +2,10 @@
 
 
  import com.easysoft.build.manager.BuildConfigInfoService;
- import com.easysoft.build.manager.BuildFileService;
- import com.easysoft.build.model.BuildFile;
- import com.easysoft.framework.spring.SpringContextHolder;
- import com.easysoft.member.backend.model.UserRole;
+import com.easysoft.build.manager.BuildFileService;
+import com.easysoft.build.model.BuildFile;
+import com.easysoft.framework.utils.SpringContextHolder;
+import com.easysoft.member.backend.model.UserRole;
 
  public class DeployBuildCommand extends BuildCommand
  {
