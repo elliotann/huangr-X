@@ -1,4 +1,4 @@
-package com.easysoft.framework.spring;
+package com.easysoft.framework.utils;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
