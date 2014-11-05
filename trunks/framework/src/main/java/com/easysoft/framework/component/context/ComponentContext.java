@@ -5,7 +5,6 @@ import com.easysoft.framework.component.IComponent;
 import com.easysoft.framework.component.PluginView;
 import com.easysoft.framework.component.WidgetView;
 import com.easysoft.framework.utils.FileUtil;
-import com.easysoft.framework.ParamSetting;
 import com.easysoft.framework.utils.XMLUtil;
 import org.apache.commons.lang.StringUtils;
 import org.w3c.dom.Document;
@@ -76,7 +75,7 @@ public class ComponentContext
         Element componentEl = (Element)doc.getFirstChild();
 
         String needVersion = componentEl.getAttribute("esf_version");
-        String currentVersion = ParamSetting.VERSION;
+        String currentVersion = "1.0.0";
 
         componentView.setName(componentEl.getAttribute("name"));
         componentView.setAuthor(componentEl.getAttribute("author"));

@@ -1,6 +1,5 @@
 package com.easysoft.framework.db.impl;
 
-import com.easysoft.framework.ParamSetting;
 import com.easysoft.framework.db.DBRuntimeException;
 import com.easysoft.framework.db.IDaoSupport;
 import com.easysoft.framework.db.ObjectNotFoundException;
@@ -46,7 +45,7 @@ public class JdbcDaoSupport<T> implements IDaoSupport<T> {
 	}
 
 	public int getLastId(String table) {
-		if (ParamSetting.DBTYPE.equals("1")) {
+		if ("2".equals("1")) {
             Connection conn = null;
             ResultSet rs = null;
             try {
@@ -79,12 +78,12 @@ public class JdbcDaoSupport<T> implements IDaoSupport<T> {
                 }
             }
 
-		} else if (ParamSetting.DBTYPE.equals("2")) {
+		} else if ("2".equals("2")) {
 			int result = 0;
 			result = this.jdbcTemplate.queryForInt("SELECT s_" + table
 					+ ".currval as id from DUAL");
 			return result;
-		} else if (ParamSetting.DBTYPE.equals("3")) {
+		} else if ("2".equals("3")) {
 			int result = 0;
 			result = this.jdbcTemplate.queryForInt("select @@identity");
 			return result;
@@ -193,7 +192,7 @@ public class JdbcDaoSupport<T> implements IDaoSupport<T> {
 		// Map map = this.simpleJdbcTemplate.queryForMap(sql, args);
 		try {
 			Map map = this.jdbcTemplate.queryForMap(sql, args);
-			if (ParamSetting.DBTYPE.equals("2")) {
+			if ("2".equals("2")) {
 				Map newMap = new HashMap();
 				Iterator keyItr = map.keySet().iterator();
 				while (keyItr.hasNext()) {
@@ -312,7 +311,7 @@ public class JdbcDaoSupport<T> implements IDaoSupport<T> {
 			Assert.hasText(where, "where条件不能为空");
 			table = quoteCol(table);
 
-			if ("3".equals(ParamSetting.DBTYPE)) { // SQLServer主键不允许更新，执行update前先删除
+			if ("3".equals("2")) { // SQLServer主键不允许更新，执行update前先删除
 				try {
 					where = where.replaceAll(" ", "");
 					String key = where.split("=")[0];
@@ -344,7 +343,7 @@ public class JdbcDaoSupport<T> implements IDaoSupport<T> {
 	public String buildPageSql(String sql, int page, int pageSize) {
 		String sql_str = null;
 
-		String db_type = ParamSetting.DBTYPE;
+		String db_type = "1";
 		if (db_type.equals("1")) {
 			db_type = "mysql";
 		} else if (db_type.equals("2")) {

@@ -3,7 +3,6 @@ package com.easysoft.framework.db.impl;
 import com.easysoft.framework.db.ISqlFileExecutor;
 import com.easysoft.framework.utils.FileUtil;
 import com.easysoft.framework.utils.StringUtil;
-import com.easysoft.framework.ParamSetting;
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Propagation;
@@ -49,8 +48,8 @@ final public class DefaultSqlFileExecutor implements ISqlFileExecutor {
 		content = StringUtil.delSqlComment(content);
 		content = content.replaceAll("\r", "");
 		String spliter = ";\n";
-		if(ParamSetting.DBTYPE.equals("2") || ParamSetting.DBTYPE.equals("3")){
-			if(ParamSetting.DBTYPE.equals("2") && exampleData)
+		if("1".equals("2") || "1".equals("3")){
+			if("1".equals("2") && exampleData)
 				spliter = ";\n";
 			else
 				spliter="\ngo\n";
@@ -58,7 +57,7 @@ final public class DefaultSqlFileExecutor implements ISqlFileExecutor {
 		
 		String[] sql_ar = content.split(spliter);
 
-		if(ParamSetting.DBTYPE.equals("3")){
+		if("1".equals("3")){
 			if(sql_ar.length==1){ //sqlserver执行示例数据时，没有go语句，不能用go分隔
 				sql_ar = content.split(";\n");
 			}
