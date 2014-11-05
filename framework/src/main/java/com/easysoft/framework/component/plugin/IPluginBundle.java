@@ -1,4 +1,4 @@
-package com.easysoft.framework.plugin;
+package com.easysoft.framework.component.plugin;
 
 /**
  * 插件桩接口<br/>

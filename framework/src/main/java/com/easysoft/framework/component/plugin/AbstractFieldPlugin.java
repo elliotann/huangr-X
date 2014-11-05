@@ -1,7 +1,7 @@
-package com.easysoft.framework.plugin;
+package com.easysoft.framework.component.plugin;
 
+import com.easysoft.framework.component.plugin.field.IFieldSaveEvent;
 import com.easysoft.framework.context.webcontext.ThreadContextHolder;
-import com.easysoft.framework.plugin.field.IFieldSaveEvent;
 import com.easysoft.framework.model.DataField;
 
 import javax.servlet.http.HttpServletRequest;

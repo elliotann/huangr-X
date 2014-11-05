@@ -1,4 +1,4 @@
-package com.easysoft.framework.plugin;
+package com.easysoft.framework.component.plugin;
 
 /**
  * 插件接口<br/> 实现此接口的插件可被注册至通过IPluginBundle桩化的业务类中。<br/>

@@ -68,17 +68,6 @@ public class WebSessionContextImpl implements WebSessionContext, Externalizable 
 		// this.sessionAttributeHolder = null;
 	}
 
-	// public FrameworkSessionContextImpl getSessionAttributeHolder() {
-	// return sessionAttributeHolder;
-	// }
-
-	// public void setSessionAttributeHolder(FrameworkSessionContextImpl
-	// sessionAttributeHolder) {
-	// // this.sessionAttributeHolder = sessionAttributeHolder;
-	// // this.sessionAttributeHolder.setCallBackHandle(this);
-	// this.session.setAttribute(sessionAttributeKey,
-	// sessionAttributeHolder);
-	// }
 
 	private void onSaveSessionAttribute() {
 		this.session.setAttribute(sessionAttributeKey, attributes);
@@ -93,12 +82,6 @@ public class WebSessionContextImpl implements WebSessionContext, Externalizable 
 	public void setAttribute(String name, Object value) {
 		
 		if(attributes!=null){
-//		if(logger.isDebugEnabled()){
-//			logger.debug("set attribute :");
-//			logger.debug("attributes=>"+attributes);
-//			logger.debug("name=>"+name);
-//			logger.debug("value=>"+value);
-//		}
 		
 		attributes.put(name, value);
 		onSaveSessionAttribute();

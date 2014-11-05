@@ -1,4 +1,4 @@
-package com.easysoft.framework.plugin;
+package com.easysoft.framework.component.plugin;
 
 /**
  * Cms数据删除事件
