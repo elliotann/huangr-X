@@ -1,4 +1,4 @@
-package com.easysoft.framework.plugin.field;
+package com.easysoft.framework.component.plugin.field;
 
 import java.util.Map;
 
