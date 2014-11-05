@@ -1,5 +1,6 @@
 package com.easysoft.core.dispatcher.processor.backend.support;
 
+import com.easysoft.core.ParamSetting;
 import com.easysoft.core.context.EsfContext;
 import com.easysoft.core.dispatcher.FacadePage;
 import com.easysoft.core.dispatcher.core.Response;
@@ -7,9 +8,8 @@ import com.easysoft.core.dispatcher.processor.facade.AbstractFacadeProcessor;
 import com.easysoft.core.manager.IAdminThemeManager;
 import com.easysoft.core.model.AdminTheme;
 import com.easysoft.core.model.Site;
-import com.easysoft.framework.ParamSetting;
-import com.easysoft.framework.spring.SpringContextHolder;
 import com.easysoft.framework.utils.HttpUtil;
+import com.easysoft.framework.utils.SpringContextHolder;
 import com.easysoft.member.backend.manager.IAdminUserManager;
 import com.easysoft.member.backend.model.AdminUser;
 

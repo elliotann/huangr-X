@@ -1,11 +1,11 @@
 package com.easysoft.core.dispatcher.processor.facade.support;
 
+import com.easysoft.core.ParamSetting;
 import com.easysoft.core.context.EsfContext;
 import com.easysoft.core.dispatcher.PageWrapper;
 import com.easysoft.core.dispatcher.page.IPageParser;
 import com.easysoft.core.model.Site;
 import com.easysoft.core.utils.HtmlUtil;
-import com.easysoft.framework.ParamSetting;
 import com.easysoft.core.freemarker.utils.FreeMarkerUtil;
 import com.sun.xml.messaging.saaj.util.ByteOutputStream;
 import freemarker.template.Configuration;

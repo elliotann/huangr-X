@@ -13,8 +13,8 @@ import com.easysoft.core.dispatcher.page.IPageParser;
 import com.easysoft.core.dispatcher.page.facade.support.HeaderResourcePageWrapper;
 import com.easysoft.core.dispatcher.processor.Processor;
 import com.easysoft.core.dispatcher.processor.facade.support.PageEditModeWrapper;
-import com.easysoft.framework.spring.SpringContextHolder;
 import com.easysoft.framework.utils.RequestUtil;
+import com.easysoft.framework.utils.SpringContextHolder;
 import com.easysoft.member.backend.manager.impl.UserServiceFactory;
 
 /**

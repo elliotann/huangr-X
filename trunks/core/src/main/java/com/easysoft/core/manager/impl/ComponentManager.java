@@ -7,10 +7,11 @@ import com.easysoft.framework.component.ComponentView;
 import com.easysoft.framework.component.PluginView;
 import com.easysoft.framework.component.WidgetView;
 import com.easysoft.framework.component.context.ComponentContext;
+import com.easysoft.framework.component.plugin.IPlugin;
+import com.easysoft.framework.component.plugin.IPluginBundle;
 import com.easysoft.core.manager.IComponentManager;
-import com.easysoft.framework.plugin.IPlugin;
-import com.easysoft.framework.plugin.IPluginBundle;
-import com.easysoft.framework.spring.SpringContextHolder;
+import com.easysoft.framework.utils.SpringContextHolder;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -1,10 +1,10 @@
 package com.easysoft.core.manager.solution.impl;
 
+import com.easysoft.core.ParamSetting;
 import com.easysoft.core.context.EsfContext;
 import com.easysoft.core.manager.solution.InstallUtil;
 import com.easysoft.core.model.Site;
 import com.easysoft.core.solution.factory.DBSolutionFactory;
-import com.easysoft.framework.ParamSetting;
 import com.easysoft.framework.db.ISqlFileExecutor;
 import com.easysoft.framework.db.dbsolution.IDBSolution;
 import com.easysoft.framework.db.dbsolution.IInstaller;

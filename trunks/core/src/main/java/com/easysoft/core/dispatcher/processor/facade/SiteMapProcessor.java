@@ -5,7 +5,7 @@ import com.easysoft.core.dispatcher.core.Response;
 import com.easysoft.core.dispatcher.core.StringResponse;
 import com.easysoft.core.dispatcher.processor.Processor;
 import com.easysoft.core.manager.ISitemapManager;
-import com.easysoft.framework.spring.SpringContextHolder;
+import com.easysoft.framework.utils.SpringContextHolder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

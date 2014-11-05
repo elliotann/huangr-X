@@ -1,7 +1,7 @@
 package com.easysoft.core.manager.solution.impl;
 
+import com.easysoft.core.ParamSetting;
 import com.easysoft.core.manager.solution.IAdminThemeInfoFileLoader;
-import com.easysoft.framework.ParamSetting;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;

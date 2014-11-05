@@ -1,7 +1,7 @@
 package com.easysoft.core.manager.impl;
 
+import com.easysoft.core.ParamSetting;
 import com.easysoft.core.context.EsfContext;
-import com.easysoft.framework.ParamSetting;
 import com.easysoft.core.common.dao.spring.BaseSupport;
 import com.easysoft.framework.db.IDaoSupport;
 import com.easysoft.framework.utils.FileUtil;

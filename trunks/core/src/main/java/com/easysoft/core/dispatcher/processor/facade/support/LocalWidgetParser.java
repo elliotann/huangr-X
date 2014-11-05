@@ -4,7 +4,7 @@ import com.easysoft.core.widget.IWidget;
 import com.easysoft.core.widget.facade.IWidgetParser;
 import com.easysoft.core.component.context.WidgetContext;
 import com.easysoft.core.dispatcher.core.EopException;
-import com.easysoft.framework.spring.SpringContextHolder;
+import com.easysoft.framework.utils.SpringContextHolder;
 
 import java.util.Map;
 

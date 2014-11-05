@@ -1,7 +1,8 @@
 package com.easysoft.core.plugin;
 
 import com.easysoft.core.dispatcher.core.freemarker.FreeMarkerParser;
-import com.easysoft.framework.plugin.IPlugin;
+import com.easysoft.framework.component.plugin.IPlugin;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 

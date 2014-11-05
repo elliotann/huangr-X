@@ -1,14 +1,14 @@
 package com.easysoft.core.dispatcher.processor.backend.support;
 
+import com.easysoft.core.ParamSetting;
 import com.easysoft.core.dispatcher.FacadePage;
 import com.easysoft.core.dispatcher.core.Response;
 import com.easysoft.core.dispatcher.core.StringResponse;
 import com.easysoft.core.dispatcher.processor.facade.AbstractFacadeProcessor;
 import com.easysoft.core.manager.IMenuManager;
 import com.easysoft.member.backend.model.*;
-import com.easysoft.framework.ParamSetting;
 import com.easysoft.framework.context.webcontext.ThreadContextHolder;
-import com.easysoft.framework.spring.SpringContextHolder;
+import com.easysoft.framework.utils.SpringContextHolder;
 import com.easysoft.member.backend.manager.IAdminUserManager;
 import com.easysoft.member.backend.manager.IPermissionManager;
 import org.apache.commons.lang.StringUtils;

@@ -1,10 +1,11 @@
 package com.easysoft.core.plugin;
 
+import com.easysoft.core.ParamSetting;
 import com.easysoft.core.context.EsfContext;
 import com.easysoft.core.model.Site;
-import com.easysoft.framework.ParamSetting;
-import com.easysoft.framework.plugin.IPlugin;
-import com.easysoft.framework.plugin.IPluginBundle;
+import com.easysoft.framework.component.plugin.IPlugin;
+import com.easysoft.framework.component.plugin.IPluginBundle;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 

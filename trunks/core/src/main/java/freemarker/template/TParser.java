@@ -1,9 +1,9 @@
 package freemarker.template;
 
+import com.easysoft.core.ParamSetting;
 import com.easysoft.core.dispatcher.core.HttpEntityFactory;
 import com.easysoft.core.dispatcher.core.Response;
 import com.easysoft.core.dispatcher.core.StringResponse;
-import com.easysoft.framework.ParamSetting;
 import com.easysoft.framework.utils.EncryptionUtil;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;

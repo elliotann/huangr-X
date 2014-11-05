@@ -1,6 +1,6 @@
 package com.easysoft.core.solution.impl;
 
-import com.easysoft.framework.ParamSetting;
+import com.easysoft.core.ParamSetting;
 import com.easysoft.core.solution.IProfileLoader;
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Scope;

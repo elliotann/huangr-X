@@ -1,11 +1,12 @@
 package com.easysoft.core.listener;
 
+import com.easysoft.core.ParamSetting;
 import com.easysoft.core.manager.IAppManager;
 import com.easysoft.core.model.JEAPApp;
 import com.easysoft.core.model.IApp;
 import com.easysoft.core.model.Site;
-import com.easysoft.framework.ParamSetting;
-import com.easysoft.framework.spring.SpringContextHolder;
+import com.easysoft.framework.utils.SpringContextHolder;
+
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpSessionEvent;

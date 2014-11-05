@@ -1,9 +1,9 @@
 package com.easysoft.core.manager.solution.impl;
 
+import com.easysoft.core.ParamSetting;
 import com.easysoft.core.context.EsfContext;
 import com.easysoft.core.manager.IBorderManager;
 import com.easysoft.core.model.Border;
-import com.easysoft.framework.ParamSetting;
 import com.easysoft.framework.db.dbsolution.IInstaller;
 import com.easysoft.framework.utils.FileUtil;
 import org.springframework.context.annotation.Scope;

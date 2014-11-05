@@ -1,7 +1,7 @@
 package com.easysoft.core.dispatcher.core.freemarker;
 
-import com.easysoft.framework.ParamSetting;
 import com.easysoft.framework.context.webcontext.ThreadContextHolder;
+import com.easysoft.core.ParamSetting;
 import com.easysoft.core.freemarker.utils.FreeMarkerUtil;
 import com.easysoft.framework.utils.JeapUtil;
 import com.sun.xml.messaging.saaj.util.ByteOutputStream;

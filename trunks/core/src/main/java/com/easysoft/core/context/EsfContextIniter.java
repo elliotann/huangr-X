@@ -1,13 +1,13 @@
 package com.easysoft.core.context;
 
+import com.easysoft.core.ParamSetting;
 import com.easysoft.core.dispatcher.core.freemarker.FreeMarkerParser;
 import com.easysoft.core.manager.IMultiSiteManager;
 import com.easysoft.core.manager.ISiteManager;
 import com.easysoft.core.model.MultiSite;
 import com.easysoft.core.model.Site;
-import com.easysoft.framework.ParamSetting;
 import com.easysoft.framework.context.webcontext.ThreadContextHolder;
-import com.easysoft.framework.spring.SpringContextHolder;
+import com.easysoft.framework.utils.SpringContextHolder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

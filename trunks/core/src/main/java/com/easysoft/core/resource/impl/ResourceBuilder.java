@@ -1,9 +1,9 @@
 package com.easysoft.core.resource.impl;
 
+import com.easysoft.core.ParamSetting;
 import com.easysoft.core.context.EsfContext;
 import com.easysoft.core.model.Site;
 import com.easysoft.core.resource.ResourceStateManager;
-import com.easysoft.framework.ParamSetting;
 import com.easysoft.framework.context.webcontext.ThreadContextHolder;
 import com.easysoft.framework.resource.Resource;
 import com.easysoft.framework.resource.impl.SystemOutErrorReporter;

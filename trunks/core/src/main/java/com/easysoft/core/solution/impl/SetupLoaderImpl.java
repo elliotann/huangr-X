@@ -1,7 +1,7 @@
 package com.easysoft.core.solution.impl;
 
+import com.easysoft.core.ParamSetting;
 import com.easysoft.core.solution.ISetupLoader;
-import com.easysoft.framework.ParamSetting;
 import com.easysoft.framework.utils.FileUtil;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;

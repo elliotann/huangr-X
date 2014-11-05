@@ -6,14 +6,6 @@
     <groupId>com.easysoft.jeap</groupId>
     <artifactId>jeap-core</artifactId>
     <version>1.0-SNAPSHOT</version>
-
-    <!--<parent>
-        <groupId>com.easysoft.jeap</groupId>
-        <artifactId>build</artifactId>
-        <version>1.0-SNAPSHOT</version>
-        <relativePath>../build</relativePath>
-    </parent>-->
-
     <build>
         <resources>
             <resource>
@@ -43,33 +35,6 @@
             <artifactId>commons-fileupload</artifactId>
             <version>1.3.1</version>
         </dependency>
-        <!--   <dependency>
-               <groupId>corenut-pf</groupId>
-               <artifactId>corenut-commons</artifactId>
-               <version>1.0</version>
-           </dependency>
-           <dependency>
-               <groupId>corenut-pf</groupId>
-               <artifactId>corenut-pf-api</artifactId>
-               <version>1.0</version>
-           </dependency>
-           <dependency>
-               <groupId>corenut-pf</groupId>
-               <artifactId>corenut-pf-impl</artifactId>
-               <version>1.0</version>
-           </dependency>
-           <dependency>
-               <groupId>corenut-pf</groupId>
-               <artifactId>corenut-pf-jdbc</artifactId>
-               <version>1.0</version>
-           </dependency>
-           <dependency>
-               <groupId>corenut-pf</groupId>
-               <artifactId>corenut-scm</artifactId>
-               <version>1.0</version>
-           </dependency>-->
-
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
@@ -144,26 +109,6 @@
             <version>4.11</version>
             <scope>test</scope>
         </dependency>
-        <!--<dependency>
-            <groupId>com.easysoft.jeap</groupId>
-            <artifactId>corenut-pf-api</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.easysoft.jeap</groupId>
-            <artifactId>corenut-pf-impl</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.easysoft.jeap</groupId>
-            <artifactId>corenut-commons</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.easysoft.jeap</groupId>
-            <artifactId>corenut-scm</artifactId>
-            <version>1.0</version>
-        </dependency>-->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpmime</artifactId>
@@ -225,10 +170,10 @@
             <version>1.52.0</version>
         </dependency>
         <dependency>
-  <groupId>log4j</groupId>
-  <artifactId>log4j</artifactId>
-  <version>1.2.9</version>
-</dependency>
+		  <groupId>log4j</groupId>
+		  <artifactId>log4j</artifactId>
+		  <version>1.2.9</version>
+		</dependency>
     </dependencies>
 
 </project>
