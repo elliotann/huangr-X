@@ -9,7 +9,7 @@ import com.easysoft.build.manager.BuildReposManager;
 import com.easysoft.build.model.BuildConfig;
 import com.easysoft.build.model.BuildFile;
 import com.easysoft.build.model.RepositoryInfo;
-import com.easysoft.framework.spring.SpringContextHolder;
+import com.easysoft.framework.utils.SpringContextHolder;
 import com.easysoft.member.backend.model.UserRole;
 
 import java.io.BufferedWriter;

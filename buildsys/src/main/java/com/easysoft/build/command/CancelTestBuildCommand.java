@@ -3,7 +3,7 @@ package com.easysoft.build.command;
 
 import com.easysoft.build.manager.BuildConfigInfoService;
 import com.easysoft.build.model.BuildFile;
-import com.easysoft.framework.spring.SpringContextHolder;
+import com.easysoft.framework.utils.SpringContextHolder;
 import com.easysoft.member.backend.model.UserRole;
 
 public class CancelTestBuildCommand extends BuildCommand {
