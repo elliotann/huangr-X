@@ -16,6 +16,9 @@ public interface IPluginBundle {
 	 */
 	public void registerPlugin(IPlugin plugin);
 
-
+	/**
+	 * 卸载一个插件
+	 * @param plugin 要卸载的插件
+	 */
     public  void unRegisterPlugin(IPlugin plugin);
 }
