@@ -10,12 +10,6 @@ package com.easysoft.framework.component.plugin;
  * 
  * 利用如此的构造函数可实现插件本身的注册, 如果通过Spring IoC 方式注入则配置如下：<br/>
  * 
- * &lt;bean id=&quot;yourPlugin&quot; class=&quot;package.PluginClass&quot;
- * lazy-init=&quot;false&quot;&gt;<br />
- * &lt;constructor-arg&gt;<br />
- * &lt;ref bean=&quot;yourPluginBundle&quot;/&gt;<br />
- * &lt;/constructor-arg&gt; <br />
- * &lt;/bean&gt;
  * 
  * @author andy
  * 
