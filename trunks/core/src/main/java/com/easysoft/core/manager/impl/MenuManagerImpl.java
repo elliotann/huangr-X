@@ -128,7 +128,8 @@ public class MenuManagerImpl extends BaseSupport<Menu> implements IMenuManager {
 		if(menu.getUrl() ==null) throw new IllegalArgumentException("url argument is null");
 		if(menu.getSorder() ==null) throw new IllegalArgumentException("sorder argument is null");
 		menu.setDeleteflag(0);
-		this.baseDaoSupport.update("menu", menu, "id="+ menu.getId());
+		menuDao.update(menu);
+		
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED)
