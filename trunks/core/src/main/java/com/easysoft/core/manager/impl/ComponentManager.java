@@ -50,7 +50,7 @@ public class ComponentManager extends BaseSupport
 
     public List<ComponentView> list()
     {
-        List viewList = new ArrayList();
+        List<ComponentView> viewList = new ArrayList<ComponentView>();
         List<ComponentView> componentViews = ComponentContext.getComponents();
 
         List dbList = getDbList();
