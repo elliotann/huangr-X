@@ -3,7 +3,7 @@ package com.easysoft.tag.webapp.taglib.html;
 import com.easysoft.component.form.manager.IFormManager;
 import com.easysoft.component.form.model.FormEntity;
 import com.easysoft.component.form.model.FormField;
-import com.easysoft.framework.spring.SpringContextHolder;
+import com.easysoft.framework.utils.SpringContextHolder;
 import com.easysoft.framework.utils.StringUtil;
 import com.easysoft.tag.webapp.taglib.HtmlTaglib;
 import org.apache.commons.lang3.StringUtils;
