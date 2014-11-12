@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="后台权限组件"  version="1.0" jeap_version="1.0.0" author="jeap">
+
+	<plugins>
+	 	<plugin name="管理员管理插件" id="themeUriSitemapPlugin">
+				<bundle id="sitemapPluginBundle"></bundle>
+			</plugin>
+	</plugins>		
+	<widgets>
+	
+	</widgets>
+
+</component>
