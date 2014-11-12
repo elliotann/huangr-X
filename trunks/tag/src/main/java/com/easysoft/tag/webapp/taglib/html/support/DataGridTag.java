@@ -24,7 +24,6 @@ public class DataGridTag extends BodyTagSupport{
     private String width;//宽度
     private String tree;
     private boolean rownumbers;//是否显示行号
-
     private boolean hasSearchBar = false;//是否有搜索栏
 
 
@@ -126,7 +125,9 @@ public class DataGridTag extends BodyTagSupport{
     private String buildGrid(){
         StringBuilder sb = new StringBuilder("<form action=\"\" id=\"dataGridform\">");
         sb.append("<table class=\"easyui-treegrid\" id=\"dataGrid\"");
-        sb.append("data-options=\"url:'menu.do?dataGrid&ajax=yes',fitColumns:'true',idField: 'id',treeField: 'title'\">");
+        sb.append("data-options=\"url:'");
+        sb.append(action+"?dataGrid&ajax=yes'");
+        sb.append(",fitColumns:'true',idField: 'id',treeField: 'title'\">");
         sb.append("<thead>");
         sb.append("<tr>");
         for(DataGridColumn column : columns){
@@ -212,7 +213,7 @@ public class DataGridTag extends BodyTagSupport{
             sb.append("class=\"easyui-datagrid\"");
         }
         sb.append(" pagination=\"true\"  sortName=\"member_id\" sortOrder=\"desc\" id=\"dataGrid\"");
-        sb.append(" data-options=\"url:'"+action+"',pageList: [5,10,15,20],fitColumns:'true',singleSelect:true,idField: 'id',treeField: 'title'\"");
+        sb.append(" data-options=\"url:'"+action+"',pageList: [5,10,15,20],fitColumns:'true',singleSelect:true,idField: 'id',treeField: 'name'\"");
         sb.append(">");
         sb.append(" <thead><tr>");
 
