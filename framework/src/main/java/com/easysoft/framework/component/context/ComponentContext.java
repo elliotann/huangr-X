@@ -61,8 +61,7 @@ public class ComponentContext
     }
 
     private static void loadComponent(ComponentView componentView)
-            throws SAXException, IOException, ParserConfigurationException
-    {
+            throws SAXException, IOException, ParserConfigurationException{
         IComponent component = componentView.getComponent();
 
         String path = component.getClass().getPackage().getName();
@@ -74,13 +73,13 @@ public class ComponentContext
         Document doc = builder.parse(FileUtil.getResourceAsStream(path));
         Element componentEl = (Element)doc.getFirstChild();
 
-        String needVersion = componentEl.getAttribute("esf_version");
+        String needVersion = componentEl.getAttribute("jeap_version");
         String currentVersion = "1.0.0";
 
         componentView.setName(componentEl.getAttribute("name"));
         componentView.setAuthor(componentEl.getAttribute("author"));
         componentView.setVersion(componentEl.getAttribute("version"));
-        componentView.setEsf_version(needVersion);
+        componentView.setJeap_version(needVersion);
         componentView.setDescription(componentEl.getAttribute("description"));
 
         if (!versionLargerThen(currentVersion, needVersion))

@@ -10,23 +10,29 @@ public class ComponentView
     private int id;
     private String name;
     private String componentid;
+    /**组件版本*/
     private String version;
-    private String esf_version;
+    /**框架版本*/
+    private String jeap_version;
+    /**组件作者*/
     private String author;
+    /**描述*/
     private String description;
     private IComponent component;
+    /**插件*/
     private List<PluginView> pluginList;
+    /**挂件*/
     private List<WidgetView> widgetList;
-    /**安装状态**,1:已安装;0:未安装*/
+    /**安装状态,1:已安装;0:未安装*/
     private int install_state;
-    /**活动状态**/
+    /**活动状态*/
     private int enable_state;
     private String error_message;
 
     public ComponentView()
     {
-        this.pluginList = new ArrayList();
-        this.widgetList = new ArrayList();
+        this.pluginList = new ArrayList<PluginView>();
+        this.widgetList = new ArrayList<WidgetView>();
     }
     @Transient
     public void addPlugin(PluginView plugin)
@@ -139,14 +145,14 @@ public class ComponentView
         this.version = version;
     }
     @Column(name="esf_version")
-    public String getEsf_version()
+    public String getJeap_version()
     {
-        return this.esf_version;
+        return this.jeap_version;
     }
 
-    public void setEsf_version(String esf_version)
+    public void setJeap_version(String jeap_version)
     {
-        this.esf_version = esf_version;
+        this.jeap_version = jeap_version;
     }
     @Column(name="author")
     public String getAuthor()
