@@ -1,20 +1,19 @@
 package com.easysoft.core.common.dao.hibernate.support;
 
-import com.easysoft.core.common.dao.IGenericDao;
-import com.easysoft.framework.db.PageOption;
-import org.hibernate.Criteria;
-import org.hibernate.Query;
-import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Criterion;
-import org.hibernate.criterion.Restrictions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
-import org.springframework.stereotype.Repository;
-
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import java.util.Map;
+
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.SQLQuery;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Criterion;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.easysoft.core.common.dao.IGenericDao;
+import com.easysoft.framework.db.PageOption;
 
 /**
  * @author : andy.huang
@@ -90,11 +89,17 @@ public class HibernateGenericDao<T,PK extends Serializable> implements IGenericD
 
 
     public void update(T entity) {
-
+    	sessionFactory.getCurrentSession().update(entity);
     }
 
 
     public void deleteById(PK id) {
 
     }
+
+	public void excuteBySql(String sql) {
+		SQLQuery sqlQuery = sessionFactory.getCurrentSession().createSQLQuery(sql);
+	
+		sqlQuery.executeUpdate();
+	}
 }
