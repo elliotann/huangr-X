@@ -7,8 +7,8 @@
 <link href="${context}/css/style1.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="${context}/js/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${context}/js/easyui/locale/easyui-lang-zh_CN.js"></script>
-<script src="/jeap/admin/js/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
-<script src="/jeap/admin/js/crud.js" type="text/javascript"></script>
+<script src="${ctx }/admin/js/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
+<script src="${ctx }/admin/js/crud.js" type="text/javascript"></script>
 <link href="${context }/css/form.css" rel="stylesheet"/>
 <link href="${context }/css/button.css" rel="stylesheet"/>
 <style>
@@ -119,7 +119,7 @@
 
 </script>
 
-<grid:dataGrid action="menu.do?dataGrid&ajax=yes" height="99%" usePager="false"  width="100%" tree="true" style="easyui">
+<grid:dataGrid action="menu.do" height="99%" usePager="false"  width="100%" tree="true" style="easyui">
     <grid:column title="名称" field="title" align="left" width="100" id="title"/>
     <grid:column title="url" field="url"  width="100" align="left" id="url"/>
     <grid:column title="类型" field="menutype"  width="100" align="center" sortType="int" renderFun="getMenuType" id="menutype"/>
