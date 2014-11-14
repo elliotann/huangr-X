@@ -29,7 +29,7 @@
             {
 
                 $("#objForm").ajaxSubmit({
-                    url :"menu.do?saveAdd&ajax=true",
+                    url :"menu.do?saveEdit&ajax=true",
                     type : "POST",
                     dataType:"json",
                     success : function(result) {
