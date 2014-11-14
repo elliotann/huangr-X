@@ -127,7 +127,7 @@ public class DataGridTag extends BodyTagSupport{
         sb.append("<table class=\"easyui-treegrid\" id=\"dataGrid\"");
         sb.append("data-options=\"url:'");
         sb.append(action+"?dataGrid&ajax=yes'");
-        sb.append(",fitColumns:'true',idField: 'id',treeField: 'title'\">");
+        sb.append(",fitColumns:'true',idField: 'id',treeField: 'name'\">");
         sb.append("<thead>");
         sb.append("<tr>");
         for(DataGridColumn column : columns){
