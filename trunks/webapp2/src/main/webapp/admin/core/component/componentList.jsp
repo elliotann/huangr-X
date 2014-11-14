@@ -119,8 +119,8 @@
 
 </script>
 
-<grid:dataGrid action="component.do" height="99%" usePager="false"  width="100%" tree="true" style="easyui">
-    <grid:column title="名称" field="name" align="center" width="100" id="title"/>
+<grid:dataGrid action="component.do" height="99%" usePager="false"  width="100%" tree="true" style="easyui" treeField="name">
+    <grid:column title="名称" field="name" align="left" width="100" id="title"/>
     <grid:column title="安装状态" field="url"  width="100" align="center" id="url"/>
     <grid:column title="启用状态" field="menutype"  width="100" align="center" sortType="int" renderFun="getMenuType" id="menutype"/>
 </grid:dataGrid>
