@@ -25,7 +25,7 @@ public class DataGridTag extends BodyTagSupport{
     private String tree;
     private boolean rownumbers;//是否显示行号
     private boolean hasSearchBar = false;//是否有搜索栏
-
+    private String treeField = "title";
 
     private List<DataGridColumn> columns = new ArrayList<DataGridColumn>();
     private List<ToolBar> toolBars = new ArrayList<ToolBar>();
@@ -61,10 +61,18 @@ public class DataGridTag extends BodyTagSupport{
     public void setHasSearchBar(boolean hasSearchBar) {
         this.hasSearchBar = hasSearchBar;
     }
+    
 
 
+    public String getTreeField() {
+		return treeField;
+	}
 
-    @Override
+	public void setTreeField(String treeField) {
+		this.treeField = treeField;
+	}
+
+	@Override
     public int doStartTag() throws JspException {
         columns.clear();
         toolBars.clear();
@@ -127,7 +135,7 @@ public class DataGridTag extends BodyTagSupport{
         sb.append("<table class=\"easyui-treegrid\" id=\"dataGrid\"");
         sb.append("data-options=\"url:'");
         sb.append(action+"?dataGrid&ajax=yes'");
-        sb.append(",fitColumns:'true',idField: 'id',treeField: 'name'\">");
+        sb.append(",fitColumns:'true',idField: 'id',treeField: '"+treeField+"'\">");
         sb.append("<thead>");
         sb.append("<tr>");
         for(DataGridColumn column : columns){
