@@ -3,7 +3,8 @@ package com.easysoft.framework.component;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
+@Entity
+@Table(name="t_component")
 public class ComponentView
         implements Cloneable
 {
