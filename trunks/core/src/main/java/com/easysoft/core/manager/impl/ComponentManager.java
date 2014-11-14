@@ -172,12 +172,8 @@ public class ComponentManager extends BaseSupport
             this.logger.debug("start component[" + componentid + "]...");
         }
 
-         ComponentView componentView = getComponentView(componentid);
-
-
+        ComponentView componentView = getComponentView(componentid);
         List<PluginView> pluginList = componentView.getPluginList();
-
-
         IPlugin plugin;
         for (PluginView pluginView : pluginList) {
             String pluginid = pluginView.getId();
