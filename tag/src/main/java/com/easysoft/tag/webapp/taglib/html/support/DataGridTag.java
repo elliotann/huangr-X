@@ -7,7 +7,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
-import javax.servlet.jsp.tagext.BodyContent;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,6 +25,7 @@ public class DataGridTag extends BodyTagSupport{
     private boolean rownumbers;//是否显示行号
     private boolean hasSearchBar = false;//是否有搜索栏
     private String treeField = "title";
+    private String onLoadSuccess;
 
     private List<DataGridColumn> columns = new ArrayList<DataGridColumn>();
     private List<ToolBar> toolBars = new ArrayList<ToolBar>();
@@ -61,10 +61,12 @@ public class DataGridTag extends BodyTagSupport{
     public void setHasSearchBar(boolean hasSearchBar) {
         this.hasSearchBar = hasSearchBar;
     }
-    
 
+    public void setOnLoadSuccess(String onLoadSuccess) {
+		this.onLoadSuccess = onLoadSuccess;
+	}
 
-    public String getTreeField() {
+	public String getTreeField() {
 		return treeField;
 	}
 
@@ -108,57 +110,24 @@ public class DataGridTag extends BodyTagSupport{
     public String endHtml(){
         return "";
     }
+    //treegrid
     private String endEasyUI4Tree(){
         StringBuilder sb = new StringBuilder();
-        sb.append("<div class=\"main\">");
-        sb.append("<div id=\"dialogInfo\" style=\"display: none;\"></div>");
+        //div开始
+        sb.append(buildGridStartDiv());
+        //工具栏
         sb.append(buildToolBar());
+        //列
         sb.append(buildGrid());
-        sb.append("</div>");
+        //div结束
+        sb.append(buildGridEndDiv());
         return sb.toString();
     }
-
-    /**
-     * 构建工具条
-     * @return
-     */
-    private String buildToolBar(){
-        StringBuilder sb = new StringBuilder("<div class=\"buttonArea\">");
-        for(ToolBar toolBar : toolBars){
-            sb.append(" <a href=\"javascript:void(0)\" class=\"button blueButton\" data-options=\"iconCls:'icon-add',plain:true\" onclick=\""+toolBar.getClickFun()+"()\">"+toolBar.getTitle()+"</a>");
-        }
-        sb.append("</div>");
-        return sb.toString();
-    }
-    private String buildGrid(){
-        StringBuilder sb = new StringBuilder("<form action=\"\" id=\"dataGridform\">");
-        sb.append("<table class=\"easyui-treegrid\" id=\"dataGrid\"");
-        sb.append("data-options=\"url:'");
-        sb.append(action+"?dataGrid&ajax=yes'");
-        sb.append(",fitColumns:'true',idField: 'id',treeField: '"+treeField+"'\">");
-        sb.append("<thead>");
-        sb.append("<tr>");
-        for(DataGridColumn column : columns){
-            sb.append("<th data-options=\"field:'"+column.getField()+"',width:"+column.getWidth()+",align:'"+column.getAlign()+"'\" ");
-            if(StringUtils.isNotEmpty(column.getRenderFun())){
-                sb.append("formatter=\""+column.getRenderFun()+"\"");
-            }
-            sb.append(">");
-            sb.append(column.getTitle());
-            sb.append("</th>");
-        }
-
-        sb.append("</tr>");
-        sb.append("</thead>");
-        sb.append("</table>");
-        sb.append("</form>");
-        return sb.toString();
-    }
+    //datagrid
     public String endEasyUI(){
         StringBuilder sb = new StringBuilder();
-        sb.append("<div class=\"main\">");
-        sb.append("<div id=\"dialogInfo\" style=\"display: none;\"></div>");
-        sb.append(" <form id=\"dataGridform\">");
+        sb.append(buildGridStartDiv());
+ 
         sb.append("<div id=\"tb\" style=\"height: auto\">");
         for(ToolBar toolBar : toolBars){
             sb.append(" <a href=\"javascript:void(0)\" class=\"button blueButton\" data-options=\"iconCls:'icon-add',plain:true\" onclick=\""+toolBar.getClickFun()+"()\">"+toolBar.getTitle()+"</a>");
@@ -237,12 +206,75 @@ public class DataGridTag extends BodyTagSupport{
         sb.append("</tr></thead>");
         sb.append("</table>");
         sb.append("</div>");
-        sb.append("</form>");
-        sb.append("<div id=\"divdia\" style=\"display: none;\"></div>");
+        
 
+        sb.append(buildGridEndDiv());
+        return sb.toString();
+    }
+    /**
+     * 构建div开始标签
+     * @return
+     */
+    private String buildGridStartDiv(){
+    	StringBuilder sb = new StringBuilder();
+    	sb.append("<div class=\"main\">");
+        sb.append("<div id=\"dialogInfo\" style=\"display: none;\"></div>");
+        sb.append(" <form id=\"dataGridform\">");
+        return sb.toString();
+    }
+    /**
+     * 构建div结束标签
+     * @return
+     */
+    private String buildGridEndDiv(){
+    	StringBuilder sb = new StringBuilder();
+    	sb.append("</form>");
+        sb.append("<div id=\"divdia\" style=\"display: none;\"></div>");
         sb.append("</div>");
         return sb.toString();
     }
+
+    /**
+     * 构建工具条
+     * @return
+     */
+    private String buildToolBar(){
+        StringBuilder sb = new StringBuilder("<div class=\"buttonArea\">");
+        for(ToolBar toolBar : toolBars){
+            sb.append(" <a href=\"javascript:void(0)\" class=\"button blueButton\" data-options=\"iconCls:'icon-add',plain:true\" onclick=\""+toolBar.getClickFun()+"()\">"+toolBar.getTitle()+"</a>");
+        }
+        sb.append("</div>");
+        return sb.toString();
+    }
+    private String buildGrid(){
+        StringBuilder sb = new StringBuilder("<form action=\"\" id=\"dataGridform\">");
+        sb.append("<table class=\"easyui-treegrid\" id=\"dataGrid\"");
+        sb.append("data-options=\"url:'");
+        sb.append(action+"?dataGrid&ajax=yes'");
+        sb.append(",fitColumns:'true',idField: 'id',treeField: '"+treeField+"'");
+        if(StringUtils.isNotEmpty(onLoadSuccess)){
+        	sb.append(",onLoadSuccess:"+onLoadSuccess);
+        }
+        sb.append("\">");
+        sb.append("<thead>");
+        sb.append("<tr>");
+        for(DataGridColumn column : columns){
+            sb.append("<th data-options=\"field:'"+column.getField()+"',width:"+column.getWidth()+",align:'"+column.getAlign()+"'\" ");
+            if(StringUtils.isNotEmpty(column.getRenderFun())){
+                sb.append("formatter=\""+column.getRenderFun()+"\"");
+            }
+            sb.append(">");
+            sb.append(column.getTitle());
+            sb.append("</th>");
+        }
+
+        sb.append("</tr>");
+        sb.append("</thead>");
+        sb.append("</table>");
+        sb.append("</form>");
+        return sb.toString();
+    }
+    
 
 
 
