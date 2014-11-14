@@ -43,6 +43,10 @@ public class ComponentController extends BaseController {
     			Map<String,Object> map = new HashMap<String,Object>();
     			map.put("id", componentView.getComponentid());
     			map.put("name", componentView.getName());
+    			map.put("install_state", componentView.getInstall_state());
+    			map.put("enable", componentView.getEnable_state());
+    			
+    			map.put("componentid", componentView.getComponentid());
     			if(!componentView.getPluginList().isEmpty()){
     				map.put("children", componentView.getPluginList());
     			}
