@@ -35,7 +35,11 @@ public interface IGenericDao<T,PK extends Serializable> {
      * @return
      */
     public List<T> queryForList(Map<String,Object> params);
-
+    /**
+     * 通过参数查询列表
+     * @param hql
+     * @return
+     */
     public List<T> queryForListByHql(String hql);
 
     /**
@@ -44,6 +48,12 @@ public interface IGenericDao<T,PK extends Serializable> {
      * @return
      */
     public List<T> queryForPage(PageOption pageOption);
+    /**
+     * 分页条件查询记录
+     * @param pageOption
+     * @param criterions
+     * @return
+     */
     public List<T> queryForPage(PageOption pageOption, List<Criterion> criterions);
     public List<T> queryForHQL(String hql,Map<String,Object> params);
 
@@ -52,4 +62,9 @@ public interface IGenericDao<T,PK extends Serializable> {
     public void update(T entity);
 
     public void deleteById(PK id);
+    /**
+     * 执行原生sql
+     * @param sql
+     */
+    public void excuteBySql(String sql);
 }
