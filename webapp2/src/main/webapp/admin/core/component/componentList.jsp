@@ -39,8 +39,34 @@
             }
             $(".searchAdvanced").slideToggle("slow");
         });
+        
+        $(".install").click(function(){
+    		request("component.do?install&componentid="+$(this).attr("componentid") );
+    	});
     });
-
+   function init(){
+	   $(".start").click(function(){
+			request("component.do?start&componentid="+$(this).attr("componentid") );
+		});
+		$(".stop").click(function(){
+			if(confirm( "确认停用此组件吗?" )){
+				request("component.do?stop&componentid="+$(this).attr("componentid") );
+			}
+			
+		});
+		
+		$(".install").click(function(){
+			request("component.do?install&componentid="+$(this).attr("componentid") );
+		});
+		
+		$(".uninstall").click(function(){
+			
+			if(confirm( "确认卸载此组件吗?此操作可能会破坏现有数据，且无法恢复!" )){
+				request("component.do?unInstall&componentid="+$(this).attr("componentid") );
+			}
+			
+		});
+   }
 
     function getParent()
     {
@@ -81,7 +107,22 @@
         delObj4Tree("menu.do?delete&id="+row.id);
     }
 
-
+    function request(requrl){
+    	$.ajax({
+    		url:requrl+"&ajax=yes",
+    		dataType:"json",
+    		success:function(result){
+    			if(result.success){
+    				alert("操作成功"); 
+    				location.reload();
+    			}else{
+    				alert(result.message);
+    			}
+    		},error:function(){
+    			alert("启动组件出现错误");
+    		}
+    	});
+    }
 
     function addMenu(){
         addOrUpdateDialog('增加菜单','menu.do?add',500,700);
@@ -106,23 +147,50 @@
         var row = $('#dataGrid').treegrid('getSelections')[0];
         addOrUpdateDialog('修改菜单','menu.do?edit&id='+row.id,500,700);
     }
-    function getMenuType(rowdata,index,value){
-        if(value==1){
-            return "系统菜单";
-        }else{
-            return "应用菜单";
-        }
+    function getEnable(value,row,index){
+    	if(value==1){
+    		return "已启用";
+    	}else if(value==0){
+    		return "已停用";
+    	}else if(value==2){
+    		return "错误";
+    	}
+    	return "";
     }
-    function showIco(rowdata,index,value){
-       return "<img src='${context}/images/system/ico/default_menu.png'/>";
+    function getInstallState(value,row,index){
+    	if(value==1){
+    		return "已安装";
+    	}else if(value==0){
+    		return "未安装";
+    	}else if(value==2){
+    		return "错误"+row.error_message;
+    	}
+    	return "";
+       
     }
-
+  
+    function fmoption(value,row,index){
+    	var val="";
+    	if(row.install_state==1  ){
+    		if(row.enable==0){
+    			val='<a componentid="'+row.componentid+'" class="start button"  href="javascript:;">启用</a>&nbsp;&nbsp;';
+    			val+='<a componentid="'+row.componentid+'" class="uninstall button"  href="javascript:;">卸载</a>'
+    		}
+    		if(row.enable==1){
+    			val='<a componentid="'+row.componentid+'" class="stop button" href="javascript:;">停用</a>'
+    		}
+    	}else if(row.install_state==0){
+    		val='<a  class="install button" href="javascript:;" componentid="'+row.componentid+'" installstate="'+row.install_state+'">安装</a>';
+    	}
+    	return val;
+    }
 </script>
 
-<grid:dataGrid action="component.do" height="99%" usePager="false"  width="100%" tree="true" style="easyui" treeField="name">
+<grid:dataGrid action="component.do" height="99%" usePager="false"  width="100%" tree="true" style="easyui" treeField="name" onLoadSuccess="init">
     <grid:column title="名称" field="name" align="left" width="100" id="title"/>
-    <grid:column title="安装状态" field="url"  width="100" align="center" id="url"/>
-    <grid:column title="启用状态" field="menutype"  width="100" align="center" sortType="int" renderFun="getMenuType" id="menutype"/>
+    <grid:column title="安装状态" field="install_state"  width="100" align="center" id="url" renderFun="getInstallState"/>
+    <grid:column title="启用状态" field="enable"  width="100" align="center" sortType="int" renderFun="getEnable" id="menutype"/>
+    <grid:column title="操作" field="option"  align="center" renderFun="fmoption"/>
 </grid:dataGrid>
 
 
