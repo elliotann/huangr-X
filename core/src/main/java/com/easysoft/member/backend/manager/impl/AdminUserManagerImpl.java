@@ -281,5 +281,13 @@ public class AdminUserManagerImpl  implements IAdminUserManager {
         }
         return pageOption;
     }
+	public AdminUser getAdminUserByEmail(String email, Integer userId) {
+		
+		if(userId==null) userId=0;
+        Map<String,Object> params = new HashMap<String, Object>();
+        params.put("email",email);
+        params.put("userId",userId);
+        return adminUserDao.queryUserByEmail(params);
+	}
 
 }

@@ -32,4 +32,17 @@ public class AdminUserDao extends HibernateGenericDao<AdminUser,Integer> impleme
         return adminUserList.get(0);
 
     }
+
+
+	public AdminUser queryUserByEmail(Map<String, Object> conditions) {
+		String hql = " from AdminUser a where a.email='"+conditions.get("email").toString()+"'";
+        if(StringUtils.isNotEmpty(conditions.get("userId").toString())&&!"0".equals(conditions.get("userId").toString())){
+            hql += " and a.id!='"+conditions.get("userId").toString()+"' ";
+        }
+        List<AdminUser> adminUserList = this.queryForListByHql(hql);
+        if(adminUserList.isEmpty()){
+            return null;
+        }
+        return adminUserList.get(0);
+	}
 }
