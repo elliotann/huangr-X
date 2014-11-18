@@ -16,7 +16,11 @@ import java.util.List;
  * Created by Administrator on 14-5-25.
  */
 public class DataGridTag extends BodyTagSupport{
-    private String action;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String action;
     private String style="ligerui";
     private String height;
     private boolean usePager = true;//是否分页
