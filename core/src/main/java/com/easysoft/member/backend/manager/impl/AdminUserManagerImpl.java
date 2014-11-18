@@ -116,7 +116,7 @@ public class AdminUserManagerImpl  implements IAdminUserManager {
 		return adminUser.getId();
 	}
 	
-	public int checkLast() {
+	public int checkLastAdminUser() {
 		int count =0;// this.baseDaoSupport.queryForInt("select count(0) from adminuser");
 		return count;
 	}
@@ -125,7 +125,7 @@ public class AdminUserManagerImpl  implements IAdminUserManager {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void delete(Integer id) {
 		//如果只有一个管理员，则抛出异常
-		if(this.checkLast()==1){
+		if(this.checkLastAdminUser()==1){
 			throw new RuntimeException("必须最少保留一个管理员");
 		}
 		
