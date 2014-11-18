@@ -91,7 +91,7 @@ public interface IAdminUserManager {
 	 * 检查是否为最后一个管理员
 	 * @return 
 	 */
-	public int checkLast();
+	public int checkLastAdminUser();
  
   
 	/**
