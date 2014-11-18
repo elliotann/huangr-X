@@ -21,4 +21,10 @@ public interface IAdminUserDao extends IGenericDao<AdminUser,Integer> {
      * @return
      */
     public AdminUser queryUserByName(Map<String,Object> conditions);
+    /**
+     * 根据email查询用户
+     * @param conditions
+     * @return
+     */
+    public AdminUser queryUserByEmail(Map<String,Object> conditions);
 }

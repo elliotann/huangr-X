@@ -1,6 +1,5 @@
 package com.easysoft.member.backend.manager;
 
-import com.easysoft.core.common.service.IGenericService;
 import com.easysoft.framework.db.PageOption;
 import com.easysoft.member.backend.model.AdminUser;
 
@@ -130,4 +129,11 @@ public interface IAdminUserManager {
      * @return
      */
     public AdminUser getAdminUserByName(String name,Integer userId);
+    /**
+     * 根据邮箱查询用户，当修改时，userId不能为空
+     * @param email
+     * @param userId
+     * @return
+     */
+    public AdminUser getAdminUserByEmail(String email,Integer userId);
 }

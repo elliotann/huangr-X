@@ -112,7 +112,7 @@ public class AdminUser extends IdEntity{
 	public void setSiteid(Integer siteid) {
 		this.siteid = siteid;
 	}
-
+	@Column(name="email",length=50)
     public String getEmail() {
         return email;
     }
