@@ -6,7 +6,6 @@ import com.easysoft.core.common.vo.json.DataGridReturn;
 import com.easysoft.core.context.EsfContext;
 import com.easysoft.framework.db.PageOption;
 import com.easysoft.framework.utils.JsonUtils;
-import com.easysoft.framework.utils.SpringContextHolder;
 import com.easysoft.member.backend.manager.*;
 import com.easysoft.member.backend.model.AdminUser;
 import com.easysoft.member.backend.model.Depart;
@@ -47,12 +46,7 @@ public class AdminUserAction extends BaseController{
      * @throws Exception
      */
     @RequestMapping(params = {"list"})
-    public ModelAndView list(Integer menuId) throws Exception{
-    	System.out.println("load bean def is ="+SpringContextHolder.getApplicationContext().getBeanDefinitionCount());
-    	
-    	for(String beanName : SpringContextHolder.getApplicationContext().getBeanDefinitionNames()){
-    		System.out.println("load bean beanName is ="+beanName);
-    	}
+    public ModelAndView list() throws Exception{
         return new ModelAndView("admin/core/auth/useradminlist");
     }
     @RequestMapping(params = {"dataGrid"})
@@ -170,5 +164,12 @@ public class AdminUserAction extends BaseController{
     public boolean checkNameExist(String username,Integer userid){
         AdminUser adminUser = adminUserManager.getAdminUserByName(username,userid);
         return adminUser == null;
+    }
+    
+    @RequestMapping(params = {"checkEmailExist"})
+    @ResponseBody
+    public boolean checkEmailExist(String email,Integer userId){
+    	 AdminUser adminUser = adminUserManager.getAdminUserByEmail(email,userId);
+         return adminUser == null;
     }
 }

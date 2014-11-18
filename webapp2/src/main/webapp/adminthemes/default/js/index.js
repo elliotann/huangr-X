@@ -55,7 +55,7 @@ var BackendUi = {
         $.each(menu.app, function (k, v) {
             if (founder == 1 && (v.id == 237 || v.id == 244 || v.id == 266)) {
             } else {
-                var link = $("<a class='dashboard' target='" + v.target + "' href='" + v.url + "'><span>" + v.text + "</span></a>");
+                var link = $("<a  target='" + v.target + "' href='" + v.url + "'><span>" + v.text + "</span></a>");
                 $("<li></li>").appendTo($(".tabmenu>ul")).append(link);
                 var children = v.children;
 

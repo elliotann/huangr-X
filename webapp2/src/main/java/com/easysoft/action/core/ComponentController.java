@@ -13,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.easysoft.core.common.controller.BaseController;
 import com.easysoft.core.common.vo.json.AjaxJson;
-import com.easysoft.core.common.vo.json.DataGridReturn;
 import com.easysoft.core.manager.IComponentManager;
 import com.easysoft.framework.component.ComponentView;
 import com.easysoft.framework.utils.JsonUtils;
@@ -23,7 +22,7 @@ import com.easysoft.framework.utils.JsonUtils;
  * Date: 14-3-4
  * Time: 下午1:01
  *
- * @since:
+ * @since: 1.0
  */
 @Controller
 @RequestMapping({"/core/admin/component"})

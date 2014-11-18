@@ -45,8 +45,9 @@
             alert("必须选择一条数据进行修改!");
             return;
         }
-        addOrUpdateDialog('修改管理员','userAdmin.do?edit&id='+row.id,500,700);
         var row = $('#dataGrid').datagrid('getSelections')[0];
+        addOrUpdateDialog('修改管理员','userAdmin.do?edit&id='+row.id,500,700);
+        
 
     }
 
@@ -88,6 +89,7 @@
     <grid:search label="用户名" name="username" shortSearch="true"/>
     <grid:column title="ID" field="id" align="center" width="100" minWidth="60"/>
     <grid:column title="用户名" field="username"  minWidth="100"/>
+    <grid:column title="email" field="email"  minWidth="100"/>
     <grid:column title="姓名" field="realname"  minWidth="140"/>
     <grid:column title="状态" field="state" renderFun="getStatusName"/>
     <grid:toolbar title="增加" clickFun="addUser" icon="add"/>
