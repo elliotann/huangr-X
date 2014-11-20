@@ -2,7 +2,7 @@
          pageEncoding="UTF-8"%>
 <%@ include file="/commons/taglibs.jsp"%>
 
-<script src="/jeap/statics/js/common/jquery.validate.js" type="text/javascript"></script>
+<script src="${ctx }/statics/js/common/jquery.validate.js" type="text/javascript"></script>
 <script src="${staticserver}/js/admin/jeap.js" type="text/javascript"></script>
 <link href="${context }/css/form.css" rel="stylesheet"/>
 
@@ -44,7 +44,7 @@
                         if(result.success){
                             $("#dialogInfo").dialog('close');
                             $('#dataGrid').datagrid('reload');
-                             savebtn.linkbutton("enable");
+                             
                         }else{
                             alert(result.msg)
                         }
@@ -82,7 +82,7 @@
     .l-verify-tip{ left:230px; top:120px;}
 </style>
 <form name="objForm" method="post"   id="objForm">
-    <input type="hidden" name="roleid" id="roleid" value="${role.roleid==null?0:role.roleid }" />
+    <input type="hidden" name="id" id="roleid" value="${role.id==null?0:role.id }" />
     <input type="hidden" name="ajax"  value="true" />
     <div>
     </div>

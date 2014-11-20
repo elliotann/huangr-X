@@ -13,6 +13,19 @@
                     required:true,
                     minlength:6,
                     maxlength:18
+                },
+                email:{
+                	required:true,
+                	email:true,
+                	remote:{
+                		url:'userAdmin.do?checkEmailExist&ajax=true',
+                		type:'post',
+                		dataType:'json',
+                		data:{
+                			email:function(){return $("#email").val();},
+                			userId:function(){return $("#userId").val();}
+                		}
+                	}
                 }
             },
 
@@ -44,6 +57,14 @@
                     }
                 });
 
+            },
+            messages:{
+                
+                email:{
+                	required:"邮箱不能为空",
+                	email:"邮箱格式不正确",
+                	remote:"邮箱已经存在"
+                }
             }
         });
 
@@ -129,7 +150,7 @@
 
 </style>
 <form name="objForm" method="post"   id="objForm">
-    <input type="hidden" name="id" value="${adminUser.id }" />
+    <input type="hidden" name="id" value="${adminUser.id }" id="userId" />
     <input type="hidden" name="ajax" value="true"/>
     <input  type="hidden" name="founder" value="${adminUser.founder }"/>
     <table cellpadding="0" cellspacing="0" class="l-table-edit" >
@@ -187,6 +208,13 @@
             <td align="right" class="l-table-edit-td">确认密码:</td>
             <td align="left" class="l-table-edit-td">
                 <input name="newPassword" type="password" id="repassword"  class="form-control"/>
+            </td>
+            <td align="left"></td>
+        </tr>
+        <tr>
+            <td align="right" class="l-table-edit-td">email:</td>
+            <td align="left" class="l-table-edit-td">
+                <input name="email" type="text" id="email" class="form-control" value="${adminUser.email }"/>
             </td>
             <td align="left"></td>
         </tr>
@@ -254,6 +282,7 @@
     });
 
     function queryDeparts(id){
+    	if(!id) return;
         $("#userdept").combotree({
             url:'../depart.do?queryDepartsByOrgId&ajax=true&orgId='+id
         });
