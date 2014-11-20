@@ -17,4 +17,10 @@ public class UserRoleDao extends HibernateGenericDao<UserRole,Integer> implement
         String hql = "from UserRole ur where ur.adminUser.id="+userid;
         return this.queryForListByHql(hql);
     }
+
+	public void delUserRoleByRoleId(Integer roleId) {
+		String sql = "delete from t_user_role  where roleid="+roleId;
+		this.excuteBySql(sql);
+		
+	}
 }

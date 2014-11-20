@@ -79,6 +79,7 @@ public class HibernateGenericDao<T,PK extends Serializable> implements IGenericD
         if(params!=null&&params.size()>0){
             query.setProperties(params);
         }
+        
         return query.list();
     }
 
@@ -94,12 +95,14 @@ public class HibernateGenericDao<T,PK extends Serializable> implements IGenericD
 
 
     public void deleteById(PK id) {
-
+    	T entity = this.queryById(id);
+    	sessionFactory.getCurrentSession().delete(entity);
+    	
     }
 
 	public void excuteBySql(String sql) {
 		SQLQuery sqlQuery = sessionFactory.getCurrentSession().createSQLQuery(sql);
-	
+		
 		sqlQuery.executeUpdate();
 	}
 }

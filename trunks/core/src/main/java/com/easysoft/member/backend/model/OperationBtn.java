@@ -13,7 +13,8 @@ import java.io.Serializable;
  *
  * @since:
  */
-
+@Entity
+@Table(name="t_operation_btn")
 public class OperationBtn extends IdEntity {
 
     private String code;
@@ -23,7 +24,7 @@ public class OperationBtn extends IdEntity {
     private String operType;
     private String menuId;
 
-
+    @Column(name="code")
     public String getCode() {
         return code;
     }
@@ -31,7 +32,7 @@ public class OperationBtn extends IdEntity {
     public void setCode(String code) {
         this.code = code;
     }
-
+    @Column(name="name")
     public String getName() {
         return name;
     }
@@ -47,7 +48,7 @@ public class OperationBtn extends IdEntity {
     public void setIco(String ico) {
         this.ico = ico;
     }
-
+    @Column(name="status")
     public int getStatus() {
         return status;
     }
@@ -63,7 +64,7 @@ public class OperationBtn extends IdEntity {
     public void setOperType(String operType) {
         this.operType = operType;
     }
-
+    @Column(name="menuId")
     public String getMenuId() {
         return menuId;
     }

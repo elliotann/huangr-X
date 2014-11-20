@@ -1,23 +1,27 @@
 package com.easysoft.member.backend.manager.impl;
 
-import com.easysoft.core.common.service.impl.GenericService;
-import com.easysoft.framework.db.PageOption;
-import com.easysoft.framework.exception.ErrorCode;
-import com.easysoft.framework.utils.StringUtil;
-import com.easysoft.member.backend.dao.IRoleDao;
-import com.easysoft.member.backend.manager.IRoleManager;
-import com.easysoft.member.backend.model.AuthAction;
-import com.easysoft.member.backend.model.Role;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.activiti.engine.IdentityService;
 import org.activiti.engine.identity.Group;
+import org.apache.commons.lang.StringUtils;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.easysoft.framework.db.PageOption;
+import com.easysoft.framework.exception.ErrorCode;
+import com.easysoft.framework.utils.StringUtil;
+import com.easysoft.member.backend.dao.IRoleDao;
+import com.easysoft.member.backend.dao.IUserRoleDao;
+import com.easysoft.member.backend.manager.IRoleManager;
+import com.easysoft.member.backend.model.Role;
 
 /**
  * 角色管理
@@ -25,6 +29,7 @@ import java.util.Map;
  * @since : 1.0
  */
 @Service("roleManager")
+@Transactional
 public class RoleManager implements IRoleManager {
     public enum RoleManagerError{
         @ErrorCode(comment = "编辑角色时id不可为空!")
@@ -41,6 +46,8 @@ public class RoleManager implements IRoleManager {
     private IdentityService identityService;
     @Autowired
     private IRoleDao roleDao;
+    @Autowired
+    private IUserRoleDao userRoleDao;
 	/**
 	 * 添加一个角色
 	 * @param role 角色实体
@@ -91,17 +98,19 @@ public class RoleManager implements IRoleManager {
 	 */
 	public void deleteById(int roleid) {
 
-		/*//删除用户角色
-        this.executeSql("delete from t_user_role where roleid=?", roleid);
+		/*
+
 
 		//删除角色权限
         this.executeSql("delete from t_role_auth where roleid =?", roleid);
 
 		//删除角色
         this.executeSql("delete from t_role where roleid =?", roleid);*/
+		//删除用户角色
+		userRoleDao.delUserRoleByRoleId(roleid);
         roleDao.deleteById(roleid);
         //删除审批角色
-        identityService.deleteGroup(roleid+"");
+        //identityService.deleteGroup(roleid+"");
 	}
 
 
@@ -148,7 +157,11 @@ public class RoleManager implements IRoleManager {
     
     public PageOption queryByPage(PageOption pageOption, String rolename) {
         pageOption.addSearch("rolename",rolename);
-        List<Role> roles = roleDao.queryForPage(pageOption);
+        List<Criterion> criterions = new ArrayList<Criterion>();
+        List<Role> roles = roleDao.queryForPage(pageOption,criterions);
+        if(StringUtils.isNotEmpty(rolename)){
+        	criterions.add(Restrictions.like("rolename",rolename));
+        }
         if(!roles.isEmpty()){
             pageOption.setData(roles);
         }

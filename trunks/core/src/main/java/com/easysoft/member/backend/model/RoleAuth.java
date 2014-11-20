@@ -12,12 +12,14 @@ import javax.persistence.*;
  *
  * @since: 1.0
  */
-
+@Entity
+@Table(name="t_role_auth")
 public class RoleAuth extends IdEntity {
     private Integer roleId;
     private Integer funId;
     private String operids;//操作IDS
 
+    @Column(name="fun_id")
     public Integer getFunId() {
         return funId;
     }
@@ -25,7 +27,8 @@ public class RoleAuth extends IdEntity {
     public void setFunId(Integer funId) {
         this.funId = funId;
     }
-
+    
+    @Column(name="operids")
     public String getOperids() {
         return operids;
     }
@@ -33,7 +36,7 @@ public class RoleAuth extends IdEntity {
     public void setOperids(String operids) {
         this.operids = operids;
     }
-
+    @Column(name="role_id")
     public Integer getRoleId() {
         return roleId;
     }

@@ -1,8 +1,9 @@
 package com.easysoft.member.backend.dao;
+import java.util.List;
+import java.util.Map;
+
 import com.easysoft.core.common.dao.IGenericDao;
 import com.easysoft.member.backend.model.AdminUser;
-
-import java.util.Map;
 
 /**
  * User: andy
@@ -27,4 +28,9 @@ public interface IAdminUserDao extends IGenericDao<AdminUser,Integer> {
      * @return
      */
     public AdminUser queryUserByEmail(Map<String,Object> conditions);
+    /**
+     * 获取管理
+     * @return
+     */
+    public List<AdminUser> queryUser4Admin();
 }

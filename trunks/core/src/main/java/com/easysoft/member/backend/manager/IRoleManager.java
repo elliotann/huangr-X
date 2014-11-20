@@ -1,6 +1,5 @@
 package com.easysoft.member.backend.manager;
 
-import com.easysoft.core.common.service.IGenericService;
 import com.easysoft.framework.db.PageOption;
 import com.easysoft.member.backend.model.Role;
 

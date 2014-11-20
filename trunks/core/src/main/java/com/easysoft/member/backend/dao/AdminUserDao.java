@@ -45,4 +45,10 @@ public class AdminUserDao extends HibernateGenericDao<AdminUser,Integer> impleme
         }
         return adminUserList.get(0);
 	}
+
+
+	public List<AdminUser> queryUser4Admin() {
+		String hql = " from AdminUser a where a.founder='1'";
+		return this.queryForListByHql(hql);
+	}
 }
