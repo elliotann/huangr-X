@@ -91,9 +91,9 @@ public class DataGridTag extends BodyTagSupport{
         JspWriter out = pageContext.getOut();
         try {
             if("ligerui".equals(style)){
-                out.write(end());
+               
             }else if("html".equals(style)){
-                out.write(endHtml());
+                
             }
             else if("easyui".equals(style)){
                 if(StringUtils.isNotEmpty(tree)&&"true".equals(tree)){
@@ -111,9 +111,6 @@ public class DataGridTag extends BodyTagSupport{
     }
 
 
-    public String endHtml(){
-        return "";
-    }
     //treegrid
     private String endEasyUI4Tree(){
         StringBuilder sb = new StringBuilder();
@@ -282,73 +279,7 @@ public class DataGridTag extends BodyTagSupport{
 
 
 
-    public String end(){
-        height=(height==null)?"auto":height;
-        width=(width==null)?"auto":width;
-        StringBuilder sb = new StringBuilder("<script type=\"text/javascript\">");
-        sb.append("var listgrid;");
-        sb.append("$(function (){");
-        sb.append("listgrid = $(\"#maingrid\").ligerGrid({");
-        sb.append("height:'"+height+"',");
-        sb.append("width:'"+width+"',");
-        sb.append("cssClass:'table-grid',");
-        sb.append("usePager:"+usePager+",");
-        if(usePager){
-            sb.append("pageParmName:'currentPageNo',");
-            sb.append("pagesizeParmName:'pageSize',");
-        }
-        if(StringUtils.isNotEmpty(tree)){
-            sb.append("tree:{columnId: 'title',idField: 'id',parentIDField: 'pid'},");
-        }
-
-        sb.append("rownumbers:"+rownumbers+",");
-        sb.append("columns: [");
-        int i=0;
-        for(DataGridColumn column : columns){
-            String width = StringUtils.isEmpty(column.getWidth())?"auto":column.getWidth();
-
-            sb.append("{");
-            sb.append("display:'"+column.getTitle()+"',");
-            sb.append("name:'"+column.getField()+"'");
-            sb.append(",align:'"+column.getAlign()+"'");
-            sb.append(",width:'"+width+"'");
-            if(StringUtils.isNotEmpty(column.getMinWidth())){
-                sb.append(",minWidth:'"+column.getMinWidth()+"'");
-            }
-            if(StringUtils.isNotEmpty(column.getId())){
-                sb.append(",id:'"+column.getId()+"'");
-            }
-            if(StringUtils.isNotEmpty(column.getRenderFun())){
-                sb.append(",render:"+column.getRenderFun()+"");
-            }
-            if(StringUtils.isNotEmpty(column.getSortType())){
-                sb.append(",type:'"+column.getSortType()+"'");
-            }
-            if(i==columns.size()-1){
-                sb.append("}");
-            }else{
-                sb.append("},");
-            }
-
-            i++;
-
-        }
-
-        sb.append("],");
-        sb.append("url:'"+action+"',  pageSize:20 ,");
-        sb.append(buildToolBars());
-        sb.append("});");
-        sb.append("});");
-        sb.append("</script>");
-        if(this.hasSearchBar){
-            sb.append(buildSearchBar());
-        }
-        sb.append("<div class=\"grid\">");
-
-        sb.append("<div id=\"maingrid\"></div>");
-        sb.append("</div><div style=\"display:none;\"></div>");
-        return sb.toString();
-    }
+    
 
     private String buildSearchBar(){
         StringBuilder sb = new StringBuilder();
