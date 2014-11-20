@@ -320,40 +320,6 @@ public class DataGridTag extends BodyTagSupport{
         searchControls.add(searchControl);
     }
 
-    public String buildToolBars(){
-        StringBuffer sb = new StringBuffer();
-        sb.append("toolbar: { items: [");
-        int j=0;
-        for(ToolBar toolBar : toolBars){
-            sb.append("{");
-            sb.append("text:'"+toolBar.getTitle()+"',");
-            sb.append("click:"+toolBar.getClickFun()+",");
-            sb.append("icon:'"+toolBar.getIcon()+"'");
-            if(j==toolBars.size()-1){
-                sb.append("}");
-            }else{
-                sb.append("},");
-                sb.append("{ line: true },");
-            }
-            j++;
-        }
-        sb.append("]}");
-        return sb.toString();
-    }
-    public String buildToolBars4EasyUI(){
-        StringBuffer sb = new StringBuffer();
-        sb.append(" <div id=\"tb\" style=\"height: auto\">");
-        for(ToolBar toolBar : toolBars){
-            sb.append(" <a href=\"javascript:void(0)\" class=\"button blueButton\" data-options=\"iconCls:'icon-add',plain:true\" onclick=\""+toolBar.getClickFun()+"()\">"+toolBar.getTitle()+"</a>");
-        }
-        sb.append("<span style=\"float: right;\">");
-        sb.append("<span id=\"simpleSearch\">");
-        sb.append("<input id=\"searchKeyword\" class=\"input_text\" type=\"text\" value=\"\" size=\"30\" style=\"width: 300px;\" placeholder=\"请输入姓名，手机号\" name=\"searchKeyWord\">");
-        sb.append("<a href=\"javascript:void(0)\" class=\"easyui-linkbutton\" data-options=\"plain:true\" onclick=\"searchMember()\">搜索</a>");
-        sb.append("</span>");
-        sb.append("</span>");
-        sb.append("</div>");
-
-        return sb.toString();
-    }
+    
+    
 }
