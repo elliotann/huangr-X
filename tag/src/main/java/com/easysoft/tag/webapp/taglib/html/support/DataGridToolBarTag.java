@@ -1,6 +1,6 @@
 package com.easysoft.tag.webapp.taglib.html.support;
 
-import com.easysoft.tag.webapp.taglib.vo.DataGridColumn;
+
 import com.easysoft.tag.webapp.taglib.vo.ToolBar;
 
 import javax.servlet.jsp.JspException;
