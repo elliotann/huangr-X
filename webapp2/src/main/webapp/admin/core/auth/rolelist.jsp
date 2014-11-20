@@ -5,8 +5,8 @@
 <link href="${context}/css/stylenew.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="${context}/js/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${context}/js/easyui/locale/easyui-lang-zh_CN.js"></script>
-<script src="/jeap/admin/js/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
-<script src="/jeap/admin/js/crud.js" type="text/javascript"></script>
+<script src="${ctx}/admin/js/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
+<script src="${ctx}/admin/js/crud.js" type="text/javascript"></script>
 <link href="${context }/css/form.css" rel="stylesheet"/>
 <script type="text/javascript">
 
@@ -29,7 +29,7 @@
         });
     });
 
-    function modifyUser()
+    function modifyRole()
     {
 
         if($('#dataGrid').datagrid('getSelections').length<1||$('#dataGrid').datagrid('getSelections').length>1){
@@ -37,11 +37,11 @@
             return;
         }
         var row = $('#dataGrid').datagrid('getSelections')[0];
-        addOrUpdateDialog("修改角色",'role.do?edit&roleid='+row.roleid,350,600);
+        addOrUpdateDialog("修改角色",'role.do?edit&roleid='+row.id,350,600);
 
 
     }
-    function delUser()
+    function delRole()
     {
         var rows = $('#dataGrid').datagrid("getSelections");
         if (rows.length < 1||rows.length>1) {
@@ -52,7 +52,7 @@
             return;
         }
         var row = rows[0];
-        delObj("role.do?delete&id="+row.roleid);
+        delObj("role.do?delete&id="+row.id);
 
 
 
@@ -73,7 +73,7 @@
             height: 550,
             closed: false,
             cache: false,
-            href:'auth.do?add&ajax=yes&roleId='+row.roleid,
+            href:'auth.do?add&ajax=yes&roleId='+row.id,
             modal: true,
             buttons: [
                 {
@@ -148,12 +148,12 @@
 </script>
 <grid:dataGrid action="role.do?dataGrid&ajax=yes" height="99%"  rownumbers="true" hasSearchBar="true" style="easyui">
     <grid:search label="请输入角色名称" name="rolename" shortSearch="true"/>
-    <grid:column title="ID" field="roleid" align="center" width="100" minWidth="60"/>
+    <grid:column title="ID" field="id" align="center" width="100" minWidth="60"/>
     <grid:column title="角色名称" field="rolename"  minWidth="120"/>
     <grid:column title="描述" field="rolememo"  minWidth="140"/>
     <grid:toolbar title="增加" clickFun="addRole" icon="add"/>
-    <grid:toolbar title="修改" clickFun="modifyUser" icon="modify"/>
-    <grid:toolbar title="删除" clickFun="delUser" icon="delete"/>
+    <grid:toolbar title="修改" clickFun="modifyRole" icon="modify"/>
+    <grid:toolbar title="删除" clickFun="delRole" icon="delete"/>
     <grid:toolbar title="设置权限" clickFun="setAuth" icon="modify"/>
 </grid:dataGrid>
 

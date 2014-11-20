@@ -74,7 +74,7 @@
         }
     }
 
-    function searchMember(){
+    function simpleSearch(){
 
         var username = $("#username").val();
         $("#dataGrid").datagrid('load', {

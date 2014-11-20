@@ -44,8 +44,10 @@ function delObj(url,id)
         dataType : 'json',
         success : function(result) {
             if(result.success){
-                alert("删除成功");
+            	alert(result.msg);
                 $('#dataGrid').datagrid('reload');
+            }else{
+            	 alert(result.msg);
             }
 
         },

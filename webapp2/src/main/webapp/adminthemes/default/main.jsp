@@ -72,7 +72,7 @@
 
         <div class="info">
             <h3>${user.username }</h3>
-            <small>360042212@qq.com</small>
+            <small>${user.email }</small>
             <p>
                 <a href="">账号设置</a> <a href="../admin/logout.do" target="_self">退出</a>
             </p>

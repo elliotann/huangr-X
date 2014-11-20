@@ -89,12 +89,12 @@
 
     function addBtn(item){
 
-        var row = listgrid.getSelectedRow();
-        if(row==null){
-            $.ligerDialog.error('请选择数据操作!');
+    	if($('#dataGrid').treegrid('getSelections').length<1||$('#dataGrid').treegrid('getSelections').length>1){
+            alert("请选择数据操作!");
             return;
         }
-        addOrUpdateDialog(item,'增加按钮','oper.do?add&menuId='+row.id,400,400);
+        var row = $('#dataGrid').treegrid('getSelections')[0];
+        addOrUpdateDialog('增加按钮','oper.do?add&menuId='+row.id,400,400);
 
     }
 
@@ -116,7 +116,14 @@
     function showIco(rowdata,index,value){
        return "<img src='${context}/images/system/ico/default_menu.png'/>";
     }
+    function simpleSearch(){
 
+        var username = $("#username").val();
+        $("#dataGrid").datagrid('load', {
+            username:username,
+            page:1
+        });
+    }
 </script>
 
 <grid:dataGrid action="menu.do" height="99%" usePager="false"  width="100%" tree="true" style="easyui">

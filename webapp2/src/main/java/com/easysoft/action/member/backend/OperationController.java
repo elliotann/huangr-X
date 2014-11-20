@@ -3,7 +3,6 @@ package com.easysoft.action.member.backend;
 import com.easysoft.core.common.controller.BaseController;
 import com.easysoft.core.common.vo.json.AjaxJson;
 import com.easysoft.member.backend.dao.IOperationBtnDao;
-import com.easysoft.member.backend.manager.IOperationBtnManager;
 import com.easysoft.member.backend.model.OperationBtn;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,16 +33,14 @@ public class OperationController extends BaseController {
     public ModelAndView add(Integer menuId){
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("menuId",menuId);
-        return new ModelAndView("core/admin/menu/addOperation",map);
+        return new ModelAndView("admin/core/menu/addOperation",map);
     }
     @RequestMapping(params = {"saveAdd"})
     @ResponseBody
-    public AjaxJson saveAdd(OperationBtn operationBtn,@RequestParam MultipartFile icoFile){
+    public AjaxJson saveAdd(OperationBtn operationBtn){
         AjaxJson json = new AjaxJson();
         try{
-            if(StringUtils.isNotEmpty(icoFile.getOriginalFilename())){
-                operationBtn.setIco(updateFile(icoFile));
-            }
+            
             operationBtnDao.save(operationBtn);
             json.setMsg("新增菜单成功");
 
