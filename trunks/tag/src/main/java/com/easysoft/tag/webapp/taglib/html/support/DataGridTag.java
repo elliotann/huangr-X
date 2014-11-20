@@ -21,7 +21,7 @@ public class DataGridTag extends BodyTagSupport{
 	 */
 	private static final long serialVersionUID = 1L;
 	private String action;
-    private String style="ligerui";
+    private String style="easyui";
     private String height;
     private boolean usePager = true;//是否分页
     private String width;//宽度
