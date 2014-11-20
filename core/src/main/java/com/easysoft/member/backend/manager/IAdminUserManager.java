@@ -86,13 +86,7 @@ public interface IAdminUserManager {
 	 */
 	public void delete(Integer id);
 	
-	
-	/**
-	 * 检查是否为最后一个管理员
-	 * @return 
-	 */
-	public int checkLastAdminUser();
- 
+
   
 	/**
 	 * 读取此站点所有管理员
