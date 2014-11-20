@@ -281,34 +281,7 @@ public class DataGridTag extends BodyTagSupport{
 
     
 
-    private String buildSearchBar(){
-        StringBuilder sb = new StringBuilder();
-        sb.append("<div id=\"searchbar\">");
-        sb.append("<div style=\" width:100%\">");
-        sb.append("<div class=\"searchtitle\">");
-        sb.append(" <span>搜索</span><img src=\"/jeap/admin/images/icons/searchtool.gif\" />");
-        sb.append("  <div class=\"togglebtn\"></div>");
-        sb.append("</div>");
-        sb.append(" <div class=\"navline\" style=\"margin-bottom:10px; margin-top:4px;\"></div>");
-        sb.append(" <div class=\"searchbox\">");
-        sb.append("<form>");
-        if(!searchControls.isEmpty()){
-            for(SearchControl control : searchControls){
-                sb.append(control.getLabel());
-                sb.append("<input type=\"text\" class=\"form-control\" style=\"height: 10px\"");
-                sb.append(" id='"+control.getName()+"Qry'/>");
-
-            }
-
-        }
-
-        sb.append(" <button class=\"btn btn-info\" style=\"height: 25px\" onclick=\"return query();\">查询</button>");
-        sb.append("</form>");
-        sb.append("<div class=\"l-clear\"></div>");
-        sb.append("</div></div></div>");
-        return sb.toString();
-    }
-
+    
     public void setColumns(DataGridColumn column){
         columns.add(column);
     }
