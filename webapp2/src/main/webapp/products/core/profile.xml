@@ -24,9 +24,7 @@
 	</site>
 	<menus>
 			<menu text="设置" type="app" url="/core/admin/setting.do?edit_input">
-			<menu text="系统设置">
-				<menu text="组件管理" url="/core/admin/component.do?list" />
-			</menu>
+		
             <menu text="权限管理">
                 <menu text="管理员管理" url="/core/admin/user/userAdmin.do?list" />
                 <menu text="角色管理" url="/core/admin/role.do?list" />
@@ -35,13 +33,11 @@
 
 		<menu text="开发者" type="app" url="/admin/setting/setting!edit_input.do">
 			<menu text="工具">
-				<menu text="URL映射" url="/core/admin/themeUri!list.do" />
+		
 				<menu text="菜单管理" url="/core/admin/menu.do?list" />
 			</menu>
 
-			<menu text="系统设置">
-				<menu text="组件管理" url="/core/admin/component.do?list" />
-			</menu>
+		
             <menu text="权限管理">
                 <menu text="管理员管理" url="/core/admin/user/userAdmin.do?list" />
                 <menu text="角色管理" url="/core/admin/role.do?list" />
