@@ -6,36 +6,40 @@ import java.util.Date;
 
 /**
  * 日期相关的操作
+ * 
  * @author Dawei
- *  
+ * 
  */
 
 public class DateUtil {
-    public static int getDateline(String date, String pattern) {
-        return (int)(toDate(date, pattern).getTime() / 1000L);
-    }
-    public static String toString(Long time, String pattern) {
-/*  62 */     if (time.longValue() > 0L) {
-/*  63 */       if (time.toString().length() == 10) {
-/*  64 */         time = Long.valueOf(time.longValue() * 1000L);
-/*     */       }
-/*  66 */       Date date = new Date(time.longValue());
-/*  67 */       String str = toString(date, pattern);
-/*  68 */       return str;
-/*     */     }
-/*  70 */     return "";
-/*     */   }
+	public static int getDateline(String date, String pattern) {
+		return (int) (toDate(date, pattern).getTime() / 1000L);
+	}
+
+	public static String toString(Long time, String pattern) {
+		if (time.longValue() > 0L) {
+			if (time.toString().length() == 10) {
+				time = Long.valueOf(time.longValue() * 1000L);
+			}
+			Date date = new Date(time.longValue());
+			String str = toString(date, pattern);
+			return str;
+		}
+		return "";
+	}
+
 	/**
 	 * 将一个字符串转换成日期格式
+	 * 
 	 * @param date
 	 * @param pattern
 	 * @return
 	 */
 	public static Date toDate(String date, String pattern) {
-		if((""+date).equals("")){
+		if (("" + date).equals("")) {
 			return null;
 		}
-		if(pattern == null){
+		if (pattern == null) {
 			pattern = "yyyy-MM-dd";
 		}
 		SimpleDateFormat sdf = new SimpleDateFormat(pattern);
@@ -47,18 +51,19 @@ public class DateUtil {
 		}
 		return newDate;
 	}
-	
+
 	/**
 	 * 把日期转换成字符串型
+	 * 
 	 * @param date
 	 * @param pattern
 	 * @return
 	 */
-	public static String toString(Date date, String pattern){
-		if(date == null){
+	public static String toString(Date date, String pattern) {
+		if (date == null) {
 			return "";
 		}
-		if(pattern == null){
+		if (pattern == null) {
 			pattern = "yyyy-MM-dd";
 		}
 		String dateString = "";
@@ -71,124 +76,121 @@ public class DateUtil {
 		return dateString;
 	}
 
-	
-	
 	/**
 	 * 获取上个月的开始结束时间
+	 * 
 	 * @return
 	 */
 	public static String[] getLastMonth() {
-		   // 取得系统当前时间
-		   Calendar cal = Calendar.getInstance();
-		   int year = cal.get(Calendar.YEAR);
-		   int month = cal.get(Calendar.MONTH) + 1;
-		   
-		   // 取得系统当前时间所在月第一天时间对象
-		   cal.set(Calendar.DAY_OF_MONTH, 1);
-		   
-		   // 日期减一,取得上月最后一天时间对象
-		   cal.add(Calendar.DAY_OF_MONTH, -1);
-		   
-		   // 输出上月最后一天日期
-		   int day = cal.get(Calendar.DAY_OF_MONTH);
+		// 取得系统当前时间
+		Calendar cal = Calendar.getInstance();
+		int year = cal.get(Calendar.YEAR);
+		int month = cal.get(Calendar.MONTH) + 1;
 
-		   String months = "";
-		   String days = "";
+		// 取得系统当前时间所在月第一天时间对象
+		cal.set(Calendar.DAY_OF_MONTH, 1);
 
-		   if (month > 1) {
-		    month--;
-		   } else {
-		    year--;
-		    month = 12;
-		   }
-		   if (!(String.valueOf(month).length() > 1)) {
-		    months = "0" + month;
-		   } else {
-		    months = String.valueOf(month);
-		   }
-		   if (!(String.valueOf(day).length() > 1)) {
-		    days = "0" + day;
-		   } else {
-		    days = String.valueOf(day);
-		   }
-		   String firstDay = "" + year + "-" + months + "-01";
-		   String lastDay = "" + year + "-" + months + "-" + days;
+		// 日期减一,取得上月最后一天时间对象
+		cal.add(Calendar.DAY_OF_MONTH, -1);
 
-		   String[] lastMonth = new String[2];
-		   lastMonth[0] = firstDay;
-		   lastMonth[1] = lastDay;
+		// 输出上月最后一天日期
+		int day = cal.get(Calendar.DAY_OF_MONTH);
 
-		 //  System.out.println(lastMonth[0] + "||" + lastMonth[1]);
-		   return lastMonth;
+		String months = "";
+		String days = "";
+
+		if (month > 1) {
+			month--;
+		} else {
+			year--;
+			month = 12;
 		}
-	
-	
+		if (!(String.valueOf(month).length() > 1)) {
+			months = "0" + month;
+		} else {
+			months = String.valueOf(month);
+		}
+		if (!(String.valueOf(day).length() > 1)) {
+			days = "0" + day;
+		} else {
+			days = String.valueOf(day);
+		}
+		String firstDay = "" + year + "-" + months + "-01";
+		String lastDay = "" + year + "-" + months + "-" + days;
+
+		String[] lastMonth = new String[2];
+		lastMonth[0] = firstDay;
+		lastMonth[1] = lastDay;
+
+		// System.out.println(lastMonth[0] + "||" + lastMonth[1]);
+		return lastMonth;
+	}
+
 	/**
 	 * 获取当月的开始结束时间
+	 * 
 	 * @return
 	 */
 	public static String[] getCurrentMonth() {
-		   // 取得系统当前时间
-		   Calendar cal = Calendar.getInstance();
-		   int year = cal.get(Calendar.YEAR);
-		   int month = cal.get(Calendar.MONTH)+1 ;
-		   
-		   // 取得系统当前时间所在月第一天时间对象
-		   cal.set(Calendar.DAY_OF_MONTH, 1);
-		   
-		   // 日期减一,取得上月最后一天时间对象
-		   cal.add(Calendar.DAY_OF_MONTH, -1);
-		   
-		   // 输出上月最后一天日期
-		   int day = cal.get(Calendar.DAY_OF_MONTH);
+		// 取得系统当前时间
+		Calendar cal = Calendar.getInstance();
+		int year = cal.get(Calendar.YEAR);
+		int month = cal.get(Calendar.MONTH) + 1;
 
-		   String months = "";
-		   String days = "";
+		// 取得系统当前时间所在月第一天时间对象
+		cal.set(Calendar.DAY_OF_MONTH, 1);
 
+		// 日期减一,取得上月最后一天时间对象
+		cal.add(Calendar.DAY_OF_MONTH, -1);
 
-		   if (!(String.valueOf(month).length() > 1)) {
-		    months = "0" + month;
-		   } else {
-		    months = String.valueOf(month);
-		   }
-		   if (!(String.valueOf(day).length() > 1)) {
-		    days = "0" + day;
-		   } else {
-		    days = String.valueOf(day);
-		   }
-		   String firstDay = "" + year + "-" + months + "-01";
-		   String lastDay = "" + year + "-" + months + "-" + days;
+		// 输出上月最后一天日期
+		int day = cal.get(Calendar.DAY_OF_MONTH);
 
-		   String[] currentMonth = new String[2];
-		   currentMonth[0] = firstDay;
-		   currentMonth[1] = lastDay;
+		String months = "";
+		String days = "";
 
-		 //  System.out.println(lastMonth[0] + "||" + lastMonth[1]);
-		   return currentMonth;
+		if (!(String.valueOf(month).length() > 1)) {
+			months = "0" + month;
+		} else {
+			months = String.valueOf(month);
 		}
-		
-	
-	
-	public static int getDateline(){
-		
-		return (int)(System.currentTimeMillis()/1000);
+		if (!(String.valueOf(day).length() > 1)) {
+			days = "0" + day;
+		} else {
+			days = String.valueOf(day);
+		}
+		String firstDay = "" + year + "-" + months + "-01";
+		String lastDay = "" + year + "-" + months + "-" + days;
+
+		String[] currentMonth = new String[2];
+		currentMonth[0] = firstDay;
+		currentMonth[1] = lastDay;
+
+		// System.out.println(lastMonth[0] + "||" + lastMonth[1]);
+		return currentMonth;
 	}
-	
-	public static int getDateline(String date){
-		return (int)(toDate(date, "yyyy-MM-dd").getTime()/1000);
+
+	public static int getDateline() {
+
+		return (int) (System.currentTimeMillis() / 1000);
 	}
-	//andy 经测，int最大值反应到日期上为2038-01-19，故补充以下两个方法
-	public static long getDatelineLong(){
-		
-		return (long)(System.currentTimeMillis()/1000);
+
+	public static int getDateline(String date) {
+		return (int) (toDate(date, "yyyy-MM-dd").getTime() / 1000);
 	}
-	
-	public static long getDatelineLong(String date){
-		return (long)(toDate(date, "yyyy-MM-dd").getTime()/1000);
+
+	// andy 经测，int最大值反应到日期上为2038-01-19，故补充以下两个方法
+	public static long getDatelineLong() {
+
+		return (long) (System.currentTimeMillis() / 1000);
 	}
-	
-	public static void main(String[] args){
-//		System.out.println(DateUtil.getDateline("2038-01-20"));
+
+	public static long getDatelineLong(String date) {
+		return (long) (toDate(date, "yyyy-MM-dd").getTime() / 1000);
+	}
+
+	public static void main(String[] args) {
+		// System.out.println(DateUtil.getDateline("2038-01-20"));
 		System.out.println(DateUtil.getDatelineLong("2011-12-31"));
 	}
 }
