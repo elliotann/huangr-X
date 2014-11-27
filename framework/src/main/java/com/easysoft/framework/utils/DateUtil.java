@@ -75,6 +75,14 @@ public class DateUtil {
 		}
 		return dateString;
 	}
+	/**
+	 * 获取缺省格式的日期字符串
+	 * @param date
+	 * @return
+	 */
+	public static String getDefaultPatternStrDate(Date date){
+		return toString(date,null);
+	}
 
 	/**
 	 * 获取上个月的开始结束时间
