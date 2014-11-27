@@ -10,7 +10,7 @@ import java.util.Map;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import com.easysoft.framework.db.PageOption;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -22,14 +22,15 @@ import org.w3c.dom.NodeList;
 
 import com.easysoft.core.ParamSetting;
 import com.easysoft.core.context.EsfContext;
+import com.easysoft.core.dao.ISiteDao;
 import com.easysoft.core.manager.IAppManager;
 import com.easysoft.core.manager.IDomainManager;
 import com.easysoft.core.manager.ISiteManager;
 import com.easysoft.core.manager.IThemeManager;
 import com.easysoft.core.manager.IUserManager;
 import com.easysoft.core.model.Dns;
-import com.easysoft.core.model.JEAPSiteDomain;
 import com.easysoft.core.model.JEAPApp;
+import com.easysoft.core.model.JEAPSiteDomain;
 import com.easysoft.core.model.JEAPUser;
 import com.easysoft.core.model.Site;
 import com.easysoft.core.model.Theme;
@@ -39,6 +40,7 @@ import com.easysoft.framework.context.webcontext.ThreadContextHolder;
 import com.easysoft.framework.context.webcontext.WebSessionContext;
 import com.easysoft.framework.db.IDaoSupport;
 import com.easysoft.framework.db.ISqlFileExecutor;
+import com.easysoft.framework.db.PageOption;
 import com.easysoft.framework.db.StringMapper;
 import com.easysoft.framework.utils.DateUtil;
 import com.easysoft.framework.utils.FileUtil;
@@ -61,6 +63,8 @@ public class SiteManagerImpl implements ISiteManager {
 	private IAdminUserManager adminUserManager;
 	private IAppManager appManager;
 	private ISetupLoader setupLoader;
+	@Autowired
+	private ISiteDao siteDao;
 
 	@Transactional(propagation = Propagation.REQUIRED)
 	public int addDomain(JEAPSiteDomain eopSiteDomain) {
@@ -103,18 +107,18 @@ public class SiteManagerImpl implements ISiteManager {
 		site.setLastgetpoint(DateUtil.getDatelineLong()); // 默认创建即获取了积分
 
 		// 添加站点并得到id
-		this.daoSupport.insert("jeap_site", site);
-		Integer siteid = this.daoSupport.getLastId("jeap_site");
+		siteDao.save(site);
+	
 
 		JEAPSiteDomain eopSiteDomain = new JEAPSiteDomain();
 		eopSiteDomain.setDomain(domain);
-		eopSiteDomain.setSiteid(siteid);
+		eopSiteDomain.setSiteid(site.getId());
 		eopSiteDomain.setUserid(userid);
 
 		// 为站点添加域名
 		this.addDomain(eopSiteDomain);
 
-		return siteid;
+		return site.getId();
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED)
