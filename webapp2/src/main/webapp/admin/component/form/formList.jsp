@@ -3,43 +3,38 @@
 <%@ include file="/commons/taglibs.jsp"%>
 
 
-<link href="${context }/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
-<link href="${context }/js/ligerui/skins/ligerui-icons.css" rel="stylesheet" type="text/css" />
-<link href="${context }/js/ligerui/skins/Gray2014/css/all.css" rel="stylesheet" type="text/css" />
-
-<script src="${context }/js/ligerui/js/core/base.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerGrid.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerToolBar.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerResizable.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerCheckBox.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerDialog.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerDrag.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerForm.js" type="text/javascript"></script>
-<link href="/jeap/form/config/lab.css" rel="stylesheet" type="text/css" />
-<script src="/jeap/form/config/lab.js" type="text/javascript"></script>
-<script src="/jeap/form/config/preview.js" type="text/javascript"></script>
-<script src="/jeap/form/config/ligerGrid.showFilter.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="${context}/js/easyui/themes/gray/easyui.css">
+<link href="${context}/css/style1.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="${context}/js/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="${context}/js/easyui/locale/easyui-lang-zh_CN.js"></script>
+<script src="${ctx }/admin/js/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
+<script src="${ctx }/admin/js/crud.js" type="text/javascript"></script>
+<link href="${context }/css/form.css" rel="stylesheet"/>
+<link href="${context }/css/button.css" rel="stylesheet"/>
 
 
 <script type="text/javascript">
-
+$(function () {
+    $(".searchAdvanced").hide();
+    //高级查询按钮
+    $("#aAdvanced").click(function () {
+        if ($("#Advanced").val() == "0") {
+            $("#Advanced").val(1);
+            $("#simpleSearch").hide();
+            //$("#aAdvanced").text("简单搜索")
+            $("#aAdvanced").addClass("searchAdvancedS");
+        } else {
+            $("#Advanced").val(0);
+            $("#simpleSearch").show();
+            //$("#aAdvanced").text("高级搜索");
+            $("#aAdvanced").removeClass("searchAdvancedS");
+        }
+        $(".searchAdvanced").slideToggle("slow");
+    });
+});
     function addForm(item)
     {
-
-        $.ligerDialog.open({
-            height:400,
-            width: 600,
-            name:'openDia',
-            title : '表单设计',
-            url: 'designer.do?toDesigner',
-            showMax: false,
-            showToggle: true,
-            showMin: false,
-            isResize: true,
-            slide: false,
-            buttons:[ { text: '确定', onclick: btnOK }, { text: '取消', onclick: function (item, dialog) { dialog.close(); } } ]
-        });
-
+    	addOrUpdateDialog('增加表单','designer.do?toDesigner',500,700);
     }
 
     function btnOK(item,dialog){
@@ -164,12 +159,16 @@
             return "未同步";
         }
     }
+    
+    function pageSettting(){
+    	window.location.href="designer.do?pageSetting";
+    }
 </script>
 
 <grid:dataGrid action="designer.do?dataGrid&ajax=yes" height="99%">
     <grid:column title="id" field="id" align="center" width="100" minWidth="60"/>
     <grid:column title="表名" field="tableName"  minWidth="120"/>
-    <grid:column title="表描述" field="tableTitle"  minWidth="140"/>
+    <grid:column title="表单名称" field="tableTitle"  minWidth="140"/>
     <grid:column title="版本" field="version"  minWidth="100"/>
     <grid:column title="同步数据库" field="isSynDB"  minWidth="100" renderFun="isSynDB"/>
     <grid:column title="创建人" field="createBy"  minWidth="100"/>
@@ -179,4 +178,5 @@
     <grid:toolbar title="删除" clickFun="delUser" icon="del"/>
     <grid:toolbar title="同步数据库" clickFun="synDB" icon="modify"/>
     <grid:toolbar title="生成代码" clickFun="generatorCode" icon="modify"/>
+    <grid:toolbar title="页面设计" clickFun="pageSettting" icon="modify"/>
 </grid:dataGrid>

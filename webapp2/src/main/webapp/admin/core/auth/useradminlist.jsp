@@ -28,7 +28,7 @@
             $(".searchAdvanced").slideToggle("slow");
         });
     });
-    var listgrid;
+
     function addUser()
     {
         addOrUpdateDialog('增加管理员','userAdmin.do?add',500,700);

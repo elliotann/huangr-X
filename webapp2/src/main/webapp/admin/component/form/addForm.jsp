@@ -161,19 +161,45 @@
         </tr>
     </table>
     <br />
-    <div id="navtab1" style="width: 100%;overflow:hidden; height: 370px ">
+    <%-- <div id="navtab1" style="width: 100%;overflow:hidden; height: 370px ">
         <div tabid="dbColumn" title="数据库字段" lselected="true"  style="height:470px" >
             <div id="dbColumnGrid" style="margin: 0; padding: 0"></div>
 
         </div>
         <div tabid="listPage" title="列表页设置" lselected="true"  style="height:470px" >
             <div id="listPageGrid" style="margin: 0; padding: 0"></div>
-            <%--<iframe frameborder="0" name="showmessage" src="designer.do?dbFormEle" id="showmessage"></iframe>--%>
+            <iframe frameborder="0" name="showmessage" src="designer.do?dbFormEle" id="showmessage"></iframe>
         </div>
         <div tabid="formPage" title="表单页设置" lselected="true"  style="height:470px" >
             <div id="formPageGrid" style="margin: 0; padding: 0"></div>
         </div>
-    </div>
+    </div> --%>
+    <div class="easyui-tabs" data-options="tools:'#tab-tools'" style="width:600px;height:400px">
+		
+		<div title="数据库字段" data-options="closable:true" style="padding:10px">
+			<table class="easyui-datagrid" data-options="fit:true,singleSelect:true,rownumbers:true">
+				<thead>
+					<tr>
+						<th data-options="field:'f1',width:100">Title1</th>
+						<th data-options="field:'f2',width:100">Title2</th>
+						<th data-options="field:'f3',width:100">Title3</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>d11</td>
+						<td>d12</td>
+						<td>d13</td>
+					</tr>
+					<tr>
+						<td>d21</td>
+						<td>d22</td>
+						<td>d23</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </form>
 </body>
 

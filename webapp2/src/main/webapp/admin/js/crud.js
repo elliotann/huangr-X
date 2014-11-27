@@ -1,7 +1,9 @@
 //增加或者修改弹出框
 function addOrUpdateDialog(title,url,height,width)
 {
-    $("#dialogInfo").show();
+	
+	$("#dialogInfo").show();
+
     $('#dialogInfo').dialog({
         title:title,
         top: 60,
