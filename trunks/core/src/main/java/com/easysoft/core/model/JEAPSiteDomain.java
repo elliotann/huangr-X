@@ -1,9 +1,17 @@
 package com.easysoft.core.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * @author andy
  * @version 1.0
  */
+@Entity
+@Table(name="jeap_sitedomain")
 public class JEAPSiteDomain {
 	private Integer id;
 	private String domain;
@@ -24,6 +32,8 @@ public class JEAPSiteDomain {
 	public void setUserid(Integer userid) {
 		this.userid = userid;
 	}
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getId() {
 		return id;
 	}
