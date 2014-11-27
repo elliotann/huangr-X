@@ -11,12 +11,12 @@
     <title>jeap安装向导</title>
 
     <!-- Bootstrap framework -->
-    <link href="/jeap/install/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${ctx }/install/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- wizard -->
-    <link href="/jeap/install/css/jquery.stepy.css" rel="stylesheet">
+    <link href="${ctx }/install/css/jquery.stepy.css" rel="stylesheet">
 
-    <link href="/jeap/install/css/style.css" rel="stylesheet">
+    <link href="${ctx }/install/css/style.css" rel="stylesheet">
     <!-- theme color-->
     <link id="link_theme" href="/jeap/install/css/blue.css" rel="stylesheet">
 
@@ -254,14 +254,14 @@
 
 
 
-    <script src="/jeap/install/css/jquery.min.js"></script>
-    <script src="/jeap/statics/js/common/jquery-form-2.33.js"></script>
+    <script src="${ctx }/install/css/jquery.min.js"></script>
+    <script src="${ctx }/statics/js/common/jquery-form-2.33.js"></script>
     <!-- validation -->
-    <script src="/jeap/install/css/jquery.validate.min.js"></script>
+    <script src="${ctx }/install/css/jquery.validate.min.js"></script>
     <!-- wizard -->
-    <script src="/jeap/install/css/jquery.stepy.js"></script>
+    <script src="${ctx }/install/css/jquery.stepy.js"></script>
     <!-- wizard functions -->
-    <script src="/jeap/install/css/install.js"></script>
+    <script src="${ctx }/install/css/install.js"></script>
 
 
 
