@@ -32,12 +32,13 @@
         <!--注解方式配置 &ndash-->
         <property name="packagesToScan">
             <list>
+                <value>com.easysoft.core.model</value>
                 <value>com.easysoft.member.backend.model</value>
                 <value>com.easysoft.build.model</value>
                 <value>com.easysoft.framework.component</value>
                 <!--<value>com.easysoft.framework.component</value>
                 <value>com.easysoft.member.model</value>
-                <value>com.easysoft.core.model</value>
+                
                 <value>com.easysoft.member.backend.model</value>-->
             </list>
         </property>
