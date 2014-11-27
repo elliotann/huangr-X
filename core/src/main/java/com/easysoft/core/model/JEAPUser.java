@@ -3,14 +3,13 @@ package com.easysoft.core.model;
 import com.easysoft.core.common.entity.IdEntity;
 
 import javax.persistence.*;
-import java.io.Serializable;
-
 /**
  * 用户实体
  * @author andy
  * @since : 1.0
  */
-
+@Entity
+@Table(name="jeap_user")
 public class JEAPUser extends IdEntity{
 
 

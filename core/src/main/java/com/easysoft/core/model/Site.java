@@ -2,11 +2,19 @@ package com.easysoft.core.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 
 /**
  * @author andy
  * @since : 1.0
  */
+@Entity
+@Table(name="jeap_site")
 public class Site implements Serializable{
  
 	private static final long serialVersionUID = 7525130003L;
@@ -88,7 +96,8 @@ public class Site implements Serializable{
 	public void setKeywords(String keywords) {
 		this.keywords = keywords;
 	}
-
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getId() {
 		return id;
 	}
