@@ -111,7 +111,8 @@
 		<field><name>defaultsiteid</name><type>int</type><size>11</size><option>00</option></field>
 		<field><name>deleteflag</name><type>int</type><size>6</size><option>00</option><default>0</default></field>
 		<field><name>usertype</name><type>int</type><size>6</size><option>00</option></field>
-		<field><name>createtime</name><type>int</type><size>11</size><option>00</option></field>
+		<field><name>create_time</name><type>varchar</type><size>11</size><option>00</option></field>
+		<field><name>create_by</name><type>varchar</type><size>50</size><option>00</option></field>
 	</action>
 
 	<action>
