@@ -23,6 +23,7 @@ import org.w3c.dom.NodeList;
 import com.easysoft.core.ParamSetting;
 import com.easysoft.core.context.EsfContext;
 import com.easysoft.core.dao.ISiteDao;
+import com.easysoft.core.dao.ISiteDomainDao;
 import com.easysoft.core.manager.IAppManager;
 import com.easysoft.core.manager.IDomainManager;
 import com.easysoft.core.manager.ISiteManager;
@@ -65,15 +66,17 @@ public class SiteManagerImpl implements ISiteManager {
 	private ISetupLoader setupLoader;
 	@Autowired
 	private ISiteDao siteDao;
+	@Autowired
+	private ISiteDomainDao siteDomainDao;
 
 	@Transactional(propagation = Propagation.REQUIRED)
-	public int addDomain(JEAPSiteDomain eopSiteDomain) {
+	public int addDomain(JEAPSiteDomain jeapSiteDomain) {
 		// UserUtil.validUser(eopSiteDomain.getUserid());
-		if (checkInDomain(eopSiteDomain.getDomain())) {
+		if (checkInDomain(jeapSiteDomain.getDomain())) {
 			throw new IllegalArgumentException("域名["
-					+ eopSiteDomain.getDomain() + "]已存在！");
+					+ jeapSiteDomain.getDomain() + "]已存在！");
 		}
-		daoSupport.insert("jeap_sitedomain", eopSiteDomain);
+		daoSupport.insert("jeap_sitedomain", jeapSiteDomain);
 		return daoSupport.getLastId("jeap_sitedomain");
 	}
 
