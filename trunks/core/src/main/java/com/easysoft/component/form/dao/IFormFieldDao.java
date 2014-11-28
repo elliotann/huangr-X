@@ -12,4 +12,5 @@ import com.easysoft.component.form.model.FormField;
  */
 public interface IFormFieldDao extends IGenericDao<FormField,Integer> {
     public void delByFormId(Integer formId);
+    
 }

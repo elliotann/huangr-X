@@ -16,7 +16,8 @@ import java.io.Serializable;
  *
  * @since:
  */
-
+@Entity
+@Table(name="t_form_field")
 public class FormField extends IdEntity {
 
     /*================数据库字段===================*/
