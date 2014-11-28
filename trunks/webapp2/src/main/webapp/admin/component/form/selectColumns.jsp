@@ -39,11 +39,17 @@
 				$(element).removeAttr("title").ligerHideTip();
 			},
 			submitHandler : function() {
-				$("form .l-text,.l-textarea").ligerHideTip();
-				if (outjson()) {
-					window.parent.listgrid.loadData();
-					dialog.close();//关闭dialog
-				}
+				$.Loading.show('操作成功!');
+
+                setTimeout(function ()
+                {
+                    $.Loading.hide();
+                    $("#dialogInfo").dialog('close');
+                   
+
+
+                }, 1000);
+
 			}
 		});
 
@@ -53,8 +59,15 @@
 		var output = document.getElementById("output");
 		var resultJson = [];
 		for(var i=0;i<output.length;i++){
-			var filed=output[i].value+":"+output[i].text;
-			resultJson.push(filed);
+			var col = {                        
+					field: output[i].value,                        
+					title: output[i].text,                        
+					align: 'center',                       
+					width: 100                  
+				};  
+			
+
+			resultJson.push(col);
 		}
 		refresh(resultJson);
 		$("#objForm").submit();
@@ -99,7 +112,7 @@
 		var output = document.getElementById("output");
 		for (i = 0; i < output.length; i++) {
 			if (output[i].selected == true) {
-				output.options.removeChild(output[i--]);
+				output.options.remove(i--);
 			}
 		}
 
@@ -140,7 +153,7 @@ body {
 				<td align="left" class="l-table-edit-td"><input
 					name="tableName" type="text" id="tableName"
 					validate="{required:true,maxlength:30}" class="form-control"
-					value="请假表单" /></td>
+					value="${formEntity.formName }" /></td>
 				<td align="right" class="l-table-edit-td"></td>
 				<td align="left" class="l-table-edit-td"></td>
 			</tr>
@@ -154,10 +167,10 @@ body {
 				<select name="input" size="10"
 					multiple="multiple" id="inputFrom"
 					style="width: 200px; font-size: 16px">
-						<option value="id">主键</option>
-						<option value="beginDate">请假开始日期</option>
-						<option value="endDate">请假结束日期</option>
-						<option value="reason">请假原因</option>
+						<c:forEach items="${formEntity.fields }" var="formField">
+						<option value="${formField.fieldName }">${formField.display }</option>
+						</c:forEach>
+						
 
 				</select></td>
 				<td align="center">
