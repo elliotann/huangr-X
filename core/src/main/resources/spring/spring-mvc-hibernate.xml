@@ -11,7 +11,7 @@
            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd"
        default-autowire="byName" default-lazy-init="false">
     <!-- 加载service,此时要排除要controller,因为controller已经spring-mvc中加载过了 -->
-    <context:component-scan base-package="com.easysoft.core.common.dao.*,com.easysoft.core.common.service.*">
+    <context:component-scan base-package="com.easysoft.core.common.dao.*,com.easysoft.core.common.service.*,com.easysoft.component.*.dao.*">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
@@ -36,7 +36,8 @@
                 <value>com.easysoft.member.backend.model</value>
                 <value>com.easysoft.build.model</value>
                 <value>com.easysoft.framework.component</value>
-                <!--<value>com.easysoft.framework.component</value>
+                <value>com.easysoft.component.form.model</value>
+                <!--
                 <value>com.easysoft.member.model</value>
                 
                 <value>com.easysoft.member.backend.model</value>-->

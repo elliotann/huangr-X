@@ -4,7 +4,6 @@ import com.easysoft.core.common.entity.IdEntity;
 import com.easysoft.framework.utils.DateUtil;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -15,13 +14,15 @@ import java.util.List;
  *
  * @since:
  */
+@Entity
+@Table(name="t_form")
 public class FormEntity extends IdEntity {
 
     public String tableName;
-    public String tableTitle;
+    public String formName;
     private String isSynDB="0";//是否同步数据库
     private String version="1.0.0";
-    private String createBy;
+
     private String createTime = DateUtil.toString(new Date(),"yyyy-MM-dd HH:mm:ss");
     private List<FormField> fields;
     private int formType= 1;
@@ -39,20 +40,19 @@ public class FormEntity extends IdEntity {
     public void setTableName(String tableName) {
         this.tableName = tableName;
     }
-    @Column(name="tableTitle")
-    public String getTableTitle() {
-        return tableTitle;
-    }
+    @Column(name="form_name")
+    public String getFormName() {
+		return formName;
+	}
 
-    public void setTableTitle(String tableTitle) {
-        this.tableTitle = tableTitle;
-    }
+	public void setFormName(String formName) {
+		this.formName = formName;
+	}
     @Transient
     public List<FormField> getFields() {
         return fields;
     }
-
-    public void setFields(List<FormField> fields) {
+	public void setFields(List<FormField> fields) {
         this.fields = fields;
     }
     @Column(name="is_syndb")
@@ -73,22 +73,7 @@ public class FormEntity extends IdEntity {
     public void setVersion(String version) {
         this.version = version;
     }
-    @Column(name="create_by")
-    public String getCreateBy() {
-        return createBy;
-    }
 
-    public void setCreateBy(String createBy) {
-        this.createBy = createBy;
-    }
-    @Column(name="create_time")
-    public String getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime;
-    }
     @Column(name="form_type")
     public int getFormType() {
         return formType;
