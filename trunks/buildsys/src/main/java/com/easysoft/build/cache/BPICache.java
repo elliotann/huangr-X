@@ -19,7 +19,6 @@
 package com.easysoft.build.cache;
 
 
-
 import com.easysoft.build.model.BuildFile;
 
 import java.io.File;
