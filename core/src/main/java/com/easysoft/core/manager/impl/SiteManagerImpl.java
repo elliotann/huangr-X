@@ -110,13 +110,13 @@ public class SiteManagerImpl implements ISiteManager {
 		siteDao.save(site);
 	
 
-		JEAPSiteDomain eopSiteDomain = new JEAPSiteDomain();
-		eopSiteDomain.setDomain(domain);
-		eopSiteDomain.setSiteid(site.getId());
-		eopSiteDomain.setUserid(userid);
+		JEAPSiteDomain jeapSiteDomain = new JEAPSiteDomain();
+		jeapSiteDomain.setDomain(domain);
+		jeapSiteDomain.setSiteid(site.getId());
+		jeapSiteDomain.setUserid(userid);
 
 		// 为站点添加域名
-		this.addDomain(eopSiteDomain);
+		this.addDomain(jeapSiteDomain);
 
 		return site.getId();
 	}
