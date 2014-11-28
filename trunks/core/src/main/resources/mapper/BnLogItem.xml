@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  ~ /*
+  ~  * Copyright 1999-2011 jeap Group Holding Ltd.
+  ~  *
+  ~  * Licensed under the Apache License, Version 2.0 (the "License");
+  ~  * you may not use this file except in compliance with the License.
+  ~  * You may obtain a copy of the License at
+  ~  *
+  ~  *      http://www.apache.org/licenses/LICENSE-2.0
+  ~  *
+  ~  * Unless required by applicable law or agreed to in writing, software
+  ~  * distributed under the License is distributed on an "AS IS" BASIS,
+  ~  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~  * See the License for the specific language governing permissions and
+  ~  * limitations under the License.
+  ~  */
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.easysoft.core.log.support.Appender">
+    <resultMap id="bnLogItemMap" type="BnLogItem">
+        <id property="id" column="id"/>
+        <id property="message" column="message"/>
+        <id property="operator" column="operator"/>
+        <id property="state" column="state"/>
+        <id property="businessType" column="businessType"/>
+        <id property="eventType" column="eventType"/>
+        <id property="logTime" column="logTime"/>
+    </resultMap>
+    <insert id="doAppend" parameterType="BnLogItem" useGeneratedKeys="true" keyProperty="id">
+        insert t_jeap_log (message,operator,state,businessType,eventType,logTime)
+         values (#{message},#{operator},#{state},#{businessType},#{eventType},#{logTime})
+    </insert>
+    <select id="queryForPage" resultMap="bnLogItemMap">
+        select * from t_jeap_log where 1=1
+        <if test=" searchConditions.operator!=null ">
+            and operator=#{searchConditions.operator}
+        </if>
+    </select>
+
+
+</mapper>

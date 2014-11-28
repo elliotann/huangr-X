@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.easysoft.member.backend.dao.IDepartDao">
+    <resultMap id="departMap" type="Depart">
+        <id property="id" column="id"/>
+        <id property="name" column="name"/>
+        <id property="pid" column="pid"/>
+        <id property="deptNo" column="dept_no"/>
+        <id property="compId" column="comp_id"/>
+        <id property="orgType" column="org_type"/>
+        <id property="createBy" column="create_by"/>
+        <id property="createTime" column="create_time"/>
+    </resultMap>
+    <insert id="save" parameterType="Depart" useGeneratedKeys="true" keyProperty="id">
+        insert t_depart (name,pid,comp_id,dept_no,create_by,create_time)
+         values (#{name},#{pid},#{compId},#{deptNo},#{createBy},#{createTime})
+    </insert>
+    <update id="update" parameterType="Depart">
+        update t_depart
+         set name=#{name},
+         dept_no=#{deptNo}
+        where id=#{id}
+    </update>
+    <select id="queryByOrgId" parameterType="java.lang.Integer" resultMap="departMap">
+        select * from t_depart where comp_id=#{compId}
+    </select>
+    <select id="queryById" parameterType="java.lang.Integer" resultMap="departMap">
+        select * from t_depart where id=#{id}
+    </select>
+    <select id="queryByQry" parameterType="hashMap" resultMap="departMap">
+        select * from t_depart where dept_no=#{deptNo}
+        <if test="id!=0">
+            and id!=${id}
+        </if>
+    </select>
+    <select id="queryByCompIdAndPid" parameterType="hashMap" resultMap="departMap">
+        select * from t_depart where comp_id=#{compId} and pid=#{pid}
+
+    </select>
+</mapper>
