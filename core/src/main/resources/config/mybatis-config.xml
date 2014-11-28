@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <typeAlias type="com.easysoft.member.backend.model.AdminUser" alias="AdminUser"/>
+        <typeAlias type="com.easysoft.member.backend.model.Role" alias="Role"/>
+        <typeAlias type="com.easysoft.member.backend.model.RoleAuth" alias="RoleAuth"/>
+        <typeAlias type="com.easysoft.member.backend.model.UserRole" alias="UserRole"/>
+        <typeAlias type="com.easysoft.member.backend.model.OperationBtn" alias="OperationBtn"/>
+        <typeAlias type="com.easysoft.framework.component.ComponentView" alias="Component"/>
+        <typeAlias type="com.easysoft.member.backend.model.Menu" alias="Menu"/>
+        <typeAlias type="com.easysoft.core.model.JEAPUser" alias="JEAPUser"/>
+        <typeAlias type="com.easysoft.core.model.JEAPUserDetail" alias="JEAPUserDetail"/>
+        <typeAlias type="com.easysoft.component.form.model.FormEntity" alias="FormEntity"/>
+        <typeAlias type="com.easysoft.component.form.model.FormField" alias="FormField"/>
+
+        <typeAlias type="com.easysoft.member.backend.model.Organization" alias="OrganizatiOn"/>
+        <typeAlias type="com.easysoft.member.backend.model.Depart" alias="Depart"/>
+        <typeAlias type="com.easysoft.member.backend.model.Company" alias="Company"/>
+        <typeAlias type="com.easysoft.member.backend.model.Employ" alias="Employ"/>
+        <typeAlias type="com.easysoft.core.log.annotation.BnLogItem" alias="BnLogItem"/>
+    </typeAliases>
+    <plugins>
+        <plugin interceptor="com.easysoft.framework.db.PageInterceptor">
+            <property name="databaseType" value="mysql" />
+        </plugin>
+    </plugins>
+    <mappers>
+
+    </mappers>
+
+</configuration>

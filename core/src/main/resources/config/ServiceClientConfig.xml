@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service-client>
+    <context id="tecsgo">
+    </context>
+	<mapping ref-contxt="tecsgo">
+		<pattern>com/mangocity/**/*</pattern>
+		<jndi-bind>ejb/ServiceSkeletonEJB</jndi-bind>
+	</mapping>
+</service-client>

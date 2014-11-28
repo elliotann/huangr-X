@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+        "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+    <!-- Just keep one bean in this file, don't define more !-->
+    <bean id="ServiceSystemContext"
+          class="org.mangocube.corenut.scm.support.ExtendXmlApplicationContext" lazy-init="true">
+        <constructor-arg>
+            <list>
+                <value>config/common/data-access.xml</value>
+            </list>
+        </constructor-arg>
+    </bean>
+</beans>

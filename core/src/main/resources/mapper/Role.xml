@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.easysoft.member.backend.dao.IRoleDao">
+    <resultMap id="roleMap" type="Role">
+        <id property="roleid" column="roleid"/>
+        <id property="rolename" column="rolename"/>
+        <id property="rolememo" column="rolememo"/>
+
+    </resultMap>
+    <insert id="save" parameterType="Role" useGeneratedKeys="true" keyProperty="roleid">
+        insert t_role (rolename,rolememo) values (#{rolename},#{rolememo})
+    </insert>
+    <select id="queryForList" parameterType="Role" resultMap="roleMap">
+        select * from t_role
+    </select>
+    <select id="getRoleByName" resultMap="roleMap">
+        select * from t_role where rolename=#{rolename}
+        <if test="roleid!=0">
+            and roleid!=#{roleid}
+        </if>
+    </select>
+    <select id="queryById" resultMap="roleMap">
+        select * from t_role where roleid=#{id}
+    </select>
+    <update id="update" parameterType="Role">
+        UPDATE t_role
+        SET rolename = #{rolename}
+        <if test="rolememo!=null">
+            ,rolememo = #{rolememo}
+        </if>
+
+        WHERE roleid = #{roleid}
+
+    </update>
+    <delete id="deleteById">
+        delete from t_role where roleid=#{id}
+    </delete>
+    <!--<select id="queryForAll" resultMap="roleMap">
+        select * from t_role
+    </select>
+    -->
+
+
+
+
+    <select id="queryForPage" parameterType="Role" resultMap="roleMap">
+        select * from t_role where 1=1
+        <if test="searchConditions.rolename!=null">
+            and rolename=#{searchConditions.rolename}
+        </if>
+    </select>
+</mapper>

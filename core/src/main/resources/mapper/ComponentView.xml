@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.easysoft.core.dao.IComponentDao">
+    <resultMap id="ComponentMap" type="Component">
+        <id property="id" column="id"/>
+        <id property="name" column="name"/>
+        <id property="componentid" column="componentid"/>
+        <id property="esf_version" column="esf_version"/>
+        <id property="author" column="author"/>
+        <id property="description" column="description"/>
+        <id property="install_state" column="install_state"/>
+        <id property="enable_state" column="enable_state"/>
+        <id property="error_message" column="error_message"/>
+    </resultMap>
+    <insert id="save" parameterType="Component" useGeneratedKeys="true" keyProperty="id">
+        insert t_component (name,componentid,esf_version,author,description,install_state,enable_state,error_message)
+         values (#{name},#{componentid},#{esf_version},#{author},#{description},#{install_state},#{enable_state},#{error_message})
+    </insert>
+    <select id="queryForList" parameterType="Component" resultMap="ComponentMap">
+        select * from t_component
+    </select>
+
+    <select id="queryById" resultMap="ComponentMap">
+        select * from t_component where id=#{id}
+    </select>
+    <select id="queryComponentByCompId" resultMap="ComponentMap">
+        select * from t_component where componentid=#{componentId}
+    </select>
+    <update id="update" parameterType="Component">
+        UPDATE t_component
+        SET install_state = #{install_state}
+        <if test="rolememo!=null">
+            ,rolememo = #{rolememo}
+        </if>
+
+        WHERE id = #{id}
+
+    </update>
+    <update id="updateByCondition">
+        UPDATE t_component
+        SET
+        <if test="enable_state!=null">
+            enable_state = #{enable_state}
+        </if>
+        <if test="install_state!=null">
+            install_state = #{install_state}
+        </if>
+        WHERE componentid = #{componentId}
+
+    </update>
+    <delete id="deleteById">
+        delete from t_role where roleid=#{id}
+    </delete>
+
+
+
+
+
+
+    <select id="queryForPage" parameterType="Component" resultMap="ComponentMap">
+        select * from t_role
+    </select>
+</mapper>
