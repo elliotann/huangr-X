@@ -161,14 +161,19 @@ $(function () {
     }
     
     function pageSettting(){
-    	window.location.href="designer.do?pageSetting";
+    	 if($('#dataGrid').datagrid('getSelections').length<1||$('#dataGrid').datagrid('getSelections').length>1){
+             alert("必须选择一条数据进行修改!");
+             return;
+         }
+    	 var row = $('#dataGrid').datagrid('getSelections')[0];
+    	window.location.href="designer.do?pageSetting&formId="+row.id;
     }
 </script>
 
 <grid:dataGrid action="designer.do?dataGrid&ajax=yes" height="99%">
     <grid:column title="id" field="id" align="center" width="100" minWidth="60"/>
     <grid:column title="表名" field="tableName"  minWidth="120"/>
-    <grid:column title="表单名称" field="tableTitle"  minWidth="140"/>
+    <grid:column title="表单名称" field="formName"  minWidth="140"/>
     <grid:column title="版本" field="version"  minWidth="100"/>
     <grid:column title="同步数据库" field="isSynDB"  minWidth="100" renderFun="isSynDB"/>
     <grid:column title="创建人" field="createBy"  minWidth="100"/>

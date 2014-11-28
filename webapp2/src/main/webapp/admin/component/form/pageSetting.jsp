@@ -24,11 +24,11 @@
 		
 	</div>
 
-	<div data-options="region:'center',title:'设计区'">
+	<div data-options="region:'center',title:'设计区-${formEntity.formName }'">
 		
 		<div style="margin-bottom:5px;background-color:yellow;">
-			<a href="javascript:void(0);" class="button blueButton" data-options="iconCls:'icon-add',plain:true" onclick="addForm()">数据选择</a>
-
+			<a href="javascript:void(0);" class="button blueButton" data-options="iconCls:'icon-add',plain:true" onclick="addForm(${formEntity.id})">数据选择</a>
+			<a href="javascript:void(0);" class="button blueButton" data-options="iconCls:'icon-add',plain:true" onclick="addForm(${formEntity.id})">保存</a>
 		</div>
 		<div>
 			<div style="margin:0px 0;"></div>
@@ -38,17 +38,13 @@
 
 	</div>
 	<script type="text/javascript">
-
-    function addForm()
+	 var cols = ${cols};
+    function addForm(formId)
     {
-    	addOrUpdateDialog('选择字段','designer.do?selectColumns',500,700);
+    	addOrUpdateDialog('选择字段','designer.do?selectColumns&formId='+formId,500,700);
     }
 
-    var cols = [
-				{field:'code',title:'Code',width:100},
-				{field:'name',title:'Name',width:100},
-				{field:'price',title:'Price',width:100,align:'right'}
-				];
+   
 	$(document).ready(function () {
 		init();
 		drag();//绑定datagrid，绑定拖拽
@@ -57,7 +53,7 @@
 	function init() {    
 
 		$('#dg').datagrid({
-			url:'datagrid_data.json',
+			url:'#',
 			columns:[cols],
 			onLoadSuccess: function (data) {                       
 				drag();
@@ -113,13 +109,12 @@
 		});
 	}
 	
-	function refresh(resultJson){
-		var datas = $('#db').datagrid('getColumnFields');
-		alert(datas.length);
-		for(var i=0;i<resultJson.length;i++){
-			
-		}
-	}
+	 function refresh(resultJson){
+		 cols = resultJson;
+		 timeid = setTimeout("init()", 0);
+		 timeid = setTimeout("drag()", 0);
+		
+	} 
 </script>
 </body>
 </html>

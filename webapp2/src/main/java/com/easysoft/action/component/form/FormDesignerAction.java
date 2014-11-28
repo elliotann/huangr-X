@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +27,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping({"/core/admin/designer"})
-public class FormDesignerController extends BaseController {
+public class FormDesignerAction extends BaseController {
     @Autowired
     private IFormManager formManager;
     @RequestMapping(params = {"list"})
@@ -38,8 +39,23 @@ public class FormDesignerController extends BaseController {
         return new ModelAndView("admin/component/form/addForm");
     }
     @RequestMapping(params = {"pageSetting"})
-    public ModelAndView pageSetting(){
-        return new ModelAndView("admin/component/form/pageSetting");
+    public ModelAndView pageSetting(Integer formId){
+    	//根据id获取表单信息
+    	FormEntity formEntity =formManager.getFormById(formId);
+    	Map<String,Object> params = new HashMap<String,Object>();
+    	
+    	List<Map<String,Object>> json = new ArrayList<Map<String,Object>>();
+    	for(FormField field:formEntity.getFields()){
+    		Map<String,Object> fieldsJson = new HashMap<String,Object>();
+    		fieldsJson.put("field", field.getFieldName());
+    		fieldsJson.put("title", field.getDisplay());
+    		fieldsJson.put("width", field.getWidth()==null?150:field.getWidth());
+    		json.add(fieldsJson);
+    	}
+
+    	params.put("cols", JsonUtils.beanToJsonArray(json));
+    	params.put("formEntity", formEntity);
+        return new ModelAndView("admin/component/form/pageSetting",params);
     }
 
     @RequestMapping(params = {"delete"})
@@ -142,9 +158,11 @@ public class FormDesignerController extends BaseController {
         return new ModelAndView("admin/component/form/editForm",map);
     }
     @RequestMapping(params = {"selectColumns"})
-    public ModelAndView selectColumns(){
-       
-        return new ModelAndView("admin/component/form/selectColumns");
+    public ModelAndView selectColumns(Integer formId){
+    	FormEntity formEntity =formManager.getFormById(formId);
+    	Map<String,Object> params = new HashMap<String,Object>();
+    	params.put("formEntity", formEntity);
+        return new ModelAndView("admin/component/form/selectColumns",params);
     }
     
 }
