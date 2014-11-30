@@ -1,12 +1,11 @@
 package com.easysoft.core.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import com.easysoft.framework.db.NotDbField;
 
 /**
  * @author andy
@@ -16,9 +15,7 @@ import com.easysoft.framework.db.NotDbField;
 @Table(name="t_theme")
 public class Theme {
 	private Integer id;
-	 
 	private Integer deleteflag = 0;
-	
 	private String productId;
 	
 
@@ -39,7 +36,7 @@ public class Theme {
 	}
 	 
 	
-	@NotDbField
+	@Column(name="productId")
 	public String getProductId() {
 		return productId;
 	}
