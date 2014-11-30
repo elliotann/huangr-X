@@ -12,7 +12,6 @@ import com.easysoft.core.dispatcher.processor.factory.ProcessorFactory;
 import com.easysoft.core.utils.JspUtil;
 import com.easysoft.framework.context.webcontext.ThreadContextHolder;
 import com.easysoft.core.freemarker.utils.FreeMarkerUtil;
-import com.easysoft.framework.utils.SpringContextHolder;
 import com.sun.xml.messaging.saaj.util.ByteOutputStream;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
