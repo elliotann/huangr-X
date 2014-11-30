@@ -72,7 +72,6 @@ public class ThemeManagerImpl extends BaseSupport<Theme> implements IThemeManage
 	public Integer add(Theme theme,boolean isCommon) {
 		try {
 			this.copy(theme,isCommon);
-		//	System.out.println("安装"+ theme.getThemename());
 			themeDao.save(theme);
 			return theme.getId();
 		} catch (Exception e) {
