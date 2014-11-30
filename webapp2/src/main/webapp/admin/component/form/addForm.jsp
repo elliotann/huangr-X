@@ -2,31 +2,11 @@
          pageEncoding="UTF-8"%>
 <%@ include file="/commons/taglibs.jsp"%>
 
-<link href="${context }/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
-<link href="${context }/js/ligerui/skins/Gray2014/css/all.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="${staticserver }/js/common/jquery-1.6.4.js"></script>
-<script src="${context }/js/ligerui/js/core/base.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerForm.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerDateEditor.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerComboBox.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerCheckBox.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerButton.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerDialog.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerRadio.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerSpinner.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerTextBox.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerTip.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerGrid.js" type="text/javascript"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerToolBar.js" type="text/javascript"></script>
-
-<script src="${staticserver}/js/common/jquery.validate.js" type="text/javascript"></script>
-<link href="/jeap/admin/component/form/css/lab.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="${staticserver }/js/admin/jeap.js"></script>
-<script src="${context }/js/ligerui/js/plugins/ligerTab.js" type="text/javascript"></script>
-<script src="/jeap/admin/component/form/js/ligerGrid.showFilter.js" type="text/javascript"></script>
-<script src="/jeap/admin/component/form/js/lab.js" type="text/javascript"></script>
-<script src="/jeap/admin/component/form/js/formold.js" type="text/javascript"></script>
-<link href="${context }/css/form.css" rel="stylesheet"/>
+<script src="${staticserver}/js/common/jquery.validate.js"
+	type="text/javascript"></script>
+<script src="${staticserver}/js/admin/jeap.js" type="text/javascript"></script>
+<link href="${context }/css/form.css" rel="stylesheet" />
+<link href="${context }/js/easyui/themes/icon.css" rel="stylesheet" />
 <script type="text/javascript">
 
     var groupicon = "${context }/js/ligerui/skins/icons/communication.gif";
@@ -75,21 +55,6 @@
             }
         });
 
-
-        $("#navtab1").ligerTab({ onAfterSelectTabItem: function (tabid){
-            if(tabid!="dbColumn"){
-                var manager = $("#dbColumnGrid").ligerGetGridManager();
-                var changeManager = $("#"+tabid+"Grid").ligerGetGridManager();
-                changeManager._setData(manager.getData());
-            }
-
-
-
-        }});
-        tab = $("#framecenter").ligerGetTabManager();
-
-
-
     });
 
     function subForm(){
@@ -126,6 +91,30 @@
 
         return true;
     }
+    var editIndex = undefined;
+	function endEditing(){
+		if (editIndex == undefined){return true}
+		if ($('#fromDataGrid').datagrid('validateRow', editIndex)){
+			var ed = $('#fromDataGrid').datagrid('getEditor', {index:editIndex,field:'productid'});
+			var productname = $(ed.target).combobox('getText');
+			$('#fromDataGrid').datagrid('getRows')[editIndex]['productname'] = productname;
+			$('#fromDataGrid').datagrid('endEdit', editIndex);
+			editIndex = undefined;
+			return true;
+		} else {
+			return false;
+		}
+	}
+    function append(){
+    	
+		if (endEditing()){
+			alert("here");
+			$('#fromDataGrid').datagrid('appendRow',{status:'P'});
+			editIndex = $('#fromDataGrid').datagrid('getRows').length-1;
+			$('#fromDataGrid').datagrid('selectRow', editIndex)
+					.datagrid('beginEdit', editIndex);
+		}
+	}
 </script>
 <style type="text/css">
     body{ font-size:12px;}
@@ -154,50 +143,38 @@
             <td align="left" class="l-table-edit-td">
                 <input name="tableName" type="text" id="tableName"   validate="{required:true,maxlength:30}" class="form-control"/>
             </td>
-            <td align="right" class="l-table-edit-td">注释:</td>
+            <td align="right" class="l-table-edit-td">表单名称:</td>
             <td align="left" class="l-table-edit-td">
                 <input name="tableTitle" type="text" id="tableTitle"  validate="{required:true,maxlength:60}" class="form-control"/>
             </td>
         </tr>
     </table>
     <br />
-    <%-- <div id="navtab1" style="width: 100%;overflow:hidden; height: 370px ">
-        <div tabid="dbColumn" title="数据库字段" lselected="true"  style="height:470px" >
-            <div id="dbColumnGrid" style="margin: 0; padding: 0"></div>
-
-        </div>
-        <div tabid="listPage" title="列表页设置" lselected="true"  style="height:470px" >
-            <div id="listPageGrid" style="margin: 0; padding: 0"></div>
-            <iframe frameborder="0" name="showmessage" src="designer.do?dbFormEle" id="showmessage"></iframe>
-        </div>
-        <div tabid="formPage" title="表单页设置" lselected="true"  style="height:470px" >
-            <div id="formPageGrid" style="margin: 0; padding: 0"></div>
-        </div>
-    </div> --%>
     <div class="easyui-tabs" data-options="tools:'#tab-tools'" style="width:600px;height:400px">
 		
 		<div title="数据库字段" data-options="closable:true" style="padding:10px">
-			<table class="easyui-datagrid" data-options="fit:true,singleSelect:true,rownumbers:true">
+			<div id="tb" style="height:auto">
+					<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="append()">Append</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onclick="removeit()">Remove</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true" onclick="accept()">Accept</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-undo',plain:true" onclick="reject()">Reject</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true" onclick="getChanges()">GetChanges</a>
+			</div>
+			<table id="fromDataGrid" class="easyui-datagrid" data-options="fit:true,singleSelect:true,rownumbers:true" style="width:600px;height:400px">
 				<thead>
 					<tr>
-						<th data-options="field:'f1',width:100">Title1</th>
-						<th data-options="field:'f2',width:100">Title2</th>
-						<th data-options="field:'f3',width:100">Title3</th>
+						<th data-options="field:'f1',width:100,editor:'textbox'">字段名</th>
+						<th data-options="field:'f2',width:100">显示名</th>
+						<th data-options="field:'f3',width:100,editor:{type:'checkbox',options:{on:'P',off:''}}">是否主键</th>
+						<th data-options="field:'f3',width:100">允许空值</th>
+						<th data-options="field:'f3',width:100">数据类型</th>
+						<th data-options="field:'f3',width:100,editor:{type:'numberbox',options:{precision:1}}">长度</th>
+						<th data-options="field:'f3',width:100">小数点</th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr>
-						<td>d11</td>
-						<td>d12</td>
-						<td>d13</td>
-					</tr>
-					<tr>
-						<td>d21</td>
-						<td>d22</td>
-						<td>d23</td>
-					</tr>
-				</tbody>
+		
 			</table>
+			
 		</div>
 	</div>
 </form>
