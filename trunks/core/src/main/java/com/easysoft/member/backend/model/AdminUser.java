@@ -120,7 +120,7 @@ public class AdminUser extends IdEntity{
     public void setEmail(String email) {
         this.email = email;
     }
-
+    @Column(name="userCorp")
     public Integer getUserCorp() {
         return userCorp;
     }
