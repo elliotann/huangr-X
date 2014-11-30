@@ -3,7 +3,7 @@
 <%@ include file="/commons/taglibs.jsp"%>
 
 
-<link rel="stylesheet" type="text/css" href="${context}/js/easyui/themes/gray/easyui.css">
+<link rel="stylesheet" type="text/css" href="${context}/easyui/themes/gray/easyui.css">
 <link href="${context}/css/style1.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="${context}/js/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${context}/js/easyui/locale/easyui-lang-zh_CN.js"></script>
