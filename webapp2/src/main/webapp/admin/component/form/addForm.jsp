@@ -118,7 +118,7 @@
 					editIndex = index;
 					var editors = $('#dg').datagrid('getEditors', editIndex);
 					$(editors[4].target).bind('click',function(){  
-					      alert("here");
+						$(editors[5].target).checked=true;
 					});
 				} else {
 					$('#dg').datagrid('selectRow', editIndex);
@@ -135,7 +135,7 @@
 				var editors = $('#dg').datagrid('getEditors', editIndex);
 		
 				$(editors[4].target).bind('click',function(){  
-				      alert("here");
+					$(editors[5].target).checked=true;
 				});
 			}
 		}
