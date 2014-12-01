@@ -25,6 +25,7 @@ public class CodeFactory extends BaseCodeFactory{
         serviceImpl("ServiceImpl"),
         service("ServiceI"),
         dao("Dao"),
+        daoImpl("DaoImpl"),
         mapper("mapper"),
         controller("Controller"),
         entity("Entity"),

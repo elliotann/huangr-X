@@ -21,7 +21,6 @@ import java.util.HashMap;
 import java.util.Map;
 import ${bussiPackage}.${entityPackage}.entity.${entityName}Entity;
 import ${bussiPackage}.${entityPackage}.service.${entityName}ServiceI;
-
 /**   
  * @Title: Controller
  * @Description: ${ftl_description}

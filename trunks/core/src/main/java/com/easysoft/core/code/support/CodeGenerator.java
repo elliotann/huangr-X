@@ -82,8 +82,9 @@ public class CodeGenerator implements ICallBack {
         }
 
         if (createFileProperty.isServiceFlag()) {
-            codeFactory.invoke("MybatisMappingTemplate.ftl", "mapper");
+          
             codeFactory.invoke("IDaoTemplate.ftl", "dao");
+            codeFactory.invoke("DaoTemplateImpl.ftl", "daoImpl");
             codeFactory.invoke("ServiceITemplate.ftl", "service");
             codeFactory.invoke("ServiceImplTemplate.ftl", "serviceImpl");
         }

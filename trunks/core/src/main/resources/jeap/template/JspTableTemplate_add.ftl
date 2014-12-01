@@ -10,7 +10,6 @@ pageEncoding="UTF-8"%>
 <script src="/jeap/statics/js/common/jquery.validate.js" type="text/javascript"></script>
 <script src="${r" ${staticserver}"}/js/admin/jeap.js" type="text/javascript"></script>
 <link href="${r" ${context}"}/css/form.css" rel="stylesheet"/>
-
 <script type="text/javascript">
     var dialog = frameElement.dialog;
     $(function (){

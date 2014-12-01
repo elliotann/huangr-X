@@ -37,8 +37,9 @@
                 <value>com.easysoft.build.model</value>
                 <value>com.easysoft.framework.component</value>
                 <value>com.easysoft.component.form.model</value>
+                <value>com.easysoft.component.form.entity</value>
                 <!--
-                <value>com.easysoft.member.model</value>
+                
                 
                 <value>com.easysoft.member.backend.model</value>-->
             </list>

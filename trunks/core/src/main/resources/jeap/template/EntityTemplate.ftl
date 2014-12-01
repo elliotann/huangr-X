@@ -25,10 +25,12 @@ import com.easysoft.core.common.entity.IdEntity;
  * @since : 1.0
  *
  */
+ @Entity
+ @Table(name="${tableName}")
 public class ${entityName}Entity extends IdEntity {
 	<#list columns as po>
     <#if po.fieldName!="id">
-	/**${po.display}*/
+	/**${po.displayName}*/
 	private ${po.type} ${po.fieldName};
     </#if>
 	</#list>
