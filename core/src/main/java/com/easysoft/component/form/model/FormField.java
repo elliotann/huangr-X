@@ -22,10 +22,10 @@ public class FormField extends IdEntity {
 
     /*================数据库字段===================*/
     private String fieldName;
-    private String labelName;
+    private String displayName;
     //数据类型
     private String dataType;
-    private boolean ispk;
+    private boolean isPK;
     private boolean isNullable;
     //数据类型长度
     private int dataTypeLength;
@@ -73,23 +73,26 @@ public class FormField extends IdEntity {
         this.fieldName = fieldName;
     }
     @Column(name="label_name")
-    public String getLabelName() {
-        return labelName;
-    }
+    public String getDisplayName() {
+		return displayName;
+	}
 
-    public void setLabelName(String labelName) {
-        this.labelName = labelName;
-    }
-    @Column(name="is_PK")
-    public boolean isIspk() {
-        return ispk;
-    }
+	public void setDisplayName(String displayName) {
+		this.displayName = displayName;
+	}
 
-    public void setIspk(boolean ispk) {
-        this.ispk = ispk;
-    }
+	
+    
+	@Column(name="is_PK")
+    public boolean isPK() {
+		return isPK;
+	}
 
-    @Column(name="is_nullable")
+	public void setPK(boolean isPK) {
+		this.isPK = isPK;
+	}
+
+	@Column(name="is_nullable")
     public boolean isNullable() {
         return isNullable;
     }
@@ -218,10 +221,6 @@ public class FormField extends IdEntity {
 
     public void setDataTypeLength(int dataTypeLength) {
         this.dataTypeLength = dataTypeLength;
-    }
-    @Transient
-    public String getDisplay() {
-        return labelName;
     }
 
     public Integer getFormId() {
