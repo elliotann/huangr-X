@@ -3,7 +3,7 @@
 <%@ include file="/commons/taglibs.jsp"%>
 
 
-<link rel="stylesheet" type="text/css" href="${context}/easyui/themes/gray/easyui.css">
+<link rel="stylesheet" type="text/css" href="${context}/js/easyui/themes/gray/easyui.css">
 <link href="${context}/css/style1.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="${context}/js/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${context}/js/easyui/locale/easyui-lang-zh_CN.js"></script>
@@ -34,7 +34,8 @@ $(function () {
 });
     function addForm(item)
     {
-    	addOrUpdateDialog('增加表单','designer.do?toDesigner',500,700);
+    	window.location.href="designer.do?toDesigner";
+
     }
 
     function btnOK(item,dialog){
@@ -44,24 +45,13 @@ $(function () {
     function modifyForm(item)
     {
 
-        var row = listgrid.getSelectedRow();
-        if(row==null){
-            $.ligerDialog.error('请选择数据修改!');
+    	if($('#dataGrid').datagrid('getSelections').length<1||$('#dataGrid').datagrid('getSelections').length>1){
+            alert("必须选择一条数据进行修改!");
             return;
         }
-        $.ligerDialog.open({
-            name:'openDia',
-            height:400,
-            width: 600,
-            title : '修改表单',
-            url: 'designer.do?modify&id='+row.id,
-            showMax: false,
-            showToggle: true,
-            showMin: false,
-            isResize: true,
-            slide: false,
-            buttons:[ { text: '确定', onclick: btnOK }, { text: '取消', onclick: function (item, dialog) { dialog.close(); } } ]
-        });
+   	 	var row = $('#dataGrid').datagrid('getSelections')[0];
+   	 	window.location.href='designer.do?modify&id='+row.id;
+        
 
     }
     function delUser(item)
@@ -100,23 +90,13 @@ $(function () {
 
 
     function generatorCode(item){
-        var row = listgrid.getSelectedRow();
-        if(row==null){
-            $.ligerDialog.error('请选择数据!');
+    	if($('#dataGrid').datagrid('getSelections').length<1||$('#dataGrid').datagrid('getSelections').length>1){
+            alert("必须选择一条数据进行修改!");
             return;
         }
-
-        $.ligerDialog.open({
-            height:600,
-            width: 900,
-            title : '代码生成',
-            url: '${ctx}//core/admin/code.do?toGenerate&formId='+row.id,
-            showMax: false,
-            showToggle: true,
-            showMin: false,
-            isResize: true,
-            slide: false
-        });
+   	 	var row = $('#dataGrid').datagrid('getSelections')[0];
+   	 	addOrUpdateDialog('生成代码','${ctx}//core/admin/code.do?toGenerate&formId='+row.id,600,900);
+       
     }
     //同步数据库
     function synDB(item){
