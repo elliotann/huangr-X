@@ -48,7 +48,7 @@ public class FormDesignerAction extends BaseController {
     	for(FormField field:formEntity.getFields()){
     		Map<String,Object> fieldsJson = new HashMap<String,Object>();
     		fieldsJson.put("field", field.getFieldName());
-    		fieldsJson.put("title", field.getDisplay());
+    		fieldsJson.put("title", field.getDisplayName());
     		fieldsJson.put("width", field.getWidth()==null?150:field.getWidth());
     		json.add(fieldsJson);
     	}
