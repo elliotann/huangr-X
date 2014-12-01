@@ -168,7 +168,7 @@ body {
 					multiple="multiple" id="inputFrom"
 					style="width: 200px; font-size: 16px">
 						<c:forEach items="${formEntity.fields }" var="formField">
-						<option value="${formField.fieldName }">${formField.display }</option>
+						<option value="${formField.fieldName }">${formField.displayName }</option>
 						</c:forEach>
 						
 

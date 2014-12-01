@@ -124,10 +124,10 @@
             <td align="left"></td>
         </tr>
         <tr>
-            <td align="right" class="l-table-edit-td">描述:</td>
+            <td align="right" class="l-table-edit-td">表单名称:</td>
             <td align="left" class="l-table-edit-td">
-                <input name="tableTitleLabel" type="text" id="tableTitle" class="form-control" value="${formEntity.tableTitle}"   disabled="disabled" />
-                <input type="hidden" name="tableTitle" value="${formEntity.tableTitle}"/>
+                <input name="tableTitleLabel" type="text" id="tableTitle" class="form-control" value="${formEntity.formName}"   disabled="disabled" />
+                <input type="hidden" name="tableTitle" value="${formEntity.formName}"/>
             </td>
             <td align="left"></td>
         </tr>
