@@ -70,7 +70,7 @@ public class FormTaglib extends HtmlTaglib{
         for(FormField field : formEntity.getFields()){
             if(!field.isInform()) continue;
             sb.append("<tr>");
-            sb.append("<td align=\"right\" class=\"l-table-edit-td\">"+field.getLabelName()+":</td>");
+            sb.append("<td align=\"right\" class=\"l-table-edit-td\">"+field.getDisplayName()+":</td>");
             sb.append("<td align=\"left\" class=\"l-table-edit-td\">");
             sb.append(field.renderHtmlControl(obj));
 
