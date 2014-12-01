@@ -36,49 +36,16 @@ public class ListTaglib extends HtmlTaglib{
         }
 
         StringBuilder sb = new StringBuilder();
-        sb.append("<script type=\"text/javascript\">");
-        sb.append(" var listgrid;");
-        sb.append("$(function (){");
-        sb.append("listgrid =$(\"#maingrid\").ligerGrid({");
-        sb.append("height:'99%',");
-        sb.append("url:'oaLeave.do?dataGrid&ajax=yes',");
-        sb.append(" columns: [");
-        if(formEntity.getFields()!=null){
-            int i=0;
-            for(FormField field : formEntity.getFields()){
-                sb.append("{");
-                sb.append("display:'"+field.getLabelName()+"'");
-                sb.append(",name:'"+ StringUtil.formatDBFieldName(field.getFieldName())+"'");
-                sb.append(",align:'center'");
-                sb.append(",width:'auto'");
-                sb.append(",minWidth:60");
-                sb.append("}");
-                if(i!=formEntity.getFields().size()-1){
-                    sb.append(",");
-                }
-                i++;
-
-
-            }
+       
+        sb.append("<table class=\"easyui-datagrid\"  style=\"width:auto;height:250px\"	data-options=\"singleSelect:true,collapsible:true,url:'/jeap1.0/core/admin/formTesT.do?dataGrid&ajax=true',method:'post'\">");
+        sb.append("<thead><tr>");
+        for(FormField field:formEntity.getFields()){
+        	sb.append("	<th data-options=\"field:'"+field.getFieldName()+"',width:300,align:'center'\">");
+        	sb.append(field.getDisplayName());
+        	sb.append("</th>");
         }
-
-        sb.append("]");
-        sb.append(",toolbar:{");
-        sb.append("items: [");
-        sb.append("{ text: '增加', click: add, icon: 'add' },");
-        sb.append("{ line: true },");
-        sb.append("{ text: '修改', click: modify, icon: 'modify' },");
-        sb.append("{ line: true },");
-        sb.append("{ text: '删除', click: del, img: '${context }/js/ligerui/skins/icons/delete.gif' }");
-        sb.append("]");
-        sb.append("}");
-        sb.append("});");
-        sb.append("});");
-        sb.append("</script>");
-
-
-        sb.append("<div class=\"grid\">");
-        sb.append("<div id=\"maingrid\">");
+        sb.append("</tr></thead>");
+        sb.append("</table>");
         return sb.toString();
     }
 
