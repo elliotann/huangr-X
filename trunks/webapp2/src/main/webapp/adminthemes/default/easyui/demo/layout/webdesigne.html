@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Full Layout - jQuery EasyUI Demo</title>
+	<link rel="stylesheet" type="text/css" href="../../themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../../themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="../demo.css">
+	<script type="text/javascript" src="../../jquery.min.js"></script>
+	<script type="text/javascript" src="../../jquery.easyui.min.js"></script>
+	<script>
+		var cols = [
+					{field:'code',title:'Code',width:100},
+					{field:'name',title:'Name',width:100},
+					{field:'price',title:'Price',width:100,align:'right'}
+					];
+		$(document).ready(function () {
+			init();
+			drag();//绑定datagrid，绑定拖拽
+
+		});
+		function init() {    
+
+			$('#dg').datagrid({
+				url:'datagrid_data.json',
+				columns:[cols],
+				onLoadSuccess: function (data) {                       
+					drag();
+				}
+			});
+		}
+		//拖动drag和drop都是datagrid的头的datagrid-cell 
+		function drag() {
+			
+			$('.datagrid-header-inner .datagrid-cell').draggable({
+				revert: true,
+				proxy: 'clone'
+
+			}).droppable({
+				accept: '.datagrid-header-inner .datagrid-cell',
+				onDrop: function (e, source) {
+					//取得拖动源的html值                
+					var src = $(e.currentTarget.innerHTML).html();
+					var sou = $(source.innerHTML).html();
+				
+					var tempcolsrc;//拖动后源和目标列交换                
+					var tempcolsou;               
+					var tempcols=[];
+					for (var i = 0; i < cols.length; i++) {                    
+						if (cols[i].title == sou) {                        
+							tempcolsrc = cols[i];
+							//循环读一遍列把源和目标列都记下来                    
+						}else if (cols[i].title == src) { 
+							tempcolsou = cols[i];                    
+						}                
+					}
+					for (var i = 0; i < cols.length; i++) {                    
+					//再循环一遍，把源和目标的列对换                   
+						var col = {                        
+							field: cols[i].field,                        
+							title: cols[i].title,                        
+							align: cols[i].align,                       
+							width: cols[i].width                   
+						};                    
+						if (cols[i].title == sou) {                       
+							col = tempcolsou;                    
+						}                   
+						else if (cols[i].title == src) {                        
+							col = tempcolsrc;                    
+						}                     
+					tempcols.push(col);  
+					
+					}
+					cols = tempcols;
+					timeid = setTimeout("init()", 0);
+					timeid = setTimeout("drag()", 0);
+				}
+			});
+		}
+	</script>
+</head>
+<body class="easyui-layout">
+
+
+	<div data-options="region:'east',split:true,collapsed:true,title:'操作区'" style="width:200px;padding:10px;">3123
+		
+	</div>
+
+	<div data-options="region:'center',title:'设计区'">
+		
+		<div style="margin-bottom:5px;background-color:yellow;">
+			
+			<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" title="字段选择"></a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true"></a>
+
+		</div>
+		<div>
+			<div style="margin:0px 0;"></div>
+	
+			<table id="dg"></table>
+		</div>
+
+	</div>
+</body>
+</html>
