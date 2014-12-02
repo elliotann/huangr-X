@@ -29,7 +29,7 @@ public class HibernateGenericDao<T,PK extends Serializable> implements IGenericD
     }
 
     public void save(T entity) {
-        sessionFactory.getCurrentSession().save(entity);
+        sessionFactory.getCurrentSession().merge(entity);
 
     }
 
@@ -102,7 +102,6 @@ public class HibernateGenericDao<T,PK extends Serializable> implements IGenericD
 
 	public void excuteBySql(String sql) {
 		SQLQuery sqlQuery = sessionFactory.getCurrentSession().createSQLQuery(sql);
-		
 		sqlQuery.executeUpdate();
 	}
 }

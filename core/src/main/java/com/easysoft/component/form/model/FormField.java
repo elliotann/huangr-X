@@ -53,6 +53,8 @@ public class FormField extends IdEntity {
 
     private FormEntity form;
     private Integer formId;
+    
+    private ListPageMeta listPageMeta;
 
     @JsonInvisible("List")
     @ManyToOne
@@ -248,4 +250,13 @@ public class FormField extends IdEntity {
         return "<input name=\""+StringUtil.formatDBFieldName(this.getFieldName())+"\" type=\"text\" id=\""+StringUtil.formatDBFieldName(this.getFieldName())+"\" value=\""+value+"\" class=\"form-control\" onFocus=\"WdatePicker({isShowClear:false,readOnly:true})\"/>";
 
     }
+    @Transient
+	public ListPageMeta getListPageMeta() {
+		return listPageMeta;
+	}
+
+	public void setListPageMeta(ListPageMeta listPageMeta) {
+		this.listPageMeta = listPageMeta;
+	}
+    
 }

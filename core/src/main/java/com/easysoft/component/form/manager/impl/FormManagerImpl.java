@@ -9,12 +9,15 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.easysoft.component.form.dao.IFormDao;
 import com.easysoft.component.form.dao.IFormFieldDao;
+import com.easysoft.component.form.dao.IPageMetaDao;
 import com.easysoft.component.form.manager.IFormManager;
 import com.easysoft.component.form.model.FormEntity;
 import com.easysoft.component.form.model.FormField;
+import com.easysoft.component.form.model.ListPageMeta;
 import com.easysoft.core.dispatcher.core.freemarker.FreeMarkerParser;
 import com.easysoft.core.solution.factory.DBSolutionFactory;
 import com.easysoft.framework.db.dbsolution.IDBSolution;
@@ -27,12 +30,15 @@ import com.easysoft.framework.db.dbsolution.IDBSolution;
  * @since:
  */
 @Service("formManager")
+@Transactional
 public class FormManagerImpl  implements IFormManager {
 	private static final Log logger = LogFactory.getLog(FormManagerImpl.class);
     @Autowired
     private IFormDao formDao;
     @Autowired
     private IFormFieldDao formFieldDao;
+    @Autowired
+    private IPageMetaDao pageMetaDao;
   
     public List list() {
         return formDao.queryForList();
@@ -48,15 +54,25 @@ public class FormManagerImpl  implements IFormManager {
         }
         if(entity.getId()!=0)
             formFieldDao.delByFormId(entity.getId());
+        
         for(FormField field : entity.getFields()){
+        	ListPageMeta listPageMeta = new ListPageMeta();
+        	
             field.setForm(entity);
+            //增加页面元素
+            listPageMeta.setField(field);
+            listPageMeta.setWidth("150");
+            field.setListPageMeta(listPageMeta);
             if(field.getId()!=0){
                 formFieldDao.update(field);
             }else{
                 formFieldDao.save(field);
             }
-
+            
+            pageMetaDao.save(listPageMeta);
         }
+        
+        
     }
 
    
@@ -66,7 +82,9 @@ public class FormManagerImpl  implements IFormManager {
         Map<String,Object> params = new HashMap<String, Object>();
         params.put("formId",id);
         List<FormField> fields = formFieldDao.queryForList(params);
+        List<ListPageMeta> listPageMetas = pageMetaDao.queryForList(params);
         result.setFields(fields);
+        result.setPageMetas(listPageMetas);
         return result;
     }
 
@@ -97,6 +115,7 @@ public class FormManagerImpl  implements IFormManager {
     public void delFormById(Integer id) {
         FormEntity result = getFormById(id);
         for(FormField field : result.getFields()){
+        	
             formFieldDao.deleteById(field.getId());
         }
         formDao.deleteById(id);
@@ -127,7 +146,9 @@ public class FormManagerImpl  implements IFormManager {
         Map<String,Object> params = new HashMap<String, Object>();
         params.put("formId",result.getId());
         List<FormField> fields = formFieldDao.queryForList(params);
+        List<ListPageMeta> listPageMetas = pageMetaDao.queryForList(params);
         result.setFields(fields);
+        result.setPageMetas(listPageMetas);
         return result;
     }
 }

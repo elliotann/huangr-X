@@ -25,6 +25,7 @@ public class FormEntity extends IdEntity {
 
     private String createTime = DateUtil.toString(new Date(),"yyyy-MM-dd HH:mm:ss");
     private List<FormField> fields;
+    private List<ListPageMeta> pageMetas; 
     private int formType= 1;
     private String code;
     /**
@@ -55,7 +56,16 @@ public class FormEntity extends IdEntity {
 	public void setFields(List<FormField> fields) {
         this.fields = fields;
     }
-    @Column(name="is_syndb")
+	@Transient
+    public List<ListPageMeta> getPageMetas() {
+		return pageMetas;
+	}
+
+	public void setPageMetas(List<ListPageMeta> pageMetas) {
+		this.pageMetas = pageMetas;
+	}
+
+	@Column(name="is_syndb")
     public String getIsSynDB() {
         return isSynDB;
     }
