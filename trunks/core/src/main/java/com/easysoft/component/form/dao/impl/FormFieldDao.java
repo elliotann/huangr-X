@@ -19,7 +19,7 @@ public class FormFieldDao extends HibernateGenericDao<FormField, Integer>
 		
 	}
 	public List<FormField> queryForList(Map<String, Object> params){
-		String hql = " from FormField f where f.form.id=:formId";
+		String hql = " from FormField f where f.form.id=:formId ";
 		return this.queryForHQL(hql, params);
 	}
 
