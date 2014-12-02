@@ -1,24 +1,28 @@
 package com.easysoft.action.component.form;
 
-import com.easysoft.core.common.controller.BaseController;
-import com.easysoft.core.common.vo.json.AjaxJson;
-import com.easysoft.core.common.vo.json.DataGridReturn;
-import com.easysoft.component.form.manager.IFormManager;
-import com.easysoft.component.form.model.FormEntity;
-import com.easysoft.component.form.model.FormField;
-import com.easysoft.framework.utils.JsonUtils;
-import com.easysoft.framework.utils.StringUtil;
-import com.easysoft.member.backend.manager.impl.UserServiceFactory;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.easysoft.component.form.manager.IFormManager;
+import com.easysoft.component.form.manager.IPageMetaManager;
+import com.easysoft.component.form.model.FormEntity;
+import com.easysoft.component.form.model.FormField;
+import com.easysoft.component.form.model.ListPageMeta;
+import com.easysoft.core.common.controller.BaseController;
+import com.easysoft.core.common.vo.json.AjaxJson;
+import com.easysoft.core.common.vo.json.DataGridReturn;
+import com.easysoft.framework.utils.JsonUtils;
+import com.easysoft.framework.utils.StringUtil;
+import com.easysoft.member.backend.manager.impl.UserServiceFactory;
 
 
 /**
@@ -30,6 +34,8 @@ import java.util.Map;
 public class FormDesignerAction extends BaseController {
     @Autowired
     private IFormManager formManager;
+    @Autowired
+    private IPageMetaManager pageMetaManager;
     @RequestMapping(params = {"list"})
     public ModelAndView list(){
         return new ModelAndView("admin/component/form/formList");
@@ -45,11 +51,13 @@ public class FormDesignerAction extends BaseController {
     	Map<String,Object> params = new HashMap<String,Object>();
     	
     	List<Map<String,Object>> json = new ArrayList<Map<String,Object>>();
-    	for(FormField field:formEntity.getFields()){
+    	
+    	for(ListPageMeta field:formEntity.getPageMetas()){
     		Map<String,Object> fieldsJson = new HashMap<String,Object>();
-    		fieldsJson.put("field", field.getFieldName());
-    		fieldsJson.put("title", field.getDisplayName());
-    		fieldsJson.put("width", field.getWidth()==null?150:field.getWidth());
+    		fieldsJson.put("field", field.getField().getFieldName());
+    		fieldsJson.put("title", field.getField().getDisplayName());
+    		fieldsJson.put("width", 150);
+    		fieldsJson.put("fieldId", field.getField().getId());
     		json.add(fieldsJson);
     	}
 
@@ -163,6 +171,14 @@ public class FormDesignerAction extends BaseController {
     	Map<String,Object> params = new HashMap<String,Object>();
     	params.put("formEntity", formEntity);
         return new ModelAndView("admin/component/form/selectColumns",params);
+    }
+    @RequestMapping(params = {"saveColumns"})
+    @ResponseBody
+    public ModelAndView saveColumns(Integer formId,String data){
+    	Object[] pageMetas = JsonUtils.getDTOArray(data, ListPageMeta.class);
+    	List<ListPageMeta> listPageMetas = (List)Arrays.asList(pageMetas);
+    	pageMetaManager.savePageMetas(formId, listPageMetas);
+    	return null;
     }
     
 }
