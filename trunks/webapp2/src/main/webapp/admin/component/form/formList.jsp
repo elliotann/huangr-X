@@ -56,33 +56,34 @@ $(function () {
     }
     function delUser(item)
     {
-        var row = listgrid.getSelectedRow();
-        if(row==null){
-            $.ligerDialog.error('请选择数据删除!');
+       
+        if($('#dataGrid').datagrid('getSelections').length<1||$('#dataGrid').datagrid('getSelections').length>1){
+            alert("请选择数据删除!");
             return;
         }
-        $.ligerDialog.confirm('确定删除？', function (yes) {
-            if(yes){
-                $.ajax({
-                    type: "GET",
-                    url: "designer.do?delete",
-                    data:"ajax=true&id="+row.id,
-                    dataType:"json",
-                    success: function(result){
-                        if(result.success){
-                            $.ligerDialog.alert('删除成功!', '提示', type);
-                            listgrid.loadData();
-                        }else{
-                            $.ligerDialog.alert(result.msg, '提示', type);
-
-                        }
-                    },error:function(e){
-                        $.ligerDialog.alert('出错了!', '提示', type)
-
-                    }
-                });
-            }
-        });
+   	 	var row = $('#dataGrid').datagrid('getSelections')[0];
+   	 	if(confirm("确定删除？")){
+	   	 	 $.ajax({
+	             type: "GET",
+	             url: "designer.do?delete",
+	             data:"ajax=true&id="+row.id,
+	             dataType:"json",
+	             success: function(result){
+	                 if(result.success){
+	                     alert('删除成功!');
+	                     $('#dataGrid').datagrid('reload');
+	                    
+	                 }else{
+	                     alert(result.msg);
+	
+	                 }
+	             },error:function(e){
+	                 alert('出错了!')
+	
+	             }
+	         });
+   	 	}
+        
 
 
 

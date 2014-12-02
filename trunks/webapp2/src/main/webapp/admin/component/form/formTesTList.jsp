@@ -8,7 +8,30 @@
 <script src="${ctx }/admin/js/crud.js" type="text/javascript"></script>
 <link href="${context }/css/form.css" rel="stylesheet"/>
 <link href="${context }/css/button.css" rel="stylesheet"/>
+<script type="text/javascript">
+    $(function () {
+        $(".searchAdvanced").hide();
+        //高级查询按钮
+        $("#aAdvanced").click(function () {
+            if ($("#Advanced").val() == "0") {
+                $("#Advanced").val(1);
+                $("#simpleSearch").hide();
+                //$("#aAdvanced").text("简单搜索")
+                $("#aAdvanced").addClass("searchAdvancedS");
+            } else {
+                $("#Advanced").val(0);
+                $("#simpleSearch").show();
+                //$("#aAdvanced").text("高级搜索");
+                $("#aAdvanced").removeClass("searchAdvancedS");
+            }
+            $(".searchAdvanced").slideToggle("slow");
+        });
+    });
 
+
+
+
+</script>
 <form:list formCode="leaveForm1">
 
 </form:list>

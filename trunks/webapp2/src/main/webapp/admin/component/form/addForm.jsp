@@ -58,22 +58,22 @@
 			<tr>
 				<th data-options="field:'fieldName',width:250,editor:'textbox'">字段名</th>
 				<th data-options="field:'displayName',width:250,editor:'textbox'">显示名称</th>
-				<th data-options="field:'productid',width:100,
+				<th data-options="field:'dataType',width:100,
 						formatter:function(value,row){
-							return row.productname;
+							return row.dataType;
 						},
 						editor:{
 							type:'combobox',
 							options:{
-								valueField:'productid',
-								textField:'productname',
+								valueField:'dataType',
+								textField:'dataType',
 								method:'get',
 								url:'products.json',
 								required:true
 							}
 						}">数据类型</th>
-				<th data-options="field:'listprice',width:80,align:'right',editor:{type:'numberbox',options:{precision:2}}">长度</th>
-				<th data-options="field:'status',width:60,align:'center',editor:{type:'checkbox',options:{on:'是',off:'否'}}">是否主键</th>
+				<th data-options="field:'dataTypeLength',width:80,align:'right',editor:{type:'numberbox',options:{precision:2}}">长度</th>
+				<th data-options="field:'isPK',width:60,align:'center',editor:{type:'checkbox',options:{on:'是',off:'否'}}">是否主键</th>
 				<th data-options="field:'isNullable',width:60,align:'center',editor:{type:'checkbox',options:{on:'是',off:'否'}}">允许空值</th>
 			
 				

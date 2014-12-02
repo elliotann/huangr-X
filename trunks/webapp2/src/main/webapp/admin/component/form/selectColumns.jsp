@@ -59,11 +59,13 @@
 		var output = document.getElementById("output");
 		var resultJson = [];
 		for(var i=0;i<output.length;i++){
+			var data = output[i].value.split("#");
 			var col = {                        
-					field: output[i].value,                        
+					field: data[0],                        
 					title: output[i].text,                        
 					align: 'center',                       
-					width: 100                  
+					width: 100,
+					fieldId:data[1]
 				};  
 			
 
@@ -168,7 +170,7 @@ body {
 					multiple="multiple" id="inputFrom"
 					style="width: 200px; font-size: 16px">
 						<c:forEach items="${formEntity.fields }" var="formField">
-						<option value="${formField.fieldName }">${formField.displayName }</option>
+						<option value="${formField.fieldName }#${formField.id }">${formField.displayName }</option>
 						</c:forEach>
 						
 
