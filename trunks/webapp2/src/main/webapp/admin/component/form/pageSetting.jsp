@@ -531,7 +531,7 @@ function exportProcessDef(obj){
 							<div id="designer-area" title="设计" style="POSITION: absolute;width:100%;height:100%;padding: 0;border: none;overflow:auto;">
 								<!--以下为面板, DIV中的DIV-->
 								<div id="paintarea" style="POSITION: absolute;WIDTH: 100%; HEIGHT: 100%" >
-									<div style="width:100%;height:20%;border:1px">312</div>
+									<div style="width:99%;height:20%;border:1px solid #F00">312</div>
 									
 									<div>321<div>321</div></div>
 								</div>
