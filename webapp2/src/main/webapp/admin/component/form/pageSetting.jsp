@@ -77,6 +77,14 @@
 		<SCRIPT src="../../ui/js/designer/designer.js"></SCRIPT>	
 		
 		<SCRIPT src="../../ui/js/designer/form/TextInput.js"></SCRIPT>
+		<link href="${context }/css/form.css" rel="stylesheet" />
+		<style type="text/css">
+    body{ font-size:12px;}
+    .l-table-edit {}
+    .l-table-edit-td{ padding:4px;}
+    .l-button-submit,.l-button-test{width:80px; float:left; margin-left:10px; padding-bottom:2px;}
+    .l-verify-tip{ left:230px; top:120px;}
+</style>
 </head>
 <script type="text/javascript">
 
@@ -142,7 +150,7 @@ jq(function(){
 		                    var scrollLeft = workflow.getScrollLeft();
 		                    var scrollTop  = workflow.getScrollTop();
 		          
-		                    addModel(wfModel,x-xOffset+scrollLeft,y-yOffset+scrollTop,shape);
+		                    //addModel(wfModel,x-xOffset+scrollLeft,y-yOffset+scrollTop,shape);
 						}
 					}
 				});
@@ -531,9 +539,23 @@ function exportProcessDef(obj){
 							<div id="designer-area" title="设计" style="POSITION: absolute;width:100%;height:100%;padding: 0;border: none;overflow:auto;">
 								<!--以下为面板, DIV中的DIV-->
 								<div id="paintarea" style="POSITION: absolute;WIDTH: 100%; HEIGHT: 100%" >
-									<div style="width:99%;height:20%;border:1px solid #F00">312</div>
-									
-									<div>321<div>321</div></div>
+								
+									<table cellpadding="0" cellspacing="0" class="l-table-edit" >
+								        <tr>
+								            <td align="right" class="l-table-edit-td">表单编码:</td>
+								            <td align="left" class="l-table-edit-td">
+								                <input name="code" type="text" id="code"   validate="{required:true,maxlength:30}" class="form-control"/>
+								            </td>
+								            
+								        </tr>
+								        <tr>
+								            <td align="right" class="l-table-edit-td">表名:</td>
+								            <td align="left" class="l-table-edit-td">
+								                <input name="tableName" type="text" id="tableName"   validate="{required:true,maxlength:30}" class="form-control"/>
+								            </td>
+								            
+								        </tr>
+								    </table>
 								</div>
 							</div>
 							<div id="xml-area" title="json" style="width:100%;height:100%;overflow:hidden;overflow-x:hidden;overflow-y:hidden;">
