@@ -530,7 +530,7 @@ function exportProcessDef(obj){
 				<div id="process-definition-tab">
 							<div id="designer-area" title="设计" style="POSITION: absolute;width:100%;height:100%;padding: 0;border: none;overflow:auto;">
 								<!--以下为面板, DIV中的DIV-->
-								<div id="paintarea" style="POSITION: absolute;WIDTH: 1309px; HEIGHT: 830px" ></div>
+								<div id="paintarea" style="POSITION: absolute;WIDTH: 100%; HEIGHT: 100%" ></div>
 							</div>
 							<div id="xml-area" title="json" style="width:100%;height:100%;overflow:hidden;overflow-x:hidden;overflow-y:hidden;">
 								<textarea id="descriptorarea" rows="38" style="width: 100%;height:100%;padding: 0;border: none;" readonly="readonly"></textarea>
