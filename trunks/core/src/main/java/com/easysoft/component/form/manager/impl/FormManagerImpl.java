@@ -11,10 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.easysoft.component.form.dao.IAddFormPageMetaDao;
 import com.easysoft.component.form.dao.IFormDao;
 import com.easysoft.component.form.dao.IFormFieldDao;
 import com.easysoft.component.form.dao.IPageMetaDao;
 import com.easysoft.component.form.manager.IFormManager;
+import com.easysoft.component.form.model.AddFormPageMeta;
 import com.easysoft.component.form.model.FormEntity;
 import com.easysoft.component.form.model.FormField;
 import com.easysoft.component.form.model.ListPageMeta;
@@ -39,6 +41,8 @@ public class FormManagerImpl  implements IFormManager {
     private IFormFieldDao formFieldDao;
     @Autowired
     private IPageMetaDao pageMetaDao;
+    @Autowired
+    private IAddFormPageMetaDao addFormPageMetaDao;
   
     public List list() {
         return formDao.queryForList();
@@ -147,8 +151,11 @@ public class FormManagerImpl  implements IFormManager {
         params.put("formId",result.getId());
         List<FormField> fields = formFieldDao.queryForList(params);
         List<ListPageMeta> listPageMetas = pageMetaDao.queryForList(params);
+        List<AddFormPageMeta> addFormPageMetas = addFormPageMetaDao.queryForList(params);
+        
         result.setFields(fields);
         result.setPageMetas(listPageMetas);
+        result.setAddFormPageMetas(addFormPageMetas);
         return result;
     }
 }
