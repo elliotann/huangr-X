@@ -1,11 +1,15 @@
 package com.easysoft.component.form.model;
 
-import com.easysoft.core.common.entity.IdEntity;
-import com.easysoft.framework.utils.DateUtil;
-
-import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.easysoft.core.common.entity.IdEntity;
+import com.easysoft.framework.utils.DateUtil;
 
 /**
  * User: andy
@@ -26,6 +30,7 @@ public class FormEntity extends IdEntity {
     private String createTime = DateUtil.toString(new Date(),"yyyy-MM-dd HH:mm:ss");
     private List<FormField> fields;
     private List<ListPageMeta> pageMetas; 
+    private List<AddFormPageMeta> addFormPageMetas; 
     private int formType= 1;
     private String code;
     /**
@@ -108,4 +113,13 @@ public class FormEntity extends IdEntity {
     public void setCode(String code) {
         this.code = code;
     }
+    @Transient
+	public List<AddFormPageMeta> getAddFormPageMetas() {
+		return addFormPageMetas;
+	}
+
+	public void setAddFormPageMetas(List<AddFormPageMeta> addFormPageMetas) {
+		this.addFormPageMetas = addFormPageMetas;
+	}
+    
 }

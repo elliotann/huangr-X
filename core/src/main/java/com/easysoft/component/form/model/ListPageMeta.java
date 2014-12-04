@@ -1,9 +1,12 @@
 package com.easysoft.component.form.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -14,19 +17,14 @@ public class ListPageMeta extends FormPageMeta {
 	 * 
 	 */
 	private static final long serialVersionUID = 5005619730665307203L;
-	public enum ShowType{
-		SHORT_SEARCH,
-		SEARCH,
-		LIST
-	}
-	private ShowType showType;
-	@Column(name="show_type")
-	@Enumerated(EnumType.STRING)
-	public ShowType getShowType() {
-		return showType;
-	}
-	public void setShowType(ShowType showType) {
-		this.showType = showType;
-	}
 	
+	private FormField field;
+	@OneToOne(cascade={CascadeType.REFRESH})
+	@JoinColumn(name="refDBFieldId")
+	public FormField getField() {
+		return field;
+	}
+	public void setField(FormField field) {
+		this.field = field;
+	}
 }

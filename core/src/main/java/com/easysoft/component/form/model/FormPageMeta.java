@@ -2,6 +2,9 @@ package com.easysoft.component.form.model;
 
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
@@ -15,13 +18,18 @@ public abstract class FormPageMeta extends IdEntity {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	public enum ShowType{
+		SHORT_SEARCH,
+		SEARCH,
+		LIST,
+		ADD_FORM
+	}
 	private String width;
 	private int sort;
-	private FormField field;
+	
 	private FormEntity form;
 	private Integer fieldId;
-	
+	private ShowType showType;
 	public String getWidth() {
 		return width;
 	}
@@ -34,14 +42,7 @@ public abstract class FormPageMeta extends IdEntity {
 	public void setSort(int sort) {
 		this.sort = sort;
 	}
-	@OneToOne(cascade={CascadeType.REFRESH})
-	@JoinColumn(name="refDBFieldId")
-	public FormField getField() {
-		return field;
-	}
-	public void setField(FormField field) {
-		this.field = field;
-	}
+	
 	@ManyToOne
 	@JoinColumn(name="form_id")
 	public FormEntity getForm() {
@@ -58,5 +59,13 @@ public abstract class FormPageMeta extends IdEntity {
 		this.fieldId = fieldId;
 	}
 	
+	@Column(name="show_type")
+	@Enumerated(EnumType.STRING)
+	public ShowType getShowType() {
+		return showType;
+	}
+	public void setShowType(ShowType showType) {
+		this.showType = showType;
+	}
 	
 }
