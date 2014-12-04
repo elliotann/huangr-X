@@ -18,8 +18,10 @@ function addOrUpdateDialog(title,url,height,width)
                 text: '保存',
                 iconCls: 'icon-ok',
                 handler: function () {
+                	 alert(disabled);
                     var savebtn = $(this);
                     var disabled = savebtn.hasClass("l-btn-disabled");
+                   
                     if (!disabled) {
                         addForm(savebtn);
                     }
@@ -33,6 +35,7 @@ function addOrUpdateDialog(title,url,height,width)
 }
 //确定回调函数
 function addForm(savebtn){
+	alert($("#objForm"));
     $("#objForm").submit();
 }
 
