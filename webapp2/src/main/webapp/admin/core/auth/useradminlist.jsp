@@ -85,6 +85,7 @@
 
 
 </script>
+<button id="singlebutton" name="singlebutton" class="btn-primary">Button</button>
 <grid:dataGrid action="userAdmin.do?dataGrid&ajax=yes" height="100%"  rownumbers="true" hasSearchBar="true" style="easyui">
     <grid:search label="用户名" name="username" shortSearch="true"/>
     <grid:column title="ID" field="id" align="center" width="100" minWidth="60"/>
