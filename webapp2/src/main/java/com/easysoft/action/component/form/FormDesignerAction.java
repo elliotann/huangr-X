@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.easysoft.component.form.manager.IFormManager;
 import com.easysoft.component.form.manager.IPageMetaManager;
+import com.easysoft.component.form.model.AddFormPageMeta;
 import com.easysoft.component.form.model.FormEntity;
 import com.easysoft.component.form.model.FormField;
 import com.easysoft.component.form.model.ListPageMeta;
@@ -63,6 +64,7 @@ public class FormDesignerAction extends BaseController {
 
     	params.put("cols", JsonUtils.beanToJsonArray(json));
     	params.put("formEntity", formEntity);
+    	params.put("fields", formEntity.getPageMetas());
         return new ModelAndView("admin/component/form/pageSetting",params);
     }
 
@@ -180,5 +182,16 @@ public class FormDesignerAction extends BaseController {
     	pageMetaManager.savePageMetas(formId, listPageMetas);
     	return null;
     }
+    
+    @RequestMapping(params = {"saveAddForm"})
+    @ResponseBody
+    public ModelAndView saveAddForm(String formItems,Integer formId){
+    	Object[] pageMetas = JsonUtils.getDTOArray(formItems, AddFormPageMeta.class);
+    	List<AddFormPageMeta> addFormPageMetas = (List)Arrays.asList(pageMetas);
+    	pageMetaManager.saveAddFormPageMetas(formId, addFormPageMetas);
+    	
+    	return null;
+    }
+    
     
 }
