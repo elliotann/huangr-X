@@ -95,6 +95,7 @@ var _process_def_provided_listeners="";
 var is_open_properties_panel = false;
 var task;
 var line;
+var formItems = [];
 jq(function(){
 	try{
 		_task_obj = jq('#task');
@@ -145,12 +146,23 @@ jq(function(){
 						if(wfModel){
 							var x=jq(source).draggable('proxy').offset().left;
 							var y=jq(source).draggable('proxy').offset().top;
+							
 							var xOffset    = workflow.getAbsoluteX();
 		                    var yOffset    = workflow.getAbsoluteY();
 		                    var scrollLeft = workflow.getScrollLeft();
 		                    var scrollTop  = workflow.getScrollTop();
-		          
+		                    var text = jq(source).text();
+		                    var fieldName = jq(source).attr('fieldName');
+		                    
+		             
 		                    //addModel(wfModel,x-xOffset+scrollLeft,y-yOffset+scrollTop,shape);
+		                    var trHTML = "<tr><td align='right' class='l-table-edit-td'>"+text+":</td><td align='left' class='l-table-edit-td'><input name='"+fieldName+"' type='text' id='"+fieldName+"'   validate='{required:true,maxlength:30}' class='form-control'/></td></tr>"
+		                    var item ={
+		                    		title:text,
+		                    		name:fieldName
+		                    }
+		                    formItems.push(item);
+		                    $("#myTable").append(trHTML);
 						}
 					}
 				});
@@ -225,11 +237,11 @@ function saveProcessDef(){
 	//alert(workflow.process.getVariablesJSONObject());
 	//return;
 	jq.ajax({
-		url:"${ctx}/wf/procdef/procdef!saveProcessDescriptor.action",
+		url:"designer.do?saveAddForm&ajax=true",
 		type: 'POST',
 		data:{
-			processDescriptor:xml,
-			processName:workflow.process.name,
+			formItems:JSON.stringify(formItems),
+			formId:${formEntity.id},
 			processVariables:workflow.process.getVariablesJSONObject()
 		},
 		dataType:'json',
@@ -259,7 +271,7 @@ function exportProcessDef(obj){
 
                 <div id="scLibrary" title="表单字段" icoCls="palette-menu-icon" selected="true" class="palette-menu">
                 	<c:forEach items="${fields }" var="field">
-                		<a href="##" class="easyui-linkbutton" plain="true" iconCls="application_add" wfModel="UserTask">${field.field.displayName }</a><br />
+                		<a href="##" class="easyui-linkbutton" plain="true" iconCls="application_add" wfModel="UserTask" fieldName="${field.field.fieldName }">${field.field.displayName }</a><br />
                 	</c:forEach>
                 </div>
                 <div id="exLibrary" title="操作按钮" icoCls="palette-menu-icon"  class="palette-menu">
@@ -540,21 +552,8 @@ function exportProcessDef(obj){
 								<!--以下为面板, DIV中的DIV-->
 								<div id="paintarea" style="POSITION: absolute;WIDTH: 100%; HEIGHT: 100%" >
 								
-									<table cellpadding="0" cellspacing="0" class="l-table-edit" >
-								        <tr>
-								            <td align="right" class="l-table-edit-td">表单编码:</td>
-								            <td align="left" class="l-table-edit-td">
-								                <input name="code" type="text" id="code"   validate="{required:true,maxlength:30}" class="form-control"/>
-								            </td>
-								            
-								        </tr>
-								        <tr>
-								            <td align="right" class="l-table-edit-td">表名:</td>
-								            <td align="left" class="l-table-edit-td">
-								                <input name="tableName" type="text" id="tableName"   validate="{required:true,maxlength:30}" class="form-control"/>
-								            </td>
-								            
-								        </tr>
+									<table cellpadding="0" cellspacing="0" class="l-table-edit" id="myTable">
+								        
 								    </table>
 								</div>
 							</div>
@@ -570,8 +569,9 @@ function exportProcessDef(obj){
 						onSelect:function(title){
 							if(title=='设计'){
 								
-							}else if(title=='XML'){
-								jq('#descriptorarea').val(workflow.toXML());
+							}else if(title=='json'){
+								if(formItems.length>0)
+									jq('#descriptorarea').val(JSON.stringify(formItems));
 							 
 							}
 						}
