@@ -78,6 +78,9 @@
 		
 		<SCRIPT src="../../ui/js/designer/form/TextInput.js"></SCRIPT>
 		<link href="${context }/css/form.css" rel="stylesheet" />
+		<link href="/jeap1.0/admin/component/form/css/formbuilder.css" rel="stylesheet" />
+		
+		
 		<style type="text/css">
     body{ font-size:12px;}
     .l-table-edit {}
@@ -156,7 +159,15 @@ jq(function(){
 		                    
 		             
 		                    //addModel(wfModel,x-xOffset+scrollLeft,y-yOffset+scrollTop,shape);
-		                    var trHTML = "<tr><td align='right' class='l-table-edit-td'>"+text+":</td><td align='left' class='l-table-edit-td'><input name='"+fieldName+"' type='text' id='"+fieldName+"'   validate='{required:true,maxlength:30}' class='form-control'/></td></tr>"
+		                    var trHTML =" <div class=\"fb-field-wrapper  editing\"><div class=\"subtemplate-wrapper\"><div class=\"cover\"></div>";
+		                    trHTML+="<label><span>"+text+":  </span></label>";
+		                    trHTML+="<input class=\"form-control\" type=\"text\">";
+		                    trHTML += "<span class=\"help-block\"></span>";
+		                    trHTML+="<div class=\"actions-wrapper\">";
+		                    trHTML+=" <a class=\"js-clear fb-button\" title=\"Remove Field\"><i class=\"fa fa-minus-circle\"></i></a>";
+		                    trHTML+="</div></div>";
+		                    
+		                   
 		                    var item ={
 		                    		title:text,
 		                    		name:fieldName
@@ -547,14 +558,109 @@ function exportProcessDef(obj){
 						return parsedListeners;
 					}
 				</script>
+				 <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #444;
+            font-family: sans-serif;
+        }
+
+        .fb-main {
+            background-color: #fff;
+            border-radius: 5px;
+            min-height: 600px;
+        }
+
+        input[type=text] {
+            height: 26px;
+            margin-bottom: 3px;
+        }
+
+        select {
+            margin-bottom: 5px;
+            font-size: 40px;
+        }
+
+        .fb-field-wrapper{cursor:pointer;position:relative;margin-bottom:20px}
+        .fb-field-wrapper input{border-radius:3px;border:thin solid #ddd}
+        .fb-field-wrapper:hover .actions-wrapper,.fb-field-wrapper.editing .actions-wrapper{display:block}
+        .fb-field-wrapper:hover .subtemplate-wrapper{border-color:#ddd;border-radius:3px}
+        .fb-field-wrapper.editing{background-color:#ecf0f1;border-radius:3px}
+        .fb-field-wrapper.editing .subtemplate-wrapper{border-color:#d9e1e3;border-style:solid;margin:0;border-radius:3px}
+        .fb-field-wrapper .actions-wrapper{display:none;position:absolute;bottom:-7px;right:5px;z-index:3}
+        .fb-field-wrapper .actions-wrapper a{display:inline-block;background-color:#ccc;padding:2px 8px}
+
+        .fb-field-wrapper .actions-wrapper a.js-duplicate,.fb-edit-field-wrapper .js-add-option{background-color:#2ecc71;border:none}
+        .fb-field-wrapper .actions-wrapper a.js-clear,.fb-edit-field-wrapper .js-remove-option{background-color:#e74c3c;border:none}
+        .fb-field-wrapper .subtemplate-wrapper{border:1px dashed transparent;margin-bottom:10px;padding:10px;position:relative}
+        .fb-field-wrapper .subtemplate-wrapper .cover{position:absolute;top:0;left:0;height:100%;width:100%;z-index:2}
+        .fb-field-wrapper .subtemplate-wrapper > label{border-bottom:thin solid #eee;padding-bottom:3px;margin-bottom:7px}
+        .fb-field-wrapper .subtemplate-wrapper abbr{color:#f00}
+
+        .fb-field-wrapper .input-line .above-line{margin-top:7px}
+        .fb-field-wrapper .input-line > span{display:inline-block;vertical-align:top}
+        .fb-field-wrapper .input-line > span input{width:100%}
+        .fb-field-wrapper .input-line > span > label{display:block;font-size:13px;margin-left:3px}
+        .fb-field-wrapper .help-block{display:block;font-size:12px;margin-top:5px}
+
+
+        .fb-edit-field-wrapper .fb-field-label .field-type{margin-top:.5em;display:block;font-family:'Source Sans Pro',sans-serif;font-size:1em}
+        .fb-edit-field-wrapper .fb-field-label .field-type:before{content:'Type: ';color:#999}
+
+.fa {
+display: inline-block;
+font-family: FontAwesome;
+font-style: normal;
+font-weight: 400;
+line-height: 1;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+.fa-plus-circle:before {
+content: "\f055";
+}
+
+
+    </style>
 				<div id="process-definition-tab">
 							<div id="designer-area" title="设计" style="POSITION: absolute;width:100%;height:100%;padding: 0;border: none;overflow:auto;">
 								<!--以下为面板, DIV中的DIV-->
 								<div id="paintarea" style="POSITION: absolute;WIDTH: 100%; HEIGHT: 100%" >
 								
-									<table cellpadding="0" cellspacing="0" class="l-table-edit" id="myTable">
+									<!-- <table cellpadding="0" cellspacing="0" class="l-table-edit" id="myTable">
 								        
-								    </table>
+								    </table> -->
+								    <div class="fb-response-fields ui-sortable" id="myTable">
+
+							            <div class="fb-field-wrapper  editing">
+							                <div class="subtemplate-wrapper">
+							                    <div class="cover"></div>
+							                    <label>
+							                          <span>
+							                           		名称: 
+							                          </span>
+							                    </label>
+							
+							
+							                    <input class="form-control" type="text">
+							
+							                      <span class="help-block">
+							
+							                    </span>
+							
+							                    <div class="actions-wrapper">
+							                        <a class="js-duplicate fb-button" title="Duplicate Field"><i class="fa fa-plus-circle"></i></a>
+							                        <a class="js-clear fb-button" title="Remove Field"><i class="fa fa-minus-circle"></i></a>
+							                    </div>
+							                </div>
+							            </div>
+							
+							
+							
+							        </div>
 								</div>
 							</div>
 							<div id="xml-area" title="json" style="width:100%;height:100%;overflow:hidden;overflow-x:hidden;overflow-y:hidden;">

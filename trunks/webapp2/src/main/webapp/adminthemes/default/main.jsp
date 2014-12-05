@@ -3,13 +3,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>${title }</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <script type="text/javascript" src="menu.do"></script>
-    <script>
-        var founder= ${user.founder};
-    </script>
-
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<script type="text/javascript" src="menu.do"></script>
     <link href="${context}/css/style.css" rel="stylesheet" type="text/css" />
     <link href="${context}/css/global.css" rel="stylesheet" type="text/css" />
     <link href="${context}/css/grid.css" rel="stylesheet" type="text/css" />
@@ -19,14 +14,12 @@
     <link href="${ctx}/install/css/bootstrap.min1.css" rel="stylesheet" type="text/css" />
     <link href="${ctx}/install/css/style1.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="${staticserver }/js/common/jquery-1.6.4.js"></script>
-
-
-
-
     <script type="text/javascript" src="${staticserver }/js/admin/jeap.js"></script>
     <script type="text/javascript" src="${context}/js/index.js"></script>
-
-
+    <title>${title }</title>
+    
+    
+  
     <style type="text/css">
 
         body{ padding:0px; margin:0;}
@@ -46,6 +39,9 @@
 
     </style>
 </head>
+	<script>
+        var founder= ${user.founder};
+    </script>
 <body class="bodygrey">
 <input id="context" value="${context}" type="hidden"/>
 <div class="header" id="top">
@@ -111,6 +107,4 @@
 
 
 </body>
-</html>
-
 </html>
