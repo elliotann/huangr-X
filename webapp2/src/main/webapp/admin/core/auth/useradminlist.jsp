@@ -8,7 +8,7 @@
 <script src="${ctx }/admin/js/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
 <script src="${ctx }/admin/js/crud.js" type="text/javascript"></script>
 <link href="${context }/css/form.css" rel="stylesheet"/>
-<link href="${context }/css/button.css" rel="stylesheet"/>
+
 <script type="text/javascript">
     $(function () {
         $(".searchAdvanced").hide();
@@ -31,7 +31,7 @@
 
     function addUser()
     {
-        addOrUpdateDialog('增加管理员','userAdmin.do?add',500,700);
+        CRUD.addOrUpdateDialog('增加管理员','userAdmin.do?add',500,700);
     }
     function customSearch()
     {
@@ -46,7 +46,7 @@
             return;
         }
         var row = $('#dataGrid').datagrid('getSelections')[0];
-        addOrUpdateDialog('修改管理员','userAdmin.do?edit&id='+row.id,500,700);
+        CRUD.addOrUpdateDialog('修改管理员','userAdmin.do?edit&id='+row.id,500,700);
         
 
     }
@@ -63,7 +63,7 @@
             return;
         }
         var row = rows[0];
-        delObj("userAdmin.do?delete&id="+row.id);
+        CRUD.delObj("userAdmin.do?delete&id="+row.id);
 
     }
     function getStatusName(value, row, index) {
@@ -85,7 +85,7 @@
 
 
 </script>
-<button id="singlebutton" name="singlebutton" class="btn-primary">Button</button>
+
 <grid:dataGrid action="userAdmin.do?dataGrid&ajax=yes" height="100%"  rownumbers="true" hasSearchBar="true" style="easyui">
     <grid:search label="用户名" name="username" shortSearch="true"/>
     <grid:column title="ID" field="id" align="center" width="100" minWidth="60"/>
