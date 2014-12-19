@@ -7,8 +7,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.easysoft.component.form.manager.IFormManager;
 import com.easysoft.component.form.model.FormEntity;
+import com.easysoft.component.form.model.FormPageMeta.ShowType;
 import com.easysoft.component.form.model.ListPageMeta;
-import com.easysoft.component.form.model.ListPageMeta.ShowType;
 import com.easysoft.framework.utils.SpringContextHolder;
 import com.easysoft.tag.webapp.taglib.HtmlTaglib;
 import com.easysoft.tag.webapp.taglib.vo.SearchControl;
