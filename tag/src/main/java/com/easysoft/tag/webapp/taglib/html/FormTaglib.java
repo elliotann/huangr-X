@@ -1,13 +1,13 @@
 package com.easysoft.tag.webapp.taglib.html;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.easysoft.component.form.manager.IFormManager;
+import com.easysoft.component.form.model.AddFormPageMeta;
 import com.easysoft.component.form.model.FormEntity;
-import com.easysoft.component.form.model.FormField;
 import com.easysoft.framework.utils.ReflectionUtil;
 import com.easysoft.framework.utils.SpringContextHolder;
-import com.easysoft.framework.utils.StringUtil;
 import com.easysoft.tag.webapp.taglib.HtmlTaglib;
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * 列表标签
@@ -67,10 +67,10 @@ public class FormTaglib extends HtmlTaglib{
         sb.append("<input type=\"hidden\" name=\"ajax\"  value=\"true\" />");
         sb.append("<div></div>");
         sb.append("<table cellpadding=\"0\" cellspacing=\"0\" class=\"l-table-edit\" >");
-        for(FormField field : formEntity.getFields()){
-            if(!field.isInform()) continue;
+        for(AddFormPageMeta field : formEntity.getAddFormPageMetas()){
+           
             sb.append("<tr>");
-            sb.append("<td align=\"right\" class=\"l-table-edit-td\">"+field.getDisplayName()+":</td>");
+            sb.append("<td align=\"right\" class=\"l-table-edit-td\">"+field.getTitle()+":</td>");
             sb.append("<td align=\"left\" class=\"l-table-edit-td\">");
             sb.append(field.renderHtmlControl(obj));
 
