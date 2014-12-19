@@ -131,9 +131,10 @@ public class DataGridTag extends BodyTagSupport{
  
         sb.append("<div id=\"tb\" style=\"height: auto\">");
         for(ToolBar toolBar : toolBars){
-            sb.append(" <a href=\"javascript:void(0)\" class=\"button blueButton\" data-options=\"iconCls:'icon-add',plain:true\" onclick=\""+toolBar.getClickFun()+"()\">"+toolBar.getTitle()+"</a>");
-        }
+        	sb.append("<a href=\"javascript:void(0)\" class=\"btn btn-primary\" data-options=\"iconCls:'icon-add',plain:true\" onclick=\""+toolBar.getClickFun()+"()\">"+toolBar.getTitle()+"</a> ");
 
+        }
+        
         sb.append("<span style=\"float: right;\">");
         sb.append("<span id=\"simpleSearch\">");
         List<SearchControl> advances = new ArrayList<SearchControl>();
@@ -242,7 +243,7 @@ public class DataGridTag extends BodyTagSupport{
     private String buildToolBar(){
         StringBuilder sb = new StringBuilder("<div class=\"buttonArea\">");
         for(ToolBar toolBar : toolBars){
-            sb.append(" <a href=\"javascript:void(0)\" class=\"button blueButton\" data-options=\"iconCls:'icon-add',plain:true\" onclick=\""+toolBar.getClickFun()+"()\">"+toolBar.getTitle()+"</a>");
+        	sb.append("<a href=\"javascript:void(0)\" class=\"btn btn-primary\" data-options=\"iconCls:'icon-add',plain:true\" onclick=\""+toolBar.getClickFun()+"()\">"+toolBar.getTitle()+"</a> ");
         }
         sb.append("</div>");
         return sb.toString();
