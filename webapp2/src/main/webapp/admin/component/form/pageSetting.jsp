@@ -44,39 +44,10 @@
 <!--<script type='text/javascript' src='../../js/jquery-autocomplete/lib/thickbox-compressed.js'></script>-->
 <script type='text/javascript' src='../../ui/js/jquery-autocomplete/jquery.autocomplete.min.js'></script>
 
-<!-- framework JS -->
-<script src="../../ui/js/skin.js" type="text/javascript"></script>
-		  <link href="../../ui/js/designer/designer.css" type="text/css" rel="stylesheet"/>
+
   			
-        <!-- common, all times required, imports -->
-        <SCRIPT src='../../ui/js/draw2d/wz_jsgraphics.js'></SCRIPT>          
-        <SCRIPT src='../../ui/js/draw2d/mootools.js'></SCRIPT>          
-        <SCRIPT src='../../ui/js/draw2d/moocanvas.js'></SCRIPT>                        
-        <SCRIPT src='../../ui/js/draw2d/draw2d.js'></SCRIPT>
 
 
-        <!-- example specific imports -->
-        <SCRIPT src="../../ui/js/designer/MyCanvas.js"></SCRIPT>
-        <SCRIPT src="../../ui/js/designer/ResizeImage.js"></SCRIPT>
-		<SCRIPT src="../../ui/js/designer/event/Start.js"></SCRIPT>
-		<SCRIPT src="../../ui/js/designer/event/End.js"></SCRIPT>
-		<SCRIPT src="../../ui/js/designer/connection/MyInputPort.js"></SCRIPT>
-		<SCRIPT src="../../ui/js/designer/connection/MyOutputPort.js"></SCRIPT>
-		<SCRIPT src="../../ui/js/designer/connection/DecoratedConnection.js"></SCRIPT>
-		<SCRIPT src="../../ui/js/designer/task/Task.js"></SCRIPT>
-		<SCRIPT src="../../ui/js/designer/task/UserTask.js"></SCRIPT>
-		<SCRIPT src="../../ui/js/designer/task/ManualTask.js"></SCRIPT>
-		<SCRIPT src="../../ui/js/designer/task/ServiceTask.js"></SCRIPT>
-		<SCRIPT src="../../ui/js/designer/task/ScriptTask.js"></SCRIPT>
-		<SCRIPT src="../../ui/js/designer/task/MailTask.js"></SCRIPT>
-		<SCRIPT src="../../ui/js/designer/task/ReceiveTask.js"></SCRIPT>
-		<SCRIPT src="../../ui/js/designer/task/BusinessRuleTask.js"></SCRIPT>
-		<SCRIPT src="../../ui/js/designer/task/CallActivity.js"></SCRIPT>
-		<SCRIPT src="../../ui/js/designer/gateway/ExclusiveGateway.js"></SCRIPT>
-		<SCRIPT src="../../ui/js/designer/gateway/ParallelGateway.js"></SCRIPT>
-		<SCRIPT src="../../ui/js/designer/designer.js"></SCRIPT>	
-		
-		<SCRIPT src="../../ui/js/designer/form/TextInput.js"></SCRIPT>
 		<link href="${context }/css/form.css" rel="stylesheet" />
 		<link href="/jeap1.0/admin/component/form/css/formbuilder.css" rel="stylesheet" />
 		
@@ -87,6 +58,25 @@
     .l-table-edit-td{ padding:4px;}
     .l-button-submit,.l-button-test{width:80px; float:left; margin-left:10px; padding-bottom:2px;}
     .l-verify-tip{ left:230px; top:120px;}
+    
+    .drag-item{
+			list-style-type:none;
+			display:block;
+			padding:5px;
+			border:1px solid #ccc;
+			margin:2px;
+			width:300px;
+			background:#fafafa;
+			color:#444;
+		}
+		.indicator{
+			position:absolute;
+			font-size:9px;
+			width:10px;
+			height:10px;
+			display:none;
+			color:red;
+		}
 </style>
 </head>
 <script type="text/javascript">
@@ -99,10 +89,10 @@ var is_open_properties_panel = false;
 var task;
 var line;
 var formItems = [];
-jq(function(){
+$(function(){
 	try{
-		_task_obj = jq('#task');
-		_designer = jq('#designer');
+		_task_obj = $('#task');
+		_designer = $('#designer');
 		_properties_panel_obj = _designer.layout('panel','east');
 		_properties_panel_obj.panel({
 			onOpen:function(){
@@ -113,13 +103,15 @@ jq(function(){
 			}
 		});
 		_process_panel_obj = _designer.layout('panel','center');
-		_task_context_menu = jq('#task-context-menu').menu({});
-//		_designer.layout('collapse','east');
+		_task_context_menu = $('#task-context-menu').menu({});
+
+		var indicator = $('<div class="indicator">>></div>').appendTo('body');
 		
-		jq('.easyui-linkbutton').draggable({
+		
+		$('.easyui-linkbutton').draggable({
 					proxy:function(source){
-						var n = jq('<div class="draggable-model-proxy"></div>');
-						n.html(jq(source).html()).appendTo('body');
+						var n = $('<div class="draggable-model-proxy"></div>');
+						n.html($(source).html()).appendTo('body');
 						return n;
 					},
 					deltaX:0,
@@ -127,39 +119,36 @@ jq(function(){
 					revert:true,
 					cursor:'auto',
 					onStartDrag:function(){
-						jq(this).draggable('options').cursor='not-allowed';
+						$(this).draggable('options').cursor='not-allowed';
 					},
 					onStopDrag:function(){
-						jq(this).draggable('options').cursor='auto';
+						$(this).draggable('options').cursor='auto';
 					}	
 		});
-		jq('#paintarea').droppable({
+		$('#paintarea').droppable({
 					accept:'.easyui-linkbutton',
 					onDragEnter:function(e,source){
-						jq(source).draggable('options').cursor='auto';
+						$(source).draggable('options').cursor='auto';
 					},
 					onDragLeave:function(e,source){
-						jq(source).draggable('options').cursor='not-allowed';
+						$(source).draggable('options').cursor='not-allowed';
 					},
 					onDrop:function(e,source){
 						//jq(this).append(source)
 						//jq(this).removeClass('over');
-						var wfModel = jq(source).attr('wfModel');
-						var shape = jq(source).attr('iconImg');
+						var wfModel = $(source).attr('wfModel');
+						var shape = $(source).attr('iconImg');
 						if(wfModel){
-							var x=jq(source).draggable('proxy').offset().left;
-							var y=jq(source).draggable('proxy').offset().top;
+							var x=$(source).draggable('proxy').offset().left;
+							var y=$(source).draggable('proxy').offset().top;
 							
-							var xOffset    = workflow.getAbsoluteX();
-		                    var yOffset    = workflow.getAbsoluteY();
-		                    var scrollLeft = workflow.getScrollLeft();
-		                    var scrollTop  = workflow.getScrollTop();
-		                    var text = jq(source).text();
-		                    var fieldName = jq(source).attr('fieldName');
+					
+		                    var text = $(source).text();
+		                    var fieldName = $(source).attr('fieldName');
 		                    
 		             
 		                    //addModel(wfModel,x-xOffset+scrollLeft,y-yOffset+scrollTop,shape);
-		                    var trHTML =" <div class=\"fb-field-wrapper  editing\"><div class=\"subtemplate-wrapper\"><div class=\"cover\"></div>";
+		                    var trHTML =" <div class=\"fb-field-wrapper\"><div class=\"subtemplate-wrapper\"><div class=\"cover\"></div>";
 		                    trHTML+="<label><span>"+text+":  </span></label>";
 		                    trHTML+="<input class=\"form-control\" type=\"text\">";
 		                    trHTML += "<span class=\"help-block\"></span>";
@@ -174,6 +163,28 @@ jq(function(){
 		                    }
 		                    formItems.push(item);
 		                    $("#myTable").append(trHTML);
+		                    
+		                    $('.fb-field-wrapper').draggable({
+		        				revert:true,
+		        				deltaX:0,
+		        				deltaY:0
+		        			}).droppable({
+		        				onDragOver:function(e,source){
+		        					indicator.css({
+		        						display:'block',
+		        						left:$(this).offset().left-10,
+		        						top:$(this).offset().top+$(this).outerHeight()-5
+		        					});
+		        				},
+		        				onDragLeave:function(e,source){
+		        					indicator.hide();
+		        				},
+		        				onDrop:function(e,source){
+		        					$(source).insertAfter(this);
+		        					indicator.hide();
+		        				}
+		        			});
+		        			
 						}
 					}
 				});
@@ -181,7 +192,7 @@ jq(function(){
 	}catch(e){
 		alert(e.message);
 	};
-	jq(window).unload( function () { 
+	$(window).unload( function () { 
 		window.opener._list_grid_obj.datagrid('reload');
 	} );
 });
@@ -247,7 +258,7 @@ function saveProcessDef(){
 	//alert(workflow.process.getVariablesJSONObject());
 	//alert(workflow.process.getVariablesJSONObject());
 	//return;
-	jq.ajax({
+	$.ajax({
 		url:"designer.do?saveAddForm&ajax=true",
 		type: 'POST',
 		data:{
@@ -262,9 +273,9 @@ function saveProcessDef(){
 		},
 		success:function(data){
 			if(data.result){
-				jq.messager.alert('Info','Save Successfully!','info');
+				$.messager.alert('Info','Save Successfully!','info');
 			}else{
-				jq.messager.alert('Error',data.message,'error');
+				$.messager.alert('Error',data.message,'error');
 			}
 		}	
 	}); 
@@ -294,270 +305,7 @@ function exportProcessDef(obj){
 		</div>
 	</div>
 	<div id="process-panel" region="center" split="true"  iconCls="process-icon" title="桌面">
-				<script>
-					function parseProcessDescriptor(data){
-						var descriptor = jq(data);
-						
-						var definitions = descriptor.find('definitions');
-						var process = descriptor.find('process');
-						var startEvent = descriptor.find('startEvent');
-						var endEvent = descriptor.find('endEvent');
-						var userTasks = descriptor.find('userTask'); //打到标准元素
-						var exclusiveGateway = descriptor.find('exclusiveGateway');
-						var parallelGateway = descriptor.find('parallelGateway');
-						var lines = descriptor.find('sequenceFlow');
-						var shapes = descriptor.find('bpmndi\\:BPMNShape');
-						var edges = descriptor.find('bpmndi\\:BPMNEdge');
-						
-						workflow.process.category=definitions.attr('targetNamespace');
-						workflow.process.id=process.attr('id');
-						workflow.process.name=process.attr('name');
-						var documentation = trim(descriptor.find('process > documentation').text());
-						if(documentation != null && documentation != "")
-							workflow.process.documentation=documentation;
-						var extentsion = descriptor.find('process > extensionElements');
-						if(extentsion != null){
-							var listeners = extentsion.find('activiti\\:executionListener');
-							var taskListeners = extentsion.find('activiti\\:taskListener');
-							workflow.process.setListeners(parseListeners(listeners,"draw2d.Process.Listener","draw2d.Process.Listener.Field"));
-						}
-						jq.each(processDefinitionVariables,function(i,n){
-								var variable = new draw2d.Process.variable();
-								variable.name=n.name;
-								variable.type=n.type;
-								variable.scope=n.scope;
-								variable.defaultValue=n.defaultValue;
-								variable.remark=n.remark;
-								workflow.process.addVariable(variable);
-							});
-						startEvent.each(function(i){
-								var start = new draw2d.Start("../../js/designer/icons/type.startevent.none.png");
-								start.id=jq(this).attr('id');
-								start.eventId=jq(this).attr('id');
-								start.eventName=jq(this).attr('name');
-								shapes.each(function(i){
-									var id = jq(this).attr('bpmnElement');
-									if(id==start.id){
-										var x=parseInt(jq(this).find('omgdc\\:Bounds').attr('x'));
-										var y=parseInt(jq(this).find('omgdc\\:Bounds').attr('y'));
-										workflow.addFigure(start,x,y);
-										return false;
-									}
-								});
-							});
-						endEvent.each(function(i){
-								var end = new draw2d.End("../../js/designer/icons/type.endevent.none.png");
-								end.id=jq(this).attr('id');
-								end.eventId=jq(this).attr('id');
-								end.eventName=jq(this).attr('name');
-								shapes.each(function(i){
-									var id = jq(this).attr('bpmnElement');
-									if(id==end.id){
-										var x=parseInt(jq(this).find('omgdc\\:Bounds').attr('x'));
-										var y=parseInt(jq(this).find('omgdc\\:Bounds').attr('y'));
-										workflow.addFigure(end,x,y);
-										return false;
-									}
-								});
-							});
-						
-						userTasks.each(function(i){
-								var task = new draw2d.UserTask();
-								var tid = jq(this).attr('id');
-								task.id=tid;
-								var tname = jq(this).attr('name');
-								var assignee=jq(this).attr('activiti:assignee');
-								var candidataUsers=jq(this).attr('activiti:candidateUsers');
-								var candidataGroups=jq(this).attr('activiti:candidateGroups');
-								var formKey=jq(this).attr('activiti:formKey');
-								if(assignee!=null&&assignee!=""){
-									task.isUseExpression=true;
-									task.performerType="assignee";
-									task.expression=assignee;
-								}else if(candidataUsers!=null&&candidataUsers!=""){
-									task.isUseExpression=true;
-									task.performerType="candidateUsers";
-									task.expression=candidataUsers;
-								}else if(candidataGroups!=null&&candidataGroups!=""){
-									task.isUseExpression=true;
-									task.performerType="candidateGroups";
-									task.expression=candidataGroups;
-								}
-								if(formKey!=null&&formKey!=""){
-									task.formKey=formKey;
-								}
-								var documentation = trim(jq(this).find('documentation').text());
-								if(documentation != null && documentation != "")
-									task.documentation=documentation;
-								task.taskId=tid;
-								task.taskName=tname;
-								if(tid!= tname)
-									task.setContent(tname);
-								var listeners = jq(this).find('extensionElements').find('activiti\\:taskListener');
-								task.setListeners(parseListeners(listeners,"draw2d.Task.Listener","draw2d.Task.Listener.Field"));
-								var performersExpression = jq(this).find('potentialOwner').find('resourceAssignmentExpression').find('formalExpression').text();
-								if(performersExpression.indexOf('user(')!=-1){
-									task.performerType="candidateUsers";
-								}else if(performersExpression.indexOf('group(')!=-1){
-									task.performerType="candidateGroups";
-								}
-								var performers = performersExpression.split(',');
-								jq.each(performers,function(i,n){
-									var start = 0;
-									var end = n.lastIndexOf(')');
-									if(n.indexOf('user(')!=-1){
-										start = 'user('.length;
-										var performer = n.substring(start,end);
-										task.addCandidateUser({
-												sso:performer
-										});
-									}else if(n.indexOf('group(')!=-1){
-										start = 'group('.length;
-										var performer = n.substring(start,end);
-										task.addCandidateGroup(performer);
-									}
-								});
-								shapes.each(function(i){
-									var id = jq(this).attr('bpmnElement');
-									if(id==task.id){
-										var x=parseInt(jq(this).find('omgdc\\:Bounds').attr('x'));
-										var y=parseInt(jq(this).find('omgdc\\:Bounds').attr('y'));
-										workflow.addModel(task,x,y);
-										return false;
-									}
-								});
-							});
-						exclusiveGateway.each(function(i){
-								var gateway = new draw2d.ExclusiveGateway("../../js/designer/icons/type.gateway.exclusive.png");
-								var gtwid = jq(this).attr('id');
-								var gtwname = jq(this).attr('name');
-								gateway.id=gtwid;
-								gateway.gatewayId=gtwid;
-								gateway.gatewayName=gtwname;
-								shapes.each(function(i){
-									var id = jq(this).attr('bpmnElement');
-									if(id==gateway.id){
-										var x=parseInt(jq(this).find('omgdc\\:Bounds').attr('x'));
-										var y=parseInt(jq(this).find('omgdc\\:Bounds').attr('y'));
-										workflow.addModel(gateway,x,y);
-										return false;
-									}
-								});
-							});
-						parallelGateway.each(function(i){
-							var gateway = new draw2d.ExclusiveGateway("../../js/designer/icons/type.gateway.parallel.png");
-							var gtwid = jq(this).attr('id');
-							var gtwname = jq(this).attr('name');
-							gateway.id=gtwid;
-							gateway.gatewayId=gtwid;
-							gateway.gatewayName=gtwname;
-							shapes.each(function(i){
-								var id = jq(this).attr('bpmnElement');
-								if(id==gateway.id){
-									var x=parseInt(jq(this).find('omgdc\\:Bounds').attr('x'));
-									var y=parseInt(jq(this).find('omgdc\\:Bounds').attr('y'));
-									workflow.addModel(gateway,x,y);
-									return false;
-								}
-							});
-						});
-						lines.each(function(i){
-								var lid = jq(this).attr('id');
-								var name = jq(this).attr('name');
-								var condition=jq(this).find('conditionExpression').text();
-								var sourceRef = jq(this).attr('sourceRef');
-								var targetRef = jq(this).attr('targetRef');
-								var source = workflow.getFigure(sourceRef);
-								var target = workflow.getFigure(targetRef);
-								edges.each(function(i){
-										var eid = jq(this).attr('bpmnElement');
-										if(eid==lid){
-											var startPort = null;
-											var endPort = null;
-											var points = jq(this).find('omgdi\\:waypoint');
-											var startX = jq(points[0]).attr('x');
-											var startY = jq(points[0]).attr('y');
-											var endX = jq(points[1]).attr('x');
-											var endY = jq(points[1]).attr('y');
-											var sports = source.getPorts();
-											for(var i=0;i<sports.getSize();i++){
-												var s = sports.get(i);
-												var x = s.getAbsoluteX();
-												var y = s.getAbsoluteY();
-												if(x == startX&&y==startY){
-													startPort = s;
-													break;
-												}
-											}
-											var tports = target.getPorts();
-											for(var i=0;i<tports.getSize();i++){
-												var t = tports.get(i);
-												var x = t.getAbsoluteX();
-												var y = t.getAbsoluteY();
-												if(x==endX&&y==endY){
-													endPort = t;
-													break;
-												}
-											}
-											if(startPort != null&&endPort!=null){
-												var cmd=new draw2d.CommandConnect(workflow,startPort,endPort);
-												var connection = new draw2d.DecoratedConnection();
-												connection.id=lid;
-												connection.lineId=lid;
-												connection.lineName=name;
-												if(lid!=name)
-													connection.setLabel(name);
-												if(condition != null && condition!=""){
-													connection.condition=condition;
-												}
-												cmd.setConnection(connection);
-												workflow.getCommandStack().execute(cmd);
-											}
-											return false;
-										}
-									});
-							});
-						if(typeof setHightlight != "undefined"){
-							setHightlight();
-						}
-					}
-					function parseListeners(listeners,listenerType,fieldType){
-						var parsedListeners = new draw2d.ArrayList();
-						listeners.each(function(i){
-							var listener = eval("new "+listenerType+"()");
-							
-							listener.event=jq(this).attr('event');
-							var expression = jq(this).attr('expression');
-							var clazz = jq(this).attr('class');
-							if(expression != null && expression!=""){
-								listener.serviceType='expression';
-								listener.serviceExpression=expression;
-							}else if(clazz != null&& clazz!=""){
-								listener.serviceType='javaClass';
-								listener.serviceExpression=clazz;
-							}
-							var fields = jq(this).find('activiti\\:field');
-							fields.each(function(i){
-								var field = eval("new "+fieldType+"()");
-								field.name=jq(this).attr('name');
-								//alert(field.name);
-								var string = jq(this).find('activiti\\:string').text();
-								var expression = jq(this).find('activiti\\:expression').text();
-								//alert("String="+string.text()+"|"+"expression="+expression.text());
-								if(string != null && string != ""){
-									field.type='string';
-									field.value=string;
-								}else if(expression != null && expression!= ""){
-									field.type='expression';
-									field.value=expression;
-								}
-								listener.setField(field);
-							});
-							parsedListeners.add(listener);
-						});
-						return parsedListeners;
-					}
-				</script>
+				
 				 <style>
         * {
             box-sizing: border-box;
@@ -635,29 +383,15 @@ content: "\f055";
 								    </table> -->
 								    <div class="fb-response-fields ui-sortable" id="myTable">
 
-							            <div class="fb-field-wrapper  editing">
-							                <div class="subtemplate-wrapper">
-							                    <div class="cover"></div>
-							                    <label>
-							                          <span>
-							                           		名称: 
-							                          </span>
-							                    </label>
-							
-							
-							                    <input class="form-control" type="text">
-							
-							                      <span class="help-block">
-							
-							                    </span>
-							
-							                    <div class="actions-wrapper">
-							                        <a class="js-duplicate fb-button" title="Duplicate Field"><i class="fa fa-plus-circle"></i></a>
-							                        <a class="js-clear fb-button" title="Remove Field"><i class="fa fa-minus-circle"></i></a>
-							                    </div>
-							                </div>
-							            </div>
-							
+							           
+									<ul style="margin:0;padding:0;margin-left:10px;">
+										<li class="drag-item">Drag 1</li>
+										<li class="drag-item">Drag 2</li>
+										<li class="drag-item">Drag 3</li>
+										<li class="drag-item">Drag 4</li>
+										<li class="drag-item">Drag 5</li>
+										<li class="drag-item">Drag 6</li>
+									</ul>
 							
 							
 							        </div>
@@ -669,54 +403,22 @@ content: "\f055";
 				</div>
 				<script type="text/javascript">
 					
-					var workflow;
-					jq('#process-definition-tab').tabs({
+		
+					$('#process-definition-tab').tabs({
 						fit:true,
 						onSelect:function(title){
 							if(title=='设计'){
 								
 							}else if(title=='json'){
 								if(formItems.length>0)
-									jq('#descriptorarea').val(JSON.stringify(formItems));
+									$('#descriptorarea').val(JSON.stringify(formItems));
 							 
 							}
 						}
 					});
-					function openProcessDef(){
-						jq.ajax({
-							url:"../../wf/procdef/procdef!getProcessDefXML.action?procdefId="+processDefinitionId,
-							type: 'POST',
-							/*
-							data:{
-										moduleId:"${moduleId}",
-										_request_json_fields:json4params
-								},
-							*/
-							dataType:'xml',
-							error:function(){
-								$.messager.alert("<s:text name='label.common.error'></s:text>","System Error","error");
-								return "";
-							},
-							success:parseProcessDescriptor	
-						}); 
-					}
+					
 				
-					function createCanvas(disabled){
-						try{
-							//initCanvas();
-							workflow  = new draw2d.MyCanvas("paintarea");
-							workflow.scrollArea=document.getElementById("designer-area");
-							if(disabled)
-								workflow.setDisabled();
-							if(typeof processDefinitionId != "undefined" && processDefinitionId != null &&  processDefinitionId != "null" && processDefinitionId != "" && processDefinitionId != "NULL"){
-								openProcessDef();
-							}else{
-									
-							} 
-						}catch(e){
-							alert(e.message);
-						}
-					}
+					
 				
 				</script>
 	</div>
@@ -763,7 +465,5 @@ content: "\f055";
 </body>
 </html>
 <script type="text/javascript">
-<!--
-	createCanvas(false);
-//-->
+
 </script>
