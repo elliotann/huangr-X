@@ -299,13 +299,12 @@
 		}
 		
 		function onClickRowList(index){
-		
 			editIndex1 =  $('#listDg').datagrid('getRows').length-1;
 			if (editIndex1 != index){
 				if (endEditing1()){
 					$('#listDg').datagrid('selectRow', index)
 							.datagrid('beginEdit', index);
-				
+					editIndex1 = index;
 				} else {
 					$('#listDg').datagrid('selectRow', editIndex);
 				}
