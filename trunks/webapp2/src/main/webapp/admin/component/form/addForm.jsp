@@ -211,7 +211,9 @@
 								        	  type:'checkbox',
 								        	  options:{on:'是',off:'否'}
 								          }},
-								          {field:'width',title:'宽度',width:100}
+								          {field:'width',title:'宽度',width:100,editor:{
+								        	  type:'textbox'
+								          }}
 								          ]],
 							iconCls: 'icon-edit',
 							singleSelect: true,
@@ -222,10 +224,30 @@
 						
 					}
 					if(title=="表单"){
-						var listDg = $('#listDg').datagrid('getData');
-						
+						if(dgdatas.formDatas==null||myData.length!=dgdatas.formDatas.length){
+				
+							 var listFields = [];
+							 
+							 $.each(myData,function(i,v){
+								 var listField = {
+										 fieldName:'',
+										 displayName:'',
+										 isShow:'',
+										 width:'240px'
+								 };
+								 listField.fieldName = v.fieldName;
+								 listField.displayName = v.displayName;
+							
+								 if(!v.isShow){
+									 listField.isShow = '否';
+								 }
+								 listFields.push(listField);
+								 
+							 });
+							 dgdatas.listDatas = listFields;
+						}
 						$("#formDg").datagrid({
-							data: myData.rows,
+							data: dgdatas.listDatas,
 							columns:[[
 								          {field:'fieldName',title:'字段名',width:100}, 
 								          {field:'displayName',title:'显示名称',width:100},
@@ -233,8 +255,13 @@
 								        	  type:'checkbox',
 								        	  options:{on:'是',off:'否'}
 								          }},
-								          {field:'showType',title:'显示类型',width:100},
-								          {field:'width',title:'宽度',width:100}
+								          {field:'isShow',title:'显示类型',width:100,align:'center',editor:{
+								        	  type:'checkbox',
+								        	  options:{on:'是',off:'否'}
+								          }},
+								          {field:'width',title:'宽度',width:100,editor:{
+								        	  type:'textbox'
+								          }}
 								          ]],
 							iconCls: 'icon-edit',
 							singleSelect: true,
