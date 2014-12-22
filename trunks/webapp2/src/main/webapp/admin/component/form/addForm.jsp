@@ -267,7 +267,7 @@
 			}
 		}
 		function endEditing1(){
-			alert("editIndex1"+endEditing1);
+			
 			if (editIndex1 == undefined){return true}
 			if ($('#listDg').datagrid('validateRow', editIndex1)){
 				var ed = $('#listDg').datagrid('getEditor', {index:editIndex1,field:'dataType'});
@@ -300,8 +300,7 @@
 		
 		function onClickRowList(index){
 		
-			if(index==0) return;
-			alert(editIndex1);
+			editIndex1 =  $('#listDg').datagrid('getRows').length-1;
 			if (editIndex1 != index){
 				if (endEditing1()){
 					$('#listDg').datagrid('selectRow', index)
