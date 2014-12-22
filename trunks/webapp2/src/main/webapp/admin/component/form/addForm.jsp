@@ -299,7 +299,7 @@
 		}
 		
 		function onClickRowList(index){
-			editIndex1 =  $('#listDg').datagrid('getRows').length-1;
+			
 			if (editIndex1 != index){
 				if (endEditing1()){
 					$('#listDg').datagrid('selectRow', index)
@@ -323,7 +323,7 @@
 					$(editors[5].target).checked=true;
 				});
 				
-				editIndex1 = $('#dg').datagrid('getRows').length-1;
+				editIndex1 = $('#listDg').datagrid('getRows').length-1;
 			}
 		}
 		function removeit(){
