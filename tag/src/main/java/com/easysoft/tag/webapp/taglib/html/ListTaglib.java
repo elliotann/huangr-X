@@ -73,14 +73,14 @@ public class ListTaglib extends HtmlTaglib{
         List<SearchControl> advances = new ArrayList<SearchControl>();
        
         List<SearchControl> searchControls = new ArrayList<SearchControl>();//搜索栏
-        for(ListPageMeta column : formEntity.getPageMetas()){
+       /* for(ListPageMeta column : formEntity.getPageMetas()){
         	if(!column.getShowType().equals(ShowType.SHORT_SEARCH)) continue;
         	SearchControl searchControl = new SearchControl();
         	searchControl.setLabel(column.getField().getDisplayName());
         	searchControl.setName(column.getField().getFieldName());
         	searchControl.setShortSearch(true);
         	searchControls.add(searchControl);
-        }
+        }*/
         if(!searchControls.isEmpty()){
 	        for(SearchControl control : searchControls){
 	            if(control.isShortSearch()){
@@ -136,14 +136,14 @@ public class ListTaglib extends HtmlTaglib{
         sb.append(">");
         sb.append(" <thead><tr>");
 
-        for(ListPageMeta column : formEntity.getPageMetas()){
+        /*for(ListPageMeta column : formEntity.getPageMetas()){
         	if(!column.getShowType().equals(ShowType.LIST)) continue;
             sb.append("<th data-options=\"field:'"+column.getField().getFieldName()+"',width:"+150+",align:'"+"center"+"'\" ");
         
             sb.append(">");
             sb.append(column.getField().getDisplayName());
             sb.append("</th>");
-        }
+        }*/
         sb.append("</tr></thead>");
         sb.append("</table>");
         sb.append("</div>");

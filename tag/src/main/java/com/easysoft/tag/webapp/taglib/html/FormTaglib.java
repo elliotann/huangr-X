@@ -67,7 +67,7 @@ public class FormTaglib extends HtmlTaglib{
         sb.append("<input type=\"hidden\" name=\"ajax\"  value=\"true\" />");
         sb.append("<div></div>");
         sb.append("<table cellpadding=\"0\" cellspacing=\"0\" class=\"l-table-edit\" >");
-        for(AddFormPageMeta field : formEntity.getAddFormPageMetas()){
+        /*for(AddFormPageMeta field : formEntity.getAddFormPageMetas()){
            
             sb.append("<tr>");
             sb.append("<td align=\"right\" class=\"l-table-edit-td\">"+field.getTitle()+":</td>");
@@ -78,7 +78,7 @@ public class FormTaglib extends HtmlTaglib{
 
 
             sb.append("</tr>");
-        }
+        }*/
         sb.append("</table>");
         return sb.toString();
     }
