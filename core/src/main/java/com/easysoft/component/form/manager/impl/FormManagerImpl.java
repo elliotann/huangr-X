@@ -86,9 +86,7 @@ public class FormManagerImpl  implements IFormManager {
         Map<String,Object> params = new HashMap<String, Object>();
         params.put("formId",id);
         List<FormField> fields = formFieldDao.queryForList(params);
-        List<ListPageMeta> listPageMetas = pageMetaDao.queryForList(params);
-        result.setFields(fields);
-        result.setPageMetas(listPageMetas);
+     
         return result;
     }
 
@@ -154,8 +152,7 @@ public class FormManagerImpl  implements IFormManager {
         List<AddFormPageMeta> addFormPageMetas = addFormPageMetaDao.queryForList(params);
         
         result.setFields(fields);
-        result.setPageMetas(listPageMetas);
-        result.setAddFormPageMetas(addFormPageMetas);
+ 
         return result;
     }
 }

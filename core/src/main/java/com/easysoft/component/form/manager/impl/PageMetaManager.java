@@ -35,7 +35,7 @@ public class PageMetaManager implements IPageMetaManager {
 		for(ListPageMeta pageMeta : pageMetas){
 			FormField field = new FormField();
 			field.setId(pageMeta.getFieldId());
-			pageMeta.setForm(fromEntity);
+			pageMeta.setFormId(formId);
 			pageMeta.setField(field);
 			pageMeta.setShowType(ShowType.LIST);
 			pageMeta.setSort(i);
@@ -55,7 +55,7 @@ public class PageMetaManager implements IPageMetaManager {
 		for(AddFormPageMeta pageMeta : pageMetas){
 
 
-			pageMeta.setForm(fromEntity);
+			pageMeta.setFormId(formId);
 			
 			pageMeta.setShowType(ShowType.ADD_FORM);
 			pageMeta.setSort(i);
