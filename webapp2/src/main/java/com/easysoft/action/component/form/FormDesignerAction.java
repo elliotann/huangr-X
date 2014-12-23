@@ -53,18 +53,18 @@ public class FormDesignerAction extends BaseController {
     	
     	List<Map<String,Object>> json = new ArrayList<Map<String,Object>>();
     	
-    	for(ListPageMeta field:formEntity.getPageMetas()){
+    	/*for(ListPageMeta field:formEntity.getPageMetas()){
     		Map<String,Object> fieldsJson = new HashMap<String,Object>();
     		fieldsJson.put("field", field.getField().getFieldName());
     		fieldsJson.put("title", field.getField().getDisplayName());
     		fieldsJson.put("width", 150);
     		fieldsJson.put("fieldId", field.getField().getId());
     		json.add(fieldsJson);
-    	}
+    	}*/
 
     	params.put("cols", JsonUtils.beanToJsonArray(json));
     	params.put("formEntity", formEntity);
-    	params.put("fields", formEntity.getPageMetas());
+
         return new ModelAndView("admin/component/form/pageSetting",params);
     }
 
@@ -138,6 +138,14 @@ public class FormDesignerAction extends BaseController {
         }
         map.put("json",data);
         return new ModelAndView("admin/json_message",map);
+    }
+    @RequestMapping(params = {"getFormEntity"})
+    public ModelAndView getFormEntity(Integer id){
+    	FormEntity form = formManager.getFormById(id);
+    	Map<String,Object> map = new HashMap<String, Object>();
+    	String data = JsonUtils.beanToJson(form);
+    	 map.put("json",data);
+    	return new ModelAndView("admin/json_message",map);
     }
     @RequestMapping(params = {"getDisColumns"})
     public ModelAndView getDisColumns(Integer id,String type){

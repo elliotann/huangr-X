@@ -1,4 +1,4 @@
 {"total":28,"rows":[
-	{"fieldName":"id","displayName":"主键","dataType":"INTEGER","dataTypeLabel":"INTEGER","dataTypeLength":10.00,"isPK":"是","isNullable":"否","dataTypeLength":11}
+	{"fieldName":"id","displayName":"主键","dataType":"INTEGER","dataTypeLabel":"INTEGER","dataTypeLength":10.00,"isPK":"是","isNullable":"否","dataTypeLength":11,"isShow":"是"}
 	
 ]}

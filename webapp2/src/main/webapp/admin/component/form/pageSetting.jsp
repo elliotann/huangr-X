@@ -106,7 +106,26 @@ $(function(){
 		_task_context_menu = $('#task-context-menu').menu({});
 
 		var indicator = $('<div class="indicator">>></div>').appendTo('body');
-		
+		$('.drag-item').draggable({
+			revert:true,
+			deltaX:0,
+			deltaY:0
+		}).droppable({
+			onDragOver:function(e,source){
+				indicator.css({
+					display:'block',
+					left:$(this).offset().left-10,
+					top:$(this).offset().top+$(this).outerHeight()-5
+				});
+			},
+			onDragLeave:function(e,source){
+				indicator.hide();
+			},
+			onDrop:function(e,source){
+				$(source).insertAfter(this);
+				indicator.hide();
+			}
+		});
 		
 		$('.easyui-linkbutton').draggable({
 					proxy:function(source){
@@ -431,7 +450,7 @@ content: "\f055";
 		<div style="background:#E1F0F2;padding:5px;">
 			<a href="javascript:void(0)" id="sb1" class="easyui-splitbutton" menu="#edit-menu" iconCls="icon-edit">Edit</a>
 
-			<a href="javascript:void(0)" id="mb3" class="easyui-menubutton" menu="#mm3" iconCls="icon-help">Help</a>
+			<a href="javascript:void(0)" id="mb3" class="easyui-menubutton" menu="#mm3" iconCls="icon-help">页面类型</a>
 		</div>
 		<div id="edit-menu" style="width:150px;">
 		<div iconCls="icon-undo" onclick="undo()">Undo</div>
@@ -443,9 +462,11 @@ content: "\f055";
 
 		</div>
 		<div id="mm3" style="width:150px;">
-			<div>Help</div>
+			<div>增加页面</div>
 			<div class="menu-sep"></div>
-			<div>About</div>
+			<div>修改页面</div>
+			<div class="menu-sep"></div>
+			<div>列表页面</div>
 		</div>
 	</div>
 	<!-- task context menu -->
