@@ -27,7 +27,7 @@ public abstract class FormPageMeta extends IdEntity {
 	private String width;
 	private int sort;
 	
-	private FormEntity form;
+	private Integer formId;
 	private Integer fieldId;
 	private ShowType showType;
 	public String getWidth() {
@@ -43,13 +43,13 @@ public abstract class FormPageMeta extends IdEntity {
 		this.sort = sort;
 	}
 	
-	@ManyToOne
-	@JoinColumn(name="form_id")
-	public FormEntity getForm() {
-		return form;
+
+	@Column(name="form_id")
+	public Integer getFormId() {
+		return formId;
 	}
-	public void setForm(FormEntity form) {
-		this.form = form;
+	public void setFormId(Integer formId) {
+		this.formId = formId;
 	}
 	@Transient
 	public Integer getFieldId() {

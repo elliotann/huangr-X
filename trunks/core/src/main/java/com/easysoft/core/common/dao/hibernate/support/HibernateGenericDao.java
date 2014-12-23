@@ -29,7 +29,7 @@ public class HibernateGenericDao<T,PK extends Serializable> implements IGenericD
     }
 
     public void save(T entity) {
-        sessionFactory.getCurrentSession().merge(entity);
+        sessionFactory.getCurrentSession().save(entity);
 
     }
 

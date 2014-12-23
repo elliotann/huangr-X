@@ -17,7 +17,7 @@ public class PageMetaDao extends HibernateGenericDao<ListPageMeta, Integer> impl
 		IPageMetaDao {
 
 	public List<ListPageMeta> queryForList(Map<String, Object> params){
-		String hql = " from ListPageMeta f where f.form.id=:formId order by f.sort";
+		String hql = " from ListPageMeta f where f.formId=:formId order by f.sort";
 		return this.queryForHQL(hql, params);
 	}
 
