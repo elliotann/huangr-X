@@ -90,61 +90,15 @@
 		</div>
 		<div title="列表页" style="padding:0px">
 			<table id="listDg"
-				style="width: auto; height: auto"
+				style="width: auto; height: auto">
 				
-				
-			>
-				<thead>
-					<tr>
-						<th data-options="field:'fieldName',width:250,editor:'textbox'">字段名</th>
-						<th data-options="field:'displayName',width:250,editor:'textbox'">显示名称</th>
-					
-					<th
-							data-options="field:'dataTypeLength',width:80,align:'right',editor:{type:'numberbox',options:{precision:2}}">宽度</th>
-						<th
-							data-options="field:'isPK',width:60,align:'center',editor:{type:'checkbox',options:{on:'是',off:'否'}}">是否显示</th>
-				
-
-
-
-					</tr>
-				</thead>
 			</table>
 		</div>
 		<div title="表单" data-options="" style="padding:0px">
-			<table id="formDg" class="easyui-datagrid"
+			<table id="formDg" 
 				style="width: auto; height: auto"
 				>
-				<thead>
-					<tr>
-						<th data-options="field:'fieldName',width:250,editor:'textbox'">字段名</th>
-						<th data-options="field:'displayName',width:250,editor:'textbox'">显示名称</th>
-						
-						<th
-							data-options="field:'isPK',width:60,align:'center',editor:{type:'checkbox',options:{on:'是',off:'否'}}">是否显示</th>
-							<th
-							data-options="field:'dataType',width:100,
-						formatter:function(value,row){
-							return row.dataType;
-						},
-						editor:{
-							type:'combobox',
-							options:{
-								valueField:'dataType',
-								textField:'dataType',
-								method:'get',
-								url:'products.json',
-								required:true
-							}
-						}">显示类型</th>
-						<th
-							data-options="field:'dataTypeLength',width:80,align:'right',editor:{type:'numberbox',options:{precision:2}}">宽度</th>
-					
-
-
-
-					</tr>
-				</thead>
+				
 			</table>
 		</div>
 	</div>
@@ -163,24 +117,32 @@
 	</form>
 	<script type="text/javascript">
 		var dgdatas = {
-				listDatas:null,
-				formDatas:null
+				tableName:'',
+				formName:'',
+				fields:null,
+				pageMetas:null,
+				addFormPageMetas:null
 		}
 		$(function(){
 			$("#formTabs").tabs({
 				onSelect:function(title,index){
 					var myData = $('#dg').datagrid('getData').rows;
-					
-					if(dgdatas.listDatas!=null){
+					dgdatas.fields = myData;
+					if(dgdatas.pageMetas!=null){
 						var listRows = $('#listDg').datagrid('getData').rows;
 						
-						dgdatas.listDatas = listRows;						 	
+						dgdatas.pageMetas = listRows;						 	
+					}
+					if(dgdatas.addFormPageMetas!=null){
+						var listRows = $('#formDg').datagrid('getData').rows;
+						
+						dgdatas.addFormPageMetas = listRows;						 	
 					}
 					if(title=="列表页"){
 						
 						 
-						 if(dgdatas.listDatas==null||myData.length!=dgdatas.listDatas.length){
-							 //dgdatas = dgdatas.formDatas;
+						 if(dgdatas.pageMetas==null||myData.length!=dgdatas.pageMetas.length){
+							 //dgdatas = dgdatas.addFormPageMetas;
 					
 							 var listFields = [];
 							 
@@ -189,7 +151,7 @@
 										 fieldName:'',
 										 displayName:'',
 										 isShow:'',
-										 width:'240px'
+										 width:'240'
 								 };
 								 listField.fieldName = v.fieldName;
 								 listField.displayName = v.displayName;
@@ -200,10 +162,10 @@
 								 listFields.push(listField);
 								 
 							 });
-							 dgdatas.listDatas = listFields;
+							 dgdatas.pageMetas = listFields;
 						}
 						$("#listDg").datagrid({
-							data: dgdatas.listDatas,
+							data: dgdatas.pageMetas,
 							columns:[[
 								          {field:'fieldName',title:'字段名',width:100}, 
 								          {field:'displayName',title:'显示名称',width:100},
@@ -212,7 +174,8 @@
 								        	  options:{on:'是',off:'否'}
 								          }},
 								          {field:'width',title:'宽度',width:100,editor:{
-								        	  type:'textbox'
+								        	  type:'numberbox',
+								        	  options:{}
 								          }}
 								          ]],
 							iconCls: 'icon-edit',
@@ -224,30 +187,9 @@
 						
 					}
 					if(title=="表单"){
-						if(dgdatas.formDatas==null||myData.length!=dgdatas.formDatas.length){
-				
-							 var listFields = [];
-							 
-							 $.each(myData,function(i,v){
-								 var listField = {
-										 fieldName:'',
-										 displayName:'',
-										 isShow:'',
-										 width:'240px'
-								 };
-								 listField.fieldName = v.fieldName;
-								 listField.displayName = v.displayName;
-							
-								 if(!v.isShow){
-									 listField.isShow = '否';
-								 }
-								 listFields.push(listField);
-								 
-							 });
-							 dgdatas.listDatas = listFields;
-						}
+						dgdatas.addFormPageMetas = myData;
 						$("#formDg").datagrid({
-							data: dgdatas.listDatas,
+							data: dgdatas.addFormPageMetas,
 							columns:[[
 								          {field:'fieldName',title:'字段名',width:100}, 
 								          {field:'displayName',title:'显示名称',width:100},
@@ -255,9 +197,15 @@
 								        	  type:'checkbox',
 								        	  options:{on:'是',off:'否'}
 								          }},
-								          {field:'isShow',title:'显示类型',width:100,align:'center',editor:{
-								        	  type:'checkbox',
-								        	  options:{on:'是',off:'否'}
+								          {field:'showType',title:'显示类型',width:100,align:'center',editor:{
+								        	  type:'combobox',
+								        	  options:{
+													valueField:'showType',
+													textField:'dataTypeLabel',
+													method:'get',
+													url:'showType.json',
+													required:true
+												}
 								          }},
 								          {field:'width',title:'宽度',width:100,editor:{
 								        	  type:'textbox'
@@ -265,21 +213,18 @@
 								          ]],
 							iconCls: 'icon-edit',
 							singleSelect: true,
-							onClickRow: onClickRowList
+							onClickRow: onClickRowForm
 
 						});
 					}
-					
-					
-			
-					
-					
+	
 				}
 			});
 		
 		});
 		var editIndex = undefined;
 		var editIndex1 = undefined;
+		var editIndex2 = undefined;
 		function endEditing(){
 			if (editIndex == undefined){return true}
 			if ($('#dg').datagrid('validateRow', editIndex)){
@@ -287,6 +232,7 @@
 				var productname = $(ed.target).combobox('getText');
 				$('#dg').datagrid('getRows')[editIndex]['dataType'] = productname;
 				$('#dg').datagrid('endEdit', editIndex);
+				dgdatas.addFormPageMetas = $('#dg').datagrid('getData').rows;
 				editIndex = undefined;
 				return true;
 			} else {
@@ -300,7 +246,22 @@
 				var ed = $('#listDg').datagrid('getEditor', {index:editIndex1,field:'dataType'});
 			
 				$('#listDg').datagrid('endEdit', editIndex1);
+				dgdatas.addFormPageMetas = $('#listDg').datagrid('getData').rows;
 				editIndex1 = undefined;
+				return true;
+			} else {
+				return false;
+			}
+		}
+		function endEditing2(){
+			
+			if (editIndex2 == undefined){return true}
+			if ($('#formDg').datagrid('validateRow', editIndex2)){
+				var ed = $('#formDg').datagrid('getEditor', {index:editIndex2,field:'dataType'});
+			
+				$('#formDg').datagrid('endEdit', editIndex2);
+				dgdatas.addFormPageMetas = $('#formDg').datagrid('getData').rows;
+				editIndex2 = undefined;
 				return true;
 			} else {
 				return false;
@@ -338,6 +299,19 @@
 			}
 		}
 		
+		function onClickRowForm(index){
+			
+			if (editIndex2 != index){
+				if (endEditing2()){
+					$('#formDg').datagrid('selectRow', index)
+							.datagrid('beginEdit', index);
+					editIndex2 = index;
+				} else {
+					$('#formDg').datagrid('selectRow', editIndex);
+				}
+			}
+		}
+		
 		function append(){
 			if (endEditing()){
 				$('#dg').datagrid('appendRow',{});
@@ -351,6 +325,7 @@
 				});
 				
 				editIndex1 = $('#listDg').datagrid('getRows').length-1;
+				editIndex2 = $('#formDg').datagrid('getRows').length-1;
 			}
 		}
 		function removeit(){
@@ -375,12 +350,17 @@
 		}
 		
 		function saveSubmit(){
+			var myData = $('#dg').datagrid('getData').rows;
+			dgdatas.fields = myData;
 			var tableName = $("#tableName").val();
 			var formName = $("#formName").val();
 			var rows = $('#dg').datagrid('getRows');
-			var jsonData = "{\"tableName\":\""+tableName+"\",\"formName\":\""+formName+"\",\"fields\":"+JSON.stringify(rows)+"}";
+			dgdatas.tableName = tableName;
+			dgdatas.formName = formName;
+			alert(JSON.stringify(dgdatas));
+		
 			
-			$("#datas").val(jsonData);
+			$("#datas").val(JSON.stringify(dgdatas));
 			$("#objForm").submit();
 			
 		
