@@ -6,7 +6,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>增加表单</title>
-	
+	<script type="text/javascript" src="${context}/js/easyui/jquery.easyui.min.js"></script>
 </style>
 </head>
 <body>
@@ -40,7 +40,7 @@
 				data-options="
 				iconCls: 'icon-edit',
 				singleSelect: true,
-				toolbar: '#tb',
+				toolbar: '#tb1',
 				url: 'designer.do?getColumns&ajax=true&id=0',
 				method: 'get',
 				onClickRow: onClickRow
@@ -93,7 +93,7 @@
 	</div>
 	
 
-	<div id="tb" style="height:auto">
+	<div id="tb1" style="height:auto">
 		<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="append()">增加行</a>
 		<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onclick="removeit()">删除行</a>
 		<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true" onclick="accept()">保存</a>
@@ -112,133 +112,7 @@
 				pageMetas:null,
 				addFormPageMetas:null
 		}
-$(function(){
-			
-			$("#formTabs").tabs({
-				onSelect:function(title,index){
-					var myData = $('#dg').datagrid('getData').rows;
-					
-					dgdatas.fields = myData;
-					
-					if(title=="列表页"){
-						
-						$("#listDg").datagrid({
-							data: dgdatas.fields,
-							columns:[[
-								          {field:'fieldName',title:'字段名',width:100}, 
-								          {field:'displayName',title:'显示名称',width:100},
-								          {field:'inlist',title:'是否显示',width:100,align:'center',editor:{
-								        	  type:'checkbox',
-								        	  options:{on:'是',off:'否'}
-								          },formatter:function(value,row){
-								        	  var result;
-								        	  if(value==true){
-								        		  result = "是";
-								        		  
-								        	  }else if(value=="是"){
-								        		  result = "是";
-								        		  
-								        	  }else if(value=="否"){
-								        		  result = "否";
-								        	  }else{
-								        		  result = "否";
-								        
-								        	  }
-								        	  return result;
-								          }},
-								          {field:'listwidth',title:'宽度',width:100,editor:{
-								        	  type:'numberbox',
-								        	  options:{}
-								          }}
-								          ]],
-							iconCls: 'icon-edit',
-							singleSelect: true,
-							onClickRow: onClickRowList
 
-						});
-
-						
-					}
-					if(title=="表单"){
-						
-						if(dgdatas.addFormPageMetas==null||myData.length!=dgdatas.addFormPageMetas.length){
-				
-							 var listFields = [];
-							 
-							 $.each(myData,function(i,v){
-								 var listField = {
-										 fieldName:'',
-										 displayName:'',
-										 isShow:'',
-										 width:'240',
-										 showType:'HIDDEN'
-								 };
-								 listField.fieldName = v.fieldName;
-								 listField.displayName = v.displayName;
-							
-								 if(!v.isShow){
-									 listField.isShow = '否';
-								 }
-								 listFields.push(listField);
-								 
-							 });
-							
-						}
-						$("#formDg").datagrid({
-							data: dgdatas.fields,
-							columns:[[
-								          {field:'fieldName',title:'字段名',width:100}, 
-								          {field:'displayName',title:'显示名称',width:100},
-								          {field:'inform',title:'是否显示',width:100,align:'center',editor:{
-								        	  type:'checkbox',
-								        	  options:{on:true,off:false}
-								          },formatter:function(value,row){
-								        	  var result;
-								        	  if(value==true){
-								        		  result = "是";
-								        		  
-								        	  }else if(value=="true"){
-								        		  result = "是";
-								        		  
-								        	  }else if(value=="false"){
-								        		  result = "否";
-								        	  }else{
-								        		  result = "否";
-								        
-								        	  }
-								        	  return result;
-								          }},
-								          {field:'displayType',title:'显示类型',width:100,align:'center',editor:{
-								        	  type:'combobox',
-								        	  options:{
-													valueField:'displayType',
-													textField:'dataTypeLabel',
-													method:'get',
-													url:'showType.json',
-													required:true
-												}
-								          }},
-								          {field:'width',title:'宽度',width:100,editor:{
-								        	  type:'textbox'
-								          }}
-								          ]],
-							iconCls: 'icon-edit',
-							singleSelect: true,
-							onClickRow: onClickRowForm
-
-						});
-					}
-					
-					
-					
-					
-			
-					
-					
-				}
-			});
-		
-		});
 		var editIndex = undefined;
 		var editIndex1 = undefined;
 		var editIndex2 = undefined;
