@@ -414,3 +414,24 @@ a:hover {
     color: #666666;
 }
 
+#top	{
+	/* 底色 */
+	background-color: #063053;
+	/* chrome 2+, safari 4+; multiple color stops */
+	background-image:-webkit-gradient(linear, left bottom, left top, color-stop(0.32, #063053), color-stop(0.66, #395873), color-stop(0.83, #5c7c99));
+	/* chrome 10+, safari 5.1+ */
+	background-image: -webkit-linear-gradient(#063053, #395873, #5c7c99);
+	/* firefox; multiple color stops */
+	background-image: -moz-linear-gradient(top,#063053, #395873, #5c7c99);
+	/* ie 6+ */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#063053', endColorstr='#395873');
+	/* ie8 + */
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#063053', endColorstr='#395873')";
+	/* ie10 */
+	background-image: -ms-linear-gradient(#063053, #395873, #5c7c99);
+	/* opera 11.1 */
+	background-image: -o-linear-gradient(#063053, #395873, #5c7c99);
+	/* 标准写法 */
+	background-image: linear-gradient(#063053, #395873, #5c7c99);
+}
+

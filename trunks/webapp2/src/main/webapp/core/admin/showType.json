@@ -1,6 +1,6 @@
 [
-{"showType":"TEXT","dataTypeLabel":"输入框"},
-{"showType":"SELECT","dataTypeLabel":"选择框"},
-{"showType":"HIDDEN","dataTypeLabel":"隐藏域"},
-{"showType":"DATE","dataTypeLabel":"日期"}
+{"dispalyType":"TEXT","dataTypeLabel":"输入框"},
+{"dispalyType":"SELECT","dataTypeLabel":"选择框"},
+{"dispalyType":"HIDDEN","dataTypeLabel":"隐藏域"},
+{"dispalyType":"DATE","dataTypeLabel":"日期"}
 ]

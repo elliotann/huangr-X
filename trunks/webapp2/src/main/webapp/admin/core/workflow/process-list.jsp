@@ -24,7 +24,7 @@
 <script type="text/javascript" src="${context}/js/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${context}/js/easyui/locale/easyui-lang-zh_CN.js"></script>
 
-<script src="/jeap/admin/js/crud.js" type="text/javascript"></script>
+<script src="${ctx }/admin/js/crud.js" type="text/javascript"></script>
 <link href="${context }/css/form.css" rel="stylesheet"/>
 <link href="${context }/css/button.css" rel="stylesheet"/>
 
@@ -51,12 +51,10 @@
     });
 
     function deploy(item){
-        addOrUpdateDialog(item,'部署流程','workflow.do?toDeploy',600,900);
-
+    	CRUD.addOrUpdateDialog('部署流程','workflow.do?toDeploy',600,900);
     }
     function addProcess(item){
-        addOrUpdateDialog(item,'新增流程','workflow.do?toFlowDesigner',600,900);
-
+    	CRUD.addOrUpdateDialog('新增流程','workflow.do?toFlowDesigner',600,900);
     }
 
 

@@ -37,6 +37,8 @@
         .menulist li.over .menuitem-r, .menulist li.selected .menuitem-r { background: url('${context}/images/menubg.gif') repeat-x -1px -24px; width: 2px; height: 24px; position: absolute; right: 0; top: 0; }
         #portrait { border-radius: 4px; box-shadow: 1px 1px 1px #111; position: absolute; width: 48px; height: 48px; right: 7px; top: 10px; background: #d2d2f2 /*url(images/icons/32X32/user.gif) no-repeat center center*/; border: 3px solid #fff; behavior: url(css/pie.htc); text-align: center; }
 
+
+		
     </style>
 </head>
 	<script>
@@ -97,7 +99,7 @@
     </div>
 </div>
 <!--左侧菜单结束-->
-<div class="maincontent">
+<div class="maincontent" style="background-color:#EEEEEE">
 
     <!-- breadcrumbs -->
     <div class="left" id="right_content" >

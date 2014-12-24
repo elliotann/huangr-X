@@ -22,6 +22,7 @@
 			margin: 0px;
 			font-family: Arial, "宋体", Verdana, sans-serif;
 			font-size: 12px;
+			
 		}
 		
 		html,body {

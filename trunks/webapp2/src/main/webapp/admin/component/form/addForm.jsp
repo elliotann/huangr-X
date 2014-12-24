@@ -5,19 +5,8 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Row Editing in DataGrid - jQuery EasyUI Demo</title>
-	<link rel="stylesheet" type="text/css" href="${context}/easyui/themes/default/easyui.css">
-	<link rel="stylesheet" type="text/css" href="${context}/easyui/themes/icon.css">
-	<link rel="stylesheet" type="text/css" href="${context}/easyui/demo/demo.css">
-	<script type="text/javascript" src="${context}/easyui/jquery.min.js"></script>
-	<script type="text/javascript" src="${context}/easyui/jquery.easyui.min.js"></script>
-	<link href="${context }/css/form.css" rel="stylesheet" />
-	<style type="text/css">
-    body{ font-size:12px;}
-    .l-table-edit {}
-    .l-table-edit-td{ padding:4px;}
-    .l-button-submit,.l-button-test{width:80px; float:left; margin-left:10px; padding-bottom:2px;}
-    .l-verify-tip{ left:230px; top:120px;}
+	<title>增加表单</title>
+	
 </style>
 </head>
 <body>
@@ -52,7 +41,7 @@
 				iconCls: 'icon-edit',
 				singleSelect: true,
 				toolbar: '#tb',
-				url: '/jeap1.0/admin/core/datagrid_data1.json',
+				url: 'designer.do?getColumns&ajax=true&id=0',
 				method: 'get',
 				onClickRow: onClickRow
 			">
@@ -123,57 +112,41 @@
 				pageMetas:null,
 				addFormPageMetas:null
 		}
-		$(function(){
+$(function(){
+			
 			$("#formTabs").tabs({
 				onSelect:function(title,index){
 					var myData = $('#dg').datagrid('getData').rows;
+					
 					dgdatas.fields = myData;
-					if(dgdatas.pageMetas!=null){
-						var listRows = $('#listDg').datagrid('getData').rows;
-						
-						dgdatas.pageMetas = listRows;						 	
-					}
-					if(dgdatas.addFormPageMetas!=null){
-						var listRows = $('#formDg').datagrid('getData').rows;
-						
-						dgdatas.addFormPageMetas = listRows;						 	
-					}
+					
 					if(title=="列表页"){
 						
-						 
-						 if(dgdatas.pageMetas==null||myData.length!=dgdatas.pageMetas.length){
-							 //dgdatas = dgdatas.addFormPageMetas;
-					
-							 var listFields = [];
-							 
-							 $.each(myData,function(i,v){
-								 var listField = {
-										 fieldName:'',
-										 displayName:'',
-										 isShow:'',
-										 width:'240'
-								 };
-								 listField.fieldName = v.fieldName;
-								 listField.displayName = v.displayName;
-							
-								 if(!v.isShow){
-									 listField.isShow = '否';
-								 }
-								 listFields.push(listField);
-								 
-							 });
-							 dgdatas.pageMetas = listFields;
-						}
 						$("#listDg").datagrid({
-							data: dgdatas.pageMetas,
+							data: dgdatas.fields,
 							columns:[[
 								          {field:'fieldName',title:'字段名',width:100}, 
 								          {field:'displayName',title:'显示名称',width:100},
-								          {field:'isShow',title:'是否显示',width:100,align:'center',editor:{
+								          {field:'inlist',title:'是否显示',width:100,align:'center',editor:{
 								        	  type:'checkbox',
 								        	  options:{on:'是',off:'否'}
+								          },formatter:function(value,row){
+								        	  var result;
+								        	  if(value==true){
+								        		  result = "是";
+								        		  
+								        	  }else if(value=="是"){
+								        		  result = "是";
+								        		  
+								        	  }else if(value=="否"){
+								        		  result = "否";
+								        	  }else{
+								        		  result = "否";
+								        
+								        	  }
+								        	  return result;
 								          }},
-								          {field:'width',title:'宽度',width:100,editor:{
+								          {field:'listwidth',title:'宽度',width:100,editor:{
 								        	  type:'numberbox',
 								        	  options:{}
 								          }}
@@ -187,20 +160,58 @@
 						
 					}
 					if(title=="表单"){
-						dgdatas.addFormPageMetas = myData;
+						
+						if(dgdatas.addFormPageMetas==null||myData.length!=dgdatas.addFormPageMetas.length){
+				
+							 var listFields = [];
+							 
+							 $.each(myData,function(i,v){
+								 var listField = {
+										 fieldName:'',
+										 displayName:'',
+										 isShow:'',
+										 width:'240',
+										 showType:'HIDDEN'
+								 };
+								 listField.fieldName = v.fieldName;
+								 listField.displayName = v.displayName;
+							
+								 if(!v.isShow){
+									 listField.isShow = '否';
+								 }
+								 listFields.push(listField);
+								 
+							 });
+							
+						}
 						$("#formDg").datagrid({
-							data: dgdatas.addFormPageMetas,
+							data: dgdatas.fields,
 							columns:[[
 								          {field:'fieldName',title:'字段名',width:100}, 
 								          {field:'displayName',title:'显示名称',width:100},
-								          {field:'isShow',title:'是否显示',width:100,align:'center',editor:{
+								          {field:'inform',title:'是否显示',width:100,align:'center',editor:{
 								        	  type:'checkbox',
-								        	  options:{on:'是',off:'否'}
+								        	  options:{on:true,off:false}
+								          },formatter:function(value,row){
+								        	  var result;
+								        	  if(value==true){
+								        		  result = "是";
+								        		  
+								        	  }else if(value=="true"){
+								        		  result = "是";
+								        		  
+								        	  }else if(value=="false"){
+								        		  result = "否";
+								        	  }else{
+								        		  result = "否";
+								        
+								        	  }
+								        	  return result;
 								          }},
-								          {field:'showType',title:'显示类型',width:100,align:'center',editor:{
+								          {field:'displayType',title:'显示类型',width:100,align:'center',editor:{
 								        	  type:'combobox',
 								        	  options:{
-													valueField:'showType',
+													valueField:'displayType',
 													textField:'dataTypeLabel',
 													method:'get',
 													url:'showType.json',
@@ -217,7 +228,13 @@
 
 						});
 					}
-	
+					
+					
+					
+					
+			
+					
+					
 				}
 			});
 		
@@ -232,7 +249,7 @@
 				var productname = $(ed.target).combobox('getText');
 				$('#dg').datagrid('getRows')[editIndex]['dataType'] = productname;
 				$('#dg').datagrid('endEdit', editIndex);
-				dgdatas.addFormPageMetas = $('#dg').datagrid('getData').rows;
+				dgdatas.fields = $('#dg').datagrid('getData').rows;
 				editIndex = undefined;
 				return true;
 			} else {
@@ -246,7 +263,7 @@
 				var ed = $('#listDg').datagrid('getEditor', {index:editIndex1,field:'dataType'});
 			
 				$('#listDg').datagrid('endEdit', editIndex1);
-				dgdatas.addFormPageMetas = $('#listDg').datagrid('getData').rows;
+				dgdatas.fields = $('#listDg').datagrid('getData').rows;
 				editIndex1 = undefined;
 				return true;
 			} else {
@@ -260,7 +277,7 @@
 				var ed = $('#formDg').datagrid('getEditor', {index:editIndex2,field:'dataType'});
 			
 				$('#formDg').datagrid('endEdit', editIndex2);
-				dgdatas.addFormPageMetas = $('#formDg').datagrid('getData').rows;
+				dgdatas.fields = $('#formDg').datagrid('getData').rows;
 				editIndex2 = undefined;
 				return true;
 			} else {
@@ -268,8 +285,6 @@
 			}
 		}
 		function onClickRow(index){
-			//if(index==0) return;
-			
 			if (editIndex != index){
 				if (endEditing()){
 					if(index==0) return;
@@ -357,9 +372,6 @@
 			var rows = $('#dg').datagrid('getRows');
 			dgdatas.tableName = tableName;
 			dgdatas.formName = formName;
-			alert(JSON.stringify(dgdatas));
-		
-			
 			$("#datas").val(JSON.stringify(dgdatas));
 			$("#objForm").submit();
 			
