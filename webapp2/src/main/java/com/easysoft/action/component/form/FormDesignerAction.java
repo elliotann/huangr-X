@@ -112,10 +112,8 @@ public class FormDesignerAction extends BaseController {
         Map<String,Class> map = new HashMap<String,Class>();
         map.put("fields", FormField.class);
         FormEntity formEntity = (FormEntity)JsonUtils.jsonToBean(data, FormEntity.class,map);
-        if(formId!=null&&formId!=0){
-            formEntity.setId(formId);
-        }else{
-            formEntity.setCreateBy(UserServiceFactory.getUserService().getCurrentUser().getUsername());
+        if(formEntity.getId()==0){
+        	 formEntity.setCreateBy(UserServiceFactory.getUserService().getCurrentUser().getUsername());
         }
         formManager.addForm(formEntity);
         return result;
@@ -130,11 +128,19 @@ public class FormDesignerAction extends BaseController {
 
             data = JsonUtils.beanToJsonArray(form.getFields());
         }else{
-            data = "[\n" +
-                    "    {\"dataType\":\"INTEGER\",\"isInForeignKey\":false, \"ispk\":true,\"isNullable\":false, \"inputType\":\"digits\", " +
-                    "\"isAutoKey\":true, \"sourceTableName\":\"\", \"sourceTableIDField\":\"\", \"sourceTableTextField\":\"\", " +
-                    "\"fieldName\":\"id\", \"labelName\":\"主键\", \"type\":\"column\", \"icon\":\"images/table_key.png\" }\n" +
-                    "]";
+
+        	FormField fieldForm = new FormField();
+        	fieldForm.setFieldName("id");
+        	fieldForm.setDisplayName("主键");
+        	fieldForm.setDataType("INT");
+        	fieldForm.setDataTypeLength(11);
+        	fieldForm.setInform(false);
+        	fieldForm.setDisplayType("HIDDEN");
+        	fieldForm.setWidth("180");
+        	fieldForm.setListwidth("180");
+        	List<FormField> formFields = new ArrayList<FormField>();
+        	formFields.add(fieldForm);
+        	data = JsonUtils.beanToJsonArray(formFields);
         }
         map.put("json",data);
         return new ModelAndView("admin/json_message",map);

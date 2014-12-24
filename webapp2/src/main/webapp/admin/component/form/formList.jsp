@@ -34,7 +34,7 @@ $(function () {
 });
     function addForm(item)
     {
-    	window.location.href="designer.do?toDesigner";
+    	CRUD.addOrUpdateDialog('增加表单','designer.do?toDesigner',600,900);
 
     }
 

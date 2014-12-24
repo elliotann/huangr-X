@@ -1,51 +1,71 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ include file="/commons/taglibs.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>Row Editing in DataGrid - jQuery EasyUI Demo</title>
-	<link rel="stylesheet" type="text/css" href="${context}/easyui/themes/default/easyui.css">
-	<link rel="stylesheet" type="text/css" href="${context}/easyui/themes/icon.css">
-	<link rel="stylesheet" type="text/css" href="${context}/easyui/demo/demo.css">
-	<script type="text/javascript" src="${context}/easyui/jquery.min.js"></script>
-	<script type="text/javascript" src="${context}/easyui/jquery.easyui.min.js"></script>
-	<link href="${context }/css/form.css" rel="stylesheet" />
-	<style type="text/css">
-    body{ font-size:12px;}
-    .l-table-edit {}
-    .l-table-edit-td{ padding:4px;}
-    .l-button-submit,.l-button-test{width:80px; float:left; margin-left:10px; padding-bottom:2px;}
-    .l-verify-tip{ left:230px; top:120px;}
+<meta charset="UTF-8">
+<title>Row Editing in DataGrid - jQuery EasyUI Demo</title>
+<link rel="stylesheet" type="text/css"
+	href="${context}/easyui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css"
+	href="${context}/easyui/themes/icon.css">
+<link rel="stylesheet" type="text/css"
+	href="${context}/easyui/demo/demo.css">
+<script type="text/javascript" src="${context}/easyui/jquery.min.js"></script>
+<script type="text/javascript"
+	src="${context}/easyui/jquery.easyui.min.js"></script>
+<link href="${context }/css/form.css" rel="stylesheet" />
+<style type="text/css">
+body {
+	font-size: 12px;
+}
+
+.l-table-edit {
+	
+}
+
+.l-table-edit-td {
+	padding: 4px;
+}
+
+.l-button-submit,.l-button-test {
+	width: 80px;
+	float: left;
+	margin-left: 10px;
+	padding-bottom: 2px;
+}
+
+.l-verify-tip {
+	left: 230px;
+	top: 120px;
+}
 </style>
 </head>
 <body>
-	<table cellpadding="0" cellspacing="0" class="l-table-edit" >
-        <tr>
-            <td align="right" class="l-table-edit-td">表单编码:</td>
-            <td align="left" class="l-table-edit-td">
-                <input name="code" type="text" id="code"   validate="{required:true,maxlength:30}" class="form-control"/>
-            </td>
-            <td align="right" class="l-table-edit-td"></td>
-            <td align="left" class="l-table-edit-td">
-
-            </td>
-        </tr>
-        <tr>
-            <td align="right" class="l-table-edit-td">表名:</td>
-            <td align="left" class="l-table-edit-td">
-                <input name="tableName" type="text" id="tableName"   validate="{required:true,maxlength:30}" class="form-control"/>
-            </td>
-            <td align="right" class="l-table-edit-td">表单名称:</td>
-            <td align="left" class="l-table-edit-td">
-                <input name="formName" type="text" id="formName"  validate="{required:true,maxlength:60}" class="form-control"/>
-            </td>
-        </tr>
-    </table>
-	<div style="margin:20px 0;"></div>
-	<div id="formTabs" style="width:100%;height:250px" >
-		<div title="数据库字段" style="padding:0px">
+	<table cellpadding="0" cellspacing="0" class="l-table-edit">
+		<tr>
+			<td align="right" class="l-table-edit-td">表单编码:</td>
+			<td align="left" class="l-table-edit-td"><input name="code"
+				type="text" id="code" validate="{required:true,maxlength:30}"
+				class="form-control" value="${form.code }" /></td>
+			<td align="right" class="l-table-edit-td"></td>
+			<td align="left" class="l-table-edit-td"></td>
+		</tr>
+		<tr>
+			<td align="right" class="l-table-edit-td">表名:</td>
+			<td align="left" class="l-table-edit-td"><input name="tableName"
+				type="text" id="tableName" validate="{required:true,maxlength:30}"
+				class="form-control" value="${form.tableName }" /></td>
+			<td align="right" class="l-table-edit-td">表单名称:</td>
+			<td align="left" class="l-table-edit-td"><input name="formName"
+				type="text" id="formName" validate="{required:true,maxlength:60}"
+				class="form-control" value="${form.formName }" /></td>
+		</tr>
+	</table>
+	<div style="margin: 20px 0;"></div>
+	<div id="formTabs" style="width: 100%; height: 250px">
+		<div title="数据库字段" style="padding: 0px">
 			<table id="dg" class="easyui-datagrid"
 				style="width: auto; height: auto"
 				data-options="
@@ -58,8 +78,10 @@
 			">
 				<thead>
 					<tr>
-						<th data-options="field:'fieldName',width:250,editor:{type:'textbox',options:{required:true}}">字段名</th>
-						<th data-options="field:'displayName',width:250,editor:{type:'textbox',options:{required:true}}">显示名称</th>
+						<th
+							data-options="field:'fieldName',width:250,editor:{type:'textbox',options:{required:true}}">字段名</th>
+						<th
+							data-options="field:'displayName',width:250,editor:{type:'textbox',options:{required:true}}">显示名称</th>
 						<th
 							data-options="field:'dataType',width:100,
 						formatter:function(value,row){
@@ -88,101 +110,80 @@
 				</thead>
 			</table>
 		</div>
-		<div title="列表页" style="padding:0px">
-			<table id="listDg"
-				style="width: auto; height: auto">
-				
-			</table>
-		</div>
-		<div title="表单" data-options="" style="padding:0px">
-			<table id="formDg" 
-				style="width: auto; height: auto"
-				>
-				
-			</table>
-		</div>
-	</div>
-	
+		<div title="列表页" style="padding: 0px">
+			<table id="listDg" style="width: auto; height: auto">
 
-	<div id="tb" style="height:auto">
-		<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="append()">增加行</a>
-		<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onclick="removeit()">删除行</a>
-		<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true" onclick="accept()">保存</a>
-		<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-undo',plain:true" onclick="reject()">上移</a>
-		<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true" onclick="getChanges()">下移</a>
+			</table>
+		</div>
+		<div title="表单" data-options="" style="padding: 0px">
+			<table id="formDg" style="width: auto; height: auto">
+
+			</table>
+		</div>
 	</div>
-	<form id="objForm" name="objForm" action="designer.do?save&ajax=yes" method="post">
-		<input type="hidden" name="data" value="" id="datas"/>
+
+
+	<div id="tb" style="height: auto">
+		<a href="javascript:void(0)" class="easyui-linkbutton"
+			data-options="iconCls:'icon-add',plain:true" onclick="append()">增加行</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton"
+			data-options="iconCls:'icon-remove',plain:true" onclick="removeit()">删除行</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton"
+			data-options="iconCls:'icon-save',plain:true" onclick="accept()">保存</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton"
+			data-options="iconCls:'icon-undo',plain:true" onclick="reject()">上移</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton"
+			data-options="iconCls:'icon-search',plain:true"
+			onclick="getChanges()">下移</a>
+	</div>
+	<form id="objForm" name="objForm" action="designer.do?save&ajax=yes"
+		method="post">
+		<input type="hidden" name="data" value="" id="datas" />
 		<button onclick="saveSubmit()">保存</button>
 	</form>
 	<script type="text/javascript">
 		var dgdatas = {
+				id:${form.id },
 				tableName:'',
 				formName:'',
-				fields:null,
-				pageMetas:null,
-				addFormPageMetas:null
+				fields:null
 		}
 		
 		$(function(){
-			$.ajax({
-				url:'designer.do?getFormEntity&ajax=true&id='+${form.id },
-				type:'post',
-				dataType:'json',
-				async:false,
-				success:function(result){
-					dgdatas.pageMetas = result.pageMetas;
-					dgdatas.addFormPageMetas = result.addFormPageMetas;
-					
-				}
-			});
+			
 			$("#formTabs").tabs({
 				onSelect:function(title,index){
 					var myData = $('#dg').datagrid('getData').rows;
-					dgdatas.fields = myData;
-					/* if(dgdatas.pageMetas!=null){
-						var listRows = $('#listDg').datagrid('getData').rows;
-						dgdatas.pageMetas = listRows;						 	
-					} */
-					/* if(dgdatas.addFormPageMetas!=null){
-						var listRows = $('#formDg').datagrid('getData').rows;
-						
-						dgdatas.addFormPageMetas = listRows;						 	
-					} */
-					if(title=="列表页"){
-						 if(dgdatas.pageMetas==null||myData.length!=dgdatas.pageMetas.length){
-							 //dgdatas = dgdatas.addFormPageMetas;
 					
-							 var listFields = [];
-							 
-							 $.each(myData,function(i,v){
-								 var listField = {
-										 fieldName:'',
-										 displayName:'',
-										 isShow:'',
-										 width:'240'
-								 };
-								 listField.fieldName = v.fieldName;
-								 listField.displayName = v.displayName;
-							
-								 if(!v.isShow){
-									 listField.isShow = '否';
-								 }
-								 listFields.push(listField);
-								 
-							 });
-							 dgdatas.pageMetas = listFields;
-						}
+					dgdatas.fields = myData;
+					
+					if(title=="列表页"){
+						
 						$("#listDg").datagrid({
-							data: dgdatas.pageMetas,
+							data: dgdatas.fields,
 							columns:[[
 								          {field:'fieldName',title:'字段名',width:100}, 
 								          {field:'displayName',title:'显示名称',width:100},
-								          {field:'isShow',title:'是否显示',width:100,align:'center',editor:{
+								          {field:'inlist',title:'是否显示',width:100,align:'center',editor:{
 								        	  type:'checkbox',
 								        	  options:{on:'是',off:'否'}
+								          },formatter:function(value,row){
+								        	  var result;
+								        	  if(value==true){
+								        		  result = "是";
+								        		  
+								        	  }else if(value=="是"){
+								        		  result = "是";
+								        		  
+								        	  }else if(value=="否"){
+								        		  result = "否";
+								        	  }else{
+								        		  result = "否";
+								        
+								        	  }
+								        	  return result;
 								          }},
-								          {field:'width',title:'宽度',width:100,editor:{
+								          {field:'listwidth',title:'宽度',width:100,editor:{
 								        	  type:'numberbox',
 								        	  options:{}
 								          }}
@@ -196,6 +197,7 @@
 						
 					}
 					if(title=="表单"){
+						
 						if(dgdatas.addFormPageMetas==null||myData.length!=dgdatas.addFormPageMetas.length){
 				
 							 var listFields = [];
@@ -217,18 +219,33 @@
 								 listFields.push(listField);
 								 
 							 });
-							 dgdatas.addFormPageMetas = listFields;
+							
 						}
 						$("#formDg").datagrid({
-							data: dgdatas.addFormPageMetas,
+							data: dgdatas.fields,
 							columns:[[
 								          {field:'fieldName',title:'字段名',width:100}, 
 								          {field:'displayName',title:'显示名称',width:100},
-								          {field:'isShow',title:'是否显示',width:100,align:'center',editor:{
+								          {field:'inform',title:'是否显示',width:100,align:'center',editor:{
 								        	  type:'checkbox',
-								        	  options:{on:'是',off:'否'}
+								        	  options:{on:true,off:false}
+								          },formatter:function(value,row){
+								        	  var result;
+								        	  if(value==true){
+								        		  result = "是";
+								        		  
+								        	  }else if(value=="true"){
+								        		  result = "是";
+								        		  
+								        	  }else if(value=="false"){
+								        		  result = "否";
+								        	  }else{
+								        		  result = "否";
+								        
+								        	  }
+								        	  return result;
 								          }},
-								          {field:'showType',title:'显示类型',width:100,align:'center',editor:{
+								          {field:'displayType',title:'显示类型',width:100,align:'center',editor:{
 								        	  type:'combobox',
 								        	  options:{
 													valueField:'showType',
@@ -269,6 +286,7 @@
 				var productname = $(ed.target).combobox('getText');
 				$('#dg').datagrid('getRows')[editIndex]['dataType'] = productname;
 				$('#dg').datagrid('endEdit', editIndex);
+				dgdatas.fields = $('#dg').datagrid('getData').rows;
 				editIndex = undefined;
 				return true;
 			} else {
@@ -282,6 +300,7 @@
 				var ed = $('#listDg').datagrid('getEditor', {index:editIndex1,field:'dataType'});
 			
 				$('#listDg').datagrid('endEdit', editIndex1);
+				dgdatas.fields = $('#listDg').datagrid('getData').rows;
 				editIndex1 = undefined;
 				return true;
 			} else {
@@ -295,6 +314,7 @@
 				var ed = $('#formDg').datagrid('getEditor', {index:editIndex2,field:'dataType'});
 			
 				$('#formDg').datagrid('endEdit', editIndex2);
+				dgdatas.fields = $('#formDg').datagrid('getData').rows;
 				editIndex2 = undefined;
 				return true;
 			} else {
@@ -302,8 +322,6 @@
 			}
 		}
 		function onClickRow(index){
-			//if(index==0) return;
-			
 			if (editIndex != index){
 				if (endEditing()){
 					if(index==0) return;
@@ -391,9 +409,6 @@
 			var rows = $('#dg').datagrid('getRows');
 			dgdatas.tableName = tableName;
 			dgdatas.formName = formName;
-			alert(JSON.stringify(dgdatas));
-		
-			
 			$("#datas").val(JSON.stringify(dgdatas));
 			$("#objForm").submit();
 			
