@@ -17,12 +17,7 @@
  */
 
 package com.easysoft.core.log.query;
-
-import com.easysoft.core.log.annotation.BnLogItem;
 import com.easysoft.framework.db.PageOption;
-
-import java.util.List;
-
 /**
  * @author : andy.huang
  * @since :
