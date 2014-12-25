@@ -27,13 +27,14 @@
 
             submitHandler: function ()
             {
-
+				
                 $("#objForm").ajaxSubmit({
                     url :"menu.do?saveEdit&ajax=true",
                     type : "POST",
                     dataType:"json",
                     success : function(result) {
-
+                    	alert("here");
+                    	alert(result);
                         if(result.success){
                             $.Loading.show('操作成功!');
 
@@ -42,8 +43,6 @@
                                 $.Loading.hide();
                                 $("#dialogInfo").dialog('close');
                                 $('#dataGrid').datagrid('reload');
-
-
                             }, 1000);
 
                         }else{
