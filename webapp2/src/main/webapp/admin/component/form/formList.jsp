@@ -34,8 +34,8 @@ $(function () {
 });
     function addForm(item)
     {
-    	CRUD.addOrUpdateDialog('增加表单','designer.do?toDesigner',600,900);
-
+    	//CRUD.addOrUpdateDialog('增加表单','designer.do?toDesigner',600,900);
+		window.location.href="designer.do?toDesigner";
     }
 
     function btnOK(item,dialog){
