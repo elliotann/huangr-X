@@ -84,7 +84,7 @@
 
 
     function addMenu(){
-        addOrUpdateDialog('增加菜单','menu.do?add',500,700);
+        CRUD.addOrUpdateDialog('增加菜单','menu.do?add',500,700);
     }
 
     function addBtn(item){
@@ -104,7 +104,7 @@
             return;
         }
         var row = $('#dataGrid').treegrid('getSelections')[0];
-        addOrUpdateDialog('修改菜单','menu.do?edit&id='+row.id,500,700);
+        CRUD.addOrUpdateDialog('修改菜单','menu.do?edit&id='+row.id,500,700);
     }
     function getMenuType(rowdata,index,value){
         if(value==1){
