@@ -18,14 +18,15 @@
 
 package com.easysoft.core.log.annotation;
 
-import com.easysoft.framework.utils.DateUtil;
-
-import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * @author : andy.huang
- * @since :
+ * @since : 1.0
  */
+@Entity
+@Table(name="t_jeap_log")
 public class BnLogItem {
     private int id;
     private String logTime ;
