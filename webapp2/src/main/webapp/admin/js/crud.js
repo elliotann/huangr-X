@@ -27,7 +27,7 @@
 	                text: '保存',
 	                iconCls: 'icon-ok',
 	                handler: function () {
-	                	 alert(disabled);
+	                	
 	                    var savebtn = $(this);
 	                    var disabled = savebtn.hasClass("l-btn-disabled");
 	                   
@@ -44,7 +44,7 @@
 	}
 	//确定回调函数
 	function addForm(savebtn){
-		alert($("#objForm"));
+	
 	    $("#objForm").submit();
 	}
 
