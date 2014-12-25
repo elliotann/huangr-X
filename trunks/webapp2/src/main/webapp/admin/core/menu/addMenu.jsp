@@ -7,11 +7,6 @@
     <link href="${context }/js/easyui/themes/icon.css" rel="stylesheet"/>
 
 <script type="text/javascript">
-
-    var groupicon = "${context }/js/ligerui/skins/icons/communication.gif";
-    var dialog = frameElement.dialog;
-
-
     $(function ()
     {
 
