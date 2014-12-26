@@ -63,6 +63,8 @@ public abstract class ProcessorFactory {
         if (uri.startsWith("/test/")) return null;
         if (uri.startsWith("/spring")) return null;
         if (uri.endsWith("favicon.ico")) return null;
+        if(uri.startsWith("/detect")) return null;
+        if(uri.endsWith("tracer")) return null;
 
         if (uri.indexOf("/headerresource") >= 0) {
             return new ResourceProcessor();
