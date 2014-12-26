@@ -55,7 +55,7 @@
 		</component-param>
 		<component-param  style="longtext">
 			<name>driver-clazzs</name>
-			<value></value>
+			<value>com.alibaba.druid.pool.DruidDataSource</value>
 			<description>
 			1)Local datasource: set your ConnectionManagerClass,or the connection pool 's datasource. If you have more than one class ,divided by ';'.
 												c3p0:com.mchange.v2.c3p0.ComboPooledDataSource; 
