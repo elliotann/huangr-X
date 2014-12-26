@@ -37,8 +37,7 @@ public class DispatcherFilter implements Filter {
     }
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-            throws IOException, ServletException
-    {
+            throws IOException, ServletException{
 
         HttpServletRequest httpRequest = (HttpServletRequest)request;
         HttpServletResponse httpResponse = (HttpServletResponse)response;
@@ -49,15 +48,7 @@ public class DispatcherFilter implements Filter {
                 chain.doFilter(httpRequest, httpResponse);
                 return;
             }
-            /*if (!uri.startsWith("/install") && "NO".equals(ParamSetting.INSTALL_LOCK.toUpperCase())) {
-                httpResponse.sendRedirect(httpRequest.getContextPath() + "/install");
-                return;
-            }
-            if ((!uri.startsWith("/install.html")) && (uri.startsWith("/install")) &&
-                    (!uri.startsWith("/install/images")) && (ParamSetting.INSTALL_LOCK.toUpperCase().equals("YES"))){
-                httpResponse.getWriter().write("如要重新安装，请先删除/install/install.lock文件，并重起web容器");
-                return;
-            }*/
+        
             if ("2".equals(ParamSetting.RUNMODE))
                 SaasEsfContextIniter.init(httpRequest, httpResponse);
             else {
@@ -110,25 +101,11 @@ public class DispatcherFilter implements Filter {
         }
     }
 
-    public void destroy()
-    {
+    public void destroy() {
     }
-
-    private HttpServletRequest wrapRequest(HttpServletRequest request, String url)
-            throws UploadException, IOException
-    {
-        List<String> safeUrlList = ParamSetting.safeUrlList;
-        for (String safeUrl : safeUrlList) {
-            if (safeUrl.equals(url)) {
-                return request;
-            }
-        }
-        return new SafeHttpRequestWrapper(request);
-    }
-
     public String get404Html(String url) {
         String themeFld = ParamSetting.ESF_PATH + "/themes/";
-        Map data = new HashMap();
+        Map<String,String> data = new HashMap<String,String>();
         data.put("url", url);
         try
         {
