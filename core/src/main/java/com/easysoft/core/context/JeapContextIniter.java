@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
  * @author andy
  *
  */
-public class EsfContextIniter {
+public class JeapContextIniter {
 	
 	public static void init(HttpServletRequest httpRequest,
 			HttpServletResponse httpResponse){
