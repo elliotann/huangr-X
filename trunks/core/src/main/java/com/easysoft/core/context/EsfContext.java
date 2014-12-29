@@ -59,17 +59,7 @@ public class EsfContext {
 	
 	//得到当前站点上下文
 	public String getContextPath(){
-		if("2".equals(ParamSetting.RUNMODE) ){
-			Site site  = this.getCurrentSite();
-			StringBuffer context = new StringBuffer("/user");
-			context.append("/");
-			context.append(site.getUserid());
-			context.append("/");
-			context.append(site.getId());
-			return context.toString();
-		}else{
-			return "";
-		}
+		return "";
 	}
     public String getResDomain()
     {

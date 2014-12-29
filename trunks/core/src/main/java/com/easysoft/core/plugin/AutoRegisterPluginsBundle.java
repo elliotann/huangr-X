@@ -21,98 +21,68 @@ import java.util.Map;
  * 
  */
 public abstract class AutoRegisterPluginsBundle implements IPluginBundle {
-    protected static final Log loger = LogFactory
-            .getLog(AutoRegisterPluginsBundle.class);
+	protected static final Log loger = LogFactory
+			.getLog(AutoRegisterPluginsBundle.class);
 
-    protected List<IPlugin> plugins;
-    private Map<String, List<IPlugin>> saasPlugins;
+	protected List<IPlugin> plugins;
+	private Map<String, List<IPlugin>> saasPlugins;
 
-    public void registerPlugin(IPlugin plugin) {
-        if ("2".equals(ParamSetting.RUNMODE)) {
-            registerPlugin2(plugin);
-        }
+	public void registerPlugin(IPlugin plugin) {
 
-        if ("1".equals(ParamSetting.RUNMODE))
-            registerPlugin1(plugin);
+		registerPlugin1(plugin);
 
-    }
+	}
 
+	private void registerPlugin1(IPlugin plugin) {
+		if (this.plugins == null) {
+			this.plugins = new ArrayList();
+		}
 
-    private void registerPlugin1(IPlugin plugin) {
-        if (this.plugins == null) {
-            this.plugins = new ArrayList();
-        }
+		if (!this.plugins.contains(plugin)) {
+			this.plugins.add(plugin);
+		}
+		if (loger.isDebugEnabled())
+			loger.debug("为插件桩" + getName() + "注册插件：" + plugin.getClass());
+	}
 
-        if (!this.plugins.contains(plugin)) {
-            this.plugins.add(plugin);
-        }
-        if (loger.isDebugEnabled())
-            loger.debug("为插件桩" + getName() + "注册插件：" + plugin.getClass());
-    }
+	private void registerPlugin2(IPlugin plugin) {
+		if (this.saasPlugins == null) {
+			this.saasPlugins = new HashMap();
+		}
 
-    private void registerPlugin2(IPlugin plugin) {
-        if (this.saasPlugins == null) {
-            this.saasPlugins = new HashMap();
-        }
+		String key = getKey();
 
-        String key = getKey();
+		List pluginList = (List) this.saasPlugins.get(key);
 
-        List pluginList = (List) this.saasPlugins.get(key);
+		if (pluginList == null) {
+			pluginList = new ArrayList();
+			this.saasPlugins.put(key, pluginList);
+		}
+		if (!pluginList.contains(plugin))
+			pluginList.add(plugin);
+	}
 
-        if (pluginList == null) {
-            pluginList = new ArrayList();
-            this.saasPlugins.put(key, pluginList);
-        }
-        if (!pluginList.contains(plugin))
-            pluginList.add(plugin);
-    }
+	public abstract String getName();
 
-     public abstract String getName();
+	public synchronized List<IPlugin> getPlugins() {
 
-    public synchronized List<IPlugin> getPlugins() {
-        if ("2".equals(ParamSetting.RUNMODE)) {
-            if (this.saasPlugins == null) {
-                return new ArrayList();
-            }
+		return this.plugins;
+	}
 
-            String key = getKey();
-            List pluginList = (List) this.saasPlugins.get(key);
-            if (pluginList == null) {
-                return new ArrayList();
-            }
-            return pluginList;
-        }
+	private String getKey() {
+		Site site = EsfContext.getContext().getCurrentSite();
+		int userid = site.getUserid().intValue();
+		int siteid = site.getId().intValue();
+		String key = userid + "_" + siteid;
 
-        return this.plugins;
-    }
+		return key;
+	}
 
-    private String getKey() {
-        Site site = EsfContext.getContext().getCurrentSite();
-        int userid = site.getUserid().intValue();
-        int siteid = site.getId().intValue();
-        String key = userid + "_" + siteid;
+	public synchronized void unRegisterPlugin(IPlugin _plugin) {
 
-        return key;
-    }
-    public synchronized void unRegisterPlugin(IPlugin _plugin)
-/*     */   {
-/*  87 */     if ("2".equals(ParamSetting.RUNMODE))
-/*     */     {
-/*  89 */       if (this.saasPlugins == null) {
-/*  90 */         return;
-/*     */       }
-/*     */
-/*  93 */       String key = getKey();
-/*  94 */       List pluginList = (List)this.saasPlugins.get(key);
-/*  95 */       if (pluginList == null) {
-/*  96 */         return;
-/*     */       }
-/*  98 */       pluginList.remove(_plugin);
-/*     */     }
-/* 103 */     else if (this.plugins != null) {
-/* 104 */       this.plugins.remove(_plugin);
-/*     */     }
-/*     */   }
+		if (this.plugins != null) {
+			this.plugins.remove(_plugin);
+		}
+	}
 
 }
-

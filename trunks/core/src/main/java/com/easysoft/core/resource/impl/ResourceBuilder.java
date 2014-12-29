@@ -209,21 +209,13 @@ public class ResourceBuilder {
 
     private static boolean isCommonScriptCreated()
     {
-        if ("2".equals(ParamSetting.RUNMODE)) {
-            Site site = EsfContext.getContext().getCurrentSite();
-            String key = "script_created_" + site.getUserid() + "_" + site.getId();
-            return !StringUtil.isEmpty((String)commonScriptStateMap.get(key));
-        }
+       
         return commonScriptCreated;
     }
 
     private static boolean isCommonCssCreated()
     {
-        if ("2".equals(ParamSetting.RUNMODE)) {
-            Site site = EsfContext.getContext().getCurrentSite();
-            String key = "script_created_" + site.getUserid() + "_" + site.getId();
-            return !StringUtil.isEmpty((String)commonCssStateMap.get(key));
-        }
+        
         return commonCssCreated;
     }
 
@@ -235,13 +227,7 @@ public class ResourceBuilder {
 
     private static boolean isImageCreated()
     {
-        if ("2".equals(ParamSetting.RUNMODE))
-        {
-            Site site = EsfContext.getContext().getCurrentSite();
-            String key = "image_created_" + site.getUserid() + "_" + site.getId();
-            return imageMap.get(key) != null;
-        }
-
+        
         return imageCreated;
     }
 
@@ -253,25 +239,16 @@ public class ResourceBuilder {
 
     private static void setCommonScriptCreated()
     {
-        if ("2".equals(ParamSetting.RUNMODE)) {
-            Site site = EsfContext.getContext().getCurrentSite();
-            String key = "script_created_" + site.getUserid() + "_" + site.getId();
-            commonScriptStateMap.put(key, "created");
-        }
-        else {
+        
             commonScriptCreated = true;
-        }
+        
     }
 
     private static void setCommonCssCreated()
     {
-        if ("2".equals(ParamSetting.RUNMODE)) {
-            Site site = EsfContext.getContext().getCurrentSite();
-            String key = "script_created_" + site.getUserid() + "_" + site.getId();
-            commonCssStateMap.put(key, "created");
-        } else {
+        
             commonCssCreated = true;
-        }
+        
     }
 
     private static void setCssCreated(String pageid)
@@ -282,15 +259,9 @@ public class ResourceBuilder {
 
     private static void setImageCreated(String pageid)
     {
-        if ("2".equals(ParamSetting.RUNMODE))
-        {
-            Site site = EsfContext.getContext().getCurrentSite();
-            String key = "image_created_" + site.getUserid() + "_" + site.getId();
-            imageMap.put(key, "created");
-        }
-        else {
+        
             imageCreated = true;
-        }
+        
     }
 
     private static String getKey(String pageid)
@@ -298,9 +269,7 @@ public class ResourceBuilder {
         String key = pageid;
         Site site = EsfContext.getContext().getCurrentSite();
 
-        if ("2".equals(ParamSetting.RUNMODE)) {
-            key = pageid + "_" + site.getUserid() + "_" + site.getId();
-        }
+      
 
         return key;
     }

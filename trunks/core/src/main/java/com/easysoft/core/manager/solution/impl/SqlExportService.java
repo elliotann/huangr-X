@@ -60,12 +60,9 @@ public class SqlExportService {
 			if(tabname.endsWith("admintheme"))continue;
 			String querySql  ;
 			
-			if("2".equals(ParamSetting.RUNMODE)){
-				Site site  = EsfContext.getContext().getCurrentSite();
-				querySql="show tables like '" + prefix + tabname + "_"+site.getUserid()+"_"+site.getId()+"'";
-			}else{
+			
 				querySql="show tables like '" + prefix + tabname + "'";
-			}
+			
 			
 			List tblist = this.simpleJdbcTemplate.queryForList(querySql);
 			if(tblist==null || tblist.isEmpty()){
@@ -96,12 +93,9 @@ public class SqlExportService {
 			if(tabname.endsWith("admintheme"))continue;
 			String querySql;
 			
-			if("2".equals(ParamSetting.RUNMODE)){
-				Site site = EsfContext.getContext().getCurrentSite();
-				querySql="show tables like 'es_"+ tabname +"_"+site.getUserid()+"_"+site.getId()+"'";
-			}else{
+		
 				querySql="show tables like 'es_"+ tabname+"'";
-			}
+			
 			
 			List tblist = this.simpleJdbcTemplate.queryForList(querySql);
 			if(tblist==null || tblist.isEmpty()){
@@ -215,9 +209,7 @@ public class SqlExportService {
 
 			final Integer userid  = site.getUserid();
 			final Integer siteid = site.getId();
-		if("2".equals(ParamSetting.RUNMODE)){
-			rname  =table+"_"+userid+"_"+siteid;
-		}
+		
 		StringBuffer sql = new StringBuffer();
 		
 		int total = simpleJdbcTemplate.queryForInt("SELECT COUNT(0) FROM " + rname);

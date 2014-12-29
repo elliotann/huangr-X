@@ -69,10 +69,7 @@ public class SolutionInstaller implements ISolutionInstaller {
         }
 
         String tablenameperfix = "";
-        if ("2".equals(ParamSetting.RUNMODE)) {
-            Site site = EsfContext.getContext().getCurrentSite();
-            tablenameperfix = "_" + site.getUserid() + "_" + site.getId();
-        }
+        
 
         List listRecreate = setupDoc.getRootElement().element("recreate").elements();
 
@@ -97,10 +94,7 @@ public class SolutionInstaller implements ISolutionInstaller {
 
             install(InstallerFactory.TYPE_COMPONENT, proFileDoc, productId);
 
-            if (ParamSetting.RUNMODE.equals("2")) {
-                if (!"base".equals(productId))
-                    FileUtil.copyFile(ParamSetting.PRODUCTS_STORAGE_PATH + "/" + productId + "/profile.xml", ParamSetting.ESF_PATH + EsfContext.getContext().getContextPath() + "/profile.xml");
-            }
+            
 
         } catch (Exception e) {
             e.printStackTrace();

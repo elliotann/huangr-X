@@ -80,8 +80,7 @@ public class ParamSetting {
 	// 资源模式
 	public static String RESOURCEMODE = "1";
 
-	// 运行模式
-	public static String RUNMODE = "2";
+
 
 	// 数据库类型
 	public static String DBTYPE = "1";
@@ -183,9 +182,7 @@ public class ParamSetting {
 		RESOURCEMODE = StringUtil.isEmpty(resoucemode) ? RESOURCEMODE
 				: resoucemode;
 
-		// 运行模式
-		String runmode = props.getProperty("runmode");
-		RUNMODE = StringUtil.isEmpty(runmode) ? RUNMODE : runmode;
+	
 
 		// 数据库类型
 		String dbtype = props.getProperty("dbtype");

@@ -77,17 +77,13 @@ public class ExampleDataInstaller implements IInstaller {
 	}
 	
 	protected String parseUserSiteID(String content){
-		if("2".equals(ParamSetting.RUNMODE) ){
-			Site site  = EsfContext.getContext().getCurrentSite();
-			content = content.replaceAll("<userid>",String.valueOf( site.getUserid() ));
-			content = content.replaceAll("<siteid>",String.valueOf( site.getId()));
-		}else{
+		
 			content = content.replaceAll("_<userid>","");
 			content = content.replaceAll("_<siteid>","");		
 			content = content.replaceAll("/user/<userid>/<siteid>","");
 			content = content.replaceAll("<userid>","1");
 			content = content.replaceAll("<siteid>","1");						
-		}
+		
 		return content;
 	}
 	
