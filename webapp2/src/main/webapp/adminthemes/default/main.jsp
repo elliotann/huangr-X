@@ -17,8 +17,6 @@
     <script type="text/javascript" src="${staticserver }/js/admin/jeap.js"></script>
     <script type="text/javascript" src="${context}/js/index.js"></script>
     <title>${title }</title>
-    
-    
   
     <style type="text/css">
 

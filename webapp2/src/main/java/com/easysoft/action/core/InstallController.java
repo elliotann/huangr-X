@@ -143,14 +143,10 @@ public class InstallController extends BaseController{
                 }
             }
 
-            //saas方式可以自定义解决方案所在目录
-            if("2".equals(ParamSetting.RUNMODE ) ){
-                props.setProperty("storage.app_data", solutionpath+"/commons");
-                props.setProperty("storage.products", solutionpath);
-            }else{
+
                 props.setProperty("storage.app_data", webroot+"/products/commons");
                 props.setProperty("storage.products", webroot+"/products");
-            }
+            
 
             if("mysql".equals(dbType))
                 props.setProperty("dbtype", "1");
@@ -279,12 +275,9 @@ public class InstallController extends BaseController{
 
 
         try{
-            //saas模式可以自定义域名
-            if("2".equals(ParamSetting.RUNMODE)){
-                installManager.install(adminUser.getUsername(),adminUser.getPassword(),domain,productid);
-            }else{
+          
                 installManager.install(adminUser.getUsername(),adminUser.getPassword(),"localhost",productid);
-            }
+            
 
         }catch (RuntimeException e) {
             e.printStackTrace();
