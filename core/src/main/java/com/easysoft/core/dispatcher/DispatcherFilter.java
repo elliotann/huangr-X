@@ -45,12 +45,8 @@ public class DispatcherFilter implements Filter {
                 chain.doFilter(httpRequest, httpResponse);
                 return;
             }
-        
-          
             JeapContextIniter.init(httpRequest, httpResponse);
-           
             Processor processor = ProcessorFactory.newProcessorInstance(uri, httpRequest);
-
             if (processor == null) {
                 chain.doFilter(request, response);
             }

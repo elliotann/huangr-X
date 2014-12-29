@@ -9,8 +9,7 @@ import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -23,8 +22,6 @@ import java.util.Map;
  * @author andy
  */
 public final class FreeMarkerParser {
-
-	private static final Log log = LogFactory.getLog(FreeMarkerParser.class);
 	private static ThreadLocal<FreeMarkerParser> managerLocal = new ThreadLocal<FreeMarkerParser>();
 	
 	public FreeMarkerParser(){
@@ -222,12 +219,6 @@ public final class FreeMarkerParser {
 			cfg.setEncoding(java.util.Locale.CHINA, "UTF-8");
 		return cfg;
 	}
-	
-	
-
-	
-
-
 
 	/**
 	 * 设置模板路径前缀
