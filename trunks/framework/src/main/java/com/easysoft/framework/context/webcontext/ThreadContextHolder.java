@@ -62,12 +62,12 @@ public class ThreadContextHolder  {
 
 	public static   WebSessionContext  getSessionContext() {
 		if (SessionContextThreadLocalHolder.get() == null) {
-//			if(logger.isDebugEnabled())
-//				logger.debug("create new webSessionContext.");
+			if(logger.isDebugEnabled())
+				logger.debug("create new webSessionContext.");
 			SessionContextThreadLocalHolder.set(new WebSessionContextImpl());
 		}else{
-//			if(logger.isDebugEnabled())
-//				logger.debug(" webSessionContext not null and return ...");
+			if(logger.isDebugEnabled())
+				logger.debug(" webSessionContext not null and return ...");
 		}
 		return SessionContextThreadLocalHolder.get();
 	}
