@@ -64,7 +64,7 @@ public class MenuJsonGetter extends AbstractFacadeProcessor {
         HttpServletRequest request  = ThreadContextHolder.getHttpRequest();
         json.append("var mainpage=true;");
         json.append("var domain='"+request.getServerName()+"';");
-        json.append("var runmode="+ ParamSetting.RUNMODE+";");
+
         json.append("var app_path='"+request.getContextPath()+"';");
 
         return json.toString();
@@ -227,7 +227,7 @@ public class MenuJsonGetter extends AbstractFacadeProcessor {
         HttpServletRequest request  = ThreadContextHolder.getHttpRequest();
         json.append("var mainpage=true;");
         json.append("var domain='"+request.getServerName()+"';");
-        json.append("var runmode="+ ParamSetting.RUNMODE+";");
+
         json.append("var app_path='"+request.getContextPath()+"';");
 
         return json.toString();

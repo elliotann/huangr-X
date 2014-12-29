@@ -3,7 +3,6 @@ package com.easysoft.core.dispatcher;
 import com.easysoft.core.ParamSetting;
 import com.easysoft.core.context.EsfContext;
 import com.easysoft.core.context.EsfContextIniter;
-import com.easysoft.core.context.SaasEsfContextIniter;
 import com.easysoft.core.dispatcher.core.Response;
 import com.easysoft.core.dispatcher.core.freemarker.FreeMarkerParser;
 import com.easysoft.core.dispatcher.httpcache.HttpCacheManager;
@@ -15,7 +14,6 @@ import com.easysoft.core.freemarker.utils.FreeMarkerUtil;
 import com.sun.xml.messaging.saaj.util.ByteOutputStream;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
-import javazoom.upload.UploadException;
 import org.apache.commons.io.IOUtils;
 
 import javax.servlet.*;
@@ -23,11 +21,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
- * 独立版的filter
+ * 系统中心filter
  * @author andy
  */
 public class DispatcherFilter implements Filter {
@@ -42,18 +39,16 @@ public class DispatcherFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest)request;
         HttpServletResponse httpResponse = (HttpServletResponse)response;
         String uri = httpRequest.getServletPath();
-        try
-        {
+        try{
+        	//静态资源
             if (uri.startsWith("/statics")) {
                 chain.doFilter(httpRequest, httpResponse);
                 return;
             }
         
-            if ("2".equals(ParamSetting.RUNMODE))
-                SaasEsfContextIniter.init(httpRequest, httpResponse);
-            else {
-                EsfContextIniter.init(httpRequest, httpResponse);
-            }
+          
+            EsfContextIniter.init(httpRequest, httpResponse);
+           
             Processor processor = ProcessorFactory.newProcessorInstance(uri, httpRequest);
 
             if (processor == null) {

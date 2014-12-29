@@ -98,10 +98,6 @@ public class AppInstaller implements IInstaller {
 						this.install(app,el);
 					}
 					
-					//如果是saas式，则需要进行saas安装
-					if("2".equals(ParamSetting.RUNMODE)   ){
-						this.saasInstall(app);
-					}
 				}
 				
 				if(this.logger.isDebugEnabled()){

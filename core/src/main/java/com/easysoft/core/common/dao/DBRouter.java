@@ -1,10 +1,6 @@
 package com.easysoft.core.common.dao;
 
-import com.easysoft.core.ParamSetting;
-import com.easysoft.core.context.EsfContext;
-import com.easysoft.core.model.Site;
 import com.easysoft.framework.db.IDBRouter;
-import com.easysoft.core.solution.factory.DBSolutionFactory;
 import com.easysoft.framework.utils.StringUtil;
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -31,25 +27,14 @@ public class DBRouter implements IDBRouter {
 
 	public String getTableName(String moudle) {
 		String result = StringUtil.addPrefix(moudle, prefix);
-		if ("1".equals(ParamSetting.RUNMODE)) {
-			return result;
-		}
-
-		Site site = EsfContext.getContext().getCurrentSite();
-		Integer userid = site.getUserid();
-		Integer siteid = site.getId();
-
-		return result + "_" + userid + "_" + siteid;
+		return result;
+		
 	}
 
 
     public void doSaasInstall(String xmlFile) {
-        //开发模式
-        if ("1".equals(ParamSetting.RUNMODE)) {
-             return;
-        }
-        this.prefix = (this.prefix == null ? "" : this.prefix);
-        DBSolutionFactory.dbImport(xmlFile, this.prefix);
+    	return;
+      
     }
 
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {

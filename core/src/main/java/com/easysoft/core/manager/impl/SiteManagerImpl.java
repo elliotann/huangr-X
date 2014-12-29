@@ -191,12 +191,9 @@ public class SiteManagerImpl implements ISiteManager {
 	private static class DnsMapper implements ParameterizedRowMapper<Dns> {
 
 		private String getContext(Site site) {
-			if ("2".equals(ParamSetting.RUNMODE)) {
-				return ParamSetting.IMG_SERVER_DOMAIN + "/user/"
-						+ site.getUserid() + "/" + site.getId();
-			} else {
+	
 				return ParamSetting.IMG_SERVER_DOMAIN;
-			}
+	
 		}
 
 		public Dns mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -296,12 +293,9 @@ public class SiteManagerImpl implements ISiteManager {
 	}
 
 	private String getContext(Site site) {
-		if ("2".equals(ParamSetting.RUNMODE)) {
-			return ParamSetting.IMG_SERVER_DOMAIN + "/user/" + site.getUserid()
-					+ "/" + site.getId();
-		} else {
+	
 			return ParamSetting.IMG_SERVER_DOMAIN;
-		}
+
 	}
 
 	public Site get(Integer id) {
@@ -514,24 +508,7 @@ public class SiteManagerImpl implements ISiteManager {
 	 * 方式为执行当前站点的init.sql
 	 */
 	public void initData() {
-		if ("2".equals(ParamSetting.RUNMODE)) {
-			// 加载产品的setup.xml文件
-			Site site = EsfContext.getContext().getCurrentSite();
-			String productId = site.getProductid();
-			org.dom4j.Document setupDoc = setupLoader.load(productId);
-
-			String tablenameperfix = "";
-
-			tablenameperfix = "_" + site.getUserid() + "_" + site.getId();
-
-			List listClean = setupDoc.getRootElement().element("clean")
-					.elements();
-			for (Object o : listClean) {
-				org.dom4j.Element table = (org.dom4j.Element) o;
-				this.daoSupport.execute("truncate table " + table.getText()
-						+ tablenameperfix);
-			}
-		}
+		
 
 		String sqlPath = ParamSetting.ESF_PATH
 				+ EsfContext.getContext().getContextPath() + "/init.sql";
@@ -539,19 +516,13 @@ public class SiteManagerImpl implements ISiteManager {
 		if (file.exists()) {
 			String content = FileUtil.read(sqlPath, "UTF-8");
 
-			if ("2".equals(ParamSetting.RUNMODE)) {
-				Site site = EsfContext.getContext().getCurrentSite();
-				content = content.replaceAll("<userid>", String.valueOf(site
-						.getUserid()));
-				content = content.replaceAll("<siteid>", String.valueOf(site
-						.getId()));
-			} else {
+			
 				content = content.replaceAll("_<userid>", "");
 				content = content.replaceAll("_<siteid>", "");
 				content = content.replaceAll("/user/<userid>/<siteid>", "");
 				content = content.replaceAll("<userid>", "1");
 				content = content.replaceAll("<siteid>", "1");
-			}
+			
 			try{
 				sqlFileExecutor.execute(content);
 			}catch(Exception e){
@@ -598,13 +569,10 @@ public class SiteManagerImpl implements ISiteManager {
 	 */
 	public List<JEAPApp> getSiteApps() {
 
-		if(ParamSetting.RUNMODE.equals("2")){
-			List<JEAPApp>   appList  = this.listSaasApp();
-			return appList;
-		}else{
+		
 			List<JEAPApp>   appList  = appManager.list();
 			return appList;
-		}
+		
 
 	}
 	private List<JEAPApp> listSaasApp(){

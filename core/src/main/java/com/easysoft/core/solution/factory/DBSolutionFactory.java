@@ -31,22 +31,10 @@ public class DBSolutionFactory {
         IDBSolution dbsolution = getDBSolution();
         dbsolution.setPrefix(prefix);
         dbsolution.setConnection(conn);
-        boolean result;
-        if (ParamSetting.RUNMODE.equals("1")) {
-            result = dbsolution.dbImport(xml);
-        }else {
-            Site site = EsfContext.getContext().getCurrentSite();
-            Integer userid = site.getUserid();
-            Integer siteid = site.getId();
-            result = dbsolution.dbSaasImport(xml, userid.intValue(), siteid.intValue());
-            try {
-                conn.close();
-            }catch (SQLException e) {
-                e.printStackTrace();
-                return false;
-            }
-        }
-        return result;
+
+        
+        return  dbsolution.dbImport(xml);
+
     }
     //得到数据库连接
     public static Connection getConnection(JdbcTemplate jdbcTemplate) {
@@ -68,15 +56,7 @@ public class DBSolutionFactory {
         IDBSolution dbsolution = getDBSolution();
         dbsolution.setPrefix(prefix);
         dbsolution.setConnection(conn);
-        String result = "";
-        if (ParamSetting.RUNMODE.equals("1")) {
-            result = dbsolution.dbExport(tables, dataOnly);
-        } else {
-            Site site = EsfContext.getContext().getCurrentSite();
-            Integer userid = site.getUserid();
-            Integer siteid = site.getId();
-            result = dbsolution.dbSaasExport(tables, dataOnly, userid.intValue(), siteid.intValue());
-        }
+        String   result = dbsolution.dbExport(tables, dataOnly);
         try {
             conn.close();
         } catch (SQLException e) {

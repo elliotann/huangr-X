@@ -38,36 +38,25 @@ public class AdminUserInstaller implements IInstaller {
 				int adminUserId = this.adminUserManager.add(site.getUserid(),
 						siteid, adminUser);
 				// 创建管理员时的密码为双md5了，更新为md5码
-				if (ParamSetting.RUNMODE.equals("2")) {
-					this.daoSupport.execute("update t_adminuser_" + userid
-							+ "_" + siteid + " set password=? where userid=?",
-							user.getPassword(), adminUserId);
-				} else {
+			
 					this.daoSupport
 							.execute(
 									"update t_adminuser  set password=? where userid=?",
 									user.getPassword(), adminUserId);
-				}
+				
 			} else { // 如果是本地导入，adminuser表已经清空，重新插入当前用户
 				AdminUser adminUser = this.adminUserManager.getCurrentUser();
 				String tablename = "t_adminuser";
-				if (ParamSetting.RUNMODE.equals("2")) { // saas式时表名变更
-					tablename = tablename + "_" + userid + "_" + siteid;
-				}
+				
 				this.daoSupport.insert(tablename, adminUser);
 				Integer adminuserid = adminUser.getId();
 
-				// 创建管理员时的密码为双md5了，更新为md5码
-				if (ParamSetting.RUNMODE.equals("2")) {
-					this.daoSupport.execute("update t_adminuser_" + userid
-							+ "_" + siteid + " set password=? where userid=?",
-							adminUser.getPassword(), adminuserid);
-				} else {
+				
 					this.daoSupport
 							.execute(
 									"update t_adminuser  set password=? where userid=?",
 									adminUser.getPassword(), userid);
-				}
+				
 			}
 		}
 	}

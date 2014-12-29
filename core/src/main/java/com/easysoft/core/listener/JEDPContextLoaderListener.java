@@ -22,15 +22,11 @@ public class JEDPContextLoaderListener implements ServletContextListener {
     }
 
     public void contextInitialized(ServletContextEvent event) {
-        if ((ParamSetting.INSTALL_LOCK.toUpperCase().equals("YES")) && ("1".equals(ParamSetting.RUNMODE))) {
+        if ((ParamSetting.INSTALL_LOCK.toUpperCase().equals("YES")) ) {
             IComponentManager componentManager = (IComponentManager) SpringContextHolder.getBean("componentManager");
             componentManager.startComponents();
         }
 
-        if (("2".equals(ParamSetting.RUNMODE)) && (ParamSetting.INSTALL_LOCK.toUpperCase().equals("YES"))) {
-            ISiteManager siteManager = (ISiteManager) SpringContextHolder.getBean("siteManager");
-            siteManager.getDnsList();
-        }
     }
 
 }
