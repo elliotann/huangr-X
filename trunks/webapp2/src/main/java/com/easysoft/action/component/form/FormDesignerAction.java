@@ -24,8 +24,6 @@ import com.easysoft.core.common.vo.json.DataGridReturn;
 import com.easysoft.framework.utils.JsonUtils;
 import com.easysoft.framework.utils.StringUtil;
 import com.easysoft.member.backend.manager.impl.UserServiceFactory;
-
-
 /**
  * User: andy
  * Date: 14-3-30
