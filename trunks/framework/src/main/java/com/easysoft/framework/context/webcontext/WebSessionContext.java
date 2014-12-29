@@ -5,7 +5,7 @@ import java.util.Set;
 
 public interface WebSessionContext<T> {
 
-	public static String sessionAttributeKey = "EOPSessionKey";
+	public static String sessionAttributeKey = "JeapSessionKey";
 
 	public  HttpSession getSession();
 
