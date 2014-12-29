@@ -2,7 +2,7 @@ package com.easysoft.core.dispatcher;
 
 import com.easysoft.core.ParamSetting;
 import com.easysoft.core.context.EsfContext;
-import com.easysoft.core.context.EsfContextIniter;
+import com.easysoft.core.context.JeapContextIniter;
 import com.easysoft.core.dispatcher.core.Response;
 import com.easysoft.core.dispatcher.core.freemarker.FreeMarkerParser;
 import com.easysoft.core.dispatcher.httpcache.HttpCacheManager;
@@ -47,7 +47,7 @@ public class DispatcherFilter implements Filter {
             }
         
           
-            EsfContextIniter.init(httpRequest, httpResponse);
+            JeapContextIniter.init(httpRequest, httpResponse);
            
             Processor processor = ProcessorFactory.newProcessorInstance(uri, httpRequest);
 
