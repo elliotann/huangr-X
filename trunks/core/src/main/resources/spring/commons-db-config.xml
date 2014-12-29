@@ -54,6 +54,53 @@
         <!--<property name="filters" value="mergeStat" />
       -->
     </bean>
+   <!--  <bean id="dataSource_mysql" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName">
+			<value>com.mysql.jdbc.Driver</value>
+		</property>
+		<property name="url">
+			<value>${jdbc.url}</value>
+		</property>
+		<property name="username">
+			<value>${jdbc.username}</value>
+		</property>
+		<property name="password">
+			<value>${jdbc.password}</value>
+		</property>
+		以下为可选参数
+		<property name="initialSize">
+			<value>10</value>
+		</property>
+		<property name="minIdle">
+			<value>10</value>
+		</property>
+		<property name="maxActive">
+			<value>100</value>
+		</property>
+		<property name="maxIdle">
+			<value>100</value>
+		</property>
+		<property name="validationQuery">
+			<value>select count(*) from dual</value>
+		</property>
+		<property name="testOnBorrow">
+			<value>true</value>
+		</property>
+		<property name="testOnReturn">
+			<value>true</value>
+		</property>
+		<property name="testWhileIdle">
+			<value>true</value>
+		</property>
+		大于0 ，进行连接空闲时间判断，或为0，对空闲的连接不进行验证
+		<property name="minEvictableIdleTimeMillis">
+			<value>60000</value>
+		</property>
+		失效检查线程运行时间间隔，如果小于等于0，不会启动检查线程
+		<property name="timeBetweenEvictionRunsMillis">
+			<value>300000</value>
+		</property>
+	</bean> -->
     <!-- 数据源集合 -->
     <bean id="dataSource" class="com.easysoft.framework.db.core.DynamicDataSource">
         <property name="targetDataSources">
