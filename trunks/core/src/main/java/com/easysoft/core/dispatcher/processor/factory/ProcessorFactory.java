@@ -21,8 +21,7 @@ public abstract class ProcessorFactory {
 	 * 
 	 * @param uri
 	 */
-    public static Processor newProcessorInstance(String uri, HttpServletRequest request)
-    {
+    public static Processor newProcessorInstance(String uri, HttpServletRequest request){
         Processor processor = null;
 
         if (uri.startsWith("/statics")) return null;
