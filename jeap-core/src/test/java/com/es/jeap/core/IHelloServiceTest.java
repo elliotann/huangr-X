@@ -4,6 +4,8 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.es.jeap.core.manager.IHelloService;
+
 public class IHelloServiceTest {
 	@Test
 	public void sayHello(){
