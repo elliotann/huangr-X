@@ -9,7 +9,56 @@
            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
            http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
-
-   
-
+    
+    <aop:aspectj-autoproxy />
+    <context:component-scan base-package="com.es.jeap.core"/>
+    <!-- 引入属性文件 -->
+    <context:property-placeholder location="classpath:config/jdbc.properties"/>
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	    <property name="driverClassName">
+			<value>${jdbc.driverClassName}</value>
+		</property>
+		<property name="url">
+			<value>${jdbc.url}</value>
+		</property>
+		<property name="username">
+			<value>${jdbc.username}</value>
+		</property>
+		<property name="password">
+			<value>${jdbc.password}</value>
+		</property>
+		
+		<property name="initialSize">
+			<value>10</value>
+		</property>
+		<property name="minIdle">
+			<value>10</value>
+		</property>
+		<property name="maxActive">
+			<value>100</value>
+		</property>
+		<property name="maxIdle">
+			<value>100</value>
+		</property>
+		<property name="validationQuery">
+			<value>${validationQuery}</value>
+		</property>
+		<property name="testOnBorrow">
+			<value>true</value>
+		</property>
+		<property name="testOnReturn">
+			<value>true</value>
+		</property>
+		<property name="testWhileIdle">
+			<value>true</value>
+		</property>
+		
+		<property name="minEvictableIdleTimeMillis">
+			<value>60000</value>
+		</property>
+		
+		<property name="timeBetweenEvictionRunsMillis">
+			<value>300000</value>
+		</property>
+	</bean>
 </beans>
