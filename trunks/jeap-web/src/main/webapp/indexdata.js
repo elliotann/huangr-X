@@ -1,8 +1,8 @@
 ﻿var indexdata = 
 [
-    { text: '基础',isexpand:false, children: [ 
-		{url:"demos/base/resizable.htm",text:"改变大小"},
-		{url:"demos/base/drag.htm",text:"拖动"},
+    { text: '系统管理',isexpand:false, children: [ 
+		{url:"demos/base/resizable.htm",text:"管理员管理"},
+		{url:"demos/base/drag.htm",text:"角色管理"},
 		{url:"demos/base/drag2.htm",text:"拖动2"},
 		{url:"demos/base/dragresizable.htm",text:"拖动并改变大小"},
 		{url:"demos/base/tip.htm",text:"气泡"},
