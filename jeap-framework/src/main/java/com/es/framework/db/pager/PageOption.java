@@ -9,6 +9,7 @@ import java.util.Map;
  * @author huangxa
  *
  */
+
 public class PageOption {
 	private static int DEFAULT_PAGE_SIZE = 10;
 
