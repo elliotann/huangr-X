@@ -34,8 +34,11 @@
 		  <version>3.1.1.RELEASE</version>
 		</dependency>
         <!-- 此处的类库根据自己的需要进行添加 -->
-
-       
+		<dependency>
+		  <groupId>javax.servlet.jsp.jstl</groupId>
+		  <artifactId>jstl-api</artifactId>
+		  <version>1.2</version>
+		</dependency>
     </dependencies>
     <build>
         <finalName>jeap</finalName>

@@ -8,8 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author huangxa
  *
  */
+
 @Controller
-@RequestMapping({"/core/admin/component"})
+@RequestMapping({"/admin/index"})
 public class IndexAction {
-	
+	@RequestMapping(params={"main"})
+	public String list(){
+		return "index";
+	}
 }
