@@ -13,7 +13,7 @@ public class AdminUser extends IdEntity{
 	private String email;
 	private int loginCount;
 	private String lastLoginTime;
-	@Column(name="username")
+	@Column(name="username",nullable=false)
 	public String getUsername() {
 		return username;
 	}
