@@ -4,15 +4,17 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.es.jeap.core.component.permission.dao.IAdminUserDao;
-import com.es.jeap.core.manager.IHelloService;
+import com.es.jeap.core.component.permission.entity.AdminUser;
+import com.es.jeap.core.component.permission.manager.IAdminUserManager;
 
 public class IHelloServiceTest {
 	@Test
 	public void sayHello(){
 
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:spring/*.xml");
-		IAdminUserDao helloService = (IAdminUserDao)ctx.getBean("adminUserDao");
-		helloService.save(null);
+		IAdminUserManager helloService = (IAdminUserManager)ctx.getBean("adminUserManager");
+		AdminUser adminUser = new AdminUser();
+		adminUser.setCreateBy("andy");
+		helloService.save(adminUser);
 	}
 }

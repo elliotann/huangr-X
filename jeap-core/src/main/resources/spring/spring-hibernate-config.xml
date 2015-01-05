@@ -11,7 +11,7 @@
            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
     <!-- 加载service,此时要排除要controller,因为controller已经spring-mvc中加载过了 -->
     <!-- 加载service,此时要排除要controller,因为controller已经spring-mvc中加载过了 -->
-    <context:component-scan base-package="com.es.jeap.core.component.permission.dao.*">
+    <context:component-scan base-package="com.es.jeap.core.component.permission.*">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
@@ -26,6 +26,7 @@
                 <prop key="hibernate.current_session_context_class">
                     org.springframework.orm.hibernate4.SpringSessionContext
                 </prop>
+              
             </props>
         </property>
         <!--注解方式配置 &ndash-->
@@ -36,11 +37,40 @@
         </property>
     </bean>
 
-
+ 	<aop:aspectj-autoproxy expose-proxy="true" />
+    <tx:annotation-driven transaction-manager="transactionManager"/>
     <!-- 配置事物管理器，在*ServiceImpl里写@Transactional就可以启用事物管理 -->
     <bean name="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
-    <tx:annotation-driven transaction-manager="transactionManager"/>
+   <tx:advice id="txAdvice" transaction-manager="transactionManager">
+    <tx:attributes>
+      <tx:method name="save*" propagation="REQUIRED" />
+      <tx:method name="add*" propagation="REQUIRED" />
+      <tx:method name="create*" propagation="REQUIRED" />
+      <tx:method name="insert*" propagation="REQUIRED" />
+      <tx:method name="update*" propagation="REQUIRED" />
+      <tx:method name="merge*" propagation="REQUIRED" />
+      <tx:method name="del*" propagation="REQUIRED" />
+      <tx:method name="remove*" propagation="REQUIRED" />
+      <tx:method name="put*" propagation="REQUIRED" />
+      <tx:method name="use*" propagation="REQUIRED" />
+      <!--hibernate4必须配置为开启事务 否则 getCurrentSession()获取不到 -->
+      <tx:method name="get*" propagation="REQUIRED" read-only="true" />
+      <tx:method name="count*" propagation="REQUIRED" read-only="true" />
+      <tx:method name="find*" propagation="REQUIRED" read-only="true" />
+      <tx:method name="list*" propagation="REQUIRED" read-only="true" />
+      <tx:method name="*" read-only="true" />
+    </tx:attributes>
+  </tx:advice>
+  <aop:config expose-proxy="true">
+    <!-- 只对业务逻辑层实施事务 -->
+    <aop:pointcut id="txPointcut"
+      expression="execution(* com.es..manager..*.*(..))" />
+    <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut" />
+  </aop:config>
+    
+	
 
+    
 </beans>
