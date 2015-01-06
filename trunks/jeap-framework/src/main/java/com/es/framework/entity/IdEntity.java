@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
 
 import com.es.framework.utils.DateUtils;
 
@@ -40,5 +41,8 @@ public abstract class IdEntity {
 	public void setCreateBy(String createBy) {
 		this.createBy = createBy;
 	}
-
+	@Transient
+	public boolean validate(){
+		return true;
+	}
 }
