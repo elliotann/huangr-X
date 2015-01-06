@@ -10,7 +10,6 @@
            http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
     <!-- 加载service,此时要排除要controller,因为controller已经spring-mvc中加载过了 -->
-    <!-- 加载service,此时要排除要controller,因为controller已经spring-mvc中加载过了 -->
     <context:component-scan base-package="com.es.jeap.core.component.permission.*">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
