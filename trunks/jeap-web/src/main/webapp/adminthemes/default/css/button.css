@@ -1,0 +1,45 @@
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0px;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 1.42857;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -moz-user-select: none;
+}
+.btn-primary {
+    color: #FFF;
+    background-color: #428BCA;
+    border-color: #357EBD;
+}
+.btn-primary:hover,.btn-primary:focus,.btn-primary:active,.btn-primary.active,.open .dropdown-toggle.btn-primary{
+	color:#fff;
+	background-color:#3276b1;
+	border-color:#285e8e
+}
+
+.btn-primary:active,.btn-primary.active,.open .dropdown-toggle.btn-primary{
+	background-image:none
+}
+
+
+.btn-primary.disabled,.btn-primary[disabled],fieldset[disabled] .btn-primary,.btn-primary.disabled:hover,.btn-primary[disabled]:hover,fieldset[disabled] .btn-primary:hover,.btn-primary.disabled:focus,.btn-primary[disabled]:focus,fieldset[disabled] .btn-primary:focus,.btn-primary.disabled:active,.btn-primary[disabled]:active,fieldset[disabled] .btn-primary:active,.btn-primary.disabled.active,.btn-primary[disabled].active,fieldset[disabled] .btn-primary.active{
+	background-color:#428bca;
+	border-color:#357ebd
+}
+.btn-info{
+	color:#fff;
+	background-color:#5bc0de;
+	border-color:#46b8da
+}
+a.easyui-linkbutton.l-btn-disabled span.l-btn-left,.easyui-linkbutton.l-btn-disabled:hover span.l-btn-left{
+    color: #ccc;
+    background:#f2f2f2;
+    border:1px solid #e2e2e2;
+}

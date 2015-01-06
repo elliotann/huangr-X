@@ -1,7 +1,7 @@
 ﻿var indexdata = 
 [
     { text: '系统管理',isexpand:false, children: [ 
-		{url:"demos/base/resizable.htm",text:"管理员管理"},
+		{url:"../admin/user.do?list",text:"管理员管理"},
 		{url:"demos/base/drag.htm",text:"角色管理"},
 		{url:"demos/base/drag2.htm",text:"拖动2"},
 		{url:"demos/base/dragresizable.htm",text:"拖动并改变大小"},
