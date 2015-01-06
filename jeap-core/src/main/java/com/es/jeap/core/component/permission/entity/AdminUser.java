@@ -3,6 +3,7 @@ package com.es.jeap.core.component.permission.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.es.framework.entity.IdEntity;
 @Entity
@@ -48,5 +49,6 @@ public class AdminUser extends IdEntity{
 	public void setLastLoginTime(String lastLoginTime) {
 		this.lastLoginTime = lastLoginTime;
 	}
+	
 	
 }
