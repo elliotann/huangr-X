@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>jQuery ligerUI Demos导航主页</title>
+    <title>esframe</title>
     <link href="/jeap1.0/js/admin/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />  
     <link rel="stylesheet" type="text/css" id="mylink"/>   
     <script src="/jeap1.0/js/commons/jquery-1.3.2.min.js" type="text/javascript"></script>    
@@ -111,37 +111,13 @@
                     url: url,
                     callback: function ()
                     {
-                        addShowCodeBtn(tabid); 
+                        
                         addFrameSkinLink(tabid); 
                     }
                 });
             }
-            function addShowCodeBtn(tabid)
-            {
-                var viewSourceBtn = $('<a class="viewsourcelink" href="javascript:void(0)">查看源码</a>');
-                var jiframe = $("#" + tabid);
-                viewSourceBtn.insertBefore(jiframe);
-                viewSourceBtn.click(function ()
-                {
-                    showCodeView(jiframe.attr("src"));
-                }).hover(function ()
-                {
-                    viewSourceBtn.addClass("viewsourcelink-over");
-                }, function ()
-                {
-                    viewSourceBtn.removeClass("viewsourcelink-over");
-                });
-            }
-            function showCodeView(src)
-            {
-                $.ligerDialog.open({
-                    title : '源码预览',
-                    url: 'dotnetdemos/codeView.aspx?src=' + src,
-                    width: $(window).width() *0.9,
-                    height: $(window).height() * 0.9
-                });
-
-            }
+           
+            
             function addFrameSkinLink(tabid)
             {
                 var prevHref = getLinkPrevHref(tabid) || "";
