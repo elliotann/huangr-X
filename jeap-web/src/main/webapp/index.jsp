@@ -286,7 +286,7 @@
         
     </div>
     <div  style="height:32px; line-height:32px; text-align:center;">
-            Copyright © 2011-2014 www.ligerui.com
+            Copyright © 2012-2015 www.esframe.com
     </div>
     <div style="display:none"></div>
 </body>
