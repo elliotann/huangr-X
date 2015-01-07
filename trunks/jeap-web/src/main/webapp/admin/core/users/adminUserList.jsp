@@ -6,6 +6,7 @@
 <title></title>
 <link href="/jeap1.0/js/admin/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
 <link href="/jeap1.0/adminthemes/default/css/button.css" rel="stylesheet" type="text/css" />
+<link href="/jeap1.0/adminthemes/default/css/global.css" rel="stylesheet" type="text/css" />
 <script src="/jeap1.0/js/commons/jquery-1.3.2.min.js" type="text/javascript"></script>
 <script src="/jeap1.0/js/admin/ligerui/js/core/base.js" type="text/javascript"></script>
 
