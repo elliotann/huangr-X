@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.es.framework.db.pager.PageOption;
 import com.es.framework.exception.ErrorCode;
+import com.es.framework.utils.EncryptUtils;
+import com.es.jeap.core.component.log.annotation.BusinessLog;
+import com.es.jeap.core.component.log.annotation.State;
 import com.es.jeap.core.component.permission.PermissionException;
 import com.es.jeap.core.component.permission.dao.IAdminUserDao;
 import com.es.jeap.core.component.permission.entity.AdminUser;
@@ -26,11 +29,13 @@ public class AdminUserManager implements IAdminUserManager {
 	}
 	@Autowired
 	private IAdminUserDao adminUserDao;
+	@BusinessLog(state = State.VALID,success = "增加用户")
 	public void save(AdminUser adminUser) {
 		if(adminUser==null) throw new PermissionException(AdminUserError.USER_IS_NULL);
 		if(StringUtils.isEmpty(adminUser.getUsername())) throw new PermissionException(AdminUserError.USERNAME_IS_NULL);
-		if(StringUtils.isEmpty(adminUser.getPassword())) throw new PermissionException(AdminUserError.PASSWORD_IS_NULL);
 		if(StringUtils.isEmpty(adminUser.getEmail())) throw new PermissionException(AdminUserError.EMAIL_IS_NULL);
+		adminUser.setPassword(EncryptUtils.md5("88888888"));
+		adminUser.setCreateBy("admin");//todo:后续替换成登录的用户名
 		adminUserDao.save(adminUser);
 	}
 	public void update(AdminUser adminuser) {
@@ -46,6 +51,12 @@ public class AdminUserManager implements IAdminUserManager {
 		pageOption.setData(adminUserDao.queryForList());
 		pageOption.setTotalCount(adminUsers.size());
 		return pageOption;
+	}
+	public AdminUser queryUserByName(String username) {
+		return adminUserDao.queryUserByName(username);
+	}
+	public AdminUser queryUserByEmail(String email) {
+		return adminUserDao.queryUserByEmail(email);
 	}
 
 }

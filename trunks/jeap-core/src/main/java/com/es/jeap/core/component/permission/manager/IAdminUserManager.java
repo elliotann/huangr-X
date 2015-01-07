@@ -8,4 +8,6 @@ public interface IAdminUserManager {
 	public void update(AdminUser adminuser);
 	public void deleteById(Integer id);
 	public PageOption queryUsers(PageOption pageOption);
+	public AdminUser queryUserByName(String username);
+	public AdminUser queryUserByEmail(String email);
 }
