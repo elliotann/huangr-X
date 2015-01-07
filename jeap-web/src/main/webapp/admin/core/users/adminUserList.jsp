@@ -17,7 +17,8 @@
 <script type="text/javascript">
     function delUser(userId)
     {
-        alert(item.text);
+    	$.ligerDialog.confirm('提示内容', function (yes) { alert(yes); });
+    	alert(userId);
     }
     var listgrid;
         $(function ()
