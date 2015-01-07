@@ -15,7 +15,7 @@
 <script src="../CustomersData.js" type="text/javascript"></script>
 <script src="/jeap1.0/js/admin/ligerui/js/plugins/ligerDialog.js" type="text/javascript"></script>
 <script type="text/javascript">
-    function itemclick(item)
+    function delUser(userId)
     {
         alert(item.text);
     }
@@ -40,7 +40,7 @@
                 	 }
                  } },
                  { display: '操作', name: '',width:'auto',render:function(item){
-                	 return "<a href='#'>修改</a>&nbsp;&nbsp;<a href='user.do?delete&id="+item.id+"'>删除</a>";
+                	 return "<a href='#'>修改</a>&nbsp;&nbsp;<a href='javascript:void(0)' onclick='delUser("+item.id+")'>删除</a>";
                  } }
                  ], url:'user.do?datalist',  pageSize:30 ,rownumbers:true
              });
