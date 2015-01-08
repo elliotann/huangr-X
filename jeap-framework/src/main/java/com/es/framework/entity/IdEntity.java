@@ -33,7 +33,7 @@ public abstract class IdEntity {
 	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
-	@Column(name="create_by",nullable=false)
+	@Column(name="create_by",nullable=false,updatable=false)
 	public String getCreateBy() {
 		return createBy;
 	}
