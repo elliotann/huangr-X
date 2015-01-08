@@ -1,8 +1,12 @@
 package com.es.jeap.core.component.permission.manager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.LikeExpression;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,23 +44,30 @@ public class AdminUserManager implements IAdminUserManager {
 	}
 	public void update(AdminUser adminuser) {
 		
-		
+		adminUserDao.update(adminuser);
 	}
 	public void deleteById(Integer id) {
-		// TODO Auto-generated method stub
+		adminUserDao.deleteById(id);
 		
 	}
 	public PageOption queryUsers(PageOption pageOption) {
-		List<AdminUser> adminUsers = adminUserDao.queryForList();
-		pageOption.setData(adminUserDao.queryForList());
-		pageOption.setTotalCount(adminUsers.size());
+		List<Criterion> criterions = new ArrayList<Criterion>();
+		if(pageOption.getSearchConditions().get("username")!=null&&!"".equals(pageOption.getSearchConditions().get("username").toString())){
+			criterions.add(Restrictions.like("username", pageOption.getSearchConditions().get("username")));
+		}
+		
+		adminUserDao.queryForPage(pageOption,criterions);
+		
 		return pageOption;
 	}
-	public AdminUser queryUserByName(String username) {
-		return adminUserDao.queryUserByName(username);
+	public AdminUser queryUserByName(String username,Integer id) {
+		return adminUserDao.queryUserByName(username,id);
 	}
-	public AdminUser queryUserByEmail(String email) {
-		return adminUserDao.queryUserByEmail(email);
+	public AdminUser queryUserByEmail(String email,Integer id) {
+		return adminUserDao.queryUserByEmail(email,id);
+	}
+	public AdminUser queryUserById(Integer id) {
+		return adminUserDao.queryById(id);
 	}
 
 }
