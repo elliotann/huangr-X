@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="/common/taglibs.jsp"%>
 <!DOCTYPE html>
 <html>
 <head><title>
@@ -37,7 +38,8 @@
                         type:'post',
                         dataType:'json',
                         data:{
-                            username:function(){return $("#username").val();}
+                            username:function(){return $("#username").val();},
+                            id:${adminUser.id}
                         }
 
                     }
@@ -50,7 +52,8 @@
                         type:'post',
                         dataType:'json',
                         data:{
-                            email:function(){return $("#email").val();}
+                            email:function(){return $("#email").val();},
+                            id:${adminUser.id}
                         }
 
                     }
@@ -84,7 +87,7 @@
             },
             submitHandler: function () {
             	$.ajax({
-            		url:'user.do?add',
+            		url:'user.do?edit',
             		type:'post',
             		dataType:'json',
             		data:$('#objForm').serialize(),
@@ -131,12 +134,13 @@
 <body style="padding:10px">
 
 	<form name="objForm" method="post" id="objForm">
+		<input type="hidden" id="userId" name="id" value="${adminUser.id }"/>
 		<div></div>
 		<table cellpadding="0" cellspacing="0" class="l-table-edit">
 			<tr>
 				<td align="right" class="l-table-edit-td">用户名:</td>
 				<td align="left" class="l-table-edit-td"><input name="username"
-					type="text" id="username" ltype="text" /></td>
+					type="text" id="username" ltype="text" value="${adminUser.username }"/></td>
 				<td align="left"></td>
 			</tr>
 
@@ -144,14 +148,13 @@
 				<td align="right" class="l-table-edit-td" valign="top">姓名:</td>
 				<td align="left" class="l-table-edit-td"><input name="realName"
 					type="text" id="realName" ltype="text"
-					validate="{required:true,minlength:3,maxlength:10}" /></td>
+					validate="{required:true,minlength:3,maxlength:10}"  value="${adminUser.realName }"/></td>
 				<td align="left"></td>
 			</tr>
 			<tr>
 				<td align="right" class="l-table-edit-td">Email:</td>
 				<td align="left" class="l-table-edit-td"><input name="email"
-					type="text" id="email" ltype="text"
-					/></td>
+					type="text" id="email" ltype="text" value="${adminUser.email }"/></td>
 				<td align="left"></td>
 			</tr>
 
@@ -159,13 +162,13 @@
 			<tr>
 				<td align="right" class="l-table-edit-td">办公电话:</td>
 				<td align="left" class="l-table-edit-td"><input name="tel"
-					type="text" id="tel" ltype="text" /></td>
+					type="text" id="tel" ltype="text" value="${adminUser.tel }"/></td>
 				<td align="left"></td>
 			</tr>
 			<tr>
 				<td align="right" class="l-table-edit-td">手机:</td>
 				<td align="left" class="l-table-edit-td"><input name="phone"
-					type="text" id="phone" ltype='text' /></td>
+					type="text" id="phone" ltype='text' value="${adminUser.phone }"/></td>
 				<td align="left"></td>
 			</tr>
 			<tr>
@@ -177,11 +180,12 @@
 				</select></td>
 			</tr>
 			<tr>
+				
 				<td align="right" class="l-table-edit-td" valign="top">状态:</td>
 				<td align="left" class="l-table-edit-td"><input id="rbtnl_0"
-					type="radio" name="status" value="ACTIVE" checked="checked" /><label
+					type="radio" name="status" value="ACTIVE"  <c:if test="${adminUser.status eq 'ACTIVE' }">checked='checked'</c:if> /><label
 					for="rbtnl_0">激活</label> <input id="rbtnl_1" type="radio"
-					name="status" value="INACTIVE" /><label for="rbtnl_1">禁用</label></td>
+					name="status" value="INACTIVE" <c:if test="${adminUser.status eq 'INACTIVE' }">checked='checked'</c:if>/><label for="rbtnl_1">禁用</label></td>
 				<td align="left"></td>
 			</tr>
 		</table>
