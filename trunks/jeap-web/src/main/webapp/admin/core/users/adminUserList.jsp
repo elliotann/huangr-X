@@ -9,18 +9,49 @@
 <link href="/jeap1.0/adminthemes/default/css/global.css" rel="stylesheet" type="text/css" />
 <script src="/jeap1.0/js/commons/jquery-1.3.2.min.js" type="text/javascript"></script>
 <script src="/jeap1.0/js/admin/ligerui/js/core/base.js" type="text/javascript"></script>
-
 <script src="/jeap1.0/js/admin/ligerui/js/plugins/ligerGrid.js" type="text/javascript"></script>
+<script src="/jeap1.0/js/admin/ligerui/js/plugins/ligerForm.js" type="text/javascript"></script>
 <script src="/jeap1.0/js/admin/ligerui/js/plugins/ligerResizable.js" type="text/javascript"></script>
 <script src="../CustomersData.js" type="text/javascript"></script>
 <script src="/jeap1.0/js/admin/ligerui/js/plugins/ligerDialog.js" type="text/javascript"></script>
+ <script src="/jeap1.0/js/admin/ligerui/js/plugins/ligerToolBar.js" type="text/javascript"></script>
 <script type="text/javascript">
+var listgrid;
+var lab = {};
     function delUser(userId)
     {
-    	$.ligerDialog.confirm('提示内容', function (yes) { alert(yes); });
-    	alert(userId);
+    	$.ligerDialog.confirm('确认删除?', function (yes) { 
+    		if(yes){
+    			$.ajax({
+    				url:'user.do?delete',
+    				type:'post',
+    				data:'id='+userId,
+    				dataType:'json',
+    				success:function(result){
+    					if(result.success){
+    						$.ligerDialog.waitting(result.msg);
+    						setTimeout(function ()
+    	                            {
+    	                            	$.ligerDialog.closeWaitting();
+    	                                listgrid.loadData();
+    	                            }, 2000);
+    					}
+    				}
+    			});
+    		}
+    	});
+    	
     }
-    var listgrid;
+    function toEdit(userId){
+    	$.ligerDialog.open({name:'openDiag', title:'修改用户',url: 'user.do?toEdit&id='+userId, height: 300, width: null, 
+    			buttons: [
+                     { text: '确定', onclick: function (item, dialog) { openDiag.submitForm(); },cls:'l-dialog-btn-highlight' },
+                     { text: '取消', onclick: function (item, dialog) { dialog.close(); } }
+                  ], isResize: true,width:600,height:500
+                 });
+    	
+    }
+    
         $(function ()
         {
         	listgrid =  $("#maingrid4").ligerGrid({
@@ -41,10 +72,47 @@
                 	 }
                  } },
                  { display: '操作', name: '',width:'auto',render:function(item){
-                	 return "<a href='#'>修改</a>&nbsp;&nbsp;<a href='javascript:void(0)' onclick='delUser("+item.id+")'>删除</a>";
+                	 return "<a href='javascript:void(0)' onclick='toEdit("+item.id+")'>修改</a>&nbsp;&nbsp;<a href='javascript:void(0)' onclick='delUser("+item.id+")'>删除</a>";
                  } }
-                 ], url:'user.do?datalist',  pageSize:30 ,rownumbers:true
+                 ], url:'user.do?datalist',  pageSize:30 ,rownumbers:true,
+                 toolbar:{ items: [
+                                            { text: '增加', click: addUser, icon: 'add' },
+                                            { line: true }]
+                                            }
              });
+        	//搜索框 收缩/展开
+        	$(".searchtitle .togglebtn").live('click', function ()
+        	{
+        	    if ($(this).hasClass("togglebtn-down")) $(this).removeClass("togglebtn-down");
+        	    else $(this).addClass("togglebtn-down");
+        	    var searchbox = $(this).parent().nextAll("div.searchbox:first");
+        	    searchbox.slideToggle('fast');
+        	}); 
+        	var fields=[{ display: "用户名", name: "username", type: "text" ,width:470,id:'username' }];
+        	//$("#searchForm").ligerForm({fields:fields});
+        	var griddata;
+         	$("#btn1container").click(function(){
+         		
+         		/* $.ajax({
+                    url: 'user.do?datalist',
+                    dataType: 'json',
+                    type: 'POST',
+                    data:'username='+$('#username').val(),
+                    success: function (result) {
+                        if (result.total > 0) {
+                            griddata = JSON.stringify(result);
+                            alert(JSON.stringify(result));
+                            
+                        }
+                    }
+                });
+         	
+         		listgrid.options.data = $.extend(true,{}, griddata);
+                listgrid.showFilter(); */
+         		//listgrid.loadData(griddata);
+         		 listgrid.loadServerData("username="+$("#username").val());
+                 return false;
+         	});
         });
         function addUser()
         {
@@ -53,22 +121,41 @@
                 { text: '取消', onclick: function (item, dialog) { dialog.close(); } }
              ], isResize: true,width:600,height:500
             });
-        }
+        } 
+  		function itemclick(item){
+  			
+  		}
+  	//过滤属性  
+        function f_getWhere() {
+            //  alert(JSON.stringify(griddata));  
+            if (!listgrid) return null;
+
+           var clause = function (rowdata, rowindex) {
+                
+  
+                return ((rowdata.UserName.indexOf(username) > -1) );
+            };
+            return clause;
+        }  
     </script>
 </head>
 <body style="padding: 3px; overflow: hidden;">
-	<div id="tb" style="height: auto">
-		<a href="javascript:void(0)" class="btn btn-primary" onclick="addUser()">增加</a><span
-			style="float: right;"><span id="simpleSearch"><input
-				id="32131" class="form-control" type="text" value="" size="30"
-				style="width: 200px;" placeholder="栽植" name="313"><a
-					href="javascript:void(0)" class="easyui-linkbutton"
-					data-options="plain:true" onclick="">搜索</a></span><a
-			href="javascript:void(0)" class="button" data-options="plain:true"
-			id="aAdvanced">高级搜索</a></span>
+	<div>
+		<div style="width: 98%">
+			<div class="searchtitle">
+				<span>搜索</span><img src="../icons/searchtool.gif" />
+				<div class="togglebtn"></div>
+			</div>
+			<div class="navline" style="margin-bottom: 4px; margin-top: 4px;"></div>
+			<div class="searchbox">
+				<form id="searchForm">
+					用户名：<input type="text" value="" class="liger-textbox" id="username"/> 
+				</form>
+				<ul><li id="btn1container"><div class="button button2 buttonnoicon" style="width:60px"><div class="button-l"> </div><div class="button-r"> </div> <span>搜索</span></div></li></ul>
+				<div class="l-clear"></div>
+			</div>
+		</div>
+		<div id="maingrid4" style="margin: 0; padding: 0"></div>
 	</div>
-	<div style="display: block;" class="searchAdvanced"><input id="Advanced" name="Advanced" type="hidden" value="0"/><table width="98%" border="0" cellspacing="0" cellpadding="8">
-	<tr><th width="70" align="right">234234</th><td><input type="text"/></td>
-	<div id="maingrid4" style="margin: 0; padding: 0"></div>
 </body>
 </html>
