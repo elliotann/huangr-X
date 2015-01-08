@@ -67,9 +67,12 @@ public class HibernateGenericDao<T,PK extends Serializable> implements IGenericD
             criteria.add(criterion);
         }
         pageOption.setTotalCount(criteria.list().size());
+        System.out.println(pageOption.getStartRecord());
+        System.out.println(pageOption.getPageSize());
         criteria.setFirstResult(pageOption.getStartRecord());
         criteria.setMaxResults(pageOption.getPageSize());
         List<T> results = criteria.list();
+        pageOption.setData(results);
 
         return results;
     }
