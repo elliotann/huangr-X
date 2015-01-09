@@ -8,16 +8,16 @@ import java.util.List;
  * @author 
  * 
  */
-public class DataGridReturn {
+public class DataGridReturn<T> {
 
-	public DataGridReturn(long total, List rows) {
+	public DataGridReturn(long total, List<T> rows) {
 		this.total = total;
 		this.rows = rows;
 	}
 
 	private long total;// 总记录数
-	private List rows;// 每行记录
-	private List footer;
+	private List<T> rows;// 每行记录
+
 
 	public long getTotal() {
 		return total;
@@ -27,20 +27,12 @@ public class DataGridReturn {
 		this.total = total;
 	}
 
-	public List getRows() {
+	public List<T> getRows() {
 		return rows;
 	}
 
-	public void setRows(List rows) {
+	public void setRows(List<T> rows) {
 		this.rows = rows;
-	}
-
-	public List getFooter() {
-		return footer;
-	}
-
-	public void setFooter(List footer) {
-		this.footer = footer;
 	}
 
 }
