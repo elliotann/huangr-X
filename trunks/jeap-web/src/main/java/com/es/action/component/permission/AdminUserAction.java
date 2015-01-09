@@ -30,7 +30,7 @@ public class AdminUserAction {
 	public DataGridReturn datalist(PageOption pageOption,String username){
 		pageOption.addSearch("username", username);
 		adminUserManager.queryUsers(pageOption);
-		DataGridReturn dataGridReturn = new DataGridReturn(pageOption.getTotalCount(),(List<AdminUser>)pageOption.getResult());
+		DataGridReturn<AdminUser> dataGridReturn = new DataGridReturn<AdminUser>(pageOption.getTotalCount(),(List<AdminUser>)pageOption.getResult());
 		return dataGridReturn;
 	}
 	@RequestMapping(params={"toAdd"})
