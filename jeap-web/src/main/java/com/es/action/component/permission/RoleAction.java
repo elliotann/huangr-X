@@ -51,4 +51,11 @@ public class RoleAction {
 		params.put("role",role);
 		return new ModelAndView("admin/core/role/editRole",params);
 	}
+	@RequestMapping(params={"edit"})
+	@ResponseBody
+	public AjaxJsonResult edit(Role role){
+		roleManager.update(role);
+		AjaxJsonResult result = new AjaxJsonResult();
+		return result;
+	}
 }

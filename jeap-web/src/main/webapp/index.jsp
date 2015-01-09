@@ -279,7 +279,7 @@
                     </div> 
         </div>
         <div position="center" id="framecenter"> 
-            <div tabid="home" title="我的主页" style="height:300px" >
+            <div tabid="home" title="桌面" style="height:300px" >
                 <iframe frameborder="0" name="home" id="home" src="welcome.htm"></iframe>
             </div> 
         </div> 

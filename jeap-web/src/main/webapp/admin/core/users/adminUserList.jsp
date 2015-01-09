@@ -15,6 +15,7 @@
 <script src="../CustomersData.js" type="text/javascript"></script>
 <script src="/jeap1.0/js/admin/ligerui/js/plugins/ligerDialog.js" type="text/javascript"></script>
  <script src="/jeap1.0/js/admin/ligerui/js/plugins/ligerToolBar.js" type="text/javascript"></script>
+ <script src="/jeap1.0/js/admin/crud.js" type="text/javascript"></script>
 <script type="text/javascript">
 	var listgrid;
 	$(function (){
@@ -59,46 +60,13 @@
      });
     function delUser(userId)
     {
-    	$.ligerDialog.confirm('确认删除?', function (yes) { 
-    		if(yes){
-    			$.ajax({
-    				url:'user.do?delete',
-    				type:'post',
-    				data:'id='+userId,
-    				dataType:'json',
-    				success:function(result){
-    					if(result.success){
-    						$.ligerDialog.waitting(result.msg);
-    						setTimeout(function ()
-    	                            {
-    	                            	$.ligerDialog.closeWaitting();
-    	                                listgrid.loadData();
-    	                            }, 2000);
-    					}
-    				}
-    			});
-    		}
-    	});
-    	
+    	CRUD.delObj('user.do?delete',userId);
     }
     function toEdit(userId){
-    	$.ligerDialog.open({name:'openDiag', title:'修改用户',url: 'user.do?toEdit&id='+userId, height: 300, width: null, 
-    			buttons: [
-                     { text: '确定', onclick: function (item, dialog) { openDiag.submitForm(); },cls:'l-dialog-btn-highlight' },
-                     { text: '取消', onclick: function (item, dialog) { dialog.close(); } }
-                  ], isResize: true,width:600,height:500
-                 });
-    	
+    	CRUD.addOrUpdateDialog('修改用户','user.do?toEdit&id='+userId,300,null);
     }
-    
-        
-    function addUser()
-    {
-        $.ligerDialog.open({name:'openDiag',title:'增加用户',url: 'user.do?toAdd', height: 300, width: null, buttons: [
-            { text: '确定', onclick: function (item, dialog) { openDiag.submitForm(); },cls:'l-dialog-btn-highlight' },
-            { text: '取消', onclick: function (item, dialog) { dialog.close(); } }
-         ], isResize: true,width:600,height:500
-        });
+    function addUser(){
+        CRUD.addOrUpdateDialog('增加用户','user.do?toAdd',300,null);
     } 
     </script>
 </head>
