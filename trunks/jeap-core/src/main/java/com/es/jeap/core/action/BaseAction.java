@@ -10,5 +10,10 @@ import com.es.jeap.core.common.json.DataGridReturn;
 import com.es.jeap.core.component.permission.entity.AdminUser;
 
 public abstract class BaseAction {
-	
+	@RequestMapping(params={"list"})
+	public String list(){
+		return listResult();
+		
+	}
+	protected abstract String listResult();
 }
