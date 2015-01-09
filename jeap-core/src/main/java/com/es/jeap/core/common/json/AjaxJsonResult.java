@@ -1,5 +1,9 @@
 package com.es.jeap.core.common.json;
-
+/**
+ * ajax操作结果返回对象
+ * @author huangxa
+ *
+ */
 public class AjaxJsonResult {
 	private boolean success = true;
 	private String msg="操作成功!";
