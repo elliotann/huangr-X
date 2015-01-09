@@ -22,7 +22,10 @@ import com.es.jeap.core.component.permission.manager.IAdminUserManager;
 public class AdminUserAction extends BaseAction{
 	@Autowired
 	private IAdminUserManager adminUserManager;
-	
+	@RequestMapping(params={"list"})
+	public String list(){
+		return "admin/core/users/adminUserList";
+	}
 	@RequestMapping(params={"datalist"})
 	@ResponseBody
 	public DataGridReturn datalist(PageOption pageOption,String username){
