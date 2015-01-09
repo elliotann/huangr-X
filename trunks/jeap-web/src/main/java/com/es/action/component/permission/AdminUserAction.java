@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.es.framework.db.pager.PageOption;
+import com.es.jeap.core.action.BaseAction;
 import com.es.jeap.core.common.json.AjaxJsonResult;
 import com.es.jeap.core.common.json.DataGridReturn;
 import com.es.jeap.core.component.permission.entity.AdminUser;
@@ -18,13 +19,10 @@ import com.es.jeap.core.component.permission.manager.IAdminUserManager;
 
 @Controller
 @RequestMapping({"/admin/user"})
-public class AdminUserAction {
+public class AdminUserAction extends BaseAction{
 	@Autowired
 	private IAdminUserManager adminUserManager;
-	@RequestMapping(params={"list"})
-	public String list(){
-		return "admin/core/users/adminUserList";
-	}
+	
 	@RequestMapping(params={"datalist"})
 	@ResponseBody
 	public DataGridReturn datalist(PageOption pageOption,String username){

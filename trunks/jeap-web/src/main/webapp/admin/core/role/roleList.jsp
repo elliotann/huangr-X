@@ -31,7 +31,7 @@
              	 }
               } },
               { display: '操作', name: '',width:'auto',render:function(item){
-             	 return "<a href='javascript:void(0)' onclick='toEdit("+item.id+")'>修改</a>&nbsp;&nbsp;<a href='javascript:void(0)' onclick='delUser("+item.id+")'>删除</a>";
+             	 return "<a href='javascript:void(0)' onclick='toEdit("+item.id+")'>修改</a>&nbsp;&nbsp;<a href='javascript:void(0)' onclick='delUser("+item.id+")'>删除</a>&nbsp;&nbsp;<a href='javascript:void(0)' onclick='delUser("+item.id+")'>分配权限</a>";
               } }
               ], url:'role.do?datalist',  pageSize:30 ,rownumbers:true,
               toolbar:{ items: [

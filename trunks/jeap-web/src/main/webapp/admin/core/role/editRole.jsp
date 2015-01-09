@@ -57,7 +57,7 @@
             },
             submitHandler: function () {
             	$.ajax({
-            		url:'role.do?add',
+            		url:'role.do?edit',
             		type:'post',
             		dataType:'json',
             		data:$('#objForm').serialize(),
@@ -104,6 +104,7 @@
 <body style="padding:10px">
 
 	<form name="objForm" method="post" id="objForm">
+		<input type="hidden" name="id" value="${role.id }"/>
 		<div></div>
 		<table cellpadding="0" cellspacing="0" class="l-table-edit">
 			<tr>
