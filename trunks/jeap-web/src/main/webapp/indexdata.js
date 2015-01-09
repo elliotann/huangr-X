@@ -2,7 +2,7 @@
 [
     { text: '系统管理',isexpand:false, children: [ 
 		{url:"../admin/user.do?list",text:"管理员管理"},
-		{url:"demos/base/drag.htm",text:"角色管理"}
+		{url:"../admin/role.do?list",text:"角色管理"}
 	]
     },   
 ];
