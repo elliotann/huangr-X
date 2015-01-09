@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ include file="/common/taglibs.jsp"%>
 <!DOCTYPE html>
 <html>
 <head><title>
@@ -27,35 +28,7 @@
     $(function () {
         $.metadata.setType("attr", "validate");
         var v = $("form").validate({
-        	rules:{
-                username:{
-                    required:true,
-                    minlength:3,
-                    maxlength:10,
-                    remote:{
-                        url:'user.do?checkNameExist',
-                        type:'post',
-                        dataType:'json',
-                        data:{
-                            username:function(){return $("#username").val();}
-                        }
-
-                    }
-                },
-                email:{
-                    required:true,
-                    email:true,
-                    remote:{
-                        url:'user.do?checkEmailExist',
-                        type:'post',
-                        dataType:'json',
-                        data:{
-                            email:function(){return $("#email").val();}
-                        }
-
-                    }
-                }
-            },
+        	
             //调试状态，不会提交数据的
             debug: true,
             errorPlacement: function (lable, element) {
@@ -84,7 +57,7 @@
             },
             submitHandler: function () {
             	$.ajax({
-            		url:'user.do?add',
+            		url:'role.do?add',
             		type:'post',
             		dataType:'json',
             		data:$('#objForm').serialize(),
@@ -134,54 +107,17 @@
 		<div></div>
 		<table cellpadding="0" cellspacing="0" class="l-table-edit">
 			<tr>
-				<td align="right" class="l-table-edit-td">用户名:</td>
-				<td align="left" class="l-table-edit-td"><input name="username"
-					type="text" id="username" ltype="text" /></td>
-				<td align="left"></td>
-			</tr>
-
-			<tr>
-				<td align="right" class="l-table-edit-td" valign="top">姓名:</td>
-				<td align="left" class="l-table-edit-td"><input name="realName"
-					type="text" id="realName" ltype="text"
-					validate="{required:true,minlength:3,maxlength:10}" /></td>
+				<td align="right" class="l-table-edit-td">角色名称:</td>
+				<td align="left" class="l-table-edit-td"><input name="roleName"	type="text" id="roleName" ltype="text" validate="{required:true}" value="${role.roleName }"/></td>
 				<td align="left"></td>
 			</tr>
 			<tr>
-				<td align="right" class="l-table-edit-td">Email:</td>
-				<td align="left" class="l-table-edit-td"><input name="email"
-					type="text" id="email" ltype="text"
-					/></td>
-				<td align="left"></td>
-			</tr>
-
-
-			<tr>
-				<td align="right" class="l-table-edit-td">办公电话:</td>
-				<td align="left" class="l-table-edit-td"><input name="tel"
-					type="text" id="tel" ltype="text" /></td>
-				<td align="left"></td>
-			</tr>
-			<tr>
-				<td align="right" class="l-table-edit-td">手机:</td>
-				<td align="left" class="l-table-edit-td"><input name="phone"
-					type="text" id="phone" ltype='text' /></td>
-				<td align="left"></td>
-			</tr>
-			<tr>
-				<td align="right" class="l-table-edit-td">公司:</td>
-				<td align="left" class="l-table-edit-td"><select
-					name="companyId" id="companyId" ltype="select">
-						<option value="1">小黄人集团</option>
-						<option value="2">小黄人长沙公司</option>
-				</select></td>
-			</tr>
-			<tr>
+				
 				<td align="right" class="l-table-edit-td" valign="top">状态:</td>
 				<td align="left" class="l-table-edit-td"><input id="rbtnl_0"
-					type="radio" name="status" value="ACTIVE" checked="checked" /><label
+					type="radio" name="status" value="ACTIVE"  <c:if test="${role.status eq 'ACTIVE' }">checked='checked'</c:if> /><label
 					for="rbtnl_0">激活</label> <input id="rbtnl_1" type="radio"
-					name="status" value="INACTIVE" /><label for="rbtnl_1">禁用</label></td>
+					name="status" value="INACTIVE" <c:if test="${role.status eq 'INACTIVE' }">checked='checked'</c:if>/><label for="rbtnl_1">禁用</label></td>
 				<td align="left"></td>
 			</tr>
 		</table>
