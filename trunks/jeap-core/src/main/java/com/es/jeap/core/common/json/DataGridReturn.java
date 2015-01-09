@@ -3,7 +3,7 @@ package com.es.jeap.core.common.json;
 import java.util.List;
 
 /**
- * 后台向前台返回JSON，用于easyui的datagrid
+ * 后台向前台返回JSON，用于ligerui的datagrid
  * 
  * @author 
  * 
