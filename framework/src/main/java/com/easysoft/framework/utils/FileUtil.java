@@ -1,13 +1,10 @@
 package com.easysoft.framework.utils;
-
-
 import org.apache.commons.io.FileUtils;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.taskdefs.Delete;
 import org.apache.tools.ant.taskdefs.Expand;
 
 import java.io.*;
-
 /**
  * 文件工具类
  * 
