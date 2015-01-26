@@ -2,7 +2,6 @@ package com.easysoft.core.listener;
 
 import com.easysoft.core.ParamSetting;
 import com.easysoft.core.manager.IComponentManager;
-import com.easysoft.core.manager.ISiteManager;
 import com.easysoft.framework.utils.SpringContextHolder;
 
 import javax.servlet.ServletContextEvent;
@@ -15,7 +14,6 @@ import javax.servlet.ServletContextListener;
  * @author andy
  */
 public class JEDPContextLoaderListener implements ServletContextListener {
-
 
     public void contextDestroyed(ServletContextEvent event) {
 
