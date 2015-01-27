@@ -52,7 +52,7 @@ public class AdminUserAction extends BaseController{
     @RequestMapping(params = {"dataGrid"})
     public ModelAndView dataGrid(Integer rows,Integer page,String username){
         PageOption pageOption = new PageOption();
-        pageOption.setPageSize(rows);
+        //pageOption.setPageSize(rows);
         pageOption.setCurrentPageNo(page);
         if(StringUtils.isEmpty(username)){
             username=null;
