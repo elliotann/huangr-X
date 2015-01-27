@@ -56,9 +56,34 @@ var BackendUi = {
             if (founder == 1 && (v.id == 237 || v.id == 244 || v.id == 266)) {
             } else {
                 var link = $("<a  target='" + v.target + "' href='" + v.url + "'><span>" + v.text + "</span></a>");
-                $("<li></li>").appendTo($(".tabmenu>ul")).append(link);
+      
+                var parentDiv = $("<div></div>");
+                parentDiv.addClass('l-scroll');
+                parentDiv.attr('title',v.text);
+                parentDiv.appendTo($("#accordion1"));
+                var treeUL = $("<ul></ul>");
+                treeUL.attr('id','tree'+v.id);
+                treeUL.css('margin-top','3px');
+                treeUL.appendTo(parentDiv);
                 var children = v.children;
-
+                $("#tree"+v.id).ligerTree({
+                    data : children,
+                    checkbox: false,
+                    slide: false,
+                    nodeWidth: 120,
+                    attribute: ['nodename', 'url'],
+                    onSelect: function (node)
+                    {
+                        if (!node.data.url) return;
+                        var tabid = $(node.target).attr("tabid");
+                        if (!tabid)
+                        {
+                            tabid = new Date().getTime();
+                            $(node.target).attr("tabid", tabid)
+                        } 
+                        f_addTab(tabid, node.data.text, node.data.url);
+                    }
+                });
                 link.click(function () {
                     if (children) {
                         self.disAppChildren(children);
