@@ -6,7 +6,8 @@
 <title></title>
 <link href="${context }/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
 <link href="/jeap1.0/adminthemes/default/css/button.css" rel="stylesheet" type="text/css" />
-<link href="/jeap1.0/adminthemes/default/css/global.css" rel="stylesheet" type="text/css" />
+<link href="${context }/css/global.css" rel="stylesheet" type="text/css" />
+
 <script type="text/javascript" src="${staticserver }/js/common/jquery-1.6.4.js"></script> 
 <script src="${context }/js/ligerui/js/core/base.js" type="text/javascript"></script>
 <script src="${context }/js/ligerui/js/plugins/ligerGrid.js" type="text/javascript"></script>
@@ -20,7 +21,7 @@
 	var listgrid;
 	$(function (){
      	listgrid =  $("#maingrid").ligerGrid({
-              height:'100%',
+              height:'99%',
               columns: [
               { display: '用户名', name: 'username', align: 'center', width: 100, minWidth: 60 },
               { display: '姓名', name: 'realName', align: 'center', width: 100, minWidth: 60 },
@@ -69,6 +70,7 @@
         CRUD.addOrUpdateDialog('增加用户','user.do?toAdd',300,null);
     } 
     </script>
+ 
 </head>
 <body style="padding: 3px; overflow: hidden;">
 	<div>
