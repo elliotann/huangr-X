@@ -40,7 +40,7 @@
               { display: '操作', name: '',width:'auto',render:function(item){
              	 return "<a href='javascript:void(0)' onclick='toEdit("+item.id+")'>修改</a>&nbsp;&nbsp;<a href='javascript:void(0)' onclick='delUser("+item.id+")'>删除</a>";
               } }
-              ], url:'user.do?datalist',  pageSize:30 ,rownumbers:true,
+              ], url:'userAdmin.do?dataGrid&ajax=yes',  pageSize:30 ,rownumbers:true,
               toolbar:{ items: [
                                          { text: '增加', click: addUser, icon: 'add' },
                                          { line: true }]
