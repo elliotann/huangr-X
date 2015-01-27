@@ -84,25 +84,7 @@ var BackendUi = {
                         f_addTab(tabid, node.data.text, node.data.url);
                     }
                 });
-                link.click(function () {
-                    if (children) {
-                        self.disAppChildren(children);
-                    }
-                    $(".tabmenu li").removeClass("current");
-                    $(this).parent().addClass("current");
-
-                    return false;
-                });
-
-                if (i == 0) {
-                    var href = link.attr("href");
-                    var target = link.attr("target");
-                    link.attr("href", app_path + "/core/admin/index.do");
-                    link.removeAttr("target");
-                    link.click();
-                    link.attr("href", href);
-                    link.attr("target", target);
-                }
+               
                 i++;
             }
         });
