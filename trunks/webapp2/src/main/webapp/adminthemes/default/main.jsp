@@ -7,12 +7,15 @@
     <title>esframe</title>
     <link href="${context }/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />  
     <link rel="stylesheet" type="text/css" id="mylink"/>   
+    <script type="text/javascript" src="menu.do"></script>
     <script type="text/javascript"	src="${staticserver }/js/common/jquery-1.6.4.js"></script> 
     <script src="${context }/js/ligerui/js/ligerui.all.js" type="text/javascript"></script> 
+    <script src="${ctx }/statics/js/common/jquery.cookie.js" type="text/javascript"></script> 
     <script src="${context }/js/ligerui/js/plugins/ligerTab.js"></script>
-    <scritp src="${context }/js/index.js"></scritp>
-    <scritp src="${context }/statics/js/admin/jeap.js"></scritp>
-    <script src="lib/json2.js"></script>
+    <script src="${ctx }/statics/js/admin/jeap.js"></script>
+    <script src="${context }/js/index.js"></script>
+   
+
 
     
         <script type="text/javascript">
@@ -71,25 +74,7 @@
                 {
                     $(this).removeClass("l-link-over");
                 });
-                //树
-                $("#tree1").ligerTree({
-                    data : indexdata,
-                    checkbox: false,
-                    slide: false,
-                    nodeWidth: 120,
-                    attribute: ['nodename', 'url'],
-                    onSelect: function (node)
-                    {
-                        if (!node.data.url) return;
-                        var tabid = $(node.target).attr("tabid");
-                        if (!tabid)
-                        {
-                            tabid = new Date().getTime();
-                            $(node.target).attr("tabid", tabid)
-                        } 
-                        f_addTab(tabid, node.data.text, node.data.url);
-                    }
-                });
+
 
                 tab = liger.get("framecenter");
                 accordion = liger.get("accordion1");
@@ -244,6 +229,9 @@
     }
  </style>
 </head>
+<script>
+        var founder= ${user.founder};
+    </script>
 <body style="padding:0px;background:#EAEEF5;">  
 <div id="pageloading"></div>  
 <div id="topmenu" class="l-topmenu">
@@ -264,22 +252,11 @@
     </div> 
 </div>
   <div id="layout1" style="width:99.2%; margin:0 auto; margin-top:4px; "> 
-        <div position="left"  title="主要菜单" id="accordion1"> 
+        <div position="left"  title="菜单导航" id="accordion1"> 
                      <div title="功能列表" class="l-scroll">
                          <ul id="tree1" style="margin-top:3px;">
                     </div>
-                    <div title="应用场景">
-                    <div style=" height:7px;"></div>
-                         <a class="l-link" href="javascript:f_addTab('listpage','列表页面','demos/case/listpage.htm')">列表页面</a> 
-                        <a class="l-link" href="javascript:f_addTab('listpage','列表页面','demos/case/listpage2.htm')">列表页面2</a> 
-                         <a class="l-link" href="demos/dialog/win7.htm" target="_blank">模拟Window桌面</a> 
-                        <a class="l-link" href="javascript:f_addTab('week','工作日志','demos/case/week.htm')">工作日志</a> 
-                    </div>    
-                     <div title="实验室">
-                    <div style=" height:7px;"></div>
-                          <a class="l-link" href="lab/generate/index.htm" target="_blank">表格表单设计器</a> 
-                          <a class="l-link" href="lab/formdesign/index.htm" target="_blank">可视化表单设计</a> 
-                    </div> 
+                    
         </div>
         <div position="center" id="framecenter"> 
             <div tabid="home" title="桌面" style="height:300px" >
