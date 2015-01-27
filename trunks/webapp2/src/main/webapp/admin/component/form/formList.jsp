@@ -1,168 +1,123 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<%@ include file="/commons/taglibs.jsp"%>
-
-
-<link rel="stylesheet" type="text/css" href="${context}/js/easyui/themes/gray/easyui.css">
-<link href="${context}/css/style1.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="${context}/js/easyui/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="${context}/js/easyui/locale/easyui-lang-zh_CN.js"></script>
-<script src="${ctx }/admin/js/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<link href="${context }/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
+<link href="${context }/css/button.css" rel="stylesheet" type="text/css" />
+<link href="${context }/css/global.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="${staticserver }/js/common/jquery-1.6.4.js"></script>
+<script src="${context }/js/ligerui/js/core/base.js" type="text/javascript"></script>
+<script src="${context }/js/ligerui/js/plugins/ligerGrid.js" type="text/javascript"></script>
+<script src="${context }/js/ligerui/js/plugins/ligerForm.js" type="text/javascript"></script>
+<script src="${context }/js/ligerui/js/plugins/ligerResizable.js" type="text/javascript"></script>
+<script src="${context }/js/ligerui/js/plugins/ligerDialog.js" type="text/javascript"></script>
+ <script src="${context }/js/ligerui/js/plugins/ligerToolBar.js" type="text/javascript"></script>
 <script src="${ctx }/admin/js/crud.js" type="text/javascript"></script>
-<link href="${context }/css/form.css" rel="stylesheet"/>
-<link href="${context }/css/button.css" rel="stylesheet"/>
+<style type="text/css">
+	a{text-decoration:none;}
+/* 搜索框 */
+.searchtitle{ padding-left:28px; position:relative;}
+.searchtitle img{ width:22px; height:22px; position:absolute; left:0; top:0;}
+.searchtitle span{ font-size:14px; font-weight:bold;}
+.searchtitle .togglebtn{ position:absolute; top:6px; right:15px; background:url(images/toggle.gif) no-repeat 0px 0px; height:10px; width:9px; cursor:pointer;}
+.searchtitle .togglebtn-down{ background-position:0px -10px;}
+/* 一条线 导航线 */
+.navline{ height:1px; line-height:1px; width:100%;border-bottom:1px solid #f5f5f5; background-color:#D9D9D9;width:100%; }
 
+ .jloading{ position:absolute; right:0; top:0; padding:4px; color:White; background:#6287AC; z-index:99999; border-left:1px solid #53779D; border-bottom:1px solid #53779D;filter:alpha(opacity=70);opacity:0.70;}
+ 
+ 
+.chk-icon{ background:url(../lib/ligerUI/skins/Aqua/images/controls/checkbox.gif) 0px 0px; height:13px; line-height:13px; width:13px; margin:4px 20px; display:block; cursor:pointer;}
+.chk-icon-selected{ background-position:0px -13px;}
 
+/* 按钮 */
+.button{line-height:25px;height:25px;background:url('images/button1.gif') repeat-x; position:relative; margin-top:8px; margin-bottom:8px;color:#2C69A2; width:120px; cursor:pointer;}
+.button-l,.button-r{ width:2px;height:25px;background:url('images/button1.gif') no-repeat; position:absolute; }
+.button-l{ left:0px; background-position:0px -25px;}
+.button-r{ right:0px;background-position:0px -50px;}
+.button-icon{ position:absolute; left:7px; top:6px;}
+.button img{ width:16px; height:16px;}
+.button span{ display:block; margin-left:30px;text-align: center; } 
+.buttonnoicon span{ margin-left:4px; } 
+ 
+ 
+.button2,.button2 .button-l,.button2 .button-r{background-image:url('images/button2.gif'); line-height:23px; height:23px; color:#333;}
+.button2 .button-icon{   top:4px;}
+.button2 .button-l,.button2 .button-r{ background-position:0px -23px; width:1px;}
+</style>
 <script type="text/javascript">
-$(function () {
-    $(".searchAdvanced").hide();
-    //高级查询按钮
-    $("#aAdvanced").click(function () {
-        if ($("#Advanced").val() == "0") {
-            $("#Advanced").val(1);
-            $("#simpleSearch").hide();
-            //$("#aAdvanced").text("简单搜索")
-            $("#aAdvanced").addClass("searchAdvancedS");
-        } else {
-            $("#Advanced").val(0);
-            $("#simpleSearch").show();
-            //$("#aAdvanced").text("高级搜索");
-            $("#aAdvanced").removeClass("searchAdvancedS");
-        }
-        $(".searchAdvanced").slideToggle("slow");
-    });
-});
-    function addForm(item)
+	var listgrid;
+	$(function (){
+     	listgrid =  $("#maingrid").ligerGrid({
+              height:'100%',
+              columns: [
+              { display: '用户名', name: 'username', align: 'center', width: 100, minWidth: 60 },
+              { display: '姓名', name: 'realName', align: 'center', width: 100, minWidth: 60 },
+              { display: '邮箱', name: 'email', minWidth: 120 },
+              { display: '办公电话', name: 'tel', minWidth: 120 },
+              { display: '最后登录时间', name: 'lastLoginTime', minWidth: 140 },
+              { display: '登录次数', name: 'loginCount' },
+              { display: '所属公司', name: 'companyId' },
+              { display: '状态', name: 'status',render:function(item){
+             	 if(item.status=='ACTIVE'){
+             		 return "激活";
+             	 }else{
+             		 return "禁用";
+             	 }
+              } },
+              { display: '操作', name: '',width:'auto',render:function(item){
+             	 return "<a href='javascript:void(0)' onclick='toEdit("+item.id+")'>修改</a>&nbsp;&nbsp;<a href='javascript:void(0)' onclick='delUser("+item.id+")'>删除</a>";
+              } }
+              ], url:'user.do?datalist',  pageSize:30 ,rownumbers:true,
+              toolbar:{ items: [
+                                         { text: '增加', click: addUser, icon: 'add' },
+                                         { line: true }]
+                                         }
+          });
+     	//搜索框 收缩/展开
+     	$(".searchtitle .togglebtn").live('click', function ()
+     	{
+     	    if ($(this).hasClass("togglebtn-down")) $(this).removeClass("togglebtn-down");
+     	    else $(this).addClass("togglebtn-down");
+     	    var searchbox = $(this).parent().nextAll("div.searchbox:first");
+     	    searchbox.slideToggle('fast');
+     	}); 
+      	$("#btn1container").click(function(){
+      		 listgrid.loadServerData("username="+$("#username").val());
+              return false;
+      	});
+     });
+    function delUser(userId)
     {
-    	//CRUD.addOrUpdateDialog('增加表单','designer.do?toDesigner',600,900);
-		window.location.href="designer.do?toDesigner";
+    	CRUD.delObj('user.do?delete',userId);
     }
-
-    function btnOK(item,dialog){
-        openDia.subForm();
-
+    function toEdit(userId){
+    	CRUD.addOrUpdateDialog('修改用户','user.do?toEdit&id='+userId,300,null);
     }
-    function modifyForm(item)
-    {
-
-    	if($('#dataGrid').datagrid('getSelections').length<1||$('#dataGrid').datagrid('getSelections').length>1){
-            alert("必须选择一条数据进行修改!");
-            return;
-        }
-   	 	var row = $('#dataGrid').datagrid('getSelections')[0];
-   	 	window.location.href='designer.do?modify&id='+row.id;
-        
-
-    }
-    function delUser(item)
-    {
-       
-        if($('#dataGrid').datagrid('getSelections').length<1||$('#dataGrid').datagrid('getSelections').length>1){
-            alert("请选择数据删除!");
-            return;
-        }
-   	 	var row = $('#dataGrid').datagrid('getSelections')[0];
-   	 	if(confirm("确定删除？")){
-	   	 	 $.ajax({
-	             type: "GET",
-	             url: "designer.do?delete",
-	             data:"ajax=true&id="+row.id,
-	             dataType:"json",
-	             success: function(result){
-	                 if(result.success){
-	                     alert('删除成功!');
-	                     $('#dataGrid').datagrid('reload');
-	                    
-	                 }else{
-	                     alert(result.msg);
-	
-	                 }
-	             },error:function(e){
-	                 alert('出错了!')
-	
-	             }
-	         });
-   	 	}
-        
-
-
-
-    }
-
-
-    function generatorCode(item){
-    	if($('#dataGrid').datagrid('getSelections').length<1||$('#dataGrid').datagrid('getSelections').length>1){
-            alert("必须选择一条数据进行修改!");
-            return;
-        }
-   	 	var row = $('#dataGrid').datagrid('getSelections')[0];
-   	 	addOrUpdateDialog('生成代码','${ctx}//core/admin/code.do?toGenerate&formId='+row.id,600,900);
-       
-    }
-    //同步数据库
-    function synDB(item){
-        var row = listgrid.getSelectedRow();
-        if(row==null){
-            $.ligerDialog.error('请选择数据!');
-            return;
-        }
-        $.ajax({
-            type: "post",
-            url: '${ctx}//core/admin/code.do?synDb',
-            data:"ajax=true&formId="+row.id,
-            dataType:"json",
-            success: function(result){
-                if(result.success){
-                    $.ligerDialog.waitting('操作成功...');
-                    setTimeout(function ()
-                    {
-                        $.ligerDialog.closeWaitting();
-                        listgrid.loadData();
-                        dialog.close();
-                    }, 1000);
-
-                }else{
-                    $.ligerDialog.alert(result.msg, '提示', type);
-
-                }
-            },error:function(e){
-                $.ligerDialog.alert('出错了!', '提示', type)
-
-            }
-        });
-
-    }
-
-    function isSynDB(rowdata,index,value){
-        if(value==1){
-            return "已同步";
-        }else{
-            return "未同步";
-        }
-    }
-    
-    function pageSettting(){
-    	 if($('#dataGrid').datagrid('getSelections').length<1||$('#dataGrid').datagrid('getSelections').length>1){
-             alert("必须选择一条数据进行修改!");
-             return;
-         }
-    	 var row = $('#dataGrid').datagrid('getSelections')[0];
-    	window.location.href="designer.do?pageSetting&formId="+row.id;
-    }
-</script>
-
-<grid:dataGrid action="designer.do?dataGrid&ajax=yes" height="99%">
-    <grid:column title="id" field="id" align="center" width="100" minWidth="60"/>
-    <grid:column title="表名" field="tableName"  minWidth="120"/>
-    <grid:column title="表单名称" field="formName"  minWidth="140"/>
-    <grid:column title="版本" field="version"  minWidth="100"/>
-    <grid:column title="同步数据库" field="isSynDB"  minWidth="100" renderFun="isSynDB"/>
-    <grid:column title="创建人" field="createBy"  minWidth="100"/>
-    <grid:column title="创建时间" field="createTime"  minWidth="140"/>
-    <grid:toolbar title="增加" clickFun="addForm" icon="add"/>
-    <grid:toolbar title="修改" clickFun="modifyForm" icon="modify"/>
-    <grid:toolbar title="删除" clickFun="delUser" icon="del"/>
-    <grid:toolbar title="同步数据库" clickFun="synDB" icon="modify"/>
-    <grid:toolbar title="生成代码" clickFun="generatorCode" icon="modify"/>
-    <grid:toolbar title="页面设计" clickFun="pageSettting" icon="modify"/>
-</grid:dataGrid>
+    function addUser(){
+        CRUD.addOrUpdateDialog('增加用户','user.do?toAdd',300,null);
+    } 
+    </script>
+</head>
+<body style="padding: 3px; overflow: hidden;">
+	<div>
+		<div style="width: 100%">
+			<div class="searchtitle">
+				<span>搜索</span><img src="/jeap1.0/admin/images/icons/searchtool.gif" />
+				<div class="togglebtn"></div>
+			</div>
+			<div class="navline" style="margin-bottom: 4px; margin-top: 4px;"></div>
+			<div class="searchbox">
+				<form id="searchForm">
+					用户名：<input type="text" value="" class="liger-textbox" id="username"/> 
+				</form>
+				<ul><li id="btn1container"><div class="button button2 buttonnoicon" style="width:60px"><div class="button-l"></div><div class="button-r"></div> <span>搜索</span></div></li></ul>
+				<div class="l-clear"></div>
+			</div>
+		</div>
+		<div id="maingrid" style="margin: 0; padding: 0"></div>
+	</div>
+</body>
+</html>
