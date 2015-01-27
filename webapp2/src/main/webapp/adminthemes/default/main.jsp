@@ -5,13 +5,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>esframe</title>
-    <link href="/jeap1.0/js/admin/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />  
+    <link href="${context }/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />  
     <link rel="stylesheet" type="text/css" id="mylink"/>   
-    <script src="/jeap1.0/js/commons/jquery-1.3.2.min.js" type="text/javascript"></script>    
-    <script src="/jeap1.0/js/admin/ligerui/js/ligerui.all.js" type="text/javascript"></script> 
-    <script src="/jeap1.0/js/admin/ligerui/js/plugins/ligerTab.js"></script>
+    <script type="text/javascript"	src="${staticserver }/js/common/jquery-1.6.4.js"></script> 
+    <script src="${context }/js/ligerui/js/ligerui.all.js" type="text/javascript"></script> 
+    <script src="${context }/js/ligerui/js/plugins/ligerTab.js"></script>
+    <scritp src="${context }/js/index.js"></scritp>
+    <scritp src="${context }/statics/js/admin/jeap.js"></scritp>
     <script src="lib/json2.js"></script>
-    <script src="/jeap1.0/indexdata.js" type="text/javascript"></script>
+
     
         <script type="text/javascript">
  
