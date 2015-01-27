@@ -6,7 +6,7 @@
 <head>
     <title>esframe</title>
     <link href="${context }/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />  
-    <link rel="stylesheet" type="text/css" id="mylink"/>   
+    <link rel="stylesheet" type="text/css" href="${context }/css/global.css"/>   
     <script type="text/javascript" src="menu.do"></script>
     <script type="text/javascript"	src="${staticserver }/js/common/jquery-1.6.4.js"></script> 
     <script src="${context }/js/ligerui/js/ligerui.all.js" type="text/javascript"></script> 
