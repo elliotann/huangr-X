@@ -12,6 +12,7 @@
     <script src="/jeap1.0/js/admin/ligerui/js/plugins/ligerTab.js"></script>
     <script src="lib/json2.js"></script>
     <script src="/jeap1.0/indexdata.js" type="text/javascript"></script>
+    
         <script type="text/javascript">
  
             var tab = null;
