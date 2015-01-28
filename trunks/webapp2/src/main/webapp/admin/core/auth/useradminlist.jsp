@@ -30,8 +30,8 @@
               { display: '最后登录时间', name: 'lastLoginTime', minWidth: 140 },
               { display: '登录次数', name: 'loginCount' },
               { display: '所属公司', name: 'companyId' },
-              { display: '状态', name: 'status',render:function(item){
-             	 if(item.status=='ACTIVE'){
+              { display: '状态', name: 'state',render:function(item){
+             	 if(item.state=='1'){
              		 return "激活";
              	 }else{
              		 return "禁用";
