@@ -1,12 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/commons/taglibs.jsp"%>
-<script src="${staticserver}/js/common/jquery.validate.js"
-	type="text/javascript"></script>
-<script src="${staticserver}/js/admin/jeap.js" type="text/javascript"></script>
-<link href="${context }/css/form.css" rel="stylesheet" />
-<link href="${context }/js/easyui/themes/icon.css" rel="stylesheet" />
-
+<link href="${context }/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />  
+ 
+   <script type="text/javascript" src="${staticserver }/js/common/jquery-1.6.4.js"></script> 
+    <script src="${context }/js/ligerui/js/core/base.js" type="text/javascript"></script>
+    <script src="${context }/js/ligerui/js/plugins/ligerForm.js" type="text/javascript"></script>
+    <script src="${context }/js/ligerui/js/plugins/ligerDateEditor.js" type="text/javascript"></script>
+    <script src="${context }/js/ligerui/js/plugins/ligerComboBox.js" type="text/javascript"></script>
+    <script src="${context }/js/ligerui/js/plugins/ligerCheckBox.js" type="text/javascript"></script>
+    <script src="${context }/js/ligerui/js/plugins/ligerButton.js" type="text/javascript"></script>
+    <script src="${context }/js/ligerui/js/plugins/ligerDialog.js" type="text/javascript"></script>
+    <script src="${context }/js/ligerui/js/plugins/ligerRadio.js" type="text/javascript"></script>
+    <script src="${context }/js/ligerui/js/plugins/ligerSpinner.js" type="text/javascript"></script>
+    <script src="${context }/js/ligerui/js/plugins/ligerTextBox.js" type="text/javascript"></script> 
+    <script src="${context }/js/ligerui/js/plugins/ligerTip.js" type="text/javascript"></script>
+    <script src="${ctx }/statics/js/common/jquery.validate.min.js" type="text/javascript"></script> 
+    <script src="${ctx }/statics/js/common/jquery.metadata.js" type="text/javascript"></script>
+    <script src="${ctx }/statics/js/common/messages_cn.js" type="text/javascript"></script>
+    <script src="${staticserver}/js/admin/jeap.js" type="text/javascript"></script>
 <script type="text/javascript">
 
         var dialog = frameElement.dialog;
@@ -56,21 +68,18 @@
                         dataType:"json",
                         success : function(result) {
 
-                            if(result.success){
-                                $.Loading.show('操作成功!');
-
+                        	if(result.success){
+                				$.ligerDialog.waitting(result.msg);
                                 setTimeout(function ()
                                 {
-                                    $.Loading.hide();
-                                    $("#dialogInfo").dialog('close');
-                                    $('#dataGrid').datagrid('reload');
-
-
-                                }, 1000);
-
-                            }else{
-                                alert(result.msg)
-                            }
+                                	
+                                	$.ligerDialog.closeWaitting();
+                                	var dialog = frameElement.dialog; //调用页面的dialog对象(ligerui对象)
+                                    dialog.close();//关闭dialog 
+                                    
+                                }, 2000);
+                                window.parent.listgrid.loadData();
+                			}
                         },
                         error : function(e) {
                             alert("出错啦:(");
@@ -98,13 +107,8 @@
                 }
             });
 
-
-            $('#compId').combotree({onSelect:function(node) {
-                $("#userdept").combotree({
-                    url:'../depart.do?queryDepartsByOrgId&ajax=true&orgId='+node.id
-                });
-
-            }});
+            $("form").ligerForm();
+           
 
         });
         function submitForm(){
@@ -115,19 +119,13 @@
     </script>
 
 
-<style type="text/css">
-body {
-	font-size: 12px;
-}
-
-.l-table-edit {
-	
-}
-
-.l-table-edit-td {
-	padding: 4px;
-}
-</style>
+ <style type="text/css">
+           body{ font-size:12px;}
+        .l-table-edit {}
+        .l-table-edit-td{ padding:4px;}
+        .l-button-submit,.l-button-test{width:80px; float:left; margin-left:10px; padding-bottom:2px;}
+        .l-verify-tip{ left:230px; top:120px;}
+    </style>
 <form name="objForm" method="post" id="objForm">
 	<input type="hidden" name="founder" value="0" />
 	<table cellpadding="0" cellspacing="0" class="l-table-edit">
