@@ -12,8 +12,8 @@
 	<script type="text/javascript" src="${staticserver }/js/admin/jeap.js"></script>
 	<script type="text/javascript" src="${ctx }/admin/js/My97DatePicker/WdatePicker.js"></script>
 	<link href="${context}/css/global.css" rel="stylesheet" type="text/css" />
-	<link href="${context}/css/input.css" rel="stylesheet" type="text/css" />
-	<link href="${context}/css/grid.css" rel="stylesheet" type="text/css" />
+	<%-- <link href="${context}/css/input.css" rel="stylesheet" type="text/css" />
+	<link href="${context}/css/grid.css" rel="stylesheet" type="text/css" /> --%>
 	
 	<link href="/jeap1.0/adminthemes/default/css/button.css" rel="stylesheet"/>
 	<title>网站后台管理</title>
