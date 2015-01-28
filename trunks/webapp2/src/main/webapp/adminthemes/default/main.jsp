@@ -253,10 +253,6 @@
 </div>
   <div id="layout1" style="width:99.2%; margin:0 auto; margin-top:4px; "> 
         <div position="left"  title="菜单导航" id="accordion1"> 
-                     <div title="功能列表" class="l-scroll">
-                         <ul id="tree1" style="margin-top:3px;">
-                    </div>
-                    
         </div>
         <div position="center" id="framecenter"> 
             <div tabid="home" title="桌面" style="height:300px" >

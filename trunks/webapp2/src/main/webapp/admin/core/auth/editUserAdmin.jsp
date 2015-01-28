@@ -1,9 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ include file="/commons/taglibs.jsp"%>
-<script src="${staticserver}/js/common/jquery.validate.js" type="text/javascript"></script>
-<script src="${staticserver}/js/admin/jeap.js" type="text/javascript"></script>
-<link href="${context }/css/form.css" rel="stylesheet"/>
+	<link href="${context }/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />  
+ 
+   	<script type="text/javascript" src="${staticserver }/js/common/jquery-1.6.4.js"></script> 
+    <script src="${context }/js/ligerui/js/core/base.js" type="text/javascript"></script>
+    <script src="${context }/js/ligerui/js/plugins/ligerForm.js" type="text/javascript"></script>
+    <script src="${context }/js/ligerui/js/plugins/ligerDateEditor.js" type="text/javascript"></script>
+    <script src="${context }/js/ligerui/js/plugins/ligerComboBox.js" type="text/javascript"></script>
+    <script src="${context }/js/ligerui/js/plugins/ligerCheckBox.js" type="text/javascript"></script>
+    <script src="${context }/js/ligerui/js/plugins/ligerButton.js" type="text/javascript"></script>
+    <script src="${context }/js/ligerui/js/plugins/ligerDialog.js" type="text/javascript"></script>
+    <script src="${context }/js/ligerui/js/plugins/ligerRadio.js" type="text/javascript"></script>
+    <script src="${context }/js/ligerui/js/plugins/ligerSpinner.js" type="text/javascript"></script>
+    <script src="${context }/js/ligerui/js/plugins/ligerTextBox.js" type="text/javascript"></script> 
+    <script src="${context }/js/ligerui/js/plugins/ligerTip.js" type="text/javascript"></script>
+    <script src="${ctx }/statics/js/common/jquery.validate.min.js" type="text/javascript"></script> 
+    <script src="${ctx }/statics/js/common/jquery.metadata.js" type="text/javascript"></script>
+    <script src="${ctx }/statics/js/common/messages_cn.js" type="text/javascript"></script>
+    <script src="${staticserver}/js/admin/jeap.js" type="text/javascript"></script>
 <script type="text/javascript">
     $(function() {
         $("#objForm").validate({
@@ -67,7 +82,7 @@
                 }
             }
         });
-
+        $("form").ligerForm();
         $("#updatePwd").change(function () {
 
             if(this.checked){
@@ -154,36 +169,7 @@
     <input type="hidden" name="ajax" value="true"/>
     <input  type="hidden" name="founder" value="${adminUser.founder }"/>
     <table cellpadding="0" cellspacing="0" class="l-table-edit" >
-        <c:if test="${multiSite==1}">
-            <tr>
-                <td align="right"><label class="Validform_label">站点：</label></td>
-                <td >
-                    <select name="adminUser.siteid" id="adminUserSite"/>
-                </td>
-            </tr>
-            <script>
-                $(function(){
-
-                    $.ajax({
-                        type: "GET",
-                        url: "../multiSite!listJson.do",
-                        data:   "ajax=yes",
-                        dataType:'json',
-                        success: function(result){
-                            if(result.result==0){
-                                $("#adminUserSite").selectTree(result.data);
-                            }else{
-                                alert("站点列表获取失败，请重试");
-                            }
-                        },
-                        error:function(){
-                            alert("站点列表获取失败");
-                        }
-                    });
-
-                });
-            </script>
-        </c:if>
+      
         <tr>
             <td align="right" class="l-table-edit-td">用户名:</td>
             <td align="left" class="l-table-edit-td">
@@ -274,18 +260,14 @@
 <script type="text/javascript">
     $(function(){
 
-        $('#compId').combotree({onSelect:function(node) {
-            queryDeparts(node.id);
-        }});
-        queryDeparts(${adminUser.userCorp});
+        
+       
 
     });
 
     function queryDeparts(id){
-    	if(!id) return;
-        $("#userdept").combotree({
-            url:'../depart.do?queryDepartsByOrgId&ajax=true&orgId='+id
-        });
+    	
+      
     }
 </script>
 

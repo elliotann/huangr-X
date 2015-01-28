@@ -11,36 +11,12 @@
 	function addOrUpdateDialog(title,url,height,width)
 	{
 		
-		$("#dialogInfo").show();
-
-	    $('#dialogInfo').dialog({
-	        title:title,
-	        top: 60,
-	        width: width==undefined?800:width,
-	        height: height==undefined?600:height,
-	        closed: false,
-	        cache: false,
-	        href:url,
-	        modal: true,
-	        buttons: [
-	            {
-	                text: '保存',
-	                iconCls: 'icon-ok',
-	                handler: function () {
-	                	
-	                    var savebtn = $(this);
-	                    var disabled = savebtn.hasClass("l-btn-disabled");
-	                   
-	                    if (!disabled) {
-	                        addForm(savebtn);
-	                    }
-	                }
-	            },
-	            {text: '取消', handler: function () {
-	                $('#dialogInfo').dialog('close');
-	            }}
-	        ]});
-
+		$.ligerDialog.open({name:'openDiag',title:title,url: url, height: height, width: width, 
+			buttons: [
+				   { text: '确定', onclick: function (item, dialog) { openDiag.submitForm(); },cls:'l-dialog-btn-highlight' },
+				   { text: '取消', onclick: function (item, dialog) { dialog.close(); } }
+				    ], isResize: true,width:600,height:500
+				   });
 	}
 	//确定回调函数
 	function addForm(savebtn){
@@ -51,25 +27,27 @@
 
 	function delObj(url,id)
 	{
-	   url += "&ajax=true&rmd="+ new Date().getTime();
-	    var options = {
-	        url : url,
-	        type : "POST",
-	        dataType : 'json',
-	        success : function(result) {
-	            if(result.success){
-	            	alert(result.msg);
-	                $('#dataGrid').datagrid('reload');
-	            }else{
-	            	 alert(result.msg);
-	            }
-
-	        },
-	        error : function(e) {
-	            $.Loading.error("出现错误 ，请重试");
-	        }
-	    };
-	    $('#dataGridform').ajaxSubmit(options);
+		url += "&ajax=true&rmd="+ new Date().getTime();
+		$.ligerDialog.confirm('确认删除?', function (yes) { 
+    		if(yes){
+    			$.ajax({
+    				url:url,
+    				type:'post',
+    				data:'id='+id,
+    				dataType:'json',
+    				success:function(result){
+    					if(result.success){
+    						$.ligerDialog.waitting(result.msg);
+    						setTimeout(function ()
+    	                            {
+    	                            	$.ligerDialog.closeWaitting();
+    	                                listgrid.loadData();
+    	                            }, 1000);
+    					}
+    				}
+    			});
+    		}
+    	});
 	}
 
 	function delObj4Tree(url,id)
