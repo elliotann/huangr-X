@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ include file="/commons/taglibs.jsp"%>
-	<link href="${context }/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />  
- 
-   	<script type="text/javascript" src="${staticserver }/js/common/jquery-1.6.4.js"></script> 
-    <script src="${context }/js/ligerui/js/core/base.js" type="text/javascript"></script>
+
+    <link href="${context }/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
+    <link href="${context }/js/ligerui/skins/Gray/css/all.css" rel="stylesheet" type="text/css" /> 
+      <script type="text/javascript" src="${staticserver }/js/common/jquery-1.6.4.js"></script> 
+     <script src="${context }/js/ligerui/js/core/base.js" type="text/javascript"></script>
     <script src="${context }/js/ligerui/js/plugins/ligerForm.js" type="text/javascript"></script>
     <script src="${context }/js/ligerui/js/plugins/ligerDateEditor.js" type="text/javascript"></script>
     <script src="${context }/js/ligerui/js/plugins/ligerComboBox.js" type="text/javascript"></script>
@@ -18,257 +19,197 @@
     <script src="${ctx }/statics/js/common/jquery.validate.min.js" type="text/javascript"></script> 
     <script src="${ctx }/statics/js/common/jquery.metadata.js" type="text/javascript"></script>
     <script src="${ctx }/statics/js/common/messages_cn.js" type="text/javascript"></script>
-    <script src="${staticserver}/js/admin/jeap.js" type="text/javascript"></script>
-<script type="text/javascript">
-    $(function() {
-        $("#objForm").validate({
-            rules:{
+     <script src="${staticserver}/js/admin/jeap.js" type="text/javascript"></script>
 
-                password:{
-                    required:true,
-                    minlength:6,
-                    maxlength:18
-                },
-                email:{
-                	required:true,
-                	email:true,
-                	remote:{
-                		url:'userAdmin.do?checkEmailExist&ajax=true',
-                		type:'post',
-                		dataType:'json',
-                		data:{
-                			email:function(){return $("#email").val();},
-                			userId:function(){return $("#userId").val();}
-                		}
-                	}
-                }
-            },
-
-            submitHandler: function ()
-            {
-
-                $("#objForm").ajaxSubmit({
-                    url :"userAdmin.do?editSave&ajax=true",
-                    type : "POST",
-                    dataType:"json",
-                    success : function(result) {
-
-                        if(result.success){
-                            $.Loading.show('操作成功!');
-                            setTimeout(function ()
-                            {
-                                $.Loading.hide();
-                                $("#dialogInfo").dialog('close');
-                                $('#dataGrid').datagrid('reload');
-
-                            }, 1000);
-
-                        }else{
-                            alert(result.msg)
-                        }
+    <script type="text/javascript">
+        var eee;
+        $(function ()
+        {
+            $.validator.addMethod(
+                    "notnull",
+                    function (value, element, regexp)
+                    {
+                        if (!value) return true;
+                        return !$(element).hasClass("l-text-field-null");
                     },
-                    error : function(e) {
-                        alert("出错啦:(");
-                    }
-                });
+                    "不能为空"
+            );
 
-            },
-            messages:{
-                
-                email:{
-                	required:"邮箱不能为空",
-                	email:"邮箱格式不正确",
-                	remote:"邮箱已经存在"
+            $.metadata.setType("attr", "validate");
+            var v = $("form").validate({
+                //调试状态，不会提交数据的
+                debug: true,
+                rules:{
+                    password:{
+                        required:true,
+                        minlength:6,
+                        maxlength:18
+                    },
+                    email:{
+                    	required:true,
+                    	email:true,
+                    	remote:{
+                    		url:'userAdmin.do?checkEmailExist&ajax=true',
+                    		type:'post',
+                    		dataType:'json',
+                    		data:{
+                    			email:function(){return $("#email").val();},
+                    			userId:function(){return $("#userId").val();}
+                    		}
+                    	}
+                    }
+                },
+                errorPlacement: function (lable, element)
+                {
+
+                    if (element.hasClass("l-textarea"))
+                    {
+                        element.addClass("l-textarea-invalid");
+                    }
+                    else if (element.hasClass("l-text-field"))
+                    {
+                        element.parent().addClass("l-text-invalid");
+                    }
+                    $(element).removeAttr("title").ligerHideTip();
+                    $(element).attr("title", lable.html()).ligerTip();
+                },
+                success: function (lable)
+                {
+                    var element = $("#" + lable.attr("for"));
+                    if (element.hasClass("l-textarea"))
+                    {
+                        element.removeClass("l-textarea-invalid");
+                    }
+                    else if (element.hasClass("l-text-field"))
+                    {
+                        element.parent().removeClass("l-text-invalid");
+                    }
+                    $(element).removeAttr("title").ligerHideTip();
+                },
+                submitHandler: function ()
+                {
+                	$("#objForm").ajaxSubmit({
+                        url :"userAdmin.do?editSave&ajax=true",
+                        type : "POST",
+                        dataType:"json",
+                        success : function(result) {
+
+                            if(result.success){
+                            	$.ligerDialog.waitting(result.msg);
+                                setTimeout(function ()
+                                {
+                                	
+                                	$.ligerDialog.closeWaitting();
+                                	var dialog = frameElement.dialog; //调用页面的dialog对象(ligerui对象)
+                                    dialog.close();//关闭dialog 
+                                    
+                                }, 2000);
+                                window.parent.listgrid.loadData();
+
+                            }else{
+                                alert(result.msg)
+                            }
+                        },
+                        error : function(e) {
+                            alert("出错啦:(");
+                        }
+                    });
                 }
-            }
-        });
-        $("form").ligerForm();
-        $("#updatePwd").change(function () {
-
-            if(this.checked){
-
-                $("#pwdtr").show();
-                $("#repwdtr").show();
-                $( "#password" ).rules( "add", {
-                    required:true,
-                    minlength: 2,
-                    maxlength:18,
-                    messages:{
-                        required:"请输入新密码",
-                        minlength:"密码最少2位",
-                        maxlength:"密码最长18位"
-                    }
-
-                });
-                $( "#repassword" ).rules( "add", {
-                    required:true,
-                    minlength: 2,
-                    maxlength:18,
-                    equalTo:'#password',
-                    messages:{
-                        required:"请输入确认密码",
-                        equalTo:"两次输入密码不一致",
-                        minlength:"密码最少2位",
-                        maxlength:"密码最长18位"
-
-                    }
-                });
-
-            }else{
-                $("#pwdtr").hide();
-                $("#repwdtr").hide();
-                $( "#password" ).rules( "remove");
-                $( "#repassword" ).rules( "remove");
-            }
-
-        });
-
-        <c:forEach var="userRole" items="${userRoles }">
-        $("#roleids${userRole.roleid}").attr("checked",true);
-        </c:forEach>
-        <c:if test="${adminUser.founder==1}" >
-            $("#superChk").click();
-        </c:if>
-        <c:if test="${adminUser.founder==0}" >
-            $("#notSuperChk").click();
-        </c:if>
+            });
+            $("form").ligerForm();
+            $(".l-button-test").click(function ()
+            {
+                alert(v.element($("#txtName")));
+            });
+        });  
+        function submitForm(){
+            $("#objForm").submit();
+        }
+    </script>
+    <style type="text/css">
+           body{ font-size:12px;}
+        .l-table-edit {}
+        .l-table-edit-td{ padding:4px;}
+        .l-button-submit,.l-button-test{width:80px; float:left; margin-left:10px; padding-bottom:2px;}
+        .l-verify-tip{ left:230px; top:120px;}
+    </style>
 
 
-    });
-    function submitForm(){
-        $("#objForm").submit();
-    }
-</script>
 
-<style type="text/css">
-    #commentForm { width: 500px; }
-    #commentForm label { width: 250px; }
-    #commentForm label.error, #commentForm input.submit { margin-left: 253px; }
-    #signupForm { width: 670px; }
-    #signupForm label.error {
-        margin-left: 10px;
-        width: auto;
-        display: inline;
-    }
-    #newsletter_topics label.error {
-        display: none;
-        margin-left: 103px;
-    }
-    #repwdtr,#pwdtr{display:none}
-</style>
-<style type="text/css">
-    body{ font-size:12px;}
-    .l-table-edit {}
-    .l-table-edit-td{ padding:4px;}
-    .l-button-submit,.l-button-test{width:80px; float:left; margin-left:10px; padding-bottom:2px;}
-    .l-verify-tip{ left:230px; top:120px;}
-
-</style>
-<form name="objForm" method="post"   id="objForm">
-    <input type="hidden" name="id" value="${adminUser.id }" id="userId" />
+    <form name="objForm" method="post" id="objForm">
+	<input type="hidden" name="id" value="${adminUser.id }" id="userId" />
     <input type="hidden" name="ajax" value="true"/>
     <input  type="hidden" name="founder" value="${adminUser.founder }"/>
-    <table cellpadding="0" cellspacing="0" class="l-table-edit" >
-      
-        <tr>
-            <td align="right" class="l-table-edit-td">用户名:</td>
-            <td align="left" class="l-table-edit-td">
-                <input name="username" type="text" id="username" class="form-control" value="${adminUser.username }" readonly/>
-            </td>
-            <td align="left"></td>
-        </tr>
-        <tr>
-            <td align="right" class="l-table-edit-td"></td>
-            <td align="left" class="l-table-edit-td">
-                <input type="checkbox" name="check_name" id="updatePwd"  style="margin-left: 7px">&nbsp;&nbsp;同时修改密码
-            </td>
-        </tr>
-        <tr id="pwdtr">
-            <td align="right" class="l-table-edit-td">密码:</td>
-            <td align="left" class="l-table-edit-td">
-                <input name="updatePwd" type="password" id="password"  class="form-control"/>
-            </td>
-            <td align="left"></td>
-        </tr>
-        <tr id="repwdtr">
-            <td align="right" class="l-table-edit-td">确认密码:</td>
-            <td align="left" class="l-table-edit-td">
-                <input name="newPassword" type="password" id="repassword"  class="form-control"/>
-            </td>
-            <td align="left"></td>
-        </tr>
-        <tr>
-            <td align="right" class="l-table-edit-td">email:</td>
-            <td align="left" class="l-table-edit-td">
-                <input name="email" type="text" id="email" class="form-control" value="${adminUser.email }"/>
-            </td>
-            <td align="left"></td>
-        </tr>
-
-        <tr id="roletr">
-            <td align="right" class="l-table-edit-td" valign="top">角色:</td>
-            <td colspan="3" class="value">
-                <c:forEach var="role" items="${roleList }" varStatus="roleSta">
+	<table cellpadding="0" cellspacing="0" class="l-table-edit">
+		<tr>
+			<td align="right" class="l-table-edit-td">用户名:</td>
+			<td align="left" class="l-table-edit-td">
+				<input name="username" type="text" id="username" class="form-control" value="${adminUser.username }"/>
+			</td>
+			<td align="left">
+			</td>
+		</tr>
+		
+		<tr>
+			<td align="right" class="l-table-edit-td">邮箱:</td>
+			<td align="left" class="l-table-edit-td"><input name="email" ype="text" id="email"
+				class="form-control" value="${adminUser.email }"/></td>
+			<td align="left"></td>
+		</tr>
+		<tr id="roletr">
+			<td align="right" class="l-table-edit-td" valign="top">角色:</td>
+			<td colspan="3" class="value">
+			<c:forEach var="role" items="${roleList }" varStatus="roleSta">
                     <input id="roleids${role.id }" type="checkbox" name="roleids"  value="${role.id }"  style="margin-left: 11px"/><label for="roleids${role.id }">${role.rolename }&nbsp;</label>
                     <c:if test="${(roleSta.index+1)%4==0}">
                         <br/>
                     </c:if>
                 </c:forEach>
+				</td>
+		</tr>
 
-            </td>
-        </tr>
-
-        <c:forEach items="${htmlList }" var="html">${html }</c:forEach>
-        <tr>
-            <td align="right" class="l-table-edit-td" valign="top">状态:</td>
-            <td align="left" class="l-table-edit-td">
-                <input id="active" type="radio" name="state" value="1" <c:if test="${adminUser.state==1}">checked="checked"</c:if> style="margin-left: 7px"/><label for="active">启用</label>
+		<c:forEach items="${htmlList }" var="html">${html }</c:forEach>
+		<tr>
+			<td align="right" class="l-table-edit-td" valign="top">状态:</td>
+			<td align="left" class="l-table-edit-td">
+			 	<input id="active" type="radio" name="state" value="1" <c:if test="${adminUser.state==1}">checked="checked"</c:if> style="margin-left: 7px"/><label for="active">启用</label>
                 <input id="inActive" type="radio" name="state" value="0" <c:if test="${adminUser.state==0}">checked="checked"</c:if>/><label for="inActive">禁用</label>
-            </td><td align="left"></td>
-        </tr>
-        <tr>
-            <td align="right" class="l-table-edit-td">姓名:</td>
-            <td align="left" class="l-table-edit-td"><input name="realname" type="text" id="realname" class="form-control" value="${adminUser.realname }"/></td>
-            <td align="left"></td>
-        </tr>
+				</td>
+			<td align="left"></td>
+		</tr>
+		<tr>
+			<td align="right" class="l-table-edit-td">姓名:</td>
+			<td align="left" class="l-table-edit-td"><input name="realname"
+				type="text" id="realname" ltype="text" class="form-control" value="${adminUser.realname}"/></td>
+			<td align="left"></td>
+		</tr>
 
-        <tr>
-            <td align="right" class="l-table-edit-td">所属公司:</td>
-            <td align="left" class="l-table-edit-td">
+		<tr>
+			<td align="right" class="l-table-edit-td">所属公司:</td>
+			<td align="left" class="l-table-edit-td"><select id="compId"
+				name="userCorp" class="easyui-combotree combo"
+				data-options="url:'../organization.do?queryForTree&ajax=true',method:'get'"
+				style="width: 206px; height: 30px;"></select></td>
+			<td align="left"></td>
+		</tr>
 
-                <input id="compId" name="userCorp" class="easyui-combotree combo" data-options="url:'../organization.do?queryForTree&ajax=true',method:'get'" style="width:205px;height:30px;" value="${adminUser.userCorp }"/>
-            </td>
-            <td align="left"></td>
-        </tr>
-        <tr>
-            <td align="right" class="l-table-edit-td">部门:</td>
-            <td align="left" class="l-table-edit-td">
-                <input id="userdept" name="userdept" class="easyui-combotree combo" style="width:205px;height:30px;" value="${depart.id}"/>
-            </td>
-            <td align="left"></td>
-        </tr>
-        <tr>
-            <td align="right" class="l-table-edit-td">备注:</td>
-            <td align="left" class="l-table-edit-td">
-                <textarea name="remark" cols="100" rows="4"  class="form-control" id="remark" style="width:400px;height: 100px;">${adminUser.remark }</textarea>
-            </td>
-            <td align="left"></td>
-        </tr>
+		<tr>
+			<td align="right" class="l-table-edit-td">所属部门:</td>
+			<td align="left" class="l-table-edit-td"><select id="userdept"
+				name="userdept" class="easyui-combotree combo"
+				style="width: 206px; height: 30px;"></select></td>
+			<td align="left"></td>
+		</tr>
+		<tr>
+			<td align="right" class="l-table-edit-td">备注:</td>
+			<td align="left" class="l-table-edit-td"><textarea name="remark"
+					cols="100" rows="4" class="form-control" id="remark"
+					style="width: 400px; height: 100px;">${adminUser.remark }</textarea></td>
+			<td align="left"></td>
+		</tr>
 
-    </table>
+	</table>
 </form>
-<script type="text/javascript">
-    $(function(){
-
-        
-       
-
-    });
-
-    function queryDeparts(id){
-    	
-      
-    }
-</script>
 
 
+    
