@@ -174,9 +174,5 @@ var GridUi = {
 
 };
 var tab;
-$(function () {
-	GridUi.init(menu, null);
-	GridUi.disMenu();
-})
 
 
