@@ -2,7 +2,7 @@
  * 后台grid构建js
  * @author andy
  */
-var GridUi = {
+var GridUI = {
     searchFields: undefined,
     accordion: undefined,
     init: function (searchFields, accordion) {
