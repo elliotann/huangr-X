@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>esframe</title>
+    <title>${title }</title>
     <link href="${context }/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />  
     <link rel="stylesheet" type="text/css" href="${context }/css/global.css"/>   
     <script type="text/javascript" src="menu.do"></script>
@@ -14,12 +14,7 @@
     <script src="${context }/js/ligerui/js/plugins/ligerTab.js"></script>
     <script src="${ctx }/statics/js/admin/jeap.js"></script>
     <script src="${context }/js/index.js"></script>
-   
-
-
-    
         <script type="text/javascript">
- 
             var tab = null;
             var accordion = null;
             var tree = null;

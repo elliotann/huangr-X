@@ -5,6 +5,7 @@
 <head>
 <title></title>
 <link href="${context }/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
+
 <link href="/jeap1.0/adminthemes/default/css/button.css" rel="stylesheet" type="text/css" />
 <link href="${context }/css/global.css" rel="stylesheet" type="text/css" />
 
@@ -22,7 +23,6 @@
 	var listgrid;
 	var searchForm;
 	$(function (){
-		
      	listgrid =  $("#maingrid").ligerGrid({
               height:'99%',
               columns: [
@@ -59,6 +59,7 @@
      	}); 
      	var fieldsdata = [{ label: "用户名", name: "username", width: 170, labelWidth: 50}];
 		searchForm = $("#searchForm").ligerForm({fields: fieldsdata});
+		
       	$("#btn1container").click(function(){
       		  var searchBean = searchForm.getData();
       		  listgrid.loadServerData("username="+searchBean.username);
@@ -81,24 +82,26 @@
 </head>
 <body style="padding: 3px; overflow: hidden;">
 	<div>
-		<div style="width: 100%" >
+		<div style="width: 98%">
 			<div class="searchtitle">
-				<span>搜索</span><img src="${ctx }/admin/images/icons/searchtool.gif" />
+				<span>搜索</span><img src="/jeap1.0/admin/images/icons/searchtool.gif">
 				<div class="togglebtn"></div>
 			</div>
 			<div class="navline" style="margin-bottom: 4px; margin-top: 4px;"></div>
 			<div class="searchbox">
-				<form id="searchForm">
+				<form id="searchForm" >
+					
+					<ul>
+						<li id="btn1container">
+						<div class="button button2 buttonnoicon" style="width: 60px">
+								<div class="button-l"></div>
+								<div class="button-r"></div>
+								<span>搜索</span>
+							</div></li>
+					</ul>
+					<div class="l-clear"></div>
 				</form>
-				<ul>
-					<li id="btn1container">
-						<div class="button button2 buttonnoicon" style="width:60px">
-							<div class="button-l"></div>
-							<div class="button-r"></div> 
-							<span>搜索</span>
-						</div>
-					</li>
-				</ul>
+				
 				<div class="l-clear"></div>
 			</div>
 		</div>
