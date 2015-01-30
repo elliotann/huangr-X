@@ -59,7 +59,8 @@
      	}); 
      	var fieldsdata = [{ label: "用户名", name: "username", width: 170, labelWidth: 50}];
 		searchForm = $("#searchForm").ligerForm({fields: fieldsdata});
-		
+		GridUi.init(fieldsdata, null);
+		GridUi.disMenu();
       	$("#btn1container").click(function(){
       		  var searchBean = searchForm.getData();
       		  listgrid.loadServerData("username="+searchBean.username);
