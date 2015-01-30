@@ -5,16 +5,12 @@
 var GridUi = {
     searchFields: undefined,
     accordion: undefined,
-    init: function (menu, accordion) {
-        Jeap.AdminUI.init({wrapper:$("#right_content")});
-
-        $(".desktop a").click(function () {
-            //Jeap.AdminUI.load($(this));
-            return false;
-        });
+    init: function (searchFields, accordion) {
 
 
-        this.menu = menu;
+
+        this.searchFields = searchFields;
+        alert(JSON.stringify(searchFields));
         this.accordion = accordion;
         this.autoHeight();
         var self = this;
