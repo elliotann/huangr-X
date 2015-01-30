@@ -53,7 +53,7 @@ public class AdminUserAction extends BaseController{
     public ModelAndView dataGrid(Integer rows,Integer page,String username){
         PageOption pageOption = new PageOption();
 
-        pageOption.setCurrentPageNo(page);
+        //pageOption.setCurrentPageNo(page);
         if(StringUtils.isEmpty(username)){
             username=null;
         }
