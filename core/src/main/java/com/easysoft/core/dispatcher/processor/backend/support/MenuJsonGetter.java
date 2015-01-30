@@ -194,17 +194,14 @@ public class MenuJsonGetter extends AbstractFacadeProcessor {
         AdminUser user  =adminUserManager.getCurrentUser();
         user = adminUserManager.get(user.getId());
         List<RoleAuth> authList = permissionManager.getUesrAct(user.getId(), "FUNCTION");
-
         for(Menu menu:tempMenuList){
             if(menu.getMenutype().intValue() == Menu.MENU_TYPE_APP){
-
                 if(user.getFounder()!=1){
                     if( !checkPermssion(menu, authList) ){
                         continue;
                     }
                 }
             }
-
             menuList.add(menu);
         }
         List<Menu> syslist  = getMenuList(Menu.MENU_TYPE_SYS,menuList);
@@ -372,8 +369,6 @@ public class MenuJsonGetter extends AbstractFacadeProcessor {
      * @return
      */
     private  String toJson(Menu menu,List<Menu> menuList,List<AuthAction> authList){
-
-
         String title  =  menu.getTitle();
         String url = menu.getUrl();
         Integer selected = menu.getSelected();
