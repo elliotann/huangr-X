@@ -20,6 +20,7 @@
 <script src="${ctx}/admin/js/crud.js" type="text/javascript"></script>
 <script type="text/javascript">
 	var listgrid;
+	var searchForm;
 	$(function (){
 		
      	listgrid =  $("#maingrid").ligerGrid({
@@ -56,17 +57,15 @@
      	    var searchbox = $(this).parent().nextAll("div.searchbox:first");
      	    searchbox.slideToggle('fast');
      	}); 
-     	var fieldsdata = [ 
-                            
-                            { label: "用户名", name: "username", width: 170, labelWidth: 50}
-                           
-                            ];
-		$("#searchForm").ligerForm({ fields: fieldsdata});
+     	var fieldsdata = [{ label: "用户名", name: "username", width: 170, labelWidth: 50}];
+		searchForm = $("#searchForm").ligerForm({fields: fieldsdata});
       	$("#btn1container").click(function(){
-      		  listgrid.loadServerData("username="+$("#username").val());
+      		  var searchBean = searchForm.getData();
+      		  listgrid.loadServerData("username="+searchBean.username);
               return false;
       	});
      });
+	
     function delUser(userId)
     {
     	CRUD.delObj('userAdmin.do?delete',userId);
@@ -91,7 +90,15 @@
 			<div class="searchbox">
 				<form id="searchForm">
 				</form>
-				<ul><li id="btn1container"><div class="button button2 buttonnoicon" style="width:60px"><div class="button-l"></div><div class="button-r"></div> <span>搜索</span></div></li></ul>
+				<ul>
+					<li id="btn1container">
+						<div class="button button2 buttonnoicon" style="width:60px">
+							<div class="button-l"></div>
+							<div class="button-r"></div> 
+							<span>搜索</span>
+						</div>
+					</li>
+				</ul>
 				<div class="l-clear"></div>
 			</div>
 		</div>

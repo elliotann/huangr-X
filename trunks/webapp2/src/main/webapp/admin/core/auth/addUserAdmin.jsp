@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/commons/taglibs.jsp"%>
-<link href="${context }/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />  
- 
-   <script type="text/javascript" src="${staticserver }/js/common/jquery-1.6.4.js"></script> 
-    <script src="${context }/js/ligerui/js/core/base.js" type="text/javascript"></script>
+
+    <link href="${context }/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
+    <link href="${context }/js/ligerui/skins/Gray/css/all.css" rel="stylesheet" type="text/css" /> 
+      <script type="text/javascript" src="${staticserver }/js/common/jquery-1.6.4.js"></script> 
+     <script src="${context }/js/ligerui/js/core/base.js" type="text/javascript"></script>
     <script src="${context }/js/ligerui/js/plugins/ligerForm.js" type="text/javascript"></script>
     <script src="${context }/js/ligerui/js/plugins/ligerDateEditor.js" type="text/javascript"></script>
     <script src="${context }/js/ligerui/js/plugins/ligerComboBox.js" type="text/javascript"></script>
@@ -18,12 +19,26 @@
     <script src="${ctx }/statics/js/common/jquery.validate.min.js" type="text/javascript"></script> 
     <script src="${ctx }/statics/js/common/jquery.metadata.js" type="text/javascript"></script>
     <script src="${ctx }/statics/js/common/messages_cn.js" type="text/javascript"></script>
-    <script src="${staticserver}/js/admin/jeap.js" type="text/javascript"></script>
-<script type="text/javascript">
+     <script src="${staticserver}/js/admin/jeap.js" type="text/javascript"></script>
 
-        var dialog = frameElement.dialog;
-        $(function() {
-            $("#objForm").validate({
+    <script type="text/javascript">
+        var eee;
+        $(function ()
+        {
+            $.validator.addMethod(
+                    "notnull",
+                    function (value, element, regexp)
+                    {
+                        if (!value) return true;
+                        return !$(element).hasClass("l-text-field-null");
+                    },
+                    "不能为空"
+            );
+
+            $.metadata.setType("attr", "validate");
+            var v = $("form").validate({
+                //调试状态，不会提交数据的
+                debug: true,
                 rules:{
                     username:{
                         required:true,
@@ -58,11 +73,36 @@
                     	}
                     }
                 },
-
-                submitHandler: function ()
+                errorPlacement: function (lable, element)
                 {
 
-                    $("#objForm").ajaxSubmit({
+                    if (element.hasClass("l-textarea"))
+                    {
+                        element.addClass("l-textarea-invalid");
+                    }
+                    else if (element.hasClass("l-text-field"))
+                    {
+                        element.parent().addClass("l-text-invalid");
+                    }
+                    $(element).removeAttr("title").ligerHideTip();
+                    $(element).attr("title", lable.html()).ligerTip();
+                },
+                success: function (lable)
+                {
+                    var element = $("#" + lable.attr("for"));
+                    if (element.hasClass("l-textarea"))
+                    {
+                        element.removeClass("l-textarea-invalid");
+                    }
+                    else if (element.hasClass("l-text-field"))
+                    {
+                        element.parent().removeClass("l-text-invalid");
+                    }
+                    $(element).removeAttr("title").ligerHideTip();
+                },
+                submitHandler: function ()
+                {
+                	$("#objForm").ajaxSubmit({
                         url :"userAdmin.do?addSave&ajax=true",
                         type : "POST",
                         dataType:"json",
@@ -85,48 +125,29 @@
                             alert("出错啦:(");
                         }
                     });
-
-                },
-                messages:{
-                    username: {
-                        required: "用户名不能为空",
-                        minlength: "用户名最少3个字符",
-                        maxlength:"用户名最大18个字符",
-                        remote:"用户名已经存在"
-                    },
-                    password:{
-                        required:"密码不能为空",
-                        minlength:"密码最少6位",
-                        maxlength:"密码最长18位"
-                    },
-                    email:{
-                    	required:"邮箱不能为空",
-                    	email:"邮箱格式不正确",
-                    	remote:"邮箱已经存在"
-                    }
                 }
             });
-
             $("form").ligerForm();
-           
-
-        });
+            $(".l-button-test").click(function ()
+            {
+                alert(v.element($("#txtName")));
+            });
+        });  
         function submitForm(){
             $("#objForm").submit();
         }
-
-
     </script>
-
-
- <style type="text/css">
+    <style type="text/css">
            body{ font-size:12px;}
         .l-table-edit {}
         .l-table-edit-td{ padding:4px;}
         .l-button-submit,.l-button-test{width:80px; float:left; margin-left:10px; padding-bottom:2px;}
         .l-verify-tip{ left:230px; top:120px;}
     </style>
-<form name="objForm" method="post" id="objForm">
+
+
+
+    <form name="objForm" method="post" id="objForm">
 	<input type="hidden" name="founder" value="0" />
 	<table cellpadding="0" cellspacing="0" class="l-table-edit">
 		<c:if test="${multiSite==1}">
@@ -235,4 +256,4 @@
 </form>
 
 
-
+    

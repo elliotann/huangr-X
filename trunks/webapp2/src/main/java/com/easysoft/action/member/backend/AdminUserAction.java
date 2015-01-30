@@ -52,7 +52,7 @@ public class AdminUserAction extends BaseController{
     @RequestMapping(params = {"dataGrid"})
     public ModelAndView dataGrid(Integer rows,Integer page,String username){
         PageOption pageOption = new PageOption();
-        //pageOption.setPageSize(rows);
+
         pageOption.setCurrentPageNo(page);
         if(StringUtils.isEmpty(username)){
             username=null;
@@ -98,7 +98,6 @@ public class AdminUserAction extends BaseController{
     public AjaxJson  addSave(AdminUser adminUser,int[] roleids) throws Exception {
         AjaxJson json = new AjaxJson();
         try{
-
             adminUser.setRoleids(roleids);
             adminUserManager.add(adminUser);
             json.setMsg("新增管理员成功");
