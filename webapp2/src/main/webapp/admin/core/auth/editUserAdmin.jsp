@@ -25,7 +25,10 @@
         var eee;
         $(function ()
         {
-            $.validator.addMethod(
+        	<c:forEach var="userRole" items="${userRoles }">
+        		$("#roleids${userRole.roleid}").attr("checked",true);
+        	</c:forEach>
+        	$.validator.addMethod(
                     "notnull",
                     function (value, element, regexp)
                     {
@@ -121,6 +124,8 @@
             {
                 alert(v.element($("#txtName")));
             });
+            
+            
         });  
         function submitForm(){
             $("#objForm").submit();
@@ -160,11 +165,11 @@
 			<td align="right" class="l-table-edit-td" valign="top">角色:</td>
 			<td colspan="3" class="value">
 			<c:forEach var="role" items="${roleList }" varStatus="roleSta">
-                    <input id="roleids${role.id }" type="checkbox" name="roleids"  value="${role.id }"  style="margin-left: 11px"/><label for="roleids${role.id }">${role.rolename }&nbsp;</label>
-                    <c:if test="${(roleSta.index+1)%4==0}">
-                        <br/>
-                    </c:if>
-                </c:forEach>
+                <input id="roleids${role.id }" type="checkbox" name="roleids"  value="${role.id }"  style="margin-left: 11px"/><label for="roleids${role.id }">${role.rolename }&nbsp;</label>
+                <c:if test="${(roleSta.index+1)%4==0}">
+                    <br/>
+                </c:if>
+            </c:forEach>
 				</td>
 		</tr>
 
