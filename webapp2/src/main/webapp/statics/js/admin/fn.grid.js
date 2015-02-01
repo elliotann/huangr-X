@@ -6,11 +6,7 @@ var GridUI = {
     searchFields: undefined,
     accordion: undefined,
     init: function (searchFields, accordion) {
-
-
-
         this.searchFields = searchFields;
-        alert(JSON.stringify(searchFields));
         this.accordion = accordion;
         this.autoHeight();
         var self = this;
@@ -26,140 +22,11 @@ var GridUI = {
     /**
      * 显示系统菜单
      */
-    disSysMenu: function () {
+    buildSearch: function () {
         var self = this;
-        var menu = this.menu;
-        $.each(menu.sys, function (k, v) {
-            var link = self.createLink(v);
-            $("<li/>").appendTo($(".sysmenu>ul")).append(link);
-            if (v.target != '_blank') {
-                link.click(function () {
-                    Jeap.AdminUI.load($(this));
-                    return false;
-                });
-            }
-        });
-    },
-
-    /**
-     * 显示应用菜单
-     */
-    disAppMenu: function () {
-        var self = this;
-        var menu = this.menu;
-        var i = 0;
-        $.each(menu.app, function (k, v) {
-            if (founder == 1 && (v.id == 237 || v.id == 244 || v.id == 266)) {
-            } else {
-                var link = $("<a  target='" + v.target + "' href='" + v.url + "'><span>" + v.text + "</span></a>");
-      
-                var parentDiv = $("<div></div>");
-                parentDiv.addClass('l-scroll');
-                parentDiv.attr('title',v.text);
-                parentDiv.appendTo($("#accordion1"));
-                var treeUL = $("<ul></ul>");
-                treeUL.attr('id','tree'+v.id);
-                treeUL.css('margin-top','3px');
-                treeUL.appendTo(parentDiv);
-                var children = v.children;
-                $("#tree"+v.id).ligerTree({
-                    data : children,
-                    checkbox: false,
-                    slide: false,
-                    nodeWidth: 120,
-                    attribute: ['nodename', 'url'],
-                    onSelect: function (node)
-                    {
-                        if (!node.data.url) return;
-                        var tabid = $(node.target).attr("tabid");
-                        if (!tabid)
-                        {
-                            tabid = new Date().getTime();
-                            $(node.target).attr("tabid", tabid)
-                        } 
-                        f_addTab(tabid, node.data.text, node.data.url);
-                    }
-                });
-               
-                i++;
-            }
-        });
-    },
-    /**
-     * 显示应用的子菜单
-     */
-    disAppChildren:function(children){
-        var self= this;
-        var leftMenu = $("#side_accordion");
-        leftMenu.empty();
-        $.each(children,function(k,v){
-            var mainPanel = $("<div></div>");
-            mainPanel.addClass("panel panel-default")
-
-            var firstChild = $("<div></div>")
-            firstChild.addClass("panel-heading");
-            firstChild.appendTo(mainPanel);
-            var linkNode = $("<a></a>");
-
-            linkNode.addClass("accordion-toggle");
-            linkNode.attr("href","#");
-            linkNode.appendTo(firstChild);
-            linkNode.append($("<i class=\"glyphicon glyphicon-folder-close\"></i>"));
-            linkNode.append(v.text);
-
-            linkNode.click(function(){
-                $(".accordion-toggle").removeClass("collapse");
-                $(".accordion-toggle").addClass("collapse");
-                $(".accordion-body").removeClass("in");
-                $(".accordion-body").addClass("collapse");
-                if($(this).hasClass('collapse')) {
-                    $(this).removeClass('collapse');
-                    $(this).addClass("in");
-                    $(this).parent().next().removeClass("collapse");
-                    $(this).parent().next().addClass("in");
-                } else {
-                    $(this).removeClass('in');
-                    $(this).addClass('collapse');
-                    $(this).parent().next().removeClass("in");
-                    $(this).parent().next().addClass("collapse");
-
-                };
-            });
-
-            var secondChild = $("<div></div>");
-            secondChild.addClass("accordion-body collapse");
-            secondChild.css("height","auto");
-            secondChild.appendTo(mainPanel);
-
-            var panelBody = $("<div></div>");
-            panelBody.addClass("panel-body");
-            panelBody.appendTo(secondChild);
-
-            var ulNode = $("<ul></ul>");
-            ulNode.addClass("nav nav-pills nav-stacked");
-            ulNode.appendTo(panelBody);
-            if(this.children){
-                $.each(this.children,function(k,v){
-
-                    var link = self.createLink(v);
-                    ulNode.append($("<li></li>").append(link));
-
-                    link.click(function(){
-                        Jeap.AdminUI.load($(this));
-                        $("#accordion li").removeClass("current");
-                        $(this).parent().addClass("current");
-                        return false;
-                    });
-                });
-            }
-
-            leftMenu.append(mainPanel);
-
-        });
-    },
-    createLink: function (v) {
-        var link = $("<a  target='" + v.target + "' href='" + v.url+"&menuId=1" + "' >" + v.text + "</a>");
-        return link;
+        var searchFields = this.searchFields;
+        searchForm = $("#searchForm").ligerForm({fields: searchFields});
+        var container = $('<ul><li id="btn1container"><div class="button button2 buttonnoicon" style="width: 60px"><div class="button-l"></div><div class="button-r"></div><span>搜索</span></div></li></ul><div class="l-clear"></div>').appendTo($("#searchForm"));
     },
     autoHeight: function () {
         var height = $(window).height() - 140;
@@ -169,6 +36,5 @@ var GridUI = {
     }
 
 };
-var tab;
 
 
