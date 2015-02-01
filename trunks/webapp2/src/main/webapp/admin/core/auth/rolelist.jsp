@@ -59,10 +59,10 @@
 	
     function delUser(userId)
     {
-    	CRUD.delObj('userAdmin.do?delete',userId);
+    	CRUD.delObj('role.do?delete&id=',userId);
     }
     function toEdit(userId){
-    	CRUD.addOrUpdateDialog('修改用户','userAdmin.do?edit&id='+userId,300,null);
+    	CRUD.addOrUpdateDialog('修改角色','role.do?edit&roleid='+userId,300,null);
     }
     function addRole(){
     	CRUD.addOrUpdateDialog('增加角色','role.do?add',500,700);
