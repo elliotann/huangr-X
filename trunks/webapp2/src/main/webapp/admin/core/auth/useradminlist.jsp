@@ -17,7 +17,7 @@
 <script src="${context }/js/ligerui/js/plugins/ligerResizable.js" type="text/javascript"></script>
 <script src="${context }/js/ligerui/js/plugins/ligerDialog.js" type="text/javascript"></script>
  <script src="${context}/js/ligerui/js/plugins/ligerToolBar.js" type="text/javascript"></script>
- 
+ <script src="${ctx }/statics/js/admin/fn.grid.js"></script>
 <script src="${ctx}/admin/js/crud.js" type="text/javascript"></script>
 <script type="text/javascript">
 	var listgrid;
@@ -58,9 +58,9 @@
      	    searchbox.slideToggle('fast');
      	}); 
      	var fieldsdata = [{ label: "用户名", name: "username", width: 170, labelWidth: 50}];
-		searchForm = $("#searchForm").ligerForm({fields: fieldsdata});
-		GridUi.init(fieldsdata, null);
-		GridUi.disMenu();
+		
+		GridUI.init(fieldsdata, null);
+		GridUI.buildSearch();
       	$("#btn1container").click(function(){
       		  var searchBean = searchForm.getData();
       		  listgrid.loadServerData("username="+searchBean.username);
@@ -91,16 +91,6 @@
 			<div class="navline" style="margin-bottom: 4px; margin-top: 4px;"></div>
 			<div class="searchbox">
 				<form id="searchForm" >
-					
-					<ul>
-						<li id="btn1container">
-						<div class="button button2 buttonnoicon" style="width: 60px">
-								<div class="button-l"></div>
-								<div class="button-r"></div>
-								<span>搜索</span>
-							</div></li>
-					</ul>
-					<div class="l-clear"></div>
 				</form>
 				
 				<div class="l-clear"></div>
