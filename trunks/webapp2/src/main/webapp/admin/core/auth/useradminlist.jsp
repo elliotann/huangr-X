@@ -93,7 +93,7 @@
 				<form id="searchForm" >
 				</form>
 				
-				<div class="l-clear"></div>
+			
 			</div>
 		</div>
 		<div id="maingrid" style="margin: 0; padding: 0"></div>
