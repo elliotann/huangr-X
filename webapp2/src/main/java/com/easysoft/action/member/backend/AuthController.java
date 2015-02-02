@@ -54,7 +54,6 @@ public class AuthController extends BaseController {
 
         if(funAndOpers!=null&&!funAndOpers.isEmpty()){
             map.put("isEdit",1);
-            //map.put("actid",authActions.get(0).getActid());
             map.put("funAndOpers",funAndOpers);
         }else{
             map.put("isEdit",0);
