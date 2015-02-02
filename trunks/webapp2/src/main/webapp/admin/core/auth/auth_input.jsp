@@ -133,9 +133,15 @@
         }
         function f_isChecked(rowdata)
         {
-       
-            if (rowdata.id == 1) 
-                return true;
+     
+        	var menuids = ${menuids};
+       		if(!menuids) return false;
+       		for(var i=0;i<menuids.length;i++){
+       			if (rowdata.id == menuids[i]) {
+       				return true;
+       			}
+       		}
+           
             return false;
         }
     </script>
