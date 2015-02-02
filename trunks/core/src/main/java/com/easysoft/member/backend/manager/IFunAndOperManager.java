@@ -1,9 +1,10 @@
 package com.easysoft.member.backend.manager;
 
+import java.util.List;
+
 import com.easysoft.core.common.service.IGenericService;
 import com.easysoft.member.backend.model.FunAndOper;
-
-import java.util.List;
+import com.easysoft.member.backend.model.RoleAuth;
 
 /**
  * User: andy
@@ -18,5 +19,5 @@ public interface IFunAndOperManager extends IGenericService<FunAndOper>{
      * @param roleId
      * @return
      */
-    public List<FunAndOper> queryFunAndOpersByRoleId(Integer roleId);
+    public List<RoleAuth> queryFunAndOpersByRoleId(Integer roleId);
 }
