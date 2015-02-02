@@ -1,5 +1,17 @@
 package com.easysoft.action.member.backend;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
 import com.easysoft.core.common.controller.BaseController;
 import com.easysoft.core.common.vo.json.AjaxJson;
 import com.easysoft.core.common.vo.json.DataGridReturn;
@@ -9,20 +21,11 @@ import com.easysoft.framework.utils.StringUtil;
 import com.easysoft.member.backend.dao.IOperationBtnDao;
 import com.easysoft.member.backend.manager.IAuthActionManager;
 import com.easysoft.member.backend.manager.IFunAndOperManager;
-import com.easysoft.member.backend.manager.IOperationBtnManager;
 import com.easysoft.member.backend.manager.IPermissionManager;
-import com.easysoft.member.backend.model.*;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.easysoft.member.backend.model.AuthAction;
+import com.easysoft.member.backend.model.Menu;
+import com.easysoft.member.backend.model.OperationBtn;
+import com.easysoft.member.backend.model.RoleAuth;
 
 /**
  * Created with IntelliJ IDEA.
@@ -51,12 +54,18 @@ public class AuthController extends BaseController {
         List<OperationBtn> operationBtns = operationBtnDao.queryForList();
         map.put("operationBtns",operationBtns);
         List<RoleAuth>funAndOpers = funAndOperManager.queryFunAndOpersByRoleId(roleId);
-
+        List<Integer> menuids = new ArrayList<Integer>();
         if(funAndOpers!=null&&!funAndOpers.isEmpty()){
+        	
+        	for(RoleAuth roleAuth:funAndOpers){
+        		menuids.add(roleAuth.getFunId());
+        	}
             map.put("isEdit",1);
             map.put("funAndOpers",funAndOpers);
+            map.put("menuids",menuids);
         }else{
             map.put("isEdit",0);
+            map.put("menuids",menuids);
         }
 
         map.put("roleId",roleId);
