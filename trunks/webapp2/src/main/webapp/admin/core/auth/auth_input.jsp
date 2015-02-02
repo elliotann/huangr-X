@@ -12,6 +12,11 @@
     <script src="${context }/js/ligerui/js/plugins/ligerResizable.js" type="text/javascript"></script>
     <script src="${context }/js/ligerui/js/plugins/ligerDialog.js" type="text/javascript"></script>
     <script type="text/javascript">
+    	function Auth(menuId,operations){
+    		this.menuId = menuId;
+    		this.operaions = operations;
+    	}
+    	var myAuths = [];
         var dialog = frameElement.dialog;
         var manager;
         $(function ()
@@ -110,26 +115,18 @@
                 $.ligerDialog.closeWaitting();
                 dialog.close();
             }, 1000);
-
         }
         function checkOperation(obj){
             //判断功能权限是否选中
             var rowid = obj.getAttribute("id").split("_")[1];
             var rowdata = manager.getRow($("#menu"+rowid).val());
             var param = {menuIds:[rowdata.id+''],roleId:${roleId},operId:obj.value,isCheck:obj.checked,ajax:'true'};
+            alert(JSON.stringify(param));
             if(manager.isSelected(rowdata)){
-
-                //保存权限
-                $.ajax({
-                    type: 'post',
-                    url: "auth.do?saveAuth",
-                    dataType:'json',
-                    data:param,
-                    success:function(result){
-
-                    }
-                });
+            	var auth=new Auth(rowid,obj.value);
+                myAuths.push(auth);
             }
+            alert(myAuths.length);
         }
         function f_isChecked(rowdata)
         {
