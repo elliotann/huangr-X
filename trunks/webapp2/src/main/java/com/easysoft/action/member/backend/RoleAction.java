@@ -41,8 +41,6 @@ public class RoleAction extends BaseController {
     @RequestMapping(params = {"dataGrid"})
     public ModelAndView dataGrid(Integer rows,Integer page,String rolename){
         PageOption pageOption = new PageOption();
-        pageOption.setPageSize(rows);
-        pageOption.setCurrentPageNo(page);
         roleManager.queryByPage(pageOption,rolename);
         DataGridReturn dataGridReturn = new DataGridReturn(pageOption.getTotalCount(),(List<Role>)pageOption.getResult());
         String json = JsonUtils.beanToJson(dataGridReturn);

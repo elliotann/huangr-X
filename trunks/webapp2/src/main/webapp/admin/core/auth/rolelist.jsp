@@ -30,7 +30,7 @@
               { display: '角色名称', name: 'rolename', align: 'center', width: 100, minWidth: 60 },
               { display: '描述', name: 'rolememo', minWidth: 120 },
               { display: '操作', name: '',width:'auto',render:function(item){
-             	 return "<a href='javascript:void(0)' onclick='toEdit("+item.id+")'>修改</a>&nbsp;&nbsp;<a href='javascript:void(0)' onclick='delUser("+item.id+")'>删除</a>";
+             	 return "<a href='javascript:void(0)' onclick='toEdit("+item.id+")'>修改</a>&nbsp;&nbsp;<a href='javascript:void(0)' onclick='delUser("+item.id+")'>删除</a>&nbsp;&nbsp;<a href='javascript:void(0)' onclick='setAuth("+item.id+")'>设置权限</a>";
               } }
               ], url:'role.do?dataGrid&ajax=yes',  pageSize:30 ,rownumbers:true,
               toolbar:{ items: [
@@ -46,7 +46,7 @@
      	    var searchbox = $(this).parent().nextAll("div.searchbox:first");
      	    searchbox.slideToggle('fast');
      	}); 
-     	var fieldsdata = [{ label: "用户名", name: "username", width: 170, labelWidth: 50}];
+     	var fieldsdata = [{ label: "角色名", name: "rolename", width: 170, labelWidth: 50}];
 		
 		GridUI.init(fieldsdata, null);
 		GridUI.buildSearch();
@@ -67,6 +67,9 @@
     function addRole(){
     	CRUD.addOrUpdateDialog('增加角色','role.do?add',500,700);
     } 
+    function setAuth(userId){
+    	CRUD.addOrUpdateDialog('修改角色','auth.do?add&ajax=yes&roleId='+userId,300,500);
+    }
     </script>
  
 </head>

@@ -5,7 +5,6 @@
     <title></title>
     <script type="text/javascript" src="${staticserver }/js/common/jquery-1.6.4.js"></script>
     <link href="${context }/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css">
-    <link href="${context }/js/ligerui/skins/Gray2014/css/all.css" rel="stylesheet" type="text/css" />
     <script src="${context }/js/ligerui/js/core/base.js" type="text/javascript"></script>
     <script src="${context }/js/ligerui/js/plugins/ligerGrid.js" type="text/javascript"></script>
     <script src="${context }/js/ligerui/js/plugins/ligerSpinner.js" type="text/javascript"></script>
@@ -17,10 +16,8 @@
         var manager;
         $(function ()
         {
-
-
             listgrid = $("#maingrid").ligerGrid({
-                        height:400,
+                        height:'auto',
                         columns: [
                             { display: 'id', name: 'id', id: 'menuId',  align: 'center',width:60 },
                             { display: '名称', name: 'title', id: 'menuName',  align: 'left',width:250 },
@@ -29,25 +26,17 @@
                             columnId: 'menuName',
                             idField: 'id',
                             parentIDField: 'pid'
-                        },onCheckRow:onCheckRow, onAfterShowData: onAfterShowData
-
+                        },onCheckRow:onCheckRow, isChecked: f_isChecked
                     }
             );
             manager = $("#maingrid").ligerGetGridManager();
 
         });
         function onAfterShowData(currentData){
-
-
-                $(currentData.rows).each(function(i,item){
-
-                        selectChildren(item);
-
-
-                });
-
-
-
+            $(currentData.rows).each(function(i,item){
+            	alert(item.title);
+                    selectChildren(item);
+            }); 
         }
         function selectChildren(item){
             if(item.hasAuth) {
@@ -60,9 +49,6 @@
             }
         }
         function authSelect(item){
-
-
-
                 var  html="";
                 if(item.hasChildren){
                     return html;
@@ -75,7 +61,6 @@
                     success:function(result){
                         html = result;
                     }
-
                 });
                 html += "<input type='hidden' id='menu"+item.id+"' value='"+item.__id+"'/>";
                 return html;
@@ -145,6 +130,13 @@
                     }
                 });
             }
+        }
+        function f_isChecked(rowdata)
+        {
+       
+            if (rowdata.id == 1) 
+                return true;
+            return false;
         }
     </script>
 </head>
