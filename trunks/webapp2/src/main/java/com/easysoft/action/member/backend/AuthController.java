@@ -151,7 +151,6 @@ public class AuthController extends BaseController {
     @RequestMapping(params = {"getBtnByMenuId"})
     @ResponseBody
     public String getBtnByMenuId(Integer id,Integer roleId){
-
         if(id==null||id==0){
             return "";
         }
