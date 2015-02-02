@@ -12,6 +12,7 @@ import com.easysoft.member.backend.manager.IFunAndOperManager;
 import com.easysoft.member.backend.manager.IOperationBtnManager;
 import com.easysoft.member.backend.manager.IPermissionManager;
 import com.easysoft.member.backend.model.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,7 +50,7 @@ public class AuthController extends BaseController {
 
         List<OperationBtn> operationBtns = operationBtnDao.queryForList();
         map.put("operationBtns",operationBtns);
-        List<FunAndOper> funAndOpers = funAndOperManager.queryFunAndOpersByRoleId(roleId);
+        List<RoleAuth>funAndOpers = funAndOperManager.queryFunAndOpersByRoleId(roleId);
 
         if(funAndOpers!=null&&!funAndOpers.isEmpty()){
             map.put("isEdit",1);
