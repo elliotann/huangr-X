@@ -18,6 +18,7 @@ public class RoleAuth extends IdEntity {
     private Integer roleId;
     private Integer funId;
     private String operids;//操作IDS
+    private Integer[] operations;
 
     @Column(name="fun_id")
     public Integer getFunId() {
@@ -44,4 +45,13 @@ public class RoleAuth extends IdEntity {
     public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }
+    @Transient
+	public Integer[] getOperations() {
+		return operations;
+	}
+
+	public void setOperations(Integer[] operations) {
+		this.operations = operations;
+	}
+    
 }
