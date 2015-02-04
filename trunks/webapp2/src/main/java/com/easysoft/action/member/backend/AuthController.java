@@ -176,10 +176,9 @@ public class AuthController extends BaseController {
     }
     @RequestMapping(params = {"saveAuth"})
     @ResponseBody
-    public AjaxJson saveAuth(Integer menuId,Integer roleId,Integer operId,boolean isCheck,@RequestParam(value = "menuIds")String menuIds){
+    public AjaxJson saveAuth(String data){
         AjaxJson result = new AjaxJson();
-
-        Object[] objects = JsonUtils.getDTOArray(menuIds, RoleAuth.class);
+        Object[] objects = JsonUtils.getDTOArray(data, RoleAuth.class);
         RoleAuth[] roleAuths=new RoleAuth[objects.length];
         for(int i=0;i<objects.length;i++){
             roleAuths[i] = (RoleAuth)objects[i];
