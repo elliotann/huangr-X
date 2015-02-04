@@ -216,7 +216,15 @@ public class AuthActionManager extends GenericService<AuthAction> implements IAu
             roleAuthManager.deleteByRoleId(roleAuths[0].getRoleId());
         }
         for(RoleAuth roleAuth:roleAuths){
-
+        	Integer[] operIds = roleAuth.getOperations();
+        	String menuOper = "";
+        	for(int i=0;i<operIds.length;i++){
+        		if(i!=operIds.length-1)
+        			menuOper += operIds[i]+",";
+        		else
+        			menuOper += operIds[i];
+        	}
+        	roleAuth.setOperids(menuOper);
             roleAuthManager.save(roleAuth);
         }
 
