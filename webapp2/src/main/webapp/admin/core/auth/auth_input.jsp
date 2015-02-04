@@ -73,7 +73,7 @@
 
         }
         function onCheckRow(checked,data,rowid,rowdata){
-			alert(checked);
+		
             var parent = manager.getParent(data);
             if(parent!=null){
                 selectParent(parent);
@@ -81,23 +81,23 @@
             var rows = manager.getSelectedRows();
 
             var menu=[];
-
+			var tempObj = [];
             $(rows).each(function () {
-                menu.push(this.id);
+      
                 var existObj = isExist(myAuths,this.id);
             	if(!existObj){
             		var auth=new Auth();
                 	auth.funId = this.id;
                 	auth.roleId = ${roleId};
-                	
-            		myAuths.push(auth);
+                	tempObj.push(auth);
+            	
             	}else{
-            		
+            		tempObj.push(existObj);
             		
             	}
             });
 
-
+            myAuths = tempObj;
            
 			alert(JSON.stringify(myAuths));
 
