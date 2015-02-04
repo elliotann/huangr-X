@@ -12,9 +12,10 @@
     <script src="${context }/js/ligerui/js/plugins/ligerResizable.js" type="text/javascript"></script>
     <script src="${context }/js/ligerui/js/plugins/ligerDialog.js" type="text/javascript"></script>
     <script type="text/javascript">
-    	function Auth(menuId,operations){
-    		this.menuId = menuId;
-    		this.operaions = operations;
+    	function Auth(){
+    		this.roleId = 0;
+    		this.funId = 0;
+    		this.operations  = [];
     	}
     	var myAuths = [];
         var dialog = frameElement.dialog;
@@ -72,7 +73,7 @@
 
         }
         function onCheckRow(checked,data,rowid,rowdata){
-
+			alert(checked);
             var parent = manager.getParent(data);
             if(parent!=null){
                 selectParent(parent);
@@ -83,20 +84,22 @@
 
             $(rows).each(function () {
                 menu.push(this.id);
+                var existObj = isExist(myAuths,this.id);
+            	if(!existObj){
+            		var auth=new Auth();
+                	auth.funId = this.id;
+                	auth.roleId = ${roleId};
+                	
+            		myAuths.push(auth);
+            	}else{
+            		
+            		
+            	}
             });
-            var param = {menuIds:menu,roleId:${roleId}};
 
-            //保存权限
-            $.ajax({
-                type: 'post',
-                url: "auth.do?saveAuth&ajax=true",
-                data:param,
-                dataType:'json',
-                success:function(result){
 
-                }
-            });
-
+           
+			alert(JSON.stringify(myAuths));
 
         }
 
@@ -109,24 +112,72 @@
         }
 
         function submitForm(){
-            $.ligerDialog.waitting('增加成功');
-            setTimeout(function ()
-            {
-                $.ligerDialog.closeWaitting();
-                dialog.close();
-            }, 1000);
+        	var param = JSON.stringify(myAuths);
+        	
+        	$.ajax({
+        		url:'auth.do?saveAuth&ajax=true',
+        		type:'post',
+        		data:'data='+param,
+        		dataType:'json',
+        		success:function(result){
+        			 $.ligerDialog.waitting('增加成功');
+        	            setTimeout(function ()
+        	            {
+        	                $.ligerDialog.closeWaitting();
+        	                dialog.close();
+        	            }, 1000);
+        		},
+        		error:function(e){
+        			
+        		}
+        	});
+
+
+           
         }
         function checkOperation(obj){
             //判断功能权限是否选中
             var rowid = obj.getAttribute("id").split("_")[1];
             var rowdata = manager.getRow($("#menu"+rowid).val());
             var param = {menuIds:[rowdata.id+''],roleId:${roleId},operId:obj.value,isCheck:obj.checked,ajax:'true'};
-            alert(JSON.stringify(param));
+           
             if(manager.isSelected(rowdata)){
-            	var auth=new Auth(rowid,obj.value);
-                myAuths.push(auth);
+            	
+            	var existObj = isExist(myAuths,rowid);
+            	if(!existObj){
+            		var auth=new Auth();
+                	auth.funId = rowid;
+                	auth.roleId = ${roleId};
+                	auth.operations.push(obj.value);
+            		myAuths.push(auth);
+            	}else{
+            		if(obj.checked)
+            			existObj.operations.push(obj.value);
+            		else{
+            			var tempOperations = [];
+            			var j=0;
+            			for(var i=0;i<existObj.operations.length;i++){
+            				if(obj.value!=existObj.operations[i]){
+            					tempOperations[j] = existObj.operations[i];
+            					j++;
+            				}
+            			}
+            			existObj.operations = tempOperations;
+            		}
+            		
+            	}
+                
             }
-            alert(myAuths.length);
+            
+        }
+        function isExist(obj,menuId){
+        	for(var i=0;i<obj.length;i++){
+        		if(obj[i].funId==menuId)
+        		{
+        			return obj[i];
+        		}
+        	}
+        	return null;
         }
         function f_isChecked(rowdata)
         {
