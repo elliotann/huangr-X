@@ -4,9 +4,11 @@ import com.easysoft.core.common.dao.spring.BaseSupport;
 import com.easysoft.core.dao.IMenuDao;
 import com.easysoft.core.manager.IMenuManager;
 import com.easysoft.member.backend.manager.IFunAndOperManager;
+import com.easysoft.member.backend.manager.IPermissionManager;
 import com.easysoft.member.backend.manager.IRoleAuthManager;
 import com.easysoft.member.backend.model.FunAndOper;
 import com.easysoft.member.backend.model.Menu;
+import com.easysoft.member.backend.model.OperationBtn;
 import com.easysoft.member.backend.model.RoleAuth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +33,8 @@ public class MenuManagerImpl extends BaseSupport<Menu> implements IMenuManager {
     private IFunAndOperManager funAndOperManager;
     @Autowired
     private IRoleAuthManager roleAuthManager;
+    @Autowired
+    private IPermissionManager permissionManager;
 	public void clean() {
 		this.baseDaoSupport.execute("truncate table menu");
 	}
@@ -78,16 +82,37 @@ public class MenuManagerImpl extends BaseSupport<Menu> implements IMenuManager {
                 for(Menu menu : menuList){
                     for(Menu selectMenu : selectMenus){
                         if(menu.getId()==selectMenu.getId()){
-
                             menu.setChecked(true);
                         }
                     }
                 }
             }
             for(Menu menu :menuList){
+            	List<Menu> children = this.getChildren(menuList, menu.getId());
+            	 //如果无子菜单，说明是叶子菜单，去查询此叶子菜单的操作权限
+                if(children.isEmpty()){
+                	List<OperationBtn> operationBtns = permissionManager.getOperationBtnsByMenuId(menu.getId());
+                	if(!operationBtns.isEmpty()){
+                		children = new ArrayList<Menu>();
+                		Menu tempMenu = null;
+                		for(OperationBtn btn : operationBtns){
+                			tempMenu = new Menu();
+                			tempMenu.setId(btn.getId());
+                			tempMenu.setTitle(btn.getName());
+                			tempMenu.setMenutype(5);
+                			tempMenu.setPid(menu.getId());
+                			tempMenu.set_parentId(menu.getId());
+                			children.add(tempMenu);
+                		}
+                		menu.setChildren(children);
+                	}
+                }
                 if(menu.getPid().compareTo(menuid)==0){
-                    List<Menu> children = this.getChildren(menuList, menu.getId());
-                    menu.setChildren(children);
+                    
+                
+                    	menu.setChildren(children);
+                    
+                    
                     topMenuList.add(menu);
                 }
             }
@@ -179,7 +204,8 @@ public class MenuManagerImpl extends BaseSupport<Menu> implements IMenuManager {
         List<Menu> results = new ArrayList<Menu>();
         List<RoleAuth> roleAuths = roleAuthManager.queryRoleAuthListByRoleId(roleId);
         for(RoleAuth roleAuth : roleAuths){
-            results.add(this.get(roleAuth.getFunId()));
+        	if(roleAuth.getType()!=null&&roleAuth.getType()!=5)
+        		results.add(this.get(roleAuth.getFunId()));
         }
 
         return results;
