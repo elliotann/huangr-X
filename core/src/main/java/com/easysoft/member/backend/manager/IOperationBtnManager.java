@@ -1,7 +1,6 @@
 package com.easysoft.member.backend.manager;
 
-import com.easysoft.core.common.service.IGenericService;
-import com.easysoft.member.backend.model.OperationBtn;
+
 
 /**
  * Created with IntelliJ IDEA.
