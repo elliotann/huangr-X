@@ -53,26 +53,24 @@
      	listgrid =  $("#maingrid").ligerGrid({
               height:'100%',
               columns: [
-              { display: '用户名', name: 'username', align: 'center', width: 100, minWidth: 60 },
-              { display: '姓名', name: 'realName', align: 'center', width: 100, minWidth: 60 },
-              { display: '邮箱', name: 'email', minWidth: 120 },
-              { display: '办公电话', name: 'tel', minWidth: 120 },
-              { display: '最后登录时间', name: 'lastLoginTime', minWidth: 140 },
-              { display: '登录次数', name: 'loginCount' },
-              { display: '所属公司', name: 'companyId' },
-              { display: '状态', name: 'status',render:function(item){
-             	 if(item.status=='ACTIVE'){
-             		 return "激活";
-             	 }else{
-             		 return "禁用";
-             	 }
+              { display: '表单名', name: 'formName', align: 'center', width: 100, minWidth: 60 },
+              { display: '表单编码', name: 'code', align: 'center', width: 100, minWidth: 60 },
+              { display: '创建时间', name: 'createTime', minWidth: 120 },
+              { display: '创建人', name: 'createBy', minWidth: 120 },
+              { display: '是否同步', name: 'isSynDB', minWidth: 140,render:function(item){
+            	  if(item.isSynDB==1){
+            		  return '是';
+            	  }else{
+            		  return '否';
+            	  }
               } },
+              { display: '表单版本', name: 'version' },
               { display: '操作', name: '',width:'auto',render:function(item){
              	 return "<a href='javascript:void(0)' onclick='toEdit("+item.id+")'>修改</a>&nbsp;&nbsp;<a href='javascript:void(0)' onclick='delUser("+item.id+")'>删除</a>";
               } }
-              ], url:'user.do?datalist',  pageSize:30 ,rownumbers:true,
+              ], url:'designer.do?dataGrid&ajax=true',  pageSize:30 ,rownumbers:true,
               toolbar:{ items: [
-                                         { text: '增加', click: addUser, icon: 'add' },
+                                         { text: '增加', click: addForm, icon: 'add' },
                                          { line: true }]
                                          }
           });
@@ -89,6 +87,10 @@
               return false;
       	});
      });
+	function addForm()
+    {
+		 CRUD.addOrUpdateDialog('增加表单','designer.do?toDesigner',400,800);
+    }
     function delUser(userId)
     {
     	CRUD.delObj('user.do?delete',userId);
