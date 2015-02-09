@@ -17,6 +17,7 @@ import javax.persistence.*;
 public class RoleAuth extends IdEntity {
     private Integer roleId;
     private Integer funId;
+    private Integer type;
     private String operids;//操作IDS
     private Integer[] operations;
 
@@ -52,6 +53,14 @@ public class RoleAuth extends IdEntity {
 
 	public void setOperations(Integer[] operations) {
 		this.operations = operations;
+	}
+	@Column(name="type")
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
 	}
     
 }
