@@ -183,6 +183,7 @@ function bulidMainGrid()
 function createGridToolbar(tName)
 {
     var items = [];
+    items.push({ text: '增加行', click: preview, img: "../icons/application_view_list.png" });
     items.push({ text: '预览效果', click: preview, img: "../icons/application_view_list.png" });
     items.push({ text: '导出JSON', click: outjson, img: "../icons/printer_48.png" });
     items.push({ text: '上移', click: moveup, img: "../icons/sign_up.gif" });
