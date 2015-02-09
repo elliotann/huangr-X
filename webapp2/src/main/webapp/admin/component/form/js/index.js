@@ -116,7 +116,7 @@ function bulidMainGrid()
     $(columns).each(function ()
     {
         var row = {
-        	id: 'id',
+        	columnName: 'id',
             name: this.text,
             display: this.text,
             listwidth: 180,
@@ -154,7 +154,7 @@ function bulidMainGrid()
     window.grid =  gridPanle.ligerGrid({
         columns: [
             { display: '基本信息', columns: [
-            { display: '字段名', name: 'id', align: 'center', width: 110, minWidth: 30 , editor: { type: 'text'}},
+            { display: '字段名', name: 'columnName', align: 'center', width: 110, minWidth: 30 , editor: { type: 'text'}},
             { display: '显示名', name: 'display', align: 'center', width: 110, minWidth: 30, editor: { type: 'text'} },
             { display: '是否主键', name: 'isInPrimaryKey', width: 55, render: checkboxRender},
             { display: '是否为空', name: 'allownull', width: 55, render: checkboxRender}]
@@ -171,8 +171,7 @@ function bulidMainGrid()
             { display: '标签宽度', name: 'labelwidth', align: 'right', width: 55, editor: { type: 'numberbox'} },
             { display: '控件宽度', name: 'width', align: 'right', width: 55, editor: { type: 'numberbox'} },
             { display: '间隔宽度', name: 'space', align: 'right', width: 55, editor: { type: 'numberbox'} },
-            { display: '是否新行', name: 'newline', width: 55, render: checkboxRender },
-                { display: '分组', name: 'group', width: 100, editor: { type: 'text'}}]
+            { display: '是否新行', name: 'newline', width: 55, render: checkboxRender }]
             }
        ],data: { Rows: rows }, usePager: false, toolbar: createGridToolbar(),
         enabledEdit: true, clickToEdit: true, fixedCellHeight: false, inWindow: true, rownumbers: true,
@@ -188,7 +187,6 @@ function createGridToolbar(tName)
     items.push({ text: '导出JSON', click: outjson, img: "../icons/printer_48.png" });
     items.push({ text: '上移', click: moveup, img: "../icons/sign_up.gif" });
     items.push({ text: '下移', click: movedown, img: "../icons/arrow_down.gif" }); 
-    //items.push({ text: '自动翻译字段', click: translate, img: "../icons/world.gif" });
     return { items: items };
 
     function clear()
@@ -218,16 +216,23 @@ function createGridToolbar(tName)
         //参数2:插入的位置 Row Data 
         //参数3:之前或者之后(非必填)
         grid.addRow({ 
-            DepartmentID: 3,
-            DepartmentName: '销售部',
-            RealName: "分为" + newrowid,
-            ID: newrowid++,
-            Sex : 1,
-            Age : 25,
-            IncomeDay: new Date(1306108800000),
-            Phone : "2343434",
-            Address: "wwrere4"
-        }, row, document.getElementById("chkbefore").checked);
+        	id: '',
+            name: '',
+            display: '',
+            listwidth: 180,
+            type: 'text',
+            width: 220,
+            labelwidth: 100,
+            space: 30,
+            newline: false,
+            search_newline : false,
+            inlist: false,
+            insearch: false,
+            inform: true,
+            SourceTableName: this.sourceTableName,
+            SourceTableIDField: this.sourceTableIDField,
+            SourceTableTextField: this.sourceTableTextField
+        }, row);
     } 
     function preview()
     {
@@ -381,7 +386,7 @@ function bulidData()
     {
         var o = grid.rows[i];
         if (o.inlist)
-            griddata.push({ display: o.display, name: o.name, width: o.listwidth });
+            griddata.push({ display: o.columnName, name: o.name, width: o.listwidth });
         if (o.insearch)
             searchdata.push(getFieldData(o, true));
         if (o.inform)
