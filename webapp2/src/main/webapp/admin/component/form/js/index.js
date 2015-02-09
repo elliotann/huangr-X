@@ -183,7 +183,7 @@ function bulidMainGrid()
 function createGridToolbar(tName)
 {
     var items = [];
-    items.push({ text: '增加行', click: preview, img: "../icons/application_view_list.png" });
+    items.push({ text: '增加行', click: addNewRow, img: "../icons/application_view_list.png" });
     items.push({ text: '预览效果', click: preview, img: "../icons/application_view_list.png" });
     items.push({ text: '导出JSON', click: outjson, img: "../icons/printer_48.png" });
     items.push({ text: '上移', click: moveup, img: "../icons/sign_up.gif" });
@@ -211,7 +211,24 @@ function createGridToolbar(tName)
         }
         return false;
     }
-
+    function addNewRow()
+    {
+        var row = grid.getSelectedRow();
+        //参数1:rowdata(非必填)
+        //参数2:插入的位置 Row Data 
+        //参数3:之前或者之后(非必填)
+        grid.addRow({ 
+            DepartmentID: 3,
+            DepartmentName: '销售部',
+            RealName: "分为" + newrowid,
+            ID: newrowid++,
+            Sex : 1,
+            Age : 25,
+            IncomeDay: new Date(1306108800000),
+            Phone : "2343434",
+            Address: "wwrere4"
+        }, row, document.getElementById("chkbefore").checked);
+    } 
     function preview()
     {
         
