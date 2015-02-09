@@ -116,6 +116,7 @@ function bulidMainGrid()
     $(columns).each(function ()
     {
         var row = {
+        	id: 'id',
             name: this.text,
             display: this.text,
             listwidth: 180,
@@ -153,8 +154,8 @@ function bulidMainGrid()
     window.grid =  gridPanle.ligerGrid({
         columns: [
             { display: '基本信息', columns: [
-            { display: '字段名', name: 'name', align: 'left', width: 110, minWidth: 30 },
-            { display: '显示名', name: 'display', align: 'left', width: 110, minWidth: 30, editor: { type: 'text'} },
+            { display: '字段名', name: 'id', align: 'center', width: 110, minWidth: 30 , editor: { type: 'text'}},
+            { display: '显示名', name: 'display', align: 'center', width: 110, minWidth: 30, editor: { type: 'text'} },
             { display: '是否主键', name: 'isInPrimaryKey', width: 55, render: checkboxRender},
             { display: '是否为空', name: 'allownull', width: 55, render: checkboxRender}]
             },
