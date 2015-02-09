@@ -15,6 +15,7 @@
     	function Auth(){
     		this.roleId = 0;
     		this.funId = 0;
+    		this.type = 0;
     		this.operations  = [];
     	}
     	var myAuths = [];
@@ -27,7 +28,13 @@
                         columns: [
                             { display: 'id', name: 'id', id: 'menuId',  align: 'center',width:60 },
                             { display: '名称', name: 'title', id: 'menuName',  align: 'left',width:250 },
-                            { display: '操作', name: 'ico',  align: 'left',width:300,render:authSelect}], width: '100%', usePager:false, checkbox: true,
+                            { display: '类型', name: 'menutype', id: 'menutype',  align: 'center',width:215,render:function(item){
+                            	if(item.menutype==5){
+                            		return "操作";
+                            	}else{
+                            		return "菜单";
+                            	}
+                            } }], width: '100%', usePager:false, checkbox: true,
                         url: 'auth.do?dataGrid&ajax=yes&roleId=${roleId}', alternatingRow: true,selectRowButtonOnly:true, tree: {
                             columnId: 'menuName',
                             idField: 'id',
@@ -75,8 +82,15 @@
         function onCheckRow(checked,data,rowid,rowdata){
 		
             var parent = manager.getParent(data);
-            if(parent!=null){
+            if(parent!=null&&checked){
                 selectParent(parent);
+            }
+            var children = manager.getChildren(data);
+            if(children.length>1&&!checked){
+            	for(var i=0;i<children.length;i++){
+            		unSelectChild(children[i]);
+            	}
+            	
             }
             var rows = manager.getSelectedRows();
 
@@ -97,7 +111,8 @@
             	}
             });
 
-            myAuths = tempObj;
+            myAuths = [];
+            myAuths=tempObj;
            
 			alert(JSON.stringify(myAuths));
 
@@ -110,10 +125,34 @@
             }
 
         }
+        
+        function unSelectChild(data){
+        	alert(JSON.stringify(data));
+            manager.unselect(data);
+            if(data.children.length>1){
+            	for(var i=0;i<data.children.length;i++)
+            		unSelectChild(manager.getChildren(data.children[i]));
+            }
+
+        }
 
         function submitForm(){
-        	var param = JSON.stringify(myAuths);
-        	
+        	  var rows = manager.getSelectedRows();
+
+        	myAuths = [];
+        	var opers = [];
+        	 $(rows).each(function () {
+        		
+   		 		var auth=new Auth();
+               	auth.funId = this.id;
+               	auth.type=this.menutype;
+               	auth.roleId = ${roleId};
+               	myAuths.push(auth);
+
+             	
+             });
+        	 var param = JSON.stringify(myAuths);
+        
         	$.ajax({
         		url:'auth.do?saveAuth&ajax=true',
         		type:'post',
