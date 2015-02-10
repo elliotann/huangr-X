@@ -1,10 +1,8 @@
 package com.easysoft.member.backend.manager.impl;
 
-import com.easysoft.core.common.service.impl.GenericService;
 import com.easysoft.core.context.EsfContext;
 import com.easysoft.core.log.annotation.BusinessLog;
 import com.easysoft.core.log.annotation.State;
-import com.easysoft.core.log.context.BnLogContext;
 import com.easysoft.core.model.MultiSite;
 import com.easysoft.core.model.Site;
 import com.easysoft.framework.context.webcontext.ThreadContextHolder;
@@ -35,6 +33,7 @@ import java.util.*;
  * @author andy
  */
 @Service("adminUserManager")
+@Transactional
 public class AdminUserManagerImpl  implements IAdminUserManager {
     @Autowired
     private IAdminUserDao adminUserDao;
@@ -172,6 +171,7 @@ public class AdminUserManagerImpl  implements IAdminUserManager {
 	 * @return 登录成功返回管理员
 	 * @throws RuntimeException 当登录失败时抛出此异常，登录失败的原因可通过getMessage()方法获取
 	 */
+	 @BusinessLog(state = State.VALID,success = "用户登录")
 	public int login(String username, String password) {
 		return this.loginBySys(username, StringUtil.md5(password));
 	}
@@ -212,7 +212,7 @@ public class AdminUserManagerImpl  implements IAdminUserManager {
 		}
 		
 		//更新月登录次数和此站点的最后登录时间
-		int logincount = site.getLogincount();
+		int logincount = user.getLoginCount();
 		long lastlogin  =( (long)site.getLastlogin() )* 1000;
 		Date today = new Date();
 		if(DateUtil.toString(new Date(lastlogin), "yyyy-MM").equals(DateUtil.toString(today, "yyyy-MM"))){//与上次登录在同一月内
@@ -223,8 +223,9 @@ public class AdminUserManagerImpl  implements IAdminUserManager {
 		
 		site.setLogincount(logincount);
 		site.setLastlogin(DateUtil.getDatelineLong());
-		//this.daoSupport.execute("update eop_site set logincount=?, lastlogin=? where id=?", logincount,site.getLastlogin(),site.getId());
 		
+		user.setLoginCount(logincount);
+		adminUserDao.update(user);
 		//记录session信息
 		WebSessionContext sessonContext = ThreadContextHolder
 		.getSessionContext();			
