@@ -33,9 +33,7 @@
   
 
     <script type="text/javascript">
-        var ICONS = {
-            Group: "group.gif"
-        };
+     
         var demoData = [], demoGrid = { columns: [] };
         for (var i = 0; i < 9; i++) demoData.push({ id: i, value: i, text: '[数据' + i + ']' });
         demoGrid.columns.push({ display: 'ID', name: 'id' });
@@ -293,8 +291,8 @@
                 labelWidth: 90,
                 space: 40,
                 fields: [ 
-                { name: "ProductID", type: "hidden" },
-                { label: "产品名称", name: "ProductName", width: 170, labelWidth: 90, space: 40, newline: true, type: "text", group: "基础信息", groupicon: ICONS.Group },
+             
+                { label: "产品名称", name: "ProductName", width: 170, labelWidth: 90, space: 40, newline: true, type: "text"},
                 {
                     label: "供应商", name: "SupplierID", width: 170, labelWidth: 90, space: 40, newline: false, type: "combobox", textField: "CompanyName", editor: {
                         data: demoData,grid:demoGrid,selectBoxWidth:400,selectBoxHeight:200
@@ -305,40 +303,10 @@
                     label: "类别 ", name: "CategoryID", width: 170, labelWidth: 90, space: 40, newline: true, type: "select", textField: "CategoryName", editor: {
                         data: demoData
                     }
-                },
-                {
-                    label: "供应商2", name: "SupplierID2", width: 170, labelWidth: 90, space: 40, newline: false, type: "popup", textField: "CompanyName2", editor: {
-                        data: demoData, grid: demoGrid, selectBoxWidth: 400, selectBoxHeight: 200
-                    }
-                },
-                { label: "日期 ", name: "AddTime", width: 170, labelWidth: 90, space: 40, newline: true, type: "date" },
-                { label: "折扣", name: "QuantityPerUnit", width: 170, labelWidth: 90, space: 40, newline: false, type: "number" },
-                { label: "单价", name: "UnitPrice", width: 170, labelWidth: 90, space: 40, newline: true, type: "number" },
-                { label: "库存量", name: "UnitsInStock", width: 170, labelWidth: 90, space: 40, newline: true, type: "digits", group: "库存", groupicon: ICONS.Group },
-                { label: "订购量", name: "UnitsOnOrder", width: 170, labelWidth: 90, space: 40, newline: false, type: "digits" },
-                { label: "备注", name: "Remark", labelWidth: 90, space: 40, newline: true, type: "textarea", width: 470 },
-                   { label: "产品名称", name: "ProductName", width: 170, labelWidth: 90, space: 40, newline: true, type: "text", group: "基础信息 ", groupicon: ICONS.Group }
+                }
                 ]
             });
-            //$.ajax({
-            //    type: "GET",
-            //    url: "data.json",
-            //    dataType: "json",
-            //    success: function (data)
-            //    { 
-            //        if (!data || !data.Fields) return;
-            //        var fields = convertToFields(data.Fields);
-            //        formDesign.set({
-            //            labelWidth: data.LabelWidth,
-            //            inputWidth: data.InputWidth,
-            //            space: data.Space,
-            //            fields: fields
-            //        });
-            //    },
-            //    error: function ()
-            //    {
-            //    }
-            //});
+     
         }
         function showMessage(message)
         {
@@ -355,22 +323,7 @@
         function f_saveToFile()
         {
             showMessage(JSON.stringify(formDesign.get('fields')));
-            //$.ajax({
-            //    type: "post",
-            //    url: "save.ashx",
-            //    data: {
-            //        fields: JSON.stringify(formDesign.get('fields'))
-            //    },
-            //    dataType: "json",
-            //    success: function (data) {
-            //        if (!data) return;
-            //        if (data.error) alert('保存发生错误');
-            //        else alert('保存成功');
-            //    },
-            //    error: function () {
-            //        alert('保存发生错误');
-            //    }
-            //});
+    
         }
 
         function convertToFields(FormFields) {
