@@ -1,9 +1,15 @@
 package com.easysoft.member.backend.model;
 
-import com.easysoft.core.common.entity.IdEntity;
-
-import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.easysoft.core.common.entity.IdEntity;
+import com.easysoft.framework.utils.DateUtil;
 
 
 /**
@@ -28,6 +34,8 @@ public class AdminUser extends IdEntity{
 	private Integer siteid; //子站点id
     private String email;
     private List<AuthAction> authList;
+    private int loginCount;//登录次数
+    private String lastLoginTime = DateUtil.toString(new Date(),"YYYY-MM-DD HH:mm:ss");//最后登录时间
     @Transient
     public List<AuthAction> getAuthList() { return this.authList; }
 
@@ -128,4 +136,21 @@ public class AdminUser extends IdEntity{
     public void setUserCorp(Integer userCorp) {
         this.userCorp = userCorp;
     }
+    @Column(name="login_count")
+	public int getLoginCount() {
+		return loginCount;
+	}
+
+	public void setLoginCount(int loginCount) {
+		this.loginCount = loginCount;
+	}
+	@Column(name="last_login_time")
+	public String getLastLoginTime() {
+		return lastLoginTime;
+	}
+
+	public void setLastLoginTime(String lastLoginTime) {
+		this.lastLoginTime = lastLoginTime;
+	}
+    
 }
