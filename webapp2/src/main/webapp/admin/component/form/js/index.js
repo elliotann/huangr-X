@@ -151,9 +151,9 @@ function bulidMainGrid()
         rows.push(row);
     }); 
     var parentDiv = $("<div></div>");
-    var formDiv = $('<div  style="margin:7px;"><form></form></div>');
+    var formDiv = $('<div  style="margin:7px;"><form>表名：<input type=</form></div>');
     var entityform = $("form:first", formDiv);
-    var fieldsdata = [{ label: "用户名", name: "username", width: 170, labelWidth: 50}];
+    var fieldsdata = [{ label: "表名", name: "tableName", width: 170, labelWidth: 50,type: "text"},{ label: "表单名称", name: "tableName", width: 170, labelWidth: 50,type: "text",newline:false},{ label: "表单编码", name: "code", width: 170, labelWidth: 50,type: "text",newline:false}];
     entityform.ligerForm({ fields: fieldsdata }); 
     formDiv.appendTo(parentDiv);
     var gridPanle = $('<div style="margin:7px;"></div>').appendTo(parentDiv);
@@ -269,6 +269,7 @@ function createGridToolbar(tName)
 
         var searchform = $("form:first", listPanle);
         searchform.ligerForm({ fields: o.search }); 
+        alert(o.search.length);
         var listgrid = $(".listgrid:first", listPanle).ligerGrid({
             columns: o.grid,
             toolbar: listToolbar(), data: $.extend(true, {}, AllProductData),
