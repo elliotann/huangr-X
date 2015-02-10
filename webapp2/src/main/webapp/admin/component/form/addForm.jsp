@@ -10,13 +10,15 @@
    <link href="${context }/js/ligerui/skins/Gray2014/css/all.css" rel="stylesheet" type="text/css" />
     <link href="${context }/js/ligerui/skins/ligerui-icons.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="${staticserver }/js/common/jquery-1.6.4.js"></script> 
-    <script src="../../demos/grid/AllProductData.js" type="text/javascript"></script>
-    <script src="${context }/js/ligerui/js/ligerui.min.js" type="text/javascript"></script>
+    <script src="${ctx }/admin/component/form/js/AllProductData.js" type="text/javascript"></script>
+    <script src="${context }/js/ligerui/js/ligerui.all.js" type="text/javascript"></script> 
+    <script src="${context }/js/ligerui/js/plugins/ligerForm.js" type="text/javascript"></script>
     <script src="${ctx }/admin/component/form/js/ligerGrid.showFilter.js" type="text/javascript"></script>
     <link href="${ctx }/admin/component/form/css/lab.css" rel="stylesheet" type="text/css" />
     <script src="${ctx }/admin/component/form/js/data.js" type="text/javascript"></script>
     <script src="${ctx }/admin/component/form/js/lab.js" type="text/javascript"></script>
     <script src="${ctx }/admin/component/form/js/index.js" type="text/javascript"></script>
+    
 </head>
 <body></body>
 </html>
