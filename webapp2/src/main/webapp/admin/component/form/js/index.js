@@ -102,7 +102,7 @@ $.ligerDefaults.Grid.editors['select'] =
 
 var root = "../../";
 var fieldTypeData = [{ value: 'text', text: '文本框' }, { value: 'textarea', text: '多行文本框' }, { value: 'date', text: '日期控件' }, { value: 'select', text: '下拉框' }, { value: 'digits', text: '整数输入框' }, { value: 'number', text: '浮点数输入框' }, { value: 'hidden', text: '隐藏控件'}];
-  
+var fieldDataType = [{ value: 'int', text: 'int' }, { value: 'varchar', text: 'varchar' }]; 
 
 function init()
 {
@@ -117,8 +117,8 @@ function bulidMainGrid()
     {
         var row = {
         	columnName: 'id',
-            name: this.text,
-            display: this.text,
+        	displayName: this.displayName,
+        	isPK: this.isPK,
             listwidth: 180,
             type: 'text',
             width: 220,
@@ -133,7 +133,7 @@ function bulidMainGrid()
             SourceTableIDField: this.sourceTableIDField,
             SourceTableTextField: this.sourceTableTextField
         };
-        row.allownull = this.isNullable ? true : false;
+        row.isNullable = this.isNullable ? true : false;
         row.type = this.inputType;
         if (this.isAutoKey || this.isInForeignKey)
         {
@@ -150,14 +150,22 @@ function bulidMainGrid()
         }
         rows.push(row);
     }); 
-    var gridPanle = $('<div style="margin:7px;"></div>').appendTo('body');
+    var parentDiv = $("<div></div>");
+    var formDiv = $('<div  style="margin:7px;"><form></form></div>');
+    var entityform = $("form:first", formDiv);
+    var fieldsdata = [{ label: "用户名", name: "username", width: 170, labelWidth: 50}];
+    entityform.ligerForm({ fields: fieldsdata }); 
+    formDiv.appendTo(parentDiv);
+    var gridPanle = $('<div style="margin:7px;"></div>').appendTo(parentDiv);
+    parentDiv.appendTo('body');
     window.grid =  gridPanle.ligerGrid({
         columns: [
             { display: '基本信息', columns: [
             { display: '字段名', name: 'columnName', align: 'center', width: 110, minWidth: 30 , editor: { type: 'text'}},
-            { display: '显示名', name: 'display', align: 'center', width: 110, minWidth: 30, editor: { type: 'text'} },
-            { display: '是否主键', name: 'isInPrimaryKey', width: 55, render: checkboxRender},
-            { display: '是否为空', name: 'allownull', width: 55, render: checkboxRender}]
+            { display: '显示名', name: 'displayName', align: 'center', width: 110, minWidth: 30, editor: { type: 'text'} },
+            { display: '数据类型', name: 'dataType', align: 'left', width: 80, minWidth: 30, editor: { type: 'select', data: fieldDataType }, render: fieldDataTypeRender },
+            { display: '是否主键', name: 'isPK', width: 55, render: checkboxRender},
+            { display: '允许空值', name: 'isNullable', width: 55, render: checkboxRender}]
             },
             { display: '列表页设置', columns: [
             { display: '列表显示', name: 'inlist', width: 55, render: checkboxRender },
@@ -184,7 +192,7 @@ function createGridToolbar(tName)
     var items = [];
     items.push({ text: '增加行', click: addNewRow, img: "../icons/application_view_list.png" });
     items.push({ text: '预览效果', click: preview, img: "../icons/application_view_list.png" });
-    items.push({ text: '导出JSON', click: outjson, img: "../icons/printer_48.png" });
+    items.push({ text: '保存', click: outjson, img: "../icons/printer_48.png" });
     items.push({ text: '上移', click: moveup, img: "../icons/sign_up.gif" });
     items.push({ text: '下移', click: movedown, img: "../icons/arrow_down.gif" }); 
     return { items: items };
@@ -216,9 +224,10 @@ function createGridToolbar(tName)
         //参数2:插入的位置 Row Data 
         //参数3:之前或者之后(非必填)
         grid.addRow({ 
-        	id: '',
-            name: '',
-            display: '',
+        	columnName: '',
+        	displayName: '',
+        	isPK:false,
+        	isNullable:false,
             listwidth: 180,
             type: 'text',
             width: 220,
@@ -381,7 +390,7 @@ function createGridToolbar(tName)
 //获取 表单和表格 结构 所需要的数据
 function bulidData()
 { 
-    var griddata = [], searchdata= [], formdata= [];   
+    var griddata = [], searchdata= [], formdata= [],fields = [];   
     for (var i = 0, l = grid.rows.length; i < l; i++)
     {
         var o = grid.rows[i];
@@ -391,8 +400,10 @@ function bulidData()
             searchdata.push(getFieldData(o, true));
         if (o.inform)
             formdata.push(getFieldData(o));
+        fields.push({fieldName:o.columnName,displayName:o.displayName,isPK:o.isPK,isNullable:o.isNullable});
+        
     }
-    return { grid: griddata, search: searchdata, form: formdata };
+    return { grid: griddata, search: searchdata, form: formdata,fields:fields };
 
     function getFieldData(o, search)
     {
@@ -436,6 +447,16 @@ function fieldTypeRender(r, i, value)
         if (o.value == value) return o.text || o.name;
     }
     return "文本框";
+}
+//数据类型类型渲染器
+function fieldDataTypeRender(r, i, value)
+{
+    for (var i = 0, l = fieldDataType.length; i < l; i++)
+    {
+        var o = fieldDataType[i];
+        if (o.value == value) return o.text || o.name;
+    }
+    return "int";
 }
 //是否类型的模拟复选框的渲染函数
 function checkboxRender(rowdata, rowindex, value, column)
