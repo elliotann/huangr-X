@@ -43,11 +43,7 @@
                 //调试状态，不会提交数据的
                 debug: true,
                 rules:{
-                    password:{
-                        required:true,
-                        minlength:6,
-                        maxlength:18
-                    },
+                   
                     email:{
                     	required:true,
                     	email:true,
@@ -145,6 +141,7 @@
 	<input type="hidden" name="id" value="${adminUser.id }" id="userId" />
     <input type="hidden" name="ajax" value="true"/>
     <input  type="hidden" name="founder" value="${adminUser.founder }"/>
+    <input  type="hidden" name="password" value="${adminUser.password }"/>
 	<table cellpadding="0" cellspacing="0" class="l-table-edit">
 		<tr>
 			<td align="right" class="l-table-edit-td">用户名:</td>
