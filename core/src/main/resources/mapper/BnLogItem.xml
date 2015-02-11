@@ -37,6 +37,7 @@
         <if test=" searchConditions.operator!=null ">
             and operator=#{searchConditions.operator}
         </if>
+        order by logTime DESC
     </select>
 
 
