@@ -9,14 +9,13 @@ import org.apache.log4j.Logger;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-
-
 /**
  * web应用程序监听器
  * 
  * @author 张均锋
  * 
  */
+
 public class WebAppListener implements ServletContextListener {
 	private final static Logger logger = Logger.getLogger(WebAppListener.class);
 
