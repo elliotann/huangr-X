@@ -153,17 +153,16 @@ function bulidMainGrid()
     var parentDiv = $("<div></div>");
     var formDiv = $('<div  style="margin:7px;"><form></form></div>');
     var entityform = $("form:first", formDiv);
-    var fieldsdata = [{ label: "表名", name: "tableName", width: 170, labelWidth: 50,type: "text"},{ label: "表单名称", name: "tableName", width: 170, labelWidth: 50,type: "text",newline:false},{ label: "表单编码", name: "code", width: 170, labelWidth: 50,type: "text",newline:false}];
+    var fieldsdata = [{ label: "表名", name: "tableName", type: "text"},{ label: "表单名称", name: "formName", type: "text",newline:false},{ label: "表单编码", name: "code", type: "text",newline:false}];
    
     formDiv.appendTo(parentDiv);
     var gridPanle = $('<div style="margin:7px;"></div>').appendTo(parentDiv);
     parentDiv.appendTo('body');
     var options = {
     	fields: fieldsdata,
-    	labelWidth:700,
-    	inputWidth: 300
+    	labelWidth:60
     };
-    entityform.ligerForm(options); 
+    window.formEntity =entityform.ligerForm(options); 
     window.grid =  gridPanle.ligerGrid({
         columns: [
             { display: '基本信息', columns: [
@@ -275,7 +274,6 @@ function createGridToolbar(tName)
 
         var searchform = $("form:first", listPanle);
         searchform.ligerForm({ fields: o.search }); 
-        alert(o.search.length);
         var listgrid = $(".listgrid:first", listPanle).ligerGrid({
             columns: o.grid,
             toolbar: listToolbar(), data: $.extend(true, {}, AllProductData),
@@ -347,6 +345,8 @@ function createGridToolbar(tName)
     function outjson()
     {
         var d = bulidData();
+     
+       
         var textarea = $("<textarea />").width(400).height(120);
         textarea.val($.ligerui.toJSON(d));
         $.ligerDialog.open({
@@ -354,6 +354,14 @@ function createGridToolbar(tName)
             target: textarea.wrap('<div></div>').parent().css('margin', 10),
             width: 470, height: 200, isResize: true,
             buttons: [{ text: '关闭', onclick: function (item, dialog) { dialog.hide(); } }]
+        });
+        $.ajax({
+        	url:'designer.do?save&ajax=true',
+        	type:'post',
+        	data:'data='+$.ligerui.toJSON(d),
+        	success:function(result){
+        		
+        	}
         });
     }
     function translate()
@@ -398,6 +406,7 @@ function createGridToolbar(tName)
 function bulidData()
 { 
     var griddata = [], searchdata= [], formdata= [],fields = [];   
+   
     for (var i = 0, l = grid.rows.length; i < l; i++)
     {
         var o = grid.rows[i];
@@ -410,7 +419,7 @@ function bulidData()
         fields.push({fieldName:o.columnName,displayName:o.displayName,isPK:o.isPK,isNullable:o.isNullable});
         
     }
-    return { grid: griddata, search: searchdata, form: formdata,fields:fields };
+    return { tableName:formEntity.getData().tableName,formName:formEntity.getData().formName,code:formEntity.getData().code,grid: griddata, search: searchdata, form: formdata,fields:fields };
 
     function getFieldData(o, search)
     {
