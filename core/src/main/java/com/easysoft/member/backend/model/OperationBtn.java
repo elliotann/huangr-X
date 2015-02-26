@@ -1,8 +1,11 @@
 package com.easysoft.member.backend.model;
 
-import com.easysoft.core.common.entity.IdEntity;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
-import javax.persistence.*;
+import com.easysoft.core.common.entity.IdEntity;
+import com.easysoft.framework.commons.AbstractTree;
 
 /**
  * 操作按钮-->功能,如增、删、改、查、导出
@@ -14,7 +17,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="t_operation_btn")
-public class OperationBtn extends IdEntity {
+public class OperationBtn extends IdEntity implements AbstractTree{
 
     private String code;
     private String name;
