@@ -19,7 +19,7 @@ import com.easysoft.framework.db.NotDbField;
  */
 @Entity
 @Table(name = "t_menu")
-public class Menu extends IdEntity implements AbstractTree{
+public class Menu extends IdEntity implements AbstractTree<Menu>{
     private Integer deleteflag = 0;
 
     private String productId;
@@ -177,12 +177,10 @@ public class Menu extends IdEntity implements AbstractTree{
     }
 
 	public void add(Menu menu) {
-		// TODO Auto-generated method stub
-		
+		children.add(menu);
 	}
 
 	public void remove(Menu menu) {
-		// TODO Auto-generated method stub
-		
+		children.remove(menu);
 	}
 }
