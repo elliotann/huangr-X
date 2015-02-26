@@ -1,10 +1,16 @@
 package com.easysoft.member.backend.model;
 
-import com.easysoft.core.common.entity.IdEntity;
-import com.easysoft.framework.db.NotDbField;
-
-import javax.persistence.*;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.easysoft.core.common.entity.IdEntity;
+import com.easysoft.framework.commons.AbstractTree;
+import com.easysoft.framework.commons.Branch;
+import com.easysoft.framework.db.NotDbField;
 
 
 /**
@@ -13,7 +19,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "t_menu")
-public class Menu extends IdEntity{
+public class Menu extends IdEntity implements Branch{
     private Integer deleteflag = 0;
 
     private String productId;
@@ -169,4 +175,14 @@ public class Menu extends IdEntity{
     public void setChecked(boolean checked) {
         this.checked = checked;
     }
+
+	public void add(AbstractTree component) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void remove(AbstractTree component) {
+		// TODO Auto-generated method stub
+		
+	}
 }
