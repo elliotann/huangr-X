@@ -21,7 +21,6 @@ import com.easysoft.framework.db.NotDbField;
 @Table(name = "t_menu")
 public class Menu extends IdEntity implements AbstractTree<Menu>{
     private Integer deleteflag = 0;
-
     private String productId;
     private Integer pid;
     private String title;
