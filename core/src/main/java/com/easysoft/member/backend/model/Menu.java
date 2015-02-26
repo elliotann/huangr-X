@@ -1,7 +1,6 @@
 package com.easysoft.member.backend.model;
 
 import com.easysoft.core.common.entity.IdEntity;
-import com.easysoft.core.model.Resource;
 import com.easysoft.framework.db.NotDbField;
 
 import javax.persistence.*;
@@ -15,8 +14,6 @@ import java.util.List;
 @Entity
 @Table(name = "t_menu")
 public class Menu extends IdEntity{
-
-
     private Integer deleteflag = 0;
 
     private String productId;

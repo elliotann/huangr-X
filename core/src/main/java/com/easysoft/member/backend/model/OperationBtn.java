@@ -3,7 +3,6 @@ package com.easysoft.member.backend.model;
 import com.easysoft.core.common.entity.IdEntity;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 /**
  * 操作按钮-->功能,如增、删、改、查、导出
