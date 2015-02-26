@@ -176,12 +176,12 @@ public class Menu extends IdEntity implements AbstractTree{
         this.checked = checked;
     }
 
-	public void add(AbstractTree component) {
+	public void add(Menu menu) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public void remove(AbstractTree component) {
+	public void remove(Menu menu) {
 		// TODO Auto-generated method stub
 		
 	}
