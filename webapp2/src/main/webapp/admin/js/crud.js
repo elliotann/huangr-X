@@ -20,7 +20,6 @@
 	}
 	//确定回调函数
 	function addForm(savebtn){
-	
 	    $("#objForm").submit();
 	}
 
@@ -33,7 +32,6 @@
     			$.ajax({
     				url:url,
     				type:'post',
-    				data:'id='+id,
     				dataType:'json',
     				success:function(result){
     					if(result.success){
