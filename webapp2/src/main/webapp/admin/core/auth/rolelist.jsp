@@ -5,13 +5,10 @@
 <head>
 <title></title>
 <link href="${context }/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
-
 <link href="/jeap1.0/adminthemes/default/css/button.css" rel="stylesheet" type="text/css" />
 <link href="${context }/css/global.css" rel="stylesheet" type="text/css" />
-
 <script type="text/javascript" src="${staticserver }/js/common/jquery-1.6.4.js"></script> 
 <script src="${context }/js/ligerui/js/ligerui.all.js" type="text/javascript"></script> 
-
 <script src="${context }/js/ligerui/js/plugins/ligerGrid.js" type="text/javascript"></script>
 <script src="${context }/js/ligerui/js/plugins/ligerForm.js" type="text/javascript"></script>
 <script src="${context }/js/ligerui/js/plugins/ligerResizable.js" type="text/javascript"></script>
@@ -35,7 +32,9 @@
               ], url:'role.do?dataGrid&ajax=yes',  pageSize:30 ,rownumbers:true,
               toolbar:{ items: [
                                          { text: '增加', click: addRole, icon: 'add' },
-                                         { line: true }]
+                                         { line: true },
+                                         { text: '删除', click: delUser, icon: 'add' },
+                               ]
                                          }
           });
      	//搜索框 收缩/展开
@@ -57,9 +56,11 @@
       	});
      });
 	
-    function delUser(userId)
-    {
-    	CRUD.delObj('role.do?delete&id=',userId);
+    function delUser(){
+    	var row = listgrid.getSelectedRow();
+        if (!row) { alert('请选择数据进行删除!'); return; }
+        var userId= row.id;
+    	CRUD.delObj('role.do?delete&id='+userId,null);
     }
     function toEdit(userId){
     	CRUD.addOrUpdateDialog('修改角色','role.do?edit&roleid='+userId,300,null);
@@ -84,8 +85,6 @@
 			<div class="searchbox">
 				<form id="searchForm" >
 				</form>
-				
-			
 			</div>
 		</div>
 		<div id="maingrid" style="margin: 0; padding: 0"></div>
