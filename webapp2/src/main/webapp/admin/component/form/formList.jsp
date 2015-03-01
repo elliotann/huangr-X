@@ -96,7 +96,7 @@
     	CRUD.delObj('user.do?delete',userId);
     }
     function toEdit(userId){
-    	CRUD.addOrUpdateDialog('修改用户','user.do?toEdit&id='+userId,300,null);
+    	CRUD.addOrUpdateDialog('修改表单','designer.do?modify&id='+userId,300,null);
     }
     function addUser(){
         CRUD.addOrUpdateDialog('增加用户','user.do?toAdd',300,null);
