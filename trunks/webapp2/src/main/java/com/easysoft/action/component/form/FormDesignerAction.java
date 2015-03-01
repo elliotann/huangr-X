@@ -110,7 +110,8 @@ public class FormDesignerAction extends BaseController {
         Map<String,Class> map = new HashMap<String,Class>();
         map.put("fields", FormField.class);
         FormEntity formEntity = (FormEntity)JsonUtils.jsonToBean(data, FormEntity.class,map);
-        if(formEntity.getId()==0){
+        formEntity.setId(formId);
+        if(formId==null||formId==0){
         	 formEntity.setCreateBy(UserServiceFactory.getUserService().getCurrentUser().getUsername());
         }
         formManager.addForm(formEntity);
@@ -176,6 +177,8 @@ public class FormDesignerAction extends BaseController {
     public ModelAndView modify(Integer id){
         Map<String,Object> map = new HashMap<String, Object>();
         FormEntity form = formManager.getFormById(id);
+        String formData = JsonUtils.beanToJson(form);
+        map.put("formData",formData);
         map.put("form",form);
         return new ModelAndView("admin/component/form/editForm",map);
     }
