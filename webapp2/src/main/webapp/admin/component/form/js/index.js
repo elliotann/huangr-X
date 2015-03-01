@@ -107,6 +107,7 @@ var fieldDataType = [{ value: 'int', text: 'int' }, { value: 'varchar', text: 'v
 function init()
 {
     bulidMainGrid();
+
 }
 
 
@@ -116,8 +117,9 @@ function bulidMainGrid()
     $(columns).each(function ()
     {
         var row = {
-        	columnName: 'id',
+        	fieldName: this.fieldName,
         	displayName: this.displayName,
+        	dataType:this.dataType,
         	isPK: this.isPK,
             listwidth: 180,
             type: 'text',
@@ -163,10 +165,13 @@ function bulidMainGrid()
     	labelWidth:60
     };
     window.formEntity =entityform.ligerForm(options); 
+    
+    if(formData)
+    	formEntity.setData(formData);
     window.grid =  gridPanle.ligerGrid({
         columns: [
             { display: '基本信息', columns: [
-            { display: '字段名', name: 'columnName', align: 'center', width: 110, minWidth: 30 , editor: { type: 'text'}},
+            { display: '字段名', name: 'fieldName', align: 'center', width: 110, minWidth: 30 , editor: { type: 'text'}},
             { display: '显示名', name: 'displayName', align: 'center', width: 110, minWidth: 30, editor: { type: 'text'} },
             { display: '数据类型', name: 'dataType', align: 'left', width: 80, minWidth: 30, editor: { type: 'select', data: fieldDataType }, render: fieldDataTypeRender },
             { display: '是否主键', name: 'isPK', width: 55, render: checkboxRender},
@@ -196,8 +201,7 @@ function createGridToolbar(tName)
 {
     var items = [];
     items.push({ text: '增加行', click: addNewRow, img: "../icons/application_view_list.png" });
-    items.push({ text: '预览效果', click: preview, img: "../icons/application_view_list.png" });
-    items.push({ text: '保存', click: outjson, img: "../icons/printer_48.png" });
+    items.push({ text: '删除行', click: deleteRow, img: "../icons/application_view_list.png" });
     items.push({ text: '上移', click: moveup, img: "../icons/sign_up.gif" });
     items.push({ text: '下移', click: movedown, img: "../icons/arrow_down.gif" }); 
     return { items: items };
@@ -212,6 +216,10 @@ function createGridToolbar(tName)
                 managers[i].destroy();
             }
         }
+    }
+    function deleteRow()
+    { 
+    	grid.deleteSelectedRow();
     }
     function exits(id)
     {
@@ -342,28 +350,7 @@ function createGridToolbar(tName)
     }
    
 
-    function outjson()
-    {
-        var d = bulidData();
-     
-       
-        var textarea = $("<textarea />").width(400).height(120);
-        textarea.val($.ligerui.toJSON(d));
-        $.ligerDialog.open({
-            title: 'JSON',
-            target: textarea.wrap('<div></div>').parent().css('margin', 10),
-            width: 470, height: 200, isResize: true,
-            buttons: [{ text: '关闭', onclick: function (item, dialog) { dialog.hide(); } }]
-        });
-        $.ajax({
-        	url:'designer.do?save&ajax=true',
-        	type:'post',
-        	data:'data='+$.ligerui.toJSON(d),
-        	success:function(result){
-        		
-        	}
-        });
-    }
+   
     function translate()
     { 
         var list = [];
@@ -416,7 +403,7 @@ function bulidData()
             searchdata.push(getFieldData(o, true));
         if (o.inform)
             formdata.push(getFieldData(o));
-        fields.push({fieldName:o.columnName,displayName:o.displayName,isPK:o.isPK,isNullable:o.isNullable});
+        fields.push({fieldName:o.fieldName,displayName:o.displayName,isPK:o.isPK,isNullable:o.isNullable,dataType:o.dataType});
         
     }
     return { tableName:formEntity.getData().tableName,formName:formEntity.getData().formName,code:formEntity.getData().code,grid: griddata, search: searchdata, form: formdata,fields:fields };
