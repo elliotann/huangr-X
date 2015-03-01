@@ -18,7 +18,32 @@
     <script src="${ctx }/admin/component/form/js/data.js" type="text/javascript"></script>
     <script src="${ctx }/admin/component/form/js/lab.js" type="text/javascript"></script>
     <script src="${ctx }/admin/component/form/js/index.js" type="text/javascript"></script>
-    
+    <script>
+    var formData;
+    function submitForm()
+    {
+        var d = bulidData();
+        $.ajax({
+        	url:'designer.do?save&ajax=true',
+        	type:'post',
+        	data:'data='+$.ligerui.toJSON(d),
+        	success:function(result){
+        		if(result.success){
+    				$.ligerDialog.waitting(result.msg);
+                    setTimeout(function ()
+                    {
+                    	
+                    	$.ligerDialog.closeWaitting();
+                    	var dialog = frameElement.dialog; //调用页面的dialog对象(ligerui对象)
+                        dialog.close();//关闭dialog 
+                        
+                    }, 2000);
+                    window.parent.listgrid.loadData();
+    			}
+        	}
+        });
+    }
+    </script>
 </head>
 <body>
 </body>
