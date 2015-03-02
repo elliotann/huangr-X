@@ -48,21 +48,9 @@ public class FormDesignerAction extends BaseController {
     	//根据id获取表单信息
     	FormEntity formEntity =formManager.getFormById(formId);
     	Map<String,Object> params = new HashMap<String,Object>();
-    	
     	List<Map<String,Object>> json = new ArrayList<Map<String,Object>>();
-    	
-    	/*for(ListPageMeta field:formEntity.getPageMetas()){
-    		Map<String,Object> fieldsJson = new HashMap<String,Object>();
-    		fieldsJson.put("field", field.getField().getFieldName());
-    		fieldsJson.put("title", field.getField().getDisplayName());
-    		fieldsJson.put("width", 150);
-    		fieldsJson.put("fieldId", field.getField().getId());
-    		json.add(fieldsJson);
-    	}*/
-
     	params.put("cols", JsonUtils.beanToJsonArray(json));
     	params.put("formEntity", formEntity);
-
         return new ModelAndView("admin/component/form/pageSetting",params);
     }
 
