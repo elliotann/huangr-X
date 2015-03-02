@@ -64,14 +64,14 @@
             		  return '否';
             	  }
               } },
-              { display: '表单版本', name: 'version' },
-              { display: '操作', name: '',width:'auto',render:function(item){
-             	 return "<a href='javascript:void(0)' onclick='toEdit("+item.id+")'>修改</a>&nbsp;&nbsp;<a href='javascript:void(0)' onclick='delUser("+item.id+")'>删除</a>";
-              } }
+              { display: '表单版本', name: 'version' }
               ], url:'designer.do?dataGrid&ajax=true',  pageSize:30 ,rownumbers:true,
               toolbar:{ items: [
                                          { text: '增加', click: addForm, icon: 'add' },
-                                         { line: true }]
+                                         { line: true },
+                                         { text: '删除', click: delForm, icon: 'add' },
+                                         { line: true },
+                                         { text: '修改', click: toEdit, icon: 'add' }]
                                          }
           });
      	//搜索框 收缩/展开
@@ -91,12 +91,16 @@
     {
 		 CRUD.addOrUpdateDialog('增加表单','designer.do?toDesigner',400,800);
     }
-    function delUser(userId)
+    function delForm()
     {
-    	CRUD.delObj('user.do?delete',userId);
+    	var row = listgrid.getSelectedRow();
+        if (!row) { alert('请选择数据进行删除!'); return; }
+    	CRUD.delObj('designer.do?delete&id='+row.id,null);
     }
-    function toEdit(userId){
-    	CRUD.addOrUpdateDialog('修改表单','designer.do?modify&id='+userId,300,null);
+    function toEdit(){
+    	var row = listgrid.getSelectedRow();
+        if (!row) { alert('请选择数据进行删除!'); return; }
+    	CRUD.addOrUpdateDialog('修改表单','designer.do?modify&id='+row.id,300,null);
     }
     function addUser(){
         CRUD.addOrUpdateDialog('增加用户','user.do?toAdd',300,null);
