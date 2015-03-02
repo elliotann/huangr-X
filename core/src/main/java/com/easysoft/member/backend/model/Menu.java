@@ -20,6 +20,9 @@ import com.easysoft.framework.db.NotDbField;
 @Entity
 @Table(name = "t_menu")
 public class Menu extends IdEntity implements AbstractTree<Menu>{
+	/*
+	 删除标识
+	 */
     private Integer deleteflag = 0;
     private String productId;
     private Integer pid;
@@ -57,7 +60,6 @@ public class Menu extends IdEntity implements AbstractTree<Menu>{
     public void setProductId(String productId) {
         this.productId = productId;
     }
-
 
 	@NotDbField
     @Transient
