@@ -15,10 +15,15 @@
     <script src="${context }/js/ligerui/js/plugins/ligerForm.js" type="text/javascript"></script>
     <script src="${ctx }/admin/component/form/js/ligerGrid.showFilter.js" type="text/javascript"></script>
     <link href="${ctx }/admin/component/form/css/lab.css" rel="stylesheet" type="text/css" />
-    <script src="${ctx }/admin/component/form/js/data.js" type="text/javascript"></script>
     <script src="${ctx }/admin/component/form/js/lab.js" type="text/javascript"></script>
     <script src="${ctx }/admin/component/form/js/index.js" type="text/javascript"></script>
     <script>
+    var columns = [
+                   {"fieldName":"ID", "isPK": true, "isInForeignKey": false, "isNullable": false, 
+                	   "inputType": "digits", "isAutoKey": true, "sourceTableName": "", 
+                	   "sourceTableIDField": "", "sourceTableTextField": "", "name": "ProductID", 
+                	   "displayName": "主键", "type": "column", "icon": "images/table_key.png" 
+                   }];
     var formData;
     function submitForm()
     {
