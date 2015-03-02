@@ -86,7 +86,7 @@ public class FormManagerImpl  implements IFormManager {
         Map<String,Object> params = new HashMap<String, Object>();
         params.put("formId",id);
         List<FormField> fields = formFieldDao.queryForList(params);
-     
+        result.setFields(fields);
         return result;
     }
 
@@ -116,8 +116,8 @@ public class FormManagerImpl  implements IFormManager {
    
     public void delFormById(Integer id) {
         FormEntity result = getFormById(id);
+        if(result==null) return;
         for(FormField field : result.getFields()){
-        	
             formFieldDao.deleteById(field.getId());
         }
         formDao.deleteById(id);
