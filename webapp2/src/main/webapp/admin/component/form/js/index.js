@@ -196,7 +196,7 @@ function bulidMainGrid()
         width: '98%', height: '100%',heightDiff:-14, rowHeight: 24
     });
 }
-
+//创建工具栏
 function createGridToolbar(tName)
 {
     var items = [];
@@ -230,6 +230,7 @@ function createGridToolbar(tName)
         }
         return false;
     }
+    //增加新行
     function addNewRow()
     {
         var row = grid.getSelectedRow();
@@ -461,6 +462,7 @@ function fieldDataTypeRender(r, i, value)
     }
     return "int";
 }
+
 //是否类型的模拟复选框的渲染函数
 function checkboxRender(rowdata, rowindex, value, column)
 {
@@ -476,7 +478,7 @@ function checkboxRender(rowdata, rowindex, value, column)
 //是否类型的模拟复选框的点击事件
 $("div.chk-icon").live('click', function ()
 {
-    var grid = $.ligerui.get($(this).attr("gridid"));
+	var grid = $.ligerui.get($(this).attr("gridid"));
     var rowdata = grid.getRow($(this).attr("rowid"));
     var columnname = $(this).attr("columnname");
     var checked = rowdata[columnname];
