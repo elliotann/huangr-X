@@ -7,7 +7,6 @@ import com.easysoft.framework.db.PageOption;
 import com.easysoft.framework.utils.JsonUtils;
 import com.easysoft.member.backend.manager.IAuthActionManager;
 import com.easysoft.member.backend.manager.IRoleManager;
-import com.easysoft.member.backend.model.Employ;
 import com.easysoft.member.backend.model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,7 +32,7 @@ public class RoleAction extends BaseController {
 
     @RequestMapping(params = {"list"})
     public ModelAndView list(){
-        List roleList = roleManager.list();
+        List<Role> roleList = roleManager.list();
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("roleList",roleList);
         return new ModelAndView("admin/core/auth/rolelist",map);
