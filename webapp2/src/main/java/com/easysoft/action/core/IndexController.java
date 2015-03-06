@@ -32,8 +32,10 @@ public class IndexController extends BaseController{
         params.put("itemList",itemList);
         return new ModelAndView("admin/core/index",params);
     }
-
-
+    @RequestMapping(params = {"main"})
+    public ModelAndView main(){
+    	return new ModelAndView("adminthemes/default/main");
+    }
     public IIndexItemManager getIndexItemManager() {
         return indexItemManager;
     }
