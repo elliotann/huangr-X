@@ -108,5 +108,17 @@ public class RoleAction extends BaseController {
         }
         return result;
     }
+    
+    @RequestMapping(params = {"toTest"})
+    public ModelAndView toTest(){
+        
+        return new ModelAndView("admin/core/auth/bankTest");
+    }
+    
+    @RequestMapping(params = {"toTest2"})
+    public ModelAndView toTest2(){
+        System.out.println("toTest2");
+        return new ModelAndView("admin/core/auth/bankTest2");
+    }
 
 }

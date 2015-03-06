@@ -1,264 +1,193 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<%@ include file="/commons/taglibs.jsp"%>
+<!DOCTYPE html>
+<html>
 <head>
-    <title>${title }</title>
-    <link href="${context }/js/ligerui/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />  
-    <link rel="stylesheet" type="text/css" href="${context }/css/global.css"/>   
-    <script type="text/javascript" src="menu.do"></script>
-    <script type="text/javascript"	src="${staticserver }/js/common/jquery-1.6.4.js"></script> 
-    <script src="${context }/js/ligerui/js/ligerui.all.js" type="text/javascript"></script> 
-    <script src="${ctx }/statics/js/common/jquery.cookie.js" type="text/javascript"></script> 
-    <script src="${context }/js/ligerui/js/plugins/ligerTab.js"></script>
-    <script src="${ctx }/statics/js/admin/jeap.js"></script>
-    <script src="${context }/js/index.js"></script>
-        <script type="text/javascript">
-            var tab = null;
-            var accordion = null;
-            var tree = null;
-            var tabItems = [];
-            $(function ()
-            {
+<title>小黄人后台管理系统</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=9" > </meta> 
+<link rel="shortcut icon" href=" ../favicon.ico" /> 
+<link type="image/x-icon" href="" rel="bookmark" />
 
-                //布局
-                $("#layout1").ligerLayout({ leftWidth: 190, height: '100%',heightDiff:-34,space:4, onHeightChanged: f_heightChanged });
-
-                var height = $(".l-layout-center").height();
-
-                //Tab
-                $("#framecenter").ligerTab({
-                    height: height,
-                    showSwitchInTab : true,
-                    showSwitch: true,
-                    onAfterAddTabItem: function (tabdata)
-                    {
-                        tabItems.push(tabdata);
-                        saveTabStatus();
-                    },
-                    onAfterRemoveTabItem: function (tabid)
-                    { 
-                        for (var i = 0; i < tabItems.length; i++)
-                        {
-                            var o = tabItems[i];
-                            if (o.tabid == tabid)
-                            {
-                                tabItems.splice(i, 1);
-                                saveTabStatus();
-                                break;
-                            }
-                        }
-                    },
-                    onReload: function (tabdata)
-                    {
-                        var tabid = tabdata.tabid;
-                        addFrameSkinLink(tabid);
-                    }
-                });
-
-                //面板
-                $("#accordion1").ligerAccordion({
-                    height: height - 24, speed: null
-                });
-
-                $(".l-link").hover(function ()
-                {
-                    $(this).addClass("l-link-over");
-                }, function ()
-                {
-                    $(this).removeClass("l-link-over");
-                });
-
-
-                tab = liger.get("framecenter");
-                accordion = liger.get("accordion1");
-                tree = liger.get("tree1");
-                $("#pageloading").hide();
-
-                css_init();
-                pages_init();
-            });
-            function f_heightChanged(options)
-            {  
-                if (tab)
-                    tab.addHeight(options.diff);
-                if (accordion && options.middleHeight - 24 > 0)
-                    accordion.setHeight(options.middleHeight - 24);
-            }
-            function f_addTab(tabid, text, url)
-            {
-                tab.addTabItem({
-                    tabid: tabid,
-                    text: text,
-                    url: url,
-                    callback: function ()
-                    {
-                        
-                        addFrameSkinLink(tabid); 
-                    }
-                });
-            }
-           
-            
-            function addFrameSkinLink(tabid)
-            {
-                var prevHref = getLinkPrevHref(tabid) || "";
-                var skin = getQueryString("skin");
-                if (!skin) return;
-                skin = skin.toLowerCase();
-                attachLinkToFrame(tabid, prevHref + skin_links[skin]);
-            }
-            var skin_links = {
-                "aqua": "lib/ligerUI/skins/Aqua/css/ligerui-all.css",
-                "gray": "lib/ligerUI/skins/Gray/css/all.css",
-                "silvery": "lib/ligerUI/skins/Silvery/css/style.css",
-                "gray2014": "lib/ligerUI/skins/gray2014/css/all.css"
-            };
-            function pages_init()
-            {
-                var tabJson = $.cookie('liger-home-tab'); 
-                if (tabJson)
-                { 
-                    var tabitems = JSON2.parse(tabJson);
-                    for (var i = 0; tabitems && tabitems[i];i++)
-                    { 
-                        f_addTab(tabitems[i].tabid, tabitems[i].text, tabitems[i].url);
-                    } 
-                }
-            }
-            function saveTabStatus()
-            { 
-                $.cookie('liger-home-tab', JSON2.stringify(tabItems));
-            }
-            function css_init()
-            {
-                var css = $("#mylink").get(0), skin = getQueryString("skin");
-                $("#skinSelect").val(skin);
-                $("#skinSelect").change(function ()
-                { 
-                    if (this.value)
-                    {
-                        location.href = "index.htm?skin=" + this.value;
-                    } else
-                    {
-                        location.href = "index.htm";
-                    }
-                });
-
-               
-                if (!css || !skin) return;
-                skin = skin.toLowerCase();
-                $('body').addClass("body-" + skin); 
-                $(css).attr("href", skin_links[skin]); 
-            }
-            function getQueryString(name)
-            {
-                var now_url = document.location.search.slice(1), q_array = now_url.split('&');
-                for (var i = 0; i < q_array.length; i++)
-                {
-                    var v_array = q_array[i].split('=');
-                    if (v_array[0] == name)
-                    {
-                        return v_array[1];
-                    }
-                }
-                return false;
-            }
-            function attachLinkToFrame(iframeId, filename)
-            { 
-                if(!window.frames[iframeId]) return;
-                var head = window.frames[iframeId].document.getElementsByTagName('head').item(0);
-                var fileref = window.frames[iframeId].document.createElement("link");
-                if (!fileref) return;
-                fileref.setAttribute("rel", "stylesheet");
-                fileref.setAttribute("type", "text/css");
-                fileref.setAttribute("href", filename);
-                head.appendChild(fileref);
-            }
-            function getLinkPrevHref(iframeId)
-            {
-                if (!window.frames[iframeId]) return;
-                var head = window.frames[iframeId].document.getElementsByTagName('head').item(0);
-                var links = $("link:first", head);
-                for (var i = 0; links[i]; i++)
-                {
-                    var href = $(links[i]).attr("href");
-                    if (href && href.toLowerCase().indexOf("ligerui") > 0)
-                    {
-                        return href.substring(0, href.toLowerCase().indexOf("lib") );
-                    }
-                }
-            }
-     </script> 
-<style type="text/css"> 
-    body,html{height:100%;}
-    body{ padding:0px; margin:0;   overflow:hidden;}  
-    .l-link{ display:block; height:26px; line-height:26px; padding-left:10px; text-decoration:underline; color:#333;}
-    .l-link2{text-decoration:underline; color:white; margin-left:2px;margin-right:2px;}
-    .l-layout-top{background:#102A49; color:White;}
-    .l-layout-bottom{ background:#E5EDEF; text-align:center;}
-    #pageloading{position:absolute; left:0px; top:0px; background:white url('loading.gif') no-repeat center; width:100%; height:100%;z-index:99999;}
-    .l-link{ display:block; line-height:22px; height:22px; padding-left:16px;border:1px solid white; margin:4px;}
-    .l-link-over{ background:#FFEEAC; border:1px solid #DB9F00;} 
-    .l-winbar{ background:#2B5A76; height:30px; position:absolute; left:0px; bottom:0px; width:100%; z-index:99999;}
-    .space{ color:#E7E7E7;}
-    /* 顶部 */ 
-    .l-topmenu{ margin:0; padding:0; height:31px; line-height:31px; background:url('lib/images/top.jpg') repeat-x bottom;  position:relative; border-top:1px solid #1D438B;  }
-    .l-topmenu-logo{ color:#E7E7E7; padding-left:35px; line-height:26px;background:url('lib/images/topicon.gif') no-repeat 10px 5px;}
-    .l-topmenu-welcome{  position:absolute; height:24px; line-height:24px;  right:30px; top:2px;color:#070A0C;}
-    .l-topmenu-welcome a{ color:#E7E7E7; text-decoration:underline} 
-     .body-gray2014 #framecenter{
-        margin-top:3px;
-    }
-      .viewsourcelink {
-         background:#B3D9F7;  display:block; position:absolute; right:10px; top:3px; padding:6px 4px; color:#333; text-decoration:underline;
-    }
-    .viewsourcelink-over {
-        background:#81C0F2;
-    }
-    .l-topmenu-welcome label {color:white;
-    }
-    #skinSelect {
-        margin-right: 6px;
-    }
- </style>
-</head>
+<script type="text/javascript" src="${context }/js/jquery-1.8.3.min.js"></script>
+<link rel="stylesheet" type="text/css" href="${context }/js/easyui/themes/gray/easyui.css"/>    
+<link rel="stylesheet" type="text/css" href="${context }/js/easyui/themes/icon.css"/>  
+<script type="text/javascript" src="${context }/js/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="${context }/js/easyui/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="${context }/js/main.js"></script>
+<script type="text/javascript" src="${context }/js/jquery.blockUI.js"></script>
+<script type="text/javascript" src="${context }/js/jquery.loading.js"></script>
+<script type="text/javascript" src="${context }/js/jquery-Slider.js"></script>
+<script type="text/javascript" src="${context }/js/jquery.timers-1.2.js"></script>
+<script type="text/javascript" src="${context }/js/short-msg.js"></script>
+<link href="${context }/css/main.css" rel="stylesheet" type="text/css" />
+<!--PNG透明-->
+<!--[if lte IE 6]>
+<script src="../adminthemes/new/js/DD_belatedPNG_0.0.8a.js" type="text/javascript"></script>
+<script type="text/javascript">
+    DD_belatedPNG.fix('*');
+</script>
+<![endif]-->
 <script>
-        var founder= ${user.founder};
-    </script>
-<body style="padding:0px;background:#EAEEF5;">  
-<div id="pageloading"></div>  
-<div id="topmenu" class="l-topmenu">
-    <div class="l-topmenu-logo">jQuery ligerUI Demos导航主页</div>
-    <div class="l-topmenu-welcome">
-        <label> 皮肤切换：</label>
-        <select id="skinSelect">
-            <option value="aqua">默认</option> 
-            <option value="silvery">Silvery</option>
-            <option value="gray">Gray</option>
-            <option value="gray2014">Gray2014</option>
-        </select>
-        <a href="index.aspx" class="l-link2">服务器版本</a>
-        <span class="space">|</span>
-        <a href="https://me.alipay.com/daomi" class="l-link2" target="_blank">捐赠</a> 
-        <span class="space">|</span>
-         <a href="http://bbs.ligerui.com" class="l-link2" target="_blank">论坛</a>
-    </div> 
-</div>
-  <div id="layout1" style="width:99.2%; margin:0 auto; margin-top:4px; "> 
-        <div position="left"  title="菜单导航" id="accordion1"> 
+var referer = undefined;
+<#if referer?exists >
+referere='${referer}';
+</#if>
+</script> 
+
+</head>
+<body class="easyui-layout layout">
+	<input type="hidden" id="hidout" value="0" />
+    <div region="north" border="true" class="cs-north">
+		<div class="header">
+            <div class="lineOne">
+                <div class="logo"></div>
+                <div class="downArrow">
+                    <div class="downArrowIcon"></div>
+                    <div class="downArrowContent">
+                        <span id="mm-tabupdate">刷新当前页</span>
+                        <span id="mm-tabcloseall">关闭全部</span>
+                        <span id="mm-tabcloseother">关闭其他</span>
+                    </div>
+                </div>
+                <div class="info">
+                	<div class="sysmenu">  
+                		<ul>
+                			<li class="message">
+								<a href="javascript:;">消息
+									<span class="num"></span> 
+								</a>
+								 <div class="msglist" >
+								 	<div class="triangle"></div>
+								 	 <ul>
+								 	 </ul>
+								 </div>
+							</li>
+							<li class="logout">
+								<a href='javascript:;' id='logout_btn'><div class="icon"></div>退出</a>
+							</li>
+							<li class="website">
+								<a href="../" title="浏览网站" target="_blank"><div class="icon"></div> 浏览网站</a> 
+							</li>
+                		</ul>
+                	</div>
+                </div>
+            </div>
         </div>
-        <div position="center" id="framecenter"> 
-            <div tabid="home" title="桌面" style="height:300px" >
-                <iframe frameborder="0" name="home" id="home" src="welcome.htm"></iframe>
-            </div> 
-        </div> 
-        
+	</div>
+	<!-- header end -->
+    <div region="west" border="true" split="true" class="cs-west" >
+    	<div class="leftMenu" style="width:110px;margin-right:9px;height:100%;" id="leftMenu" >
+	        <div class="lmenuPrev">
+	             <a href="javascript:;" id="btnDown">向下</a>
+	        </div>
+	        <div class="lmenu fl">
+				<ul>
+					<#list menuList as menu>
+						<#if menu.hasChildren >
+							<li id="parent${menu.id}" class="parentMenu">
+								<a style="cursor: pointer">
+				                     <div class="cover"></div>
+				                     <div class="icon">
+				                     	<c:if test="${menu.icon ne '' }">
+				                     		<img src="${ctx}${menu.icon}" />
+				                     	</c:if>
+				                     	<c:if test="${menu.icon eq '' }">
+				                     		<img src="${ctx}adminthemes/new/images/menu_default.gif" />
+				                     	</c:if>
+				                     </div>
+				                     <div index="tfun2" style="display:none;" class="newFunction"></div>
+				                     <div topvalue="2" topname="" class="text">${menu.title}</div>
+								</a>
+								<div id="${menu.id}" class="secondFloat secondFLoat${menu_index+1} <#if (menu.children?size gt 4) > secondFloatBig </#if>">
+									<div class="second">
+										<ul>
+											<#list menu.children as child>
+												<#if child.hasChildren >
+													<li>
+														<div class="title">${child.title}</div>
+														<ul>
+															<#list child.children as son>
+																<li>
+																	<div class="newFunction" style="margin-top: 10px; *margin-left: -20px;display:none;" index="tfun${son.id}"></div>
+																	<a onclick="OpenWindow(this)" style="cursor:pointer" index="${son.id}" src="${ctx}${son.url}" class="cs-navi-tab">${son.title}</a>
+																</li>
+															</#list>
+														</ul>
+													</li>
+												</#if>
+											</#list>
+										</ul>
+									</div>
+									<!-- second -->
+								</div>
+							</li>
+						</#if>
+					</#list>	
+				</ul>
+			</div>
+			<div class="lmenuNext">
+	             <a href="javascript:;" id="btnUp">向上</a>
+	        </div>
+        </div>
+	</div>
+	<div id="mainPanle" region="center" border="true" border="false">
+        <div id="tabs" class="easyui-tabs" fit="true" border="false">
+            <div title="Home">
+                <div class="cs-home-remark">
+                    &nbsp;
+                </div>
+            </div>
+        </div>
     </div>
-    <div  style="height:32px; line-height:32px; text-align:center;">
-            Copyright © 2012-2015 www.esframe.com
+    <div id="mm" class="easyui-menu cs-tab-menu">
     </div>
-    <div style="display:none"></div>
 </body>
+</html>
+	<script>
+		var index = 0;
+		$(function(){
+			$(".lmenu").Scroll();
+			$(".sysmenu .msglist").hide();
+			
+			$(".sysmenu .message").mouseover(function(){
+				if($(".sysmenu .msglist ul>li").length>0){
+				    $(".sysmenu .msglist").show();
+				};
+			});
+			
+			$(".sysmenu .message").mouseout(function(){
+			    $(".sysmenu .msglist").hide();
+			});
+			$("#logout_btn").click(function(){
+				var options = {
+					url : "../core/admin/adminUser!logout.do",
+					type : "POST",
+					dataType : 'json',
+					success : function(result) {				
+						if(result.result==1){
+							var url = "${ctx}/admin/backendUi!login.do";
+							location.href=url;
+						}else{
+							$.Loading.error(result.message);
+						}
+					},
+					error : function(e) {
+						$.Loading.error("出现错误，请重试");
+					}
+				};
+				$.ajax(options);		
+			})
+		});   
+		
+		 function reloadTabGrid(title){
+	          if ($("#tabs" ).tabs('exists', title)) {
+	               $('#tabs').tabs('select' , title);
+	               window.top.reload_Abnormal_Monitor.call();
+	         }
+	     }
+	</script>
+</body>
+
 </html>
