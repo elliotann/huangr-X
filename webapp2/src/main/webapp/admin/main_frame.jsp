@@ -12,9 +12,7 @@
 	<script type="text/javascript" src="${staticserver }/js/admin/jeap.js"></script>
 	<script type="text/javascript" src="${ctx }/admin/js/My97DatePicker/WdatePicker.js"></script>
 	<link href="${context}/css/global.css" rel="stylesheet" type="text/css" />
-
-	
-	<title>网站后台管理</title>
+	<title>小黄人管理系统</title>
 	
 </head>
 	<script type="text/javascript">

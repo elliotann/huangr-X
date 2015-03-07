@@ -84,47 +84,50 @@ referere='${referer}';
 	        </div>
 	        <div class="lmenu fl">
 				<ul>
-					<#list menuList as menu>
-						<#if menu.hasChildren >
+					<c:forEach items="${menuList }" var="menu" varStatus="varMenu">
+						<c:if test="${menu.hasChildren }">
+						
 							<li id="parent${menu.id}" class="parentMenu">
 								<a style="cursor: pointer">
 				                     <div class="cover"></div>
 				                     <div class="icon">
-				                     	<c:if test="${menu.icon ne '' }">
-				                     		<img src="${ctx}${menu.icon}" />
+				                     	<c:if test="${menu.ico ne '' }">
+				                     		<img src="${ctx}${menu.ico}" />
 				                     	</c:if>
-				                     	<c:if test="${menu.icon eq '' }">
+				                     	<c:if test="${menu.ico eq '' }">
 				                     		<img src="${ctx}adminthemes/new/images/menu_default.gif" />
 				                     	</c:if>
 				                     </div>
 				                     <div index="tfun2" style="display:none;" class="newFunction"></div>
 				                     <div topvalue="2" topname="" class="text">${menu.title}</div>
 								</a>
-								<div id="${menu.id}" class="secondFloat secondFLoat${menu_index+1} <#if (menu.children?size gt 4) > secondFloatBig </#if>">
+								<div id="${menu.id}" class="secondFloat secondFLoat${varMenu.index+1} <#if (menu.children?size gt 4) > secondFloatBig </#if>">
 									<div class="second">
 										<ul>
-											<#list menu.children as child>
-												<#if child.hasChildren >
+											<c:forEach items="${menu.children }" var="child">
+												<c:if test="${child.hasChildren }">
+												
 													<li>
 														<div class="title">${child.title}</div>
 														<ul>
-															<#list child.children as son>
+															<c:forEach items="${child.children }" var="son">
+													
 																<li>
 																	<div class="newFunction" style="margin-top: 10px; *margin-left: -20px;display:none;" index="tfun${son.id}"></div>
 																	<a onclick="OpenWindow(this)" style="cursor:pointer" index="${son.id}" src="${ctx}${son.url}" class="cs-navi-tab">${son.title}</a>
 																</li>
-															</#list>
+															</c:forEach>
 														</ul>
 													</li>
-												</#if>
-											</#list>
+												</c:if>
+											</c:forEach>
 										</ul>
 									</div>
 									<!-- second -->
 								</div>
 							</li>
-						</#if>
-					</#list>	
+						</c:if>
+					</c:forEach>	
 				</ul>
 			</div>
 			<div class="lmenuNext">
