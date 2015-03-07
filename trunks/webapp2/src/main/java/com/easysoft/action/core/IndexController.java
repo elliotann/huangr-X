@@ -1,16 +1,19 @@
 package com.easysoft.action.core;
 
-import com.easysoft.core.common.controller.BaseController;
-import com.easysoft.core.manager.IIndexItemManager;
-import com.easysoft.core.model.IndexItem;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.easysoft.core.common.controller.BaseController;
+import com.easysoft.core.manager.IIndexItemManager;
+import com.easysoft.core.manager.IMenuManager;
+import com.easysoft.core.model.IndexItem;
+import com.easysoft.member.backend.model.Menu;
 
 /**
  * User: andy
@@ -24,6 +27,9 @@ import java.util.Map;
 public class IndexController extends BaseController{
     @Autowired
     private IIndexItemManager indexItemManager;
+    @Autowired
+    private IMenuManager menuManager;
+    
     private List<IndexItem> itemList;
     @RequestMapping(params = {"list"})
     public ModelAndView list(){
@@ -34,7 +40,10 @@ public class IndexController extends BaseController{
     }
     @RequestMapping(params = {"main"})
     public ModelAndView main(){
-    	return new ModelAndView("adminthemes/default/main");
+    	List<Menu> menuList = menuManager.getMenuTree(0);
+    	Map<String,Object> params = new HashMap<String, Object>();
+        params.put("menuList",menuList);
+    	return new ModelAndView("adminthemes/default/main",params);
     }
     public IIndexItemManager getIndexItemManager() {
         return indexItemManager;
