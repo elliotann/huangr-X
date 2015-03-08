@@ -1,53 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ include file="/commons/taglibs.jsp"%>
 <link href="${context}/css/layout.css" rel="stylesheet" type="text/css" />
-<div class="row">
-    <div class="col-sm-12 tac">
-        <ul class="ov_boxes">
-            <li>
-                <div class="p_bar_up p_canvas">
-                    <span style="display: none;">2,4,9,7,12,8,16</span>
-                    <canvas height="32" width="50"></canvas>
-                </div>
-                <div class="ov_text">
-                    <strong>3 458,00</strong>
-                    周访问
-                </div>
-            </li>
-            <li>
-                <div class="p_bar_down p_canvas"><span style="display: none;">20,15,18,14,10,13,9,7</span><canvas height="32" width="50"></canvas></div>
-                <div class="ov_text">
-                    <strong>43 567,43</strong>
-                    月访问
-                </div>
-            </li>
-            <li>
-                <div class="p_line_up p_canvas"><span style="display: none;">3,5,9,7,12,8,16</span><canvas height="32" width="50"></canvas></div>
-                <div class="ov_text">
-                    <strong>2304</strong>
-                    独立访问者数 (最近24小时)
-                </div>
-            </li>
-            <li>
-                <div class="p_line_down p_canvas"><span style="display: none;">20,16,14,18,15,14,14,13,12,10,10,8</span><canvas height="32" width="50"></canvas></div>
-                <div class="ov_text">
-                    <strong>30240</strong>
-                    独立访问者数 (最近一周)
-
-                </div>
-            </li>
-        </ul>
-    </div>
+<div class="main">
+	<div class="index_nav">欢迎您登录管理后台</div>
+	
+	<div id="template" class="indexitem">
+		<div class="title"><h3></h3></div>
+		<div class="body"></div>
+	</div>
+	
+	<!-- 首页项  -->
+	<div id="index_box">
+	    <div id="item1" class="item"></div>
+	    <div id="item2" class="item"></div>
+	    <div id="item3" class="item" style="clear:both"></div>
+	    <div id="item4" class="item"></div>
+	    <div id="item5" class="item"></div>
+	    <div id="item6" class="item"></div>
+	</div>
+	<div style="clear:both"></div>
 </div>
-<div class="row">
-    <div class="col-sm-12">
-        <ul class="dshb_icoNav clearfix">
-            <li><a href="javascript:void(0)" style="background-image: url(img/gCons/multi-agents.png)"><span class="label label-info">+10</span> 用户</a></li>
-            <li><a href="javascript:void(0)" style="background-image: url(img/gCons/multi-agents.png)"><span class="label label-info">+10</span> 待办事务</a></li>
-        </ul>
-    </div>
-</div>
-
 
 
 <script>

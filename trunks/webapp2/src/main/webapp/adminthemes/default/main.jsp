@@ -67,9 +67,7 @@ referere='${referer}';
 							<li class="logout">
 								<a href='javascript:;' id='logout_btn'><div class="icon"></div>退出</a>
 							</li>
-							<li class="website">
-								<a href="../" title="浏览网站" target="_blank"><div class="icon"></div> 浏览网站</a> 
-							</li>
+						
                 		</ul>
                 	</div>
                 </div>

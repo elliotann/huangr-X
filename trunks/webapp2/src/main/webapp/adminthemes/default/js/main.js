@@ -296,7 +296,7 @@ $(function () {
 
     //ConstraintActive();
     //打开首页
-    childAddTab('首页', '../core/admin/index.do', '');
+    childAddTab('首页', 'core/admin/index.do', '');
     //关闭默认tab
     $('.tabs-inner span').each(function (i, n) {
         var t = $(n).text();
