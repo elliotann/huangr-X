@@ -99,7 +99,7 @@ referere='${referer}';
 				                     <div index="tfun2" style="display:none;" class="newFunction"></div>
 				                     <div topvalue="2" topname="" class="text">${menu.title}</div>
 								</a>
-								<div id="${menu.id}" class="secondFloat secondFLoat${varMenu.index+1} <#if (menu.children?size gt 4) > secondFloatBig </#if>">
+								<div id="${menu.id}" class="secondFloat secondFLoat${varMenu.index+1} <c:if test="${fn:length(menu.children) gt 4}"> secondFloatBig </c:if>">
 									<div class="second">
 										<ul>
 											<c:forEach items="${menu.children }" var="child">
