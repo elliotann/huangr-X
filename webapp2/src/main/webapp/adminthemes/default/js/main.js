@@ -89,7 +89,7 @@ function childAddTab(title, url, topTitle) {
     addTab1(title, url, $("div[topname='" + topTitle + "']").attr("topvalue"));
 }
 function createFrame(url) {
-    var s = '<iframe scrolling="auto" frameborder="0"  src="' + url + '" style="width:100%;height:100%;"></iframe>';
+    var s = '<iframe scrolling="auto" frameborder="0"  src="' + url + '" style="width:100%;height:98%;"></iframe>';
     return s;
 }
 
@@ -296,7 +296,7 @@ $(function () {
 
     //ConstraintActive();
     //打开首页
-    childAddTab('首页', 'core/admin/index.do', '');
+    childAddTab('首页', 'index.do?list', '');
     //关闭默认tab
     $('.tabs-inner span').each(function (i, n) {
         var t = $(n).text();
