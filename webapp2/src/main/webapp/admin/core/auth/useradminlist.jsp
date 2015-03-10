@@ -133,6 +133,7 @@
 	　　			 },{
 	　　			 text:'取消',
 	　　			 handler:function(){
+	　　				 $("#useradmininfo").dialog('close');
 	　　				 $('#addadminForm')[0].reset() ;
 	　　			 }
 	　　		}]
@@ -149,10 +150,16 @@
 				type : "POST",
 				dataType : "json",
 				success : function(result) {
-					$.Loading.success(result.message);
-					$("#useradmininfo").dialog('close');
-					$('#useradmindata').datagrid('reload');
-					savebtn.linkbutton("enable");
+					if(result.success){
+						$.Loading.success(result.msg);
+						$("#useradmininfo").dialog('close');
+						$('#useradmindata').datagrid('reload');
+						savebtn.linkbutton("enable");
+					}else{
+						$.Loading.error(result.msg);	
+						 savebtn.linkbutton("enable");
+					}
+					
 			 		},
 				 error : function(e) {
 					 $.Loading.error("出现错误 ，请重试");	
