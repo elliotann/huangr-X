@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<<<<<<< .mine
 	<script type="text/javascript" src="${context }/js/jquery-1.8.3.min.js"></script>
 	<script type="text/javascript" src="${context }/js/jquery-form-2.33.js"></script>
 	
@@ -31,37 +30,6 @@
 				<input id="searchKeyword" class="input_text b_fr mr5" type="text" value="" size="30" placeholder="请用户名" name="searchKeyWord" />
 			</span>
 		</div>
-=======
-	<script type="text/javascript" src="${context }/js/jquery-1.8.3.min.js"></script>
-	<script type="text/javascript" src="${context }/js/jquery-form-2.33.js"></script>
-	
-	<link rel="stylesheet" type="text/css" href="${context }/js/easyui/themes/gray/easyui.css"/>    
-	<link rel="stylesheet" type="text/css" href="${context }/js/easyui/themes/icon.css"/>  
-	<script type="text/javascript" src="${context }/js/easyui/jquery.easyui.min.js"></script>
-	<script type="text/javascript" src="${context }/js/easyui/easyui-lang-zh_CN.js"></script>
-	<script type="text/javascript" src="${context }/js/jquery.blockUI.js"></script>
-	<script type="text/javascript" src="${context }/js/jquery.loading.js"></script>
-	<link href="${context }/css/main.css" rel="stylesheet" type="text/css" />
-	<link href="${context }/css/style.css" rel="stylesheet" type="text/css" />
-<style>
-.input_text{
-	width: 150px;
-}
-</style>
-<div id="loading"></div>
-<div class="main">
-	<form id="orderform">
-		<div class='buttonArea'>
-			<div style="float:left;">
-			 <a href="javascript:void(0)" class="button" data-options="plain:true" onclick="append()">添加</a>
-			</div>
-			 <span style="float: right;height:28px;"> 
-			 	<a href="javascript:void(0)" class="button b_fr" data-options="plain:true" id="aAdvanced" >高级搜索</a>
-			 	<a href="javascript:void(0)" class="button b_fr" id="search" data-options="plain:true" onclick="searchOrder()">搜索</a>
-				<input id="searchKeyword" class="input_text b_fr mr5" type="text" value="" size="30" placeholder="请用户名" name="searchKeyWord" />
-			</span>
-		</div>
->>>>>>> .r1241
 
 		<div style="display: block;" class="searchAdvanced">
 			<input id="Advanced" name="Advanced" type="hidden" value="0" />
@@ -131,7 +99,6 @@
 		
 	}
 	
-<<<<<<< .mine
 	//订单状态
 	function forStruts(value, row, index) {
 		
@@ -173,7 +140,6 @@
 	}
 	
 	function addadminForm(savebtn){
-	
 		var formflag= $("#addAdminForm").form().form('validate');
 		if(formflag){
 			$.Loading.show("正在保存请稍后...");
@@ -296,149 +262,4 @@ function formatAction(value,row,index){
 		var val = getFormatDateByLong(value, "yyyy-MM-dd");
 		return val;
 	}
-</script>=======
-	//订单状态
-	function forStruts(value, row, index) {
-		
-		if(value==1){
-			return "启用";
-		}
-		
-		return "禁用";
-	}
-	
-	//付款状态
-	function forpay(value,row,index){
-		var val;
-
-		return val;
-	}
-	
-	//发货状态
-	function forship(value,row,index){
-		var val;
-
-		return val;
-	}
-	
-	
-	function getType(exMap,value){
-		var val;
-		$.each(exMap,function(key,values){ 
-		    if(value==key){
-		    	val=values;
-		    }
-		});
-		return val;
-	}
-	
-	function del() {
-		var rows = $('#orderdata').datagrid("getSelections");
-		if (rows.length < 1) {
-			$.Loading.error("请选择要放入回收站的订单");
-			return;
-		}
-		if (!confirm("确认要将这些订单放入回收站？")) {
-			return;
-		}
-		var options = {
-			url : "order!delete.do?ajax=yes",
-			type : "POST",
-			dataType : 'json',
-			cache:false,
-			success : function(result) {
-				if (result.result == 1) {
-					$('#orderdata').datagrid("reload");
-					$.Loading.success(result.message);
-				}
-				if (result.result == 0) {
-					$.Loading.error(result.message);
-				}
-			},
-			error : function(e) {
-				$.Loading.error("出现错误 ，请重试");
-			}
-		};
-
-		$('#orderform').ajaxSubmit(options);	
-}
-	
-	var buttons = $.extend([], $.fn.datebox.defaults.buttons);
-	buttons.splice(1, 0, {
-	text: '清空',
-	handler: function(target){
-		 $('#start_time').datebox('setValue',"");
-	}
-	});
-	
-	var e_buttons = $.extend([], $.fn.datebox.defaults.buttons);
-	e_buttons.splice(1, 0, {
-	text: '清空',
-	handler: function(target){
-		 $('#end_time').datebox('setValue',"");
-	}
-	});
-    
-    
-function formatAction(value,row,index){
-	var val="<a class='delete' title='删除' href='javascript:void(0);' onclick='del("+row.userid +")'></a><a class='edit' title='修改' href='javascript:void(0);' onclick='edit("+row.userid +")'></a><a class='view' title='查看' href='#' onclick=\"newTab('查看订单详细','')\"></a>";
-	return val;
-		
-	}
-	
-	$(function(){
-		$(".searchAdvanced").hide();
-		//高级查询按钮
-	    $("#aAdvanced").click(function () {
-	        if ($("#Advanced").val() == "0") {
-	            $("#Advanced").val(1);
-	            $("#simpleSearch").hide();
-	            //$("#aAdvanced").text("简单搜索")
-	            $("#aAdvanced").addClass("searchAdvancedS");
-	        } else {
-	            $("#Advanced").val(0);
-	            $("#simpleSearch").show();
-	            //$("#aAdvanced").text("高级搜索");
-	            $("#aAdvanced").removeClass("searchAdvancedS");
-	        }
-	        $(".searchAdvanced").slideToggle("slow");
-	    });
-	})
-	
-	function searchOrder(){
-	var searchtype = $("#Advanced").val();
-	var keyword = $("#searchKeyword").val();
-	
-	var start_time = $('#start_time').datebox('getValue');
-	var end_time = $('#end_time').datebox('getValue');  
-	var status = $("#status").val();
-	var sn = $("#sn").val();
-	var ship_name = $("#ship_name").val();
-	var paystatus =	$("#paystatus").val();
-	var	shipstatus = $("#shipstatus").val();
-	var	shipping_type = $("#shipping_type").val();
-	var	payment_id = $("#payment_id").val();
-	
-	
-	$("#orderdata").datagrid('load', {
-		 stype:searchtype,
-		 keyword:keyword,
-		 
-		 start_time:start_time,
-		 end_time:end_time,
-		 status:status,
-		 sn:sn,
-		 ship_name:ship_name,
-		 paystatus:paystatus,
-		 shipstatus:shipstatus,
-		 shipping_type:shipping_type,
-		 payment_id:payment_id,
-		 page:1
-    });
-}
-
-	function formatTime(value,row,index){
-		var val = getFormatDateByLong(value, "yyyy-MM-dd");
-		return val;
-	}
-</script>>>>>>>> .r1241
+</script>
