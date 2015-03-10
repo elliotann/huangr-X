@@ -50,13 +50,17 @@ public class AdminUserAction extends BaseController{
         return new ModelAndView("admin/core/auth/useradminlist");
     }
     @RequestMapping(params = {"dataGrid"})
-    public ModelAndView dataGrid(Integer rows,Integer page,String username){
+    public ModelAndView dataGrid(Integer rows,Integer page,String username,String stype,String keyword){
         PageOption pageOption = new PageOption();
 
         //pageOption.setCurrentPageNo(page);
+        if("0".equals(stype)){
+        	username = keyword;
+        }
         if(StringUtils.isEmpty(username)){
             username=null;
         }
+     
         this.adminUserManager.queryForPage(pageOption,username);
         DataGridReturn dataGridReturn = new DataGridReturn(pageOption.getTotalCount(),(List<AdminUser>)pageOption.getResult());
         String json = JsonUtils.beanToJson(dataGridReturn);
