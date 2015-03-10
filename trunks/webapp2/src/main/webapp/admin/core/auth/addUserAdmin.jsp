@@ -4,12 +4,7 @@
 
 	<script type="text/javascript" src="${context }/js/jquery-form-2.33.js"></script>
 	
-	<link rel="stylesheet" type="text/css" href="${context }/js/easyui/themes/gray/easyui.css"/>    
-	<link rel="stylesheet" type="text/css" href="${context }/js/easyui/themes/icon.css"/>  
-	<script type="text/javascript" src="${context }/js/easyui/jquery.easyui.min.js"></script>
-	<script type="text/javascript" src="${context }/js/easyui/easyui-lang-zh_CN.js"></script>
-	<script type="text/javascript" src="${context }/js/jquery.blockUI.js"></script>
-	<script type="text/javascript" src="${context }/js/jquery.loading.js"></script>
+
 	<link href="${context }/css/main.css" rel="stylesheet" type="text/css" />
 	<link href="${context }/css/style.css" rel="stylesheet" type="text/css" />
   <div class="easyui-panel" style="border-style:none;" >
