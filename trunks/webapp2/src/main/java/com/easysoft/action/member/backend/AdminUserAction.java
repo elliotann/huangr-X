@@ -108,7 +108,7 @@ public class AdminUserAction extends BaseController{
 
         } catch (RuntimeException e) {
             e.printStackTrace();
-            json.setMsg(e.getMessage());
+            json.setMsg("新增用户失败!"+e.getMessage());
             json.setSuccess(false);
         }
         return json;
