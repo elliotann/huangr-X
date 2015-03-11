@@ -171,7 +171,7 @@ public class AdminUserManagerImpl  implements IAdminUserManager {
 	 * @return 登录成功返回管理员
 	 * @throws RuntimeException 当登录失败时抛出此异常，登录失败的原因可通过getMessage()方法获取
 	 */
-	 @BusinessLog(state = State.VALID,success = "用户登录")
+	
 	public int login(String username, String password) {
 		return this.loginBySys(username, StringUtil.md5(password));
 	}
@@ -184,6 +184,7 @@ public class AdminUserManagerImpl  implements IAdminUserManager {
 	 * @return 返回登录成功的用户id
 	 * @throws RuntimeException 登录失败抛出此异常，登录失败原因可通过getMessage()方法获取
 	 */
+	 @BusinessLog(state = State.VALID,success = "用户登录")
 	public int loginBySys(String username, String password) {
         Map<String,Object> params = new HashMap<String, Object>();
         params.put("username",username);

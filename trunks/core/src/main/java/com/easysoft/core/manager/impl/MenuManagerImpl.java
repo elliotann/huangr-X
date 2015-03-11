@@ -6,7 +6,6 @@ import com.easysoft.core.manager.IMenuManager;
 import com.easysoft.member.backend.manager.IFunAndOperManager;
 import com.easysoft.member.backend.manager.IPermissionManager;
 import com.easysoft.member.backend.manager.IRoleAuthManager;
-import com.easysoft.member.backend.model.FunAndOper;
 import com.easysoft.member.backend.model.Menu;
 import com.easysoft.member.backend.model.OperationBtn;
 import com.easysoft.member.backend.model.RoleAuth;

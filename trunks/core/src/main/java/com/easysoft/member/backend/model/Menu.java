@@ -8,7 +8,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.easysoft.core.common.entity.IdEntity;
-import com.easysoft.framework.commons.AbstractTree;
+
 
 import com.easysoft.framework.db.NotDbField;
 
@@ -19,7 +19,7 @@ import com.easysoft.framework.db.NotDbField;
  */
 @Entity
 @Table(name = "t_menu")
-public class Menu extends IdEntity implements AbstractTree<Menu>{
+public class Menu extends IdEntity {
 	/*
 	 删除标识
 	 */

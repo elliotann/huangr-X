@@ -16,7 +16,6 @@
 
     <!-- 引入属性文件 -->
     <context:property-placeholder location="classpath:config/jdbc.properties"/>
-
     <!-- 配置数据源1 -->
     <bean name="dataSourceDruid" class="com.alibaba.druid.pool.DruidDataSource" init-method="init"
           destroy-method="close">
