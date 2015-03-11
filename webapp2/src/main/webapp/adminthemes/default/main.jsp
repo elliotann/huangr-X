@@ -164,7 +164,7 @@ referere='${referer}';
 			$("#logout_btn").click(function(){
 	
 				var options = {
-					url : "index.do?logout&ajax=true",
+					url : "../core/admin/login.do?logout&ajax=true",
 					type : "POST",
 					dataType : 'json',
 					success : function(result) {				

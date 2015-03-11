@@ -52,15 +52,7 @@ public class IndexController extends BaseController{
         params.put("menuList",menuList);
     	return new ModelAndView("adminthemes/default/main",params);
     }
-    @RequestMapping(params = {"logout"})
-    @ResponseBody
-    public AjaxJson logout(){
-    	AjaxJson ajaxJson = new AjaxJson();
-    	WebSessionContext<UserContext> sessonContext = ThreadContextHolder.getSessionContext();
-		Response response= new StringResponse();
-		sessonContext.removeAttribute(UserContext.CONTEXT_KEY);
-    	return ajaxJson;
-    }
+   
     public IIndexItemManager getIndexItemManager() {
         return indexItemManager;
     }
