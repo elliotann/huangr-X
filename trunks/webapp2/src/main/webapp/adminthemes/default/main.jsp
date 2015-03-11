@@ -162,13 +162,14 @@ referere='${referer}';
 			    $(".sysmenu .msglist").hide();
 			});
 			$("#logout_btn").click(function(){
+	
 				var options = {
-					url : "../core/admin/adminUser!logout.do",
+					url : "index.do?logout&ajax=true",
 					type : "POST",
 					dataType : 'json',
 					success : function(result) {				
-						if(result.result==1){
-							var url = "${ctx}/admin/backendUi!login.do";
+						if(result.success){
+							var url = "${ctx}/admin";
 							location.href=url;
 						}else{
 							$.Loading.error(result.message);
