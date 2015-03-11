@@ -7,12 +7,19 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.easysoft.core.common.controller.BaseController;
+import com.easysoft.core.common.vo.json.AjaxJson;
+import com.easysoft.core.dispatcher.core.Response;
+import com.easysoft.core.dispatcher.core.StringResponse;
 import com.easysoft.core.manager.IIndexItemManager;
 import com.easysoft.core.manager.IMenuManager;
 import com.easysoft.core.model.IndexItem;
+import com.easysoft.framework.context.webcontext.ThreadContextHolder;
+import com.easysoft.framework.context.webcontext.WebSessionContext;
+import com.easysoft.member.backend.manager.UserContext;
 import com.easysoft.member.backend.model.Menu;
 
 /**
@@ -44,6 +51,15 @@ public class IndexController extends BaseController{
     	Map<String,Object> params = new HashMap<String, Object>();
         params.put("menuList",menuList);
     	return new ModelAndView("adminthemes/default/main",params);
+    }
+    @RequestMapping(params = {"logout"})
+    @ResponseBody
+    public AjaxJson logout(){
+    	AjaxJson ajaxJson = new AjaxJson();
+    	WebSessionContext<UserContext> sessonContext = ThreadContextHolder.getSessionContext();
+		Response response= new StringResponse();
+		sessonContext.removeAttribute(UserContext.CONTEXT_KEY);
+    	return ajaxJson;
     }
     public IIndexItemManager getIndexItemManager() {
         return indexItemManager;
