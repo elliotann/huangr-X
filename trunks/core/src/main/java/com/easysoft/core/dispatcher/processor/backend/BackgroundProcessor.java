@@ -48,7 +48,7 @@ public class BackgroundProcessor implements Processor {
 	
 					String ctx = httpRequest.getContextPath();
 					Response response = new StringResponse();
-					response.setContent(ctx+"/admin/login.jsp");
+					response.setContent(ctx+"/login.jsp");
 					response.setStatusCode("-1");
 					return response;
 			 }
@@ -67,8 +67,6 @@ public class BackgroundProcessor implements Processor {
 			processor = new MenuJsonGetter(page);
 		}else if( uri.startsWith("/admin/login.do") ){
 			processor = new LoginProcessor();
-		}else if( uri.startsWith("/admin/logout.do") ) {
-			processor = new LogoutProcessor();
 		}else if(uri.startsWith("/admin/plugin")){
 			processor = new AjaxPluginProcessor();
 		}else{
