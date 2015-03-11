@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import com.easysoft.core.common.entity.IdEntity;
-import com.easysoft.framework.commons.AbstractTree;
+
 
 /**
  * 操作按钮-->功能,如增、删、改、查、导出
@@ -17,7 +17,7 @@ import com.easysoft.framework.commons.AbstractTree;
  */
 @Entity
 @Table(name="t_operation_btn")
-public class OperationBtn extends IdEntity implements AbstractTree{
+public class OperationBtn extends IdEntity{
 
     private String code;
     private String name;
