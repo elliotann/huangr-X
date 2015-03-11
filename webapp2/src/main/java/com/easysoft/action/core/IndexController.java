@@ -23,7 +23,7 @@ import com.easysoft.member.backend.model.Menu;
  * @since:
  */
 @Controller
-@RequestMapping({"/core/admin/index"})
+@RequestMapping({"/admin/index"})
 public class IndexController extends BaseController{
     @Autowired
     private IIndexItemManager indexItemManager;

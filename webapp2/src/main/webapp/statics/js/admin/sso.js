@@ -173,11 +173,10 @@ jeap.SSO={
 
 
 };
-
 $(function(){
     jeap.SSO.init({
         success:function(){
-            location.href ="../core/admin/index.do?main";
+            location.href ="../admin/index.do?main";
         },
         fail:function(e){
             $("#tipMsg").removeClass("alert-info");
