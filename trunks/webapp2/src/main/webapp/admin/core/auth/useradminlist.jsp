@@ -62,10 +62,9 @@
 		<div class="shadowBoxWhite tableDiv">
 			<table class="easyui-datagrid"
 				data-options="url:'userAdmin.do?dataGrid&ajax=yes',pageList: [5,10,15,20],pageSize:30,fitColumns:'true',queryParams:{'complete':''}"
-				pagination="true" width="width" id="orderdata" sortName="order_id" sortOrder="desc">
+				pagination="true" width="width" id="useradmindata" sortName="order_id" sortOrder="desc">
 				<thead>
 					<tr>
-						<th data-options="field:'order_id',checkbox:true,width:100"></th>
 						<th data-options="field:'username',width:50,align:'center'">用户名</th>
 						<th data-options="field:'realname',width:50,align:'center'">姓名</th>
 						<th data-options="field:'email',width:50,align:'center'">邮箱</th>
@@ -81,25 +80,9 @@
 	</form>
 </div>
 <script type="text/javascript">
-	function forsn(value,row,index){
-		var val="<a href='#' onclick=\"newTab('查看订单详细','${ctx}/shop/admin/order!detail.do?orderId=&sn=&logi_no=&uname=&ship=&status=')\">"+1+"</a>"
-		return val;
-	}
-	function forMoney(value, row, index) {
-		var val = "￥" + value;
-		return val;
-	}
-	function formatDate(value,row,index){
-		if(value==null){
-			return "";
-		}
-		else{
-			return getFormatDateByLong(value, "yyyy-MM-dd");
-		}
-		
-	}
 	
-	//订单状态
+	
+	//状态
 	function forStruts(value, row, index) {
 		
 		if(value==1){
@@ -134,7 +117,7 @@
 	　　			 text:'取消',
 	　　			 handler:function(){
 	　　				 $("#useradmininfo").dialog('close');
-	　　				 $('#addadminForm')[0].reset() ;
+	　　				
 	　　			 }
 	　　		}]
 	　　	});
@@ -170,37 +153,24 @@
 		}
 	}
 	
-	function getType(exMap,value){
-		var val;
-		$.each(exMap,function(key,values){ 
-		    if(value==key){
-		    	val=values;
-		    }
-		});
-		return val;
-	}
 	
-	function del() {
-		var rows = $('#orderdata').datagrid("getSelections");
-		if (rows.length < 1) {
-			$.Loading.error("请选择要放入回收站的订单");
-			return;
-		}
+	function del(id) {
+		
 		if (!confirm("确认要将这些订单放入回收站？")) {
 			return;
 		}
 		var options = {
-			url : "order!delete.do?ajax=yes",
+			url : "userAdmin.do?delete&ajax=true&id="+id,
 			type : "POST",
 			dataType : 'json',
 			cache:false,
 			success : function(result) {
-				if (result.result == 1) {
-					$('#orderdata').datagrid("reload");
-					$.Loading.success(result.message);
+				if (result.success) {
+					$('#useradmindata').datagrid("reload");
+					$.Loading.success(result.msg);
 				}
 				if (result.result == 0) {
-					$.Loading.error(result.message);
+					$.Loading.error(result.msg);
 				}
 			},
 			error : function(e) {
@@ -209,27 +179,68 @@
 		};
 
 		$('#orderform').ajaxSubmit(options);	
-}
-	
-	var buttons = $.extend([], $.fn.datebox.defaults.buttons);
-	buttons.splice(1, 0, {
-	text: '清空',
-	handler: function(target){
-		 $('#start_time').datebox('setValue',"");
 	}
-	});
-	
-	var e_buttons = $.extend([], $.fn.datebox.defaults.buttons);
-	e_buttons.splice(1, 0, {
-	text: '清空',
-	handler: function(target){
-		 $('#end_time').datebox('setValue',"");
+	function edit(id) {
+		$("#useradmininfo").show();
+	　　	$('#useradmininfo').dialog({
+	　　		title: '修改管理员',			
+	　　		top:60,
+	　　		width: 550,
+	　　		height:450,
+	　　		closed: false,
+	　　		cache: false,
+	　　		href: 'userAdmin.do?edit&ajax=true&id='+id, 	 
+	　　		modal: true,
+	　　		buttons: [{					
+	　　			 text:'保存',
+	　　			 iconCls:'icon-ok',
+	　　			 handler:function(){
+	　　				var editbtn = $(this);
+		　　			var disabled=editbtn.hasClass("l-btn-disabled");
+		　　			if(!disabled){
+	　　					editUseradminForm(editbtn);
+	　　				}
+	　　			 }
+	　　			 },{
+	　　			 text:'取消',
+	　　			 handler:function(){
+	　　				 $("#useradmininfo").dialog('close');
+	　　			 }
+	　　		}]
+	　　	}); 
 	}
-	});
+	function editUseradminForm(editbtn){
+		if($("#pwd").val()!=$("#repwd").val()){
+			$.Loading.error("密码不相同");	
+			return ;
+		}
+		var formflag= $("#editAdminForm").form().form('validate');
+		if(formflag){
+			$.Loading.show("正在保存请稍后...");
+			editbtn.linkbutton("disable");	
+			var options = {
+				url : "userAdmin.do?checkEmailExist&ajax=true",
+				type : "POST",
+				dataType : "json",
+				success : function(result) {
+					$.Loading.success(result.message);
+					$("#useradmininfo").dialog('close');
+					$('#useradmindata').datagrid('reload');
+					editbtn.linkbutton("enable");
+			 	},
+			 	error : function(e) {
+			 		$.Loading.error("出现错误 ，请重试");	
+			 		editbtn.linkbutton("enable");
+				}
+			};
+			$('#editAdminForm').ajaxSubmit(options);
+		}
+	}
+	
     
     
 function formatAction(value,row,index){
-	var val="<a class='delete' title='删除' href='javascript:void(0);' onclick='del("+row.userid +")'></a><a class='edit' title='修改' href='javascript:void(0);' onclick='edit("+row.userid +")'></a><a class='view' title='查看' href='#' onclick=\"newTab('查看订单详细','')\"></a>";
+	var val="<a class='edit' title='修改' href='javascript:void(0);' onclick='edit("+row.id +")'></a><a class='delete' title='删除' href='javascript:void(0);' onclick='del("+row.id +")'></a>";
 	return val;
 		
 	}
@@ -265,8 +276,5 @@ function formatAction(value,row,index){
     });
 }
 
-	function formatTime(value,row,index){
-		var val = getFormatDateByLong(value, "yyyy-MM-dd");
-		return val;
-	}
+
 </script>

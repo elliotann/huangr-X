@@ -4,7 +4,6 @@
 	String path = request.getContextPath();
 %>
 <!DOCTYPE HTML>
-
 <html lang="en">
 <head>
 	<link href="${context}/css/global.css" rel="stylesheet" type="text/css" />
@@ -21,3 +20,7 @@
 	</script>
 <body>
 	${content }
+
+
+
+
