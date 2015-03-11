@@ -13,6 +13,7 @@ import java.io.UnsupportedEncodingException;
 public class StringResponse implements Response {
     private String content;
     private String contentType;
+    private String statusCode;
 	public StringResponse(){
 		contentType= ContextType.HTML;
 	}
@@ -27,7 +28,7 @@ public class StringResponse implements Response {
 	}
 
 	public String getStatusCode(){
-		return "";
+		return statusCode;
 	}
 
 	public String getContentType(){
@@ -47,7 +48,7 @@ public class StringResponse implements Response {
 	 * @param code
 	 */
 	public void setStatusCode(String code){
-
+		this.statusCode = code;
 	}
 
 	/**
@@ -57,7 +58,7 @@ public class StringResponse implements Response {
 	public void setContentType(String contentType){
 		this.contentType = contentType;
 	}
-
+	
 	
 	public InputStream getInputStream() {
 	 

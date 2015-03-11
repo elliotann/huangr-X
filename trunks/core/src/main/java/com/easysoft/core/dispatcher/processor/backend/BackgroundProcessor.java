@@ -48,7 +48,7 @@ public class BackgroundProcessor implements Processor {
 	
 					String ctx = httpRequest.getContextPath();
 					Response response = new StringResponse();
-					response.setContent(ctx+"/login.jsp");
+					response.setContent(ctx+"/admin/login.jsp");
 					response.setStatusCode("-1");
 					return response;
 			 }

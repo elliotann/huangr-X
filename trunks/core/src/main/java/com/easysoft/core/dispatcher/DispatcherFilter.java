@@ -57,7 +57,10 @@ public class DispatcherFilter implements Filter {
                     if (result) return;
                 }
                 Response eapResponse = processor.process(0, httpResponse, httpRequest);
-
+                if("-1".equals(eapResponse.getStatusCode())){
+                	httpResponse.sendRedirect(eapResponse.getContent());
+                	return;
+                }
                 InputStream in = eapResponse.getInputStream();
 
                 if (in != null)

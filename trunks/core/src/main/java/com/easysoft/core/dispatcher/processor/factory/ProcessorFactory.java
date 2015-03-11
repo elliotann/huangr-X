@@ -50,6 +50,7 @@ public abstract class ProcessorFactory {
                 return null;
             }
         }
+       
         if(uri.contains("/designer/dialogs")){
             processor = new BackgroundProcessor();
             return processor;
