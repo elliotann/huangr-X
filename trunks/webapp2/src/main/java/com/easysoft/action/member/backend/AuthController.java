@@ -74,8 +74,7 @@ public class AuthController extends BaseController {
     @RequestMapping(params = {"dataGrid"})
     public ModelAndView dataGrid(int roleId){
         List<Menu> menuList  = menuManager.getMenuTree(0,roleId);
-        DataGridReturn dataGridReturn = new DataGridReturn(menuList.size(),menuList);
-        String json = JsonUtils.beanToJson(dataGridReturn);
+        String json = JsonUtils.beanToJsonArray(menuList);
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("json",json);
         return new ModelAndView("admin/json_message",map);

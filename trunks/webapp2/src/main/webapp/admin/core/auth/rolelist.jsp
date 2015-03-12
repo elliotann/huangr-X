@@ -76,7 +76,12 @@
 	</form>
 </div>
 <script type="text/javascript">
-	
+	function Auth(){
+		this.roleId = 0;
+		this.funId = 0;
+		this.type = 0;
+		this.operations  = [];
+	}
 	
 	//状态
 	function forStruts(value, row, index) {
@@ -228,21 +233,81 @@
 			 		editbtn.linkbutton("enable");
 				}
 			};
-			$('#editAdminForm').ajaxSubmit(options);
+			$('#authForm').ajaxSubmit(options);
 		}
 	}
+	function setAuth(id,rolename){
+		$("#useradmininfo").show();
+	　　	$('#useradmininfo').dialog({
+	　　		title: rolename+'-角色授权',		
+	  		top:60,
+	　　		width: 550,
+	  		height:450,
+	　　		closed: false,
+	　　		cache: false,
+	　　		href: '../admin/auth.do?add&ajax=yes&roleId='+id, 	
+	　　		modal: true,
+	　　		buttons: [{					
+	　　			 text:'保存',
+	　　			 iconCls:'icon-ok',
+	　　			 handler:function(){
+	　　				  var savebtn = $(this);
+		　　			  var disabled=savebtn.hasClass("l-btn-disabled");
+		　　			  if(!disabled){
+	　　				 		 addAuthForm(savebtn);	
+	　　				  }
+	　　			 }
+	　　			 },{
+	　　			 text:'取消',
+	　　			 handler:function(){
+	　　				 $("#useradmininfo").dialog('close');
+	　　				
+	　　			 }
+	　　		}]
+	　　	});
+	}
 	
-	function setAuth(id){
-		newTab('角色授权'+id,'../core/admin/auth.do?add&ajax=yes&roleId='+id);
+	function addAuthForm(savebtn){
+		
+		var nodes = $('#tt').tree('getChecked', ['checked','indeterminate']);
+		var myAuths = [];
+		for(var i=0; i<nodes.length; i++){
+			var auth=new Auth();
+           	auth.funId = this.id;
+           	auth.type=this.menutype;
+           	auth.roleId = $("#roleId").val();
+           	myAuths.push(auth);
+		}
+		var param = JSON.stringify(myAuths);
+		$.Loading.show("正在保存请稍后...");
+		savebtn.linkbutton("disable");	
+		var options = {
+			url : "auth.do?saveAuth&ajax=true",
+			type : "POST",
+			dataType : "json",
+			data:'data='+param,
+			success : function(result) {
+				$.Loading.success(result.message);
+				$("#useradmininfo").dialog('close');
+				$('#useradmindata').datagrid('reload');
+				savebtn.linkbutton("enable");
+		 	},
+		 	error : function(e) {
+		 		$.Loading.error("出现错误 ，请重试");	
+		 		savebtn.linkbutton("enable");
+			}
+		};
+		$('#editAdminForm').ajaxSubmit(options);
 		
 	}
+	
 	function newTab(title,url){
     	parent.addTab1(title,url);
     }
     
     
 function formatAction(value,row,index){
-	var val="<a class='edit' title='修改' href='javascript:void(0);' onclick='edit("+row.id +")'></a><a class='view' title='权限设置' href='javascript:void(0);' onclick='setAuth("+row.id +")'></a><a class='delete' title='删除' href='javascript:void(0);' onclick='del("+row.id +")'></a>";
+	var val="<a class='edit' title='修改' href='javascript:void(0);' onclick='edit("+row.id +")'></a><a class='view' title='权限设置' href='javascript:void(0);' onclick='setAuth("+row.id +",\""+row.rolename+"\")'></a><a class='delete' title='删除' href='javascript:void(0);' onclick='del("+row.id +")'></a>";
 	return val;
 		
 	}
