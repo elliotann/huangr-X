@@ -27,7 +27,7 @@
                     用户名：<input class="form-control" name="username" id="username" placeholder="用户名" type="text"  maxLength="24" />
                 </div>
                 <div class="input">
-                    &nbsp;&nbsp;密码：<input class="form-control" name="password" id="password" type="password" placeholder="密码"  maxLength="24" />
+                    &nbsp;&nbsp;&nbsp;&nbsp;密码：<input class="form-control" name="password" id="password" type="password" placeholder="密码"  maxLength="24" />
                 </div>
                 <div class="checkbox">
                     <input type="checkbox" name="remember" id="remember" /><label for="remember"><span>记住我</span></label>
