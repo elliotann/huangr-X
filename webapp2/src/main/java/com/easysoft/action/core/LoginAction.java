@@ -21,6 +21,7 @@ import com.easysoft.member.backend.manager.UserContext;
 @Controller
 @RequestMapping({"/core/admin/login"})
 public class LoginAction extends BaseController {
+	
 	@RequestMapping(params = {"logout"})
     @ResponseBody
     public AjaxJson logout(){
