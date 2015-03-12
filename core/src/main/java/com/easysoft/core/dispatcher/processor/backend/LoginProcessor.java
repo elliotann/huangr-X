@@ -41,8 +41,6 @@ public class LoginProcessor implements Processor {
 		}else{
 			return this.sysLogin(httpResponse, httpRequest);
 		}
-		
-	
 	}
 	
 	

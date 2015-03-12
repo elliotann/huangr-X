@@ -55,11 +55,7 @@ public class BackPageGetter extends AbstractFacadeProcessor {
 		httpRequest.setAttribute("bklogo", site.getBklogofile()==null?site.getLogofile():site.getBklogofile()); //后台主界面logo
 		String uri = page.getUri();
 		if (uri.startsWith("/admin/main")) { //后台首页
-            AdminUser user = this.adminUserManager.getCurrentUser();
-            user = this.adminUserManager.get(user.getId());
-            httpRequest.setAttribute("user", user);
-			uri = context.toString() + "/main.jsp";
-			request = new HelpDivWrapper(page, request);
+          
 		
 		} else if (uri.equals("/admin/") || uri.equals("/admin/index.jsp")) { //登录页面
 			//读取记住的用户名
