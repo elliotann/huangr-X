@@ -62,7 +62,7 @@ public class DispatcherFilter implements Filter {
                 	return;
                 }
                 InputStream in = eapResponse.getInputStream();
-
+                System.out.println(eapResponse.getContent());
                 if (in != null)
                 {
                     byte[] inbytes = IOUtils.toByteArray(in);
