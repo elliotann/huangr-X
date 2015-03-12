@@ -273,8 +273,8 @@
 		var myAuths = [];
 		for(var i=0; i<nodes.length; i++){
 			var auth=new Auth();
-           	auth.funId = this.id;
-           	auth.type=this.menutype;
+           	auth.funId = nodes[i].id;
+           	auth.type=nodes[i].menutype;
            	auth.roleId = $("#roleId").val();
            	myAuths.push(auth);
 		}

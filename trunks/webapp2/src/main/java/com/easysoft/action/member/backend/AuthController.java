@@ -182,7 +182,7 @@ public class AuthController extends BaseController {
         for(int i=0;i<objects.length;i++){
             roleAuths[i] = (RoleAuth)objects[i];
         }
-       authActionManager.saveAuth(roleAuths);
+        authActionManager.saveAuth(roleAuths);
         return result;
 
     }
