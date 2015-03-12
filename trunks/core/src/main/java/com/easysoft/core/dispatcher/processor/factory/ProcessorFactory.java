@@ -23,7 +23,7 @@ public abstract class ProcessorFactory {
 	 */
     public static Processor newProcessorInstance(String uri, HttpServletRequest request){
         Processor processor = null;
-
+ 
         if (uri.startsWith("/statics")) return null;
         if ((uri.startsWith("/install")) && (!uri.startsWith("/install.html"))) return null;
 
@@ -72,7 +72,6 @@ public abstract class ProcessorFactory {
         if (uri.startsWith("/resource/")) {
             return new WebResourceProcessor();
         }
-
         if (isExinclude(uri)) return null;
 
         if (uri.startsWith("/admin/")) {

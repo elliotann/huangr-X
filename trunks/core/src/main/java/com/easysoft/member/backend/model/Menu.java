@@ -43,6 +43,7 @@ public class Menu extends IdEntity {
     private int _parentId;
     private boolean checked;
 
+
     public Integer getDeleteflag() {
         return deleteflag;
     }
@@ -184,4 +185,9 @@ public class Menu extends IdEntity {
 	public void remove(Menu menu) {
 		children.remove(menu);
 	}
+	@Transient
+	public String getText() {
+		return title;
+	}
+	
 }
