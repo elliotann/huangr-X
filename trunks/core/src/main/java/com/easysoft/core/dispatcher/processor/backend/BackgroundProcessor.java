@@ -38,20 +38,18 @@ public class BackgroundProcessor implements Processor {
 		
 		
 		//用户身份校验
-		 if( ! uri.startsWith("/admin/login")
-			&& ! uri.startsWith("/admin/index.jsp") 
-			&& !uri.equals("/admin/")
-			&& !uri.equals("/admin")
-			){
+		 if( uri.startsWith("/admin")){
 			 IUserService userService = UserServiceFactory.getUserService();
 			 if(!userService.isUserLoggedIn()){
 	
 					String ctx = httpRequest.getContextPath();
 					Response response = new StringResponse();
-					response.setContent(ctx+"/login.jsp");
+					response.setContent(ctx+"/core/admin/login.do?toLogin");
 					response.setStatusCode("-1");
 					return response;
 			 }
+		 }else{
+			 
 		 }
 		
 		Processor processor  =null;
@@ -65,8 +63,6 @@ public class BackgroundProcessor implements Processor {
 		
 		if(uri.startsWith("/admin/menu.do")){
 			processor = new MenuJsonGetter(page);
-		}else if( uri.startsWith("/admin/login.do") ){
-			processor = new LoginProcessor();
 		}else if(uri.startsWith("/admin/plugin")){
 			processor = new AjaxPluginProcessor();
 		}else{
