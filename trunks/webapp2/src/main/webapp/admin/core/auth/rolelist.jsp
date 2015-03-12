@@ -233,7 +233,7 @@
 	}
 	
 	function setAuth(id){
-		newTab('查看订单详细','auth.do?add&ajax=yes&roleId='+id);
+		newTab('角色授权'+id,'../core/admin/auth.do?add&ajax=yes&roleId='+id);
 		
 	}
 	function newTab(title,url){
