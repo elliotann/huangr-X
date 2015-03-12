@@ -76,11 +76,11 @@ jeap.SSO={
         this.login_btn.attr("disabled",true).val("正在登陆...");
         var that =this;
         var options = {
-            url : "login.do",
+            url : "login.do?login&ajax=true",
             type : "POST",
             dataType : 'json',
             success : function(result) {
-                if(result.result==0){
+                if(result.success){
 
                     /*						that.domains = result.domains;
                      that.userid =result.userid;
@@ -176,7 +176,7 @@ jeap.SSO={
 $(function(){
     jeap.SSO.init({
         success:function(){
-            location.href ="../admin/index.do?main";
+            location.href ="../../admin/main.do?main";
         },
         fail:function(e){
             $("#tipMsg").removeClass("alert-info");
