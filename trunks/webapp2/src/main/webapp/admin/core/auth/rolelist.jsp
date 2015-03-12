@@ -281,23 +281,23 @@
 		var param = JSON.stringify(myAuths);
 		$.Loading.show("正在保存请稍后...");
 		savebtn.linkbutton("disable");	
-		var options = {
-			url : "auth.do?saveAuth&ajax=true",
-			type : "POST",
-			dataType : "json",
-			data:'data='+param,
-			success : function(result) {
-				$.Loading.success(result.message);
+		$.ajax({
+    		url:'auth.do?saveAuth&ajax=true',
+    		type:'post',
+    		data:'data='+param,
+    		dataType:'json',
+    		success:function(result){
+    			$.Loading.success(result.msg);
 				$("#useradmininfo").dialog('close');
 				$('#useradmindata').datagrid('reload');
 				savebtn.linkbutton("enable");
-		 	},
-		 	error : function(e) {
-		 		$.Loading.error("出现错误 ，请重试");	
+    		},
+    		error:function(e){
+    			$.Loading.error("出现错误 ，请重试");	
 		 		savebtn.linkbutton("enable");
-			}
-		};
-		$('#editAdminForm').ajaxSubmit(options);
+    		}
+    	});
+	
 		
 	}
 	
