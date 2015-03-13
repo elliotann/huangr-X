@@ -7,19 +7,14 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.easysoft.core.common.controller.BaseController;
-import com.easysoft.core.common.vo.json.AjaxJson;
-import com.easysoft.core.dispatcher.core.Response;
-import com.easysoft.core.dispatcher.core.StringResponse;
 import com.easysoft.core.manager.IIndexItemManager;
 import com.easysoft.core.manager.IMenuManager;
 import com.easysoft.core.model.IndexItem;
-import com.easysoft.framework.context.webcontext.ThreadContextHolder;
-import com.easysoft.framework.context.webcontext.WebSessionContext;
-import com.easysoft.member.backend.manager.UserContext;
+import com.easysoft.member.backend.manager.impl.UserServiceFactory;
+import com.easysoft.member.backend.model.AdminUser;
 import com.easysoft.member.backend.model.Menu;
 
 /**
@@ -47,7 +42,15 @@ public class IndexController extends BaseController{
     }
     @RequestMapping(params = {"main"})
     public ModelAndView main(){
-    	List<Menu> menuList = menuManager.getMenuTree(0);
+    	
+    	List<Menu> menuList = null;
+    	AdminUser adminUser = UserServiceFactory.getUserService().getCurrentUser();
+    	if(adminUser.getFounder()==1){
+    		menuList = menuManager.getMenuTree(0);
+    	}else{
+    		menuList = menuManager.getPermissionMenuByUserId(adminUser.getId());
+    	}
+
     	Map<String,Object> params = new HashMap<String, Object>();
         params.put("menuList",menuList);
     	return new ModelAndView("adminthemes/default/main",params);

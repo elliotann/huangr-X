@@ -89,7 +89,7 @@ jeap.SSO={
                     //that.oneLogin("login");
                     that.success();
                 }else{
-                    that.fail(result.message);
+                    that.fail(result.msg);
                 }
             },
             error : function(e) {

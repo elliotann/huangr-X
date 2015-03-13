@@ -11,11 +11,16 @@
 	<div style="padding: 10px 0 10px 60px">
 		<form id="editAdminForm" method="post" class="validate" >
 		<input type="hidden" name="id" value="${adminUser.id }" />
+		<input type="hidden" name="password" value="${adminUser.password }" />
 			<table>
 				
 				<tr>
 					<th><label class="text">用户名：</label></th>
-					<td><input class="easyui-validatebox input_text" type="text" name="adminUser.username" value="${adminUser.username }" data-options="required:true"  dataType="string" isrequired="true" /></td>
+					<td><input class="easyui-validatebox input_text" type="text" name="username" value="${adminUser.username }" data-options="required:true"  dataType="string" isrequired="true" /></td>
+				</tr>
+				<tr>
+					<th><label class="text">email：</label></th>
+					<td><input class="easyui-validatebox input_text" type="text" name="email" value="${adminUser.email }" data-options="required:true"  dataType="string" isrequired="true" /></td>
 				</tr>
 				<tr id="roletr">
 					<th><label class="text">角色：</label></th>
@@ -23,9 +28,9 @@
 						<ul style="width:100%" id="rolesbox">
 							<c:forEach items="${roleList }" var="role">
 								<li style="width:33%;display:block">
-								<input type="checkbox" name="roleids" value="${role.id }"  
+								<input type="checkbox" name="roleids" value="${role.id }" 
 									<c:forEach items="${userRoles }" var="userrele">
-										<c:if test="${ userrele.id ==role.id}">
+										<c:if test="${ userrele.role.id ==role.id}">
 										checked="checked"
 										</c:if>
 										 
@@ -40,13 +45,13 @@
 				<tr>
 					<th><label class="text">状态：</label></th>
 					<td>
-						<input type="radio"  name="adminUser.state" value="1" checked=true>启用&nbsp;&nbsp;
-						<input type="radio"  name="adminUser.state" value="0">禁用 
+						<input type="radio"  name="state" value="1" <c:if test="${adminUser.state==1}">checked="checked"</c:if>>启用&nbsp;&nbsp;
+						<input type="radio"  name="state" value="0" <c:if test="${adminUser.state==0}">checked="checked"</c:if>>禁用 
 					</td>
 				</tr>
 				<tr>
 					<th><label class="text">姓名：</label></th>
-					<td><input type="text" class="input_text easyui-validatebox" name="adminUser.realname" value="${adminUser.realname }"   data-options="required:true"/></td>
+					<td><input type="text" class="input_text easyui-validatebox" name="realname" value="${adminUser.realname }"   data-options="required:true"/></td>
 				</tr>
 				<tr>
 					<th><label class="text">编号：</label></th>
@@ -58,7 +63,7 @@
 				</tr>
 				<tr>
 					<th><label class="text">备注：</label></th>
-					<td><input type="text" class="input_text" name="adminUser.remark"  value="${adminUser.remark }" /></td>
+					<td><input type="text" class="input_text" name="remark"  value="${adminUser.remark }" /></td>
 				</tr>
 				
 			

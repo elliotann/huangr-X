@@ -219,11 +219,11 @@
 			$.Loading.show("正在保存请稍后...");
 			editbtn.linkbutton("disable");	
 			var options = {
-				url : "userAdmin.do?checkEmailExist&ajax=true",
+				url : "userAdmin.do?editSave&ajax=true",
 				type : "POST",
 				dataType : "json",
 				success : function(result) {
-					$.Loading.success(result.message);
+					$.Loading.success(result.msg);
 					$("#useradmininfo").dialog('close');
 					$('#useradmindata').datagrid('reload');
 					editbtn.linkbutton("enable");
