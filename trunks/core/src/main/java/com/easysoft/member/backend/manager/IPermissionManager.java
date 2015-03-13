@@ -39,7 +39,7 @@ public interface IPermissionManager{
 	 * @param userid
 	 * @return 此用户的角色集合
 	 */
-	public List<Role> getUserRoles(int userid);
+	public List<UserRole> getUserRoles(int userid);
 	
 	
 	

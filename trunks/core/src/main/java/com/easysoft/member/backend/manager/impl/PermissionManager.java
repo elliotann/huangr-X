@@ -1,26 +1,30 @@
 package com.easysoft.member.backend.manager.impl;
 
-import com.easysoft.core.common.dao.spring.BaseSupport;
-import com.easysoft.core.common.service.impl.GenericService;
-import com.easysoft.framework.context.webcontext.ThreadContextHolder;
-import com.easysoft.framework.context.webcontext.WebSessionContext;
-import com.easysoft.member.backend.dao.IOperationBtnDao;
-import com.easysoft.member.backend.dao.IUserRoleDao;
-import com.easysoft.member.backend.manager.IOperationBtnManager;
-import com.easysoft.member.backend.manager.IPermissionManager;
-import com.easysoft.member.backend.manager.IRoleAuthManager;
-import com.easysoft.member.backend.model.*;
-import com.easysoft.member.backend.vo.FunAndOperationVO;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import com.easysoft.core.common.dao.spring.BaseSupport;
+import com.easysoft.core.manager.IMenuManager;
+import com.easysoft.framework.context.webcontext.ThreadContextHolder;
+import com.easysoft.framework.context.webcontext.WebSessionContext;
+import com.easysoft.member.backend.dao.IOperationBtnDao;
+import com.easysoft.member.backend.dao.IUserRoleDao;
+import com.easysoft.member.backend.manager.IPermissionManager;
+import com.easysoft.member.backend.manager.IRoleAuthManager;
+import com.easysoft.member.backend.model.AdminUser;
+import com.easysoft.member.backend.model.AuthAction;
+import com.easysoft.member.backend.model.Menu;
+import com.easysoft.member.backend.model.OperationBtn;
+import com.easysoft.member.backend.model.RoleAuth;
+import com.easysoft.member.backend.model.UserRole;
+import com.easysoft.member.backend.vo.FunAndOperationVO;
 
 /**
  * 权限管理
@@ -35,6 +39,7 @@ public class PermissionManager extends BaseSupport implements IPermissionManager
     private IRoleAuthManager roleAuthManager;
     @Autowired
     private IUserRoleDao userRoleDao;
+
     public boolean checkHaveAuth(int actid) {
         WebSessionContext sessonContext = ThreadContextHolder.getSessionContext();
 
@@ -110,8 +115,8 @@ public class PermissionManager extends BaseSupport implements IPermissionManager
 	 * @param userid
 	 * @return 此用户的角色集合
 	 */	
-	public List<Role> getUserRoles(int userid) {
-		return this.baseDaoSupport.queryForList("select roleid from  user_role where userid=?", userid);
+	public List<UserRole> getUserRoles(int userid) {
+		return userRoleDao.queryRolesByUserId(userid);
 	}
 	
 	
@@ -166,7 +171,6 @@ public class PermissionManager extends BaseSupport implements IPermissionManager
     
     public boolean hasOperationByRoleAndMenu(Integer roleId, Integer menuId,String operId) {
         RoleAuth roleAuth = roleAuthManager.queryRoleAuthByRoleIdAndFunId(roleId,menuId);
-
         if(roleAuth!=null&&roleAuth.getOperids()!=null){
             String operation = roleAuth.getOperids();
             String[] operations = operation.split(",");
@@ -177,8 +181,10 @@ public class PermissionManager extends BaseSupport implements IPermissionManager
             }
         }
         return false;
-
     }
 
+
+
+	
 
 }

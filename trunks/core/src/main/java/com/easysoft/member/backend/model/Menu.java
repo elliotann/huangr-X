@@ -1,5 +1,6 @@
 package com.easysoft.member.backend.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -8,8 +9,6 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.easysoft.core.common.entity.IdEntity;
-
-
 import com.easysoft.framework.db.NotDbField;
 
 
@@ -35,7 +34,7 @@ public class Menu extends IdEntity {
     private String appid;
 
 
-    private List<Menu> children;
+    private List<Menu> children = new ArrayList<Menu>();
     private boolean hasChildren ;
     private String ico;
 

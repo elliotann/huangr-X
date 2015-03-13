@@ -57,7 +57,7 @@ public class MenuManagerImpl extends BaseSupport<Menu> implements IMenuManager {
         return getMenuTree(menuid,null);
 	}
 
-    
+    //用于授权
     public List<Menu> getMenuTree(Integer menuid, Integer roleId) {
         if(roleId==null||0==roleId.intValue()){
             if(menuid==null)throw new IllegalArgumentException("menuid argument is null");
@@ -107,10 +107,8 @@ public class MenuManagerImpl extends BaseSupport<Menu> implements IMenuManager {
                 	}
                 }
                 if(menu.getPid().compareTo(menuid)==0){
-                    
                 
                     	menu.setChildren(children);
-                    
                     
                     topMenuList.add(menu);
                 }
@@ -198,7 +196,7 @@ public class MenuManagerImpl extends BaseSupport<Menu> implements IMenuManager {
         this.baseDaoSupport.execute(sql, new Object[]{title});
     }
 
-    
+
     public List<Menu> getMenuTreeByRoleId(Integer roleId) {
         List<Menu> results = new ArrayList<Menu>();
         List<RoleAuth> roleAuths = roleAuthManager.queryRoleAuthListByRoleId(roleId);
@@ -217,4 +215,43 @@ public class MenuManagerImpl extends BaseSupport<Menu> implements IMenuManager {
         params.put("url",url);
         menuDao.deleteMenuByCondition(params);
     }
+    public List<Menu> getPermissionMenuByUserId(Integer userId) {
+		List<RoleAuth> roleAuths = permissionManager.getUesrAct(userId,null);
+		List<Menu> temps = new ArrayList<Menu>();
+		List<Menu> results = new ArrayList<Menu>();
+		for(RoleAuth roleAuth : roleAuths){
+			if(roleAuth.getType()!=5){
+				temps.add(this.get(roleAuth.getFunId()));
+			}
+		}
+		for(Menu menu : temps){
+			boolean isContain = false;
+			if(isContainMenu(results,menu)) continue;
+			for(Menu resultMenu : results){
+				if(menu.getPid()==resultMenu.getId()){
+					resultMenu.add(menu);
+					isContain = true;
+				}
+			}
+			if(!isContain){
+				results.add(menu);
+				continue;
+				
+			}
+		}
+		return results;
+	}
+    private boolean isContainMenu(List<Menu> menuList,Menu menu){
+    	boolean isContainMenu = false;
+    	for(Menu itMenu : menuList){
+    		if(itMenu.getChildren().size()>0){
+    			isContainMenu(itMenu.getChildren(),itMenu);
+    		}
+    		if(itMenu.getId()==menu.getId()){
+    			isContainMenu = true;
+    		}
+    	}
+    	return isContainMenu;
+    }
+	
 }
