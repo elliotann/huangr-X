@@ -80,7 +80,7 @@ public class MenuManagerImpl extends BaseSupport<Menu> implements IMenuManager {
             if(!selectMenus.isEmpty()){
                 for(Menu menu : menuList){
                     for(Menu selectMenu : selectMenus){
-                        if(menu.getId()==selectMenu.getId()){
+                        if((this.getMenuTree(menu.getId())==null||this.getMenuTree(menu.getId()).size()==0)&&menu.getId()==selectMenu.getId()){
                             menu.setChecked(true);
                         }
                     }
