@@ -56,9 +56,11 @@ public class LoginAction extends BaseController {
 			}else{  //删除用户名
 				HttpUtil.addCookie(httpResponse, "loginname", "", 0);
 			}
-			
+			ajaxJson.setMsg("登录成功");
 			 
 		} catch (RuntimeException exception) {
+			ajaxJson.setSuccess(false);
+			ajaxJson.setMsg(exception.getMessage());
 			exception.printStackTrace();
 			this.logger.error(exception.getMessage(),exception.fillInStackTrace());
 			Response response = new StringResponse();
@@ -71,7 +73,6 @@ public class LoginAction extends BaseController {
     }
 	@RequestMapping(params = {"toLogin"})
     public String toLogin(){
-    	
     	return "/adminthemes/default/login";
     }
 }

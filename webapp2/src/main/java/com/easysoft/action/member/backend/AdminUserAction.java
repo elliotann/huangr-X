@@ -1,23 +1,30 @@
 package com.easysoft.action.member.backend;
 
-import com.easysoft.core.common.controller.BaseController;
-import com.easysoft.core.common.vo.json.AjaxJson;
-import com.easysoft.core.common.vo.json.DataGridReturn;
-import com.easysoft.core.context.EsfContext;
-import com.easysoft.framework.db.PageOption;
-import com.easysoft.framework.utils.JsonUtils;
-import com.easysoft.member.backend.manager.*;
-import com.easysoft.member.backend.model.AdminUser;
-import com.easysoft.member.backend.model.Depart;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
+import com.easysoft.core.common.controller.BaseController;
+import com.easysoft.core.common.vo.json.AjaxJson;
+import com.easysoft.core.common.vo.json.DataGridReturn;
+import com.easysoft.core.context.EsfContext;
+import com.easysoft.framework.db.PageOption;
+import com.easysoft.framework.utils.JsonUtils;
+import com.easysoft.member.backend.manager.IAdminUserManager;
+import com.easysoft.member.backend.manager.ICompanyManager;
+import com.easysoft.member.backend.manager.IDepartManager;
+import com.easysoft.member.backend.manager.IPermissionManager;
+import com.easysoft.member.backend.manager.IRoleManager;
+import com.easysoft.member.backend.model.AdminUser;
+import com.easysoft.member.backend.model.Depart;
+import com.easysoft.member.backend.model.UserRole;
 
 /**
  * User: andy
@@ -84,7 +91,7 @@ public class AdminUserAction extends BaseController{
     public ModelAndView edit(Integer id) throws Exception {
         int multiSite = EsfContext.getContext().getCurrentSite().getMulti_site();
         List roleList = roleManager.list();
-        List userRoles =permissionManager.getUserRoles(id);
+        List<UserRole> userRoles =permissionManager.getUserRoles(id);
         AdminUser adminUser = this.adminUserManager.get(id);
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("roleList",roleList);

@@ -7,7 +7,7 @@
 		<table>
 			
 			<tr>
-				<td>菜单:</td>
+				<td>功能:</td>
 				<td>
 					<ul id="tt" class="easyui-tree" data-options="cascadeCheck:true,url:'auth.do?dataGrid&ajax=yes&roleId=${roleId}',method:'get',animate:true,checkbox:true"></ul>
 			    </td>
