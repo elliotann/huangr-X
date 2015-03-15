@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 	<script type="text/javascript" src="${context }/js/jquery-1.8.3.min.js"></script>
 	<script type="text/javascript" src="${context }/js/jquery-form-2.33.js"></script>
-	
 	<link rel="stylesheet" type="text/css" href="${context }/js/easyui/themes/gray/easyui.css"/>    
 	<link rel="stylesheet" type="text/css" href="${context }/js/easyui/themes/icon.css"/>  
 	<script type="text/javascript" src="${context }/js/easyui/jquery.easyui.min.js"></script>
@@ -19,7 +18,7 @@
 <div id="loading"></div>
 <div class="main">
 	<div id="useradmininfo" style="display: none;"></div>
-	<form id="orderform">
+	<form id="userform">
 		<div class='buttonArea'>
 			<div style="float:left;">
 			 <a href="javascript:void(0)" class="button" data-options="plain:true" onclick="append()">添加</a>
@@ -178,7 +177,7 @@
 			}
 		};
 
-		$('#orderform').ajaxSubmit(options);	
+		$('#userform').ajaxSubmit(options);	
 	}
 	function edit(id) {
 		$("#useradmininfo").show();

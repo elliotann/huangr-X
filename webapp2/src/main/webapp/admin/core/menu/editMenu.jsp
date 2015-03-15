@@ -1,141 +1,72 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ include file="/commons/taglibs.jsp"%>
-<script src="${staticserver}/js/common/jquery.validate.js" type="text/javascript"></script>
-<script src="${staticserver}/js/admin/jeap.js" type="text/javascript"></script>
-<link href="${context }/css/form.css" rel="stylesheet"/>
-<link href="${context }/js/easyui/themes/icon.css" rel="stylesheet"/>
-<script type="text/javascript">
+    <div class="main" style="background-color: white;">
+	<div class="easyui-panel" style="border-style: none;">
+		<form id="editForm" method="post" class="validate">
+		<input type="hidden" name="menuId" value="${menu.id}" />
+			<table>
+				<tr>
+					<th>标题:</th>
+					<td><input class="input_text easyui-validatebox" type="text"
+						id="title" name="title" data-options="required:true" value="${menu.title}"></input>
+					</td>
 
-
-
-    $(function ()
-    {
-
-        $("#objForm").validate({
-            rules:{
-                title:{
-                    required:true,
-                    maxlength:60
-                },
-                password:{
-                    required:true,
-                    minlength:6,
-                    maxlength:18
-                }
-            },
-
-            submitHandler: function ()
-            {
+				</tr>
+				<tr>
+					<th>类型:</th>
+					<td style="padding: 2px 0 0 0"><input type="radio"
+						name="menutype" value="2" <c:if test="${menu.menutype==2}">checked="checked"</c:if>  />应用&nbsp; <input
+						type="radio" name="menutype" value="1"  <c:if test="${menu.menutype==1}">checked="checked"</c:if>/>系统</td>
+				</tr>
 				
-                $("#objForm").ajaxSubmit({
-                    url :"menu.do?saveEdit&ajax=true",
-                    type : "POST",
-                    dataType:"json",
-                    success : function(result) {
-                    	alert("here");
-                    	alert(result);
-                        if(result.success){
-                            $.Loading.show('操作成功!');
+				<tr class="addtr">
+					<th>上级菜单:</th>
+					<td><input class="easyui-combotree combo" name="pid"
+						data-options="url:'menu.do?addOrUpdateGrid&ajax=true',method:'post',required:false,height:28"
+						style="width: 305px;" value="${menu.pid }">
+					</td>
+				</tr>
+				<tr>
+					<th>url:</th>
+					<td><input class="input_text easyui-validatebox" type="text"
+						id="url" name="url" data-options="required:true" value="${menu.url}"></input>
+					</td>
 
-                            setTimeout(function ()
-                            {
-                                $.Loading.hide();
-                                $("#dialogInfo").dialog('close');
-                                $('#dataGrid').datagrid('reload');
-                            }, 1000);
+				</tr>
+				<tr>
+					<th>target:</th>
+					<td><input class="input_text easyui-validatebox" type="text"
+						id="target" name="target" value="${menu.target}"></input>
+					</td>
 
-                        }else{
-                            alert(result.msg)
-                        }
-                    },
-                    error : function(e) {
-                        alert("出错啦:(");
-                    }
-                });
-
-            },
-            messages:{
-                title: {
-                    required: "标题不能为空",
-                    maxlength:"标题最大60个字符"
-                }
-            }
-        });
-
-
-
-    });
-
-
-    function submitForm(){
-        $("#objForm").submit();
-    }
+				</tr>
+				<tr>
+					<th>排序</th>
+					<td><input class="input_text" type="text" id="sorder"
+						name="sorder" data-options="required:true" value="50" value="${menu.sorder}" ></input>
+					</td>
+				</tr>
+				
+				<tr>
+					<th>图标</th>
+					<td><input class="easyui-validatebox" type="file" id="icoFile"
+						name="icoFile"></input>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</div>
+<script>
+	$(function() {
+		$(".cattype").click(function() {
+			if ($(this).val() == 1) {
+				$(".addtr").hide();
+			}
+			if ($(this).val() == 0) {
+				$(".addtr").show();
+			}
+		})
+	});
 </script>
-<style type="text/css">
-    body{ font-size:12px;}
-    .l-table-edit {}
-    .l-table-edit-td{ padding:4px;}
-
-</style>
-<form name="objForm" method="post"   id="objForm" enctype="multipart/form-data">
-    <input type="hidden" name="menuId" value="${menu.id}" />
-    <div>
-    </div>
-    <table cellpadding="0" cellspacing="0" class="l-table-edit" >
-        <tr>
-            <td align="right" class="l-table-edit-td">标题:</td>
-            <td align="left" class="l-table-edit-td">
-                <input name="title" type="text" id="title" ltype="text" value="${menu.title}"  validate="{required:true,maxlength:60}" class="form-control" />
-            </td>
-            <td align="left"></td>
-        </tr>
-        <tr>
-            <td align="right" class="l-table-edit-td">类型:</td>
-            <td align="left" class="l-table-edit-td">
-                <input id="appMenuType" type="radio" name="menutype" value="2" <c:if test="${menu.menutype==2}">checked="checked"</c:if>  style="margin-left: 7px;"/><label for="appMenuType">应用</label>
-                <input id="sysMenuType" type="radio" name="menutype" value="1" <c:if test="${menu.menutype==1}">checked="checked"</c:if>  style="margin-left: 7px;"/><label for="sysMenuType">系统</label>
-
-
-            </td>
-            <td align="left"></td>
-        </tr>
-        <tr>
-            <td align="right" class="l-table-edit-td">上级菜单:</td>
-            <td align="left" class="l-table-edit-td">
-                <select id="pid" name="pid" class="easyui-combotree combo" data-options="url:'menu.do?addOrUpdateGrid&ajax=true',method:'get'" style="width:206px;height:30px;" value="${menu.pid }"></select>
-
-            </td>
-            <td align="left"></td>
-        </tr>
-        <tr>
-            <td align="right" class="l-table-edit-td">url:</td>
-            <td align="left" class="l-table-edit-td">
-                <input name="url" type="text" id="url" ltype="text" value="${menu.url}" validate="{required:true}"  class="form-control"/>
-            </td>
-            <td align="left"></td>
-        </tr>
-        <tr>
-            <td align="right" class="l-table-edit-td">target:</td>
-            <td align="left" class="l-table-edit-td">
-                <input name="target" type="text" id="target" ltype="text" value="${menu.target}"  class="form-control"/>
-            </td>
-            <td align="left"></td>
-        </tr>
-        <tr>
-            <td align="right" class="l-table-edit-td">排序:</td>
-            <td align="left" class="l-table-edit-td">
-                <input name="sorder" type="text" id="sorder" ltype="text" validate="{required:true}" value="0" value="${menu.sorder}"  class="form-control"/>
-            </td>
-            <td align="left"></td>
-        </tr>
-        <tr>
-            <td align="right" class="l-table-edit-td">图标:</td>
-            <td align="left" class="l-table-edit-td">
-                <input name="ico" type="hidden" id="ico" value="${menu.ico}"/>
-                <input name="icoFile" type="file" id="icoFile" ltype="file" value=""/>
-            </td>
-            <td align="left"></td>
-        </tr>
-    </table>
-</form>
