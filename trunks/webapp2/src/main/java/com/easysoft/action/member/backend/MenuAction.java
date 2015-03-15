@@ -71,10 +71,11 @@ public class MenuAction extends BaseController {
         return new ModelAndView("admin/json_message",map);
     }
     @RequestMapping(params = {"add"})
-    public ModelAndView add(){
+    public ModelAndView add(Integer id){
         List<Menu> menuList  = this.menuManager.getMenuList();
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("menuList",menuList);
+        map.put("pid",id);
         return new ModelAndView("admin/core/menu/addMenu",map);
     }
 
