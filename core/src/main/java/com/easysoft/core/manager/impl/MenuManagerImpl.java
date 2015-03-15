@@ -24,6 +24,7 @@ import java.util.Map;
  * @author andy
  */
 @Service("menuManager")
+@Transactional
 public class MenuManagerImpl extends BaseSupport<Menu> implements IMenuManager {
     @Autowired
     private IMenuDao menuDao;
@@ -44,9 +45,9 @@ public class MenuManagerImpl extends BaseSupport<Menu> implements IMenuManager {
 	
 	public Integer add(Menu menu) {
 		if(menu.getTitle()==null) throw new IllegalArgumentException("title argument is null");
-		if(menu.getPid()==null) throw new IllegalArgumentException("pid argument is null");
 		if(menu.getUrl() ==null) throw new IllegalArgumentException("url argument is null");
 		if(menu.getSorder() ==null) throw new IllegalArgumentException("sorder argument is null");
+		if(menu.getPid()==null) menu.setPid(0);;
 		menu.setDeleteflag(0);
         menuDao.save(menu);
 		return menu.getId();
@@ -224,34 +225,48 @@ public class MenuManagerImpl extends BaseSupport<Menu> implements IMenuManager {
 				temps.add(this.get(roleAuth.getFunId()));
 			}
 		}
+		//找出根结点
 		for(Menu menu : temps){
-			boolean isContain = false;
-			if(isContainMenu(results,menu)) continue;
-			for(Menu resultMenu : results){
-				if(menu.getPid()==resultMenu.getId()){
-					resultMenu.add(menu);
-					isContain = true;
-				}
-			}
-			if(!isContain){
+			if(menu.getPid()==null||menu.getPid()==0){
 				results.add(menu);
-				continue;
-				
 			}
+		}
+		for(Menu menu : temps){
+			//1、是否已经有此菜单
+			//1.1如果有，则继续下一循环
+			if(isContainMenu(results,menu)){
+				continue;
+			}else{//1.2如果没有，则找出其父菜单，进行添加
+				
+				addSubMenu(results,menu);
+			}
+			
 		}
 		return results;
 	}
     private boolean isContainMenu(List<Menu> menuList,Menu menu){
-    	boolean isContainMenu = false;
     	for(Menu itMenu : menuList){
+    		
+    		if(itMenu.getId()==menu.getId()){
+    			return true;
+    		}
     		if(itMenu.getChildren().size()>0){
     			isContainMenu(itMenu.getChildren(),itMenu);
     		}
-    		if(itMenu.getId()==menu.getId()){
-    			isContainMenu = true;
-    		}
     	}
-    	return isContainMenu;
+    	return false;
+    }
+    private void addSubMenu(List<Menu> menuList,Menu menu){
+    	for(Menu tempMenu : menuList){
+    		if(menu.getPid()==tempMenu.getId()){
+    			tempMenu.add(menu);
+    		}else{
+    			if(tempMenu.getChildren().size()>0){
+    				addSubMenu(tempMenu.getChildren(),menu);
+    			}
+    		}
+    		
+    	}
     }
 	
 }
