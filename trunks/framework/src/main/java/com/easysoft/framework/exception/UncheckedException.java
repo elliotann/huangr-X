@@ -122,4 +122,8 @@ public class UncheckedException extends RuntimeException {
     public ErrorRecord getErrorRec() {
         return errorRec;
     }
+    
+    public String getComment(){
+    	return errorRec.getParsedErrorComment();
+    }
 }
