@@ -17,7 +17,7 @@
 </style>
 <div id="loading"></div>
 <div class="main">
-	<div id="useradmininfo" style="display: none;"></div>
+	<div id="useradmininfo" style="display: block;"></div>
 	<form id="userform">
 		<div class='buttonArea'>
 			<div style="float:left;">
@@ -277,3 +277,5 @@ function formatAction(value,row,index){
 
 
 </script>
+</body>
+</html>
