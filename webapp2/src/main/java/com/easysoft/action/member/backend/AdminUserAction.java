@@ -22,8 +22,10 @@ import com.easysoft.member.backend.manager.ICompanyManager;
 import com.easysoft.member.backend.manager.IDepartManager;
 import com.easysoft.member.backend.manager.IPermissionManager;
 import com.easysoft.member.backend.manager.IRoleManager;
+import com.easysoft.member.backend.manager.PermissionManagerException;
 import com.easysoft.member.backend.model.AdminUser;
 import com.easysoft.member.backend.model.Depart;
+import com.easysoft.member.backend.model.Role;
 import com.easysoft.member.backend.model.UserRole;
 
 /**
@@ -78,7 +80,7 @@ public class AdminUserAction extends BaseController{
     @RequestMapping(params = {"add"})
     public ModelAndView add() throws Exception{
         int multiSite = EsfContext.getContext().getCurrentSite().getMulti_site();
-        List roleList = roleManager.list();
+        List<Role> roleList = roleManager.list();
 
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("roleList",roleList);
@@ -113,9 +115,9 @@ public class AdminUserAction extends BaseController{
             adminUserManager.add(adminUser);
             json.setMsg("新增管理员成功");
 
-        } catch (RuntimeException e) {
+        } catch (PermissionManagerException e) {
             e.printStackTrace();
-            json.setMsg("新增用户失败!"+e.getMessage());
+            json.setMsg("新增用户失败:"+e.getComment());
             json.setSuccess(false);
         }
         return json;

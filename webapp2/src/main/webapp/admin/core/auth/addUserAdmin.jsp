@@ -11,15 +11,15 @@
 			
 				<tr>
 					<th><label class="text">用户名：</label></th>
-					<td><input class="easyui-validatebox input_text" type="text" name="username" data-options="required:true" /></td>
+					<td><input class="easyui-validatebox input_text" type="text" name="username" data-options="required:true,validType:'length[1,10]'" /></td>
 				</tr>
 				<tr>
 					<th><label class="text">密码：</label></th>
-					<td><input class="easyui-validatebox input_text" type="text" name="password" data-options="required:true" /></td>
+					<td><input class="easyui-validatebox input_text" type="password" name="password" data-options="required:true,validType:'length[6,15]'" /></td>
 				</tr>
 				<tr>
 					<th><label class="text">邮箱：</label></th>
-					<td><input class="easyui-validatebox input_text" type="text" name="email" data-options="required:true" /></td>
+					<td><input class="easyui-validatebox input_text" type="text" name="email" data-options="required:true,validType:['email']" /></td>
 				</tr>
 				<tr id="roletr">
 					<th><label class="text">角色：</label></th>

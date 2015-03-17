@@ -66,9 +66,9 @@
 					<tr>
 						<th data-options="field:'username',width:50,align:'center'">用户名</th>
 						<th data-options="field:'realname',width:50,align:'center'">姓名</th>
-						<th data-options="field:'email',width:50,align:'center'">邮箱</th>
+						<th data-options="field:'email',width:100,align:'center'">邮箱</th>
 						<th data-options="field:'tel',width:50,align:'center'">办公电话</th>
-						<th data-options="field:'lastLoginTime',width:50,align:'center'">最后登录时间</th>
+						<th data-options="field:'lastLoginTime',width:80,align:'center'">最后登录时间</th>
 						<th data-options="field:'loginCount',width:50,align:'center'">登录次数</th>
 						<th data-options="field:'state',width:50,align:'center'" formatter="forStruts">状态</th>
 						<th data-options="field:'action',width:100,align:'center'" formatter="formatAction">操作</th>
