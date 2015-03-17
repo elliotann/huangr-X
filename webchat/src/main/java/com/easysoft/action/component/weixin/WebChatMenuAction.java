@@ -1,4 +1,4 @@
-package com.easysoft.component.weixin.action;
+package com.easysoft.action.component.weixin;
 
 import java.util.HashMap;
 import java.util.List;
