@@ -35,7 +35,7 @@ public class AdminUser extends IdEntity{
     private String email;
     private List<AuthAction> authList;
     private int loginCount;//登录次数
-    private String lastLoginTime = DateUtil.toString(new Date(),"YYYY-MM-DD HH:mm:ss");//最后登录时间
+    private String lastLoginTime ;//最后登录时间
     @Transient
     public List<AuthAction> getAuthList() { return this.authList; }
 

@@ -10,8 +10,7 @@ import com.easysoft.core.model.AdminTheme;
 import com.easysoft.core.model.Site;
 import com.easysoft.framework.utils.HttpUtil;
 import com.easysoft.framework.utils.SpringContextHolder;
-import com.easysoft.member.backend.manager.IAdminUserManager;
-import com.easysoft.member.backend.model.AdminUser;
+
 
 /**
  * 后台页面获取器
@@ -20,7 +19,7 @@ import com.easysoft.member.backend.model.AdminUser;
 public class BackPageGetter extends AbstractFacadeProcessor {
 	
 	private IAdminThemeManager adminThemeManager;
-    private IAdminUserManager adminUserManager;
+  
 	public BackPageGetter(FacadePage page) {
 		super(page);
 	}
@@ -29,7 +28,7 @@ public class BackPageGetter extends AbstractFacadeProcessor {
 	protected Response process() {
 		Site site = EsfContext.getContext().getCurrentSite();//this.page.getSite();
 		adminThemeManager = SpringContextHolder.getBean("adminThemeManager");
-        this.adminUserManager = ((IAdminUserManager)SpringContextHolder.getBean("adminUserManager"));
+       
 		//读取后台使用的模板
 		AdminTheme theme = adminThemeManager.get( site.getAdminthemeid());
 		String path ="default";
@@ -73,8 +72,6 @@ public class BackPageGetter extends AbstractFacadeProcessor {
 			String ajax = httpRequest.getParameter("ajax");
 			if(!"yes".equals(ajax)){ //非异步包装后台内容界面
 				request = new BackTemplateWrapper(page, request); 
-				request = new HelpDivWrapper(page, request);
-				
 			}
 			
 		}
