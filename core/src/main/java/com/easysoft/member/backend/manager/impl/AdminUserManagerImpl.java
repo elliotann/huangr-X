@@ -1,20 +1,11 @@
 package com.easysoft.member.backend.manager.impl;
 
-import com.easysoft.core.context.EsfContext;
-import com.easysoft.core.log.annotation.BusinessLog;
-import com.easysoft.core.log.annotation.State;
-import com.easysoft.core.model.MultiSite;
-import com.easysoft.core.model.Site;
-import com.easysoft.framework.context.webcontext.ThreadContextHolder;
-import com.easysoft.framework.context.webcontext.WebSessionContext;
-import com.easysoft.framework.db.PageOption;
-import com.easysoft.framework.utils.DateUtil;
-import com.easysoft.framework.utils.StringUtil;
-import com.easysoft.member.backend.dao.IAdminUserDao;
-import com.easysoft.member.backend.manager.IAdminUserManager;
-import com.easysoft.member.backend.manager.IPermissionManager;
-import com.easysoft.member.backend.manager.UserContext;
-import com.easysoft.member.backend.model.AdminUser;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.activiti.engine.IdentityService;
 import org.activiti.engine.identity.User;
 import org.activiti.engine.identity.UserQuery;
@@ -26,7 +17,23 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import com.easysoft.core.context.EsfContext;
+import com.easysoft.core.log.annotation.BusinessLog;
+import com.easysoft.core.log.annotation.State;
+import com.easysoft.core.model.MultiSite;
+import com.easysoft.core.model.Site;
+import com.easysoft.framework.context.webcontext.ThreadContextHolder;
+import com.easysoft.framework.context.webcontext.WebSessionContext;
+import com.easysoft.framework.db.PageOption;
+import com.easysoft.framework.exception.ErrorCode;
+import com.easysoft.framework.utils.DateUtil;
+import com.easysoft.framework.utils.StringUtil;
+import com.easysoft.member.backend.dao.IAdminUserDao;
+import com.easysoft.member.backend.manager.IAdminUserManager;
+import com.easysoft.member.backend.manager.IPermissionManager;
+import com.easysoft.member.backend.manager.PermissionManagerException;
+import com.easysoft.member.backend.manager.UserContext;
+import com.easysoft.member.backend.model.AdminUser;
 
 /**
  * 管理员管理实现
@@ -35,6 +42,10 @@ import java.util.*;
 @Service("adminUserManager")
 @Transactional
 public class AdminUserManagerImpl  implements IAdminUserManager {
+	private enum AdminUserManagerError{
+		@ErrorCode(comment = "用户名[${1}]已经存在！")
+		USERNAME_EXIST
+	}
     @Autowired
     private IAdminUserDao adminUserDao;
     @Autowired
@@ -48,6 +59,10 @@ public class AdminUserManagerImpl  implements IAdminUserManager {
 	@Transactional(propagation = Propagation.REQUIRED)
     @BusinessLog(state = State.VALID,success = "增加用户")
 	public Integer add(AdminUser adminUser) {
+		//用户名已经存在
+		if(this.getAdminUserByName(adminUser.getUsername(), 0)!=null){
+			throw new PermissionManagerException(AdminUserManagerError.USERNAME_EXIST,adminUser.getUsername());
+		}
 		adminUser.setPassword( StringUtil.md5(adminUser.getPassword()) );
 		//添加管理员
         adminUserDao.save(adminUser);
@@ -226,6 +241,7 @@ public class AdminUserManagerImpl  implements IAdminUserManager {
 		site.setLastlogin(DateUtil.getDatelineLong());
 		
 		user.setLoginCount(logincount);
+		user.setLastLoginTime(DateUtil.toString(new Date(),"YYYY-MM-DD HH:mm:ss"));
 		adminUserDao.update(user);
 		//记录session信息
 		WebSessionContext sessonContext = ThreadContextHolder
