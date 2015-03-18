@@ -10,5 +10,4 @@ package com.easysoft.member.backend.manager;
  * To change this template use File | Settings | File Templates.
  */
 public interface IOperationBtnManager {
-
 }

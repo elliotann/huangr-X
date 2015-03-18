@@ -10,6 +10,7 @@ import java.util.Date;
  * To change this template use File | Settings | File Templates.
  */
 public class DefAndDeployVo {
+	
     //定义ID
     private String defId;
     //定义名称

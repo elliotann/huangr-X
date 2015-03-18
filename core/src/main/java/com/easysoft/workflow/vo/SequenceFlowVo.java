@@ -17,7 +17,6 @@ public class SequenceFlowVo {
     private Point sourcePoint;
     private Point targetPoint;
     private Map<String,String> props;
-
     public String getId() {
         return id;
     }
