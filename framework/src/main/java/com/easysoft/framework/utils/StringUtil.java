@@ -26,6 +26,7 @@ import java.util.regex.Pattern;
  * 
  * @author andy 2010-1-6下午01:52:58
  */
+
 public class StringUtil {
     public static int toInt(String str, int defaultValue) {
         int value = defaultValue;
