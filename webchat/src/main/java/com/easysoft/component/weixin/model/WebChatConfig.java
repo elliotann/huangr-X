@@ -7,7 +7,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
 import com.easysoft.core.common.entity.IdEntity;
-
 /**
  * 微信公众号配置住息
  * @author Administrator
