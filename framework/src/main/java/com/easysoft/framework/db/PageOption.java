@@ -15,7 +15,9 @@ public class PageOption implements Serializable {
 	private static int DEFAULT_PAGE_SIZE = 10;
 
 	private int pageSize = DEFAULT_PAGE_SIZE; // 每页的记录数
-
+	private int rows = pageSize;
+	
+	
 	private long start; // 当前页第一条数据在List中的位置,从0开始
 
 	private Object data; // 当前页中存放的记录,类型一般为List
@@ -24,6 +26,7 @@ public class PageOption implements Serializable {
 	private long totalCount; // 总记录数
 
     private int currentPageNo=1;//当前页
+    private int page = currentPageNo;
 
 	/**
 	 * 构造方法，只构造空页.
@@ -159,4 +162,20 @@ public class PageOption implements Serializable {
         return (currentPageNo-1)*pageSize;
     }
 
+	public int getRows() {
+		return pageSize;
+	}
+
+	public void setRows(int rows) {
+		this.pageSize = rows;
+	}
+
+	public int getPage() {
+		return currentPageNo;
+	}
+
+	public void setPage(int page) {
+		this.currentPageNo = page;
+	}
+    
 }

@@ -1,6 +1,4 @@
 package com.easysoft.framework.cache;
-
-
 /**
  * Cache实现类工厂
  * @author andy
