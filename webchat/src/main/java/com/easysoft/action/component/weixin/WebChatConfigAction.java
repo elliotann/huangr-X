@@ -52,6 +52,15 @@ public class WebChatConfigAction extends BaseController {
         map.put("json",json);
         return new ModelAndView("admin/json_message",map);
     }
+    
+    @RequestMapping(params = {"menuDataGrid"})
+    public ModelAndView menuDataGrid(Integer rows,Integer page,String username,String stype,String keyword){
+      
+        String json = JsonUtils.beanToJsonArray(webChatConfigManager.getAll());
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("json",json);
+        return new ModelAndView("admin/json_message",map);
+    }
     @RequestMapping(params = {"add"})
     public ModelAndView add() throws Exception{
         Map<String,Object> map = new HashMap<String, Object>();
@@ -70,6 +79,32 @@ public class WebChatConfigAction extends BaseController {
             json.setMsg("新增用户失败!"+e.getMessage());
             json.setSuccess(false);
         }
+        return json;
+    }
+    @RequestMapping(params = {"edit"})
+    public ModelAndView edit(Integer id) throws Exception {
+    	WebChatConfig webChatConfig = this.webChatConfigManager.get(id);
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("webChatConfig",webChatConfig);
+        return new ModelAndView("component/webchat/config/editWebChatConfig",map);
+    }
+    
+    @RequestMapping(params={"editSave"})
+    @ResponseBody
+    public AjaxJson editSave(WebChatConfig webChatConfig) throws Exception {
+        AjaxJson json = new AjaxJson();
+        try {
+          
+            this.webChatConfigManager.edit(webChatConfig);
+            json.setMsg("修改公从号成功");
+
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            this.logger.error(e,e.fillInStackTrace());
+            json.setMsg("修改公众号失败:"+e.getMessage());
+            json.setSuccess(false);
+        }
+
         return json;
     }
 }

@@ -15,11 +15,19 @@ public class WebChatConfigManager implements IWebChatConfigManager {
 	@Autowired
 	private IWebChatConfigDao webChatConfigDao;
 	public List<WebChatConfig> getAll() {
-		// TODO Auto-generated method stub
+		
 		return webChatConfigDao.queryForList();
 	}
 	public void add(WebChatConfig webChatConfig) {
 		webChatConfigDao.save(webChatConfig);
+		
+	}
+	public WebChatConfig get(Integer id) {
+		
+		return webChatConfigDao.queryById(id);
+	}
+	public void edit(WebChatConfig webChatConfig) {
+		webChatConfigDao.update(webChatConfig);
 		
 	}
 	

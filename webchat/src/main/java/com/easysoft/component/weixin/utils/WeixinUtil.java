@@ -21,7 +21,8 @@ import com.easysoft.component.weixin.vo.AccessToken;
 
 public class WeixinUtil {
 	public final static String access_token_url =
-			"https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";  
+			"https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
+	private final static String CREATE_MENU_URL = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=ACCESS_TOKEN";
 	/**
      * 发起https请求并获取结果
      * 
@@ -99,8 +100,15 @@ public class WeixinUtil {
     	if(jsonObject!=null){
     		result = new AccessToken();
     		result.setToken(jsonObject.getString("access_token"));
-    		result.setExpiresIn(jsonObject.getInt("expires_in "));
+    		result.setExpiresIn(jsonObject.getInt("expires_in"));
     	}
     	return result;
+    }
+    
+    public static JSONObject createMenu(String appid, String appsecret,String output){
+    	AccessToken accessToken = getAccessToken(appid,appsecret);
+    	String requestUrl = CREATE_MENU_URL.replace("ACCESS_TOKEN", accessToken.getToken());
+    	JSONObject jsonObject = httpRequest(requestUrl,"POST",output);
+    	return jsonObject;
     }
 }

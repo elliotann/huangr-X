@@ -180,13 +180,13 @@
 	function edit(id) {
 		$("#useradmininfo").show();
 	　　	$('#useradmininfo').dialog({
-	　　		title: '修改管理员',			
+	　　		title: '修改公众号',			
 	　　		top:60,
 	　　		width: 550,
 	　　		height:450,
 	　　		closed: false,
 	　　		cache: false,
-	　　		href: 'userAdmin.do?edit&ajax=true&id='+id, 	 
+	　　		href: 'config.do?edit&ajax=true&id='+id, 	 
 	　　		modal: true,
 	　　		buttons: [{					
 	　　			 text:'保存',
@@ -207,16 +207,12 @@
 	　　	}); 
 	}
 	function editUseradminForm(editbtn){
-		if($("#pwd").val()!=$("#repwd").val()){
-			$.Loading.error("密码不相同");	
-			return ;
-		}
-		var formflag= $("#editAdminForm").form().form('validate');
+		var formflag= $("#editConfigForm").form().form('validate');
 		if(formflag){
 			$.Loading.show("正在保存请稍后...");
 			editbtn.linkbutton("disable");	
 			var options = {
-				url : "userAdmin.do?editSave&ajax=true",
+				url : "config.do?editSave&ajax=true",
 				type : "POST",
 				dataType : "json",
 				success : function(result) {
@@ -230,7 +226,7 @@
 			 		editbtn.linkbutton("enable");
 				}
 			};
-			$('#editAdminForm').ajaxSubmit(options);
+			$('#editConfigForm').ajaxSubmit(options);
 		}
 	}
 	
