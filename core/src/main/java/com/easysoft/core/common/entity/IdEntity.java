@@ -13,16 +13,16 @@ import com.easysoft.framework.utils.DateUtil;
 
 @MappedSuperclass
 public abstract class IdEntity implements Serializable{
-    protected int id;
+    protected Integer id;
     protected String createTime = DateUtil.getDefaultPatternStrDate(new Date());
     protected String createBy;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     @Column(name = "create_time")

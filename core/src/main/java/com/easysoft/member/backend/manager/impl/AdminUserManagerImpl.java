@@ -34,6 +34,7 @@ import com.easysoft.member.backend.manager.IPermissionManager;
 import com.easysoft.member.backend.manager.PermissionManagerException;
 import com.easysoft.member.backend.manager.UserContext;
 import com.easysoft.member.backend.model.AdminUser;
+import com.easysoft.member.backend.vo.UserSearchCondition;
 
 /**
  * 管理员管理实现
@@ -289,12 +290,9 @@ public class AdminUserManagerImpl  implements IAdminUserManager {
     }
 
     
-    public PageOption queryForPage(PageOption pageOption,String username) {
-        pageOption.addSearch("username",username);
-        List<Criterion> criterions = new ArrayList<Criterion>();
-        if(StringUtils.isNotEmpty(username))
-            criterions.add(Restrictions.like("username",username));
-        List<AdminUser> adminUsers = adminUserDao.queryForPage(pageOption,criterions);
+    public PageOption queryForPage(PageOption pageOption,UserSearchCondition userQry) {
+       
+        List<AdminUser> adminUsers = adminUserDao.queryForPageByQry(pageOption,userQry);
 
         if(!adminUsers.isEmpty()){
             pageOption.setData(adminUsers);

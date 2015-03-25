@@ -1,11 +1,13 @@
 package com.easysoft.core.common.dao;
 
-import com.easysoft.framework.db.PageOption;
-import org.hibernate.criterion.Criterion;
-
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
+
+import org.hibernate.criterion.Criterion;
+
+import com.easysoft.core.common.dao.hibernate.support.AbstractHibernateQry;
+import com.easysoft.framework.db.PageOption;
 
 /**
  * 新通用DAO接口
@@ -35,6 +37,7 @@ public interface IGenericDao<T,PK extends Serializable> {
      * @return
      */
     public List<T> queryForList(Map<String,Object> params);
+    public List<T> queryForQry(AbstractHibernateQry searchCondition);
     /**
      * 通过参数查询列表
      * @param hql
@@ -55,6 +58,7 @@ public interface IGenericDao<T,PK extends Serializable> {
      * @return
      */
     public List<T> queryForPage(PageOption pageOption, List<Criterion> criterions);
+    public List<T> queryForPageByQry(PageOption pageOption, AbstractHibernateQry searchCondition);
     public List<T> queryForHQL(String hql,Map<String,Object> params);
 
     public T queryById(PK id);

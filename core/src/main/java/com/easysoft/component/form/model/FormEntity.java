@@ -9,7 +9,6 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.easysoft.core.common.entity.IdEntity;
-import com.easysoft.framework.json.annotation.JsonInvisible;
 import com.easysoft.framework.utils.DateUtil;
 
 /**

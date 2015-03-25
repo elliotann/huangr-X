@@ -1,12 +1,10 @@
 package com.easysoft.core.listener;
-
 import com.easysoft.core.ParamSetting;
 import com.easysoft.core.manager.IComponentManager;
 import com.easysoft.framework.utils.SpringContextHolder;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-
 /**
  * 负责初始化站点缓存
  * 只有saas版本有效

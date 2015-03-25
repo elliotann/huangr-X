@@ -2,6 +2,7 @@ package com.easysoft.member.backend.manager;
 
 import com.easysoft.framework.db.PageOption;
 import com.easysoft.member.backend.model.AdminUser;
+import com.easysoft.member.backend.vo.UserSearchCondition;
 
 import java.util.List;
 import java.util.Map;
@@ -99,7 +100,7 @@ public interface IAdminUserManager {
      * @param pageOption
      * @return
      */
-    public PageOption queryForPage(PageOption pageOption,String username);
+    public PageOption queryForPage(PageOption pageOption,UserSearchCondition userQry);
 	
 	
 	/**

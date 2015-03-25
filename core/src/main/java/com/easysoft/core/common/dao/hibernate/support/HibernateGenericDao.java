@@ -12,6 +12,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.easysoft.core.common.BaseSearchCondition;
 import com.easysoft.core.common.dao.IGenericDao;
 import com.easysoft.framework.db.PageOption;
 
@@ -36,11 +37,13 @@ public class HibernateGenericDao<T,PK extends Serializable> implements IGenericD
 
     public void saveOrUpdate(T entity) {
         sessionFactory.getCurrentSession().saveOrUpdate(entity);
+       
     }
 
 
     public List<T> queryForList() {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(entityClass);
+       
         return criteria.list();
     }
 
@@ -103,5 +106,32 @@ public class HibernateGenericDao<T,PK extends Serializable> implements IGenericD
 	public void excuteBySql(String sql) {
 		SQLQuery sqlQuery = sessionFactory.getCurrentSession().createSQLQuery(sql);
 		sqlQuery.executeUpdate();
+	}
+
+	public List<T> queryForQry(AbstractHibernateQry searchCondition) {
+		 Criteria criteria = sessionFactory.getCurrentSession().createCriteria(entityClass);
+		 
+		 List<Criterion> criterions = searchCondition.getSearchCriteria();
+		 for(Criterion criterion : criterions){
+	         criteria.add(criterion);
+	     }
+		
+		return criteria.list();
+	}
+
+	public List<T> queryForPageByQry(PageOption pageOption,
+			AbstractHibernateQry searchCondition) {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(entityClass);
+		List<Criterion> criterions = searchCondition.getSearchCriteria();
+		for(Criterion criterion : criterions){
+            criteria.add(criterion);
+        }
+        pageOption.setTotalCount(criteria.list().size());
+        criteria.setFirstResult(pageOption.getStartRecord());
+        criteria.setMaxResults(pageOption.getPageSize());
+        List<T> results = criteria.list();
+
+        return results;
+	
 	}
 }

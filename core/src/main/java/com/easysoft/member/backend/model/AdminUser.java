@@ -36,6 +36,7 @@ public class AdminUser extends IdEntity{
     private List<AuthAction> authList;
     private int loginCount;//登录次数
     private String lastLoginTime ;//最后登录时间
+    private String officeTel;//工作电话
     @Transient
     public List<AuthAction> getAuthList() { return this.authList; }
 
@@ -151,6 +152,14 @@ public class AdminUser extends IdEntity{
 
 	public void setLastLoginTime(String lastLoginTime) {
 		this.lastLoginTime = lastLoginTime;
+	}
+	@Column(name="office_tel")
+	public String getOfficeTel() {
+		return officeTel;
+	}
+
+	public void setOfficeTel(String officeTel) {
+		this.officeTel = officeTel;
 	}
     
 }
