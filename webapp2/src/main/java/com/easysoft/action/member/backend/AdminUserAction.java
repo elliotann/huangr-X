@@ -27,6 +27,7 @@ import com.easysoft.member.backend.model.AdminUser;
 import com.easysoft.member.backend.model.Depart;
 import com.easysoft.member.backend.model.Role;
 import com.easysoft.member.backend.model.UserRole;
+import com.easysoft.member.backend.vo.UserSearchCondition;
 
 /**
  * User: andy
@@ -59,18 +60,14 @@ public class AdminUserAction extends BaseController{
         return new ModelAndView("admin/core/auth/useradminlist");
     }
     @RequestMapping(params = {"dataGrid"})
-    public ModelAndView dataGrid(Integer rows,Integer page,String username,String stype,String keyword){
-        PageOption pageOption = new PageOption();
-
-        //pageOption.setCurrentPageNo(page);
+    public ModelAndView dataGrid(PageOption pageOption,String username,String stype,String keyword,UserSearchCondition userSearch){
         if("0".equals(stype)){
         	username = keyword;
         }
         if(StringUtils.isEmpty(username)){
             username=null;
         }
-     
-        this.adminUserManager.queryForPage(pageOption,username);
+        this.adminUserManager.queryForPage(pageOption,userSearch);
         DataGridReturn dataGridReturn = new DataGridReturn(pageOption.getTotalCount(),(List<AdminUser>)pageOption.getResult());
         String json = JsonUtils.beanToJson(dataGridReturn);
         Map<String,Object> map = new HashMap<String, Object>();

@@ -54,20 +54,13 @@
 					<td><input type="text" class="input_text easyui-validatebox" name="realname" value="${adminUser.realname }"   data-options="required:true"/></td>
 				</tr>
 				<tr>
-					<th><label class="text">编号：</label></th>
-					<td><input type="text" class="input_text" name="adminUser.userno"  value="" /></td>
+					<th><label class="text">办公电话：</label></th>
+					<td><input type="text" name="officeTel" class="input_text easyui-validatebox"  data-options="required:true"  value="${adminUser.officeTel }"/></td>
 				</tr>
 				<tr>
 					<th><label class="text">部门：</label></th>
 					<td><input type="text" class="input_text" name="adminUser.userdept" value="${adminUser.userdept }"  /></td>
 				</tr>
-				<tr>
-					<th><label class="text">备注：</label></th>
-					<td><input type="text" class="input_text" name="remark"  value="${adminUser.remark }" /></td>
-				</tr>
-				
-			
-			
 			</table>
 		</form>
 	</div>

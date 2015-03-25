@@ -25,7 +25,7 @@
 			</div>
 			 <span style="float: right;height:28px;"> 
 			 	<a href="javascript:void(0)" class="button b_fr" data-options="plain:true" id="aAdvanced" >高级搜索</a>
-			 	<a href="javascript:void(0)" class="button b_fr" id="search" data-options="plain:true" onclick="searchOrder()">搜索</a>
+			 	<a href="javascript:void(0)" class="button b_fr" id="search" data-options="plain:true" onclick="searchUser()">搜索</a>
 				<input id="searchKeyword" class="input_text b_fr mr5" type="text" value="" size="30" placeholder="请用户名" name="searchKeyWord" />
 			</span>
 		</div>
@@ -51,7 +51,7 @@
 				<tr>
 					<td width="70" align="right"></td>
 					<td colspan="7" align="center"><a id="searchAdvance"
-						class="button blueButton" onclick="searchOrder()"
+						class="button blueButton" onclick="searchUser()"
 						href="javascript:;">开始搜索</a></td>
 				</tr>
 			</table>
@@ -67,7 +67,7 @@
 						<th data-options="field:'username',width:50,align:'center'">用户名</th>
 						<th data-options="field:'realname',width:50,align:'center'">姓名</th>
 						<th data-options="field:'email',width:100,align:'center'">邮箱</th>
-						<th data-options="field:'tel',width:50,align:'center'">办公电话</th>
+						<th data-options="field:'officeTel',width:50,align:'center'">办公电话</th>
 						<th data-options="field:'lastLoginTime',width:80,align:'center'">最后登录时间</th>
 						<th data-options="field:'loginCount',width:50,align:'center'">登录次数</th>
 						<th data-options="field:'state',width:50,align:'center'" formatter="forStruts">状态</th>
@@ -181,21 +181,21 @@
 	}
 	function edit(id) {
 		$("#useradmininfo").show();
-	　　	$('#useradmininfo').dialog({
-	　　		title: '修改管理员',			
-	　　		top:60,
-	　　		width: 550,
-	　　		height:450,
-	　　		closed: false,
-	　　		cache: false,
-	　　		href: 'userAdmin.do?edit&ajax=true&id='+id, 	 
-	　　		modal: true,
-	　　		buttons: [{					
-	　　			 text:'保存',
-	　　			 iconCls:'icon-ok',
-	　　			 handler:function(){
-	　　				var editbtn = $(this);
-		　　			var disabled=editbtn.hasClass("l-btn-disabled");
+		$('#useradmininfo').dialog({
+		title: '修改管理员',			
+		top:60,
+		width: 550,
+		height:450,
+		closed: false,
+		cache: false,
+		href: 'userAdmin.do?edit&ajax=true&id='+id, 	 
+		modal: true,
+			buttons: [{					
+			 text:'保存',
+			 iconCls:'icon-ok',
+				 handler:function(){
+				var editbtn = $(this);
+				var disabled=editbtn.hasClass("l-btn-disabled");
 		　　			if(!disabled){
 	　　					editUseradminForm(editbtn);
 	　　				}
@@ -263,11 +263,12 @@ function formatAction(value,row,index){
 	    });
 	})
 	
-	function searchOrder(){
+	function searchUser(){
+		
 	var searchtype = $("#Advanced").val();
 	var keyword = $("#searchKeyword").val();
 	var username = $("#username").val();
-	$("#orderdata").datagrid('load', {
+	$("#useradmindata").datagrid('load', {
 		 stype:searchtype,
 		 keyword:keyword,
 		 username:username,

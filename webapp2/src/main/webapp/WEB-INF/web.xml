@@ -30,9 +30,7 @@
             com.easysoft.core.listener.JEDPContextLoaderListener
         </listener-class>
     </listener>
-    <listener>
-        <listener-class>com.easysoft.build.web.listener.WebAppListener</listener-class>
-    </listener>
+ 
     <filter>
         <filter-name>openSessionInViewFilter</filter-name>
         <filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>

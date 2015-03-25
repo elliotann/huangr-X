@@ -59,7 +59,6 @@ import java.util.zip.ZipInputStream;
 public class WorkFlowController {
     protected Logger logger = LoggerFactory.getLogger(getClass());
 
-
     @Autowired
     protected RepositoryService repositoryService;
     @Autowired

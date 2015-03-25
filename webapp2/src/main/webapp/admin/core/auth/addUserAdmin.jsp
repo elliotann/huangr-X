@@ -46,17 +46,14 @@
 					<td><input type="text" name="realname"  class="input_text easyui-validatebox" data-options="required:true"  /></td>
 				</tr>
 				<tr>
-					<th><label class="text">编号：</label></th>
-					<td><input type="text" name="userno" class="input_text"  /></td>
+					<th><label class="text">办公电话：</label></th>
+					<td><input type="text" name="officeTel" class="input_text easyui-validatebox"  data-options="required:true"/></td>
 				</tr>
 				<tr>
 					<th><label class="text">部门：</label></th>
 					<td><input type="text" name="userdept"  class="input_text" /></td>
 				</tr>
-				<tr>
-					<th><label class="text">备注：</label></th>
-					<td><input type="text" name="remark" class="input_text"  /></td>
-				</tr>
+				
 			</table>
 		</form>
 	</div>
